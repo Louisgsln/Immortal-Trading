@@ -78,6 +78,11 @@ Le filtre ne change aucun score et se combine aux autres filtres ; Réinitialise
 rétablit toutes les catégories. Les anciens jeux de données sans cet indicateur sont
 affichés comme non reconnus. Voir l’[audit des 814 offres](EXPERIENCE-VISIBILITY-LOT35.md).
 
+Le [lot 37](VALIDATION-LOT37.md) élargit le parseur aux fourchettes explicites sans
+signe `+` associées à l’expérience du candidat. Le même minimum alimente le score
+et l’indicateur. Préférences, profils usuels et alternatives restent protégés ;
+les formulations `years in…` sans `experience` restent hors de cette extension.
+
 La vue **Tendances** présente les 7, 30 ou 90 derniers jours UTC (30 par défaut).
 Elle distingue premières détections locales, mises à jour, recalculs, fermetures,
 réouvertures, scans et échecs de sources. Le graphique montre au maximum les 14 derniers

@@ -46,6 +46,11 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 
 ## Démarrer sur ce poste
 
+Le lot 37 reconnaît les **fourchettes d’expérience sans signe +** dans les
+qualifications explicites, en préservant préférences et alternatives. Sept scores
+sont corrigés ; le dashboard et le CSV reflètent **161 offres prioritaires actives**.
+Voir le [bilan du lot 37](docs/VALIDATION-LOT37.md).
+
 Le lot 36 valide **Docker Linux en CI** : build, commande installée et restauration
 de onze tables réussis. Les **2 068 tests passent sur Python 3.11 à 3.14**, après
 correction des imports pytest en installation propre. Rapports de CI conservés ;

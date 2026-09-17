@@ -322,7 +322,16 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - Données locales et CSV préservés. Docker Desktop installé ; activation WSL et exploitation sur l’hôte cible restent à faire.
 - Bilan et preuves [VALIDATION-LOT36.md](VALIDATION-LOT36.md).
 
-## Les cinq améliorations prioritaires après le lot 36
+## Lot 37 — Fourchettes d’expérience et revue des rôles hybrides
+
+- Trois sous-agents : audit/régressions, helper et audit métier/revue d’impact ; intégration et recalcul contrôlé par l’agent principal.
+- Fourchettes explicites sans signe + reconnues, avec bornes basses et protection des préférences, négations, alternatives et contextes d’entreprise.
+- 32 extractions, 15 explications et sept scores corrigés sur 814 offres ; sauvegarde, répétition, application et idempotence vérifiées. Huit tables et toutes les données source préservées.
+- Base à 812 offres actives, 161 prioritaires et 246 pertinentes ; CSV et dashboard actualisés. 2 152 tests réussis localement et sur chacune des quatre versions Python de la CI, couverture 96 % ; Docker et reprise validés.
+- Audit de sept rôles hybrides : aucune levée d’exclusion isolée justifiée, notamment en raison d’exigences d’expérience et d’un stage explicite à préserver.
+- Bilan [VALIDATION-LOT37.md](VALIDATION-LOT37.md), audits [EXPERIENCE-GAPS-LOT37.md](EXPERIENCE-GAPS-LOT37.md) et [HYBRID-ROLE-AUDIT-LOT37.md](HYBRID-ROLE-AUDIT-LOT37.md).
+
+## Les cinq améliorations prioritaires après le lot 37
 
 1. **Valider l’hôte d’exploitation** : Docker Linux et la reprise synthétique sont désormais validés en CI. Terminer WSL sur le poste Windows, puis vérifier volume, reprise et supervision sur la cible réelle. Aucun VPS n’a encore été provisionné.
 2. **Compléter la couverture trading** : les lots 33/34 corrigent l'indice junior DRW et deux présentations générales affectant les actifs/profil. Les formulations génériques inconnues et autres employeurs restent à auditer avant toute extension. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Le lot 29 couvre les exigences explicitement additionnelles au diplôme, pas toutes les alternatives implicites. Revoir Citadel lorsque son accès public redevient disponible.

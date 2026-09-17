@@ -8,7 +8,7 @@ Le défaut vérifié est précis : le parseur réduit une fourchette à sa borne
 
 ## Dix cas de contrôle
 
-Les attentes ci-dessous constituent des observations pour une correction ciblée, pas une décision d’éligibilité. Dans les dix cas, le parseur actuel renvoie `[]`, le champ structuré est nul et le dashboard affiche `unspecified`.
+Les attentes ci-dessous constituent les observations avant correction, pas une décision d’éligibilité. Au début du lot, dans les dix cas, le parseur renvoyait `[]`, le champ structuré était nul et le dashboard affichait `unspecified`. La correction et ses résultats sont décrits dans [VALIDATION-LOT37.md](VALIDATION-LOT37.md).
 
 | Entreprise / titre | Score | Fourchette | Minimum attendu | ID local |
 | --- | ---: | --- | --- | --- |
