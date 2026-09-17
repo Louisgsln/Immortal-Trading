@@ -8,6 +8,14 @@ def utcnow() -> datetime:
     return datetime.now(UTC)
 
 
+class ExperienceEvidence(BaseModel):
+    minimum_years: int = Field(ge=0, le=99)
+    kind: Literal["professional", "industry_or_academia", "unspecified"]
+    origin: Literal["description"] = "description"
+    method: Literal["jump_coding_track_record"] = "jump_coding_track_record"
+    excerpt: str
+
+
 class RawJob(BaseModel):
     company: str = Field(min_length=1)
     title: str = Field(min_length=1)
@@ -23,6 +31,7 @@ class RawJob(BaseModel):
     expected_start_date: str | None = None
     employment_type: str | None = None
     minimum_experience_years: int | None = Field(default=None, ge=0, le=99)
+    experience_evidence: list[ExperienceEvidence] = Field(default_factory=list)
     seniority_hint: Literal["junior", "senior"] | None = None
     role_hint: Literal["trading_technology"] | None = None
     remote: bool | None = None

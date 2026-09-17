@@ -1,10 +1,12 @@
 """Read-only experience observations for the dashboard, not eligibility decisions."""
 
+from typing import Any
+
 from trading_radar.models import Job
 from trading_radar.scoring import required_experience_years
 
 
-def experience_requirement(job: Job) -> dict[str, int | str | None]:
+def experience_requirement(job: Job) -> dict[str, Any]:
     """Report the strongest recognized numeric minimum, including structured zero.
 
     Reuse the scoring parser's range and preference rules. An unspecified result
@@ -18,7 +20,13 @@ def experience_requirement(job: Job) -> dict[str, int | str | None]:
     if type(structured) is int and 0 <= structured <= 99:
         minima.append(structured)
     minimum = max(minima) if minima else None
-    return {
+    result: dict[str, Any] = {
         "minimum_years": minimum,
         "category": "unspecified" if minimum is None else "up_to_2" if minimum <= 2 else "over_2",
     }
+    # Coding practice may include academic work. Preserve this evidence for the
+    # reader without treating its duration as professional employment or changing
+    # the numeric filter. Empty evidence keeps legacy dashboard payloads stable.
+    if job.experience_evidence:
+        result["evidence"] = [item.model_dump(mode="json") for item in job.experience_evidence]
+    return result

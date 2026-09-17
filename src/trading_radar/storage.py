@@ -26,6 +26,7 @@ CONTENT_FIELDS = (
     "application_deadline",
     "expected_start_date",
     "minimum_experience_years",
+    "experience_evidence",
     "seniority_hint",
     "role_hint",
     "employment_type",
@@ -391,6 +392,36 @@ class Repository:
             and old.desk == job.desk
             and old.asset_class == job.asset_class
         ):
+            return False
+        self._write(job)
+        self.db.execute(
+            "INSERT INTO job_versions(job_id,created_at,event,payload) VALUES(?,?,?,?)",
+            (job.id, utcnow().isoformat(), "rescored", job.model_dump_json()),
+        )
+        self.db.execute(
+            "INSERT INTO score_history(job_id,created_at,score,explanation) VALUES(?,?,?,?)",
+            (
+                job.id,
+                utcnow().isoformat(),
+                job.score_breakdown.total,
+                job.score_breakdown.model_dump_json(),
+            ),
+        )
+        return True
+
+    def update_derived_experience(self, job: Job) -> bool:
+        """Record a reviewed derivation correction without refreshing the source.
+
+        The caller owns the file lock and transaction, as for ``update_scoring``.
+        Reject stale or unrelated edits instead of overwriting new observations.
+        """
+        old = self.get(job.id)
+        job = Job.model_validate(job.model_dump())
+        before, after = old.model_dump(), job.model_dump()
+        changed = {key for key in before if before[key] != after[key]}
+        if changed - {"minimum_experience_years", "experience_evidence", "score_breakdown"}:
+            raise ValueError("Experience correction contains unrelated or stale job fields")
+        if not changed:
             return False
         self._write(job)
         self.db.execute(

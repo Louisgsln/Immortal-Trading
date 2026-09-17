@@ -28,6 +28,7 @@ CHANGE_FIELDS = (
     "description_text",
     "desk",
     "employment_type",
+    "experience_evidence",
     "expected_start_date",
     "is_active",
     "is_expired",

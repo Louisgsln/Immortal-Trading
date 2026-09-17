@@ -106,8 +106,25 @@
         value.category === (years <= 2 ? "up_to_2" : "over_2")) return value;
     return {minimum_years: null, category: "unspecified"};
   };
+  const experienceEvidence = (job) => {
+    const evidence = job.experience?.evidence;
+    if (!Array.isArray(evidence)) return [];
+    return evidence.filter((item) => item && typeof item === "object" &&
+      Number.isSafeInteger(item.minimum_years) && item.minimum_years >= 0 && item.minimum_years <= 99 &&
+      ["professional", "industry_or_academia", "unspecified"].includes(item.kind) &&
+      item.origin === "description" && item.method === "jump_coding_track_record" &&
+      typeof item.excerpt === "string" && item.excerpt.trim().length > 0);
+  };
+  const evidenceLabel = (item) => {
+    const context = {professional: "cadre professionnel", industry_or_academia: "industrie ou académie", unspecified: "cadre non précisé"};
+    return "Pratique du codage : au moins " + number(item.minimum_years) +
+      (item.minimum_years === 1 ? " an" : " ans") + " (" + context[item.kind] + ")";
+  };
   const experienceLabel = (job) => {
     const years = experience(job).minimum_years;
+    if (years === null && experienceEvidence(job).some((item) => item.kind === "industry_or_academia")) {
+      return "Minimum professionnel non reconnu";
+    }
     return years === null ? "Minimum non reconnu" : "Minimum reconnu : " + number(years) + (years === 1 ? " an" : " ans");
   };
   const detailSection = (heading) => {
@@ -302,8 +319,18 @@
       link.setAttribute("aria-label", "Consulter l’offre officielle (nouvel onglet)"); content.append(link);
     } else content.append(make("p", "Lien officiel indisponible.", "detail-company"));
     const experienceSection = detailSection("Expérience");
-    experienceSection.append(make("p", experienceLabel(job), "experience-minimum"),
-      make("p", "La détection d’un minimum dans l’annonce ne garantit pas votre éligibilité. Un minimum non reconnu ne signifie ni zéro année d’expérience ni l’absence d’exigence. Vérifiez les qualifications et les alternatives dans la description officielle."));
+    experienceSection.append(make("p", experienceLabel(job), "experience-minimum"));
+    experienceEvidence(job).forEach((item) => {
+      const evidence = make("div", null, "experience-evidence");
+      evidence.append(make("p", evidenceLabel(item), "experience-practice"),
+        make("p", "Déduit de la description", "detail-company"),
+        make("blockquote", item.excerpt, "description experience-excerpt"));
+      if (item.kind === "industry_or_academia") {
+        evidence.append(make("p", "Cette pratique peut inclure des travaux académiques ; elle n’établit pas un minimum d’expérience professionnelle."));
+      }
+      experienceSection.append(evidence);
+    });
+    experienceSection.append(make("p", "La détection d’un minimum dans l’annonce ne garantit pas votre éligibilité. Un minimum non reconnu ne signifie ni zéro année d’expérience ni l’absence d’exigence. Vérifiez les qualifications et les alternatives dans la description officielle."));
     content.append(experienceSection);
     const timing = detailSection("Repères"); const grid = make("dl", null, "detail-grid");
     const deadline = job.deadline || {};
@@ -359,6 +386,9 @@
       const companyLine = make("div", null, "company-line"); const initial = make("span", job.company.slice(0, 2).toUpperCase(), "company-initial"); initial.setAttribute("aria-hidden", "true");
       companyLine.append(initial, make("span", job.company)); if (!job.is_active) companyLine.append(make("span", "Inactive", "badge"));
       jobCell.append(button, companyLine, make("span", experienceLabel(job), "experience-indicator"));
+      experienceEvidence(job).filter((item) => item.kind === "industry_or_academia").forEach((item) => {
+        jobCell.append(make("span", evidenceLabel(item), "experience-indicator experience-practice"));
+      });
       const scoreCell = make("td"); scoreCell.append(scorePill(job.score));
       const statusCell = make("td"); statusCell.append(make("span", statusLabel((job.application || {}).status), "badge"));
       const detailCell = make("td"); const detailButton = make("button", "↗", "arrow-button"); detailButton.type = "button"; detailButton.setAttribute("aria-label", "Détail : " + job.title + " chez " + job.company); detailButton.addEventListener("click", () => showDetail(job)); detailCell.append(detailButton);

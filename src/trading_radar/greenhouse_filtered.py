@@ -11,7 +11,7 @@ from pydantic import Field
 from trading_radar.config import Company
 from trading_radar.drw_campus import drw_campus_junior
 from trading_radar.http import HTTPClient, SourceUnavailable
-from trading_radar.models import Collection, RawJob
+from trading_radar.models import Collection, ExperienceEvidence, RawJob
 from trading_radar.normalizer import has, normalize_text, plain_text
 from trading_radar.search_scope import SearchOptions
 
@@ -153,38 +153,77 @@ def jump_trading_technology(row: dict) -> bool:
     )
 
 
-def jump_track_record_minimum(content: str) -> int | None:
-    """The audited coding track record in Jump's required skills is a minimum.
+def jump_track_record_evidence(content: str) -> list[ExperienceEvidence]:
+    """Preserve the audited coding track record and its professional scope.
 
-    Do not generalize corporate track records or optional skills into experience.
-    This intentionally covers only the verified coding requirement phrase.
+    Industry-or-academia and unspecified achievements are evidence, but do not
+    establish a minimum number of professional years. Keep the original plain
+    text clause as provenance; no generic track-record language is inferred.
     """
     text = plain_text(content)
-    sections = re.split(r"\bSkills\s+You.{0,3}ll\s+Need\b", text, flags=re.IGNORECASE)
-    if len(sections) != 2:
-        return None
+    headings = list(re.finditer(r"\bSkills\s+You.{0,3}ll\s+Need\b", text, re.IGNORECASE))
+    if len(headings) != 1:
+        return []
+    heading = headings[0]
+    if re.search(r"\b(?:preferred|recommended|optional)\s*$", text[: heading.start()], re.I):
+        return []
     required = re.split(
-        r"\b(?:Nice to Have|Preferred Qualifications|Benefits|About Us)\b",
-        sections[1],
+        r"\b(?:Nice to Have\s*:|(?:Preferred|Recommended|Optional)\s*(?:Qualifications\b|:)|"
+        r"Benefits\b|About Us\b)",
+        text[heading.end() :],
         flags=re.IGNORECASE,
     )[0]
-    minima = []
-    for clause in re.split(r"[.!?;]", required):
+    evidence = []
+    # Sentence splitting must not turn the fractional tail of 1.5+ into five.
+    for clause_match in re.finditer(r".+?(?:[!?;]|(?<!\d)\.(?!\d)|$)", required):
+        clause = clause_match[0]
         if re.search(
-            r"\b(?:preferred|preferably|desirable|advantageous|nice to have|a plus|optional)\b",
+            r"\b(?:preferred|preferable|preferably|desirable|advantageous|nice to have|"
+            r"a plus|optional|ideally|approximately|around|not|without|"
+            r"either|alternatively|instead|in lieu|substitut\w*|waiv\w*)\b"
+            r"|\bor\s+(?:(?:an?|the)\s+)?(?:\d|(?:no|zero)\s+experience|"
+            r"equivalent\s+(?:work\s+)?experience|"
+            r"(?:bachelor|master|doctoral|doctorate|phd|degree|bsc|msc|bs|ms|mba|jd)\b)",
             clause,
             re.IGNORECASE,
         ):
             continue
         match = re.search(
-            r"^\s*:?\s*(\d{1,2})\s*\+\s*years?\s+track record of solving "
-            r"challenging problems through coding\b",
+            r"^\s*:?\s*(?P<proof>(?P<years>\d{1,2})\s*\+\s*years?\s+track record of solving "
+            r"challenging problems through coding\b)",
             clause,
             re.IGNORECASE,
         )
-        if match:
-            minima.append(int(match[1]))
-    return max(minima) if minima else None
+        if not match or re.match(
+            r"\s*(?:or|alternatively|instead)\b", required[clause_match.end() :], re.I
+        ):
+            continue
+        excerpt = clause[match.start("proof") :].strip()
+        industry = re.search(r"\bin\s+industry\b", excerpt, re.I)
+        academia = re.search(r"\b(?:academia|academic)\b", excerpt, re.I)
+        kind: Literal["professional", "industry_or_academia", "unspecified"] = (
+            "industry_or_academia"
+            if industry and academia
+            else "professional"
+            if industry
+            else "unspecified"
+        )
+        evidence.append(
+            ExperienceEvidence(minimum_years=int(match["years"]), kind=kind, excerpt=excerpt)
+        )
+    return evidence
+
+
+def jump_track_record_minimum(content: str) -> int | None:
+    """Compatibility helper: only an explicit professional track record qualifies."""
+    return max(
+        (
+            item.minimum_years
+            for item in jump_track_record_evidence(content)
+            if item.kind == "professional"
+        ),
+        default=None,
+    )
 
 
 def parse_board(
@@ -324,6 +363,9 @@ def parse_board(
             ):
                 raise SourceUnavailable("Jump Trading employment type missing or changed")
             junior = "junior" if contract == "Full-time - Campus" else None
+        experience_evidence = (
+            jump_track_record_evidence(row["content"]) if config.tenant == "jumptrading" else []
+        )
         jobs.append(
             RawJob(
                 company=config.name,
@@ -337,11 +379,15 @@ def parse_board(
                 description=row["content"],
                 employment_type=contract,
                 seniority_hint=junior,
-                minimum_experience_years=(
-                    jump_track_record_minimum(row["content"])
-                    if config.tenant == "jumptrading"
-                    else None
+                minimum_experience_years=max(
+                    (
+                        item.minimum_years
+                        for item in experience_evidence
+                        if item.kind == "professional"
+                    ),
+                    default=None,
                 ),
+                experience_evidence=experience_evidence,
                 role_hint="trading_technology" if trading_technology else None,
                 expected_start_date=start,
                 date_posted=instant(row.get("first_published")),

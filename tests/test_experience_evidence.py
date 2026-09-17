@@ -60,7 +60,10 @@ def test_preference_does_not_erase_separate_requirement(raw, config):
     )
 
 
-TRACK = "5+ year track record of solving challenging problems through coding with real metrics."
+TRACK = (
+    "5+ year track record of solving challenging problems through coding "
+    "with real metrics in industry."
+)
 
 
 @pytest.mark.parametrize("apostrophe", ["'", "’", "\ufffd"])
