@@ -5,6 +5,7 @@ permissions:
 jobs:
   checks:
     strategy:
+      fail-fast: false
       matrix:
         python-version: ['3.11', '3.12', '3.13', '3.14']
     runs-on: ubuntu-latest
@@ -16,11 +17,18 @@ jobs:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
       - run: uv lock --check
-      - run: uv sync --locked --extra dev
+      - run: uv sync --locked --extra dev --no-editable
       - run: uv run --no-sync ruff check src tests scripts
       - run: uv run --no-sync ruff format --check src tests scripts
       - run: uv run --no-sync mypy src/trading_radar
-      - run: uv run --no-sync pytest --cov=trading_radar --cov-report=term-missing
+      - run: uv run --no-sync pytest --cov=trading_radar --cov-report=term-missing --junitxml=test-results.xml
+      - name: Preserve test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: tests-python-${{ matrix.python-version }}
+          path: test-results.xml
+          retention-days: 14
   container:
     runs-on: ubuntu-latest
     needs: checks
@@ -34,14 +42,40 @@ jobs:
           cp .env.example .env
           docker compose config --quiet
       - name: Build runtime image from the lock
-        run: docker build --tag "$IMAGE" .
+        shell: bash
+        run: docker build --progress=plain --tag "$IMAGE" . 2>&1 | tee container-build.log
+      - name: Check installed entrypoint
+        run: docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges:true "$IMAGE" --help
       - name: Exercise isolated recovery without network access
+        shell: bash
         run: |
           docker volume create "$SMOKE_VOLUME"
-          docker run --rm --network none --read-only --tmpfs /tmp \
+          docker run --name "$SMOKE_VOLUME" --network none --read-only --tmpfs /tmp \
             --cap-drop ALL --security-opt no-new-privileges:true \
             --mount "type=volume,src=$SMOKE_VOLUME,dst=/app/data" \
-            --entrypoint python "$IMAGE" scripts/smoke_container.py
+            --entrypoint python "$IMAGE" scripts/smoke_container.py 2>container-smoke.stderr.log | tee container-smoke.json
+      - name: Collect synthetic recovery evidence
+        if: always()
+        run: |
+          if docker container inspect "$SMOKE_VOLUME" > /dev/null 2>&1; then
+            docker cp "$SMOKE_VOLUME:/app/data/." container-evidence
+          fi
+      - name: Preserve container validation results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: container-validation
+          path: |
+            container-build.log
+            container-smoke.json
+            container-smoke.stderr.log
+            container-evidence/**/command-*.log
+            container-evidence/**/report.json
+          retention-days: 14
       - name: Remove this run's synthetic volume
         if: always()
-        run: docker volume rm "$SMOKE_VOLUME" || test -z "$(docker volume ls --quiet --filter "name=^${SMOKE_VOLUME}$")"
+        run: |
+          if docker container inspect "$SMOKE_VOLUME" > /dev/null 2>&1; then
+            docker rm -f "$SMOKE_VOLUME"
+          fi
+          docker volume rm "$SMOKE_VOLUME" || test -z "$(docker volume ls --quiet --filter "name=^${SMOKE_VOLUME}$")"

@@ -31,6 +31,13 @@ uv run --no-sync ruff format --check src tests scripts
 uv run --no-sync mypy src
 ```
 
+La CI installe avec `--no-editable` pour tester le paquet construit. Pytest ajoute
+explicitement la racine du dépôt à son chemin d’import : les utilitaires de
+`scripts/` restent ainsi testables avec `pytest` comme avec `python -m pytest`,
+sans être ajoutés au paquet de production. Les quatre versions Python de la
+matrice sont exécutées même si l’une échoue. Les rapports JUnit et les preuves
+du scénario Docker synthétique sont conservés comme artefacts pendant 14 jours.
+
 `dev` est ici un **extra**, pas un groupe de dépendances : il faut le demander
 avec `--extra dev`. Les extras tiers restent facultatifs :
 
