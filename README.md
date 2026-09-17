@@ -46,6 +46,11 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 
 ## Démarrer sur ce poste
 
+Le lot 36 valide **Docker Linux en CI** : build, commande installée et restauration
+de onze tables réussis. Les **2 068 tests passent sur Python 3.11 à 3.14**, après
+correction des imports pytest en installation propre. Rapports de CI conservés ;
+voir le [bilan du lot 36](docs/VALIDATION-LOT36.md). WSL reste à activer sur le poste Windows.
+
 Le lot 35 affiche le **minimum d’expérience reconnu** dans les listes et fiches,
 avec un filtre 0–2 ans, >2 ans ou minimum non reconnu. Il permet notamment de
 repérer les six offres prioritaires actives demandant trois ans. « Non reconnu »
@@ -332,7 +337,7 @@ docker compose exec radar trading-radar health
 docker compose down
 ```
 
-L'image utilise Python 3.12 et uv fixés par empreinte, les dépendances de `uv.lock`, un utilisateur non-root et un volume nommé `radar-data`. Compose garde la racine et les réglages YAML en lecture seule, fournit `/tmp` et limite les logs. L'image installe les connecteurs natifs. Utiliser les [sauvegardes SQLite](docs/BACKUPS.md), puis conserver une copie vérifiée hors du volume ; ne pas exécuter `down -v` si les données doivent être conservées. **Docker et WSL sont absents de ce poste : build et reprise Docker/VPS restent à valider**, avec un job CI préparé pour cela.
+L'image utilise Python 3.12 et uv fixés par empreinte, les dépendances de `uv.lock`, un utilisateur non-root et un volume nommé `radar-data`. Compose garde la racine et les réglages YAML en lecture seule, fournit `/tmp` et limite les logs. L'image installe les connecteurs natifs. Utiliser les [sauvegardes SQLite](docs/BACKUPS.md), puis conserver une copie vérifiée hors du volume ; ne pas exécuter `down -v` si les données doivent être conservées. **Build et reprise Docker Linux validés en CI au lot 36**. Docker Desktop est installé localement, mais WSL reste à activer ; le contrôle du poste Windows et d’un éventuel VPS reste à effectuer.
 
 `trading-radar health` fournit un JSON local et un code de sortie pour la supervision, sans créer ni migrer la base. Il mesure la fraîcheur des sources et signale les alertes incertaines. Un déploiement neuf reste critique jusqu'aux premières collectes réussies. Voir [HEALTH.md](docs/HEALTH.md).
 

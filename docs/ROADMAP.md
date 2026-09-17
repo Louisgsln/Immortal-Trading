@@ -313,9 +313,18 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - 2 068 tests réussis, couverture 96 %. Parcours Edge sur ordinateur/mobile et serveur local vérifiés ; onze tables et CSV inchangés. Export HTML actualisé.
 - Audit [EXPERIENCE-VISIBILITY-LOT35.md](EXPERIENCE-VISIBILITY-LOT35.md), bilan [VALIDATION-LOT35.md](VALIDATION-LOT35.md).
 
-## Les cinq améliorations prioritaires après le lot 35
+## Lot 36 — CI sur installation propre et Docker Linux
 
-1. **Exécuter la validation Docker/VPS** : lancer le build et le scénario de reprise préparés dans la CI sur un hôte équipé. Vérifier ensuite le volume et la supervision sur la cible réelle ; le lot 20 n'a pas pu valider ce runtime localement.
+- Deux sous-agents : correction des imports pytest et audit indépendant Docker/CI ; intégration et validation réelle GitHub par l’agent principal.
+- Import des utilitaires de test corrigé pour l’entrée console pytest. Paquet non éditable, matrice Python complète et artefacts conservés 14 jours.
+- 2 068 tests réussis sur chacune des versions Python 3.11 à 3.14 sous Ubuntu, couverture 96 %, ainsi que sous Windows 3.14.
+- Build Docker, ENTRYPOINT et reprise validés : UID 10001, réseau coupé, huit offres synthétiques, onze tables restaurées identiques, volume de test nettoyé.
+- Données locales et CSV préservés. Docker Desktop installé ; activation WSL et exploitation sur l’hôte cible restent à faire.
+- Bilan et preuves [VALIDATION-LOT36.md](VALIDATION-LOT36.md).
+
+## Les cinq améliorations prioritaires après le lot 36
+
+1. **Valider l’hôte d’exploitation** : Docker Linux et la reprise synthétique sont désormais validés en CI. Terminer WSL sur le poste Windows, puis vérifier volume, reprise et supervision sur la cible réelle. Aucun VPS n’a encore été provisionné.
 2. **Compléter la couverture trading** : les lots 33/34 corrigent l'indice junior DRW et deux présentations générales affectant les actifs/profil. Les formulations génériques inconnues et autres employeurs restent à auditer avant toute extension. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Le lot 29 couvre les exigences explicitement additionnelles au diplôme, pas toutes les alternatives implicites. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
 4. **Poursuivre l'audit des sources** : entretenir la fraîcheur et examiner les catégories ou portails non couverts sur des preuves publiques. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.

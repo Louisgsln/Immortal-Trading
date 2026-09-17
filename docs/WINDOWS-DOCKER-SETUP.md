@@ -20,7 +20,9 @@ WSL n’est pas installé. L’installation winget de Microsoft.WSL a échoué a
 `0x80073d28` : privilèges administrateur requis. Le lancement élevé de
 `wsl --install --no-distribution` a demandé une confirmation Windows ; l’utilisateur
 étant absent, la demande a expiré/été annulée sans exécution du script élevé.
-Le moteur Docker n’est pas démarré ; le build et l’exercice conteneur restent à faire.
+Le moteur Docker local n’est pas démarré. Le build et l’exercice conteneur ont
+depuis réussi sur GitHub Actions au [lot 36](VALIDATION-LOT36.md) ; leur vérification
+sur ce poste Windows reste à faire.
 
 ## Reprendre au retour sur le poste
 
@@ -35,7 +37,7 @@ Le moteur Docker n’est pas démarré ; le build et l’exercice conteneur rest
 4. Ouvrir Docker Desktop et attendre le démarrage du moteur Linux.
 5. Dans un nouveau terminal, vérifier `wsl --version`, `docker version` et
    `docker compose version`. Docker doit afficher un serveur, pas seulement le client.
-6. Reprendre avec Codex le build et le scénario synthétique de
+6. Reprendre avec Codex sur ce poste le build et le scénario synthétique de
    [validation conteneur](OPERATIONS.md#vérifier-avant-de-démarrer-le-watcher).
 
 Le scénario utilisera un volume neuf, des données synthétiques et un réseau coupé.

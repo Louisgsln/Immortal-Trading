@@ -2,7 +2,9 @@
 
 ## État de validation
 
-Le lot 20 prépare le build verrouillé, un contrôle de santé local et un exercice automatique sur un volume Docker isolé. **Docker Desktop 4.91.0 est installé depuis le 17 septembre 2026**, avec Docker CLI 29.8.0 et Compose 5.5.1. WSL reste à installer : la confirmation administrateur Windows n’a pas pu être validée en l’absence de l’utilisateur. Aucun build ni démarrage de conteneur n’a encore été exécuté. Voir [WINDOWS-DOCKER-SETUP.md](WINDOWS-DOCKER-SETUP.md) pour reprendre l’installation et [VALIDATION-LOT20.md](VALIDATION-LOT20.md) pour les contrôles applicatifs précédents. La présence des contrôles en CI ne vaut pas résultat d’exécution.
+Le **lot 36 valide le build et la reprise dans Docker Linux sur GitHub Actions**, au commit `28bda22` : image construite, ENTRYPOINT exécuté, huit offres synthétiques et onze tables identiques après restauration, sous UID 10001 et sans réseau. Les 2 068 tests passent aussi sur les quatre versions Python 3.11 à 3.14. Voir les preuves dans [VALIDATION-LOT36.md](VALIDATION-LOT36.md).
+
+Sur le poste Windows, **Docker Desktop 4.91.0 est installé**, avec Docker CLI 29.8.0 et Compose 5.5.1. WSL reste à installer avec confirmation administrateur ; le moteur local n’est pas encore validé. Voir [WINDOWS-DOCKER-SETUP.md](WINDOWS-DOCKER-SETUP.md). Aucun VPS ni watcher de production n’a été démarré.
 
 ## Image et dépendances
 
@@ -28,7 +30,7 @@ docker compose run --rm radar doctor
 
 `doctor` prépare la base si elle n'existe pas. Contrôler le résultat et les sources configurées. Un volume neuf reprend la propriété du répertoire de données de l'image ; un volume déjà présent doit autoriser l'UID 10001 à écrire. Ne pas résoudre un problème de droits en supprimant le volume.
 
-L'exercice CI construit l'image puis exécute `scripts/smoke_container.py` avec un volume neuf, utilisateur non-root, réseau coupé et les restrictions du service. Il effectue deux scans synthétiques, contrôle la déduplication et le CSV, crée des historiques synthétiques, sauvegarde, vérifie, restaure et compare les onze tables. Le volume dédié est supprimé en fin de job ; aucun volume de production n'est utilisé.
+L'exercice CI construit l'image, vérifie son ENTRYPOINT puis exécute `scripts/smoke_container.py` avec un volume neuf, utilisateur non-root, réseau coupé et les restrictions du service. Il effectue deux scans synthétiques, contrôle la déduplication et le CSV, crée des historiques synthétiques, sauvegarde, vérifie, restaure et compare les onze tables. Les rapports et journaux synthétiques sont récupérés comme artefacts pendant 14 jours avant suppression du conteneur et du volume dédiés ; aucun volume de production n'est utilisé.
 
 Pour valider uniquement le parcours Python sans Docker, avec l'environnement installé :
 
@@ -75,7 +77,8 @@ La sauvegarde tient compte du WAL pendant le fonctionnement du watcher. Conserve
 Pour examiner la conservation locale : `docker compose exec radar trading-radar backup plan data/backups --json`.
 Ce [plan](BACKUP-RETENTION.md) vérifie les archives et explique celles retenues par
 la politique choisie ; il ne supprime rien et ne remplace pas la copie sur un
-stockage distinct. Cette commande Docker reste à valider sur un hôte équipé.
+stockage distinct. Son exécution sur une archive synthétique dans Docker a été
+validée au lot 36 ; la politique réelle doit être vérifiée sur le volume cible.
 
 ## Restaurer puis reprendre
 
@@ -89,4 +92,4 @@ Le [guide de sauvegarde](BACKUPS.md) précise les refus d'écrasement et les lim
 
 ## Travaux restant à valider
 
-Exécution effective du job Docker sur Linux, exercice de reprise sur l'hôte cible, surveillance prolongée et copie distante des sauvegardes. Aucun VPS n'a été provisionné et aucun service distant n'a été lancé par le lot 20.
+Activation WSL et contrôle du moteur Windows, exercice de reprise sur l'hôte cible, surveillance prolongée et copie distante des sauvegardes. Le build et la reprise synthétique Docker Linux sont validés en CI ; aucun VPS n'a été provisionné et aucun service distant permanent n'a été lancé.
