@@ -1,6 +1,7 @@
 import re
 
 from trading_radar.degree_experience import degree_experience_years
+from trading_radar.internship_evidence import INTERNSHIP_EXCLUSION, explicit_jane_street_internship
 from trading_radar.models import Job, Score
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.range_experience import plain_range_experience_years
@@ -165,6 +166,8 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         for t in ["internship", "intern", "stage", "apprenticeship", "apprentice", "alternance"]
     ):
         result.exclusions.append("internship or apprenticeship contract")
+    if explicit_jane_street_internship(job):
+        result.exclusions.append(INTERNSHIP_EXCLUSION)
     # Senior titles override 'Analyst' when both occur (e.g. VP / Trading Analyst).
     result.exclusions += [t for t in keywords["senior_titles"] if has(title, t)]
     if job.seniority_hint == "senior":
