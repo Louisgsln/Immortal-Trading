@@ -83,6 +83,13 @@ signe `+` associées à l’expérience du candidat. Le même minimum alimente l
 et l’indicateur. Préférences, profils usuels et alternatives restent protégés ;
 les formulations `years in…` sans `experience` restent hors de cette extension.
 
+Le [lot 39](VALIDATION-LOT39.md) couvre désormais certaines qualifications
+`N–M years in…` et `N+ years in…`, dans les rubriques et domaines professionnels
+audités. Sept indicateurs auparavant inconnus deviennent explicites, sans changement
+des scores totaux. Les exigences académiques ou professionnelles ambiguës de type
+`track record` demandent encore un traitement distinct ; voir l’[audit de leur
+provenance](AMBIGUOUS-EXPERIENCE-LOT39.md).
+
 La vue **Tendances** présente les 7, 30 ou 90 derniers jours UTC (30 par défaut).
 Elle distingue premières détections locales, mises à jour, recalculs, fermetures,
 réouvertures, scans et échecs de sources. Le graphique montre au maximum les 14 derniers

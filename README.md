@@ -46,6 +46,11 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 
 ## Démarrer sur ce poste
 
+Le lot 39 reconnaît des exigences comme **« 3+ years in options trading »**.
+Sept offres affichent désormais un minimum explicite de trois ou sept ans ;
+leurs explications sont corrigées, avec **240 offres pertinentes actives et
+161 prioritaires** conservées. Voir le [bilan du lot 39](docs/VALIDATION-LOT39.md).
+
 Le lot 38 détecte les **stages explicites Jane Street même sans « Intern » dans
 le titre** : six offres sortent du classement pertinent, avec un motif visible
 dans les fiches. Le dashboard et le CSV comptent **240 offres pertinentes actives,

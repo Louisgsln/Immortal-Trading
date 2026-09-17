@@ -340,10 +340,20 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - Sept qualifications avec `years in` identifiées pour le prochain correctif ; durées contractuelles et parcours académiques séparés. Aucune extension du parseur d’expérience dans ce lot.
 - Bilan [VALIDATION-LOT38.md](VALIDATION-LOT38.md), audits [INTERNSHIP-AUDIT-LOT38.md](INTERNSHIP-AUDIT-LOT38.md) et [EXPERIENCE-IN-AUDIT-LOT38.md](EXPERIENCE-IN-AUDIT-LOT38.md).
 
-## Les cinq améliorations prioritaires après le lot 38
+## Lot 39 — Expérience professionnelle formulée avec « years in »
+
+- Trois sous-agents : implémentation, tests/revue d’impact indépendants, audit de deux cas ambigus ; mesure, recalcul et validation par l’agent principal.
+- Formes `N–M years in` et `N+ years in` reconnues dans des qualifications et domaines professionnels audités. Préférences, négations, durées contractuelles et alternatives protégées.
+- Sept indicateurs auparavant inconnus précisés : quatre Optiver et deux IMC/Jump à trois ans, UBS à sept ans. Huit listes de minima textuels changent, sans abaisser le minimum Citi de dix ans.
+- Sept décompositions corrigées, aucun score total changé ; 807 autres fiches strictement identiques. Sauvegarde restaurée, répétition et contrôle d’idempotence réussis.
+- Base à 812 offres actives, 240 pertinentes et 161 prioritaires ; CSV, HTML et serveur local actualisés. 2 342 tests réussis localement et sur Python 3.11 à 3.14 en CI, couverture 96 % ; filtres et fiches vérifiés dans Edge, build Docker et reprise réussis.
+- Audit Jump : la durée cinq est dérivée du texte par le collecteur et accepte l’académie ; provenance et signification doivent être distinguées avant une correction dédiée. Aucun changement des deux cas ambigus dans ce lot.
+- Bilan [VALIDATION-LOT39.md](VALIDATION-LOT39.md), audit [AMBIGUOUS-EXPERIENCE-LOT39.md](AMBIGUOUS-EXPERIENCE-LOT39.md).
+
+## Les cinq améliorations prioritaires après le lot 39
 
 1. **Valider l’hôte d’exploitation** : Docker Linux et la reprise synthétique sont désormais validés en CI. Terminer WSL sur le poste Windows, puis vérifier volume, reprise et supervision sur la cible réelle. Aucun VPS n’a encore été provisionné.
-2. **Compléter la couverture trading** : le lot 38 sécurise les stages explicites Jane Street sans marqueur dans le titre et documente sept qualifications `years in` à reconnaître ensuite. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Les formulations génériques inconnues et autres employeurs restent à auditer avant toute extension. Les alternatives académiques implicites et `track record` demandent un traitement séparé. Revoir Citadel lorsque son accès public redevient disponible.
+2. **Préciser la provenance des exigences et compléter la couverture trading** : les sept qualifications `years in` du lot 38 sont couvertes au lot 39. Distinguer maintenant expérience professionnelle, pratique académique et valeurs dérivées du collecteur, à partir de l’audit Jump `track record`, avant toute correction des métadonnées historiques. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Les formulations inconnues et autres employeurs restent à auditer avant toute extension. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
 4. **Poursuivre l'audit des sources** : entretenir la fraîcheur et examiner les catégories ou portails non couverts sur des preuves publiques. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
 5. **Préparer l'exploitation régulière** : tests prolongés et copie distante vérifiée. Le lot 28 fournit un plan de conservation sans suppression ; son application éventuelle reste à concevoir. Le dashboard dispose de statistiques historiques et d'un suivi éditable localement ; une exploitation sur plusieurs postes demanderait un mode d'accès adapté.
