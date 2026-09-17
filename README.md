@@ -46,6 +46,11 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 
 ## Démarrer sur ce poste
 
+Le lot 38 détecte les **stages explicites Jane Street même sans « Intern » dans
+le titre** : six offres sortent du classement pertinent, avec un motif visible
+dans les fiches. Le dashboard et le CSV comptent **240 offres pertinentes actives,
+dont 161 prioritaires**. Voir le [bilan du lot 38](docs/VALIDATION-LOT38.md).
+
 Le lot 37 reconnaît les **fourchettes d’expérience sans signe +** dans les
 qualifications explicites, en préservant préférences et alternatives. Sept scores
 sont corrigés ; le dashboard et le CSV reflètent **161 offres prioritaires actives**.

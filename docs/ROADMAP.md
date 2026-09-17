@@ -331,10 +331,19 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - Audit de sept rôles hybrides : aucune levée d’exclusion isolée justifiée, notamment en raison d’exigences d’expérience et d’un stage explicite à préserver.
 - Bilan [VALIDATION-LOT37.md](VALIDATION-LOT37.md), audits [EXPERIENCE-GAPS-LOT37.md](EXPERIENCE-GAPS-LOT37.md) et [HYBRID-ROLE-AUDIT-LOT37.md](HYBRID-ROLE-AUDIT-LOT37.md).
 
-## Les cinq améliorations prioritaires après le lot 37
+## Lot 38 — Stages dans les descriptions et audit des exigences restantes
+
+- Trois sous-agents : audit/régressions indépendantes, helper de détection et audit des formulations d’expérience restantes ; intégration et recalcul contrôlé par l’agent principal.
+- Stages Jane Street reconnus à partir de formulations directes adressées au candidat, uniquement sur la source officielle auditée. Citations, expériences passées, recrutement et encadrement de stagiaires protégés.
+- 45 motifs d’exclusion ajoutés, six scores corrigés ; 769 autres offres strictement inchangées. Sauvegarde, restauration, répétition, application et idempotence vérifiées ; candidatures et données source préservées.
+- Base à 812 offres actives, 161 prioritaires et 240 pertinentes ; CSV, export HTML et serveur local actualisés. 2 229 tests réussis localement et sur Python 3.11 à 3.14 en CI, couverture 96 % ; parcours Edge, build Docker et reprise vérifiés.
+- Sept qualifications avec `years in` identifiées pour le prochain correctif ; durées contractuelles et parcours académiques séparés. Aucune extension du parseur d’expérience dans ce lot.
+- Bilan [VALIDATION-LOT38.md](VALIDATION-LOT38.md), audits [INTERNSHIP-AUDIT-LOT38.md](INTERNSHIP-AUDIT-LOT38.md) et [EXPERIENCE-IN-AUDIT-LOT38.md](EXPERIENCE-IN-AUDIT-LOT38.md).
+
+## Les cinq améliorations prioritaires après le lot 38
 
 1. **Valider l’hôte d’exploitation** : Docker Linux et la reprise synthétique sont désormais validés en CI. Terminer WSL sur le poste Windows, puis vérifier volume, reprise et supervision sur la cible réelle. Aucun VPS n’a encore été provisionné.
-2. **Compléter la couverture trading** : les lots 33/34 corrigent l'indice junior DRW et deux présentations générales affectant les actifs/profil. Les formulations génériques inconnues et autres employeurs restent à auditer avant toute extension. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Le lot 29 couvre les exigences explicitement additionnelles au diplôme, pas toutes les alternatives implicites. Revoir Citadel lorsque son accès public redevient disponible.
+2. **Compléter la couverture trading** : le lot 38 sécurise les stages explicites Jane Street sans marqueur dans le titre et documente sept qualifications `years in` à reconnaître ensuite. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Les formulations génériques inconnues et autres employeurs restent à auditer avant toute extension. Les alternatives académiques implicites et `track record` demandent un traitement séparé. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
 4. **Poursuivre l'audit des sources** : entretenir la fraîcheur et examiner les catégories ou portails non couverts sur des preuves publiques. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
 5. **Préparer l'exploitation régulière** : tests prolongés et copie distante vérifiée. Le lot 28 fournit un plan de conservation sans suppression ; son application éventuelle reste à concevoir. Le dashboard dispose de statistiques historiques et d'un suivi éditable localement ; une exploitation sur plusieurs postes demanderait un mode d'accès adapté.
