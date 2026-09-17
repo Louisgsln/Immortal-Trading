@@ -1,0 +1,60 @@
+# Matching uses word boundaries; exclusions target job titles, not boilerplate.
+excluded_titles:
+  - recruiter
+  - administrative assistant
+  - working student
+  - trading application specialist
+  - career kickstarter
+  - expression of interest
+  - expressions of interest
+  - middle office
+  - back office
+  - operations
+  - product control
+  - accounting
+  - accountant
+  - audit
+  - compliance
+  - legal
+  - coo
+  - business manager
+  - market risk
+  - risk credit risk
+  - operational risk
+  - settlements
+  - reconciliation
+  - wealth management
+  - private banking
+  - corporate banking
+  - corporate finance
+  - investment banking
+  - it support
+  - application support
+  - lead support analyst
+  - operator commodities trading
+  - infrastructure
+  - pure research
+  - equity research
+  - research analyst
+  - sales representative
+  - internship
+  - intern
+  - stagiaire
+  - stage
+  - apprentice
+  - apprenticeship
+  - summer analyst
+  - summer associate
+  - off cycle
+  - offcycle
+  - alternance
+senior_titles:
+  - senior trader
+  - senior quantitative trader
+  - senior trading
+  - vice president
+  - vp
+  - director
+  - head of
+  - desk head
+profile_terms: [python, 'c#', sql, quantitative, derivatives, fx, pricing, 'p&l', automation, market data, electronic trading, api, apis, backtesting, algorithmic trading]

@@ -1,0 +1,268 @@
+# Start small. Other employers are tracked in docs/ROADMAP.md.
+companies:
+  nomura_professionals:
+    name: Nomura
+    enabled: true
+    ats: nomura_professionals
+    career_url: https://careers.nomura.com/Nomura?locale=en_US
+    country: global
+    options:
+      search_terms: [trading]
+      title_terms: [trading, trader, etrading, markets, structuring, structurer, repo, securities finance]
+    notes: Public SuccessFactors search and complete descriptions verified 2026-09-17. Trading search, pages of 100, first-page recheck, title filter including eTrading; Operations division excluded. Corporate grade and explicit experience minima retained. No deadline inferred from validThrough; no closure by absence.
+  hsbc_professionals:
+    name: HSBC
+    enabled: true
+    ats: hsbc_professionals
+    career_url: https://portal.careers.hsbc.com/careers
+    country: global
+    options:
+      search_terms: [trading]
+    notes: Public Eightfold search and JobPosting details verified 2026-09-17. Trading query, pagination of 10, first-page recheck and title filter. Intl Wealth & Premier Banking excluded. Platform dates without timezone are not publication/deadline instants. No closure by absence.
+  ubs_professionals:
+    name: UBS
+    enabled: true
+    ats: ubs
+    career_url: https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231
+    country: global
+    notes: Public professional board verified 2026-09-17; 547 listings, full pagination then Trading/Markets title filter. Separate source from campus, shared employer identity. No inferred seniority or dates; no closure by absence.
+  jump_trading:
+    name: Jump Trading
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: jumptrading
+    career_url: https://www.jumptrading.com/careers
+    country: global
+    notes: Public Greenhouse board linked by experienced and student career pages; verified 2026-09-17. Campus contract is not an intake date. Jump Crypto, Jump Capital and talent communities excluded.
+  xtx_markets:
+    name: XTX Markets
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: xtxmarketstechnologies
+    career_url: https://www.xtxmarkets.com/careers/
+    country: global
+    notes: Public Greenhouse board linked by official careers page; ten IDs match official JSON mirror on 2026-09-17. Trading technology requires department and role-section evidence; no junior or intake inference.
+  sig:
+    name: Susquehanna
+    enabled: true
+    ats: sig
+    career_url: https://careers.sig.com/jobs
+    country: global
+    notes: Public iCIMS/Jibe catalogue and adapter verified 2026-09-16. Three pages of 100/100/65; full requirements, explicit target starts and publication. Discovery, Operations and Sports Analytics excluded. Graduate/INTERN contradictions retained and excluded from priority. No closure by absence.
+  flow_traders:
+    name: Flow Traders
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: flowtraders
+    career_url: https://www.flowtraders.com/careers/job-search/
+    country: global
+    notes: Public Greenhouse board and adapter verified 2026-09-16; linked by official job-search.js. Events division excluded; explicit Start Date preserved, including past or missing dates without inventing a current intake. Titles filtered; no closure by absence.
+  imc:
+    name: IMC
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: imc
+    career_url: https://www.imc.com/us/search-careers
+    country: global
+    notes: Public Greenhouse board linked from official details and verified 2026-09-16. Global board via boards-api.greenhouse.io; EU hosted application URLs. Titles filtered locally; prospects and hidden postings excluded. Graduate starts retained only from explicit employment wording. No closure by absence.
+  drw:
+    name: DRW
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: drweng
+    career_url: https://www.drw.com/work-at-drw/listings
+    country: global
+    notes: English Greenhouse board linked from official details and verified 2026-09-16. Titles filtered locally; full descriptions, explicit employment type and target start season retained. French board not collected. No closure by absence.
+  optiver:
+    name: Optiver
+    enabled: true
+    ats: optiver
+    career_url: https://www.optiver.com/join-us/jobs
+    country: global
+    options:
+      exclude_title_terms: [operations, product control, compliance, audit, market risk, director, vice president, vp, svp, avp, head of, senior, the trading floor]
+    notes: Public website API and 27 detailed records verified 2026-09-16. Full board pagination then title filtering; no closure by absence. The Trading Floor event filtered out; Career Kickstarter and Expressions of Interest retained with zero score. Experienced is not interpreted as Senior. Dates without a timezone remain unknown.
+  citadel_securities:
+    name: Citadel Securities
+    enabled: false
+    ats: citadel
+    career_url: https://www.citadelsecurities.com/careers/open-opportunities/
+    country: global
+    notes: HTTP 403 from this environment on 2026-09-16. Collector not implemented or enabled; public browser indexing alone does not validate automated collection.
+  macquarie:
+    name: Macquarie
+    enabled: true
+    ats: macquarie
+    career_url: https://recruitment.macquarie.com/en_US/careers/SearchJobs/
+    country: global
+    options:
+      search_terms: [trading]
+    notes: Public Avature search and detailed pages verified 2026-09-16. Trading query plus title filter; explicit Junior/Senior employment levels inform scoring. Generic Date label not treated as original publication.
+  nomura_campus:
+    name: Nomura
+    enabled: true
+    ats: nomura
+    career_url: https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/
+    country: global
+    notes: Public campus vacancies verified 2026-09-16, excluding events. Context-free detail URLs verified; form tokens never stored. Current selected programmes are internships, excluded from priority. Professional SuccessFactors portal is a separate source.
+  credit_agricole_cib:
+    name: Crédit Agricole CIB
+    enabled: true
+    ats: ca_cib
+    career_url: https://jobs.ca-cib.com/pages/offre/listeoffre.aspx
+    country: global
+    options:
+      title_terms: [trading, trader, markets, structuring, structurer, structuration, repo, securities finance, front office developer]
+    notes: Public Talentsoft board verified 2026-09-16; complete pagination then local title filter. Explicit minimum experience and contract preserved. Update date is not publication.
+  hsbc_graduates:
+    name: HSBC
+    enabled: true
+    ats: hsbc
+    career_url: https://www.hsbc.com/careers/students-and-graduates/find-a-programme
+    country: global
+    notes: Public programme finder and emerging-talent job pages verified 2026-09-16. Explicit start dates and UTC deadlines; multi-city positions supported. Professional portal is a separate source; Hang Seng programmes grouped under HSBC.
+  ubs:
+    name: UBS
+    enabled: true
+    ats: ubs
+    career_url: https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232
+    country: global
+    notes: Public student/graduate board linked from ubs.com. Anonymous full board pagination then Trading/Markets title filter. Professional board is a separate source; session data never stored in job payloads.
+  societe_generale:
+    name: Société Générale
+    enabled: true
+    ats: societe_generale
+    career_url: https://careers.societegenerale.com/fr/Technical/toutes-les-offres
+    country: global
+    options:
+      title_terms: [trading, trader, markets, structuring, structurer, structuration, repo, securities finance, salle des marches, front office developer]
+    notes: Public French and English directories; English preferred for shared employer references. Full visible descriptions and profile requirements. validThrough not interpreted as deadline. No authenticated API used.
+  bnp_paribas:
+    name: BNP Paribas
+    enabled: true
+    ats: bnp
+    career_url: https://group.bnpparibas/emploi-carriere/toutes-offres-emploi
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: Public French-language search portal and JobPosting data verified 2026-09-15. Broad search then title filtering; subsidiaries grouped under BNP Paribas.
+  goldman_campus:
+    name: Goldman Sachs
+    enabled: true
+    ats: goldman
+    career_url: https://higher.gs.com/campus
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      programme: campus
+      search_terms: [trading, ficc]
+      title_terms: [trading, trader, markets, structuring, structurer, repo, securities finance, ficc]
+    notes: Public CAMPUS category verified 2026-09-15. Publication/scheduling startDate is not an employment start date. Internships remain excluded from priority alerts.
+  goldman_sachs:
+    name: Goldman Sachs
+    enabled: true
+    ats: goldman
+    career_url: https://higher.gs.com/results
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: Anonymous professional/early-career search verified 2026-09-15; campus programmes not covered.
+  jpmorgan:
+    name: JPMorgan
+    enabled: false
+    ats: oracle
+    career_url: https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: HTTP 403 from this environment on 2026-09-15. Adapter tested offline only; requires live validation before enabling.
+  barclays:
+    name: Barclays
+    enabled: true
+    ats: workday
+    tenant: barclays
+    career_url: https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: Public portal linked from search.jobs.barclays; verified 2026-09-15. Private/unlisted career boards excluded.
+  deutsche_bank:
+    name: Deutsche Bank
+    enabled: true
+    ats: workday
+    tenant: db
+    career_url: https://db.wd3.myworkdayjobs.com/DBWebsite
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: Public CXS verified 2026-09-15. Trading search plus title filter; not a full company inventory.
+  morgan_stanley:
+    name: Morgan Stanley
+    enabled: true
+    ats: workday
+    tenant: ms
+    career_url: https://ms.wd5.myworkdayjobs.com/External
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: Public CXS verified 2026-09-15. Early careers on other portals are not covered.
+  citi:
+    name: Citi
+    enabled: true
+    ats: workday
+    tenant: citi
+    career_url: https://citi.wd5.myworkdayjobs.com/2
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    options:
+      search_terms: [trading]
+    notes: Public CXS verified 2026-09-15. Search includes descriptions; title filter limits detail requests.
+  jane_street:
+    name: Jane Street
+    enabled: true
+    ats: greenhouse
+    tenant: janestreet
+    career_url: https://www.janestreet.com/join-jane-street/open-roles/
+    country: global
+    scan_interval: 300
+    request_interval: 2
+    notes: Public Greenhouse job board. Verify with doctor --network.
+  ats_dataset:
+    name: ATS public dataset
+    enabled: false
+    ats: ats_dataset
+    scan_interval: 1800
+    request_interval: 5
+    options:
+      query: trading
+      ats: greenhouse
+      limit: 500
+    notes: Optional hosted dataset; freshness depends on its publisher.
+  indeed_london:
+    name: Indeed London
+    enabled: false
+    ats: jobspy
+    scan_interval: 1800
+    request_interval: 5
+    options:
+      site_name: [indeed]
+      search_term: trading analyst
+      location: London
+      country_indeed: UK
+      results_wanted: 50
+      hours_old: 72
+    notes: Optional dependency; bounded search, never used for closure detection.

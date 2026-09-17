@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="__RADAR_CSP__">
+  <title>Trading Job Radar — Tableau de bord</title>
+  <style>__RADAR_CSS__</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <aside class="sidebar" aria-label="Navigation principale">
+    <a class="brand" href="#main" aria-label="Trading Job Radar, accueil"><span class="brand-mark" aria-hidden="true">R<span>•</span></span><span>TRADING<br>JOB RADAR</span></a>
+    <span class="nav-label">ESPACE DE VEILLE</span>
+    <nav class="navigation" aria-label="Vues du radar">
+      <button class="nav-item selected" type="button" data-view="jobs" aria-current="page"><span aria-hidden="true">▦</span> Offres <span id="nav-jobs" class="nav-count">—</span></button>
+      <button class="nav-item" type="button" data-view="applications"><span aria-hidden="true">◫</span> Candidatures</button>
+      <button class="nav-item" type="button" data-view="health"><span aria-hidden="true">⌁</span> Santé des sources</button>
+      <button class="nav-item" type="button" data-view="trends"><span aria-hidden="true">↗</span> Tendances</button>
+    </nav>
+    <div class="sidebar-bottom"><span class="status-dot"></span> <span id="workspace-mode">Lecture seule</span><p>Votre veille, en un regard.<br>Aucune action automatique.</p><span class="version">LOCAL WORKSPACE / 01</span></div>
+  </aside>
+  <main id="main" tabindex="-1">
+    <header class="topbar"><span class="breadcrumb">WORKSPACE <span>/</span> <span id="breadcrumb-view">OFFRES</span></span><span class="snapshot-label"><span class="status-dot"></span> INSTANTANÉ LOCAL</span></header>
+    <section class="page-heading"><div><p class="eyebrow">VOTRE PROCHAINE OPPORTUNITÉ</p><h1 id="page-title">Le marché, à votre portée.</h1><p id="page-subtitle" class="subtitle">Repérez les offres pertinentes. Gardez le cap sur votre recherche.</p></div><div class="snapshot-date"><span>Instantané généré le</span><time id="generated-at">—</time></div></section>
+    <div id="warnings" class="warnings" role="status" hidden></div>
+    <div id="fatal-error" class="error-panel" role="alert" hidden></div>
+    <section id="metrics" class="metrics" aria-label="Indicateurs du radar"></section>
+    <section id="jobs-view" class="view" aria-labelledby="results-heading">
+      <div class="section-heading"><div><p class="eyebrow">OPPORTUNITÉS</p><h2 id="results-heading">Toutes les offres</h2></div><span id="tracking-mode" class="read-only">CONSULTATION UNIQUEMENT</span></div>
+      <form id="filters" class="filters" role="search" aria-label="Filtrer les offres">
+        <label class="search-field"><span>Rechercher</span><input id="search" type="search" placeholder="Poste, entreprise, localisation…" autocomplete="off"></label>
+        <label><span>Entreprise</span><select id="company"><option value="">Toutes les entreprises</option></select></label>
+        <label><span>Score minimum</span><select id="score"><option value="0">Tous les scores</option><option value="55">55+ · Pertinent</option><option value="70">70+ · Prioritaire</option><option value="85">85+ · Très prioritaire</option></select></label>
+        <label><span>État de l’offre</span><select id="active"><option value="active">Offres actives</option><option value="all">Toutes les offres</option><option value="inactive">Offres inactives</option></select></label>
+        <label><span>Expérience</span><select id="experience" aria-describedby="experience-help"><option value="">Toutes</option><option value="up_to_2">Minimum 0–2 ans</option><option value="over_2">Minimum &gt;2 ans</option><option value="unspecified">Minimum non reconnu</option></select></label>
+        <label><span>Suivi</span><select id="application-status"><option value="">Tous les statuts</option></select></label>
+        <button id="reset" class="reset-button" type="button">Réinitialiser</button>
+      </form>
+      <p id="experience-help" class="experience-help">Le minimum reconnu dans l’annonce ne garantit pas l’éligibilité. Un minimum non reconnu ne signifie pas zéro année d’expérience.</p>
+      <div class="result-toolbar"><p id="result-count" role="status" aria-live="polite">Chargement de l’instantané…</p><label class="sort-label">Trier par <select id="sort"><option value="score">Score décroissant</option><option value="recent">Ajout le plus récent</option><option value="company">Entreprise A–Z</option><option value="deadline">Échéance proche</option></select></label></div>
+      <div class="table-scroll"><table class="jobs-table"><thead><tr><th scope="col">POSTE &amp; ENTREPRISE</th><th scope="col">LOCALISATION</th><th scope="col">SCORE</th><th scope="col">SUIVI</th><th scope="col">REPÉRÉ LE</th><th scope="col"><span class="sr-only">Détail</span></th></tr></thead><tbody id="job-rows"></tbody></table></div>
+      <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">◎</span><h3>Aucune offre à afficher</h3><p>Élargissez vos filtres ou recherchez un autre mot-clé.</p></div>
+      <footer class="pagination"><span id="page-info"></span><div><button id="previous" type="button" class="secondary-button">← Précédent</button><button id="next" type="button" class="secondary-button">Suivant →</button></div></footer>
+    </section>
+    <section id="health-view" class="view" aria-labelledby="health-heading" hidden><div class="section-heading"><div><p class="eyebrow">COLLECTE &amp; FIABILITÉ</p><h2 id="health-heading">Santé des sources</h2></div><span id="health-status" class="badge"></span></div><p id="health-explanation" class="health-explanation"></p><div class="table-scroll"><table><thead><tr><th scope="col">ENTREPRISE / SOURCE</th><th scope="col">ÉTAT</th><th scope="col">DERNIER SUCCÈS</th><th scope="col">OFFRES COLLECTÉES</th><th scope="col">ÉCHECS CONSÉCUTIFS</th></tr></thead><tbody id="source-rows"></tbody></table></div><div class="section-heading history-heading"><div><p class="eyebrow">HISTORIQUE LOCAL</p><h2>Derniers rapports de santé</h2></div></div><div id="health-history" class="history-list"></div></section>
+    <section id="trends-view" class="view" aria-labelledby="trends-heading" hidden>
+      <div class="section-heading"><div><p class="eyebrow">ACTIVITÉ DU RADAR</p><h2 id="trends-heading">Votre veille dans le temps</h2></div><label class="trend-period">Période<select id="trend-days"><option value="7">7 jours</option><option value="30" selected>30 jours</option><option value="90">90 jours</option></select></label></div>
+      <p id="trend-window" class="health-explanation" role="status" aria-live="polite"></p>
+      <p class="trend-caveat">Ces chiffres décrivent l’activité de votre radar. Une première détection n’est pas une date de publication. Les imports initiaux et reprises d’historique peuvent gonfler les volumes : ils ne mesurent pas le nombre d’offres publiées sur le marché.</p>
+      <div id="trend-unavailable" class="trend-message" role="status" hidden></div>
+      <div id="trend-content">
+        <section id="trend-metrics" class="metrics trend-metrics" aria-label="Activité sur la période sélectionnée"></section>
+        <div id="trend-empty" class="trend-message" hidden>Aucune activité enregistrée sur cette période.</div>
+        <figure class="trend-figure" aria-labelledby="trend-chart-heading"><figcaption><h3 id="trend-chart-heading">Premières détections par jour</h3><p id="trend-chart-description"></p></figcaption><div id="trend-chart" class="trend-chart"></div></figure>
+        <div class="section-heading"><div><p class="eyebrow">JOURNAL QUOTIDIEN · UTC</p><h2>Collectes et changements</h2></div></div>
+        <p id="trend-table-description" class="health-explanation"></p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Journal quotidien des tendances, défilement horizontal"><table class="trend-table"><caption class="sr-only">Activité quotidienne en UTC. Les jours sans activité sont omis.</caption><thead><tr><th scope="col">JOUR UTC</th><th scope="col">PREMIÈRES DÉTECTIONS</th><th scope="col">MISES À JOUR</th><th scope="col">RECALCULS DE SCORE</th><th scope="col">FERMETURES</th><th scope="col">RÉOUVERTURES</th><th scope="col">SCANS</th><th scope="col">ÉCHECS DE SOURCES</th></tr></thead><tbody id="trend-rows"></tbody></table></div>
+        <p class="trend-caveat trend-definitions">Les mises à jour portent sur les fiches ; les recalculs de score sont comptés séparément. Un échec de source est compté à chaque scan : une même source peut donc apparaître plusieurs fois dans ce total.</p>
+      </div>
+    </section>
+    <footer class="page-footer"><span><strong>Trading Job Radar</strong> · Décider avec méthode.</span><span id="snapshot-refresh-help">Les données reflètent cet instantané. Une nouvelle exportation les actualise.</span></footer>
+    <noscript><p class="error-panel">Activez JavaScript pour consulter cet instantané. Aucune connexion réseau n’est nécessaire.</p></noscript>
+  </main>
+  <dialog id="job-dialog" aria-labelledby="detail-title"><div class="drawer-header"><span class="eyebrow">DÉTAIL DE L’OPPORTUNITÉ</span><button id="close-detail" class="icon-button" type="button" aria-label="Fermer le détail">×</button></div><div id="job-detail"></div></dialog>
+  <script id="radar-data" type="application/json">__RADAR_DATA__</script>
+  <script>__RADAR_JS__</script>
+</body>
+</html>

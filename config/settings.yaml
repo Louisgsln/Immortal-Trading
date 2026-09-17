@@ -1,0 +1,9 @@
+bootstrap_silent: true
+alert_min_score: 70
+concurrency: 4
+timeout: 20
+retries: 3
+store_raw: false
+closure_after_missing_scans: 2
+deadline_reminders_enabled: false
+deadline_reminder_max_age_hours: 24

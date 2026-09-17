@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "trading-job-radar"
+version = "0.1.0"
+description = "Explainable, resilient trading career intelligence"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.28,<0.29", "pydantic>=2.10,<3", "PyYAML>=6,<7", "python-dotenv>=1,<2", "typer>=0.15,<1", "filelock>=3.16,<4", "protego>=0.6.2,<0.7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "mypy>=1.15,<2", "types-PyYAML>=6"]
+jobspy = ["python-jobspy>=1.1.80,<2"]
+ats = ["ats-scrapers>=0.2,<0.4"]
+
+[project.scripts]
+trading-radar = "trading_radar.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/trading_radar"]
+
+[tool.uv]
+# Pin the isolated Hatchling toolchain as well as the application lockfile.
+# These constraints apply only when a build actually requests the package.
+build-constraint-dependencies = [
+    "hatchling==1.32.0",
+    "packaging==26.3",
+    "pathspec==1.1.1",
+    "pluggy==1.6.0",
+    "tomlkit==0.15.1",
+    "trove-classifiers==2026.6.1.19",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B008"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+ignore_missing_imports = true

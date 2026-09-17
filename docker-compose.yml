@@ -1,0 +1,26 @@
+services:
+  radar:
+    build: .
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    stop_grace_period: 30s
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////app/data/jobs.db
+    volumes:
+      - radar-data:/app/data
+      - ./config:/app/config:ro
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+volumes:
+  radar-data:
