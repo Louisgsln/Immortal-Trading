@@ -1,6 +1,7 @@
 import re
 
 from trading_radar.degree_experience import degree_experience_years
+from trading_radar.in_experience import candidate_in_experience_years
 from trading_radar.internship_evidence import INTERNSHIP_EXCLUSION, explicit_jane_street_internship
 from trading_radar.models import Job, Score
 from trading_radar.normalizer import has, normalize_text
@@ -55,6 +56,7 @@ def required_experience_years(text: str) -> list[int]:
     # Academic alternatives need the original punctuation and range endpoints.
     additive_minima = degree_experience_years(text)
     range_minima = plain_range_experience_years(text)
+    in_minima = candidate_in_experience_years(text)
 
     def lower_bound(match: re.Match[str]) -> str:
         low, high, plus, years = match.groups()
@@ -131,7 +133,7 @@ def required_experience_years(text: str) -> list[int]:
             )
             if not optional and not business:
                 minima.append(int(match[1]))
-    return list(dict.fromkeys([*minima, *additive_minima, *range_minima]))
+    return list(dict.fromkeys([*minima, *additive_minima, *range_minima, *in_minima]))
 
 
 def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
