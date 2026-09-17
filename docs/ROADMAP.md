@@ -350,10 +350,18 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - Audit Jump : la durée cinq est dérivée du texte par le collecteur et accepte l’académie ; provenance et signification doivent être distinguées avant une correction dédiée. Aucun changement des deux cas ambigus dans ce lot.
 - Bilan [VALIDATION-LOT39.md](VALIDATION-LOT39.md), audit [AMBIGUOUS-EXPERIENCE-LOT39.md](AMBIGUOUS-EXPERIENCE-LOT39.md).
 
-## Les cinq améliorations prioritaires après le lot 39
+## Lot 40 — Provenance et cadre des exigences Jump
+
+- Trois sous-agents : modèle/collecteur, présentation, audit/régressions indépendantes ; correction contrôlée et validation par l’agent principal.
+- Preuves typées avec durée, cadre, origine et extrait exact ; compatibilité des anciens JSON. Collectes et aperçu historisent aussi les changements de preuve seuls.
+- Deux fiches corrigées après sauvegarde/restauration : Hong Kong garde une preuve cinq ans industrie/académie avec minimum professionnel inconnu ; New York/Chicago conserve deux ans professionnels. Une décomposition modifiée, zéro total changé, 812 autres lignes identiques.
+- Dashboard et exports actualisés, 812 offres actives, 240 pertinentes et 161 prioritaires. Preuves affichées en texte ; parcours Edge ordinateur/mobile et compatibilité des données vérifiés. 2 438 tests réussis localement et sur Python 3.11 à 3.14 en CI, couverture 96 % ; build Docker et reprise validés.
+- Bilan [VALIDATION-LOT40.md](VALIDATION-LOT40.md), audit [EXPERIENCE-PROVENANCE-LOT40.md](EXPERIENCE-PROVENANCE-LOT40.md).
+
+## Les cinq améliorations prioritaires après le lot 40
 
 1. **Valider l’hôte d’exploitation** : Docker Linux et la reprise synthétique sont désormais validés en CI. Terminer WSL sur le poste Windows, puis vérifier volume, reprise et supervision sur la cible réelle. Aucun VPS n’a encore été provisionné.
-2. **Préciser la provenance des exigences et compléter la couverture trading** : les sept qualifications `years in` du lot 38 sont couvertes au lot 39. Distinguer maintenant expérience professionnelle, pratique académique et valeurs dérivées du collecteur, à partir de l’audit Jump `track record`, avant toute correction des métadonnées historiques. Les rôles hybrides IMC/Jump et Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Les formulations inconnues et autres employeurs restent à auditer avant toute extension. Revoir Citadel lorsque son accès public redevient disponible.
+2. **Étendre la provenance et compléter la couverture trading** : les lots 39/40 couvrent les sept qualifications `years in` et distinguent les deux preuves Jump de pratique du codage. Auditer l’origine et la signification des minima fournis par les autres collecteurs avant d’étendre les preuves typées. Le cas Jane Street HR, les alternatives académiques générales et les rôles hybrides IMC/Jump/Research Analyst restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
 4. **Poursuivre l'audit des sources** : entretenir la fraîcheur et examiner les catégories ou portails non couverts sur des preuves publiques. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
 5. **Préparer l'exploitation régulière** : tests prolongés et copie distante vérifiée. Le lot 28 fournit un plan de conservation sans suppression ; son application éventuelle reste à concevoir. Le dashboard dispose de statistiques historiques et d'un suivi éditable localement ; une exploitation sur plusieurs postes demanderait un mode d'accès adapté.

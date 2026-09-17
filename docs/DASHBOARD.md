@@ -86,9 +86,16 @@ les formulations `years in…` sans `experience` restent hors de cette extension
 Le [lot 39](VALIDATION-LOT39.md) couvre désormais certaines qualifications
 `N–M years in…` et `N+ years in…`, dans les rubriques et domaines professionnels
 audités. Sept indicateurs auparavant inconnus deviennent explicites, sans changement
-des scores totaux. Les exigences académiques ou professionnelles ambiguës de type
-`track record` demandent encore un traitement distinct ; voir l’[audit de leur
-provenance](AMBIGUOUS-EXPERIENCE-LOT39.md).
+des scores totaux.
+
+Le [lot 40](VALIDATION-LOT40.md) distingue désormais les preuves de pratique du
+codage Jump : cadre professionnel, industrie ou académie, ou cadre non précisé.
+La fiche affiche la durée, **« Déduit de la description »** et l’extrait exact.
+Une preuve mixte sans minimum professionnel indépendant affiche **« Minimum
+professionnel non reconnu »** et reste dans le filtre des minima non reconnus.
+Sa durée de pratique reste visible ; elle n’est pas utilisée comme durée d’emploi.
+Les anciennes données sans preuve typée conservent leur présentation, sans
+provenance inventée. Voir l’[audit de ce périmètre](EXPERIENCE-PROVENANCE-LOT40.md).
 
 La vue **Tendances** présente les 7, 30 ou 90 derniers jours UTC (30 par défaut).
 Elle distingue premières détections locales, mises à jour, recalculs, fermetures,
