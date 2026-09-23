@@ -1,6 +1,30 @@
 # Installation Docker sur le poste Windows
 
-État au **17 septembre 2026**, après autorisation explicite de l’utilisateur.
+État mis à jour le **23 septembre 2026**, après installation de WSL par l’utilisateur.
+
+## Validation locale réussie — 23 septembre
+
+- WSL **2.7.14.0**, noyau **6.18.33.2-2**, version par défaut 2.
+- Docker Desktop **4.91.0** démarré ; distribution `docker-desktop` en cours
+  d’exécution sous WSL 2, contexte `desktop-linux`, moteur **29.8.0**, Linux amd64.
+- Configuration Compose valide et image `trading-radar-local:lot41` construite
+  depuis le code du lot 41. Identifiant du manifeste local :
+  `sha256:ad7a1f41001d9aeb7e3ecf875a03bcfc45e467b5b41f27a648d2841d5b2cd06e`.
+- ENTRYPOINT vérifié ; scénario `scripts/smoke_container.py` réussi dans un
+  volume neuf, UID/GID **10001**, réseau coupé, racine en lecture seule,
+  capacités retirées et `no-new-privileges`.
+- Huit offres synthétiques, déduplication, aperçus, exports, historique,
+  conservation et sauvegarde/restauration vérifiés : **onze tables identiques**.
+- Preuves copiées vers `data/discovery/windows-docker-20260923/`. Conteneur et
+  volume de test supprimés après contrôle de leur identité et de leur étiquette ;
+  image conservée pour la suite.
+- Onze tables de la base réelle et CSV inchangés. Aucun watcher, collecte réelle,
+  envoi de notification ni redémarrage Windows lancé par cet exercice.
+
+Le blocage initial WSL est levé. Restent la mise en exploitation régulière,
+la surveillance prolongée et une copie distante vérifiée des sauvegardes.
+
+## Historique de l’installation — 17 septembre
 
 ## Effectué
 
@@ -14,9 +38,9 @@
 - Service Windows LanmanServer actif et automatique ; hyperviseur Windows détecté.
 - Onze tables de la base et CSV du projet inchangés.
 
-## Étape bloquante
+### Blocage initial, résolu le 23 septembre
 
-WSL n’est pas installé. L’installation winget de Microsoft.WSL a échoué avec
+WSL n’était pas installé. L’installation winget de Microsoft.WSL avait échoué avec
 `0x80073d28` : privilèges administrateur requis. Le lancement élevé de
 `wsl --install --no-distribution` a demandé une confirmation Windows ; l’utilisateur
 étant absent, la demande a expiré/été annulée sans exécution du script élevé.
@@ -24,7 +48,7 @@ Le moteur Docker local n’est pas démarré. Le build et l’exercice conteneur
 depuis réussi sur GitHub Actions au [lot 36](VALIDATION-LOT36.md) ; leur vérification
 sur ce poste Windows reste à faire.
 
-## Reprendre au retour sur le poste
+### Procédure préparée pour terminer l’installation
 
 1. Ouvrir **PowerShell en tant qu’administrateur**, puis accepter la confirmation Windows.
 2. Exécuter :

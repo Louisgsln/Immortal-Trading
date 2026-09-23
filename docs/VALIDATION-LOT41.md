@@ -87,8 +87,9 @@ Les versions Python **3.11 à 3.14** passent chacune les **2 587 tests**, avec *
 couverture**. Le build Docker, l’entrée de commande et l’exercice de reprise
 réussissent : UID **10001**, réseau coupé, **onze tables restaurées identiques**.
 Les cinq logs sont conservés dans les preuves locales. Docker est validé sous
-Linux en CI ; l’activation de WSL et l’exploitation Docker sur le poste Windows
-restent à terminer.
+Linux en CI. Après confirmation de l’installation de WSL par l’utilisateur,
+le build et la reprise ont aussi été validés sur le poste Windows le 23 septembre :
+voir la [validation locale](WINDOWS-DOCKER-SETUP.md).
 
 ## Preuves locales
 

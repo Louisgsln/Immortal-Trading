@@ -46,6 +46,11 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 
 ## Démarrer sur ce poste
 
+**WSL 2 et Docker local sont validés depuis le 23 septembre 2026** : image
+construite, lancement et reprise testés sur huit offres synthétiques, onze tables
+restaurées identiques. Voir la [validation Windows](docs/WINDOWS-DOCKER-SETUP.md).
+Le watcher permanent n’est pas démarré.
+
 Le lot 41 ajoute la **provenance du champ d’expérience employeur** à 21 fiches
 Crédit Agricole CIB et reconnaît les cinq ans requis par une offre Macquarie de
 sales trading. Le classement corrigé compte **239 pertinentes actives et

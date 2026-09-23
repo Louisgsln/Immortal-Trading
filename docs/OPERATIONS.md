@@ -4,7 +4,7 @@
 
 Le **lot 36 valide le build et la reprise dans Docker Linux sur GitHub Actions**, au commit `28bda22` : image construite, ENTRYPOINT exécuté, huit offres synthétiques et onze tables identiques après restauration, sous UID 10001 et sans réseau. Les 2 068 tests passent aussi sur les quatre versions Python 3.11 à 3.14. Voir les preuves dans [VALIDATION-LOT36.md](VALIDATION-LOT36.md).
 
-Sur le poste Windows, **Docker Desktop 4.91.0 est installé**, avec Docker CLI 29.8.0 et Compose 5.5.1. WSL reste à installer avec confirmation administrateur ; le moteur local n’est pas encore validé. Voir [WINDOWS-DOCKER-SETUP.md](WINDOWS-DOCKER-SETUP.md). Aucun VPS ni watcher de production n’a été démarré.
+Sur le poste Windows, **WSL 2 et Docker local sont validés depuis le 23 septembre 2026** : Docker Desktop 4.91.0, moteur/CLI 29.8.0 et Compose 5.5.1. L’image du lot 41 se construit et le scénario synthétique restaure onze tables identiques, sous UID 10001 et sans réseau. Voir [WINDOWS-DOCKER-SETUP.md](WINDOWS-DOCKER-SETUP.md). Aucun VPS ni watcher de production n’a été démarré.
 
 ## Image et dépendances
 
@@ -92,4 +92,4 @@ Le [guide de sauvegarde](BACKUPS.md) précise les refus d'écrasement et les lim
 
 ## Travaux restant à valider
 
-Activation WSL et contrôle du moteur Windows, exercice de reprise sur l'hôte cible, surveillance prolongée et copie distante des sauvegardes. Le build et la reprise synthétique Docker Linux sont validés en CI ; aucun VPS n'a été provisionné et aucun service distant permanent n'a été lancé.
+Surveillance prolongée et copie distante des sauvegardes ; validation de tout futur hôte distant. Le build et la reprise synthétique Docker Linux sont validés en CI et sur le poste Windows via WSL 2. Aucun VPS n'a été provisionné et aucun service distant permanent n'a été lancé.
