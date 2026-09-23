@@ -46,6 +46,12 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 
 ## Démarrer sur ce poste
 
+Le lot 41 ajoute la **provenance du champ d’expérience employeur** à 21 fiches
+Crédit Agricole CIB et reconnaît les cinq ans requis par une offre Macquarie de
+sales trading. Le classement corrigé compte **239 pertinentes actives et
+160 prioritaires**. Ce travail utilise les captures conservées ; il ne renouvelle
+pas la vérification des offres en ligne. Voir le [bilan du lot 41](docs/VALIDATION-LOT41.md).
+
 Le lot 40 distingue **pratique académique et expérience professionnelle** sur
 deux offres Jump auditées. Les preuves, leur cadre et l’extrait d’origine sont
 visibles dans les fiches ; cinq ans de pratique industrie/académie ne deviennent

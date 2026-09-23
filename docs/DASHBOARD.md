@@ -97,6 +97,13 @@ Sa durée de pratique reste visible ; elle n’est pas utilisée comme durée d�
 Les anciennes données sans preuve typée conservent leur présentation, sans
 provenance inventée. Voir l’[audit de ce périmètre](EXPERIENCE-PROVENANCE-LOT40.md).
 
+Le [lot 41](VALIDATION-LOT41.md) ajoute deux provenances auditées. Crédit Agricole
+CIB affiche **« Publié dans le champ d’expérience de l’employeur »**, avec la valeur
+exacte du champ dédié, y compris zéro. Macquarie affiche la preuve de sales trading
+**« Déduit de la description »**. Le minimum de cinq ans de la référence 23225
+alimente le filtre et le score ; les 21 minima Crédit Agricole restent identiques.
+Ces preuves viennent des captures conservées et ne changent pas la date de collecte.
+
 La vue **Tendances** présente les 7, 30 ou 90 derniers jours UTC (30 par défaut).
 Elle distingue premières détections locales, mises à jour, recalculs, fermetures,
 réouvertures, scans et échecs de sources. Le graphique montre au maximum les 14 derniers
