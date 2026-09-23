@@ -51,6 +51,13 @@ construite, lancement et reprise testés sur huit offres synthétiques, onze tab
 restaurées identiques. Voir la [validation Windows](docs/WINDOWS-DOCKER-SETUP.md).
 Le watcher permanent n’est pas démarré.
 
+Le lot 42 actualise **IMC, DRW, Flow Traders, Jump et XTX** : six nouvelles offres,
+deux descriptions mises à jour et aucune fermeture déduite d’une absence.
+Le dashboard compte **243 pertinentes actives et 162 prioritaires**. Cinq sources
+sont fraîches, dix-neuf restent à actualiser. Le changement de rubrique IMC conserve
+son exigence de trois ans ; les refus HTTP du serveur de consultation sont fiabilisés
+sous Windows. Voir le [bilan du lot 42](docs/VALIDATION-LOT42.md).
+
 Le lot 41 ajoute la **provenance du champ d’expérience employeur** à 21 fiches
 Crédit Agricole CIB et reconnaît les cinq ans requis par une offre Macquarie de
 sales trading. Le classement corrigé compte **239 pertinentes actives et
