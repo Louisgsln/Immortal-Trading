@@ -1,5 +1,7 @@
 """The local preview serves a single snapshot and exposes no writable endpoint."""
 
+import socket
+import time
 from threading import Thread
 
 import httpx
@@ -50,8 +52,24 @@ def test_preview_never_serves_directory_contents(preview, path):
 
 
 @pytest.mark.parametrize("method", ["POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
-def test_preview_refuses_write_methods(preview, method):
-    assert preview.request(method, "/", content=b"change something").status_code == 405
+@pytest.mark.parametrize("content", [b"change something", b"x" * 8192])
+def test_preview_refuses_write_methods(preview, method, content):
+    assert preview.request(method, "/", content=content).status_code == 405
+
+
+def test_preview_refuses_partial_body_without_waiting_for_the_sender(preview):
+    with socket.create_connection(("127.0.0.1", preview.base_url.port), timeout=2) as connection:
+        start = time.monotonic()
+        connection.sendall(b"POST / HTTP/1.0\r\nContent-Length: 8192\r\n\r\nx")
+        response = b""
+        while b"Read-only dashboard" not in response:
+            chunk = connection.recv(4096)
+            if not chunk:
+                break
+            response += chunk
+        assert b"405 Method Not Allowed" in response
+        assert b"Read-only dashboard" in response
+        assert time.monotonic() - start < 2
 
 
 @pytest.mark.parametrize(

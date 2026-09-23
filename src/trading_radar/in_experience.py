@@ -26,7 +26,7 @@ _SECTION = re.compile(
     r"|\b(?P<other>about\s+(?:us|the\s+(?:company|firm))|our\s+(?:company|history)|"
     r"(?:key\s+)?responsibilities|what\s+you(?:'ll|\s+will)\s+get|benefits)\b"
     r"|\b(?P<required>(?:(?:basic|minimum|required|essential)\s+)?qualifications|"
-    r"requirements|about\s+you|who\s+you\s+are|your\s+skills\s+and\s+experience|"
+    r"requirements|about\s+you|who\s+you\s+are|your\s+skills\s+(?:and|&)\s+experience|"
     r"skills\s+you(?:'ll|\s+will)\s+need|what\s+you\s+bring|"
     r"what\s+we(?:'re|\s+are)\s+looking\s+for)\b",
     re.IGNORECASE,
