@@ -51,10 +51,17 @@ construite, lancement et reprise testés sur huit offres synthétiques, onze tab
 restaurées identiques. Voir la [validation Windows](docs/WINDOWS-DOCKER-SETUP.md).
 Le watcher permanent n’est pas démarré.
 
+Le lot 43 actualise **Barclays, Deutsche Bank, Morgan Stanley et Citi** :
+14 nouvelles offres et huit mises à jour après revue, sauvegarde et répétition.
+Sept grades seniors explicites sont reconnus. Le dashboard compte désormais
+**246 pertinentes actives et 166 prioritaires**, sur 832 offres actives.
+Neuf sources sont fraîches ; quinze restent à actualiser. Les annonces absentes
+conservent leur ancienne date de vérification. Voir le [bilan du lot 43](docs/VALIDATION-LOT43.md).
+
 Le lot 42 actualise **IMC, DRW, Flow Traders, Jump et XTX** : six nouvelles offres,
 deux descriptions mises à jour et aucune fermeture déduite d’une absence.
-Le dashboard compte **243 pertinentes actives et 162 prioritaires**. Cinq sources
-sont fraîches, dix-neuf restent à actualiser. Le changement de rubrique IMC conserve
+Il portait le dashboard à **243 pertinentes actives et 162 prioritaires**. Cinq sources
+avaient été rafraîchies, dix-neuf restaient à actualiser. Le changement de rubrique IMC conserve
 son exigence de trois ans ; les refus HTTP du serveur de consultation sont fiabilisés
 sous Windows. Voir le [bilan du lot 42](docs/VALIDATION-LOT42.md).
 
