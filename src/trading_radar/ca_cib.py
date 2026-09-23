@@ -11,7 +11,7 @@ from pydantic import Field
 from trading_radar.config import Company
 from trading_radar.html_page import Document, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
-from trading_radar.models import Collection, RawJob
+from trading_radar.models import Collection, ExperienceEvidence, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
 
@@ -61,6 +61,34 @@ def parse_page(text: str, page: int, limit: int) -> tuple[int, list[dict]]:
     return total, rows
 
 
+def ca_experience_evidence(value: str) -> list[ExperienceEvidence]:
+    """Read only the employer's dedicated experience-level field.
+
+    Preserve its exact value as evidence. Unknown wording, reversed ranges and
+    values outside the model's bounds supply neither a proof nor a minimum.
+    The caller must pass fldapplicantcriteria_experiencelevel, never body text.
+    """
+    match = re.fullmatch(
+        r"(?P<low>[0-9]{1,2})\s*(?:-\s*(?P<high>[0-9]{1,2})\s*(?:ans|years)|"
+        r"ans et plus|years and more)",
+        value,
+    )
+    if not match:
+        return []
+    low = int(match["low"])
+    if match["high"] is not None and low > int(match["high"]):
+        return []
+    return [
+        ExperienceEvidence(
+            minimum_years=low,
+            kind="professional",
+            origin="employer_field",
+            method="ca_cib_experience_level",
+            excerpt=value,
+        )
+    ]
+
+
 def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     nodes = list(Document(text).root.walk())
     refs = with_class(nodes, "ts-offer-page__reference")
@@ -94,10 +122,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
             start = datetime.strptime(start, "%d/%m/%Y").date().isoformat()
         except ValueError:
             raise SourceUnavailable("invalid CA CIB employment start date") from None
-    experience = fields.get("fldapplicantcriteria_experiencelevel", "")
-    minimum = re.fullmatch(
-        r"(\d+)\s*(?:-\s*\d+\s*(?:ans|years)|ans et plus|years and more)", experience
-    )
+    evidence = ca_experience_evidence(fields.get("fldapplicantcriteria_experiencelevel", ""))
     # All employer criteria are preserved, including requirements omitted from the summary.
     description = "\n".join(
         "<p>" + html.escape(value) + "</p>"
@@ -118,7 +143,8 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         + fields["fldlocation_location_geographicalareacollection"],
         expected_start_date=start,
         employment_type=fields["fldjobdescription_contract"],
-        minimum_experience_years=int(minimum[1]) if minimum else None,
+        minimum_experience_years=evidence[0].minimum_years if evidence else None,
+        experience_evidence=evidence,
         # The visible date is explicitly labelled Update date, not publication.
         raw_payload={"fields": fields},
     )

@@ -8,6 +8,7 @@ from urllib.parse import parse_qs, urlencode, urlsplit
 from trading_radar.config import Company
 from trading_radar.html_page import Document, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
+from trading_radar.macquarie_experience import macquarie_sales_trading_evidence
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
@@ -101,6 +102,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     headings = {clean(n) for n in body[0].walk() if n.tag == "h3"}
     # Both the actual role and the candidate requirements must be present, beyond boilerplate.
     requirements = ""
+    requirement_paragraphs = ""
     for label in ("What role will you play?", "What you offer"):
         sections = [
             n
@@ -117,9 +119,13 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         ):
             raise SourceUnavailable("Macquarie responsibilities or requirements missing")
         if label == "What you offer":
-            requirements = " ".join(
+            requirement_values = [
                 clean(n)
                 for n in with_class(sections[0].walk(), "article__content__view__field__value")
+            ]
+            requirements = " ".join(requirement_values)
+            requirement_paragraphs = "\n".join(
+                "<p>" + html.escape(value) + "</p>" for value in requirement_values
             )
     if (
         metadata.get("Job ID") != row["id"]
@@ -139,6 +145,8 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     )
     if any(int(low) > int(high) for low, high in ranges):
         raise SourceUnavailable("Macquarie contradictory experience range")
+    evidence = macquarie_sales_trading_evidence(requirement_paragraphs)
+    minima = [int(low) for low, _ in ranges] + [item.minimum_years for item in evidence]
     return RawJob(
         company=config.name,
         title=row["title"],
@@ -150,7 +158,8 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         description="\n".join("<p>" + html.escape(value) + "</p>" for value in descriptions),
         location="; ".join(dict.fromkeys(locations)),
         employment_type=contracts[0],
-        minimum_experience_years=max((int(low) for low, _ in ranges), default=None),
+        minimum_experience_years=max(minima, default=None),
+        experience_evidence=evidence,
         seniority_hint="junior"
         if "junior" in levels
         else "senior"

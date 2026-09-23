@@ -106,18 +106,24 @@
         value.category === (years <= 2 ? "up_to_2" : "over_2")) return value;
     return {minimum_years: null, category: "unspecified"};
   };
+  const evidenceMethods = {
+    jump_coding_track_record: {origin: "description", kinds: ["professional", "industry_or_academia", "unspecified"], label: "Pratique du codage", source: "Déduit de la description"},
+    ca_cib_experience_level: {origin: "employer_field", kinds: ["professional"], label: "Expérience indiquée", source: "Publié dans le champ d’expérience de l’employeur"},
+    macquarie_sales_trading_experience: {origin: "description", kinds: ["professional"], label: "Expérience en sales trading", source: "Déduit de la description"}
+  };
   const experienceEvidence = (job) => {
     const evidence = job.experience?.evidence;
     if (!Array.isArray(evidence)) return [];
     return evidence.filter((item) => item && typeof item === "object" &&
       Number.isSafeInteger(item.minimum_years) && item.minimum_years >= 0 && item.minimum_years <= 99 &&
-      ["professional", "industry_or_academia", "unspecified"].includes(item.kind) &&
-      item.origin === "description" && item.method === "jump_coding_track_record" &&
+      typeof item.method === "string" && Object.hasOwn(evidenceMethods, item.method) &&
+      evidenceMethods[item.method].kinds.includes(item.kind) &&
+      item.origin === evidenceMethods[item.method].origin &&
       typeof item.excerpt === "string" && item.excerpt.trim().length > 0);
   };
   const evidenceLabel = (item) => {
     const context = {professional: "cadre professionnel", industry_or_academia: "industrie ou académie", unspecified: "cadre non précisé"};
-    return "Pratique du codage : au moins " + number(item.minimum_years) +
+    return evidenceMethods[item.method].label + " : au moins " + number(item.minimum_years) +
       (item.minimum_years === 1 ? " an" : " ans") + " (" + context[item.kind] + ")";
   };
   const experienceLabel = (job) => {
@@ -323,7 +329,7 @@
     experienceEvidence(job).forEach((item) => {
       const evidence = make("div", null, "experience-evidence");
       evidence.append(make("p", evidenceLabel(item), "experience-practice"),
-        make("p", "Déduit de la description", "detail-company"),
+        make("p", evidenceMethods[item.method].source, "detail-company"),
         make("blockquote", item.excerpt, "description experience-excerpt"));
       if (item.kind === "industry_or_academia") {
         evidence.append(make("p", "Cette pratique peut inclure des travaux académiques ; elle n’établit pas un minimum d’expérience professionnelle."));

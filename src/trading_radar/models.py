@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
-from typing import Any, Literal
+from typing import Any, Literal, Self
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 def utcnow() -> datetime:
@@ -11,9 +11,22 @@ def utcnow() -> datetime:
 class ExperienceEvidence(BaseModel):
     minimum_years: int = Field(ge=0, le=99)
     kind: Literal["professional", "industry_or_academia", "unspecified"]
-    origin: Literal["description"] = "description"
-    method: Literal["jump_coding_track_record"] = "jump_coding_track_record"
+    origin: Literal["description", "employer_field"] = "description"
+    method: Literal[
+        "jump_coding_track_record", "ca_cib_experience_level", "macquarie_sales_trading_experience"
+    ] = "jump_coding_track_record"
     excerpt: str
+
+    @model_validator(mode="after")
+    def consistent_provenance(self) -> Self:
+        expected_origin = (
+            "employer_field" if self.method == "ca_cib_experience_level" else "description"
+        )
+        if self.origin != expected_origin:
+            raise ValueError("experience evidence origin does not match its extraction method")
+        if self.method != "jump_coding_track_record" and self.kind != "professional":
+            raise ValueError("this experience extraction method requires professional evidence")
+        return self
 
 
 class RawJob(BaseModel):

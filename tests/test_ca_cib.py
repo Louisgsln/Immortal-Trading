@@ -165,6 +165,33 @@ def test_missing_criteria_reference_and_duplicate_fields():
 def test_explicit_minimum_experience(label, minimum):
     job = parse_detail(detail(fldapplicantcriteria_experiencelevel=label), row(), config(), "ca")
     assert job.minimum_experience_years == minimum
+    assert [proof.excerpt for proof in job.experience_evidence] == (
+        [label] if minimum is not None else []
+    )
+
+
+def test_experience_provenance_comes_only_from_dedicated_field():
+    job = parse_detail(
+        detail(
+            fldapplicantcriteria_experiencelevel="Experienced",
+            fldjobdescription_description1="0-2 years. Pricing FX on a trading desk.",
+        ),
+        row(),
+        config(),
+        "ca",
+    )
+    assert job.minimum_experience_years is None
+    assert job.experience_evidence == []
+    assert "0-2 years" in job.description
+
+
+def test_inverted_field_is_retained_but_does_not_supply_experience():
+    job = parse_detail(
+        detail(fldapplicantcriteria_experiencelevel="6-3 years"), row(), config(), "ca"
+    )
+    assert job.minimum_experience_years is None
+    assert job.experience_evidence == []
+    assert job.raw_payload["fields"]["fldapplicantcriteria_experiencelevel"] == "6-3 years"
 
 
 @pytest.mark.parametrize(
