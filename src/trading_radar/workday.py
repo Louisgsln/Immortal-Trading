@@ -7,11 +7,13 @@ HR API. A POST here submits a search, never an application.
 import html
 import re
 import unicodedata
+from typing import Literal
 from urllib.parse import unquote, urlsplit
 
 from pydantic import Field, field_validator
 
 from trading_radar.config import Company
+from trading_radar.html_page import Document, Element, clean
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text, parse_date
@@ -102,6 +104,67 @@ def optional_text(record: dict, field: str) -> str | None:
     if value is not None and not isinstance(value, str):
         raise SourceUnavailable(f"invalid Workday {field}; no snapshot committed")
     return value
+
+
+def workday_seniority_hint(
+    source: str, company: str, title: str, description: str, posting_id: object
+) -> Literal["senior"] | None:
+    """Recognize only the source-specific grade evidence audited in lot 43.
+
+    A colleague's grade, a URL alone or an unqualified ED acronym is insufficient.
+    Do not interpret generic leadership language or derive junior grades here.
+    """
+
+    def paragraphs_in(node: Element):
+        if node.tag in {"script", "style", "template", "blockquote", "q"} or "hidden" in node.attrs:
+            return
+        if node.tag == "p":
+            if not any(
+                child.tag in {"script", "style", "template", "blockquote", "q"}
+                or "hidden" in child.attrs
+                for child in node.walk()
+            ):
+                yield clean(node)
+            return
+        for child in node.children:
+            if isinstance(child, Element):
+                yield from paragraphs_in(child)
+
+    paragraphs = list(paragraphs_in(Document(description).root))
+    if (source, company) == ("deutsche_bank", "Deutsche Bank"):
+        grades = {
+            match[1].casefold()
+            for paragraph in paragraphs
+            if (
+                match := re.fullmatch(
+                    r"Corporate Title\s*[:–—-]?\s*(Vice President|Managing Director|Director|Analyst|Associate)",
+                    paragraph,
+                    re.IGNORECASE,
+                )
+            )
+        }
+        if len(grades) > 1:
+            raise SourceUnavailable(
+                "Workday corporate grade is contradictory; no snapshot committed"
+            )
+        if grades & {"vice president", "director", "managing director"}:
+            return "senior"
+    if (
+        (source, company) == ("morgan_stanley", "Morgan Stanley")
+        and re.search(r"\s[-–—]\s*ED$", title)
+        and isinstance(posting_id, str)
+        and re.search(r"(?:^|-)Job-Level-+Executive-Director(?:_|$)", posting_id)
+    ):
+        return "senior"
+    if (source, company) == ("citi", "Citi") and any(
+        paragraph.startswith(
+            "The Director on the EMEA Cash Electronic Execution Desk is a senior leadership role "
+            "within the Equities Markets division,"
+        )
+        for paragraph in paragraphs
+    ):
+        return "senior"
+    return None
 
 
 class WorkdayCollector:
@@ -227,6 +290,9 @@ class WorkdayCollector:
             location=loc or listing_location or "",
             date_posted=parse_date(start_date),
             employment_type=time_type,
+            seniority_hint=workday_seniority_hint(
+                self.source, self.config.name, title, description, info.get("jobPostingId")
+            ),
             raw_payload={"listing": listing, "detail": info},
         )
 
