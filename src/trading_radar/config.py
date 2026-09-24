@@ -38,6 +38,8 @@ class Settings(BaseModel):
     closure_after_missing_scans: int = Field(default=2, ge=2)
     database_url: str = "sqlite:///data/jobs.db"
     alerts_enabled: bool = False
+    telegram_control_enabled: bool = False
+    telegram_incident_notices_enabled: bool = False
     deadline_reminders_enabled: bool = False
     deadline_reminder_max_age_hours: float = Field(default=24, gt=0, le=168)
 
@@ -51,7 +53,12 @@ class Config(BaseModel):
 def load_config(directory: Path = Path("config")) -> Config:
     load_dotenv(override=False)
     settings = yaml.safe_load((directory / "settings.yaml").read_text(encoding="utf-8")) or {}
-    for env, key in [("DATABASE_URL", "database_url"), ("ALERTS_ENABLED", "alerts_enabled")]:
+    for env, key in [
+        ("DATABASE_URL", "database_url"),
+        ("ALERTS_ENABLED", "alerts_enabled"),
+        ("TELEGRAM_CONTROL_ENABLED", "telegram_control_enabled"),
+        ("TELEGRAM_INCIDENT_NOTICES_ENABLED", "telegram_incident_notices_enabled"),
+    ]:
         if env in os.environ:
             settings[key] = os.environ[env]
     companies = yaml.safe_load((directory / "companies.yaml").read_text(encoding="utf-8"))

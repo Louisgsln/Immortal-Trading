@@ -51,7 +51,7 @@ class LogStream(io.TextIOBase):
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("watch", "dashboard", "backup"))
+    parser.add_argument("mode", choices=("watch", "dashboard", "backup", "telegram"))
     args = parser.parse_args()
     os.chdir(ROOT)
     runtime = ROOT / "data" / "windows-service"
@@ -86,6 +86,11 @@ def main() -> int:
                 else:
                     logger.info("Collection active; Telegram notifications disabled")
                 command = ["trading-radar", "watch"]
+            elif args.mode == "telegram":
+                if not config.settings.telegram_control_enabled:
+                    raise ValueError("Telegram control must be enabled")
+                TelegramNotifier.from_env()
+                command = ["trading-radar", "telegram"]
             else:
                 command = [
                     "trading-radar",

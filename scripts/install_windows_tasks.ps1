@@ -10,7 +10,7 @@ $taskRunner = Join-Path $PSScriptRoot 'windows_entry.py'
 $taskUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 $taskPrincipal = New-ScheduledTaskPrincipal -UserId $taskUser -LogonType Interactive -RunLevel Limited
 $taskSettings = New-ScheduledTaskSettingsSet -StartWhenAvailable -RestartCount 999 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit ([TimeSpan]::Zero) -MultipleInstances IgnoreNew
-foreach ($taskMode in @('watch','dashboard','backup')) {
+foreach ($taskMode in @('watch','dashboard','backup','telegram')) {
     $taskName = 'Immortal-Trading-' + $taskMode
     $taskExisting = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     if ($taskExisting) { throw "Task already exists: $taskName. Review before updating." }

@@ -198,7 +198,7 @@ def test_queue_idempotence_and_delivery(timely, repo):
     notifier = FakeNotifier()
     assert asyncio.run(deliver(repo, notifier, 70, reminders_enabled=True)) == 1
     assert notifier.sent[0][1] == "deadline_j7"
-    assert "APPLICATION DEADLINE" in format_message(*notifier.sent[0])
+    assert "ÉCHÉANCE DE CANDIDATURE" in format_message(*notifier.sent[0])
     assert queue_reminders(repo, 70) == 0
     assert reminder_plans(repo)[0]["reason"] == "delivery_sent"
 

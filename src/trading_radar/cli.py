@@ -25,6 +25,7 @@ from trading_radar.http_cache import JSONCache
 from trading_radar.models import utcnow
 from trading_radar.monitoring_cli import app as monitor_app
 from trading_radar.notifications import TelegramNotifier
+from trading_radar.runtime_status import WatcherPulse, pulse_path
 from trading_radar.scanner import configure_logging, scan
 from trading_radar.score_audit import build_score_audit
 from trading_radar.scoring import score_job
@@ -158,21 +159,42 @@ def watch(config_dir: Path = Path("config")):
     json_cache = JSONCache()
 
     async def loop():
-        while True:
-            result = await scan(
-                config, repo, due_only=True, notifier=notifier, json_cache=json_cache
-            )
-            if result.sources:
-                export_csv(repo, Path("data/jobs.csv"))
-                typer.echo(result.model_dump_json())
-            await asyncio.sleep(10 + random.uniform(0, 3))
+        async with WatcherPulse(config) as pulse:
+            while True:
+                pulse.check()
+                pulse.publish("scanning")
+                result = await scan(
+                    config, repo, due_only=True, notifier=notifier, json_cache=json_cache
+                )
+                if result.sources:
+                    export_csv(repo, Path("data/jobs.csv"))
+                    typer.echo(result.model_dump_json())
+                pulse.publish("waiting")
+                await asyncio.sleep(10 + random.uniform(0, 3))
 
     try:
-        asyncio.run(loop())
+        with FileLock(str(pulse_path(config)) + ".lock", timeout=0):
+            asyncio.run(loop())
     except KeyboardInterrupt:
         typer.echo("Watcher stopped.")
     finally:
         repo.close()
+
+
+@app.command("telegram")
+def telegram(config_dir: Path = Path("config")):
+    """Private /status commands and incident notices, independent of the watcher."""
+    from trading_radar.telegram_control import run_control
+
+    configure_logging()
+    config = load_config(config_dir)
+    try:
+        asyncio.run(run_control(config))
+    except KeyboardInterrupt:
+        typer.echo("Telegram service stopped.")
+    except Exception as error:
+        typer.echo(f"Telegram service unavailable ({type(error).__name__}).", err=True)
+        raise typer.Exit(1) from None
 
 
 @app.command("list")

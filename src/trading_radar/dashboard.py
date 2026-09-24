@@ -6,7 +6,6 @@ import html
 import json
 import os
 import tempfile
-import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
@@ -15,6 +14,7 @@ from typing import Any, cast
 from trading_radar.backups import database_path
 from trading_radar.config import Config
 from trading_radar.dashboard_data import build_dashboard_data
+from trading_radar.dashboard_http import discard_small_body
 
 
 def _assets() -> tuple[str, str, str]:
@@ -181,32 +181,7 @@ def create_dashboard_server(content: str, port: int = 8765) -> ThreadingHTTPServ
             # Closing with an unread request body can reset the connection on
             # Windows before the client receives its 405. Drain only a small,
             # explicitly framed body; a partial sender must not hold us open.
-            length = self.headers.get("Content-Length", "")
-            if (
-                self.headers.get("Transfer-Encoding") is None
-                and len(self.headers.get_all("Content-Length", [])) == 1
-                and length.isascii()
-                and length.isdecimal()
-                and len(length) <= 4
-                and int(length) <= 8192
-            ):
-                previous_timeout = self.connection.gettimeout()
-                try:
-                    deadline = time.monotonic() + 0.25
-                    remaining = int(length)
-                    while remaining:
-                        budget = deadline - time.monotonic()
-                        if budget <= 0:
-                            break
-                        self.connection.settimeout(budget)
-                        chunk = self.rfile.read1(remaining)
-                        if not chunk:
-                            break
-                        remaining -= len(chunk)
-                except OSError:
-                    pass
-                finally:
-                    self.connection.settimeout(previous_timeout)
+            discard_small_body(self)
             self._respond(405, b"Read-only dashboard", "text/plain; charset=utf-8")
 
         do_POST = do_PUT = do_PATCH = do_DELETE = do_OPTIONS = _read_only

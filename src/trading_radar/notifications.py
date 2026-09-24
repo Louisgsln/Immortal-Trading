@@ -1,9 +1,11 @@
 import os
 import re
+from datetime import UTC, datetime
 from typing import Protocol
 
 import httpx
 
+from trading_radar.experience import experience_requirement
 from trading_radar.models import Job
 
 
@@ -18,40 +20,55 @@ class DeliveryUnknown(RuntimeError):
 def format_message(job: Job, event: str) -> str:
     score = job.score_breakdown
     badge = "🚨" if score.total >= 85 else "🟠"
+    events = {"new": "NOUVELLE OFFRE", "updated": "OFFRE MODIFIÉE", "reopened": "OFFRE ROUVERTE"}
+    minimum = experience_requirement(job)["minimum_years"]
+
+    def date(value: datetime | None) -> str:
+        return value.astimezone(UTC).strftime("%d/%m/%Y %H:%M UTC") if value else "Non précisée"
+
     lines = [
         (
-            f"⏰ APPLICATION DEADLINE — {event.replace('deadline_j', 'J−')} WINDOW — {score.total}/100"
+            f"⏰ ÉCHÉANCE DE CANDIDATURE — {event.replace('deadline_j', 'J−')} — {score.total}/100"
             if event in {"deadline_j7", "deadline_j3", "deadline_j1"}
-            else f"{badge} TRADING OPPORTUNITY — {event.upper()} — {score.total}/100"
+            else f"{badge} {events.get(event, 'OPPORTUNITÉ TRADING')} — {score.total}/100"
         ),
         "",
         job.company[:150],
         job.title[:300],
         job.location_normalized[:150],
         "",
+        f"Début : {(job.expected_start_date or 'Non précisé')[:100]}",
+        "Expérience professionnelle : "
+        + (f"minimum reconnu {minimum} an(s)" if minimum is not None else "minimum non reconnu"),
+        f"Échéance : {date(job.application_deadline)}",
+        "",
+        "Pourquoi ce score :",
     ]
-    for name, maximum in [
-        ("trading", 30),
-        ("junior", 20),
-        ("start", 15),
-        ("front_office", 15),
-        ("asset", 10),
-        ("profile_fit", 10),
+    for name, label, maximum in [
+        ("trading", "Lien avec le trading", 30),
+        ("junior", "Compatibilité junior", 20),
+        ("start", "Calendrier", 15),
+        ("front_office", "Indices front office", 15),
+        ("asset", "Produits recherchés", 10),
+        ("profile_fit", "Mots-clés du profil", 10),
     ]:
-        lines.append(f"{name}: {getattr(score, name)}/{maximum}")
+        lines.append(f"• {label} : {getattr(score, name)}/{maximum}")
     lines += [
         "",
-        f"First seen: {job.first_seen.isoformat()}",
-        f"Posted: {job.date_posted.isoformat() if job.date_posted else 'Unknown'}",
-        f"Deadline: {job.application_deadline.isoformat() if job.application_deadline else 'Unknown'}",
-        f"Source: {job.source}",
+        "Extrait employeur (langue d’origine) :",
+        " ".join(job.description_text.split())[:500] or "Description non disponible.",
         "",
-        *[r[:200] for r in score.reasons],
+        f"Détectée le : {date(job.first_seen)}",
+        f"Dernière observation : {date(job.last_seen)}",
+        f"Publication : {date(job.date_posted)}",
+        f"Source : {job.source[:100]}",
+        "Un minimum non reconnu ne signifie pas absence d’exigence.",
+        "Score de priorité, pas une probabilité de recrutement.",
         "",
-        "APPLY:",
+        "CONSULTER L’OFFRE :",
         job.apply_url[:1500],
     ]
-    return "\n".join(lines)[:4000]
+    return "\n".join(lines).encode("utf-16-le")[:8000].decode("utf-16-le", errors="ignore")
 
 
 class TelegramNotifier:
@@ -65,6 +82,11 @@ class TelegramNotifier:
         return cls(os.getenv("TELEGRAM_BOT_TOKEN", ""), os.getenv("TELEGRAM_CHAT_ID", ""))
 
     async def send(self, job: Job, event: str) -> None:
+        await self.send_text(format_message(job, event))
+
+    async def send_text(self, text: str) -> None:
+        if not text or len(text.encode("utf-16-le")) // 2 > 4096:
+            raise ValueError("Telegram message must contain 1 to 4096 UTF-16 units")
         # Do not log URL or HTTP exception text: Telegram embeds the token in the URL.
         async with httpx.AsyncClient(timeout=20, transport=self.transport) as client:
             try:
@@ -72,7 +94,7 @@ class TelegramNotifier:
                     f"https://api.telegram.org/bot{self.token}/sendMessage",
                     json={
                         "chat_id": self.chat_id,
-                        "text": format_message(job, event),
+                        "text": text,
                         "link_preview_options": {"is_disabled": True},
                     },
                 )

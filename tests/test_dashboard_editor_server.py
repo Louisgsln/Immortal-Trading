@@ -331,3 +331,22 @@ def test_ambiguous_http_framing_never_writes(editor, repo, extra_headers, expect
         response = connection.recv(4096)
     assert response.startswith(f"HTTP/1.0 {expected}".encode())
     assert rows(repo) == before
+
+
+@pytest.mark.parametrize("body", [b"x", b"x" * 8192])
+def test_unauthorized_small_upload_gets_error_even_when_partial(editor, repo, body):
+    client, headers, path = editor
+    before = rows(repo)
+    port = client.base_url.port
+    request = (
+        f"POST {path} HTTP/1.1\r\nHost: 127.0.0.1:{port}\r\n"
+        f"Origin: {headers['Origin']}\r\nX-Radar-Token: incorrect\r\n"
+        "Content-Length: 8192\r\nContent-Type: application/json\r\n\r\n"
+    ).encode() + body
+    with socket.create_connection(("127.0.0.1", port), timeout=2) as connection:
+        connection.sendall(request)
+        with HTTPResponse(connection) as response:
+            response.begin()
+            assert response.status == 403
+            assert json.loads(response.read())["error"]["code"] == "invalid_session"
+    assert rows(repo) == before

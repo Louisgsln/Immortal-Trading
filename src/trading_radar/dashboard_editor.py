@@ -16,6 +16,7 @@ from trading_radar.dashboard_applications import (
     update_application,
 )
 from trading_radar.dashboard_data import build_dashboard_data
+from trading_radar.dashboard_http import discard_small_body
 
 MAX_BODY_BYTES = 131_072
 
@@ -84,6 +85,8 @@ def create_editable_dashboard_server(
             )
 
         def error(self, status: int, code: str, message: str) -> None:
+            if not getattr(self, "body_consumed", False):
+                discard_small_body(self)
             self.json(status, {"status": "error", "error": {"code": code, "message": message}})
 
         def local(self, *, write: bool = False) -> bool:
@@ -173,6 +176,7 @@ def create_editable_dashboard_server(
                 self.error(415, "invalid_content_type", "Un formulaire JSON UTF-8 est requis.")
                 return
             try:
+                self.body_consumed = True
                 raw = self.rfile.read(length)
                 if len(raw) != length:
                     raise ValueError("Incomplete body")

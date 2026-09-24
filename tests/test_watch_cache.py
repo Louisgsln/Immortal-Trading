@@ -11,7 +11,8 @@ from trading_radar.http_cache import JSONCache
 from trading_radar.models import Collection, ScanMetrics
 
 
-def test_watch_passes_one_cache_to_successive_scans(config, repo, monkeypatch):
+def test_watch_passes_one_cache_to_successive_scans(config, repo, monkeypatch, tmp_path):
+    config.settings.database_url = f"sqlite:///{tmp_path / 'jobs.db'}"
     caches = []
 
     async def scan(*args, **kwargs):
