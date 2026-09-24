@@ -134,7 +134,8 @@ def _job(row: sqlite3.Row) -> dict:
     }
 
 
-def _read_jobs(config: Config) -> list[dict]:
+def read_jobs(config: Config) -> list[dict]:
+    """Read a bounded, validated jobs/applications snapshot without migrations."""
     url = config.settings.database_url
     if (
         not url.startswith("sqlite:///")
@@ -222,7 +223,7 @@ def build_dashboard_data(
         "warnings": [],
     }
     try:
-        result["jobs"] = _read_jobs(config)
+        result["jobs"] = read_jobs(config)
     except DashboardDataError as exc:
         result.update(status="error", error={"code": exc.code, "message": str(exc)})
         result["database"] = {"status": exc.code, "schema_version": None}

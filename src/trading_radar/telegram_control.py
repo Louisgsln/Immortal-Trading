@@ -16,9 +16,10 @@ from trading_radar.backups import database_path
 from trading_radar.config import Config
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import atomic_json, format_status, incident_keys, runtime_report
+from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
-HELP = "📡 Immortal Trading\n/status : activité du radar, état des sources et alertes.\n/help : cette aide.\nCes commandes ne modifient pas tes candidatures."
+HELP = "📡 Immortal Trading\n/status : activité du radar, état des sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
 
 
 class ControlState(BaseModel):
@@ -66,7 +67,7 @@ def command_from(update: dict, chat_id: str, username: str, now: float) -> str |
     if type(date) is not int or not 0 <= now - date <= 300 or not isinstance(text, str):
         return None
     match = re.fullmatch(
-        r"/(status|start|help)(?:@([A-Za-z0-9_]+))?(?:[ \t]+[^\r\n]{0,128})?", text.strip()
+        r"/(status|start|help|top|new)(?:@([A-Za-z0-9_]+))?(?:[ \t]+[^\r\n]{0,128})?", text.strip()
     )
     if not match or (match[2] and match[2].casefold() != username.casefold()):
         return None
@@ -122,7 +123,10 @@ async def process_updates(
         if command is None or replies >= 3:
             continue
         replies += 1
-        text = format_status(runtime_report(config)) if command == "status" else HELP
+        if command in {"top", "new"}:
+            text = jobs_message(config, "top" if command == "top" else "new")
+        else:
+            text = format_status(runtime_report(config)) if command == "status" else HELP
         try:
             await notifier.send_text(text)
             logger.info("telegram_command_delivered command=%s", command)
@@ -187,6 +191,8 @@ async def run_control(config: Config) -> None:
                 "scope": {"type": "chat", "chat_id": notifier.chat_id},
                 "commands": [
                     {"command": "status", "description": "État du radar et des sources"},
+                    {"command": "top", "description": "Meilleures offres à examiner"},
+                    {"command": "new", "description": "Offres découvertes depuis 24 h"},
                     {"command": "help", "description": "Aide du radar"},
                 ],
             },

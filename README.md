@@ -54,6 +54,11 @@ des tâches Windows sur la base existante, avec sauvegarde quotidienne vérifié
 Les alertes Telegram sont activées et le message de test a été accepté. Le PC doit rester
 allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/WINDOWS-LIVE.md).
 
+Le lot 45 ajoute **`/top` et `/new` dans Telegram** : meilleures offres à examiner
+et découvertes des dernières 24 heures, avec score, expérience reconnue,
+fraîcheur et lien de candidature. Les listes écartent les candidatures déjà
+envoyées et les données anciennes. Voir le [guide Telegram](docs/TELEGRAM-CONTROL.md).
+
 Le lot 44 ajoute **les commandes Telegram privées `/status` et `/help`**,
 les alertes d'offres en français et les notifications d'incident du radar.
 Le service Telegram indépendant est installé sur ce PC. Les **2 720 tests**

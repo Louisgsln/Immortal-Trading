@@ -401,7 +401,20 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md),
   bilan [VALIDATION-LOT44.md](VALIDATION-LOT44.md).
 
-## Les cinq améliorations prioritaires après le lot 44
+## Lot 45 — Consultation des offres dans Telegram
+
+- `/top` : jusqu'à cinq meilleures offres à examiner ; `/new` : découvertes
+  des dernières 24 heures, triées de la plus récente à la plus ancienne.
+- Score, minimum d'expérience reconnu, dates de découverte/vérification,
+  échéance avec précision préservée et lien complet. Nombre total de
+  correspondances explicite, réponse bornée à un message.
+- Lecture seule ; réutilisation de la validation du dashboard. Sources et
+  fiches récentes exigées, candidatures déjà envoyées et échéances dépassées
+  ou ambiguës exclues. Aucune modification du score ou du suivi.
+- Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
+  Restent le digest programmé et les actions de suivi depuis Telegram.
+
+## Les cinq améliorations prioritaires après le lot 45
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Corriger les exigences observées et étendre la provenance** : priorité aux nouvelles fiches DB `R0452740` (`three (3) years`) et `R0450097` (`1-4 years of prior work experience`) dont les minima restent non reconnus au lot 43. Prévoir protections des préférences, négations et alternatives, puis mesure sur toute la base avant correction. Ensuite reprendre les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n’est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.

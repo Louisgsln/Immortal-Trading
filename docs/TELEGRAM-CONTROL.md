@@ -9,6 +9,37 @@ Dans le chat privé avec `@ImmortalTradingBot` :
 - `/status` affiche l'activité du collecteur, le dernier cycle terminé, la santé
   des sources et le nombre d'alertes envoyées ou à vérifier.
 - `/help` affiche l'aide ; `/start` affiche également cette aide.
+- `/top` affiche jusqu'à cinq offres à examiner, triées par score décroissant,
+  puis découverte la plus récente.
+- `/new` affiche jusqu'à cinq offres découvertes par le radar depuis 24 heures,
+  les plus récentes en premier. Ce n'est pas leur date de publication employeur.
+
+### Critères des listes `/top` et `/new`
+
+Les listes utilisent le seuil des alertes (70/100 sur ce poste), avec un minimum
+de 1 pour écarter les offres exclues même si le seuil est réglé à zéro. Elles
+retiennent les statuts `New`, `Reviewing` et `To Apply`. Les candidatures déjà
+envoyées ou terminées sont écartées, ainsi que les offres inactives, expirées
+ou avec une échéance connue dépassée ou ambiguë.
+
+La source doit être activée, avoir réussi depuis 24 heures et ne pas avoir un
+échec plus récent. Chaque fiche doit également avoir été vérifiée depuis
+24 heures. Une source à jour ne suffit donc pas à rafraîchir artificiellement
+une ancienne fiche. Les données indisponibles produisent un message explicite,
+jamais une liste partielle présentée comme complète.
+
+Les dates et heures sont en UTC ; une échéance sans heure reste affichée avec
+son heure et son fuseau inconnus. Elle est écartée lorsque son jour précède le
+jour UTC du rapport. L'absence de deadline n'est pas une garantie d'ouverture.
+Le minimum d'expérience affiché peut rester inconnu ou dépasser deux ans : le
+classement reste un outil de tri, à vérifier sur le site employeur.
+
+Chaque commande produit un seul message, avec le nombre affiché et le nombre
+total de correspondances. De longs liens peuvent réduire le nombre affiché
+en dessous de cinq. Un lien dépassant 700 unités UTF-16 est omis explicitement,
+jamais coupé ; seuls les liens HTTP(S) valides sans identifiants sont affichés.
+Les notes personnelles et les coordonnées de recruteurs ne sont pas incluses.
+Les listes sont demandées à la main : aucun digest quotidien n'est programmé.
 
 Les dates du rapport sont explicitement en UTC. « Activité récente confirmée »
 signifie qu'un signal du collecteur a moins de 90 secondes ; cela ne garantit
