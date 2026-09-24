@@ -1,11 +1,16 @@
 # Trading Job Radar
 
+Le lot 50 ajoute les **alertes Telegram avec boutons** : une carte compacte,
+le lien vers la candidature et **J’ai postulé** pour enregistrer le statut et
+la date dans le suivi. Le dashboard local synchronise les candidatures toutes
+les dix secondes, sans écraser un brouillon ouvert. Voir le
+[guide Telegram](docs/TELEGRAM-CONTROL.md#alertes-et-boutons-de-candidature).
+
 Le lot 49 prépare la **collecte BNP avec conflits visibles** : les références
 ambiguës sont exclues, les autres fiches validées peuvent être importées, et la
 source reste signalée en difficulté. Le dashboard et l'aperçu détaillent les
 exclusions ; les alertes de cette source attendent une collecte sans conflit.
-Voir le [guide des conflits BNP](docs/BNP-CONFLICTS.md). Développement isolé,
-non déployé dans les services Windows existants.
+Voir le [guide des conflits BNP](docs/BNP-CONFLICTS.md).
 
 Radar personnel d'offres Trading / Global Markets / Quant Trading, orienté vers une prise de poste junior en 2027. Le premier lot fonctionne de bout en bout : collecte publique → normalisation → exclusions → score explicable → déduplication → SQLite → CSV et Telegram optionnel.
 
@@ -357,7 +362,7 @@ Copy-Item .env.example .env
 
 Sans ces paramètres, le scanner, le classement et le CSV fonctionnent. Activer les alertes ne crée pas de notification rétroactive pour toutes les offres précédemment observées. Seules les nouvelles offres à partir du seuil configuré (70 par défaut), les réouvertures et les modifications significatives de titre, lieu ou deadline sont notifiées. Les changements de description sont historisés sans notification.
 
-Les messages affichent le score, ses six composantes, les raisons, la date de première observation, les dates connues et le lien de candidature. Les dates absentes restent inconnues : `updated_at` Greenhouse n'est pas présenté comme une date de publication.
+Les alertes affichent une carte HTML compacte : entreprise, poste, lieu, début, expérience, échéance, score visuel et extrait employeur. Les boutons ouvrent l’offre et permettent de confirmer une candidature envoyée. Le détail des six composantes et les dates d’observation restent dans le dashboard. Les dates absentes restent inconnues : `updated_at` Greenhouse n'est pas présenté comme une date de publication.
 
 Les alertes utilisent une file persistante. Une réponse de rejet peut être retentée. Après une interruption dont l'issue est incertaine, l'alerte passe à `unknown` (ou reste `sending` après un crash) et n'est pas renvoyée automatiquement. Telegram ne fournit pas de clé d'idempotence pour cet envoi : cette décision privilégie l'absence de doublons, au prix d'un possible message perdu. `stats` affiche ces états pour vérification manuelle.
 

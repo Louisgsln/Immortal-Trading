@@ -1,6 +1,45 @@
-# Telegram : état du radar et incidents
+# Telegram : alertes, candidatures et état du radar
 
 Disponible sur ce poste depuis le 24 septembre 2026.
+
+## Alertes et boutons de candidature
+
+Les nouvelles alertes utilisent une carte HTML : poste et entreprise, lieu,
+dates connues, expérience, score visuel et extrait de la description employeur.
+Les textes employeur sont échappés et raccourcis avant formatage.
+
+- **↗ Voir l’offre · Postuler** ouvre le lien employeur. L’ouverture ne change
+  pas le suivi et n’envoie aucune candidature.
+- **✓ J’ai postulé** confirme que vous avez envoyé votre candidature. Le statut
+  devient **Postulé** (`Applied`), avec la date du jour à Paris si aucune date
+  n’existait. Le bouton affiche ensuite **✅ Postulé**.
+
+Cette confirmation exige le service `trading-radar telegram` actif avec
+`TELEGRAM_CONTROL_ENABLED=true`, le même bot, le même chat privé et la même base
+que le collecteur et le dashboard. Seul le destinataire configuré peut agir :
+les boutons sont signés pour cette destination et cette offre. Les commandes
+restent consultatives ; seuls ces boutons modifient les candidatures.
+
+La modification et son historique sont atomiques, même pendant une collecte.
+Un nouveau clic est sans effet si le statut est déjà `Applied`. Les étapes
+ultérieures ou finales sont conservées, ainsi que les notes, contacts, actions
+et dates déjà enregistrées. Une base momentanément occupée produit une demande
+de réessai ; aucun succès n’est annoncé avant la validation de l’enregistrement.
+Si l’accusé Telegram échoue après enregistrement, un nouveau clic reste sûr.
+
+Dans le dashboard ouvert avec `--edit-applications`, le statut, les filtres et
+le compteur se synchronisent sous dix secondes lorsque la page est visible.
+Un formulaire ouvert conserve son brouillon et demande une relecture en cas de
+changement externe. Les offres et l’état des sources exigent encore un rechargement.
+Après mise à jour du serveur, recharger une fois les anciens onglets.
+
+Les anciennes alertes, listes `/top`, `/new` et récapitulatifs restent tels quels.
+Le nouveau format et les boutons s’appliquent aux alertes individuelles à venir.
+Les anciens boutons restent utilisables tant que l’offre existe et que le token
+du bot et le chat configuré n’ont pas changé.
+
+Références : [boutons Telegram](https://core.telegram.org/bots/api#inlinekeyboardbutton),
+[réponse aux clics](https://core.telegram.org/bots/api#answercallbackquery).
 
 ## Utilisation
 

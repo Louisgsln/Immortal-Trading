@@ -7,12 +7,13 @@ import sqlite3
 from contextlib import closing, contextmanager, nullcontext
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from filelock import FileLock, Timeout
 
 from trading_radar.applications import Application
 from trading_radar.config import Config
-from trading_radar.models import utcnow
+from trading_radar.models import Job, utcnow
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 
 HISTORY_LIMIT = 50
@@ -89,15 +90,21 @@ def _validate_database(db: sqlite3.Connection) -> None:
 
 
 @contextmanager
-def _connection(config: Config, writing: bool = False):
+def _connection(config: Config, writing: bool = False, *, application_only: bool = False):
     try:
         path = _path(config, writing)
-        lock = FileLock(str(path) + ".lock", timeout=0) if writing else nullcontext()
+        lock = (
+            FileLock(str(path) + ".lock", timeout=0)
+            if writing and not application_only
+            else nullcontext()
+        )
         with (
             lock,
             closing(
                 sqlite3.connect(
-                    path.as_uri() + ("?mode=rw" if writing else "?mode=ro"), uri=True, timeout=0
+                    path.as_uri() + ("?mode=rw" if writing else "?mode=ro"),
+                    uri=True,
+                    timeout=1 if application_only else 0,
                 )
             ) as db,
         ):
@@ -171,6 +178,47 @@ def read_application(config: Config, job_id: str) -> dict:
     _job_id(job_id)
     with _connection(config) as db:
         return _snapshot(db, job_id)
+
+
+def list_applications(config: Config) -> list[dict]:
+    """A consistent tracking snapshot for the local dashboard's live refresh."""
+    with _connection(config) as db:
+        return [
+            Application.model_validate(dict(row)).model_dump(mode="json")
+            for row in db.execute("SELECT * FROM applications ORDER BY job_id")
+        ]
+
+
+def mark_applied(config: Config, job_id: str, instant: datetime) -> dict:
+    """An idempotent transition; never replace notes or regress later workflow stages.
+
+    The scanner holds the broad file lock across network requests but only inserts
+    missing application rows. BEGIN IMMEDIATE serializes this application-only
+    write with its short SQLite transactions and with dashboard/CLI edits.
+    """
+    _job_id(job_id)
+    with _connection(config, writing=True, application_only=True) as db:
+        previous = _snapshot(db, job_id)
+        row = db.execute("SELECT payload FROM jobs WHERE id=?", (job_id,)).fetchone()
+        if row is None:
+            raise ApplicationEditError("not_found", status=404)
+        job = Job.model_validate_json(row[0])
+        application = previous["application"]
+        if application["status"] in {"New", "Reviewing", "To Apply"}:
+            updated = application | {
+                "status": "Applied",
+                "application_date": application["application_date"]
+                or instant.astimezone(ZoneInfo("Europe/Paris")).date().isoformat(),
+            }
+            db.execute(
+                "UPDATE applications SET status=?,application_date=? WHERE job_id=?",
+                (updated["status"], updated["application_date"], job_id),
+            )
+            db.execute(
+                "INSERT INTO application_history(job_id,changed_at,before_payload,after_payload) VALUES(?,?,?,?)",
+                (job_id, utcnow().isoformat(), json.dumps(application), json.dumps(updated)),
+            )
+        return {**_snapshot(db, job_id), "apply_url": job.apply_url}
 
 
 def update_application(config: Config, job_id: str, changes: dict, expected_revision: str) -> dict:

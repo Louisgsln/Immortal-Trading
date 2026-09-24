@@ -2,7 +2,7 @@
 
 Le serveur local peut modifier les candidatures déjà présentes dans votre base.
 Les statuts, contacts, notes et prochaines actions restent sur ce poste.
-Enregistrer « Candidature envoyée » consigne votre décision ; cela n'envoie rien à
+Enregistrer « Postulé » consigne votre décision ; cela n'envoie rien à
 l'employeur. La date de candidature reste une saisie explicite.
 
 ## Démarrer
@@ -23,7 +23,12 @@ libellé ; pour retirer l'action entière, vider aussi sa date. Seuls les champs
 modifiés sont envoyés. Une saisie identique ne crée pas d'entrée d'historique.
 
 Le badge de la fiche, les lignes, le filtre de statut et le compteur des candidatures
-en cours se mettent à jour après sauvegarde. Recharger la page relit toutes les
+en cours se mettent à jour après sauvegarde. Le suivi est aussi relu toutes les dix
+secondes lorsque la page est visible, notamment après **J’ai postulé** dans Telegram.
+Une modification externe conserve le brouillon ouvert et impose une relecture
+avant sauvegarde. Une interruption de synchronisation est signalée en bas de page.
+Recharger la page après un redémarrage du serveur renouvelle la session locale.
+Recharger la page relit toutes les
 offres, la santé et les tendances. Ce mode ne lance aucune collecte automatique.
 Le CSV et les exports HTML déjà créés nécessitent toujours un nouvel export.
 

@@ -102,6 +102,26 @@ def test_editor_headers_and_static_export_still_isolated(editor):
     assert client.get(path, headers={"X-Radar-Token": headers["X-Radar-Token"]}).status_code == 200
 
 
+def test_live_application_snapshot_requires_session_and_reflects_telegram(editor, config, job):
+    from trading_radar.dashboard_applications import mark_applied
+    from trading_radar.models import utcnow
+
+    client, headers, _ = editor
+    assert client.get("/api/applications").status_code == 403
+    assert (
+        client.get(
+            "/api/applications", headers=headers | {"Origin": "https://evil.example"}
+        ).status_code
+        == 403
+    )
+    before = client.get("/api/applications", headers=headers)
+    assert before.json()["applications"][0]["status"] == "New"
+    mark_applied(config, job.id, utcnow())
+    after = client.get("/api/applications", headers=headers)
+    assert after.json()["applications"][0]["status"] == "Applied"
+    assert after.headers["cache-control"] == "no-store"
+
+
 @pytest.mark.parametrize(
     "override",
     [

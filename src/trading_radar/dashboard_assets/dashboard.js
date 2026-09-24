@@ -18,7 +18,7 @@
   };
   const statusLabels = {
     "New": "À découvrir", "Reviewing": "En revue", "To Apply": "À candidater",
-    "Applied": "Candidature envoyée", "Online Assessment": "Test en ligne",
+    "Applied": "Postulé", "Online Assessment": "Test en ligne",
     "Video Interview": "Entretien vidéo", "Interview": "Entretien",
     "Final Round": "Dernier tour", "Offer": "Offre reçue", "Rejected": "Refus",
     "Withdrawn": "Retirée", "Closed": "Clôturée"
@@ -60,7 +60,7 @@
   if (editingEnabled) {
     $("workspace-mode").textContent = "Suivi local modifiable";
     $("tracking-mode").textContent = "SUIVI LOCAL MODIFIABLE";
-    $("snapshot-refresh-help").textContent = "Rechargez la page pour actualiser toutes les données depuis votre radar local. Aucune collecte automatique.";
+    $("snapshot-refresh-help").textContent = "Suivi des candidatures synchronisé toutes les 10 secondes. Rechargez pour actualiser les offres et les sources.";
   }
   const summary = data.summary || {};
   const health = data.health || {};
@@ -142,6 +142,7 @@
     ["next_action_date", "Date de prochaine action", "date"], ["notes", "Notes", "textarea", 20000]
   ];
   let detailSession = null;
+  let applicationEpoch = 0;
   const currentSession = (session) => detailSession === session && $("job-dialog").open;
   const actionButton = (label, action, primary = false) => {
     const button = make("button", label, primary ? "primary-button" : "secondary-button");
@@ -157,16 +158,58 @@
     return Boolean(session.editor && JSON.stringify(applicationValues(session)) !== session.baseline);
   }
   function syncApplication(job, application) {
+    applicationEpoch += 1;
     job.application = {...application};
     const selected = $("application-status").value;
     $("application-status").replaceChildren(make("option", "Tous les statuts"));
     $("application-status").firstElementChild.value = "";
-    addOptions("application-status", [...new Set(jobs.map((item) => (item.application || {}).status || "New"))].sort(collator.compare), statusLabel);
+    addOptions("application-status", [...new Set([...jobs.map((item) => (item.application || {}).status || "New"), ...(selected ? [selected] : [])])].sort(collator.compare), statusLabel);
     $("application-status").value = selected;
     const count = jobs.filter((item) => !["New", "Rejected", "Withdrawn", "Closed"].includes((item.application || {}).status || "New")).length;
     $("metrics").children[2].querySelector(".metric-value").textContent = number(count);
     if (detailSession && detailSession.job === job) detailSession.statusBadge.textContent = statusLabel(application.status);
     renderJobs();
+  }
+  let refreshingApplications = false;
+  async function refreshApplications() {
+    if (!editingEnabled || document.hidden || refreshingApplications || detailSession?.pending) return;
+    refreshingApplications = true;
+    const epoch = applicationEpoch;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const response = await fetch("/api/applications", {headers: {"X-Radar-Token": data.editing.token},
+        signal: controller.signal, credentials: "omit", cache: "no-store", redirect: "error", referrerPolicy: "no-referrer"});
+      const result = await response.json();
+      if (!response.ok || result.status !== "ok" || !Array.isArray(result.applications)) throw new Error("Tracking unavailable");
+      if (epoch !== applicationEpoch || detailSession?.pending) return;
+      const byId = new Map(result.applications.map((application) => [application.job_id, application]));
+      jobs.forEach((job) => {
+        const application = byId.get(job.id);
+        if (!application || !Object.hasOwn(statusLabels, application.status) ||
+            applicationFields.every(([field]) => (job.application?.[field] ?? null) === (application[field] ?? null))) return;
+        syncApplication(job, application);
+        if (detailSession?.job === job && currentSession(detailSession)) {
+          if (detailSession.editor) {
+            detailSession.message.textContent = "Le suivi a changé depuis Telegram ou une autre fenêtre. Votre brouillon est conservé ; rechargez le suivi avant d’enregistrer.";
+            detailSession.mustReload = true;
+            detailSession.saveButton.disabled = true;
+            if (!detailSession.reloadButton) {
+              detailSession.reloadButton = actionButton("Recharger le suivi", () => confirmDiscard(detailSession, () => {
+                detailSession.editor = null; detailSession.mustReload = false; renderTracking(detailSession); requestApplication(detailSession);
+              }));
+              detailSession.message.after(detailSession.reloadButton);
+            }
+          } else {
+            detailSession.latest = null;
+            renderTracking(detailSession, "Suivi actualisé automatiquement.");
+          }
+        }
+      });
+      $("snapshot-refresh-help").textContent = "Suivi synchronisé · " + new Date().toLocaleTimeString("fr-FR") + ". Rechargez pour actualiser les offres et les sources.";
+    } catch (_) {
+      $("snapshot-refresh-help").textContent = "Synchronisation du suivi indisponible. Nouvelle tentative automatique ; rechargez la page si le radar a redémarré.";
+    } finally { clearTimeout(timer); refreshingApplications = false; }
   }
   function setPending(session, pending) {
     session.pending = pending;
@@ -526,4 +569,9 @@
     if (event.target === $("job-dialog")) { const bounds = $("job-dialog").getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeDetail(); }
   });
   renderJobs(); renderHealth(); renderTrends();
+  if (editingEnabled) {
+    setInterval(refreshApplications, 10000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshApplications(); });
+    refreshApplications();
+  }
 })();

@@ -19,7 +19,8 @@ def test_telegram_mock(job):
     asyncio.run(notifier.send(job, "new"))
     assert requests[0]["chat_id"] == "456"
     assert "100/100" in requests[0]["text"]
-    assert job.apply_url in requests[0]["text"]
+    assert requests[0]["parse_mode"] == "HTML"
+    assert requests[0]["reply_markup"]["inline_keyboard"][0][0]["url"] == job.apply_url
 
 
 def test_csv(repo, job, tmp_path):

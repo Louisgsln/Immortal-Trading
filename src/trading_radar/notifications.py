@@ -1,12 +1,14 @@
 import os
 import re
 from datetime import UTC, datetime
+from html import unescape
 from typing import Protocol
 
 import httpx
 
 from trading_radar.experience import experience_requirement
 from trading_radar.models import Job
+from trading_radar.telegram_cards import application_keyboard, format_alert
 
 
 class Notifier(Protocol):
@@ -82,10 +84,17 @@ class TelegramNotifier:
         return cls(os.getenv("TELEGRAM_BOT_TOKEN", ""), os.getenv("TELEGRAM_CHAT_ID", ""))
 
     async def send(self, job: Job, event: str) -> None:
-        await self.send_text(format_message(job, event))
+        await self.send_text(
+            format_alert(job, event),
+            parse_mode="HTML",
+            reply_markup=application_keyboard(job.id, job.apply_url, self.token, self.chat_id),
+        )
 
-    async def send_text(self, text: str) -> None:
-        if not text or len(text.encode("utf-16-le")) // 2 > 4096:
+    async def send_text(
+        self, text: str, *, parse_mode: str | None = None, reply_markup: dict | None = None
+    ) -> None:
+        visible = unescape(re.sub(r"<[^>]*>", "", text)) if parse_mode == "HTML" else text
+        if not visible or len(visible.encode("utf-16-le")) // 2 > 4096:
             raise ValueError("Telegram message must contain 1 to 4096 UTF-16 units")
         # Do not log URL or HTTP exception text: Telegram embeds the token in the URL.
         async with httpx.AsyncClient(timeout=20, transport=self.transport) as client:
@@ -96,6 +105,8 @@ class TelegramNotifier:
                         "chat_id": self.chat_id,
                         "text": text,
                         "link_preview_options": {"is_disabled": True},
+                        **({"parse_mode": parse_mode} if parse_mode else {}),
+                        **({"reply_markup": reply_markup} if reply_markup else {}),
                     },
                 )
             except httpx.TransportError:

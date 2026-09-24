@@ -12,6 +12,7 @@ from trading_radar.config import Config
 from trading_radar.dashboard import _assets, _policy, render_dashboard
 from trading_radar.dashboard_applications import (
     ApplicationEditError,
+    list_applications,
     read_application,
     update_application,
 )
@@ -131,6 +132,14 @@ def create_editable_dashboard_server(
                     render_dashboard(data, editable=True).encode("utf-8"),
                     "text/html; charset=utf-8",
                 )
+                return
+            if self.path == "/api/applications":
+                if not self.authorized():
+                    return
+                try:
+                    self.json(200, {"status": "ok", "applications": list_applications(config)})
+                except ApplicationEditError as exc:
+                    self.error(exc.status, exc.code, exc.message)
                 return
             job_id = self.job_id()
             if job_id is None:

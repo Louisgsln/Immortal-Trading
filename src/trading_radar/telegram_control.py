@@ -1,4 +1,4 @@
-"""Private read-only Telegram commands and bounded incident notifications."""
+"""Private Telegram commands, application confirmations and incident notifications."""
 
 import asyncio
 import hashlib
@@ -15,8 +15,10 @@ from pydantic import ConfigDict, Field
 
 from trading_radar.backups import database_path
 from trading_radar.config import Config
+from trading_radar.dashboard_applications import ApplicationEditError, mark_applied
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import atomic_json, format_status, incident_keys, runtime_report
+from trading_radar.telegram_cards import application_keyboard, callback_job
 from trading_radar.telegram_digest import (
     DigestState,
     check_digest,
@@ -29,6 +31,7 @@ from trading_radar.telegram_jobs import jobs_message
 logger = logging.getLogger("trading_radar.telegram")
 HELP = "📡 Immortal Trading\n/status : activité du radar, état des sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
 HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure de Paris.\n/digest_off : arrêter le récapitulatif."
+HELP += "\n\nSous chaque nouvelle alerte : Voir l’offre ouvre le site employeur. J’ai postulé enregistre ta confirmation dans le dashboard, avec la date du jour."
 
 
 class ControlState(DigestState):
@@ -108,6 +111,80 @@ async def api(notifier: TelegramNotifier, method: str, payload: dict):
         raise RuntimeError("Telegram API unavailable") from None
 
 
+async def process_callback(
+    query: object, config: Config, notifier: TelegramNotifier, now: float
+) -> None:
+    if not isinstance(query, dict):
+        return
+    sender, message = query.get("from"), query.get("message")
+    if not isinstance(sender, dict) or not isinstance(message, dict):
+        return
+    chat, author = message.get("chat"), message.get("from")
+    if not isinstance(chat, dict) or not isinstance(author, dict):
+        return
+    if (
+        type(sender.get("id")) is not int
+        or str(sender["id"]) != notifier.chat_id
+        or sender.get("is_bot") is not False
+        or chat.get("type") != "private"
+        or type(chat.get("id")) is not int
+        or str(chat["id"]) != notifier.chat_id
+        or author.get("is_bot") is not True
+        or type(author.get("id")) is not int
+        or str(author["id"]) != notifier.token.split(":", 1)[0]
+        or type(message.get("message_id")) is not int
+        or message["message_id"] <= 0
+        or type(message.get("date")) is not int
+        or message["date"] <= 0
+        or any(key in message for key in ("forward_origin", "forward_from", "via_bot"))
+        or not isinstance(query.get("id"), str)
+        or not 1 <= len(query["id"]) <= 256
+    ):
+        return
+    job_id = callback_job(query.get("data"), notifier.token, notifier.chat_id)
+    result = None
+    if job_id is None:
+        text = "Ce bouton n’est plus valide. Utilise le dashboard pour cette candidature."
+    else:
+        try:
+            result = mark_applied(config, job_id, datetime.fromtimestamp(now, UTC))
+            text = (
+                "✅ Postulé — suivi mis à jour dans le dashboard."
+                if result["application"]["status"] == "Applied"
+                else "Ton suivi est déjà à une autre étape. Il a été conservé dans le dashboard."
+            )
+        except ApplicationEditError as error:
+            text = error.message
+    try:
+        await api(
+            notifier,
+            "answerCallbackQuery",
+            {
+                "callback_query_id": query["id"],
+                "text": text,
+                "show_alert": result is None,
+            },
+        )
+    except RuntimeError:
+        logger.warning("telegram_application_ack_unconfirmed")
+    if job_id is not None and result is not None and result["application"]["status"] == "Applied":
+        try:
+            await api(
+                notifier,
+                "editMessageReplyMarkup",
+                {
+                    "chat_id": notifier.chat_id,
+                    "message_id": message["message_id"],
+                    "reply_markup": application_keyboard(
+                        job_id, result["apply_url"], notifier.token, notifier.chat_id, applied=True
+                    ),
+                },
+            )
+        except RuntimeError:
+            # A repeated click may return "message is not modified". The DB is committed.
+            logger.info("telegram_application_keyboard_unconfirmed")
+
+
 async def process_updates(
     updates: object,
     config: Config,
@@ -137,6 +214,9 @@ async def process_updates(
         # Persist before delivery: crashes and ambiguous sends cannot replay a command.
         store.state.offset = update["update_id"] + 1
         store.save()
+        if "callback_query" in update:
+            await process_callback(update["callback_query"], config, notifier, now)
+            continue
         if command is None or replies >= 3:
             continue
         replies += 1
@@ -248,7 +328,7 @@ async def run_control(config: Config) -> None:
                         "offset": store.state.offset,
                         "limit": 100,
                         "timeout": 20,
-                        "allowed_updates": ["message"],
+                        "allowed_updates": ["message", "callback_query"],
                     },
                 )
                 await process_updates(updates, config, notifier, store, me["username"], time.time())
