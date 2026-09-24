@@ -433,10 +433,20 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
   96 %. Docker et reprise des onze tables validés.
   Bilan [VALIDATION-LOT46.md](VALIDATION-LOT46.md).
 
-## Les cinq améliorations prioritaires après le lot 46
+## Lot 47 — Exigences d'expérience explicites
+
+- Exigences de diplôme et durée écrite avec confirmation numérique (`three (3)`)
+  et fourchettes avec `prior work experience` reconnues dans les contextes audités.
+- Quatre minima précisés sur 872 offres : Deutsche Bank 3 et 1 ans,
+  Goldman Sachs 0 et 2 ans. Une composante junior corrigée, score 75 → 70.
+- Audit intégral et répétition sur sauvegarde restaurée ; candidatures, alertes,
+  dates de collecte et 871 autres lignes d'offres préservées. Second passage sans effet.
+- Audit [EXPERIENCE-AUDIT-LOT47.md](EXPERIENCE-AUDIT-LOT47.md).
+
+## Les cinq améliorations prioritaires après le lot 47
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
-2. **Corriger les exigences observées et étendre la provenance** : priorité aux nouvelles fiches DB `R0452740` (`three (3) years`) et `R0450097` (`1-4 years of prior work experience`) dont les minima restent non reconnus au lot 43. Prévoir protections des préférences, négations et alternatives, puis mesure sur toute la base avant correction. Ensuite reprendre les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n’est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
+2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman et mesure sur les 872 offres. Reprendre ensuite les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n'est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
 4. **Poursuivre l'audit des sources** : continuer les actualisations bornées avec aperçu d’impact sur les quinze sources restantes. Le lot 42 a rafraîchi IMC, DRW, Flow, Jump et XTX ; le lot 43 ajoute les quatre banques Workday. Les cinq absentes Greenhouse et 29 absentes Workday n’ont pas été clôturées ni artificiellement rafraîchies. Examiner séparément les nouveaux cas DRW `Quant Researcher` et `Junior Trader` présent dans la description, ainsi que l’affichage des prérequis de diplôme. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
 5. **Préparer l'exploitation régulière** : tests prolongés et copie distante vérifiée. Le lot 28 fournit un plan de conservation sans suppression ; son application éventuelle reste à concevoir. Le dashboard dispose de statistiques historiques et d'un suivi éditable localement ; une exploitation sur plusieurs postes demanderait un mode d'accès adapté.

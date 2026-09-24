@@ -6,7 +6,7 @@ import unicodedata
 _RANGE = re.compile(
     r"(?<![\w.+\-–—])(?P<low>\d{1,2})[ \t]*[-–—][ \t]*(?P<high>\d{1,2})"
     r"[ \t]+years?[ \t]+(?:of[ \t]+)?"
-    r"(?:(?:relevant|related|professional|work|working|trading|structuring|"
+    r"(?:(?:prior|relevant|related|professional|work|working|trading|structuring|"
     r"options|securities|financing|financial|markets|legal|progressive|technical)"
     r"[ \t]+){0,3}experience\b",
     re.IGNORECASE,
@@ -25,7 +25,7 @@ _OPTIONAL = re.compile(
     r"\b(?:preferred|preferable|preferably|recommended|desirable|desired|ideally|ideal|"
     r"typically|typical|usually|usual|approximately|roughly|around|optional|advantageous|"
     r"nice\s+to\s+have|a\s+plus|an?\s+(?:advantage|asset)|"
-    r"not\s+(?:required|essential|necessary|mandatory|a\s+must))\b",
+    r"not\s+(?:required|needed|essential|necessary|mandatory|a\s+must))\b",
     re.IGNORECASE,
 )
 _UPPER_BOUND = re.compile(

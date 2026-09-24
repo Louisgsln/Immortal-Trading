@@ -54,6 +54,11 @@ des tâches Windows sur la base existante, avec sauvegarde quotidienne vérifié
 Les alertes Telegram sont activées et le message de test a été accepté. Le PC doit rester
 allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/WINDOWS-LIVE.md).
 
+Le lot 47 améliore la **lecture des exigences d'expérience** : quatre minima
+auparavant inconnus sont reconnus chez Deutsche Bank et Goldman Sachs.
+Un score est corrigé de 75 à 70, sans changement des candidatures ni des dates
+de collecte. Voir l'[audit du lot 47](docs/EXPERIENCE-AUDIT-LOT47.md).
+
 Le lot 46 ajoute le **récapitulatif Telegram quotidien**, réglable en heure de
 Paris avec `/digest_on HH:MM`, consultable avec `/digest` et désactivable avec
 `/digest_off`. Il présente les nouvelles découvertes pertinentes et l'état des

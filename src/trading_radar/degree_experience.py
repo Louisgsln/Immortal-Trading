@@ -17,6 +17,24 @@ _OPTIONAL = re.compile(
     r"a\s+plus|an?\s+(?:advantage|asset))\b",
     re.IGNORECASE,
 )
+_WRITTEN_NUMBERS = {
+    word: value
+    for value, word in enumerate("zero one two three four five six seven eight nine ten".split())
+}
+_WRITTEN_ADDITIVE = re.compile(
+    r"\b(?:requires?|must\s+have)\s+(?:an?\s+)?"
+    + _DEGREE
+    + r"(?P<education>[^.;!?\r\n]{0,180}?)\s+and\s+"
+    r"(?P<word>zero|one|two|three|four|five|six|seven|eight|nine|ten)\s*"
+    r"\((?P<low>\d{1,2})\)\s+years?\s+(?:of\s+)?"
+    r"(?:(?:relevant|progressive|professional|related|technical|work|working)\s+){0,3}experience\b",
+    re.IGNORECASE,
+)
+_WRITTEN_SECTION = re.compile(
+    r"\b(?P<optional>(?:preferred|recommended|optional|desirable)\s+(?:qualifications|requirements|skills)|nice\s+to\s+have)\b"
+    r"|\b(?P<required>(?:(?:required|minimum|basic|essential)\s+)?qualifications|requirements|your\s+skills\s+and\s+experience)\b",
+    re.IGNORECASE,
+)
 _ALTERNATIVE = re.compile(
     r"\b(?:either|alternatively|instead|in\s+lieu|substitut\w*|waiv\w*)\b"
     r"|\bor\s+(?:(?:an?|the)\s+)?(?:\d|(?:no|zero)\s+experience|"
@@ -27,7 +45,7 @@ _ALTERNATIVE = re.compile(
 
 
 def degree_experience_years(text: str) -> list[int]:
-    """Read only unambiguous ``degree … plus N years … experience`` clauses.
+    """Read explicit degree-plus clauses and required degree-and-written-number clauses.
 
     Bound the degree-to-plus gap and experience modifiers. Sentence, semicolon
     and line boundaries are never crossed. Ambiguous education alternatives or
@@ -37,7 +55,9 @@ def degree_experience_years(text: str) -> list[int]:
     """
     text = unicodedata.normalize("NFKC", text).replace("’", "'").replace("‘", "'")
     minima: list[int] = []
-    clauses = re.split(r"[.;!?\r\n]+", text)
+    spans = list(re.finditer(r"[^.;!?\r\n]+", text))
+    clauses = [span[0] for span in spans]
+    sections = list(_WRITTEN_SECTION.finditer(text))
     for index, clause in enumerate(clauses):
         if _OPTIONAL.search(clause) or _ALTERNATIVE.search(clause):
             continue
@@ -55,10 +75,23 @@ def degree_experience_years(text: str) -> list[int]:
             re.IGNORECASE,
         ):
             continue
-        matches = list(_ADDITIVE.finditer(clause))
+        matches = list(_ADDITIVE.finditer(clause)) + list(_WRITTEN_ADDITIVE.finditer(clause))
         if len(matches) != 1:
             continue
         match = matches[0]
+        if match.re is _WRITTEN_ADDITIVE:
+            position = spans[index].start() + match.start()
+            section = next((s for s in reversed(sections) if s.end() <= position), None)
+            if section is not None and section.lastgroup == "optional":
+                continue
+            if _WRITTEN_NUMBERS[match["word"].lower()] != int(match["low"]):
+                continue
+            if re.search(
+                r"\b(?:not|without|no|never|up\s+to|maximum|at\s+most|less\s+than|preferred|optional)\b",
+                clause,
+                re.IGNORECASE,
+            ):
+                continue
         # Only education-internal alternatives (subjects/foreign equivalence)
         # are safe. A later "or" may introduce any credential abbreviation,
         # even one interrupted by the sentence splitter, such as "M.Sc.".
@@ -78,7 +111,7 @@ def degree_experience_years(text: str) -> list[int]:
         ):
             continue
         low = int(match["low"])
-        high = int(match["high"]) if match["high"] is not None else low
+        high = int(match["high"]) if match.groupdict().get("high") is not None else low
         if low <= high:
             minima.append(low)
     return list(dict.fromkeys(minima))
