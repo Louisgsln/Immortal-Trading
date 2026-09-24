@@ -57,7 +57,9 @@ allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/
 Le lot 45 ajoute **`/top` et `/new` dans Telegram** : meilleures offres à examiner
 et découvertes des dernières 24 heures, avec score, expérience reconnue,
 fraîcheur et lien de candidature. Les listes écartent les candidatures déjà
-envoyées et les données anciennes. Voir le [guide Telegram](docs/TELEGRAM-CONTROL.md).
+envoyées et les données anciennes. Déployé sur ce poste, avec 2 761 tests
+Windows réussis. Voir le [guide Telegram](docs/TELEGRAM-CONTROL.md) et le
+[bilan du lot 45](docs/VALIDATION-LOT45.md).
 
 Le lot 44 ajoute **les commandes Telegram privées `/status` et `/help`**,
 les alertes d'offres en français et les notifications d'incident du radar.

@@ -413,6 +413,10 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
   ou ambiguës exclues. Aucune modification du score ou du suivi.
 - Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
   Restent le digest programmé et les actions de suivi depuis Telegram.
+- Déployé sur ce poste ; 2 761 tests réussis sous Windows et sur Python
+  3.11 à 3.14 en CI, couverture 96 %.
+  Build Docker et restauration des onze tables synthétiques validés.
+  Bilan [VALIDATION-LOT45.md](VALIDATION-LOT45.md).
 
 ## Les cinq améliorations prioritaires après le lot 45
 
