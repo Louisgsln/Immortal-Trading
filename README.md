@@ -49,7 +49,10 @@ Le vingt-et-unième lot ajoute **l'historique de santé, un cache conditionnel W
 **WSL 2 et Docker local sont validés depuis le 23 septembre 2026** : image
 construite, lancement et reprise testés sur huit offres synthétiques, onze tables
 restaurées identiques. Voir la [validation Windows](docs/WINDOWS-DOCKER-SETUP.md).
-Le watcher permanent n’est pas démarré.
+Depuis le 24 septembre, la collecte continue et le dashboard fonctionnent via
+des tâches Windows sur la base existante, avec sauvegarde quotidienne vérifiée.
+L’activation Telegram attend le premier message privé au bot. Le PC doit rester
+allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/WINDOWS-LIVE.md).
 
 Le lot 43 actualise **Barclays, Deutsche Bank, Morgan Stanley et Citi** :
 14 nouvelles offres et huit mises à jour après revue, sauvegarde et répétition.

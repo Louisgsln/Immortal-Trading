@@ -92,4 +92,4 @@ Le [guide de sauvegarde](BACKUPS.md) précise les refus d'écrasement et les lim
 
 ## Travaux restant à valider
 
-Surveillance prolongée et copie distante des sauvegardes ; validation de tout futur hôte distant. Le build et la reprise synthétique Docker Linux sont validés en CI et sur le poste Windows via WSL 2. Aucun VPS n'a été provisionné et aucun service distant permanent n'a été lancé.
+Surveillance prolongée et copie distante des sauvegardes ; validation de tout futur hôte distant. Le build et la reprise synthétique Docker Linux sont validés en CI et sur le poste Windows via WSL 2. Aucun VPS n'a été provisionné et aucun service distant permanent n'a été lancé. Depuis le 24 septembre, le PC utilise des [tâches Windows natives](WINDOWS-LIVE.md) pour la collecte, le dashboard et les sauvegardes locales ; ne pas démarrer en parallèle un watcher Docker.
