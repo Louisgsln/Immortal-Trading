@@ -447,16 +447,27 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
   Dashboard, CSV et format Telegram vérifiés.
   Bilan [VALIDATION-LOT47.md](VALIDATION-LOT47.md).
 
-### Priorités après vérification du service le 24 septembre à 13 h 35 UTC
+## Lot 48 — Robots BNP et contrôle d'accès Nomura
 
-Le contrôle trouve 22 sources fraîches sur 24 : Nomura campus en échec récent
-et BNP Paribas avec collecte ancienne. Diagnostiquer ces deux sources en
-priorité ; les incidents DB/UBS du premier lancement sont historiques.
-Après cette fiabilisation, ajouter les actions de suivi depuis Telegram,
-puis vérifier une copie distante des sauvegardes et une supervision extérieure.
-Les points ci-dessous conservent les audits de couverture restant à mener.
+- Correction ciblée du traitement de `Disallow: *?$`, qui provoquait un faux
+  refus global chez BNP. Règles réelles, groupes et délais conservés.
+- Nomura campus : CAPTCHA identifié explicitement, arrêt sans soumission.
+- BNP : accès aux pages vérifié ; conflit réel entre deux alias d'une même
+  référence, sur description, date et contrat. Import toujours rejeté.
+- 2 884 tests réussis sous Windows et Python 3.11 à 3.14 en CI, couverture 96 %.
+  Docker et reprise validés. Installé après sauvegarde,
+  services relancés, dashboard et réglage Telegram vérifiés.
+- Bilan et preuves : [VALIDATION-LOT48.md](VALIDATION-LOT48.md).
 
-## Les cinq améliorations prioritaires après le lot 47
+### Priorités après vérification du service le 24 septembre à 14 h 13 UTC
+
+Le contrôle trouve 20 sources fraîches sur 24 ; BNP est ancien, Nomura campus,
+Citi et UBS professionnels ont un échec récent. Traiter les conflits BNP avec
+un état dégradé explicite et suivre les erreurs transitoires. Nomura campus
+dépend du retour d'un accès public sans challenge. Ajouter ensuite les actions
+de suivi depuis Telegram, puis une copie distante et une supervision extérieure.
+
+## Les cinq améliorations prioritaires après le lot 48
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman et mesure sur les 872 offres. Reprendre ensuite les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n'est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.

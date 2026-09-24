@@ -200,6 +200,12 @@ Les filiales du groupe sont rassemblées sous BNP Paribas ; le payload brut facu
 
 Plusieurs URLs peuvent partager le même identifiant BNP. Si les contenus métier sont identiques, une seule URL est choisie dans un ordre stable avant import. Si les contenus diffèrent, le scan est rejeté pour examen. Cela évite que deux alias alternent et créent de fausses modifications à chaque scan.
 
+**24 septembre, lot 48 :** le faux refus global dû à la règle robots `*?$`
+est corrigé. Une collecte publique a ensuite révélé un conflit de description,
+date et contrat sur la référence `1234567890100120639`. Le snapshot reste rejeté ;
+BNP ne doit pas être présenté comme fraîchement collecté. Nomura campus renvoie
+un CAPTCHA, désormais identifié explicitement. Voir [VALIDATION-LOT48.md](VALIDATION-LOT48.md).
+
 Les limites et options de recherche sont partagées avec Workday. Deux secondes séparent les requêtes au portail. La recherche `trading` est large et peut retourner des résultats liés à « trade » ; le filtre de titre restreint les détails. Cette couverture ne remplace pas tous les portails spécialisés BNP.
 
 ## Découverte suivante — UBS et Société Générale
