@@ -11,6 +11,7 @@ from trading_radar.config import Company
 from trading_radar.html_page import Document, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
+from trading_radar.nomura_experience import experience_minima, nomura_experience_evidence
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
 
@@ -112,11 +113,15 @@ def role_metadata(text: str) -> tuple[dict, Literal["junior", "senior"] | None, 
         seniority = "senior"
     elif has(grade_text, "analyst"):
         seniority = "junior"
-    years = re.findall(
-        r"\bExperience\s*:?\s*(\d+)\s*(?:[-–—]\s*\d+|\+)?\s*years?\b", text, re.IGNORECASE
+    proof = nomura_experience_evidence(text)
+    years = experience_minima(text)
+    years.extend(item.minimum_years for item in proof if item.minimum_years not in years)
+    minimum = max(years) if years else None
+    return (
+        {"corporate_titles": grades, "experience_minima": [str(year) for year in years]},
+        seniority,
+        minimum,
     )
-    minimum = max(map(int, years)) if years else None
-    return {"corporate_titles": grades, "experience_minima": years}, seniority, minimum
 
 
 def posted_date(value: str) -> datetime:
@@ -199,6 +204,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         date_posted=posted_date(props["datePosted"]),
         seniority_hint=seniority,
         minimum_experience_years=years,
+        experience_evidence=nomura_experience_evidence(description),
         employment_type=contract[1] if contract else None,
         # validThrough is publication expiry, not a confirmed candidate deadline.
         raw_payload={"division": row["division"], "metadata": props, **evidence},

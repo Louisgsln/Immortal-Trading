@@ -13,7 +13,10 @@ class ExperienceEvidence(BaseModel):
     kind: Literal["professional", "industry_or_academia", "unspecified"]
     origin: Literal["description", "employer_field"] = "description"
     method: Literal[
-        "jump_coding_track_record", "ca_cib_experience_level", "macquarie_sales_trading_experience"
+        "jump_coding_track_record",
+        "ca_cib_experience_level",
+        "macquarie_sales_trading_experience",
+        "nomura_position_specifications",
     ] = "jump_coding_track_record"
     excerpt: str
 

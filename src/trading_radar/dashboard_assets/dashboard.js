@@ -109,7 +109,8 @@
   const evidenceMethods = {
     jump_coding_track_record: {origin: "description", kinds: ["professional", "industry_or_academia", "unspecified"], label: "Pratique du codage", source: "Déduit de la description"},
     ca_cib_experience_level: {origin: "employer_field", kinds: ["professional"], label: "Expérience indiquée", source: "Publié dans le champ d’expérience de l’employeur"},
-    macquarie_sales_trading_experience: {origin: "description", kinds: ["professional"], label: "Expérience en sales trading", source: "Déduit de la description"}
+    macquarie_sales_trading_experience: {origin: "description", kinds: ["professional"], label: "Expérience en sales trading", source: "Déduit de la description"},
+    nomura_position_specifications: {origin: "description", kinds: ["professional"], label: "Expérience indiquée par Nomura", source: "Description employeur · Position Specifications → Experience"}
   };
   const experienceEvidence = (job) => {
     const evidence = job.experience?.evidence;

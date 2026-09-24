@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Le lot 51 ajoute la **provenance des exigences Nomura** : l'extrait employeur
+qui justifie les années d'expérience apparaît dans la fiche du dashboard.
+Six preuves ajoutées sur les 16 offres actuelles, sans changement des minima
+ni des scores. Voir le [bilan du lot 51](docs/VALIDATION-LOT51.md).
+Les prochains lots validés sont publiés sur `main`, puis déployés selon le
+[mode de livraison convenu](docs/DELIVERY.md).
+
 Le lot 50 ajoute les **alertes Telegram avec boutons** : une carte compacte,
 le lien vers la candidature et **J’ai postulé** pour enregistrer le statut et
 la date dans le suivi. Le dashboard local synchronise les candidatures toutes

@@ -49,7 +49,6 @@ des alias multiples et un incident HTTP après détection d'un conflit. Ils
 contrôlent aussi les transactions, les notifications, la reprise, la consultation
 du diagnostic et l'aperçu sans écriture.
 
-Ce lot est développé dans une copie isolée du dépôt. Il ne constitue pas une
-preuve de rétablissement du portail BNP et n'est pas une installation dans les
-services Windows existants. Une collecte publique avec aperçu et une sauvegarde
-de la base d'exploitation restent nécessaires avant déploiement.
+Le lot est désormais installé dans l'instance Windows isolée et intégré à `main`
+avec le lot 50. Les collectes publiques ont repris. Un nouveau conflit ou incident
+d'accès reste signalé ; l'installation ne garantit pas la disponibilité du portail.

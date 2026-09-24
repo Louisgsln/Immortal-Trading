@@ -6,8 +6,29 @@ from trading_radar.ca_cib import ca_experience_evidence
 from trading_radar.greenhouse_filtered import jump_track_record_evidence
 from trading_radar.macquarie_experience import macquarie_sales_trading_evidence
 from trading_radar.models import Job, RawJob
+from trading_radar.nomura_experience import nomura_experience_evidence
 from trading_radar.normalizer import canonical_url
 from trading_radar.scoring import score_job
+
+
+def correct_nomura_experience(job: Job) -> Job:
+    """Backfill provenance only; unexpected minima/evidence require a separate review."""
+    result = job.model_copy(deep=True)
+    if (
+        job.source != "nomura_professionals"
+        or job.source_type != "official"
+        or job.company_normalized != "nomura"
+    ):
+        return result
+    evidence = nomura_experience_evidence(job.description_text)
+    if not evidence:
+        return result
+    if job.minimum_experience_years != evidence[0].minimum_years:
+        raise ValueError("Nomura stored minimum differs from the audited field")
+    if job.experience_evidence and job.experience_evidence != evidence:
+        raise ValueError("Nomura stored evidence requires review")
+    result.experience_evidence = evidence
+    return result
 
 
 def correct_jump_experience(job: Job, keywords: dict[str, list[str]]) -> Job:

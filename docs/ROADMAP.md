@@ -2,6 +2,14 @@
 
 Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document suit le périmètre demandé ; le master prompt original est conservé sans modification.
 
+## Livraison des prochains lots
+
+Préférence confirmée le 25 septembre 2026 : publier chaque lot validé directement
+sur `main`, puis mettre à jour l'instance Windows après sauvegarde vérifiée.
+Le scanner reste indépendant du dépôt de développement. Les contrôles requis,
+la mesure d'impact, les preuves de déploiement et la prochaine priorité sont
+consignés à chaque livraison. Voir [DELIVERY.md](DELIVERY.md).
+
 ## Lot 1 — Pipeline vertical
 
 | Tâches du master prompt | Résultat |
@@ -412,7 +420,7 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
   fiches récentes exigées, candidatures déjà envoyées et échéances dépassées
   ou ambiguës exclues. Aucune modification du score ou du suivi.
 - Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
-  Le digest est ajouté au lot 46 ; les actions de suivi depuis Telegram restent à faire.
+  Le digest est ajouté au lot 46 ; les actions de suivi sont livrées au lot 50.
 - Déployé sur ce poste ; 2 761 tests réussis sous Windows et sur Python
   3.11 à 3.14 en CI, couverture 96 %.
   Build Docker et restauration des onze tables synthétiques validés.
@@ -467,7 +475,7 @@ un état dégradé explicite et suivre les erreurs transitoires. Nomura campus
 dépend du retour d'un accès public sans challenge. Ajouter ensuite les actions
 de suivi depuis Telegram, puis une copie distante et une supervision extérieure.
 
-## Lot 49 — Collecte BNP avec conflits visibles (préparé, non déployé)
+## Lot 49 — Collecte BNP avec conflits visibles
 
 - Références conflictuelles exclues en entier ; import transactionnel des autres
   fiches après validation complète de la collecte.
@@ -475,13 +483,34 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   conservé, aucune clôture ni nouvelle alerte issue du scan dégradé.
 - Diagnostic persistant, aperçu sans écriture et suspension des alertes en
   attente jusqu'à une collecte sans conflit.
-- Guide [BNP-CONFLICTS.md](BNP-CONFLICTS.md). La validation sur les pages publiques
-  actuelles et le déploiement dans les services existants restent à faire.
+- Installé sur l'instance isolée, collectes publiques reprises ; publié sur `main`
+  avec le lot 50 le 25 septembre. Guide [BNP-CONFLICTS.md](BNP-CONFLICTS.md).
+
+## Lot 50 — Alertes Telegram et suivi Postulé
+
+- Carte HTML compacte, lien employeur et confirmation privée signée **J’ai postulé**.
+- Statut, date du jour à Paris et historique atomiques ; clics répétés sans doublon,
+  étapes avancées et notes conservées. Confirmation possible pendant un scan.
+- Dashboard modifiable synchronisé toutes les dix secondes ; brouillons protégés.
+- Installé après sauvegarde, aperçu accepté par Telegram et services vérifiés.
+  2 927 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 et Docker réussie.
+- Bilan [VALIDATION-LOT50.md](VALIDATION-LOT50.md). Lots 49 et 50 intégrés à `main`.
+
+## Lot 51 — Provenance des exigences Nomura
+
+- Preuve typée limitée au champ **Position Specifications → Experience**, avec
+  extrait exact et origine dans la description ; grade et diplôme restent distincts.
+- Préférences, alternatives au diplôme, négations et fourchettes inversées
+  contrôlées avant d'accepter un minimum numérique.
+- Mesure sur une sauvegarde restaurée des 773 offres : six preuves ajoutées
+  parmi 16 fiches Nomura, zéro minimum ou score changé ; huit tables préservées,
+  dont candidatures et alertes. Deuxième passage sans effet.
+- Bilan [VALIDATION-LOT51.md](VALIDATION-LOT51.md).
 
 ## Les cinq améliorations prioritaires après le lot 48
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
-2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman et mesure sur les 872 offres. Reprendre ensuite les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n'est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
+2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman. Le lot 51 couvre les libellés Nomura `Position Specifications → Experience` : six preuves sur les 16 offres actuelles, valeurs et scores inchangés. Le minimum hors tableau de l'offre Equity Sales Trader reste numérique sans provenance inventée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
 4. **Poursuivre l'audit des sources** : continuer les actualisations bornées avec aperçu d’impact sur les quinze sources restantes. Le lot 42 a rafraîchi IMC, DRW, Flow, Jump et XTX ; le lot 43 ajoute les quatre banques Workday. Les cinq absentes Greenhouse et 29 absentes Workday n’ont pas été clôturées ni artificiellement rafraîchies. Examiner séparément les nouveaux cas DRW `Quant Researcher` et `Junior Trader` présent dans la description, ainsi que l’affichage des prérequis de diplôme. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
 5. **Préparer l'exploitation régulière** : tests prolongés et copie distante vérifiée. Le lot 28 fournit un plan de conservation sans suppression ; son application éventuelle reste à concevoir. Le dashboard dispose de statistiques historiques et d'un suivi éditable localement ; une exploitation sur plusieurs postes demanderait un mode d'accès adapté.
