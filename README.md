@@ -51,7 +51,7 @@ construite, lancement et reprise testés sur huit offres synthétiques, onze tab
 restaurées identiques. Voir la [validation Windows](docs/WINDOWS-DOCKER-SETUP.md).
 Depuis le 24 septembre, la collecte continue et le dashboard fonctionnent via
 des tâches Windows sur la base existante, avec sauvegarde quotidienne vérifiée.
-L’activation Telegram attend le premier message privé au bot. Le PC doit rester
+Les alertes Telegram sont activées et le message de test a été accepté. Le PC doit rester
 allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/WINDOWS-LIVE.md).
 
 Le lot 43 actualise **Barclays, Deutsche Bank, Morgan Stanley et Citi** :

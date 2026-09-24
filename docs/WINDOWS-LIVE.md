@@ -32,14 +32,14 @@ redémarrage ni observation de 24 heures n’est encore revendiquée.
 ## Telegram
 
 Le bot `@ImmortalTradingBot` est validé. Son token est dans `.env`, ignoré par Git.
-**Au dernier contrôle de préparation : premier message privé encore attendu ;
-alertes désactivées.** Le collecteur peut fonctionner sans envoyer de message.
-L’utilisateur doit ouvrir le bot et lui envoyer un message avant que Telegram
-fournisse sa destination privée.
+**Alertes activées le 24 septembre à 08 h 43**, après le premier contact privé
+de l’utilisateur et l’accusé positif de Telegram pour le message de test.
+La destination privée est configurée localement, sans publication de son identifiant.
 
-Après identification de cette destination et réception d’un accusé positif pour
-le message de test, activer `ALERTS_ENABLED=true`, puis redémarrer uniquement la
-tâche du collecteur. Son processus lit la configuration au lancement.
+`ALERTS_ENABLED=true` est configuré et la tâche du collecteur a été relancée.
+Son processus lit la configuration au lancement. Pour une modification future,
+attendre la fin effective de l’ancien processus avant de relancer : l’état Ready
+du Planificateur peut précéder brièvement la libération du verrou Windows.
 
 Le seuil actuel est 70/100, pour les nouvelles offres, réouvertures et changements
 jugés importants. Pas de réexpédition automatique du catalogue antérieur ni des
@@ -120,3 +120,9 @@ Deux passages complets Windows ont chacun rencontré un refus HTTP intermittent
 `WinError 10053` dans un test existant de rejet des requêtes du dashboard
 (`cross_site_requests`, puis `duplicate_headers`). Aucun changement du serveur
 HTTP n’est inclus ici ; ces échecs restent à investiguer séparément.
+
+La [CI du déploiement Windows](https://github.com/Louisgsln/Immortal-Trading/actions/runs/35965637822)
+réussit sur Python 3.11 à 3.14 : **2 659 tests par version**, couverture applicative
+96 %. Build Docker et restauration des onze tables synthétiques réussis sous
+UID 10001. Ruff vérifie 184 fichiers et mypy 71 fichiers lors du contrôle local.
+La sauvegarde avec le lanceur définitif se termine avec le code zéro à 08 h 45.
