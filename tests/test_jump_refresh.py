@@ -108,7 +108,7 @@ def test_replay_never_initializes_network_and_preserves_database(archive, monkey
     assert report["selected_count"] == 0
     assert database.read_bytes() == before
     collection = json.loads((path.parent / "collection.json").read_text(encoding="utf-8"))
-    assert collection == {"jobs": [], "complete": False, "requests": 0}
+    assert collection == {"jobs": [], "complete": False, "requests": 0, "conflicts": []}
 
 
 @pytest.mark.parametrize(

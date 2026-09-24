@@ -6,6 +6,7 @@ from datetime import datetime
 
 from filelock import FileLock
 
+from trading_radar.collection_diagnostics import quarantined_sources
 from trading_radar.collectors import Collector, build_collector
 from trading_radar.config import Config
 from trading_radar.http import HTTPClient, SourceUnavailable
@@ -58,10 +59,13 @@ async def deliver(
     *,
     reminders_enabled: bool = False,
     reminder_max_age_hours: float = 24,
+    skip_sources: set[str] | None = None,
 ) -> int:
     delivered = 0
     for alert in repo.pending():
         job = repo.get(alert["job_id"])
+        if job.source in (skip_sources or set()):
+            continue
         event = alert["event_key"].split(":")[-2]
         if event.startswith("deadline_j"):
             if not reminders_enabled:
@@ -145,6 +149,9 @@ async def scan(
                     collectors[key] if collectors is not None else build_collector(key, co, http)
                 )
                 result = await collector.collect()
+                excluded = {conflict.external_id for conflict in result.conflicts}
+                if any(str(raw.external_id) in excluded for raw in result.jobs):
+                    raise ValueError("collector returned a quarantined identifier")
                 # Normalize whole snapshot before writing. A malformed row cannot close other jobs.
                 normalized = [
                     score_job(normalize(raw, config.settings.store_raw), config.keywords)
@@ -152,7 +159,12 @@ async def scan(
                 ]
                 if any(job.source != key for job in normalized):
                     raise ValueError("collector returned an incorrect source identity")
-                if result.complete and not normalized and state["last_count"] > 0:
+                if (
+                    result.complete
+                    and not result.conflicts
+                    and not normalized
+                    and state["last_count"] > 0
+                ):
                     raise SourceUnavailable("unexpected empty full snapshot; closure deferred")
                 silent = config.settings.bootstrap_silent and not state["bootstrapped"]
                 if silent:
@@ -174,6 +186,7 @@ async def scan(
                         )
                         if (
                             not silent
+                            and not result.conflicts
                             and alertable
                             and not job.is_expired
                             and job.score_breakdown.total >= config.settings.alert_min_score
@@ -181,24 +194,35 @@ async def scan(
                             # Queue only while alerts explicitly enabled; no surprise backlog on activation.
                             if config.settings.alerts_enabled:
                                 repo.enqueue(job, event)
-                    if result.complete:
+                    if result.complete and not result.conflicts:
                         counts["closed"] = repo.reconcile(
                             key, seen, config.settings.closure_after_missing_scans
                         )
-                    repo.mark_success(key, len(normalized), time.monotonic() - source_start)
-                metrics.successful += 1
+                    if result.conflicts:
+                        repo.record_failure(key)
+                    else:
+                        repo.mark_success(key, len(normalized), time.monotonic() - source_start)
+                if result.conflicts:
+                    metrics.degraded[key] = result.conflicts
+                    metrics.failed[key] = (
+                        f"Collecte dégradée : {len(result.conflicts)} référence(s) en conflit exclue(s) ; "
+                        f"{len(normalized)} offre(s) validée(s) importée(s)"
+                    )
+                else:
+                    metrics.successful += 1
                 metrics.received += len(normalized)
                 metrics.new += counts["new"]
                 metrics.updated += counts["updated"]
                 metrics.closed += counts["closed"]
                 log(
-                    "source_success",
+                    "source_degraded" if result.conflicts else "source_success",
                     collector=co.ats,
                     company=co.name,
                     jobs_found=len(normalized),
                     jobs_new=counts["new"],
                     jobs_updated=counts["updated"],
                     bootstrap=silent,
+                    excluded_conflicts=len(result.conflicts),
                     duration=round(time.monotonic() - source_start, 3),
                 )
             except Exception as exc:
@@ -213,13 +237,14 @@ async def scan(
     try:
         with FileLock(repo.lock_path, timeout=0):
             await asyncio.gather(*(run_one(key) for key in selected))
+            blocked_sources = quarantined_sources(repo.db) | set(metrics.degraded)
             if config.settings.alerts_enabled and notifier:
                 if config.settings.deadline_reminders_enabled:
                     queue_reminders(
                         repo,
                         config.settings.alert_min_score,
                         config.settings.deadline_reminder_max_age_hours,
-                        skip_sources=bootstrapped_sources,
+                        skip_sources=bootstrapped_sources | blocked_sources,
                     )
                 metrics.alerts = await deliver(
                     repo,
@@ -227,6 +252,7 @@ async def scan(
                     config.settings.alert_min_score,
                     reminders_enabled=config.settings.deadline_reminders_enabled,
                     reminder_max_age_hours=config.settings.deadline_reminder_max_age_hours,
+                    skip_sources=blocked_sources,
                 )
             jobs = repo.list_jobs()
             metrics.relevant = sum(j.is_active and j.score_breakdown.total >= 55 for j in jobs)

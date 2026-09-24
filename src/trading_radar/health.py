@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from trading_radar.audit import timestamp
+from trading_radar.collection_diagnostics import source_conflicts
 from trading_radar.config import Config
 from trading_radar.models import utcnow
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
@@ -93,6 +94,9 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
                     "FROM companies"
                 )
             }
+            conflicts = {
+                key: source_conflicts(connection, key, state[0]) for key, state in states.items()
+            }
             latest = connection.execute(
                 "SELECT created_at FROM scan_runs ORDER BY id DESC LIMIT 1"
             ).fetchone()
@@ -151,8 +155,11 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
                 "age_hours": round(age, 3) if age is not None else None,
                 "consecutive_failures": failures,
                 "last_snapshot_jobs": count,
+                **({"collection_conflicts": conflicts[key]} if conflicts.get(key) else {}),
             }
         )
+        if conflicts.get(key):
+            issue("source_collection_conflicts", "warning", key)
     report["source_summary"] = dict(Counter(source["status"] for source in report["sources"]))
     if report["latest_scan"] is not None:
         scan_time = timestamp(report["latest_scan"])

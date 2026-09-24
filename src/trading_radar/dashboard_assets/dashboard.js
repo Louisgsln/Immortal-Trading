@@ -414,6 +414,16 @@
     (health.sources || []).forEach((source) => {
       const row = make("tr"); const name = make("td"); name.append(make("span", source.company, "source-name"), make("span", source.source, "source-key"));
       const status = make("td"); status.append(healthBadge(source.status));
+      if ((source.collection_conflicts || []).length) {
+        const details = make("details", undefined, "collection-conflicts");
+        details.append(make("summary", "Collecte dégradée · " + number(source.collection_conflicts.length) + " référence(s) exclue(s)"));
+        const fieldLabels = { title: "Intitulé", description: "Description", location: "Lieu", date_posted: "Date de publication", employment_type: "Type de contrat" };
+        source.collection_conflicts.forEach((conflict) => {
+          details.append(make("p", "Référence " + conflict.external_id + " · Informations divergentes : " + conflict.fields.map((field) => fieldLabels[field] || field).join(", ")));
+          conflict.urls.forEach((url) => details.append(make("p", url, "source-key")));
+        });
+        status.append(details);
+      }
       const success = make("td", date(source.last_success, true));
       if (source.age_hours !== null && source.age_hours !== undefined) success.append(make("span", "Il y a " + number(Math.round(source.age_hours * 10) / 10) + " h", "source-key"));
       row.append(name, status, success, make("td", number(source.last_snapshot_jobs ?? source.last_count)), make("td", number(source.consecutive_failures))); $("source-rows").append(row);

@@ -166,12 +166,16 @@ class Repository:
 
     def mark_failure(self, source: str) -> None:
         with self.db:
-            self.db.execute(
-                """INSERT INTO companies(source,last_failure,consecutive_failures) VALUES(?,?,1)
+            self.record_failure(source)
+
+    def record_failure(self, source: str) -> None:
+        """Record failure inside the caller's transaction, without committing it."""
+        self.db.execute(
+            """INSERT INTO companies(source,last_failure,consecutive_failures) VALUES(?,?,1)
                 ON CONFLICT(source) DO UPDATE SET last_failure=excluded.last_failure,
                 consecutive_failures=companies.consecutive_failures+1""",
-                (source, utcnow().isoformat()),
-            )
+            (source, utcnow().isoformat()),
+        )
 
     def get(self, job_id: str) -> Job:
         row = self.db.execute("SELECT payload FROM jobs WHERE id=?", (job_id,)).fetchone()

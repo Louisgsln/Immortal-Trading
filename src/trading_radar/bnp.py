@@ -8,7 +8,7 @@ from urllib.parse import unquote, urlencode, urljoin, urlsplit
 
 from trading_radar.config import Company
 from trading_radar.http import HTTPClient, SourceUnavailable
-from trading_radar.models import Collection, RawJob
+from trading_radar.models import Collection, CollectionConflict, RawJob
 from trading_radar.normalizer import canonical_url, has, normalize_text, parse_date
 from trading_radar.search_scope import SearchOptions
 
@@ -249,21 +249,39 @@ class BNPCollector:
         targets = {url: row for url, row in candidates.items() if self.selected(row["title"])}
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("BNP detail limit exceeded; narrow scope")
-        jobs: dict[str, RawJob] = {}
+        groups: dict[str, list[RawJob]] = {}
         for url in targets:
             html = await self.http.get_text(url, self.config.request_interval, self.source)
             job = parse_detail(html, url, self.config, self.source)
             key = str(job.external_id)
-            previous = jobs.get(key)
-            if previous:
-                ignored = {"apply_url", "source_url", "raw_payload"}
-                if previous.model_dump(exclude=ignored) != job.model_dump(exclude=ignored):
-                    raise SourceUnavailable("BNP identifier reused with conflicting content")
-                # Identical aliases must not alternate URLs and create versions on every scan.
-                job = min((previous, job), key=lambda item: item.apply_url)
-            jobs[key] = job
+            groups.setdefault(key, []).append(job)
+        jobs = []
+        conflicts = []
+        ignored = {"apply_url", "source_url", "raw_payload"}
+        for key, aliases in sorted(groups.items()):
+            baseline = aliases[0].model_dump(exclude=ignored)
+            fields = sorted(
+                {
+                    field
+                    for alias in aliases[1:]
+                    for field, value in alias.model_dump(exclude=ignored).items()
+                    if value != baseline[field]
+                }
+            )
+            if fields:
+                conflicts.append(
+                    CollectionConflict(
+                        external_id=key,
+                        urls=sorted({alias.apply_url for alias in aliases}),
+                        fields=fields,
+                    )
+                )
+            else:
+                # Identical aliases must not alternate URLs on every scan.
+                jobs.append(min(aliases, key=lambda item: item.apply_url))
         return Collection(
-            jobs=list(jobs.values()),
+            jobs=jobs,
             complete=False,
             requests=self.http.counts[self.source] - before,
+            conflicts=conflicts,
         )

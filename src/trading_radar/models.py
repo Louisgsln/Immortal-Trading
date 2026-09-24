@@ -120,16 +120,24 @@ class Job(RawJob):
         return self.score_breakdown.total + recent + deadline
 
 
+class CollectionConflict(BaseModel):
+    external_id: str
+    urls: list[str]
+    fields: list[str]
+
+
 class Collection(BaseModel):
     jobs: list[RawJob]
     complete: bool = False
     requests: int = 0
+    conflicts: list[CollectionConflict] = Field(default_factory=list)
 
 
 class ScanMetrics(BaseModel):
     sources: int = 0
     successful: int = 0
     failed: dict[str, str] = Field(default_factory=dict)
+    degraded: dict[str, list[CollectionConflict]] = Field(default_factory=dict)
     requests: int = 0
     received: int = 0
     new: int = 0

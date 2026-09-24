@@ -467,6 +467,17 @@ un état dégradé explicite et suivre les erreurs transitoires. Nomura campus
 dépend du retour d'un accès public sans challenge. Ajouter ensuite les actions
 de suivi depuis Telegram, puis une copie distante et une supervision extérieure.
 
+## Lot 49 — Collecte BNP avec conflits visibles (préparé, non déployé)
+
+- Références conflictuelles exclues en entier ; import transactionnel des autres
+  fiches après validation complète de la collecte.
+- État dégradé explicite dans les métriques et le dashboard, dernier succès
+  conservé, aucune clôture ni nouvelle alerte issue du scan dégradé.
+- Diagnostic persistant, aperçu sans écriture et suspension des alertes en
+  attente jusqu'à une collecte sans conflit.
+- Guide [BNP-CONFLICTS.md](BNP-CONFLICTS.md). La validation sur les pages publiques
+  actuelles et le déploiement dans les services existants restent à faire.
+
 ## Les cinq améliorations prioritaires après le lot 48
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.

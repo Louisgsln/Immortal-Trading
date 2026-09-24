@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Le lot 49 prépare la **collecte BNP avec conflits visibles** : les références
+ambiguës sont exclues, les autres fiches validées peuvent être importées, et la
+source reste signalée en difficulté. Le dashboard et l'aperçu détaillent les
+exclusions ; les alertes de cette source attendent une collecte sans conflit.
+Voir le [guide des conflits BNP](docs/BNP-CONFLICTS.md). Développement isolé,
+non déployé dans les services Windows existants.
+
 Radar personnel d'offres Trading / Global Markets / Quant Trading, orienté vers une prise de poste junior en 2027. Le premier lot fonctionne de bout en bout : collecte publique → normalisation → exclusions → score explicable → déduplication → SQLite → CSV et Telegram optionnel.
 
 Le master prompt original est conservé localement dans `docs/`, hors Git car il contient le profil personnel du candidat. La [feuille de route](docs/ROADMAP.md) suit les tâches et distingue ce qui est livré des phases suivantes. Les fichiers synchronisés dans `sources/` sont des références en lecture seule et ne sont pas publiés.

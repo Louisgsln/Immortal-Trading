@@ -245,7 +245,7 @@ def test_aliases_choose_stable_url(monkeypatch, reverse):
     assert result.jobs[0].apply_url.endswith("/job-1")
 
 
-def test_reused_identifier_conflict_aborts(monkeypatch):
+def test_reused_identifier_conflict_is_quarantined(monkeypatch):
     def handler(req):
         if req.url.path == "/robots.txt":
             return httpx.Response(404)
@@ -253,5 +253,45 @@ def test_reused_identifier_conflict_aborts(monkeypatch):
             return httpx.Response(200, text=page([listing(1), listing(2)], 2))
         return httpx.Response(200, text=html(detail(url=str(req.url), description=req.url.path)))
 
-    with pytest.raises(SourceUnavailable, match="conflicting"):
+    result = execute(handler, monkeypatch)
+    assert not result.jobs and not result.complete
+    assert len(result.conflicts) == 1
+    assert result.conflicts[0].external_id == "BNP-1"
+    assert result.conflicts[0].fields == ["description"]
+    assert result.conflicts[0].urls == [detail(1)["url"], detail(2)["url"]]
+
+
+@pytest.mark.parametrize("order", [(1, 2, 3, 4), (4, 3, 2, 1), (2, 1, 4, 3)])
+def test_conflicting_group_never_reenters_and_unrelated_job_survives(monkeypatch, order):
+    def handler(req):
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.url.path.endswith("toutes-offres-emploi"):
+            return httpx.Response(200, text=page([listing(i) for i in order], 4))
+        i = int(req.url.path.rsplit("-", 1)[1])
+        record = detail(i if i == 4 else 1, url=str(req.url))
+        if i == 2:
+            record.update(
+                description="Different description", employmentType="Stage", datePosted="2026-09-24"
+            )
+        return httpx.Response(200, text=html(record))
+
+    result = execute(handler, monkeypatch)
+    assert [job.external_id for job in result.jobs] == ["BNP-4"]
+    assert len(result.conflicts) == 1
+    assert result.conflicts[0].fields == ["date_posted", "description", "employment_type"]
+    assert result.conflicts[0].urls == [detail(i)["url"] for i in (1, 2, 3)]
+
+
+def test_detail_failure_after_conflict_still_aborts_entire_collection(monkeypatch):
+    def handler(req):
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.url.path.endswith("toutes-offres-emploi"):
+            return httpx.Response(200, text=page([listing(i) for i in (1, 2, 3)], 3))
+        if req.url.path.endswith("job-3"):
+            return httpx.Response(503)
+        return httpx.Response(200, text=html(detail(url=str(req.url), description=req.url.path)))
+
+    with pytest.raises(SourceUnavailable):
         execute(handler, monkeypatch)
