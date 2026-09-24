@@ -78,13 +78,21 @@ def card(job: dict, number: int) -> str:
     return "\n".join(lines)
 
 
-def jobs_message(config: Config, mode: Literal["top", "new"], now: datetime | None = None) -> str:
+def jobs_message(
+    config: Config,
+    mode: Literal["top", "new"],
+    now: datetime | None = None,
+    *,
+    max_units: int = 4000,
+) -> str:
     instant = now or utcnow()
     if instant.tzinfo is None:
         raise ValueError("Telegram list time must have a timezone")
     instant = instant.astimezone(UTC)
     if mode not in {"top", "new"}:
         raise ValueError("Unknown job list")
+    if not 2000 <= max_units <= 4000:
+        raise ValueError("Invalid message budget")
     try:
         jobs = read_jobs(config)
     except DashboardDataError:
@@ -130,7 +138,7 @@ def jobs_message(config: Config, mode: Literal["top", "new"], now: datetime | No
         block = card(job, len(blocks) + 1)
         # Reserve space for the final count; send one complete message per command.
         candidate = header + "\n\n" + "\n\n".join([*blocks, block]) + "\n\n" + footer
-        if units(candidate) > 3900:
+        if units(candidate) > max_units - 100:
             break
         blocks.append(block)
     count = f"{len(blocks)} affichée(s) sur {len(selected)} correspondance(s)."

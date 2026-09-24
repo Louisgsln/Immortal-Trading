@@ -54,6 +54,11 @@ des tâches Windows sur la base existante, avec sauvegarde quotidienne vérifié
 Les alertes Telegram sont activées et le message de test a été accepté. Le PC doit rester
 allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/WINDOWS-LIVE.md).
 
+Le lot 46 ajoute le **récapitulatif Telegram quotidien**, réglable en heure de
+Paris avec `/digest_on HH:MM`, consultable avec `/digest` et désactivable avec
+`/digest_off`. Il présente les nouvelles découvertes pertinentes et l'état des
+sources, avec protection contre les répétitions au redémarrage.
+
 Le lot 45 ajoute **`/top` et `/new` dans Telegram** : meilleures offres à examiner
 et découvertes des dernières 24 heures, avec score, expérience reconnue,
 fraîcheur et lien de candidature. Les listes écartent les candidatures déjà

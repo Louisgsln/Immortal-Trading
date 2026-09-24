@@ -5,24 +5,33 @@ import hashlib
 import logging
 import re
 import time
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
 import httpx
 from filelock import FileLock
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import ConfigDict, Field
 
 from trading_radar.backups import database_path
 from trading_radar.config import Config
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import atomic_json, format_status, incident_keys, runtime_report
+from trading_radar.telegram_digest import (
+    DigestState,
+    check_digest,
+    digest_message,
+    digest_status,
+    enable_digest,
+)
 from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
 HELP = "📡 Immortal Trading\n/status : activité du radar, état des sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
+HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure de Paris.\n/digest_off : arrêter le récapitulatif."
 
 
-class ControlState(BaseModel):
+class ControlState(DigestState):
     model_config = ConfigDict(extra="forbid", strict=True, allow_inf_nan=False)
     version: Literal[1] = 1
     binding: str
@@ -67,10 +76,18 @@ def command_from(update: dict, chat_id: str, username: str, now: float) -> str |
     if type(date) is not int or not 0 <= now - date <= 300 or not isinstance(text, str):
         return None
     match = re.fullmatch(
-        r"/(status|start|help|top|new)(?:@([A-Za-z0-9_]+))?(?:[ \t]+[^\r\n]{0,128})?", text.strip()
+        r"/(status|start|help|top|new|digest|digest_on|digest_off)(?:@([A-Za-z0-9_]+))?(?:[ \t]+([^\r\n]{0,128}))?",
+        text.strip(),
     )
     if not match or (match[2] and match[2].casefold() != username.casefold()):
         return None
+    if match[1] == "digest_on":
+        argument = (match[3] or "").strip()
+        if argument and not re.fullmatch(r"(?:[01][0-9]|2[0-3]):[0-5][0-9]", argument):
+            return "digest_usage"
+        return "digest_on" + (" " + argument if argument else "")
+    if match[1] in {"digest", "digest_off"} and match[3]:
+        return "digest_usage"
     return match[1]
 
 
@@ -123,7 +140,24 @@ async def process_updates(
         if command is None or replies >= 3:
             continue
         replies += 1
-        if command in {"top", "new"}:
+        instant = datetime.fromtimestamp(now, UTC)
+        if command == "digest_usage":
+            text = "Utilise /digest, /digest_on HH:MM (heure de Paris) ou /digest_off. Exemple : /digest_on 09:00."
+        elif command.startswith("digest_on"):
+            enable_digest(store.state, command.partition(" ")[2] or None, instant)
+            store.save()
+            text = digest_status(store.state) + "\nDébut au prochain horaire à venir."
+        elif command == "digest_off":
+            store.state.digest_enabled = False
+            store.save()
+            text = digest_status(store.state)
+        elif command == "digest":
+            text = (
+                digest_status(store.state)
+                + "\n\nAPERÇU À LA DEMANDE\n"
+                + digest_message(config, instant)
+            )
+        elif command in {"top", "new"}:
             text = jobs_message(config, "top" if command == "top" else "new")
         else:
             text = format_status(runtime_report(config)) if command == "status" else HELP
@@ -193,6 +227,12 @@ async def run_control(config: Config) -> None:
                     {"command": "status", "description": "État du radar et des sources"},
                     {"command": "top", "description": "Meilleures offres à examiner"},
                     {"command": "new", "description": "Offres découvertes depuis 24 h"},
+                    {"command": "digest", "description": "Aperçu et réglage du récapitulatif"},
+                    {
+                        "command": "digest_on",
+                        "description": "Activer le récapitulatif (HH:MM Paris)",
+                    },
+                    {"command": "digest_off", "description": "Désactiver le récapitulatif"},
                     {"command": "help", "description": "Aide du radar"},
                 ],
             },
@@ -216,6 +256,7 @@ async def run_control(config: Config) -> None:
                     await check_incidents(
                         config, notifier, store, runtime_report(config), time.time()
                     )
+                    await check_digest(config, notifier, store, datetime.now(UTC))
                     last_check = time.monotonic()
             except (OSError, ValueError, RuntimeError) as error:
                 logger.warning("telegram_control_cycle_failed type=%s", type(error).__name__)

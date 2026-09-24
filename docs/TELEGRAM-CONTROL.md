@@ -39,7 +39,44 @@ total de correspondances. De longs liens peuvent réduire le nombre affiché
 en dessous de cinq. Un lien dépassant 700 unités UTF-16 est omis explicitement,
 jamais coupé ; seuls les liens HTTP(S) valides sans identifiants sont affichés.
 Les notes personnelles et les coordonnées de recruteurs ne sont pas incluses.
-Les listes sont demandées à la main : aucun digest quotidien n'est programmé.
+Les listes `/top` et `/new` sont demandées à la main.
+
+## Récapitulatif quotidien
+
+- `/digest` affiche le réglage actuel et un aperçu à la demande. Cette commande
+  n'active pas l'envoi automatique et ne consomme pas l'envoi quotidien.
+- `/digest_on 09:00` active le récapitulatif à 9 h, heure de Paris.
+  Toute heure au format `HH:MM` est acceptée ; par exemple `19:00`.
+- `/digest_on` reprend l'horaire mémorisé, initialement `09:00`.
+- `/digest_off` désactive seulement le récapitulatif. Les alertes d'offres,
+  les avis d'incident et les commandes restent disponibles.
+
+Le réglage est conservé dans le fichier d'état Telegram local. Sur une nouvelle
+installation et pour un ancien fichier d'état, le récapitulatif est **désactivé
+par défaut**. L'activation commence au prochain horaire à venir, sans envoi
+immédiat rétroactif. Un changement d'horaire ne permet pas de renvoyer le
+récapitulatif d'une date déjà tentée.
+
+Le message reprend les découvertes des 24 heures précédant son exécution,
+avec les mêmes critères que `/new`, et le nombre de sources à jour. Un jour
+sans offre correspondante reste signalé par un message explicite. Les dates
+des fiches restent en UTC ; l'horaire de programmation est en Europe/Paris.
+
+Le service vérifie l'horaire environ toutes les minutes. Il peut rattraper un
+créneau manqué pendant les quatre heures suivantes, y compris après minuit.
+Au-delà, le créneau est ignoré ; aucun empilement des jours manqués. Une coupure
+du PC ou d'Internet empêche toujours le fonctionnement normal.
+
+Une seule tentative automatique est enregistrée par date de créneau **avant**
+l'appel Telegram. Un échec ou une livraison incertaine ne provoque pas de
+réexpédition automatique ce jour-là, y compris après redémarrage. La « dernière
+tentative » affichée n'est donc pas une preuve de réception : utiliser `/digest`
+pour demander à nouveau un aperçu.
+
+Les changements d'heure sont gérés avec la base de fuseaux verrouillée `tzdata`.
+Si l'heure choisie tombe dans l'heure inexistante du printemps, elle est décalée
+d'une heure réelle locale (02:30 devient 03:30). Lors du retour à l'heure d'hiver,
+la première occurrence est retenue ; la seconde ne provoque pas un autre envoi.
 
 Les dates du rapport sont explicitement en UTC. « Activité récente confirmée »
 signifie qu'un signal du collecteur a moins de 90 secondes ; cela ne garantit

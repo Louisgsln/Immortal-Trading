@@ -412,13 +412,24 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
   fiches récentes exigées, candidatures déjà envoyées et échéances dépassées
   ou ambiguës exclues. Aucune modification du score ou du suivi.
 - Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
-  Restent le digest programmé et les actions de suivi depuis Telegram.
+  Le digest est ajouté au lot 46 ; les actions de suivi depuis Telegram restent à faire.
 - Déployé sur ce poste ; 2 761 tests réussis sous Windows et sur Python
   3.11 à 3.14 en CI, couverture 96 %.
   Build Docker et restauration des onze tables synthétiques validés.
   Bilan [VALIDATION-LOT45.md](VALIDATION-LOT45.md).
 
-## Les cinq améliorations prioritaires après le lot 45
+## Lot 46 — Récapitulatif Telegram quotidien
+
+- `/digest` pour prévisualiser ; `/digest_on HH:MM` pour activer/régler ;
+  `/digest_off` pour désactiver. Réglages privés persistants, sans écriture métier.
+- Découvertes pertinentes des 24 dernières heures et bref état des sources,
+  selon les mêmes critères que `/new`. Message explicite même sans nouvelle offre.
+- Heure de Paris avec passage été/hiver ; début au prochain créneau à venir,
+  rattrapage limité à quatre heures et une tentative enregistrée par date avant
+  envoi. Aucune répétition automatique après livraison incertaine.
+- Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
+
+## Les cinq améliorations prioritaires après le lot 46
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Corriger les exigences observées et étendre la provenance** : priorité aux nouvelles fiches DB `R0452740` (`three (3) years`) et `R0450097` (`1-4 years of prior work experience`) dont les minima restent non reconnus au lot 43. Prévoir protections des préférences, négations et alternatives, puis mesure sur toute la base avant correction. Ensuite reprendre les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n’est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
