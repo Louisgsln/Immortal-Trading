@@ -56,3 +56,21 @@ prochaines collectes.
 
 Cette reconnaissance est bornée aux formulations auditées. Un minimum non reconnu
 ne signifie pas zéro année d'expérience et le score ne garantit pas l'éligibilité.
+
+## Déploiement du 25 septembre 2026
+
+Le commit `24a285f48255ac2c268e587b0f3ce87070e6272f` est publié sur `main` et
+installé dans l'instance Windows après sauvegarde vérifiée et conservation du
+paquet précédent. Six preuves ont été ajoutées dans une transaction, avec
+contrôle des champs modifiés, des huit tables protégées et de l'idempotence.
+
+Les trois services sont actifs. Le dashboard et l'API du suivi répondent HTTP 200 ;
+les 16 offres Nomura, dont six avec provenance, sont présentes. À 01:00:41 Paris,
+la collecte publique Nomura suivante a réussi avec 16 offres, zéro ajout et zéro
+mise à jour : les preuves produites par le collecteur concordent avec l'ajout
+hors ligne. Les réglages Telegram et les candidatures sont conservés.
+
+La [validation GitHub du code déployé](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36070279047)
+est réussie sur Python 3.11, 3.12, 3.13 et 3.14, ainsi que pour le build Docker
+et la restauration synthétique. Le rapport Python 3.12 compte **2 985 tests
+réussis**, couverture **96 %**. Les artefacts de la matrice sont conservés par la CI.

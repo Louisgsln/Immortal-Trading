@@ -506,6 +506,10 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   parmi 16 fiches Nomura, zéro minimum ou score changé ; huit tables préservées,
   dont candidatures et alertes. Deuxième passage sans effet.
 - Bilan [VALIDATION-LOT51.md](VALIDATION-LOT51.md).
+- Publié sur `main`, installé après sauvegarde et vérifié sur l'instance active.
+  Collecte Nomura suivante réussie : 16 offres, zéro nouvelle modification.
+  Dashboard, suivi Telegram et services Windows opérationnels.
+- CI Python 3.11–3.14 et Docker réussie, 2 985 tests Linux et couverture 96 %.
 
 ## Les cinq améliorations prioritaires après le lot 48
 
