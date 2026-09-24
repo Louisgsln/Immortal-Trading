@@ -428,6 +428,10 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
   rattrapage limité à quatre heures et une tentative enregistrée par date avant
   envoi. Aucune répétition automatique après livraison incertaine.
 - Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
+- Installé et activé à 09:00 Paris, premier créneau le 25 septembre 2026.
+  2 803 tests réussis sous Windows et sur Python 3.11 à 3.14 en CI, couverture
+  96 %. Docker et reprise des onze tables validés.
+  Bilan [VALIDATION-LOT46.md](VALIDATION-LOT46.md).
 
 ## Les cinq améliorations prioritaires après le lot 46
 

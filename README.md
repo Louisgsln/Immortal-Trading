@@ -58,6 +58,8 @@ Le lot 46 ajoute le **récapitulatif Telegram quotidien**, réglable en heure de
 Paris avec `/digest_on HH:MM`, consultable avec `/digest` et désactivable avec
 `/digest_off`. Il présente les nouvelles découvertes pertinentes et l'état des
 sources, avec protection contre les répétitions au redémarrage.
+Il est activé à **9 h Paris** sur ce poste, à partir du 25 septembre 2026.
+Voir le [bilan du lot 46](docs/VALIDATION-LOT46.md).
 
 Le lot 45 ajoute **`/top` et `/new` dans Telegram** : meilleures offres à examiner
 et découvertes des dernières 24 heures, avec score, expérience reconnue,

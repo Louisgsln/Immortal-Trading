@@ -42,6 +42,14 @@ Les alertes d'offres ont des libellés français. Le service Telegram indépenda
 signale les incidents persistants avec espacement des messages ; il ne peut pas
 signaler une coupure de tout le PC. Voir [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
 
+Le lot 46 active un récapitulatif quotidien à **09:00 Europe/Paris** sur ce
+poste. Premier créneau prévu le **25 septembre 2026 à 09:00** (07:00 UTC).
+`/digest` permet de voir l'aperçu ; `/digest_on HH:MM` règle l'heure et
+`/digest_off` arrête cet envoi. L'état est conservé dans `data/jobs.telegram.json`,
+indépendamment du token et de la base métier. Les services ont été relancés
+après sauvegarde et installation de la dépendance de fuseaux horaires.
+La première exécution quotidienne réelle reste à observer au créneau prévu.
+
 `ALERTS_ENABLED=true` est configuré et la tâche du collecteur a été relancée.
 Son processus lit la configuration au lancement. Pour une modification future,
 attendre la fin effective de l’ancien processus avant de relancer : l’état Ready

@@ -73,7 +73,9 @@ réexpédition automatique ce jour-là, y compris après redémarrage. La « der
 tentative » affichée n'est donc pas une preuve de réception : utiliser `/digest`
 pour demander à nouveau un aperçu.
 
-Les changements d'heure sont gérés avec la base de fuseaux verrouillée `tzdata`.
+Les changements d'heure utilisent le fuseau `Europe/Paris`. La dépendance
+verrouillée `tzdata` fournit notamment les règles sur Windows, où cette base
+n'est pas disponible par défaut pour Python.
 Si l'heure choisie tombe dans l'heure inexistante du printemps, elle est décalée
 d'une heure réelle locale (02:30 devient 03:30). Lors du retour à l'heure d'hiver,
 la première occurrence est retenue ; la seconde ne provoque pas un autre envoi.
