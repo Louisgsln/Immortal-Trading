@@ -21,6 +21,26 @@ from trading_radar.http import HTTPClient, SourceUnavailable
         ("Disallow: /caf%C3%A9", "/caf%C3%A9", False),
         ("Disallow: /private", "/%70rivate", False),
         ("Disallow: /Careers", "/careers", True),
+        ("Disallow: *?$", "/careers", True),
+        ("Disallow: *?$", "/careers?form%5Bq%5D=trading&page=1", True),
+        ("Disallow: *?$", "/careers?", False),
+        ("Disallow: *?$", "/careers?x=?", False),
+        ("Disallow: *?$", "/careers?%24", False),
+        ("Disallow: *?$\nDisallow: *?q=", "/careers?q=trading", False),
+        ("Disallow: *?$\nDisallow: /", "/careers", False),
+        ("Disallow: *?$\nAllow: /careers?", "/careers?", True),
+        ("Disallow: /\nAllow: /careers?$", "/careers", False),
+        ("Disallow: /\nAllow: /careers?$", "/careers?", True),
+        ("Disallow: /\nAllow: /careers?$", "/careers?x=1", False),
+        ("Disallow: /careers?$", "/other?", True),
+        ("Disallow: /careers?$", "/careers?", False),
+        ("dIsAlLoW : *?$ # empty query", "/careers", True),
+        (
+            "Disallow: *?$\nDisallow: /__radar_empty_query_rule_0__",
+            "/__radar_empty_query_rule_0__",
+            False,
+        ),
+        ("Disallow: *?$\nDisallow: /caf%C3%A9", "/caf%C3%A9", False),
     ],
 )
 def test_robot_rules_before_any_endpoint_request(monkeypatch, policy, path, allowed):
@@ -58,7 +78,7 @@ def test_specific_agent_merged_groups_crawl_delay_and_cache():
     calls = []
     policy = (
         "User-agent: *\nDisallow: /\n\n"
-        "User-agent: TradingJobRadar\nDisallow: /private\nCrawl-delay: 3.5\n\n"
+        "User-agent: TradingJobRadar\nDisallow: /private\nDisallow: *?$\nCrawl-delay: 3.5\n\n"
         "User-agent: tradingjobradar\nDisallow: /secret\n"
     )
 
@@ -71,7 +91,7 @@ def test_specific_agent_merged_groups_crawl_delay_and_cache():
         http._request = request
         try:
             assert await http.get_text("https://example.com/careers", 2, "test") == "ok"
-            for path in ["/private", "/secret"]:
+            for path in ["/private", "/secret", "/careers?"]:
                 with pytest.raises(SourceUnavailable, match="robots"):
                     await http.get_text("https://example.com" + path, 2, "test")
             assert calls == [

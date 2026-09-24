@@ -1,0 +1,31 @@
+User-agent: *
+Disallow: *?as_url_id*
+Disallow: *?ref*
+Disallow: *?cat*
+Disallow: *?NumPage*
+Disallow: *?$
+Disallow: *?field*
+Disallow: *?key*
+Disallow: *?Count*
+Disallow: *?print*
+Disallow: *404?page=*
+
+Disallow: *?study=
+Disallow: *?exp=
+Disallow: *?categories=
+Disallow: *?date_start=
+Disallow: *?date_end=
+Disallow: */link%
+Disallow: *?campaign=
+Disallow: *?ids=
+Disallow: *?idc=
+Disallow: *?back=
+Disallow: /*unavailable-offer.min.js
+Disallow: *?q=
+Disallow: *?international=
+Disallow: *?domain=
+Disallow: *?internal=
+
+
+Sitemap: https://group.bnpparibas/sitemap.xml
+Sitemap: https://group.bnpparibas/sitemap-en.xml

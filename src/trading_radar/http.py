@@ -7,10 +7,10 @@ from email.utils import parsedate_to_datetime
 from urllib.parse import urlsplit
 
 import httpx
-from protego import Protego
 
 from trading_radar.http_cache import JSONCache, cacheable
 from trading_radar.models import utcnow
+from trading_radar.robots import RobotsPolicy
 
 USER_AGENT = "TradingJobRadar/0.1 (personal public-careers monitor)"
 
@@ -39,7 +39,7 @@ class HTTPClient:
         self.locks: dict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
         self.next_request: dict[str, float] = defaultdict(float)
         self.last_request: dict[str, float] = defaultdict(float)
-        self.robots: dict[str, Protego | None] = {}
+        self.robots: dict[str, RobotsPolicy | None] = {}
         self.counts: dict[str, int] = defaultdict(int)
 
     async def close(self) -> None:
@@ -187,7 +187,7 @@ class HTTPClient:
             if response.status_code == 404:
                 self.robots[origin] = None
             elif response.status_code == 200:
-                self.robots[origin] = Protego.parse(response.text)
+                self.robots[origin] = RobotsPolicy.parse(response.text)
             else:
                 raise SourceUnavailable(f"robots policy unavailable: HTTP {response.status_code}")
         policy = self.robots[origin]

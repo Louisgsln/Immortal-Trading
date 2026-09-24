@@ -42,8 +42,18 @@ def job_url(value: str) -> tuple[str, str]:
     return ORIGIN + ROUTE + match[1] + "-" + match[2] + "/en-GB", match[1]
 
 
-def parse_board(text: str, limit: int) -> list[dict]:
+def public_nodes(text: str):
     nodes = list(Document(text).root.walk())
+    if any(
+        n.tag == "altcha-widget" or (n.tag == "form" and n.attrs.get("id") == "captcha-form")
+        for n in nodes
+    ):
+        raise SourceUnavailable("Nomura campus access restricted: CAPTCHA challenge; retry later")
+    return nodes
+
+
+def parse_board(text: str, limit: int) -> list[dict]:
+    nodes = public_nodes(text)
     counts = [
         re.fullmatch(r"(\d+) results? match!", clean(n))
         for n in nodes
@@ -84,7 +94,7 @@ def parse_board(text: str, limit: int) -> list[dict]:
 
 
 def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
-    nodes = list(Document(text).root.walk())
+    nodes = public_nodes(text)
     titles = [n for n in nodes if n.tag == "h1" and "section" in n.attrs.get("class", "").split()]
     if len(titles) != 1 or clean(titles[0]) != row["title"]:
         raise SourceUnavailable("Nomura campus detail title mismatch")

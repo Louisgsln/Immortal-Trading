@@ -85,6 +85,31 @@ def execute(handler, monkeypatch, **options):
     return asyncio.run(run())
 
 
+@pytest.mark.parametrize(
+    "challenge",
+    [
+        '<title>Quick Check Needed</title><altcha-widget challengeurl="?oleeoProtectCaptcha=1"></altcha-widget>',
+        '<form id="captcha-form" method="post"></form>',
+    ],
+)
+@pytest.mark.parametrize("on_detail", [False, True])
+def test_captcha_stops_without_following_or_submitting(challenge, on_detail, monkeypatch):
+    calls = []
+
+    def handler(req):
+        calls.append(req)
+        assert req.method == "GET"
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if on_detail and "jobboard" in req.url.path:
+            return httpx.Response(200, text=board([card()]))
+        return httpx.Response(200, text=challenge)
+
+    with pytest.raises(SourceUnavailable, match="access restricted: CAPTCHA"):
+        execute(handler, monkeypatch)
+    assert len(calls) == (3 if on_detail else 2)
+
+
 def test_board_title_filter_details_and_stable_links(monkeypatch):
     urls = []
 
