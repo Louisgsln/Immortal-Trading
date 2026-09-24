@@ -57,7 +57,9 @@ allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/
 Le lot 47 améliore la **lecture des exigences d'expérience** : quatre minima
 auparavant inconnus sont reconnus chez Deutsche Bank et Goldman Sachs.
 Un score est corrigé de 75 à 70, sans changement des candidatures ni des dates
-de collecte. Voir l'[audit du lot 47](docs/EXPERIENCE-AUDIT-LOT47.md).
+de collecte. Installé et vérifié avec 2 849 tests Windows réussis.
+Voir l'[audit du lot 47](docs/EXPERIENCE-AUDIT-LOT47.md) et son
+[bilan de validation](docs/VALIDATION-LOT47.md).
 
 Le lot 46 ajoute le **récapitulatif Telegram quotidien**, réglable en heure de
 Paris avec `/digest_on HH:MM`, consultable avec `/digest` et désactivable avec

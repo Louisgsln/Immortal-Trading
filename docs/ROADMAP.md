@@ -442,6 +442,19 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - Audit intégral et répétition sur sauvegarde restaurée ; candidatures, alertes,
   dates de collecte et 871 autres lignes d'offres préservées. Second passage sans effet.
 - Audit [EXPERIENCE-AUDIT-LOT47.md](EXPERIENCE-AUDIT-LOT47.md).
+- Installé et appliqué après sauvegarde ; 2 849 tests réussis sous Windows
+  et Python 3.11 à 3.14 en CI, couverture 96 %. Docker et reprise validés.
+  Dashboard, CSV et format Telegram vérifiés.
+  Bilan [VALIDATION-LOT47.md](VALIDATION-LOT47.md).
+
+### Priorités après vérification du service le 24 septembre à 13 h 35 UTC
+
+Le contrôle trouve 22 sources fraîches sur 24 : Nomura campus en échec récent
+et BNP Paribas avec collecte ancienne. Diagnostiquer ces deux sources en
+priorité ; les incidents DB/UBS du premier lancement sont historiques.
+Après cette fiabilisation, ajouter les actions de suivi depuis Telegram,
+puis vérifier une copie distante des sauvegardes et une supervision extérieure.
+Les points ci-dessous conservent les audits de couverture restant à mener.
 
 ## Les cinq améliorations prioritaires après le lot 47
 
