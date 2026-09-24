@@ -54,6 +54,13 @@ des tâches Windows sur la base existante, avec sauvegarde quotidienne vérifié
 Les alertes Telegram sont activées et le message de test a été accepté. Le PC doit rester
 allumé, connecté et la session ouverte ; voir [l’exploitation Windows](docs/WINDOWS-LIVE.md).
 
+Le lot 44 ajoute **les commandes Telegram privées `/status` et `/help`**,
+les alertes d'offres en français et les notifications d'incident du radar.
+Le service Telegram indépendant est installé sur ce PC. Les **2 720 tests**
+passent sous Windows et sur Python 3.11 à 3.14 en CI ; Docker passe aussi.
+Voir le [guide Telegram](docs/TELEGRAM-CONTROL.md) et le
+[bilan du lot 44](docs/VALIDATION-LOT44.md).
+
 Le lot 43 actualise **Barclays, Deutsche Bank, Morgan Stanley et Citi** :
 14 nouvelles offres et huit mises à jour après revue, sauvegarde et répétition.
 Sept grades seniors explicites sont reconnus. Le dashboard compte désormais

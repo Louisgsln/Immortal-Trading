@@ -11,6 +11,7 @@ ses historiques. Docker reste validé pour un futur déploiement distinct.
 | --- | --- | --- |
 | `Immortal-Trading-watch` | Ouverture de session FlowUP | Collecte continue selon les intervalles configurés |
 | `Immortal-Trading-dashboard` | Ouverture de session FlowUP | Dashboard éditable sur `http://127.0.0.1:8765` |
+| `Immortal-Trading-telegram` | Ouverture de session FlowUP | Commandes privées et surveillance des incidents |
 | `Immortal-Trading-backup` | Chaque jour à 03 h 15, heure Windows | Sauvegarde ZIP cohérente, puis vérification |
 
 Les tâches fonctionnent avec les droits ordinaires de l’utilisateur, via le
@@ -35,6 +36,11 @@ Le bot `@ImmortalTradingBot` est validé. Son token est dans `.env`, ignoré par
 **Alertes activées le 24 septembre à 08 h 43**, après le premier contact privé
 de l’utilisateur et l’accusé positif de Telegram pour le message de test.
 La destination privée est configurée localement, sans publication de son identifiant.
+
+Depuis le lot 44, `/status` et `/help` sont disponibles dans ce chat.
+Les alertes d'offres ont des libellés français. Le service Telegram indépendant
+signale les incidents persistants avec espacement des messages ; il ne peut pas
+signaler une coupure de tout le PC. Voir [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md).
 
 `ALERTS_ENABLED=true` est configuré et la tâche du collecteur a été relancée.
 Son processus lit la configuration au lancement. Pour une modification future,
@@ -100,9 +106,9 @@ qu’un processus est vivant ; vérifier les tâches et les événements récent
 
 ## Installation et mises à jour
 
-`scripts/install_windows_tasks.ps1` enregistre les trois tâches et refuse
+`scripts/install_windows_tasks.ps1` enregistre les quatre tâches et refuse
 d’écraser des tâches existantes. Le lanceur est `scripts/windows_service.py`.
-Avant une mise à jour du paquet installé, arrêter les deux tâches longues,
+Avant une mise à jour du paquet installé, arrêter les trois tâches longues,
 sauvegarder la base, reconstruire `data/service-venv` avec le lock, vérifier puis
 reprendre les tâches. Une modification de `src/` seule ne met pas à jour ce paquet.
 
@@ -119,7 +125,9 @@ Les sept tests du lanceur et les 42 tests ciblés du serveur éditable passent.
 Deux passages complets Windows ont chacun rencontré un refus HTTP intermittent
 `WinError 10053` dans un test existant de rejet des requêtes du dashboard
 (`cross_site_requests`, puis `duplicate_headers`). Aucun changement du serveur
-HTTP n’est inclus ici ; ces échecs restent à investiguer séparément.
+HTTP n’était inclus dans cette première mise en service. Le lot 44 corrige
+ces refus par une lecture bornée du corps restant : le passage complet Windows
+réussit désormais, avec 2 720 tests. Voir [VALIDATION-LOT44.md](VALIDATION-LOT44.md).
 
 La [CI du déploiement Windows](https://github.com/Louisgsln/Immortal-Trading/actions/runs/35965637822)
 réussit sur Python 3.11 à 3.14 : **2 659 tests par version**, couverture applicative

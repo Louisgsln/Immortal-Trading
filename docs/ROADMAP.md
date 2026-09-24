@@ -385,7 +385,23 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 - 2 652 tests réussis localement et sur Python 3.11 à 3.14 en CI, couverture 96 %, Ruff et mypy validés ; parcours Edge ordinateur/mobile, quatre fiches seniors et vingt variantes de preuves vérifiés. Build Docker et reprise sous UID 10001 réussis, onze tables restaurées identiques.
 - Deux formulations d’expérience DB encore non reconnues identifiées pour le prochain correctif borné. Bilan [VALIDATION-LOT43.md](VALIDATION-LOT43.md).
 
-## Les cinq améliorations prioritaires après le lot 43
+## Lot 44 — Commandes Telegram et incidents
+
+- Alertes d'offres en français, dates connues, expérience reconnue, score
+  détaillé et extrait employeur dans sa langue d'origine.
+- `/status`, `/help` et `/start` privés, sans modification des candidatures.
+  Signal périodique du collecteur et notifications d'incident avec stabilité
+  minimale de deux minutes et espacement minimal de trente minutes.
+- Service Telegram indépendant installé comme quatrième tâche Windows.
+  Menu vérifié via Telegram ; premier avis d'incident accepté. La surveillance
+  de l'arrêt complet du PC demande toujours un système externe.
+- Refus HTTP du dashboard éditable fiabilisés sous Windows.
+  2 720 tests réussis localement et sur Python 3.11 à 3.14 en CI,
+  couverture 96 % ; Docker et reprise des onze tables réussis.
+- Guide [TELEGRAM-CONTROL.md](TELEGRAM-CONTROL.md),
+  bilan [VALIDATION-LOT44.md](VALIDATION-LOT44.md).
+
+## Les cinq améliorations prioritaires après le lot 44
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Corriger les exigences observées et étendre la provenance** : priorité aux nouvelles fiches DB `R0452740` (`three (3) years`) et `R0450097` (`1-4 years of prior work experience`) dont les minima restent non reconnus au lot 43. Prévoir protections des préférences, négations et alternatives, puis mesure sur toute la base avant correction. Ensuite reprendre les libellés Nomura `Position Specifications → Experience` et la provenance des 16 offres ; aucune erreur des sept minima existants n’est démontrée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
