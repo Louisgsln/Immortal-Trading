@@ -575,7 +575,16 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - CI Python 3.11–3.14 et Docker réussie, 3 157 tests Linux, couverture 96 %.
   Bilan [VALIDATION-LOT56.md](VALIDATION-LOT56.md).
 
-## Les cinq améliorations prioritaires après le lot 56
+## Lot 57 — Diplômes Nomura dans le dashboard
+
+- Extension au champ audité **Position Specifications → Qualification** de Nomura
+  professionnels ; alternatives et préférences conservées dans l'extrait.
+- Sur une copie de 786 offres : quatre observations ajoutées, 30 DRW/IMC conservées,
+  aucune modification des 11 tables ni des scores ou candidatures.
+- Filtre et détail vérifiés dans le navigateur. Validation complète et livraison
+  en cours ; bilan [VALIDATION-LOT57.md](VALIDATION-LOT57.md).
+
+## Les cinq améliorations prioritaires après le lot 57
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée et la copie distante des sauvegardes. Le lot 56 résout les conflits BNP et reprend les collectes Deutsche Bank/Citi avec lacunes explicites ; Nomura campus reste soumis au CAPTCHA public. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman. Le lot 51 couvre les libellés Nomura `Position Specifications → Experience` : six preuves sur les 16 offres actuelles, valeurs et scores inchangés. Le minimum hors tableau de l'offre Equity Sales Trader reste numérique sans provenance inventée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
