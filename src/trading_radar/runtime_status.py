@@ -150,6 +150,9 @@ def format_status(report: dict) -> str:
         "recent_failure": "dernier essai en échec",
         "stale": "ancienne collecte",
         "never_scanned": "jamais collectée",
+        "partial": "collecte partielle — fiches incomplètes",
+        "collection_degraded": "collecte partielle — références contradictoires",
+        "access_restricted": "accès bloqué par CAPTCHA",
         "invalid_timestamp": "date incohérente",
     }
     lines = [
@@ -173,6 +176,7 @@ def format_status(report: dict) -> str:
     if problems:
         lines += ["", "Sources à vérifier :"] + [
             f"• {s['company']} ({s['source']}) : {source_labels.get(s['status'], s['status'])}"
+            + (f" ({len(s['listing_gaps'])})" if s.get("listing_gaps") else "")
             for s in problems[:12]
         ]
         if len(problems) > 12:

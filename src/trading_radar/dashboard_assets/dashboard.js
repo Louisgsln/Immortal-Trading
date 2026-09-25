@@ -26,11 +26,12 @@
   const healthLabels = {
     fresh: "À jour", recent_failure: "Échec récent", stale: "À actualiser",
     never_scanned: "Jamais collectée", invalid_timestamp: "Date invalide",
+    partial: "Collecte partielle", collection_degraded: "Références contradictoires", access_restricted: "Accès bloqué · CAPTCHA",
     healthy: "Sain", degraded: "À surveiller", critical: "À vérifier"
   };
   const statusLabel = (status) => statusLabels[status] || status || "Non renseigné";
   const healthBadge = (status) => make("span", healthLabels[status] || status || "Indisponible",
-    "badge " + (["fresh", "healthy"].includes(status) ? "good" : ["recent_failure", "degraded"].includes(status) ? "warning" : "bad"));
+    "badge " + (["fresh", "healthy"].includes(status) ? "good" : ["recent_failure", "degraded", "partial", "collection_degraded", "access_restricted"].includes(status) ? "warning" : "bad"));
   const safeURL = (value) => {
     if (typeof value !== "string") return null;
     try {
@@ -479,10 +480,13 @@
   }
   function renderHealth() {
     const badge = healthBadge(health.status); $("health-status").className = badge.className; $("health-status").textContent = badge.textContent;
-    $("health-explanation").textContent = (editingEnabled ? "État calculé au chargement de la page. " : "État calculé lors de l’export. ") + "Une source est à jour si sa dernière collecte réussie date de moins de " + (health.max_age_hours || 24) + " heures, sans échec ultérieur. " + (editingEnabled ? "Rechargez la page pour actualiser toutes les données depuis votre radar local. Aucune collecte automatique." : "Les données ne s’actualisent pas automatiquement.");
+    $("health-explanation").textContent = (editingEnabled ? "État calculé au chargement de la page. " : "État calculé lors de l’export. ") + "Une source est à jour si sa dernière collecte réussie date de moins de " + (health.max_age_hours || 24) + " heures, sans échec ultérieur ni fiche incomplète signalée. " + (editingEnabled ? "Rechargez la page pour actualiser toutes les données depuis votre radar local. Aucune collecte automatique." : "Les données ne s’actualisent pas automatiquement.");
     (health.sources || []).forEach((source) => {
       const row = make("tr"); const name = make("td"); name.append(make("span", source.company, "source-name"), make("span", source.source, "source-key"));
       const status = make("td"); status.append(healthBadge(source.status));
+      if ((source.listing_gaps || []).length) {
+        status.append(make("p", "Fiches sans titre ni lien : " + source.listing_gaps.join(", ") + ". Les autres offres sont actualisées ; ces références ne sont pas déclarées fermées.", "source-key"));
+      }
       if ((source.collection_conflicts || []).length) {
         const details = make("details", undefined, "collection-conflicts");
         details.append(make("summary", "Collecte dégradée · " + number(source.collection_conflicts.length) + " référence(s) exclue(s)"));

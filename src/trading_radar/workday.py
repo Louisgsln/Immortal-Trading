@@ -172,6 +172,7 @@ class WorkdayCollector:
         self.source, self.config, self.http = source, config, http
         self.site, self.api = workday_base(config)
         self.options = WorkdayOptions(**config.options)
+        self.listing_gaps: set[str] = set()
 
     async def collect(self) -> Collection:
         import asyncio
@@ -217,6 +218,28 @@ class WorkdayCollector:
             if len(page) != min(20, expected - offset):
                 raise SourceUnavailable("Workday returned a short or inconsistent page")
             for row in page:
+                # Audited CXS placeholders expose only a requisition number.
+                # Preserve their position/count and report the coverage gap; never
+                # invent a title/path or treat the reference as a closed vacancy.
+                pattern = {"deutsche_bank": r"R[0-9]{7}", "citi": r"[0-9]{8}"}.get(self.source)
+                if (
+                    pattern
+                    and isinstance(row, dict)
+                    and set(row) == {"bulletFields"}
+                    and isinstance(row["bulletFields"], list)
+                    and len(row["bulletFields"]) == 1
+                    and isinstance(row["bulletFields"][0], str)
+                    and re.fullmatch(pattern, row["bulletFields"][0])
+                ):
+                    reference = row["bulletFields"][0]
+                    key = "unavailable:" + reference
+                    if key in rows:
+                        raise SourceUnavailable("Workday pagination repeated a posting")
+                    rows[key] = row
+                    self.listing_gaps.add(reference)
+                    if len(self.listing_gaps) > 10:
+                        raise SourceUnavailable("Workday incomplete listing limit exceeded")
+                    continue
                 if (
                     not isinstance(row, dict)
                     or not isinstance(row.get("title"), str)
@@ -298,9 +321,12 @@ class WorkdayCollector:
 
     async def _collect(self) -> Collection:
         before = self.http.counts[self.source]
+        self.listing_gaps.clear()
         candidates: dict[str, dict] = {}
         for term in self.options.search_terms:
             for path, row in (await self._search(term)).items():
+                if path.startswith("unavailable:"):
+                    continue
                 if path in candidates and comparable_title(
                     candidates[path]["title"]
                 ) != comparable_title(row["title"]):
@@ -325,5 +351,8 @@ class WorkdayCollector:
             jobs.append(job)
         # Searches and title filters are partial inventories. Never infer closure from absence.
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            requests=self.http.counts[self.source] - before,
+            listing_gaps=sorted(self.listing_gaps),
         )

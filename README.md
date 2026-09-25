@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 56 rétablit la **collecte BNP** et reprend les offres complètes de
+**Deutsche Bank et Citi**, en signalant leurs références sans titre ni lien.
+Nomura campus reste bloqué par un CAPTCHA public, désormais indiqué clairement.
+Voir le [bilan des quatre sources](docs/VALIDATION-LOT56.md).
+
 Le lot 55 ajoute les **extraits de missions** aux cartes Telegram et au détail
 du dashboard : jusqu'à trois missions issues de rubriques employeur vérifiées
 chez DRW, IMC et HSBC professionnels. 54 offres couvertes sur l'instantané audité,

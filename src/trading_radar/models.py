@@ -134,6 +134,7 @@ class Collection(BaseModel):
     complete: bool = False
     requests: int = 0
     conflicts: list[CollectionConflict] = Field(default_factory=list)
+    listing_gaps: list[str] = Field(default_factory=list)
 
 
 class ScanMetrics(BaseModel):
@@ -141,6 +142,7 @@ class ScanMetrics(BaseModel):
     successful: int = 0
     failed: dict[str, str] = Field(default_factory=dict)
     degraded: dict[str, list[CollectionConflict]] = Field(default_factory=dict)
+    listing_gaps: dict[str, list[str]] = Field(default_factory=dict)
     requests: int = 0
     received: int = 0
     new: int = 0

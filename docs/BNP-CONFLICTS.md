@@ -2,8 +2,11 @@
 
 Lorsque plusieurs URL BNP portent le même identifiant employeur, le collecteur
 compare les fiches complètes. Des alias identiques conservent une URL stable.
-Si un champ métier diffère, toutes les variantes de cette référence sont exclues
-du résultat du scan, indépendamment de leur ordre. Une troisième variante
+Depuis le lot 56, un désaccord déclenche d'abord une vérification bornée de la
+fiche de recrutement officielle, seulement si toutes les variantes y pointent
+avec la même identité. Une seule variante doit correspondre à son titre et sa
+description complète, avec référence employeur et URL canonique concordantes.
+Sinon, toutes les variantes restent exclues du résultat, indépendamment de leur ordre. Une troisième variante
 identique à la première ne réintroduit pas la référence.
 
 Les autres références sont importées seulement après lecture et validation de
@@ -34,9 +37,9 @@ dans le diagnostic. Un aperçu ne modifie pas la base réelle.
 Les conflits sont conservés dans le journal existant `scan_runs`, sans migration
 de la base. `health`, l'audit des sources et les données du dashboard exposent
 `collection_conflicts`. Dans **Santé des sources**, ouvrir **Collecte dégradée**
-pour examiner les références et leurs variantes. La source conserve son état
-d'échec récent, d'ancienneté ou d'absence de succès selon son historique ; elle
-n'est pas comptée parmi les sources à jour.
+pour examiner les références et leurs variantes. Le dernier scan avec conflits est présenté comme une collecte partielle avec
+références contradictoires, même sans succès complet antérieur. Un échec réseau
+ultérieur reste signalé séparément ; la source n'est pas comptée comme à jour.
 
 Une collecte d'une autre source ou un échec réseau ultérieur ne supprime pas les
 preuves du dernier conflit non résolu. Le diagnostic est historique : il ne
@@ -52,3 +55,7 @@ du diagnostic et l'aperçu sans écriture.
 Le lot est désormais installé dans l'instance Windows isolée et intégré à `main`
 avec le lot 50. Les collectes publiques ont repris. Un nouveau conflit ou incident
 d'accès reste signalé ; l'installation ne garantit pas la disponibilité du portail.
+
+Le [lot 56](VALIDATION-LOT56.md) résout les deux conflits observés grâce aux
+fiches officielles partagées et permet une collecte de 31 offres. Les protections
+ci-dessus continuent de s’appliquer aux autres conflits.

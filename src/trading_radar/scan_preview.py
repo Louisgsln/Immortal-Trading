@@ -190,7 +190,7 @@ async def preview_scan(
                 _jobs(repo)
                 changes = _changes(repo, start, before)
                 result.update(
-                    status="incomplete" if metrics.failed else "ok",
+                    status="incomplete" if metrics.failed or metrics.listing_gaps else "ok",
                     metrics=metrics.model_dump(mode="json"),
                     changes=changes,
                 )

@@ -154,6 +154,8 @@ async def scan(
                     collectors[key] if collectors is not None else build_collector(key, co, http)
                 )
                 result = await collector.collect()
+                if result.listing_gaps:
+                    metrics.listing_gaps[key] = result.listing_gaps
                 excluded = {conflict.external_id for conflict in result.conflicts}
                 if any(str(raw.external_id) in excluded for raw in result.jobs):
                     raise ValueError("collector returned a quarantined identifier")
@@ -200,7 +202,7 @@ async def scan(
                             # Queue only while alerts explicitly enabled; no surprise backlog on activation.
                             if config.settings.alerts_enabled:
                                 repo.enqueue(job, event)
-                    if result.complete and not result.conflicts:
+                    if result.complete and not result.conflicts and not result.listing_gaps:
                         counts["closed"] = repo.reconcile(
                             key, seen, config.settings.closure_after_missing_scans
                         )
@@ -229,6 +231,7 @@ async def scan(
                     jobs_updated=counts["updated"],
                     bootstrap=silent,
                     excluded_conflicts=len(result.conflicts),
+                    incomplete_listings=len(result.listing_gaps),
                     duration=round(time.monotonic() - source_start, 3),
                 )
             except Exception as exc:

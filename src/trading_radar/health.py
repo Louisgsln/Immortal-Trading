@@ -9,7 +9,11 @@ from pathlib import Path
 from typing import Any
 
 from trading_radar.audit import timestamp
-from trading_radar.collection_diagnostics import source_conflicts
+from trading_radar.collection_diagnostics import (
+    source_conflicts,
+    source_listing_gaps,
+    source_observation,
+)
 from trading_radar.config import Config
 from trading_radar.models import utcnow
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
@@ -97,6 +101,13 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
             conflicts = {
                 key: source_conflicts(connection, key, state[0]) for key, state in states.items()
             }
+            gaps = {
+                key: source_listing_gaps(connection, key, state[0]) for key, state in states.items()
+            }
+            failure_messages = {
+                key: source_observation(connection, key, state[1], "failed")
+                for key, state in states.items()
+            }
             latest = connection.execute(
                 "SELECT created_at FROM scan_runs ORDER BY id DESC LIMIT 1"
             ).fetchone()
@@ -134,6 +145,19 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
         if invalid:
             status = "invalid_timestamp"
             issue("source_invalid_timestamp", "critical", key)
+        elif (
+            key == "nomura_campus"
+            and failure
+            and (success is None or failure >= success)
+            and failure_messages.get(key)
+            == "Nomura campus access restricted: CAPTCHA challenge; retry later"
+        ):
+            status = "access_restricted"
+            issue("source_access_restricted", "warning", key)
+        elif conflicts.get(key) and str(failure_messages.get(key, "")).startswith(
+            "Collecte dégradée :"
+        ):
+            status = "collection_degraded"
         elif success is None:
             status = "never_scanned"
             issue("source_never_scanned", "critical", key)
@@ -143,6 +167,9 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
         elif failure and failure >= success:
             status = "recent_failure"
             issue("source_recent_failure", "warning", key)
+        elif gaps.get(key):
+            status = "partial"
+            issue("source_incomplete_listings", "warning", key)
         else:
             status = "fresh"
         report["sources"].append(
@@ -156,6 +183,7 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
                 "consecutive_failures": failures,
                 "last_snapshot_jobs": count,
                 **({"collection_conflicts": conflicts[key]} if conflicts.get(key) else {}),
+                **({"listing_gaps": gaps[key]} if gaps.get(key) else {}),
             }
         )
         if conflicts.get(key):

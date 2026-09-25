@@ -6,6 +6,7 @@ import re
 from html.parser import HTMLParser
 from urllib.parse import unquote, urlencode, urljoin, urlsplit
 
+from trading_radar.bnp_authority import matching_alias, recruitment_target
 from trading_radar.config import Company
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, CollectionConflict, RawJob
@@ -250,9 +251,11 @@ class BNPCollector:
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("BNP detail limit exceeded; narrow scope")
         groups: dict[str, list[RawJob]] = {}
+        targets_by_url = {}
         for url in targets:
             html = await self.http.get_text(url, self.config.request_interval, self.source)
             job = parse_detail(html, url, self.config, self.source)
+            targets_by_url[url] = recruitment_target(html)
             key = str(job.external_id)
             groups.setdefault(key, []).append(job)
         jobs = []
@@ -269,6 +272,28 @@ class BNPCollector:
                 }
             )
             if fields:
+                alias_targets = [targets_by_url[alias.apply_url] for alias in aliases]
+                # Bound extra requests to the existing detail budget. All aliases
+                # must explicitly point to the same recruitment identity.
+                if (
+                    all(target is not None for target in alias_targets)
+                    and len({target[0] for target in alias_targets if target}) == 1
+                    and self.http.counts[self.source] - before < self.options.max_details
+                ):
+                    english = sorted(
+                        target for target in alias_targets if target and "/en_US/" in target[1]
+                    )
+                    if english:
+                        try:
+                            authority = await self.http.get_text(
+                                english[0][1], self.config.request_interval, self.source
+                            )
+                            resolved = matching_alias(authority, english[0][0], aliases)
+                        except SourceUnavailable:
+                            resolved = None
+                        if resolved is not None:
+                            jobs.append(resolved)
+                            continue
                 conflicts.append(
                     CollectionConflict(
                         external_id=key,
