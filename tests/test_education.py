@@ -85,6 +85,9 @@ def test_unreviewed_sources_and_plain_text_are_not_guessed(job):
         "A high degree of autonomy",
         "Ms. Smith leads training",
         "BSpline modelling",
+        "Proficiency with MS Office",
+        "MS SQL experience",
+        "Advanced MS Excel skills",
     ],
 )
 def test_nonacademic_words_are_not_degree_levels(job, text):
