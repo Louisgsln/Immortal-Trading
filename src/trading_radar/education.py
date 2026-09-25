@@ -7,6 +7,7 @@ items preserve alternatives, preferences, negations and graduation conditions.
 import html
 import re
 
+from trading_radar.description_sections import labelled_lists, visible_text
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
@@ -37,36 +38,6 @@ _DEGREES = {
     ),
     "doctorate": re.compile(r"\bPh\.?D\b|\bdoctorate\b|\bdoctoral\s+degree\b", re.I),
 }
-_HIDDEN = {"script", "style", "template", "noscript"}
-
-
-def _text(node: Element) -> str:
-    if node.tag in _HIDDEN or "hidden" in node.attrs:
-        return ""
-    return " ".join(
-        _text(child) if isinstance(child, Element) else child for child in node.children
-    )
-
-
-def _heading(text: str) -> str:
-    return " ".join(text.lower().replace("’", "'").replace("&", "and").split()).strip(" :.…")
-
-
-def _lists(node: Element, headings: set[str]):
-    if node.tag in _HIDDEN or "hidden" in node.attrs:
-        return
-    previous = ""
-    for child in node.children:
-        if isinstance(child, str):
-            if child.strip():
-                previous = ""
-            continue
-        text = " ".join(_text(child).split())
-        if child.tag in {"ul", "ol"} and _heading(previous) in headings:
-            yield previous, child
-        if text:
-            previous = text if child.tag in {"p", "h2", "h3", "h4", "strong"} else ""
-        yield from _lists(child, headings)
 
 
 def education_mentions(job: Job) -> dict:
@@ -75,11 +46,11 @@ def education_mentions(job: Job) -> dict:
     if job.source not in _HEADINGS:
         return result
     document = Document(html.unescape(job.description))
-    for heading, section in _lists(document.root, _HEADINGS[job.source]):
+    for heading, section in labelled_lists(document.root, _HEADINGS[job.source]):
         for item in section.children:
             if not isinstance(item, Element) or item.tag != "li":
                 continue
-            excerpt = " ".join(_text(item).split())
+            excerpt = " ".join(visible_text(item).split())
             if not excerpt or len(excerpt) > 1500:
                 continue
             levels = [key for key, pattern in _DEGREES.items() if pattern.search(excerpt)]

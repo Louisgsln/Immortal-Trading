@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 55 ajoute les **extraits de missions** aux cartes Telegram et au détail
+du dashboard : jusqu'à trois missions issues de rubriques employeur vérifiées
+chez DRW, IMC et HSBC professionnels. 54 offres couvertes sur l'instantané audité,
+sans changement des scores ni du suivi. Voir le [bilan du lot 55](docs/VALIDATION-LOT55.md).
+
 Le lot 51 ajoute la **provenance des exigences Nomura** : l'extrait employeur
 qui justifie les années d'expérience apparaît dans la fiche du dashboard.
 Six preuves ajoutées sur les 16 offres actuelles, sans changement des minima

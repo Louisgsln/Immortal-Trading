@@ -8,6 +8,14 @@ Les nouvelles alertes utilisent une carte HTML : poste et entreprise, lieu,
 dates connues, expérience, score visuel et extrait de la description employeur.
 Les textes employeur sont échappés et raccourcis avant formatage.
 
+Depuis le lot 55, la carte affiche **Missions · extraits** lorsqu'une rubrique
+de missions est reconnue chez DRW, IMC ou HSBC professionnels : jusqu'à trois
+extraits dans la langue de l'annonce, limités à 240 caractères chacun avec
+une ellipse si nécessaire. Sinon, **Extrait de description** conserve le repli
+habituel. Le dashboard montre les extraits complets et la rubrique d'origine.
+Les messages déjà reçus ne sont pas réécrits et aucune ancienne alerte n'est
+renvoyée à cause de cette évolution de présentation.
+
 - **↗ Voir l’offre · Postuler** ouvre le lien employeur. L’ouverture ne change
   pas le suivi et n’envoie aucune candidature.
 - **✓ J’ai postulé** confirme que vous avez envoyé votre candidature. Le statut

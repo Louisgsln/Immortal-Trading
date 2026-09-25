@@ -8,6 +8,7 @@ from urllib.parse import urlsplit
 from uuid import UUID
 
 from trading_radar.experience import experience_requirement
+from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job
 
 
@@ -86,6 +87,13 @@ def format_alert(job: Job, event: str) -> str:
         else "non précisée"
     )
     blocks = min(10, max(0, score // 10))
+    missions = mission_excerpts(job)
+    if missions:
+        excerpt_label = "Missions · extraits"
+        excerpt = "\n".join("• " + clean(item, 240) for item in missions["excerpts"])
+    else:
+        excerpt_label = "Extrait de description"
+        excerpt = clean(job.description_text or "Description non disponible.", 380)
     return "\n".join(
         [
             f"{'🔥' if score >= 85 else '💼'} <b>{heading}</b>",
@@ -101,7 +109,8 @@ def format_alert(job: Job, event: str) -> str:
             f"<b>Priorité · {score}/100</b>  {'▰' * blocks}{'▱' * (10 - blocks)}",
             f"Trading {job.score_breakdown.trading}/30 · Junior {job.score_breakdown.junior}/20 · Front office {job.score_breakdown.front_office}/15",
             "",
-            f"<blockquote>{clean(job.description_text or 'Description non disponible.', 380)}</blockquote>",
+            f"<b>{excerpt_label}</b>",
+            f"<blockquote>{excerpt}</blockquote>",
             f"<i>Source : {clean(job.source, 80)} · Score de priorité, pas une probabilité de recrutement.</i>",
             "",
             "Ouvre l’offre, puis confirme ici une fois ta candidature envoyée.",

@@ -13,6 +13,7 @@ from trading_radar.deadlines import resolve_deadline
 from trading_radar.education import education_mentions
 from trading_radar.experience import experience_requirement
 from trading_radar.health import check_health
+from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job, utcnow
 from trading_radar.monitoring import history
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
@@ -118,6 +119,7 @@ def _job(row: sqlite3.Row) -> dict:
         "score_breakdown": job.score_breakdown.model_dump(mode="json"),
         "experience": experience_requirement(job),
         "education": education_mentions(job),
+        "missions": mission_excerpts(job),
         "is_active": job.is_active,
         "is_expired": job.is_expired,
         "first_seen": job.first_seen.isoformat(),

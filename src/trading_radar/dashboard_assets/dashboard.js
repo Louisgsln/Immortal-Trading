@@ -372,6 +372,14 @@
       link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer";
       link.setAttribute("aria-label", "Consulter l’offre officielle (nouvel onglet)"); content.append(link);
     } else content.append(make("p", "Lien officiel indisponible.", "detail-company"));
+    if (job.missions && job.missions.excerpts.length) {
+      const missions = detailSection("Missions · extraits");
+      missions.append(make("p", "Rubrique de l’annonce · " + job.missions.heading, "detail-company"));
+      const excerpts = make("ul");
+      job.missions.excerpts.forEach((excerpt) => excerpts.append(make("li", excerpt, "description")));
+      missions.append(excerpts, make("p", "Jusqu’à trois extraits dans la langue de l’annonce. Consultez l’offre officielle pour l’ensemble des missions.", "detail-company"));
+      content.append(missions);
+    }
     const experienceSection = detailSection("Expérience");
     experienceSection.append(make("p", experienceLabel(job), "experience-minimum"));
     experienceEvidence(job).forEach((item) => {
