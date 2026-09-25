@@ -34,7 +34,22 @@ Audit du 26 septembre 2026, 786 offres dont 16 Nomura professionnels :
   Nomura + Master retourne quatre offres. Le détail montre le champ d'origine
   et l'alternative au diplôme. Aucun message d'erreur JavaScript observé.
 - Suite complète Windows : 3 184 tests réussis, quatre ignorés. Ruff et
-  vérification des types réussis. Livraison et CI à consigner.
+  vérification des types réussis.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36196242858)
+  réussie sur Python 3.11–3.14 et Docker : 3 188 tests Linux, couverture 96 %,
+  construction du conteneur et exercice de restauration sans réseau réussis.
+
+## Livraison
+
+- Code publié directement sur `main` : `177c734`.
+- Sauvegarde vérifiée le 26 septembre à 00:21, version précédente conservée,
+  puis installation du paquet isolé et contrôle des trois fichiers livrés.
+- Dashboard et lecture du suivi de candidature répondent correctement ;
+  786 offres, 34 mentions de diplôme, 54 extraits de missions et six preuves
+  d'expérience Nomura vérifiés sur l'instance active.
+- Exclusion HSBC Associate seul et conservation des titres mixtes Analyst/Associate
+  vérifiées. Scanner, dashboard et Telegram redémarrés ; nouvelles collectes
+  Jump et XTX réussies après installation.
 
 ## Prochaine étape
 
