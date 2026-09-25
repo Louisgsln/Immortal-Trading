@@ -39,4 +39,25 @@ les dates explicites ou textuelles, références contradictoires, doublons entre
 structures, valeurs absentes ou ambiguës et désaccords de dates. Ruff, formatage
 et mypy réussis. L'ancien format reste accepté sans différence de métadonnées.
 
-La livraison et les contrôles GitHub sont consignés après vérification effective.
+## Livraison du 25 septembre 2026
+
+Le commit `c05c08227ef90e1df5657359b1995f4d9a795c0a` est publié sur `main` et
+installé après sauvegarde vérifiée à 23:08 Paris et conservation du paquet précédent.
+Une collecte ciblée vérifie immédiatement la réparation, sans attendre le délai
+normal de reprise après échec. Le dashboard et Telegram sont déjà relancés pendant
+ce contrôle ; le scanner continu reprend ensuite.
+
+Résultat réel en 66,75 secondes : **34 requêtes, 31 offres reçues, une ajoutée,
+zéro mise à jour, zéro clôture, zéro alerte**. Les réglages de notification
+existants ont été conservés. Le résultat concorde avec la répétition sur copie.
+
+Le dashboard affiche Société Générale à jour (`fresh`) et 784 offres. Dashboard et
+API du suivi répondent HTTP 200 ; HSBC Associate reste exclu avec score nul et
+les 13 titres mixtes Analyst/Associate sont conservés. Les trois services sont actifs.
+
+
+La [validation GitHub du code installé](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36189866792)
+est réussie sur Python 3.11 à 3.14, ainsi que pour la construction Docker et la
+restauration synthétique. Rapport Python 3.12 : **3 073 tests réussis**, couverture
+**96 %**. Le scanner continu confirme ensuite des collectes HSBC, UBS et Goldman
+réussies après sa reprise.

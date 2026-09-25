@@ -521,7 +521,7 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   actifs. CI Python 3.11–3.14 et Docker réussie, 3 021 tests Linux, couverture 96 %.
   Bilan [VALIDATION-LOT52.md](VALIDATION-LOT52.md).
 - Prochain audit d’exploitation : erreur Société Générale `SG visible reference
-  mismatch` observée avant livraison ; conserver les contrôles d’identité.
+  mismatch` observée avant livraison ; conserver les contrôles d’identité. Résolu au lot 54.
 
 ## Lot 53 — Cible Analyst, exclusion Associate seul
 
@@ -542,7 +542,10 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   compatibilité de l'ancien format et contrôles d'identité conservés.
 - 31 fiches publiques vérifiées ; répétition sur copie de 783 offres : une offre
   ajoutée, exclue de la cible, zéro modification métier ou clôture existante.
-- Bilan [VALIDATION-LOT54.md](VALIDATION-LOT54.md).
+- Publié sur `main`, installé après sauvegarde ; collecte réelle réussie, source
+  à jour dans le dashboard, scanner et Telegram actifs. CI Python 3.11–3.14
+  et Docker réussie : 3 073 tests Linux, couverture 96 %.
+  Bilan [VALIDATION-LOT54.md](VALIDATION-LOT54.md).
 
 ## Les cinq améliorations prioritaires après le lot 54
 
