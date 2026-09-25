@@ -47,4 +47,24 @@ Les messages déjà reçus ne sont ni supprimés ni réécrits.
 Suite complète Windows initiale : **3 048 tests réussis, quatre ignorés**. Après
 les garde-fous sur le seuil zéro et les variantes de titre : 160 tests ciblés
 réussis, puis 38 tests Associate sur la version finale. Ruff, formatage et mypy
-vérifiés. Les résultats de livraison sont ajoutés après validation effective.
+vérifiés.
+
+## Livraison du 25 septembre 2026
+
+Le commit `e388d8954f2fea711a6e2e6271f3bbe7728ec1d3` est publié sur `main`.
+Installation après sauvegarde vérifiée à 22:53 Paris, puis recalcul transactionnel
+sur l'instance active : mêmes 52 fiches, 20 scores changés et 15 anciennes priorités.
+Les huit tables protégées sont identiques ; répétition sans effet.
+
+Le dashboard et l'API des candidatures répondent HTTP 200. HSBC affiche 0/100 et
+le motif Associate ; 13 titres mixtes restent présents, dont des offres toujours
+prioritaires. Les 783 offres et le suivi sont conservés. Scanner, dashboard et
+Telegram sont actifs ; collectes HSBC professionnels, Nomura et Macquarie réussies
+après redémarrage. La collecte HSBC suivante est sans nouvelle modification,
+confirmant la concordance avec le recalcul hors ligne.
+
+
+La [validation GitHub du code installé](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36188416369)
+est réussie sur Python 3.11, 3.12, 3.13 et 3.14, ainsi que pour la construction
+Docker et la restauration synthétique. Rapport Python 3.12 : **3 059 tests réussis**,
+couverture **96 %**.

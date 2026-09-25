@@ -531,7 +531,10 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   du propriétaire. Les autres exclusions continuent de s'appliquer.
 - Audit restauré : 52 fiches, dont 20 scores modifiés et 15 anciennes priorités ;
   731 autres offres et les huit tables hors score préservées.
-- Bilan [VALIDATION-LOT53.md](VALIDATION-LOT53.md).
+- Publié sur `main`, installé après sauvegarde et appliqué aux 52 fiches.
+  Dashboard, suivi et reprise des collectes vérifiés. CI Python 3.11–3.14 et
+  Docker réussie ; 3 059 tests Linux, couverture 96 %.
+  Bilan [VALIDATION-LOT53.md](VALIDATION-LOT53.md).
 
 ## Les cinq améliorations prioritaires après le lot 53
 
