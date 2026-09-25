@@ -41,7 +41,7 @@ def deadline_plan(
         else "application_already_started_or_closed"
         if application.status not in ELIGIBLE_STATUSES or application.application_date is not None
         else "below_score_threshold"
-        if job.score_breakdown.total < min_score
+        if job.score_breakdown.exclusions or job.score_breakdown.total < min_score
         else "stale_observation"
         if job.last_seen.tzinfo is None
         or not timedelta(0) <= now - job.last_seen <= timedelta(hours=max_age_hours)

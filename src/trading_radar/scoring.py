@@ -1,3 +1,4 @@
+import html
 import re
 
 from trading_radar.degree_experience import degree_experience_years
@@ -45,6 +46,25 @@ ASSET_TERMS = {
     "CRYPTO": ["crypto", "digital assets"],
     "CROSS_ASSET": ["cross asset", "multi asset", "derivatives"],
 }
+
+ASSOCIATE_EXCLUSION = "Poste Associate sans ouverture explicite au niveau Analyst"
+_ANALYST_ASSOCIATE = re.compile(
+    r"\b(?:analysts?\s*(?:[/&|]|and|or)\s*associates?|"
+    r"associates?\s*(?:[/&|]|and|or)\s*analysts?)\b",
+    re.IGNORECASE,
+)
+
+
+def associate_only(job: Job) -> bool:
+    """Owner's target excludes Associate unless the title offers Analyst as well.
+
+    This is a targeting preference, not an inferred number of years or a claim
+    that Associate has the same meaning at every employer. Body text and junior
+    hints cannot override the advertised grade.
+    """
+    return any(has(job.title_normalized, grade) for grade in ("associate", "associates")) and not (
+        _ANALYST_ASSOCIATE.search(html.unescape(job.title))
+    )
 
 
 def classify(text: str, rules: dict[str, list[str]]) -> list[str]:
@@ -162,6 +182,9 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         ]
     )
     result.exclusions = [t for t in keywords["excluded_titles"] if has(title, t)]
+    excluded_associate = associate_only(job)
+    if excluded_associate:
+        result.exclusions.append(ASSOCIATE_EXCLUSION)
     contract = normalize_text(job.employment_type or "")
     if any(
         has(contract, t)
@@ -204,6 +227,8 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     job.seniority = (
         "senior"
         if job.seniority_hint == "senior" or any(has(title, t) for t in keywords["senior_titles"])
+        else "associate"
+        if excluded_associate
         else "junior"
         if junior
         else "unknown"
@@ -232,7 +257,7 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         result.trading = 18
     if "TRADING_TECH" in roles:
         result.trading = min(result.trading, 22)
-    result.junior = 20 if junior else 8 if has(title, "associate") else 5
+    result.junior = 0 if excluded_associate else 20 if junior else 5
     required = required_experience_years(job.description_text)
     if job.minimum_experience_years is not None:
         required.append(job.minimum_experience_years)

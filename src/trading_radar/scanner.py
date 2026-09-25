@@ -78,7 +78,12 @@ async def deliver(
                 update={"application_deadline": datetime.fromisoformat(plan["deadline"])}
             )
         expired = job.application_deadline and job.application_deadline < utcnow()
-        if not job.is_active or expired or job.score_breakdown.total < min_score:
+        if (
+            not job.is_active
+            or expired
+            or job.score_breakdown.exclusions
+            or job.score_breakdown.total < min_score
+        ):
             repo.set_alert(alert["id"], "suppressed")
             continue
         # Commit before network I/O. Crash recovery must not resend uncertain deliveries.
@@ -189,6 +194,7 @@ async def scan(
                             and not result.conflicts
                             and alertable
                             and not job.is_expired
+                            and not job.score_breakdown.exclusions
                             and job.score_breakdown.total >= config.settings.alert_min_score
                         ):
                             # Queue only while alerts explicitly enabled; no surprise backlog on activation.

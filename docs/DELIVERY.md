@@ -4,6 +4,11 @@ Préférence du propriétaire confirmée le 25 septembre 2026 : poursuivre la ro
 publier chaque lot validé sur `main` et installer la version sur l'instance active.
 Une PR en brouillon n'est plus la destination finale par défaut.
 
+Cible confirmée le 25 septembre 2026 : exclure des priorités et alertes les postes
+uniquement **Associate**. Conserver les intitulés explicitement ouverts aux deux
+niveaux **Analyst / Associate**, sous réserve des autres critères habituels.
+Cette préférence de ciblage n'attribue aucun nombre d'années à un grade.
+
 1. Choisir un périmètre borné dans la roadmap et vérifier l'état du dépôt distant.
 2. Développer dans la copie de travail, indépendante du scanner en exploitation.
 3. Vérifier le code, les tests pertinents et les parcours utilisateur modifiés.
