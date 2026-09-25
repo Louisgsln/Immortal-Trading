@@ -554,7 +554,9 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - Périmètre audité : DRW, IMC et HSBC professionnels, 54 offres sur 784.
 - Lecture seule, critères Analyst/Associate, scores et candidatures préservés.
   Repli explicite sur la description quand la rubrique n’est pas reconnue.
-- Bilan [VALIDATION-LOT55.md](VALIDATION-LOT55.md).
+- Publié sur `main`, installé après sauvegarde et reprise des collectes confirmée.
+  CI Python 3.11–3.14 et Docker réussie, 3 123 tests Linux, couverture 96 %.
+  Bilan [VALIDATION-LOT55.md](VALIDATION-LOT55.md).
 
 ## Les cinq améliorations prioritaires après le lot 55
 

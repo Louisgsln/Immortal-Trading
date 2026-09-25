@@ -53,4 +53,21 @@ débordement horizontal du détail. La description complète reste accessible.
 
 **3 119 tests Windows réussis, quatre ignorés** (liens symboliques indisponibles),
 dont 50 nouveaux tests ciblés. Ruff, formatage et mypy réussis.
-Publication et déploiement : résultats consignés après livraison.
+
+Le commit `87fc9035ce86c09bdeaea2f40e9b974c92457f34` est publié sur `main` et
+installé le 25 septembre 2026 à 23:28 Paris, après sauvegarde vérifiée et
+conservation du paquet précédent. Les trois services redémarrent ; les
+collectes Susquehanna, HSBC et Nomura réussissent ensuite, sans ajout ni
+modification d’offre.
+
+Le dashboard et l’API de suivi répondent HTTP 200 : 784 offres, 54 avec
+missions, 30 avec mentions de diplôme et six avec provenance Nomura.
+L’exclusion HSBC Associate et les 13 titres mixtes Analyst/Associate sont
+conservés. Société Générale reste à jour. Les fichiers installés correspondent
+au code publié ; une carte DRW prioritaire est formatée avec les missions
+sans envoi de message de test.
+
+La [validation GitHub du code installé](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36191728441)
+est réussie sur Python 3.11 à 3.14, ainsi que pour la construction Docker et
+la restauration synthétique. Rapport Python 3.13 : **3 123 tests réussis**,
+couverture **96 %**.
