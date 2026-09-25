@@ -58,4 +58,29 @@ avec lacunes est explicitement `incomplete`.
 
 **3 153 tests Windows réussis, quatre ignorés** (liens symboliques indisponibles),
 dont 34 nouveaux tests de réparation. Ruff  formatage et mypy réussis.
-Les résultats du déploiement et de GitHub sont consignés après livraison.
+
+## Livraison et contrôle réel
+
+Le code `d1c430b9bf35a10ac73fdad273ee618c966cf370` est publié sur `main` et
+installé après sauvegarde vérifiée du 25 septembre à 23:54 Paris. Les dix
+fichiers modifiés du paquet installé correspondent au code publié.
+
+La collecte réelle termine en **220,16 secondes** : **234 requêtes, 107 offres,
+deux ajouts BNP, zéro modification existante, clôture ou alerte**. BNP, Deutsche
+Bank et Citi sont toutes trois à jour. Contrairement à la répétition antérieure,
+Workday ne renvoie plus les deux lignes incomplètes ; les recherches publiques
+par référence effectuées après la collecte renvoient chacune zéro résultat.
+Cette disparition ne constitue pas une preuve de clôture et ne ferme aucune
+ancienne annonce. Le traitement des lacunes reste prêt si ce format réapparaît.
+
+Dashboard et API de suivi répondent HTTP 200 ; 786 offres, les 54 extraits de
+missions et l'exclusion HSBC Associate sont conservés. Les trois services sont
+actifs et les collectes ordinaires ont repris avec succès après la vérification.
+Nomura campus demeure explicitement bloqué par CAPTCHA. Au contrôle global,
+22 sources sont à jour : un incident UBS professionnels distinct
+(`UBS pagination repeated a posting`, observé à 23:52 avant installation)
+reste en reprise automatique, en plus de Nomura campus. Il n'est pas masqué.
+
+La [validation GitHub](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36194102648)
+est réussie sur Python 3.11 à 3.14, ainsi que pour Docker et la restauration
+synthétique. Rapport Python 3.12 : **3 157 tests réussis, couverture 96 %**.

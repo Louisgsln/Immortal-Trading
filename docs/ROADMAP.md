@@ -567,7 +567,13 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - Statuts explicites dans Telegram et le dashboard. Nomura campus reste bloqué
   par CAPTCHA ; les 24 sources restent surveillées.
 - Répétition sur sauvegarde : deux stages BNP ajoutés, aucun score existant,
-  candidature ou historique altéré. Bilan [VALIDATION-LOT56.md](VALIDATION-LOT56.md).
+  candidature ou historique altéré. Publication sur `main`, installation après
+  sauvegarde et collecte réelle réussie des trois sources : 107 offres.
+- Les lignes Workday incomplètes ont disparu lors du contrôle réel ; BNP, DB et
+  Citi sont à jour. Nomura campus reste bloqué. Incident UBS professionnels de
+  pagination observé avant livraison : conserver la reprise et les contrôles.
+- CI Python 3.11–3.14 et Docker réussie, 3 157 tests Linux, couverture 96 %.
+  Bilan [VALIDATION-LOT56.md](VALIDATION-LOT56.md).
 
 ## Les cinq améliorations prioritaires après le lot 56
 
