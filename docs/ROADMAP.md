@@ -511,12 +511,20 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   Dashboard, suivi Telegram et services Windows opérationnels.
 - CI Python 3.11–3.14 et Docker réussie, 2 985 tests Linux et couverture 96 %.
 
-## Les cinq améliorations prioritaires après le lot 48
+## Lot 52 — Diplômes visibles dans le dashboard
+
+- Filtre par diplôme mentionné et extraits employeur dans le détail des offres.
+- Périmètre audité DRW et IMC : 30 offres sur la copie de 773 offres, avec
+  alternatives, préférences et conditions de fin d'études conservées.
+- Lecture seule, sans modification des scores, candidatures ou alertes.
+- Bilan [VALIDATION-LOT52.md](VALIDATION-LOT52.md).
+
+## Les cinq améliorations prioritaires après le lot 52
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée, les incidents BNP/DB/UBS du premier lancement et la copie distante des sauvegardes. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman. Le lot 51 couvre les libellés Nomura `Position Specifications → Experience` : six preuves sur les 16 offres actuelles, valeurs et scores inchangés. Le minimum hors tableau de l'offre Equity Sales Trader reste numérique sans provenance inventée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
 3. **Explorer les lacunes Workday** : catégories supplémentaires, portails early careers et confirmations explicites de clôture. Le cache mesuré au lot 23 reste désactivé faute de bénéfice ; conserver les budgets et les conclusions du lot 15 avant d'ajouter des requêtes.
-4. **Poursuivre l'audit des sources** : continuer les actualisations bornées avec aperçu d’impact sur les quinze sources restantes. Le lot 42 a rafraîchi IMC, DRW, Flow, Jump et XTX ; le lot 43 ajoute les quatre banques Workday. Les cinq absentes Greenhouse et 29 absentes Workday n’ont pas été clôturées ni artificiellement rafraîchies. Examiner séparément les nouveaux cas DRW `Quant Researcher` et `Junior Trader` présent dans la description, ainsi que l’affichage des prérequis de diplôme. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
+4. **Poursuivre l'audit des sources** : continuer les actualisations bornées avec aperçu d’impact sur les quinze sources restantes. Le lot 42 a rafraîchi IMC, DRW, Flow, Jump et XTX ; le lot 43 ajoute les quatre banques Workday. Les cinq absentes Greenhouse et 29 absentes Workday n’ont pas été clôturées ni artificiellement rafraîchies. Examiner séparément les nouveaux cas DRW `Quant Researcher` et `Junior Trader` présent dans la description. Le lot 52 affiche les mentions de diplôme DRW et IMC avec leurs extraits ; étendre la couverture après audit des rubriques des autres employeurs. Le lot 30 a terminé quatre recherches Citi filtrées sans nouveau chemin retenu ; les autres catégories et la recherche `structuring` restent hors de cette mesure. Reprendre JPMorgan lorsque son accès public devient disponible. Aucune exhaustivité globale n'est revendiquée.
 5. **Préparer l'exploitation régulière** : tests prolongés et copie distante vérifiée. Le lot 28 fournit un plan de conservation sans suppression ; son application éventuelle reste à concevoir. Le dashboard dispose de statistiques historiques et d'un suivi éditable localement ; une exploitation sur plusieurs postes demanderait un mode d'accès adapté.
 
 ## Phase 2 — Employeurs

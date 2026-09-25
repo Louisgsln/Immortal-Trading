@@ -355,6 +355,10 @@
     session.editButton.hidden = true; session.message.before(form); form.querySelector("select").focus();
     form.scrollIntoView({block: "nearest"});
   }
+  const educationLabels = {bachelor: "Bachelor / Licence", master: "Master", doctorate: "Doctorat", unspecified_level: "Diplôme sans niveau précis"};
+  function educationLevels(job) {
+    return ((job.education || {}).levels || []).filter((level) => Object.hasOwn(educationLabels, level));
+  }
   function showDetail(job) {
     const content = $("job-detail"); content.replaceChildren();
     const title = make("h2", job.title); title.id = "detail-title";
@@ -382,6 +386,15 @@
     });
     experienceSection.append(make("p", "La détection d’un minimum dans l’annonce ne garantit pas votre éligibilité. Un minimum non reconnu ne signifie ni zéro année d’expérience ni l’absence d’exigence. Vérifiez les qualifications et les alternatives dans la description officielle."));
     content.append(experienceSection);
+    const educationSection = detailSection("Diplômes mentionnés");
+    const educationEvidence = ((job.education || {}).evidence || []);
+    if (!educationEvidence.length) educationSection.append(make("p", "Aucune mention reconnue dans les critères pris en charge (DRW et IMC)."));
+    educationEvidence.forEach((item) => {
+      educationSection.append(make("p", "Critères de l’annonce · " + item.heading, "detail-company"),
+        make("blockquote", item.excerpt, "description experience-excerpt"));
+    });
+    educationSection.append(make("p", "Ces mentions ne définissent pas un diplôme minimum. L’extrait conserve les alternatives, préférences et conditions de fin d’études. Vérifiez l’annonce officielle pour apprécier votre éligibilité."));
+    content.append(educationSection);
     const timing = detailSection("Repères"); const grid = make("dl", null, "detail-grid");
     const deadline = job.deadline || {};
     const timingValues = [
@@ -416,11 +429,13 @@
     const company = $("company").value; const score = Number($("score").value);
     const active = $("active").value; const application = $("application-status").value;
     const experienceCategory = $("experience").value;
+    const education = $("education").value;
     let results = jobs.filter((job) =>
       (!query || searchText.get(job.id).includes(query)) && (!company || job.company === company) &&
       job.score >= score && (active === "all" || Boolean(job.is_active) === (active === "active")) &&
       (!application || (job.application || {}).status === application) &&
       (!experienceCategory || experience(job).category === experienceCategory) &&
+      (!education || (education === "unrecognized" ? !educationLevels(job).length : educationLevels(job).includes(education))) &&
       (state.view !== "applications" || (job.application || {}).status !== "New")
     );
     const sorting = $("sort").value;
@@ -439,6 +454,8 @@
       experienceEvidence(job).filter((item) => item.kind === "industry_or_academia").forEach((item) => {
         jobCell.append(make("span", evidenceLabel(item), "experience-indicator experience-practice"));
       });
+      const degrees = educationLevels(job);
+      if (degrees.length) jobCell.append(make("span", "Diplômes cités · " + degrees.map((level) => educationLabels[level]).join(" · "), "experience-indicator"));
       const scoreCell = make("td"); scoreCell.append(scorePill(job.score));
       const statusCell = make("td"); statusCell.append(make("span", statusLabel((job.application || {}).status), "badge"));
       const detailCell = make("td"); const detailButton = make("button", "↗", "arrow-button"); detailButton.type = "button"; detailButton.setAttribute("aria-label", "Détail : " + job.title + " chez " + job.company); detailButton.addEventListener("click", () => showDetail(job)); detailCell.append(detailButton);
@@ -560,7 +577,7 @@
   document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
   $("filters").addEventListener("submit", (event) => event.preventDefault());
   $("trend-days").addEventListener("change", renderTrends);
-  ["search", "company", "score", "active", "application-status", "experience", "sort"].forEach((id) => $(id).addEventListener(id === "search" ? "input" : "change", () => { state.page = 1; renderJobs(); }));
+  ["search", "company", "score", "active", "application-status", "experience", "education", "sort"].forEach((id) => $(id).addEventListener(id === "search" ? "input" : "change", () => { state.page = 1; renderJobs(); }));
   $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (state.view === "applications") $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); });
   $("previous").addEventListener("click", () => { state.page -= 1; renderJobs(); });
   $("next").addEventListener("click", () => { state.page += 1; renderJobs(); });

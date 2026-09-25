@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from trading_radar.applications import Application, ApplicationStatus
 from trading_radar.config import Config
 from trading_radar.deadlines import resolve_deadline
+from trading_radar.education import education_mentions
 from trading_radar.experience import experience_requirement
 from trading_radar.health import check_health
 from trading_radar.models import Job, utcnow
@@ -116,6 +117,7 @@ def _job(row: sqlite3.Row) -> dict:
         "priority": job.score_breakdown.priority,
         "score_breakdown": job.score_breakdown.model_dump(mode="json"),
         "experience": experience_requirement(job),
+        "education": education_mentions(job),
         "is_active": job.is_active,
         "is_expired": job.is_expired,
         "first_seen": job.first_seen.isoformat(),
