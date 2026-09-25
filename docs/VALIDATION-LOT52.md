@@ -48,7 +48,9 @@ des alertes ou des dates de collecte. Aucun nouvel appel aux sources employeur.
 
 - Suite complète Windows : **3 014 tests réussis, quatre ignorés** (liens
   symboliques indisponibles). Ruff, formatage, mypy et construction du paquet
-  installable réussis.
+  installable réussis. Après durcissement des abréviations BS/MS pour exclure
+  MS Office, MS SQL et MS Excel : 54 tests ciblés réussis et 30 observations
+  auditées identiques.
 
 - Tests des variantes HTML échappées, alternatives, préférences, négations,
   diplôme sans niveau, frontières de rubriques, contenu masqué, doublons,
@@ -59,5 +61,34 @@ des alertes ou des dates de collecte. Aucun nouvel appel aux sources employeur.
 - Mise en page vérifiée sur ordinateur et largeur 390 px : filtre utilisable,
   détail lisible et absence de débordement du formulaire.
 
-La publication, les contrôles GitHub et le déploiement sont consignés après leur
-vérification effective.
+## Livraison du 25 septembre 2026
+
+Le lot est publié sur `main` (`f9ea329`, puis durcissement `c2e02ae`). Installation
+Windows après sauvegarde vérifiée et conservation du paquet précédent. Les trois
+services sont repartis ; le correctif limité à l'affichage redémarre ensuite le
+seul dashboard, pendant que scanner et Telegram continuent de fonctionner.
+
+Premier contrôle installé : HTTP 200 pour le dashboard et le suivi des candidatures,
+782 offres présentes et 30 avec diplômes reconnus (20 DRW, 10 IMC). Les six preuves
+Nomura restent visibles. Scanner actif, collectes réelles HSBC, Macquarie et Crédit
+Agricole réussies après reprise à partir de 22:34 Paris.
+
+La différence de volume avec la copie de 773 offres vient des collectes intervenues
+entre les deux instantanés. L'observation des diplômes ne crée aucune offre.
+
+Les fichiers installés concordent avec les sources validées. Le contrôle HTTP
+après le correctif confirme à nouveau les 30 mentions, le suivi et les six preuves
+Nomura. Aucun redémarrage supplémentaire du scanner ou de Telegram n'a été requis.
+
+La [validation GitHub du code final](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36186870819)
+est réussie sur Python 3.11 à 3.14 : **3 021 tests réussis**, couverture **96 %**.
+La construction Docker et la restauration synthétique sont également réussies.
+
+## Prochain point à traiter
+
+L'exploitation révèle avant ce déploiement une erreur Société Générale
+`SG visible reference mismatch` à 22:32 Paris. Auditer le détail renvoyé et sa
+référence avant de modifier le collecteur ; ne pas supprimer le contrôle d'identité
+ni clôturer des offres sur un échec. Nomura campus dépend toujours du retour d'un
+accès public sans challenge. L'extension des diplômes aux autres employeurs demande
+un audit séparé des rubriques.

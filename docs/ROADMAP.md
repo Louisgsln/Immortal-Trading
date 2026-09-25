@@ -517,7 +517,11 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - Périmètre audité DRW et IMC : 30 offres sur la copie de 773 offres, avec
   alternatives, préférences et conditions de fin d'études conservées.
 - Lecture seule, sans modification des scores, candidatures ou alertes.
-- Bilan [VALIDATION-LOT52.md](VALIDATION-LOT52.md).
+- Publié sur `main` et installé après sauvegarde ; scanner, dashboard et Telegram
+  actifs. CI Python 3.11–3.14 et Docker réussie, 3 021 tests Linux, couverture 96 %.
+  Bilan [VALIDATION-LOT52.md](VALIDATION-LOT52.md).
+- Prochain audit d’exploitation : erreur Société Générale `SG visible reference
+  mismatch` observée avant livraison ; conserver les contrôles d’identité.
 
 ## Les cinq améliorations prioritaires après le lot 52
 
