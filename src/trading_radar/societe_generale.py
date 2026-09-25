@@ -114,11 +114,13 @@ def parse_detail(text: str, listing: dict, config: Company, source: str) -> RawJ
         or any(not n.text(without_headings=True).strip() for n in sections)
     ):
         raise SourceUnavailable("SG responsibilities or requirements missing")
-    # Capture only explicit header labels; unrelated dates in prose are not metadata.
+    # Capture explicit label/value pairs in both audited header layouts: the
+    # original div rows and the span rows introduced in September 2026. Keep
+    # direct text values and reject duplicate labels across either layout.
     labels = {}
     wanted = {"reference", "date de debut", "start date", "date de publication", "publication date"}
     for node in nodes:
-        if node.tag != "div":
+        if node.tag not in {"div", "span"}:
             continue
         spans = [n for n in node.children if isinstance(n, Element) and n.tag == "span"]
         if len(spans) == 1:

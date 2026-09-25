@@ -135,6 +135,61 @@ def test_immediate_start_does_not_become_deadline():
     assert job.expected_start_date == "Immediately" and job.application_deadline is None
 
 
+def span_header(body):
+    # Audited public layout: each header value now lives in a span whose only
+    # child element is the bold label; the value remains a direct text node.
+    return body.replace("<div><span>", '<span class="font-title"><span class="font-bold">').replace(
+        "</div>", "</span>"
+    )
+
+
+@pytest.mark.parametrize("lang", ["fr", "en"])
+@pytest.mark.parametrize("start", [None, "Immediately"])
+def test_span_header_matches_original_metadata_without_guessing(lang, start):
+    body = detail(lang=lang, start=start)
+    old = parse_detail(body, row(lang=lang), config(), "sg")
+    new = parse_detail(span_header(body), row(lang=lang), config(), "sg")
+    assert new.model_dump() == old.model_dump()
+    assert new.application_deadline is None
+
+
+@pytest.mark.parametrize(
+    "change,match",
+    [
+        (
+            lambda s: s.replace("Reference</span> 26000ABC", "Reference</span> 26000XYZ"),
+            "reference",
+        ),
+        (lambda s: s.replace("Reference</span> 26000ABC", "Reference</span>"), "metadata"),
+        (
+            lambda s: s.replace("Reference</span> 26000ABC", "Reference</span><b>26000ABC</b>"),
+            "metadata",
+        ),
+        (
+            lambda s: s.replace("Reference</span> 26000ABC", "Reference</span> 26000ABC other"),
+            "reference",
+        ),
+        (lambda s: s + "<div><span>Reference</span>26000ABC</div>", "ambiguous"),
+        (lambda s: s + "<span><span>Reference</span>26000XYZ</span>", "ambiguous"),
+        (
+            lambda s: s.replace(
+                "Publication date</span> 2026/09/07", "Publication date</span> 2026/09/08"
+            ),
+            "disagree",
+        ),
+        (
+            lambda s: s.replace("Start date</span> 2026/11/30", "Start date</span> 2026/99/99"),
+            "invalid SG date",
+        ),
+        (lambda s: s.replace('"value": "26000ABC"', '"value": "26000XYZ"'), "identifier"),
+        (lambda s: s.replace('rel="canonical"', 'rel="other"'), "canonical"),
+    ],
+)
+def test_span_layout_preserves_identity_and_date_checks(change, match):
+    with pytest.raises(SourceUnavailable, match=match):
+        parse_detail(change(span_header(detail())), row(), config(), "sg")
+
+
 @pytest.mark.parametrize(
     "body,match",
     [
