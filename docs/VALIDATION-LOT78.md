@@ -17,4 +17,20 @@ les changements saisonniers et l'indépendance vis-à-vis du fuseau du navigateu
 
 Les délais d'envoi, la déduplication et la mémoire Telegram sont conservés.
 Aucun message de test n'est envoyé ; les anciens messages ne sont pas réécrits.
-Installation et contrôles actifs consignés après livraison.
+
+Publié sur `main` : `61352a1475ea8e519faeea62df80c1638e6bf009`. Installation le
+26/09/2026 · 21:57, après sauvegarde vérifiée
+`scheduled-20260926T195737250151Z.zip`. Les 92 fichiers du paquet installé sont vérifiés.
+
+Contrôle à 21:58 : scanner actif, six sources déjà recollectées depuis
+l'installation, dashboard et API de suivi disponibles. Les 973 offres,
+175 priorités, candidatures, historiques et alertes sont préservés. L'état
+Telegram conserve le dernier avis automatique de 21:11 : aucun rejeu.
+
+Vérification dans le navigateur : l'en-tête affiche `26 sept. 2026, 21:59`.
+Le rendu local du message d'incident affiche
+`Reprise possible dès 26/09/2026 · 22:04`, sans suffixe de fuseau.
+Recharger les onglets déjà ouverts pour bénéficier de ce format.
+
+Les suites Python 3.11–3.14, les onze tests JavaScript et la construction/restauration
+isolée du conteneur ont tous réussi en [CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36267830641).
