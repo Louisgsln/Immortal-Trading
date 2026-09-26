@@ -82,7 +82,8 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
   et six cas de ciblage quantitatif audités ; installé et vérifié sur deux
   collectes, voir [validation](VALIDATION-LOT75.md).
 - Lot 76 : reprise bornée d'une pagination HSBC professionnels changeante,
-  après l'incident observé ; voir [validation](VALIDATION-LOT76.md).
+  après l'incident observé ; installé, HSBC repris et 40 sources à jour au
+  contrôle de 20:49 Paris ; voir [validation](VALIDATION-LOT76.md).
 
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.

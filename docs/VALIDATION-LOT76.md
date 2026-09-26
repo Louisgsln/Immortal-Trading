@@ -35,4 +35,33 @@ dans la base active pendant cette vérification. Cette lecture stable valide
 la compatibilité du portail ; la récupération d'une instabilité est vérifiée
 par les tests contrôlés et n'est pas artificiellement provoquée sur le site.
 
-Suite complète Windows : **3 919 tests réussis, quatre ignorés**. Mypy, Ruff et formatage réussis. Observation après installation à compléter.
+Suite complète Windows : **3 919 tests réussis, quatre ignorés**. Mypy, Ruff et
+formatage réussis.
+
+## Installation et reprise
+
+Publié sur `main` : `5827fff2de89ac88b015f23e2198460d21030c61`, installé le
+26 septembre 2026 à 20:47:42 Paris après la sauvegarde vérifiée
+`scheduled-20260926T184734322448Z.zip`. Les 90 fichiers applicatifs et ressources
+installés correspondent au paquet construit. Scanner, Telegram et dashboard actifs.
+
+HSBC professionnels réussit à 20:48:23 : trois offres, aucun ajout ni changement.
+Au contrôle de 20:49:05, **40 sources sur 40 sont à jour** et la supervision du
+processus est saine. Nomura campus et Macquarie ont également repris. Ces succès
+ne garantissent pas la disponibilité permanente des portails ; le CAPTCHA Nomura
+peut réapparaître et les contrôles restent en place.
+
+Dashboard et API de suivi répondent. Les 973 offres, leurs scores, candidatures,
+historiques et alertes sont préservés. Le total reste de 282 pertinentes et 175
+prioritaires, avec 295 fiches de missions, 329 mentions de diplôme et 523 dates
+de publication connues. Aucun message Telegram de test ni rejeu d'alerte.
+
+Observation prolongée à 20:50:26 : UBS professionnels répète un identifiant entre
+pages, après une reprise complète à 20:50:16. La seconde incohérence reste un
+échec explicite ; aucune ligne partielle n'est importée. L'état passe à
+**39 sources à jour sur 40**, avec une nouvelle tentative UBS après dix minutes.
+Cette variation confirme la nécessité d'afficher l'heure du contrôle et de
+conserver les validations de pagination.
+
+Python 3.11–3.14, dashboard Node et construction/restauration isolée du conteneur
+ont réussi en [CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36263771213).
