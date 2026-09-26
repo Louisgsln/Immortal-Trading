@@ -42,10 +42,31 @@ alerte n'est réémise et les messages déjà reçus restent inchangés.
   Software Engineer avec missions et alternative Bachelor/Master, score 51
   conservé. Aucun message d'erreur JavaScript observé.
 - Suite complète Windows : 3 217 tests réussis, quatre ignorés. Ruff et
-  vérification des types réussis. CI et livraison à consigner.
+  vérification des types réussis.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36231945448)
+  réussie sur Python 3.11–3.14 et Docker : 3 221 tests Linux, couverture 96 %,
+  construction et exercice de restauration du conteneur réussis.
+
+## Installation
+
+- Code `840c27f` publié sur `main`, paquet isolé installé après sauvegarde
+  vérifiée le 26 septembre 2026 à 11:10 Paris ; version précédente conservée.
+- Les quatre fichiers applicatifs installés correspondent au code publié.
+- Dashboard et lecture du suivi répondent correctement : 787 offres, 66 avec
+  missions, 45 avec diplômes et six preuves d'expérience Nomura.
+- Exclusion de l'offre HSBC Associate seul et conservation des titres mixtes
+  vérifiées. Les trois services Windows sont redémarrés ; collectes SIG, HSBC
+  et Nomura professionnels réussies après installation.
 
 ## Suite du carnet
 
 Poursuivre l'audit des autres rubriques employeur et des rôles hybrides, sans
 assimiler une amélioration de présentation à une validation du ciblage métier.
 La copie distante de sauvegarde reste conditionnée au choix d'une destination.
+
+Un contrôle du dashboard pendant une collecte a affiché `invalid_timestamp`
+pour Nomura professionnels alors que la collecte venait de réussir. La lecture
+des offres précède le contrôle de santé, lequel reçoit l'heure de début de
+génération : auditer cette concurrence de lecture dans un prochain lot.
+Nomura campus, précédemment soumis au CAPTCHA, a une collecte réussie le
+26 septembre à 11:01 avec 12 offres ; son accès public peut rester intermittent.
