@@ -51,7 +51,22 @@ de cette extension.
 
 ## Livraison
 
-Publication, installation et contrôles GitHub à consigner après livraison.
+- Code `80d4a1e` publié sur `main` et installé le 26 septembre 2026 à 17:31:53
+  Paris, après sauvegarde vérifiée à 17:31:48 ; paquet précédent conservé.
+- Les trois fichiers applicatifs installés correspondent au code publié.
+- La collecte automatique Crédit Agricole CIB réussit à 17:32:46 : 21 offres,
+  zéro nouvelle offre ou mise à jour de contenu. Les critères apparaissent dans
+  le dashboard sans import manuel ni réémission d'alerte.
+- Dashboard et API de suivi disponibles : 187 mentions d'études, 168 missions,
+  342 dates de publication ; les 21 annonces CA conservent une publication inconnue.
+- Les quatre filtres et leurs extraits sont vérifiés sur l'instance active,
+  sans erreur JavaScript. Scanner, dashboard et Telegram actifs.
+- À 17:35:33, 22 sources à jour, deux en échec récent : Nomura campus (CAPTCHA)
+  et Optiver (page répétée). Ces erreurs précèdent le déploiement ; aucune
+  restriction ou vérification de pagination n'est contournée.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36252233371)
+  réussie : Python 3.11–3.14, 3 597 tests Linux, couverture 96 % ; dix tests
+  JavaScript sous Node 22, construction et restauration Docker réussis.
 
 ## Suite du carnet
 

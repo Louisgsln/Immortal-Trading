@@ -737,7 +737,13 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   alternative Master/Doctorat ; total de 187 fiches avec critères d'études.
 - Deux scans sur sauvegarde restaurée : aucun ajout, mise à jour, clôture ou
   alerte artificielle. Scores, candidatures, historiques et dates conservés.
-- Parcours navigateur sur copie vérifiés ; validation complète et livraison en cours.
+- Publié sur `main` et installé après sauvegarde le 26 septembre à 17:31 Paris.
+  Collecte CA réussie à 17:32:46, filtres et détails vérifiés sur l'instance active.
+- 3 593 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 réussie :
+  3 597 tests Linux, couverture 96 %. Dix tests JavaScript et Docker réussis.
+  Scanner, dashboard et Telegram actifs.
+- À 17:35:33 : 22 sources à jour, Nomura campus et Optiver en échec récent
+  respectivement pour CAPTCHA et page répétée, avant le déploiement.
   [Bilan du lot 69](VALIDATION-LOT69.md).
 
 ## Les cinq améliorations prioritaires après le lot 69
