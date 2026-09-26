@@ -46,12 +46,25 @@ aucune observation des sources précédemment couvertes ne change.
   (deux offres), détail Alternative Capital Solutions Analyst/Associate (70/100).
   Missions, rubriques et preuves visibles ; aucune erreur JavaScript.
 - Suite complète Windows : 3 403 tests réussis, quatre ignorés. Ruff, formatage
-  et vérification des types réussis. Validation GitHub à consigner après confirmation.
+  et vérification des types réussis.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36239807345)
+  réussie sur Python 3.11–3.14 : 3 407 tests Linux, couverture 96 %. Dix tests
+  JavaScript sous Node 22 réussis ; construction et restauration Docker réussies.
 
 ## Livraison
 
-Publication sur `main` et installation après sauvegarde prévues après les contrôles
-locaux ; bilan des services à compléter après vérification de l'instance active.
+- Code `062a687` publié sur `main` et installé le 26 septembre 2026 à 13:46:10 Paris,
+  après sauvegarde vérifiée à 13:46:04 ; paquet précédent conservé.
+- Les deux fichiers applicatifs installés correspondent au paquet publié.
+- Dashboard et API de suivi disponibles : 141 missions, 108 diplômes, 342 dates de
+  publication. Ancienne couverture Citi conservée (15 missions et 20 diplômes),
+  ainsi que le ciblage des titres Associate seuls et Analyst/Associate.
+- Les deux parcours de filtre et de détail ont aussi été vérifiés sur l'instance
+  active, sans erreur JavaScript. Scanner, dashboard et Telegram actifs.
+- Collectes Jump, XTX, DRW, HSBC et Nomura professionnels réussies après installation.
+  UBS professionnels, en échec de pagination depuis 13:35 avant la livraison, a
+  repris à 13:47:52 avec 33 offres, sans assouplissement des contrôles.
+  Les 24 sources sont à jour au contrôle de 13:48:53 ; historique disponible.
 
 ## Suite du carnet
 
