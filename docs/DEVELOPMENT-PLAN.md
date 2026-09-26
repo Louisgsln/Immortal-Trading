@@ -84,6 +84,8 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
 - Lot 76 : reprise bornée d'une pagination HSBC professionnels changeante,
   après l'incident observé ; installé, HSBC repris et 40 sources à jour au
   contrôle de 20:49 Paris ; voir [validation](VALIDATION-LOT76.md).
+- Lot 77 : affichages en heure de Paris et avis Telegram épurés à la demande du
+  propriétaire ; installé et vérifié, voir [validation](VALIDATION-LOT77.md).
 
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.
@@ -104,6 +106,3 @@ vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le C
 Ces points restent à réaliser ; les lots livrés ne clôturent pas la
 feuille de route entière. L'ajout d'un employeur signifie une collecte testée,
 pas une garantie d'offres éligibles ni de disponibilité permanente du portail.
-
-- Lot 77 : affichages en heure de Paris et avis Telegram épurés à la demande du
-  propriétaire ; voir [validation](VALIDATION-LOT77.md).

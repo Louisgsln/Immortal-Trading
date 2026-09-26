@@ -41,5 +41,25 @@ L'aperçu n'a effectué aucune écriture de suivi ni aucun appel Telegram.
 
 ## Livraison
 
-Publication sur `main`, installation après sauvegarde et vérifications actives
-consignées à la fin de ce document une fois terminées.
+Publié sur `main` : `8311a067051574c3c2d74fcc7e131e53760db9ac`. Installé le 26 septembre 2026
+à 21:41 Paris (UTC+2), après sauvegarde vérifiée
+`scheduled-20260926T194152213358Z.zip`. Les 92 fichiers applicatifs et ressources
+installés correspondent au paquet construit. Scanner, dashboard et Telegram relancés.
+
+Contrôle à 21:43 Paris (UTC+2) : collecteur actif, cinq sources ont déjà réussi
+après installation. Dashboard et API de suivi répondent ; 973 offres et
+175 priorités. Scores, candidatures, historique et alertes identiques à la
+sauvegarde prise juste avant installation. Le curseur Telegram est conservé,
+le dernier avis automatique reste celui de 21:11 Paris ; aucun renvoi au redémarrage.
+
+39 sources sur 40 sont à jour à ce contrôle. Nomura campus reste limité par
+un CAPTCHA ; sa reprise possible est affichée à 22:04 Paris (UTC+2). Ce lot
+modifie la présentation des incidents et ne contourne pas la restriction.
+
+L'en-tête et les horaires du dashboard ont été vérifiés dans le navigateur,
+ainsi que les libellés des journées de tendances. Recharger les anciens onglets
+pour charger les nouveaux formats. Les anciens exports HTML et messages
+Telegram conservent leur présentation d'origine.
+
+Python 3.11–3.14, les onze tests JavaScript et la construction/restauration
+isolée du conteneur ont tous réussi en [CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36266935412).
