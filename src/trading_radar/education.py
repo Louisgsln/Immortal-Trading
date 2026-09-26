@@ -15,6 +15,7 @@ from trading_radar.models import Job
 from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
+    "optiver": {"who you are", "what you'll need", "preferred", "desirable"},
     "flow_traders": {"what you need to succeed", "what you will need to succeed"},
     "jane_street": {"about you"},
     **QUALIFICATIONS,

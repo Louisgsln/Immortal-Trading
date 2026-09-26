@@ -292,3 +292,38 @@ def test_events_and_talent_pools_are_not_prioritized(title):
     job = score_job(normalize(raw), load_config().keywords)
     assert job.score_breakdown.total == 0
     assert job.score_breakdown.exclusions
+
+
+def test_detail_preserves_paragraphs_lists_and_drops_page_code():
+    content = (
+        "<p><strong>What you’ll do</strong></p><ul><li>Price options "
+        "<em>within limits</em>.<ul><li>Only after approval.</li></ul></li></ul>"
+        "<p><strong>Who you are</strong></p><ul><li>Master’s degree preferred "
+        "or equivalent experience.</li></ul><script>unrelated script</script>"
+        '<a href="javascript:alert(1)" onclick="alert(1)">Public description text</a>'
+    )
+    text = detail().replace("<p>Trade options and ETFs. Python required.</p>", content)
+    raw = parse_detail(text, parsed(), config(), "optiver")
+    assert "<ul><li>" in raw.description and "<strong>" in raw.description
+    assert "Only after approval." in raw.description
+    assert "Public description text" in raw.description
+    assert all(
+        term not in raw.description
+        for term in (
+            "<script",
+            "unrelated script",
+            "onclick",
+            "javascript:",
+            "href=",
+            "Unrelated graduate",
+        )
+    )
+    assert raw.external_id == "1" and raw.seniority_hint == "junior"
+
+
+def test_hidden_only_description_fails_collection():
+    text = detail().replace(
+        "<p>Trade options and ETFs. Python required.</p>", "<p hidden>Hidden description.</p>"
+    )
+    with pytest.raises(SourceUnavailable, match="visible description"):
+        parse_detail(text, parsed(), config(), "optiver")

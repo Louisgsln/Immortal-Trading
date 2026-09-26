@@ -11,6 +11,7 @@ from trading_radar.description_sections import (
 from trading_radar.finance_sections import RESPONSIBILITIES
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
+from trading_radar.optiver_sections import mission_section as optiver_mission_section
 from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
@@ -114,10 +115,16 @@ def mission_excerpts(job: Job) -> dict | None:
         "hsbc_professionals",
         "ubs_professionals",
         "jane_street",
+        "optiver",
     }:
         return None
     root = Document(html.unescape(job.description)).root
-    if job.source == "jane_street":
+    if job.source == "optiver":
+        section = optiver_mission_section(root)
+        if section is None:
+            return None
+        heading, items = section
+    elif job.source == "jane_street":
         section = bounded_paragraphs(root, "about the position", "about you")
         if section is None:
             return None

@@ -1,7 +1,6 @@
 """Optiver's public website API and server-rendered vacancy descriptions."""
 
 import asyncio
-import html
 import json
 import re
 from urllib.parse import urlencode, urlsplit
@@ -13,6 +12,7 @@ from trading_radar.html_page import Document, Element, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
+from trading_radar.optiver_sections import description_html
 from trading_radar.search_scope import SearchOptions
 from trading_radar.snapshot_retry import SnapshotChanged, stable_listing
 
@@ -124,6 +124,9 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     descriptions = with_class(nodes, "rich-text-section")
     if len(descriptions) != 1 or not clean(descriptions[0]):
         raise SourceUnavailable("Optiver full description missing")
+    description = description_html(descriptions[0])
+    if not clean(Document(description).root):
+        raise SourceUnavailable("Optiver visible description missing")
     return RawJob(
         company=config.name,
         source=source,
@@ -133,7 +136,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         apply_url=row["url"],
         source_url=row["url"],
         location=row["location"],
-        description="<p>" + html.escape(clean(descriptions[0])) + "</p>",
+        description=description,
         employment_type="Internship" if row["experience"] == "Internship" else None,
         seniority_hint="junior" if row["experience"] in {"Graduate", "Early Careers"} else None,
         # Date-only publication metadata and dates inside prose remain evidence, not invented UTC instants.
