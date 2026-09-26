@@ -28,6 +28,10 @@ def labelled_lists(node: Element, headings: set[str]) -> Iterator[tuple[str, Ele
             if child.strip():
                 previous = ""
             continue
+        if child.tag in _HIDDEN or "hidden" in child.attrs:
+            # A hidden list is not evidence, nor a bridge to an unlabelled list.
+            previous = ""
+            continue
         text = " ".join(visible_text(child).split())
         if child.tag in {"ul", "ol"} and normalize_heading(previous) in headings:
             yield previous, child

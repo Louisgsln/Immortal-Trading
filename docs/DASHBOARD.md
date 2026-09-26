@@ -112,6 +112,15 @@ Les jours sans activité sont omis dans cette vue et explicitement inclus dans l
 de la commande `trends`. Voir les définitions et limites dans [TRENDS.md](TRENDS.md).
 
 Les compteurs utilisent toutes les lignes de l'instantané, indépendamment des filtres.
+
+Depuis le [lot 61](VALIDATION-LOT61.md), les rubriques vérifiées de Goldman Sachs
+professionnels alimentent les extraits de missions et le filtre des diplômes.
+Le détail conserve la rubrique et les formulations exactes, notamment les
+qualifications préférées et les alternatives au diplôme. Les rubriques mêlant
+missions et qualifications ne sont pas découpées arbitrairement. Les contenus
+masqués et listes sans titre reconnu ne servent pas de preuve. Le portail campus
+reste hors du périmètre de cette extension.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 61 étend les **missions et diplômes à Goldman Sachs professionnels** :
+36 fiches avec missions pour les prochaines cartes Telegram et le dashboard,
+32 avec diplômes cités dans le filtre et le détail, sur la copie auditée.
+Préférences et alternatives conservées, sans modification des scores ou candidatures.
+Voir le [bilan du lot 61](docs/VALIDATION-LOT61.md).
+
 Le lot 59 corrige les **fausses dates invalides pendant une collecte** : le
 dashboard et les archives de santé comparent les données à l'heure de leur
 observation. Les dates réellement futures restent signalées.

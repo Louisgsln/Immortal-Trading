@@ -9,8 +9,8 @@ dates connues, expérience, score visuel et extrait de la description employeur.
 Les textes employeur sont échappés et raccourcis avant formatage.
 
 Depuis le lot 55, la carte affiche **Missions · extraits** lorsqu'une rubrique
-de missions est reconnue chez DRW, IMC, HSBC professionnels ou, depuis le lot 58,
-Jump Trading : jusqu'à trois
+de missions est reconnue chez DRW, IMC, HSBC professionnels, Jump Trading ou,
+depuis le lot 61, Goldman Sachs professionnels : jusqu'à trois
 extraits dans la langue de l'annonce, limités à 240 caractères chacun avec
 une ellipse si nécessaire. Sinon, **Extrait de description** conserve le repli
 habituel. Le dashboard montre les extraits complets et la rubrique d'origine.

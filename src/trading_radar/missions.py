@@ -25,6 +25,17 @@ _HEADINGS = {
         "your core responsibilties",  # Employer spelling in two audited descriptions.
     },
     "jump_trading": {"what you'll do", "what you will do"},
+    "goldman_sachs": {
+        "responsibilities",
+        "key responsibilities",
+        "job responsibilities",
+        "role responsibilities",
+        "your responsibilities",
+        "principal responsibilities",
+        "general responsibilities",
+        "how you will fulfil your potential",
+        "what you will do",
+    },
 }
 _HSBC_SECTIONS = (
     ("purpose of the job", "environment of the job", False),
