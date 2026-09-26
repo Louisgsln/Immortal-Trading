@@ -660,8 +660,11 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - Alternatives, préférences et rubriques d'origine conservées ; aucun changement
   des scores, des candidatures ni des dates de publication. Les 11 tables restent
   identiques ; les cartes Telegram respectent leurs limites.
-- Parcours navigateur vérifié sur copie ; livraison et contrôles complets à
-  confirmer dans le [bilan du lot 63](VALIDATION-LOT63.md).
+- Publié sur `main` et installé après sauvegarde ; scanner, dashboard et Telegram
+  actifs. Parcours navigateur vérifié sur copie puis sur l'instance active.
+- 3 364 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 réussie :
+  3 368 tests Linux, couverture 96 %. Dix tests JavaScript et Docker réussis.
+  Les 24 sources sont à jour au contrôle suivant. [Bilan du lot 63](VALIDATION-LOT63.md).
 
 ## Les cinq améliorations prioritaires après le lot 63
 

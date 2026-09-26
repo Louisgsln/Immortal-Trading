@@ -44,12 +44,23 @@ d'employeurs ; le détail conserve le nom réel de la rubrique employeur.
   Présentation visuelle vérifiée, aucune erreur JavaScript.
 - Suite complète Windows : 3 364 tests réussis, quatre ignorés. Contrôles Ruff,
   formatage et types réussis ; dix tests JavaScript des dates réussis.
-  Validation GitHub à consigner après confirmation.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36239027454)
+  réussie sur Python 3.11–3.14 : 3 368 tests Linux, couverture 96 %. Dix tests
+  JavaScript sous Node 22 réussis ; construction et restauration Docker réussies.
 
 ## Livraison
 
-Publication sur `main` et installation après sauvegarde prévues après les contrôles
-locaux. Le bilan d'exploitation sera complété après vérification des services.
+- Code `1f7c80e` publié sur `main` et installé le 26 septembre 2026 à 13:30:59 Paris,
+  après sauvegarde vérifiée à 13:30:54 ; paquet précédent conservé.
+- Les quatre fichiers applicatifs installés correspondent au paquet publié.
+- Dashboard et API de suivi disponibles : 117 missions, 97 diplômes, dont 15 et 20
+  pour Citi. Les 342 dates de publication restent disponibles ; le ciblage des
+  titres Associate seuls et Analyst/Associate est conservé.
+- Navigateur sur l'instance active : filtre Citi + Master, détail FX Options
+  Trader, missions de Full Time Analyst London 2027 (90/100), sans erreur JavaScript.
+- Scanner, dashboard et Telegram redémarrés et actifs. Collectes XTX, Flow Traders,
+  IMC, DRW et SIG réussies après installation. Les 24 sources sont à jour au
+  contrôle de 13:31:30 ; historique de santé disponible.
 
 ## Suite du carnet
 
