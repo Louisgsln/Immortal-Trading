@@ -57,8 +57,20 @@ absente des cycles enregistrés. Les refus restent visibles.
 
 ## Livraison
 
-Publication, sauvegarde de déploiement, contrôles GitHub et observation active
-à consigner après installation. Les comptes de scans du watcher correspondent
+Commit `bda4451` publié sur main et installé le 26 septembre à 18:53, après
+sauvegarde vérifiée `scheduled-20260926T165309677668Z.zip`. Ancien paquet conservé.
+Les contrôles GitHub Python 3.11–3.14, dashboard et conteneur ont tous réussi
+([exécution](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36257047101)).
+Les 14 modules installés correspondent au dépôt ; dashboard et suivi répondent.
+
+Première observation : 23 sources ont réussi, plusieurs deux ou trois fois,
+sans échec observé, sans chevauchement d'une même source et avec au maximum
+quatre collectes simultanées. Les redémarrages après échéance prennent de
+0,9 à 38,9 secondes sur cette fenêtre, contre le retard collectif antérieur.
+Nomura campus attend toujours sa prochaine tentative après le CAPTCHA précédent ;
+cette observation courte ne garantit pas la disponibilité durable des portails.
+
+Les comptes de scans du watcher correspondent
 désormais à des tentatives individuelles : voir [le guide](SOURCE-RELIABILITY.md).
 
 ## Suite

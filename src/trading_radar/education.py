@@ -11,6 +11,7 @@ from collections.abc import Iterator
 from trading_radar.description_sections import labelled_lists, normalize_heading, visible_text
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
+from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
     "macquarie": set(),
@@ -195,59 +196,84 @@ def _barclays_qualification(root: Element) -> tuple[str, str] | None:
 
 
 def _ubs_qualification_items(root: Element) -> Iterator[tuple[str, str]]:
-    # The UBS collector preserves field names as top-level h2 headings. Require
-    # the audited next field, rather than scanning the unbounded page remainder.
-    headings = [
-        (index, node)
-        for index, node in enumerate(root.children)
-        if isinstance(node, Element) and node.tag == "h2"
-    ]
-    matches = [
-        i
-        for i, (_, node) in enumerate(headings)
-        if normalize_heading(visible_text(node)) == "your skills and experience"
-    ]
-    if len(matches) != 1:
-        return
-    position = matches[0]
-    if (
-        position + 1 == len(headings)
-        or normalize_heading(visible_text(headings[position + 1][1])) != "about us"
-    ):
-        return
-    start, end = headings[position][0], headings[position + 1][0]
+    lines = field_lines(root, "your skills and experience", {"about us"})
+    items = bullet_items(lines, mixed=True) if lines is not None else None
+    for item in items or []:
+        yield "Your skills and experience", item
 
-    def inline_text(node: Element | str) -> str | None:
-        if isinstance(node, str):
-            return node
-        if node.tag == "br" and "hidden" not in node.attrs:
-            return "\n"
-        if not visible_text(node).strip():
-            return ""
-        if node.tag not in {"b", "strong", "span", "i", "em", "a", "font"}:
-            return None
-        parts = [inline_text(child) for child in node.children]
-        return "".join(part for part in parts if part is not None) if None not in parts else None
 
-    parts = [inline_text(node) for node in root.children[start + 1 : end]]
-    if None in parts:
-        return
-    lines = [
-        line.strip()
-        for line in "".join(part for part in parts if part is not None).splitlines()
-        if line.strip()
-    ]
-    first = next((i for i, line in enumerate(lines) if line.startswith("•")), None)
-    if first is None or any(
-        not line.startswith("•") or not line[1:].strip() for line in lines[first:]
-    ):
-        # Mixed subheadings or wrapped lines may change a requirement's scope.
-        # Keep the full description instead of guessing where that scope ends.
-        return
-    preface = " ".join(lines[:first])
-    heading = " ".join(visible_text(headings[position][1]).split())
-    for line in lines[first:]:
-        yield heading, " ".join((preface + " " + line[1:]).split())
+def _barclays_programme(root: Element) -> tuple[str, str] | None:
+    # Tokyo splits the required criteria and the preferred criteria across
+    # adjacent paragraphs. Keep the entire required block before its next label.
+    label = "to be considered for this program, you must"
+    matches: list[tuple[str, str] | None] = []
+    children = [n for n in root.children if not isinstance(n, str) or n.strip()]
+    for previous, body in zip(children, children[1:], strict=False):
+        if not isinstance(previous, Element) or not isinstance(body, Element):
+            continue
+        if (
+            previous.tag != "p"
+            or body.tag != "p"
+            or "hidden" in body.attrs
+            or "hidden" in previous.attrs
+        ):
+            continue
+        parts = [c for c in previous.children if not isinstance(c, str) or c.strip()]
+        if not parts or not isinstance(parts[-1], Element) or parts[-1].tag not in {"b", "strong"}:
+            continue
+        if normalize_heading(visible_text(parts[-1])) != label:
+            continue
+
+        # The employer's 'I<b>deally...' spelling crosses an inline boundary.
+        def text(node: Element | str) -> str | None:
+            if isinstance(node, str):
+                return node
+            if node.tag == "br" and not node.attrs:
+                return "\n"
+            if node.tag not in {"b", "strong", "span", "i", "em"} or "hidden" in node.attrs:
+                return None
+            values = [text(c) for c in node.children]
+            return "".join(v for v in values if v is not None) if None not in values else None
+
+        values = [text(c) for c in body.children]
+        lines = [
+            line.strip()
+            for line in "".join(v for v in values if v is not None).splitlines()
+            if line.strip()
+        ]
+        valid = (
+            None not in values
+            and len(lines) >= 2
+            and normalize_heading(lines[-1]) == "ideally, you would also have"
+        )
+        if valid and all(line.startswith("•") and line[1:].strip() for line in lines[:-1]):
+            matches.append(("To be considered for this program, you must:", " ".join(lines[:-1])))
+        else:
+            matches.append(None)
+    return matches[0] if len(matches) == 1 else None
+
+
+def _bnp_education_field(root: Element) -> tuple[str, str] | None:
+    matches = []
+
+    def visible_nodes(node: Element) -> Iterator[Element]:
+        if node.tag in {"script", "style", "template", "noscript"} or "hidden" in node.attrs:
+            return
+        yield node
+        for child in node.children:
+            if isinstance(child, Element):
+                yield from visible_nodes(child)
+
+    for node in visible_nodes(root):
+        if node.tag != "p" or "hidden" in node.attrs:
+            continue
+        # Match the entire visible field, never a mention in another sentence.
+        match = re.fullmatch(
+            r"Education Level:\s+(.{1,500})", " ".join(visible_text(node).split()), re.I
+        )
+        if match:
+            matches.append(("Education Level", match[1]))
+    return matches[0] if len(matches) == 1 else None
 
 
 def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
@@ -319,6 +345,13 @@ def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
         inline_section = _barclays_qualification(document.root)
         if inline_section:
             yield inline_section
+        programme = _barclays_programme(document.root)
+        if programme:
+            yield programme
+    if job.source == "bnp_paribas":
+        bnp_field = _bnp_education_field(document.root)
+        if bnp_field:
+            yield bnp_field
     for heading, section in labelled_lists(document.root, _HEADINGS.get(job.source, set())):
         for item in section.children:
             if isinstance(item, Element) and item.tag == "li":

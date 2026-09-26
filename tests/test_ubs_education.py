@@ -110,7 +110,6 @@ def test_preface_is_retained_with_qualification_and_inline_markup(job):
         "<div>" + qualification("• Bachelor degree") + "</div>",
         qualification("Bachelor degree"),
         qualification("• Bachelor degree<br/>or equivalent professional experience"),
-        qualification("• Trading experience<br/>Preferred Skills<br/>• Master’s degree"),
         qualification("• Bachelor degree<br/>• "),
         qualification("• Bachelor degree<br/><ul><li>or equivalent experience</li></ul>"),
         qualification("• Bachelor degree<br/><div>or equivalent experience</div>"),

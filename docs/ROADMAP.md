@@ -810,3 +810,13 @@ La liste de banques et sociétés plus large du master prompt reste la cible à 
 ## Dashboard et suivi
 
 Dashboard en lecture seule livré au lot 22, statistiques historiques au lot 24, suivi interactif local au lot 25 ; rappels conditionnels livrés au lot 17. Les lots 55, 58, 61, 63, 64, 65 et 67 livrent une première lecture synthétique des missions par extraits employeur vérifiés (DRW, IMC, HSBC professionnels, Jump Trading, Goldman Sachs professionnels, Citi, Deutsche Bank, Morgan Stanley, Barclays, BNP Paribas), couvrant 168 offres sur la copie auditée. Restent l’extension à d’autres rubriques auditées, l'import du suivi et les évolutions d'exploitation. La suite privilégie désormais l'élargissement des employeurs de finance et trading. Les fonctions de candidature automatique, les recherches de contacts privés et les prédictions de calendrier restent hors périmètre.
+
+## Lot 72 — Fiches, ciblage et couverture
+
+Missions UBS et critères mixtes, diplôme Barclays Tokyo et champ BNP Education Level :
+197 fiches avec missions, 206 avec diplôme. Douze recalculs documentés, sans
+relâcher les exclusions générales. Audit structuring Barclays/DB sans gain ciblé ;
+requêtes inchangées. Voir [validation](VALIDATION-LOT72.md).
+
+Prochain lot : intégration d’un groupe important d’employeurs officiels de trading
+et de gestion quantitative, avec import initial silencieux et contrôle de chaque portail.

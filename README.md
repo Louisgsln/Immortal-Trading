@@ -1,5 +1,9 @@
 # Trading Job Radar
 
+Le lot 72 complète les **fiches UBS, BNP et Barclays** (197 offres avec missions,
+206 avec mentions de diplôme), corrige des faux négatifs de ciblage documentés
+et mesure les recherches supplémentaires. Voir le [bilan](docs/VALIDATION-LOT72.md).
+
 Le lot 71 rend les **collectes indépendantes**, isole les sessions des sources
 et ajoute une reprise bornée des paginations UBS/Optiver instables. Les éditions
 du suivi restent disponibles pendant les requêtes employeur. Voir le

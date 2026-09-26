@@ -1,5 +1,8 @@
 # Matching uses word boundaries; exclusions target job titles, not boilerplate.
 excluded_titles:
+  - hr partner
+  - hr generalist
+  - human resources
   - recruiter
   - administrative assistant
   - working student

@@ -5,6 +5,7 @@ import html
 from trading_radar.description_sections import labelled_lists, normalize_heading, visible_text
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
+from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
     "bnp_paribas": {
@@ -101,10 +102,19 @@ def mission_excerpts(job: Job) -> dict | None:
     None means unsupported or unrecognized, never an absence of responsibilities.
     Long items are not selectively dropped: retain the original description instead.
     """
-    if job.source not in _HEADINGS and job.source != "hsbc_professionals":
+    if job.source not in _HEADINGS and job.source not in {
+        "hsbc_professionals",
+        "ubs_professionals",
+    }:
         return None
     root = Document(html.unescape(job.description)).root
-    if job.source == "hsbc_professionals":
+    if job.source == "ubs_professionals":
+        lines = field_lines(root, "key responsibilities", {"your career comeback", "the team"})
+        ubs_items = bullet_items(lines) if lines is not None else None
+        if not ubs_items:
+            return None
+        heading, items = "Key responsibilities", ubs_items
+    elif job.source == "hsbc_professionals":
         section = _hsbc_section(root)
         if section is None:
             return None

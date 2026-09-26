@@ -8,6 +8,7 @@ from trading_radar.models import Job, Score
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.range_experience import plain_range_experience_years
 from trading_radar.role_evidence import role_evidence_text
+from trading_radar.targeting import drw_junior_role, research_trading_evidence
 
 ROLE_TERMS = {
     "TRADING": ["trader", "trading"],
@@ -163,25 +164,37 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     evidence_text = normalize_text(job.title + " " + evidence_description)
     result = Score()
     roles = classify(title, ROLE_TERMS)
+    verified_research = research_trading_evidence(job)
+    if verified_research:
+        roles = list(dict.fromkeys([*roles, "QUANT_RESEARCH"]))
+        result.reasons.append(
+            "Audited role duties link quantitative research to pricing and trading decisions"
+        )
     assets = classify(evidence_text, ASSET_TERMS)
     if evidence_description != job.description_text:
         result.reasons.append(
             "Asset and profile evidence excludes a verified DRW company paragraph"
         )
-    junior = job.seniority_hint == "junior" or any(
-        has(title, t)
-        for t in [
-            "graduate",
-            "new grad",
-            "analyst",
-            "junior",
-            "early careers",
-            "entry level",
-            "vie",
-            "v i e",
-        ]
+    junior = (
+        job.seniority_hint == "junior"
+        or drw_junior_role(job)
+        or any(
+            has(title, t)
+            for t in [
+                "graduate",
+                "new grad",
+                "analyst",
+                "junior",
+                "early careers",
+                "entry level",
+                "vie",
+                "v i e",
+            ]
+        )
     )
     result.exclusions = [t for t in keywords["excluded_titles"] if has(title, t)]
+    if verified_research and "research analyst" in result.exclusions:
+        result.exclusions.remove("research analyst")
     excluded_associate = associate_only(job)
     if excluded_associate:
         result.exclusions.append(ASSOCIATE_EXCLUSION)
@@ -297,17 +310,21 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
             "Conflicting intake years in title and description; verify start date"
         )
     direct = result.trading >= 25
-    fo = (tech and job.role_hint == "trading_technology") or any(
-        has(text, t)
-        for t in [
-            "front office",
-            "trading desk",
-            "market making",
-            "liquidity provision",
-            "sales and trading",
-            "electronic trading",
-            "global markets",
-        ]
+    fo = (
+        verified_research
+        or (tech and job.role_hint == "trading_technology")
+        or any(
+            has(text, t)
+            for t in [
+                "front office",
+                "trading desk",
+                "market making",
+                "liquidity provision",
+                "sales and trading",
+                "electronic trading",
+                "global markets",
+            ]
+        )
     )
     result.front_office = 15 if direct or (result.trading > 0 and fo) else 0
     result.asset = 10 if assets else 0
