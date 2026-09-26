@@ -911,3 +911,11 @@ plus de faux échec. Les changements de contenu et de catalogue restent contrôl
 Les deux collecteurs sont validés sur copie. CAPTCHA Nomura résolu avec accord
 dans le navigateur, 44 offres accessibles ; le collecteur HTTP reste bloqué dans
 sa session distincte. Voir [preuves et limites](VALIDATION-LOT82.md).
+
+## Lot 83 — Session Nomura réutilisable (préparée, activation en attente)
+
+Mode optionnel de session locale, fenêtre de validation dédiée et reprise après
+renouvellement. Le CAPTCHA reste manuel. Aucun cookie issu du navigateur personnel
+ni du navigateur intégré n'est extrait. L'accord sur Playwright et la conservation
+locale, puis une collecte réelle réussie, précèdent l'activation sur l'instance.
+Voir [validation](VALIDATION-LOT83.md) et [mode d'emploi](NOMURA-ACCESS.md).

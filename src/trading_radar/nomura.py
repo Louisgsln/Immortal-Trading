@@ -11,6 +11,7 @@ from trading_radar.config import Company
 from trading_radar.html_page import Document, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
+from trading_radar.nomura_session import load_session, session_path
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
 
@@ -162,7 +163,16 @@ class NomuraCollector:
 
     async def _collect(self) -> Collection:
         before = self.http.counts[self.source]
-        text = await self.http.get_text(SEARCH, self.config.request_interval, self.source)
+        path = session_path()
+        session = load_session(path) if path else None
+
+        async def read(url: str) -> str:
+            headers = session.headers(url) if session else None
+            return await self.http.get_text(
+                url, self.config.request_interval, self.source, headers=headers
+            )
+
+        text = await read(SEARCH)
         rows = parse_board(text, self.options.max_results_per_query)
         targets = []
         for row in rows:
@@ -175,7 +185,7 @@ class NomuraCollector:
             raise SourceUnavailable("Nomura campus detail limit exceeded")
         jobs = []
         for row in targets:
-            text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
+            text = await read(row["url"])
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
             jobs=jobs, complete=False, requests=self.http.counts[self.source] - before

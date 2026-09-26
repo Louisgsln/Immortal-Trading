@@ -5,6 +5,11 @@ import re
 
 def failure_summary(message: object) -> dict[str, str]:
     text = message.lower() if isinstance(message, str) else ""
+    if "nomura campus captcha session" in text:
+        return {
+            "code": "captcha",
+            "label": "L’accès Nomura doit être renouvelé dans le navigateur.",
+        }
     if "captcha" in text:
         return {"code": "captcha", "label": "Le site demande un CAPTCHA."}
     if "robots policy disallows" in text:

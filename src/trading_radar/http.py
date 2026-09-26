@@ -155,8 +155,10 @@ class HTTPClient:
             cache.discard(source, url)
             raise
 
-    async def get_text(self, url: str, interval: float, source: str) -> str:
-        return (await self._public_response(url, interval, source)).text
+    async def get_text(
+        self, url: str, interval: float, source: str, *, headers: dict[str, str] | None = None
+    ) -> str:
+        return (await self._public_response(url, interval, source, headers=headers)).text
 
     async def post_search_json(self, url: str, body: dict, interval: float, source: str):
         """Read-only public search endpoints that require a POST body."""

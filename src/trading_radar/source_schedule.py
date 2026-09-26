@@ -8,7 +8,9 @@ from datetime import datetime, timedelta
 from filelock import FileLock, Timeout
 
 from trading_radar.config import Company
+from trading_radar.http import SourceUnavailable
 from trading_radar.models import utcnow
+from trading_radar.nomura_session import load_session, session_path
 from trading_radar.storage import Repository
 
 
@@ -25,7 +27,19 @@ def due_at(company: Company, state: dict) -> datetime:
     # Failure backoff also applies before the first successful collection. Never
     # shorten a configured interval longer than the one-hour backoff cap.
     cooldown = cooldown_seconds(company, state.get("consecutive_failures", 0))
-    return last + timedelta(seconds=cooldown)
+    due = last + timedelta(seconds=cooldown)
+    if company.ats == "nomura" and state.get("consecutive_failures", 0) > 0:
+        # A newly validated local session permits one recovery attempt. A new
+        # failure is later than this verification and restores normal backoff.
+        path = session_path()
+        if path:
+            try:
+                verified = load_session(path).verified_at
+                if verified > last:
+                    return min(due, verified)
+            except SourceUnavailable:
+                pass
+    return due
 
 
 def scan_lock(repo: Repository) -> FileLock:

@@ -106,6 +106,11 @@ Lot 82 : comparaison UBS indépendante de l'ordre des lignes, protections de
 pagination conservées. Nomura accessible après CAPTCHA dans le navigateur ;
 accès du scanner encore restreint. Voir [validation](VALIDATION-LOT82.md).
 
+Lot 83 préparé : session Nomura locale optionnelle, validation manuelle dans une
+fenêtre dédiée, contrôles de portée/expiration et reprise après renouvellement.
+L'activation attend l'accord sur Playwright et une collecte réelle validée ;
+voir [état et limites](VALIDATION-LOT83.md).
+
 ## Prochains lots
 
 1. Poursuivre la fiabilité sur les incidents réels, notamment les accès

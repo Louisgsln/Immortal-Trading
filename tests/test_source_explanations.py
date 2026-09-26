@@ -17,6 +17,7 @@ NOW = datetime(2026, 9, 26, 12, tzinfo=UTC)
     "error,code",
     [
         ("Nomura campus access restricted: CAPTCHA challenge; retry later", "captcha"),
+        ("Nomura campus CAPTCHA session expired; renewal required", "captcha"),
         ("robots policy disallows this endpoint", "robots_denied"),
         ("access restricted: HTTP 403", "access_restricted"),
         ("HTTP 429 after retries", "rate_limited"),

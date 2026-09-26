@@ -13,6 +13,7 @@ dependencies = ["httpx>=0.28,<0.29", "pydantic>=2.10,<3", "PyYAML>=6,<7", "pytho
 dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "mypy>=1.15,<2", "types-PyYAML>=6"]
 jobspy = ["python-jobspy>=1.1.80,<2"]
 ats = ["ats-scrapers>=0.2,<0.4"]
+browser = ["playwright>=1.58,<2"]
 
 [project.scripts]
 trading-radar = "trading_radar.cli:app"

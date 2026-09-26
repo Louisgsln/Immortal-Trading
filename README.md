@@ -670,3 +670,8 @@ La CI est configurée pour Python 3.11 à 3.14 avec le lock uv et pour les tests
 Les adaptateurs s'appuient sur les contrats publics : [Greenhouse Job Board](https://docs.greenhouse.io/job-board.html), [Lever Postings](https://github.com/lever/postings-api), [Ashby Job Postings](https://developers.ashbyhq.com/docs/public-job-posting-api), [JobSpy](https://github.com/speedyapply/JobSpy), [ats-scrapers](https://github.com/kalil0321/ats-scrapers), [Telegram sendMessage](https://core.telegram.org/bots/api#sendmessage).
 
 Utiliser les sources publiques à un rythme raisonnable, respecter leurs restrictions et désactiver les collecteurs qui ne peuvent plus être interrogés normalement. Aucun mécanisme de contournement d'authentification ou de CAPTCHA n'est implémenté.
+
+Nomura campus dispose d'un [mode optionnel de session locale](docs/NOMURA-ACCESS.md),
+préparé pour réutiliser un accès validé manuellement dans une fenêtre dédiée.
+Il reste désactivé sans configuration explicite et doit être vérifié sur le
+portail avant activation. Un nouveau CAPTCHA nécessite une nouvelle intervention.
