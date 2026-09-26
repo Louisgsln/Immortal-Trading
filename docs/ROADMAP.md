@@ -754,7 +754,15 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   précis. Couverture totale : 192 offres. Alternatives et préférences conservées.
 - Deux scans sur copie sans ajout, mise à jour, clôture ni alerte ; candidatures,
   historiques, expérience et dates identiques. Un profil long reste non extrait.
-- Filtres et détails vérifiés sur copie ; validation complète et livraison en cours.
+- 3 639 tests Windows réussis, quatre ignorés. Filtres et détails vérifiés sur copie.
+- Publié sur `main` et installé après sauvegarde le 26 septembre à 18:06 Paris,
+  avec le correctif des styles vides révélé par la collecte après installation.
+  Collecte Macquarie réussie à 18:15:42 ; cinq mentions et parcours des filtres
+  vérifiés sur l'instance active. Scanner, dashboard et Telegram actifs.
+- CI Python 3.11–3.14 réussie : 3 643 tests Linux, couverture 96 %.
+  Dix tests JavaScript et Docker réussis.
+  À 18:16:56, 23 sources à jour ; Nomura campus reste soumis au CAPTCHA public.
+  Optiver et UBS professionnels ont repris leurs collectes.
   [Bilan du lot 70](VALIDATION-LOT70.md).
 
 ## Les cinq améliorations prioritaires après le lot 70
