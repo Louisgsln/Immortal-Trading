@@ -13,6 +13,7 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "societe_generale": set(),
     "bnp_paribas": {
         "profile and skills to success",
         "to be considered for the placement, you will",
@@ -76,6 +77,9 @@ _BARCLAYS_UNSPECIFIED_DEGREE = re.compile(
 )
 _UBS_UNSPECIFIED_DEGREE = re.compile(r"\b(?:university|law|graduate)\s+degree\b", re.I)
 _BNP_MASTER = re.compile(r"^master\s+in\s+\w", re.I)
+_SG_PROFILE = re.compile(r"^(Et si c[’']était vous\s*\?|Profile required)\s+(.+)$", re.I)
+_SG_MASTER = re.compile(r"\bde\s+type\s+master\b", re.I)
+_SG_BAC = re.compile(r"\bbac\s*\+\s*(4\s*/\s*5|[45])(?!\w|\s*/)", re.I)
 _DEGREES = {
     "bachelor": re.compile(
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
@@ -242,6 +246,18 @@ def _ubs_qualification_items(root: Element) -> Iterator[tuple[str, str]]:
 
 def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
     document = Document(html.unescape(job.description))
+    if job.source == "societe_generale":
+        # The collector retains the entire profile field in one paragraph,
+        # including its visible employer heading. Never split its conditions.
+        profiles = [
+            match
+            for node in document.root.children
+            if isinstance(node, Element) and node.tag == "p"
+            if (match := _SG_PROFILE.fullmatch(" ".join(visible_text(node).split())))
+        ]
+        if len(profiles) == 1:
+            yield profiles[0][1], profiles[0][2]
+        return
     if job.source == "ubs_professionals":
         yield from _ubs_qualification_items(document.root)
         return
@@ -271,6 +287,14 @@ def education_mentions(job: Job) -> dict:
         levels = [key for key, pattern in _DEGREES.items() if pattern.search(excerpt)]
         if job.source == "bnp_paribas" and _BNP_MASTER.search(excerpt) and "master" not in levels:
             levels.append("master")
+        if job.source == "societe_generale":
+            if _SG_MASTER.search(excerpt) and "master" not in levels:
+                levels.append("master")
+            for match in _SG_BAC.finditer(excerpt):
+                for number in match[1].replace(" ", "").split("/"):
+                    level = "bac_plus_" + number
+                    if level not in levels:
+                        levels.append(level)
         if not levels and (
             _UNSPECIFIED_DEGREE.search(excerpt)
             or job.source == "barclays"

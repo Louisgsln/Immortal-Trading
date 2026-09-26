@@ -189,6 +189,16 @@ Les parcours conditionnels Sales/Trading des programmes ne sont pas substitués
 à une rubrique commune. Les tableaux et descriptions non reconnus restent
 accessibles sans extraction ; les exclusions et priorités sont conservées.
 
+Le [lot 68](VALIDATION-LOT68.md) ajoute Société Générale : 17 fiches avec des
+critères d'études, soit 166 offres couvertes. La lecture conserve le paragraphe
+complet **Et si c’était vous ?** ou **Profile required**, dans la limite habituelle
+de 1 500 caractères d'extrait ; les profils plus longs restent dans la description.
+Les nouveaux filtres **Bac+4** et **Bac+5** correspondent aux mentions littérales
+de ces niveaux dans les profils Société Générale audités. **Bac+4/5** apparaît
+dans les deux filtres, sans être transformé en Bachelor ou Master. Les préférences
+et alternatives restent dans l'extrait ; aucune obtention du diplôme n'est présumée.
+La formulation française **de type master** est également reconnue pour cette source.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

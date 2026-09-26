@@ -356,7 +356,7 @@
     session.editButton.hidden = true; session.message.before(form); form.querySelector("select").focus();
     form.scrollIntoView({block: "nearest"});
   }
-  const educationLabels = {bachelor: "Bachelor / Licence", master: "Master", doctorate: "Doctorat", unspecified_level: "Diplôme sans niveau précis"};
+  const educationLabels = {bachelor: "Bachelor / Licence", master: "Master", doctorate: "Doctorat", bac_plus_4: "Bac+4", bac_plus_5: "Bac+5", unspecified_level: "Diplôme sans niveau précis"};
   function educationLevels(job) {
     return ((job.education || {}).levels || []).filter((level) => Object.hasOwn(educationLabels, level));
   }

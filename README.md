@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 68 ajoute les **critères d'études Société Générale** et les filtres
+**Bac+4 / Bac+5** : 17 fiches enrichies, 166 offres couvertes au total.
+Les paragraphes de profil restent complets, avec leurs préférences et alternatives.
+Voir le [bilan du lot 68](docs/VALIDATION-LOT68.md).
+
 Le lot 67 ajoute les **missions et diplômes BNP Paribas** : dix fiches avec
 missions dans le dashboard et les prochaines alertes éligibles, onze avec des
 diplômes consultables et filtrables. Les alternatives académiques restent
