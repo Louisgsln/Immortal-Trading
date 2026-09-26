@@ -49,7 +49,19 @@ préférences, négations, conditions de fin d'études et alternatives restent v
 
 ## Livraison
 
-Publication, installation et contrôles GitHub à consigner après la validation locale.
+- Code `e7c6bf8` publié sur `main` et installé le 26 septembre 2026 à 16:21:11 Paris,
+  après sauvegarde vérifiée à 16:21:06 ; paquet précédent conservé.
+- Les trois fichiers applicatifs installés correspondent au paquet publié.
+- Dashboard et API de suivi disponibles : 166 mentions d'études, 168 missions
+  et 342 dates de publication. Les scores et exclusions sont conservés.
+- Les trois filtres Société Générale + Bac+4, Bac+5 et Master sont vérifiés sur
+  l'instance active, avec leurs extraits complets ; aucune erreur JavaScript.
+- Scanner, dashboard et Telegram actifs. Collectes Greenhouse, SIG, HSBC
+  professionnels et Nomura professionnels réussies après installation.
+  Les 24 sources sont à jour au contrôle de 16:21:19.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36248194044) :
+  Python 3.11–3.14 réussis, 3 557 tests Linux et couverture 96 %. Dix tests
+  JavaScript sous Node 22 réussis ; construction et restauration Docker réussies.
 
 ## Suite du carnet
 

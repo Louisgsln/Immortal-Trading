@@ -722,7 +722,11 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   couverture totale de 166 offres. Les 11 tables et 168 missions restent identiques.
 - Filtres Bac+4 et Bac+5 fondés sur les mentions littérales ; profils complets,
   préférences et alternatives conservés. Aucune équivalence académique déduite.
-- Parcours navigateur vérifié sur copie ; validations et livraison en cours.
+- Publié sur `main` et installé après sauvegarde le 26 septembre à 16:21 Paris.
+  Parcours navigateur vérifiés sur copie puis sur l'instance active. Scanner,
+  dashboard et Telegram actifs ; les 24 sources sont à jour au contrôle de 16:21:19.
+- 3 553 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 réussie :
+  3 557 tests Linux, couverture 96 %. Dix tests JavaScript et Docker réussis.
   [Bilan du lot 68](VALIDATION-LOT68.md).
 
 ## Les cinq améliorations prioritaires après le lot 68
