@@ -17,12 +17,16 @@ l'attente augmente, y compris avant le premier succès : deux fois l'intervalle,
 puis quatre, huit et au maximum une heure, sans raccourcir un intervalle configuré
 supérieur à une heure. Un succès rétablit l'intervalle normal.
 
-UBS et Optiver vérifient la pagination et relisent sa première page avant de
+UBS, Optiver et HSBC professionnels vérifient la pagination et relisent sa première page avant de
 demander les fiches. Si des pages cohérentes séparément changent entre elles,
 une seule reprise de toute la liste est permise dans le budget initial. Les
 lignes de la tentative abandonnée ne sont ni mélangées ni importées. Une
 deuxième incohérence laisse la source en échec. Une restriction d'accès,
 un CAPTCHA ou une page structurellement invalide ne déclenche pas cette reprise.
+Chez HSBC, la reprise recommence également les recherches précédentes de la
+même tentative, pour ne pas mélanger des réponses de deux instantanés. Les
+conflits entre recherches, les limites et les fiches invalides restent des
+échecs explicites. Le compteur de requêtes inclut la tentative abandonnée.
 
 Le verrou `.scan.lock` réserve les collectes à un seul processus. Le verrou
 historique `.lock` protège les écritures et la livraison des notifications,

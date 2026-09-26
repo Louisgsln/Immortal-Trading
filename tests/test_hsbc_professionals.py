@@ -246,7 +246,7 @@ def test_unstable_search_or_limits_fail_without_partial_result(monkeypatch, fail
                 items.append(row(12))
         else:
             items = [row(i) for i in range(1, 11)]
-            if failure == "recheck" and calls > 1:
+            if failure == "recheck" and calls % 3 == 0:
                 items[0] = row(99)
         return httpx.Response(200, json=listing(items, total))
 
@@ -289,3 +289,126 @@ def test_cross_query_deduplication(monkeypatch):
 
     result = execute(handler, monkeypatch, search_terms=["trading", "markets"])
     assert len(result.jobs) == 1 and len(details) == 1
+
+
+@pytest.mark.parametrize("failure", ["total", "repeat", "recheck"])
+def test_changing_listing_restarts_once_and_discards_first_snapshot(monkeypatch, failure):
+    old = [row(i) for i in range(1, 11)]
+    fresh = [row(i) for i in range(101, 111)]
+    pages = [(0, listing(old, 11))]
+    if failure == "total":
+        pages.append((10, listing([row(11), row(12)], 12)))
+    if failure == "repeat":
+        pages.append((10, listing([row(1)], 11)))
+    if failure == "recheck":
+        pages += [(10, listing([row(11)], 11)), (0, listing([row(99), *old[1:]], 11))]
+    pages += [(0, listing(fresh, 11)), (10, listing([row(111)], 11)), (0, listing(fresh, 11))]
+    number_of_pages = len(pages)
+    details = []
+
+    def handler(req):
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.url.path == "/api/apply/v2/jobs":
+            offset, payload = pages.pop(0)
+            assert int(req.url.params["start"]) == offset
+            return httpx.Response(200, json=payload)
+        assert not pages  # No details may be fetched from the abandoned listing.
+        identifier = int(req.url.path.rsplit("/", 1)[1])
+        details.append(identifier)
+        assert 101 <= identifier <= 111
+        return httpx.Response(200, text=detail_html(*detail_data(row(identifier))))
+
+    result = execute(handler, monkeypatch)
+    assert {j.external_id for j in result.jobs} == {str(i) for i in range(101, 112)}
+    assert len(details) == 11 and result.complete is False
+    assert result.requests == number_of_pages + 11 + 1  # includes robots and failed traversal
+
+
+def test_restart_clears_results_from_earlier_search_terms(monkeypatch):
+    pages = [
+        ("trading", 0, listing([row(1)])),
+        ("trading", 0, listing([row(1)])),
+        ("markets", 0, listing([row(2)])),
+        ("markets", 0, listing([row(3)])),
+        ("trading", 0, listing([row(101)])),
+        ("trading", 0, listing([row(101)])),
+        ("markets", 0, listing([row(101)])),
+        ("markets", 0, listing([row(101)])),
+    ]
+    details = []
+
+    def handler(req):
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.url.path == "/api/apply/v2/jobs":
+            term, offset, payload = pages.pop(0)
+            assert req.url.params["query"] == term and int(req.url.params["start"]) == offset
+            payload["query"]["query"] = term
+            return httpx.Response(200, json=payload)
+        details.append(req.url.path)
+        assert not pages and req.url.path.endswith("/101")
+        return httpx.Response(200, text=detail_html(*detail_data(row(101))))
+
+    result = execute(handler, monkeypatch, search_terms=["trading", "markets"])
+    assert len(result.jobs) == 1 and len(details) == 1
+    assert result.jobs[0].external_id == "101"
+
+
+@pytest.mark.parametrize("failure", ["403", "429", "malformed", "private", "identity", "detail"])
+def test_restrictions_schema_or_detail_failures_do_not_restart(monkeypatch, failure):
+    api_calls = 0
+    detail_calls = 0
+
+    def handler(req):
+        nonlocal api_calls, detail_calls
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.url.path == "/api/apply/v2/jobs":
+            api_calls += 1
+            if failure in {"403", "429"}:
+                return httpx.Response(int(failure))
+            payload = listing([row()])
+            if failure == "malformed":
+                payload["positions"] = []
+            if failure == "private":
+                payload["positions"][0]["isPrivate"] = True
+            if failure == "identity":
+                payload["positions"][0]["canonicalPositionUrl"] = "https://evil.test/job/1"
+            return httpx.Response(200, json=payload)
+        detail_calls += 1
+        return httpx.Response(200, text="<p>No matching posting metadata.</p>")
+
+    with pytest.raises(SourceUnavailable):
+        execute(handler, monkeypatch)
+    assert api_calls == (2 if failure == "detail" else 1)
+    assert detail_calls == (1 if failure == "detail" else 0)
+
+
+def test_two_traversals_share_original_timeout(monkeypatch):
+    original_timeout = asyncio.timeout
+    original_sleep = asyncio.sleep
+    budgets = []
+    calls = 0
+
+    def shortened_budget(seconds):
+        budgets.append(seconds)
+        return original_timeout(0.03)
+
+    monkeypatch.setattr("trading_radar.hsbc_professionals.asyncio.timeout", shortened_budget)
+
+    async def handler(req):
+        nonlocal calls
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        calls += 1
+        if calls == 1:
+            return httpx.Response(200, json=listing([row(1)]))
+        if calls == 2:
+            return httpx.Response(200, json=listing([row(2)]))
+        await original_sleep(0.1)
+        pytest.fail("The retry must remain within the original deadline")
+
+    with pytest.raises(SourceUnavailable, match="scan time budget exceeded"):
+        execute(handler, monkeypatch)
+    assert budgets == [600] and calls == 3

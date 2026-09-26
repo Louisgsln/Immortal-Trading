@@ -1,8 +1,13 @@
 # Trading Job Radar
 
+Le lot 76 étend à **HSBC professionnels** la reprise bornée des catalogues
+qui changent pendant leur lecture. Les pages de la tentative abandonnée sont
+jetées avant une unique reprise ; les refus d'accès et erreurs de format
+restent explicites. Voir la [validation](docs/VALIDATION-LOT76.md).
+
 Le lot 75 ajoute **DV Trading, Walleye Capital, Squarepoint Capital, Chicago
 Trading Company et Belvedere Trading**, avec deux portails distincts pour CTC.
-Le périmètre passe à **40 sources et 35 employeurs**. Simulation vérifiée :
+Le périmètre passe à **40 sources et 35 employeurs**. Installé et vérifié sur deux collectes :
 50 annonces supplémentaires, dont 29 pertinentes et 21 prioritaires, sans
 renvoyer les anciennes alertes. Voir le [périmètre et la validation](docs/VALIDATION-LOT75.md).
 

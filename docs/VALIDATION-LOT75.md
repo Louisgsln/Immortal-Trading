@@ -73,4 +73,28 @@ dates, confidentialité, pagination répétée ou changeante, budgets et ciblage
 Le navigateur vérifie les nouveaux employeurs, le détail Belvedere avec ses
 missions et sa publication inconnue, ainsi que les stages à zéro point.
 
-Suite complète Windows : **3908 tests réussis, 4 ignorés**. Mypy (86 modules), Ruff et formatage réussis. Contrôle après installation à compléter.
+Suite complète Windows : **3 908 tests réussis, quatre ignorés**. Mypy (86 modules),
+Ruff et formatage réussis ; dix tests du tri des dates réussis sous Node.
+
+## Livraison et observation
+
+Publié sur `main` : `117f73d701bac039fff3cbb9d64d5c405d746cae`, installé à
+20:35:38 Paris après la sauvegarde vérifiée `scheduled-20260926T183532828309Z.zip`.
+Les 90 fichiers applicatifs et ressources correspondent au paquet construit.
+Scanner, Telegram et dashboard redémarrés ; chaque nouvelle source a réussi
+deux collectes. Le premier passage ajoute 50 offres sans alertes ; le deuxième,
+achevé à 20:41:46, ne crée ni ajout ni modification.
+
+Contrôle à 20:42:56 : 973 offres, 282 pertinentes, 175 prioritaires, 295 missions,
+329 mentions de diplôme et 523 dates de publication. Les scores et candidatures
+des 923 offres précédentes, ainsi que les historiques et alertes, sont identiques
+à la sauvegarde. Dashboard et API de suivi répondent ; le navigateur vérifie
+les 13 offres Squarepoint triées par publication décroissante.
+
+39 sources sur 40 sont à jour. Nomura campus a repris ; HSBC professionnels a
+interrompu une pagination dont le total avait changé à 20:37:16. Le lot 76
+traite ce cas par une reprise bornée de tout le catalogue. Ces états sont datés
+et ne garantissent pas la disponibilité permanente des portails.
+
+Python 3.11–3.14, dashboard et conteneur ont tous réussi en
+[CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36263044034).

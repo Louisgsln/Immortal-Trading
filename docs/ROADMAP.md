@@ -859,3 +859,11 @@ Voir [les limites, les preuves et les contrôles](VALIDATION-LOT75.md).
 Suite : incidents observés, rubriques et ciblage encore non reconnus, puis
 diversification vers banques, courtiers et négociants énergie/matières premières.
 Les fermetures explicites, l'import du suivi et la restauration restent au carnet.
+
+## Lot 76 — Reprise des changements de pagination HSBC professionnels
+
+Le total des offres a changé pendant la collecte du 26 septembre à 20:37 Paris.
+L'adaptateur peut désormais reprendre une fois la liste complète et toutes ses
+recherches, sans mélanger les lignes précédentes et dans le même budget de temps.
+Un deuxième changement échoue ; aucun refus d'accès ni format invalide n'est
+masqué par cette reprise. Voir [validation](VALIDATION-LOT76.md).

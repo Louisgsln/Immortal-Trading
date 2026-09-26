@@ -12,6 +12,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.snapshot_retry import SnapshotChanged, stable_listing
 
 ROOT = "https://portal.careers.hsbc.com"
 BOARD = ROOT + "/careers"
@@ -175,8 +176,7 @@ class HSBCProfessionalsCollector:
         )
         return parse_page(data, term, offset, self.options.max_results_per_query)
 
-    async def _collect(self) -> Collection:
-        before = self.http.counts[self.source]
+    async def _list(self) -> dict[str, dict]:
         found: dict[str, dict] = {}
         for term in self.options.search_terms:
             initial, total = await self.page(term, 0)
@@ -184,17 +184,22 @@ class HSBCProfessionalsCollector:
             while len(rows) < total:
                 batch, current = await self.page(term, len(rows))
                 if current != total:
-                    raise SourceUnavailable("HSBC professional total changed during pagination")
+                    raise SnapshotChanged("HSBC professional total changed during pagination")
                 for row in batch:
                     if row["id"] in rows:
-                        raise SourceUnavailable("HSBC professional repeated page")
+                        raise SnapshotChanged("HSBC professional repeated page")
                     rows[row["id"]] = row
             if await self.page(term, 0) != (initial, total):
-                raise SourceUnavailable("HSBC professional search changed during pagination")
+                raise SnapshotChanged("HSBC professional search changed during pagination")
             for identifier, row in rows.items():
                 if identifier in found and found[identifier] != row:
                     raise SourceUnavailable("HSBC professional conflicting search results")
                 found[identifier] = row
+        return found
+
+    async def _collect(self) -> Collection:
+        before = self.http.counts[self.source]
+        found = await stable_listing(self._list, self.source)
         selected = []
         for row in found.values():
             # Verified wealth division includes private-client advisory and retail propositions.

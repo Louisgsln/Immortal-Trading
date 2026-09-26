@@ -79,7 +79,10 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
 - Lot 74 : causes des incidents et calendrier de reprise visibles, six faux
   positifs opérationnels retirés et rôle Nomura requalifié ; installé et vérifié.
 - Lot 75 : cinq employeurs, six portails, contrôles Lever, rubriques de fiches
-  et six cas de ciblage quantitatif audités ; voir [validation](VALIDATION-LOT75.md).
+  et six cas de ciblage quantitatif audités ; installé et vérifié sur deux
+  collectes, voir [validation](VALIDATION-LOT75.md).
+- Lot 76 : reprise bornée d'une pagination HSBC professionnels changeante,
+  après l'incident observé ; voir [validation](VALIDATION-LOT76.md).
 
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.
