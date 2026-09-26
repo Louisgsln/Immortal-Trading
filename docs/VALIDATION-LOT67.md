@@ -49,7 +49,20 @@ par équivalence supposée.
 
 ## Livraison
 
-Publication, installation et contrôles GitHub à consigner après la validation locale.
+- Code `8c7d737` publié sur `main` et installé le 26 septembre 2026 à 16:00:07 Paris,
+  après sauvegarde vérifiée à 16:00:03 ; paquet précédent conservé.
+- Les deux fichiers applicatifs installés correspondent au paquet publié.
+- Dashboard et API de suivi disponibles : 168 missions, 149 mentions de diplôme
+  et 342 dates de publication. Ancienne couverture et ciblage conservés.
+- Les deux parcours de filtre et de détail sont vérifiés sur l'instance active,
+  sans erreur JavaScript. Scanner, dashboard et Telegram actifs.
+- Collectes Crédit Agricole CIB, Macquarie, HSBC et Optiver réussies après installation.
+- UBS professionnels a repris à 16:02:18 avec 33 offres après un échec de
+  pagination à 15:49:35, antérieur au déploiement. Les contrôles de pagination
+  sont conservés. Les 24 sources sont à jour au contrôle de 16:04:13.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36246992094)
+  réussie sur Python 3.11–3.14 : 3 519 tests Linux, couverture 96 %. Dix tests
+  JavaScript sous Node 22 réussis ; construction et restauration Docker réussies.
 
 ## Suite du carnet
 
