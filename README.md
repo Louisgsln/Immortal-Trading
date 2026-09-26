@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 69 ajoute les **critères d'études Crédit Agricole CIB** : 21 fiches
+consultables dans les filtres Bachelor, Bac+5, Master et Doctorat, soit 187 offres
+couvertes. Le champ et son intitulé d'origine sont conservés lors des prochaines
+collectes, sans changement des scores ou nouvelle alerte artificielle.
+Voir le [bilan du lot 69](docs/VALIDATION-LOT69.md).
+
 Le lot 68 ajoute les **critères d'études Société Générale** et les filtres
 **Bac+4 / Bac+5** : 17 fiches enrichies, 166 offres couvertes au total.
 Les paragraphes de profil restent complets, avec leurs préférences et alternatives.

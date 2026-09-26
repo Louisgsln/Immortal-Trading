@@ -199,6 +199,16 @@ dans les deux filtres, sans être transformé en Bachelor ou Master. Les préfé
 et alternatives restent dans l'extrait ; aucune obtention du diplôme n'est présumée.
 La formulation française **de type master** est également reconnue pour cette source.
 
+Le [lot 69](VALIDATION-LOT69.md) ajoute Crédit Agricole CIB : 21 fiches avec
+critères d'études, soit 187 offres couvertes sur la copie auditée. Le collecteur
+conserve le champ dédié et son intitulé **Niveau d'études minimum** ou **Minimal
+education level**. Les anciennes descriptions sans provenance restent non
+interprétées jusqu'à une collecte réussie. Dix fiches mentionnent un Bachelor,
+dix **Bac + 5 / M2 et plus**, une **MA/MSc/PhD/Doctorate or equivalent**. Cette
+dernière apparaît dans Master et Doctorat, avec l'alternative complète visible ;
+le Bac+5 ne devient pas un Master par équivalence. Les scores et candidatures
+restent identiques. Le texte d'aide distingue exigences, préférences et alternatives.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

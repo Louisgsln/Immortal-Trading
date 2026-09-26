@@ -9,7 +9,8 @@ from urllib.parse import urljoin, urlsplit
 from pydantic import Field
 
 from trading_radar.config import Company
-from trading_radar.html_page import Document, clean, with_class
+from trading_radar.description_sections import normalize_heading, visible_text
+from trading_radar.html_page import Document, Element, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, ExperienceEvidence, RawJob
 from trading_radar.normalizer import has, normalize_text
@@ -18,6 +19,44 @@ from trading_radar.search_scope import SearchOptions
 ORIGIN = "https://jobs.ca-cib.com"
 SEARCH = ORIGIN + "/pages/offre/listeoffre.aspx"
 PAGE_SIZE = 100
+EDUCATION_FIELD = "fldapplicantcriteria_educationlevel"
+EDUCATION_LABELS = {"minimal education level", "niveau d'études minimum"}
+
+
+def _education_label(root: Element) -> str | None:
+    """Keep provenance only for the audited, visible heading/field pair."""
+    labels = []
+
+    def inspect(node: Element) -> None:
+        if (
+            not visible_text(node).strip()
+            or node.attrs.get("aria-hidden", "").lower() == "true"
+            or re.search(
+                r"(?:display\s*:\s*none|visibility\s*:\s*hidden)", node.attrs.get("style", ""), re.I
+            )
+        ):
+            return
+        previous = None
+        for child in node.children:
+            if isinstance(child, str):
+                if child.strip():
+                    previous = None
+                continue
+            if (
+                child.attrs == {"id": EDUCATION_FIELD}
+                and child.tag == "p"
+                and all(isinstance(part, str) for part in child.children)
+                and previous is not None
+                and previous.tag == "h3"
+                and normalize_heading(visible_text(previous)) in EDUCATION_LABELS
+                and not previous.attrs
+            ):
+                labels.append(clean(previous))
+            inspect(child)
+            previous = child
+
+    inspect(root)
+    return labels[0] if len(labels) == 1 else None
 
 
 def job_url(value: str) -> tuple[str, str]:
@@ -90,7 +129,8 @@ def ca_experience_evidence(value: str) -> list[ExperienceEvidence]:
 
 
 def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
-    nodes = list(Document(text).root.walk())
+    root = Document(text).root
+    nodes = list(root.walk())
     refs = with_class(nodes, "ts-offer-page__reference")
     if len(refs) != 1 or " ".join(refs[0].text(without_headings=True).split()) != row["reference"]:
         raise SourceUnavailable("CA CIB detail reference mismatch")
@@ -123,9 +163,19 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         except ValueError:
             raise SourceUnavailable("invalid CA CIB employment start date") from None
     evidence = ca_experience_evidence(fields.get("fldapplicantcriteria_experiencelevel", ""))
+    label = _education_label(root)
+    education_attrs = (
+        f' data-ca-field="{EDUCATION_FIELD}" data-ca-label="{html.escape(label)}"' if label else ""
+    )
     # All employer criteria are preserved, including requirements omitted from the summary.
+    # Metadata keeps the source field identifiable without changing visible text,
+    # scores or update events. Old unlabelled descriptions are never guessed.
     description = "\n".join(
-        "<p>" + html.escape(value) + "</p>"
+        "<p"
+        + (education_attrs if key == EDUCATION_FIELD else "")
+        + ">"
+        + html.escape(value)
+        + "</p>"
         for key, value in fields.items()
         if value and key.startswith(("fldjobdescription_", "fldapplicantcriteria_"))
     )

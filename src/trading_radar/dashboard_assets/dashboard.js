@@ -402,7 +402,7 @@
       educationSection.append(make("p", "Critères de l’annonce · " + item.heading, "detail-company"),
         make("blockquote", item.excerpt, "description experience-excerpt"));
     });
-    educationSection.append(make("p", "Ces mentions ne définissent pas un diplôme minimum. L’extrait conserve les alternatives, préférences et conditions de fin d’études. Vérifiez l’annonce officielle pour apprécier votre éligibilité."));
+    educationSection.append(make("p", "Ces mentions peuvent être des exigences, des préférences ou des alternatives. L’extrait conserve les conditions de l’employeur. Vérifiez l’annonce officielle pour apprécier votre éligibilité."));
     content.append(educationSection);
     const timing = detailSection("Repères"); const grid = make("dl", null, "detail-grid");
     const deadline = job.deadline || {};

@@ -13,6 +13,7 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "credit_agricole_cib": set(),
     "societe_generale": set(),
     "bnp_paribas": {
         "profile and skills to success",
@@ -79,7 +80,8 @@ _UBS_UNSPECIFIED_DEGREE = re.compile(r"\b(?:university|law|graduate)\s+degree\b"
 _BNP_MASTER = re.compile(r"^master\s+in\s+\w", re.I)
 _SG_PROFILE = re.compile(r"^(Et si c[’']était vous\s*\?|Profile required)\s+(.+)$", re.I)
 _SG_MASTER = re.compile(r"\bde\s+type\s+master\b", re.I)
-_SG_BAC = re.compile(r"\bbac\s*\+\s*(4\s*/\s*5|[45])(?!\w|\s*/)", re.I)
+_BAC = re.compile(r"\bbac\s*\+\s*(4\s*/\s*5|[45])(?!\w|\s*/)", re.I)
+_CA_BAC5 = re.compile(r"bac\s*\+\s*5\s*/\s*M2\s+et\s+plus", re.I)
 _DEGREES = {
     "bachelor": re.compile(
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
@@ -246,6 +248,26 @@ def _ubs_qualification_items(root: Element) -> Iterator[tuple[str, str]]:
 
 def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
     document = Document(html.unescape(job.description))
+    if job.source == "credit_agricole_cib":
+        # Only the collector's verified field survives storage without raw data.
+        fields = [
+            node
+            for node in document.root.children
+            if isinstance(node, Element)
+            and node.attrs.get("data-ca-field") == "fldapplicantcriteria_educationlevel"
+        ]
+        if len(fields) == 1:
+            field = fields[0]
+            label = field.attrs.get("data-ca-label", "")
+            if (
+                field.tag == "p"
+                and set(field.attrs) == {"data-ca-field", "data-ca-label"}
+                and normalize_heading(label)
+                in {"minimal education level", "niveau d'études minimum"}
+                and all(isinstance(part, str) for part in field.children)
+            ):
+                yield label, " ".join(visible_text(field).split())
+        return
     if job.source == "societe_generale":
         # The collector retains the entire profile field in one paragraph,
         # including its visible employer heading. Never split its conditions.
@@ -285,12 +307,15 @@ def education_mentions(job: Job) -> dict:
         if not excerpt or len(excerpt) > 1500:
             continue
         levels = [key for key, pattern in _DEGREES.items() if pattern.search(excerpt)]
+        if job.source == "credit_agricole_cib" and _CA_BAC5.fullmatch(excerpt):
+            levels.append("bac_plus_5")
         if job.source == "bnp_paribas" and _BNP_MASTER.search(excerpt) and "master" not in levels:
             levels.append("master")
         if job.source == "societe_generale":
             if _SG_MASTER.search(excerpt) and "master" not in levels:
                 levels.append("master")
-            for match in _SG_BAC.finditer(excerpt):
+        if job.source in {"societe_generale", "credit_agricole_cib"}:
+            for match in _BAC.finditer(excerpt):
                 for number in match[1].replace(" ", "").split("/"):
                     level = "bac_plus_" + number
                     if level not in levels:
