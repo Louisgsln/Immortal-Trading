@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 62 ajoute les **dates de publication au dashboard**, avec les tris plus
+récentes / plus anciennes et un filtre par période. La date de découverte reste
+distincte ; les publications inconnues ne sont pas estimées. Sur la copie auditée,
+342 offres sur 787 disposent d'une date source. Voir le [bilan du lot 62](docs/VALIDATION-LOT62.md).
+
 Le lot 61 étend les **missions et diplômes à Goldman Sachs professionnels** :
 36 fiches avec missions pour les prochaines cartes Telegram et le dashboard,
 32 avec diplômes cités dans le filtre et le détail, sur la copie auditée.
@@ -553,10 +558,11 @@ ruff check src tests
 ruff format --check src tests
 mypy src/trading_radar
 pytest --cov=trading_radar --cov-report=term-missing
+node --test tests/dashboard_publication.test.cjs
 trading-radar scan --demo
 ```
 
-La CI est configurée pour Python 3.11 à 3.14 avec le lock uv, puis pour un build et une restauration Docker sur un volume synthétique sans réseau. L'exercice vérifie aussi l'historisation de santé, l'export du dashboard et le plan de conservation des sauvegardes. Les tests utilisent des fixtures, des transports simulés et un serveur sur la boucle locale. Les résultats effectivement obtenus sont dans [la validation du lot 30](docs/VALIDATION-LOT30.md), avec l'historique des lots précédents dans `docs/`.
+La CI est configurée pour Python 3.11 à 3.14 avec le lock uv et pour les tests de dates du dashboard sous Node 22, puis pour un build et une restauration Docker sur un volume synthétique sans réseau. Node 22 ou ultérieur sert uniquement à ces tests JavaScript, sans dépendance à installer et sans être requis en exploitation. L'exercice vérifie aussi l'historisation de santé, l'export du dashboard et le plan de conservation des sauvegardes. Les tests utilisent des fixtures, des transports simulés et un serveur sur la boucle locale. Les résultats effectivement obtenus sont dans les bilans de validation de `docs/`.
 
 ## Dépannage
 

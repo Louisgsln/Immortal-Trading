@@ -64,6 +64,27 @@ consulter la description, la décomposition du score, le suivi et les liens d'or
 La vue **Candidatures** rassemble le suivi ; la vue **Santé des sources** expose les
 dernières observations et les rapports de santé conservés.
 
+Depuis le lot 62, **Publiée le** affiche le jour de publication fourni par la source,
+à côté de **Repéré le**, qui reste la première découverte par le radar. Le détail
+de l'offre reprend ces deux repères. Les publications sont affichées au jour UTC,
+sans heure inventée ; ce jour reste identique quel que soit le fuseau du navigateur.
+Une source ne fournissant pas de date exploitable affiche **Non précisée** : ni la
+première détection ni la dernière mise à jour ne servent de remplacement.
+
+Dans **Trier par**, choisir **Publication · plus récentes** ou **Publication · plus
+anciennes**. Les offres sans date restent à la fin dans les deux sens. Les offres
+publiées le même jour sont départagées par leur titre puis leur identifiant ; le
+tri porte sur toutes les offres filtrées avant la pagination. Le score décroissant
+reste le tri initial, et **Repérage · plus récent** reste disponible séparément.
+
+Les champs **Publiée à partir du** et **Publiée jusqu'au** filtrent la période,
+bornes incluses. Une seule borne suffit ; une période exclut les offres sans date.
+Ces champs se combinent aux autres filtres, y compris dans Candidatures. Une période
+invalide affiche une explication et suspend uniquement le filtre de publication.
+Changer un filtre ou le tri revient à la première page ; **Réinitialiser** efface
+la période et rétablit le tri par score. Les mêmes fonctions sont disponibles dans
+l'export HTML autonome. Voir le [bilan du lot 62](VALIDATION-LOT62.md).
+
 Depuis le lot 35, la liste et le détail affichent le **minimum d’expérience reconnu**.
 Le filtre distingue **Minimum 0–2 ans**, **Minimum >2 ans** et **Minimum non reconnu**.
 Il prend le plus grand minimum identifié dans la description et les données structurées,

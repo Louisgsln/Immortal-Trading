@@ -6,3 +6,4 @@
 .collection-conflicts{max-width:360px;overflow-wrap:anywhere}.collection-conflicts summary{cursor:pointer;margin-top:6px}.collection-conflicts summary:focus-visible{outline:3px solid #5e9b7c;outline-offset:3px}
 
 .health-comparison{border:1px solid var(--line);background:#f6f8f3;border-radius:7px;padding:15px 18px;margin-bottom:16px;font-size:12px;overflow-wrap:anywhere}.health-comparison p{margin:7px 0;color:var(--muted)}.health-comparison ul{padding-left:18px;margin-bottom:0}.health-comparison li{margin:7px 0}#health-capture-message:empty{display:none}@media(max-width:580px){.history-heading{flex-wrap:wrap}.history-heading .primary-button{width:100%}}
+.publication-error{color:var(--red)}.filters input[aria-invalid="true"]{border-color:var(--red)}.jobs-table{min-width:940px}

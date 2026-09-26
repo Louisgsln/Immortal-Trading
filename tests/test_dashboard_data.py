@@ -13,6 +13,36 @@ from trading_radar.storage import Repository
 NOW = datetime(2026, 9, 17, 12, tzinfo=UTC)
 
 
+@pytest.mark.parametrize(
+    ("posted", "expected"),
+    [
+        (None, None),
+        ("2026-09-01T00:00:00Z", "2026-09-01"),
+        ("2026-09-01T23:59:59Z", "2026-09-01"),
+        ("2026-09-01T01:30:00+02:00", "2026-08-31"),
+        ("2026-09-01T23:30:00-04:00", "2026-09-02"),
+        ("2024-02-29T00:00:00Z", "2024-02-29"),
+        ("2026-09-01T00:00:00", None),
+        ("0001-01-01T00:00:00+01:00", None),
+        ("9999-12-31T23:00:00-02:00", None),
+    ],
+)
+def test_publication_is_source_day_in_utc_without_discovery_fallback(
+    dashboard_config, repo, job, tmp_path, posted, expected
+):
+    job.date_posted = datetime.fromisoformat(posted) if posted else None
+    job.first_seen = job.last_seen = job.date_updated = NOW
+    with repo.transaction():
+        repo.upsert(job)
+    before = fingerprints(repo)
+    result = observation(dashboard_config, tmp_path)
+    assert result["status"] == "ok"
+    assert result["jobs"][0]["publication_day"] == expected
+    assert result["jobs"][0]["first_seen"] == NOW.isoformat()
+    assert result["jobs"][0]["last_seen"] == NOW.isoformat()
+    assert fingerprints(repo) == before
+
+
 def test_dashboard_includes_read_only_ninety_day_trends(dashboard_config, repo, job, tmp_path):
     job.first_seen = job.last_seen = NOW - timedelta(days=1)
     with repo.transaction():

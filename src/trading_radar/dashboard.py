@@ -19,10 +19,13 @@ from trading_radar.dashboard_http import discard_small_body
 
 def _assets() -> tuple[str, str, str]:
     root = files("trading_radar").joinpath("dashboard_assets")
-    return tuple(
-        root.joinpath(name).read_text(encoding="utf-8")
-        for name in ("index.html", "dashboard.css", "dashboard.js")
-    )  # type: ignore[return-value]
+    return (
+        root.joinpath("index.html").read_text(encoding="utf-8"),
+        root.joinpath("dashboard.css").read_text(encoding="utf-8"),
+        root.joinpath("publication.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("dashboard.js").read_text(encoding="utf-8"),
+    )
 
 
 def _policy(css: str, script: str, *, editable: bool = False) -> str:

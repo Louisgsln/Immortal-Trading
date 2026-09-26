@@ -397,7 +397,7 @@
     content.append(experienceSection);
     const educationSection = detailSection("Diplômes mentionnés");
     const educationEvidence = ((job.education || {}).evidence || []);
-    if (!educationEvidence.length) educationSection.append(make("p", "Aucune mention reconnue dans les rubriques prises en charge (DRW, IMC, Jump Trading et Nomura professionnels). Cela ne signifie pas qu’aucun diplôme n’est demandé."));
+    if (!educationEvidence.length) educationSection.append(make("p", "Aucune mention reconnue dans les rubriques prises en charge (DRW, IMC, Jump Trading, Goldman Sachs professionnels et Nomura professionnels). Cela ne signifie pas qu’aucun diplôme n’est demandé."));
     educationEvidence.forEach((item) => {
       educationSection.append(make("p", "Critères de l’annonce · " + item.heading, "detail-company"),
         make("blockquote", item.excerpt, "description experience-excerpt"));
@@ -407,6 +407,7 @@
     const timing = detailSection("Repères"); const grid = make("dl", null, "detail-grid");
     const deadline = job.deadline || {};
     const timingValues = [
+      ["Publication · source (jour UTC)", radarPublication.label(job.publication_day)],
       ["Première détection", date(job.first_seen, true)], ["Dernière observation", date(job.last_seen, true)],
       ["Échéance", deadline.precision === "instant" ? date(deadline.instant, true) : deadline.precision === "date" ? (deadline.day || "Non renseignée") + " · heure non précisée" : "Non confirmée"],
       ["Source", job.source || "Non renseignée"]
@@ -439,18 +440,24 @@
     const active = $("active").value; const application = $("application-status").value;
     const experienceCategory = $("experience").value;
     const education = $("education").value;
+    const from = $("publication-from").value; const to = $("publication-to").value;
+    const validPeriod = radarPublication.validRange(from, to) && !$("publication-from").validity.badInput && !$("publication-to").validity.badInput;
+    $("publication-error").hidden = validPeriod;
+    $("publication-error").textContent = validPeriod ? "" : "Vérifiez les dates : le début doit précéder ou égaler la fin. Le filtre de publication n’est pas appliqué tant que la période est invalide.";
+    ["publication-from", "publication-to"].forEach((id) => $(id).setAttribute("aria-invalid", String(!validPeriod)));
     let results = jobs.filter((job) =>
       (!query || searchText.get(job.id).includes(query)) && (!company || job.company === company) &&
       job.score >= score && (active === "all" || Boolean(job.is_active) === (active === "active")) &&
       (!application || (job.application || {}).status === application) &&
       (!experienceCategory || experience(job).category === experienceCategory) &&
       (!education || (education === "unrecognized" ? !educationLevels(job).length : educationLevels(job).includes(education))) &&
+      (!validPeriod || radarPublication.within(job.publication_day, from, to)) &&
       (state.view !== "applications" || (job.application || {}).status !== "New")
     );
     const sorting = $("sort").value;
     const timestamp = (value) => { const stamp = Date.parse(value); return Number.isFinite(stamp) ? stamp : 0; };
     const deadlineTime = (job) => timestamp((job.deadline || {}).instant || (job.deadline || {}).day) || Number.MAX_SAFE_INTEGER;
-    results.sort((a, b) => (sorting === "company" ? collator.compare(a.company, b.company) : sorting === "recent" ? timestamp(b.first_seen) - timestamp(a.first_seen) : sorting === "deadline" ? deadlineTime(a) - deadlineTime(b) : b.score - a.score) || collator.compare(a.title, b.title) || collator.compare(a.id, b.id));
+    results.sort((a, b) => (sorting.startsWith("publication-") ? radarPublication.compare(a.publication_day, b.publication_day, sorting === "publication-oldest") : sorting === "company" ? collator.compare(a.company, b.company) : sorting === "recent" ? timestamp(b.first_seen) - timestamp(a.first_seen) : sorting === "deadline" ? deadlineTime(a) - deadlineTime(b) : b.score - a.score) || collator.compare(a.title, b.title) || collator.compare(a.id, b.id));
     const pages = Math.max(1, Math.ceil(results.length / pageSize)); state.page = Math.min(state.page, pages);
     const start = (state.page - 1) * pageSize;
     $("job-rows").replaceChildren();
@@ -468,7 +475,13 @@
       const scoreCell = make("td"); scoreCell.append(scorePill(job.score));
       const statusCell = make("td"); statusCell.append(make("span", statusLabel((job.application || {}).status), "badge"));
       const detailCell = make("td"); const detailButton = make("button", "↗", "arrow-button"); detailButton.type = "button"; detailButton.setAttribute("aria-label", "Détail : " + job.title + " chez " + job.company); detailButton.addEventListener("click", () => showDetail(job)); detailCell.append(detailButton);
-      row.append(jobCell, make("td", job.location || "Non précisée", "location-cell"), scoreCell, statusCell, make("td", date(job.first_seen), "date-cell"), detailCell);
+      const publicationCell = make("td", undefined, "date-cell");
+      const publicationDay = radarPublication.day(job.publication_day);
+      if (publicationDay) {
+        const published = make("time", radarPublication.label(publicationDay)); published.dateTime = publicationDay;
+        publicationCell.append(published);
+      } else publicationCell.textContent = "Non précisée";
+      row.append(jobCell, make("td", job.location || "Non précisée", "location-cell"), scoreCell, statusCell, publicationCell, make("td", date(job.first_seen), "date-cell"), detailCell);
       $("job-rows").append(row);
     });
     $("empty-state").hidden = results.length > 0;
@@ -646,7 +659,7 @@
   $("filters").addEventListener("submit", (event) => event.preventDefault());
   $("trend-days").addEventListener("change", renderTrends);
   $("record-health").addEventListener("click", recordHealth);
-  ["search", "company", "score", "active", "application-status", "experience", "education", "sort"].forEach((id) => $(id).addEventListener(id === "search" ? "input" : "change", () => { state.page = 1; renderJobs(); }));
+  ["search", "company", "score", "active", "application-status", "experience", "education", "publication-from", "publication-to", "sort"].forEach((id) => $(id).addEventListener(id === "search" || id.startsWith("publication-") ? "input" : "change", () => { state.page = 1; renderJobs(); }));
   $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (state.view === "applications") $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); });
   $("previous").addEventListener("click", () => { state.page -= 1; renderJobs(); });
   $("next").addEventListener("click", () => { state.page += 1; renderJobs(); });

@@ -105,6 +105,14 @@ def _job(row: sqlite3.Row) -> dict:
     ):
         raise DashboardDataError("invalid_data")
     deadline = resolve_deadline(job)
+    # Sources normalize publication dates to UTC. Do not expose a fabricated hour
+    # or substitute discovery/update dates when publication is unknown.
+    publication_day = None
+    if job.date_posted is not None and job.date_posted.utcoffset() is not None:
+        try:
+            publication_day = job.date_posted.astimezone(UTC).date().isoformat()
+        except (ValueError, OverflowError):
+            pass
     return {
         "id": job.id,
         "company": job.company,
@@ -124,6 +132,7 @@ def _job(row: sqlite3.Row) -> dict:
         "is_expired": job.is_expired,
         "first_seen": job.first_seen.isoformat(),
         "last_seen": job.last_seen.isoformat(),
+        "publication_day": publication_day,
         "description_text": job.description_text,
         "apply_url": safe_url(job.apply_url),
         "source_url": safe_url(job.source_url),

@@ -640,7 +640,18 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - Goldman professionnels a repris sa collecte à 12:21 le 26 septembre : 60 fiches,
   sans assouplissement des contrôles. Les 24 sources sont à jour au contrôle suivant.
 
-## Les cinq améliorations prioritaires après le lot 61
+## Lot 62 — Dates et classement des publications
+
+- Colonne et détail **Publiée le**, distincts de la première découverte par le radar.
+- Tris récent/ancien avec inconnues en fin de liste ; filtre par période inclusive,
+  bornes facultatives et combinaison avec les filtres existants et Candidatures.
+- Sur la copie de 787 offres : 342 dates connues, 445 non précisées ; 11 tables et
+  tous les anciens champs du dashboard inchangés. Jour UTC stable dans le navigateur.
+- Parcours navigateur vérifié, 3 331 tests Windows réussis et quatre ignorés,
+  dix tests JavaScript réussis. Livraison et CI à confirmer dans le
+  [bilan du lot 62](VALIDATION-LOT62.md).
+
+## Les cinq améliorations prioritaires après le lot 62
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée et la copie distante des sauvegardes. Le lot 60 permet d’archiver et comparer un contrôle de santé depuis le dashboard local. Goldman professionnels a repris le 26 septembre à 12:21 ; poursuivre la surveillance des variations de pagination. Le lot 59 corrige le faux `invalid_timestamp` observé pendant une collecte et aligne la date des archives sur celle du contrôle de santé. Le lot 56 résout les conflits BNP et reprend les collectes Deutsche Bank/Citi avec lacunes explicites ; Nomura campus reste soumis au CAPTCHA public. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman. Le lot 51 couvre les libellés Nomura `Position Specifications → Experience` : six preuves sur les 16 offres actuelles, valeurs et scores inchangés. Le minimum hors tableau de l'offre Equity Sales Trader reste numérique sans provenance inventée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
