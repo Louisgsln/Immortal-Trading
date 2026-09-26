@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 65 étend les **missions et diplômes à Barclays** : 17 fiches avec des
+missions et 14 avec des mentions de diplôme consultables et filtrables.
+Les conditions de fin d'études et les alternatives restent dans les extraits ;
+un diplôme sans niveau explicite n'est pas assimilé à un Bachelor ou un Master.
+Voir le [bilan du lot 65](docs/VALIDATION-LOT65.md).
+
 Le lot 64 étend les **missions et diplômes à Deutsche Bank et Morgan Stanley** :
 24 nouvelles fiches avec missions et 11 avec diplômes dans le dashboard.
 Les prochaines alertes éligibles reprennent les missions. Les mentions

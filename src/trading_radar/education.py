@@ -8,11 +8,12 @@ import html
 import re
 from collections.abc import Iterator
 
-from trading_radar.description_sections import labelled_lists, visible_text
+from trading_radar.description_sections import labelled_lists, normalize_heading, visible_text
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "barclays": {"essential skills/basic qualifications"},
     "deutsche_bank": {
         "your skills and experience",
         "skills you'll need",
@@ -55,6 +56,12 @@ _UNSPECIFIED_DEGREE = re.compile(
     r"\bdegree\s+(?:in|from|required|preferred)\b"
     r"|\beducated\s+to\s+(?:a\s+)?degree\s+level\b"
     r"|\bundergraduate\s+degree\b",
+    re.I,
+)
+_BARCLAYS_UNSPECIFIED_DEGREE = re.compile(
+    r"\bdegree\s+or\s+expected\s+degree\b"
+    r"|\byear\s+of\s+your\s+degree\b"
+    r"|\bpost[- ]?graduate\s+degree\b",
     re.I,
 )
 _DEGREES = {
@@ -110,6 +117,61 @@ def _nomura_qualification(root: Element) -> str | None:
     return match["excerpt"].strip()
 
 
+def _barclays_qualification(root: Element) -> tuple[str, str] | None:
+    # Workday preserves this heading and its body in one paragraph or div,
+    # sometimes after other sections. Require a bold heading on its own line,
+    # retain the entire remaining block, and never cross a container boundary.
+    matches: list[tuple[str, str] | None] = []
+    inline = {"br", "span", "i", "em", "a", "b", "strong"}
+
+    def inspect(node: Element) -> None:
+        if not visible_text(node).strip():
+            return
+        children = [c for c in node.children if not isinstance(c, str) or c.strip()]
+        for index, child in enumerate(children):
+            if not isinstance(child, Element):
+                continue
+            if (
+                node.tag in {"p", "div"}
+                and child.tag in {"b", "strong"}
+                and normalize_heading(visible_text(child)) == "who we're looking for"
+            ):
+                heading = " ".join(visible_text(child).split())
+                before = children[index - 1] if index else None
+                body = children[index + 1 :]
+                starts_line = before is None or isinstance(before, Element) and before.tag == "br"
+                starts_body = bool(body) and isinstance(body[0], Element) and body[0].tag == "br"
+                # A later bold line might be another section or an alternative
+                # condition. Reject the block instead of selectively dropping it.
+                extra_heading = any(
+                    isinstance(item, Element)
+                    and item.tag in {"b", "strong"}
+                    and isinstance(previous, Element)
+                    and previous.tag == "br"
+                    for previous, item in zip(body, body[1:], strict=False)
+                )
+                bounded = all(
+                    sub.tag in inline
+                    for item in body
+                    if isinstance(item, Element)
+                    for sub in item.walk()
+                )
+                excerpt = " ".join(
+                    " ".join(
+                        visible_text(item) if isinstance(item, Element) else item for item in body
+                    ).split()
+                )
+                matches.append(
+                    (heading, excerpt)
+                    if starts_line and starts_body and bounded and not extra_heading
+                    else None
+                )
+            inspect(child)
+
+    inspect(root)
+    return matches[0] if len(matches) == 1 else None
+
+
 def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
     document = Document(html.unescape(job.description))
     if job.source == "nomura_professionals":
@@ -117,6 +179,10 @@ def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
         if excerpt:
             yield "Position Specifications → Qualification", excerpt
         return
+    if job.source == "barclays":
+        inline_section = _barclays_qualification(document.root)
+        if inline_section:
+            yield inline_section
     for heading, section in labelled_lists(document.root, _HEADINGS.get(job.source, set())):
         for item in section.children:
             if isinstance(item, Element) and item.tag == "li":
@@ -132,7 +198,11 @@ def education_mentions(job: Job) -> dict:
         if not excerpt or len(excerpt) > 1500:
             continue
         levels = [key for key, pattern in _DEGREES.items() if pattern.search(excerpt)]
-        if not levels and _UNSPECIFIED_DEGREE.search(excerpt):
+        if not levels and (
+            _UNSPECIFIED_DEGREE.search(excerpt)
+            or job.source == "barclays"
+            and _BARCLAYS_UNSPECIFIED_DEGREE.search(excerpt)
+        ):
             levels = ["unspecified_level"]
         if not levels or any(e["excerpt"] == excerpt for e in result["evidence"]):
             continue

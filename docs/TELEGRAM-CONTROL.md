@@ -10,8 +10,8 @@ Les textes employeur sont échappés et raccourcis avant formatage.
 
 Depuis le lot 55, la carte affiche **Missions · extraits** lorsqu'une rubrique
 de missions est reconnue chez DRW, IMC, HSBC professionnels, Jump Trading,
-Goldman Sachs professionnels, Citi ou, depuis le lot 64, Deutsche Bank et
-Morgan Stanley : jusqu'à trois
+Goldman Sachs professionnels, Citi, Deutsche Bank, Morgan Stanley et, depuis
+le lot 65, Barclays : jusqu'à trois
 extraits dans la langue de l'annonce, limités à 240 caractères chacun avec
 une ellipse si nécessaire. Sinon, **Extrait de description** conserve le repli
 habituel. Le dashboard montre les extraits complets et la rubrique d'origine.

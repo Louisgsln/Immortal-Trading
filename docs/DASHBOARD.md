@@ -160,6 +160,16 @@ couverture à 141 et 108 offres sur la copie auditée. Les formulations
 un Bachelor ou un Master par équivalence supposée ; préférences, disciplines
 et alternatives par expérience restent consultables.
 
+Le [lot 65](VALIDATION-LOT65.md) ajoute Barclays : 17 fiches avec des extraits
+de la rubrique **Accountabilities**, 14 avec une mention de diplôme. La couverture
+totale atteint 158 missions et 122 mentions sur la copie auditée. Les qualifications
+proviennent de **Essential Skills/Basic Qualifications** ou du bloc
+**Who we're looking for**, conservé en entier avec ses conditions de fin d'études
+et ses préférences. Les formulations « degree or expected degree »,
+« penultimate or final year of your degree » et « post-graduate degree » restent
+sans niveau précis. Le format de Tokyo, réparti entre plusieurs paragraphes,
+reste accessible dans la description sans extraction de diplôme.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière
