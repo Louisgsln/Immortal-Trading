@@ -27,6 +27,15 @@ def _description(parts: list[tuple[Element, str]], section: Element | None, root
         return "\n".join(paragraphs)
 
     def visible_nodes(node: Element):
+        # The public editor leaves empty style elements in some requirements.
+        # They neither hide content nor add conditions; active CSS stays rejected.
+        if (
+            node.tag == "style"
+            and not node.attrs
+            and all(isinstance(child, str) and not child.strip() for child in node.children)
+        ):
+            yield id(node)
+            return
         if (
             node.tag in {"script", "style", "template", "noscript"}
             or "hidden" in node.attrs

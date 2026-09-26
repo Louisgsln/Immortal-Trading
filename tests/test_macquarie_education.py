@@ -103,6 +103,30 @@ def test_audited_keyboard_instruction_is_not_part_of_employer_requirements():
     assert result["evidence"][0]["excerpt"] == "Bachelor Degree Or equivalent experience."
 
 
+@pytest.mark.parametrize("style", ["<style></style>", "<style> \n </style>"])
+def test_empty_editor_style_keeps_complete_requirements(style):
+    text = page(["Bachelor Degree" + style, "Or equivalent experience."])
+    result = education_mentions(normalize(collect(text)))
+    assert result["evidence"][0]["excerpt"] == "Bachelor Degree Or equivalent experience."
+
+
+@pytest.mark.parametrize(
+    "markup",
+    [
+        "<style>.optional { display:none }</style>",
+        "<style hidden></style>",
+        '<style media="screen"></style>',
+        "<style><span>Bachelor Degree</span></style>",
+        "<script></script>",
+        "<template></template>",
+    ],
+)
+def test_only_inert_empty_styles_are_accepted(markup):
+    raw = collect(page(["Bachelor Degree" + markup, "Or equivalent experience."]))
+    assert "data-macquarie-section" not in raw.description
+    assert not education_mentions(normalize(raw))["evidence"]
+
+
 @pytest.mark.parametrize(
     "change",
     [
