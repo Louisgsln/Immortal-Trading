@@ -48,8 +48,20 @@ l'extrait employeur, sans interprétation supplémentaire.
 
 ## Livraison
 
-Publication, installation et vérification des contrôles GitHub à consigner après
-la fin des validations locales.
+- Code `1d349ae` publié sur `main` et installé le 26 septembre 2026 à 14:22:21 Paris,
+  après sauvegarde vérifiée à 14:22:16 ; paquet précédent conservé.
+- Les deux fichiers applicatifs installés correspondent au paquet publié.
+- Dashboard et API de suivi disponibles : 158 missions, 122 diplômes, 342 dates de
+  publication. Ancienne couverture Citi, Deutsche Bank et Morgan Stanley conservée,
+  ainsi que les exclusions Associate et les titres ouverts aux deux niveaux.
+- Les deux parcours de filtre et de détail sont aussi vérifiés sur l'instance
+  active, sans erreur JavaScript. Scanner, dashboard et Telegram actifs.
+- Collectes Crédit Agricole CIB, Macquarie, Optiver et UBS campus/professionnels
+  réussies après installation.
+  Les 24 sources sont à jour au contrôle de 14:27:50 ; historique disponible.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36241685752)
+  réussie sur Python 3.11–3.14 : 3 441 tests Linux, couverture 96 %. Dix tests
+  JavaScript sous Node 22 réussis ; construction et restauration Docker réussies.
 
 ## Suite du carnet
 
