@@ -138,6 +138,7 @@ class Collection(BaseModel):
 
 
 class ScanMetrics(BaseModel):
+    source_results: dict[str, dict] = Field(default_factory=dict)
     sources: int = 0
     successful: int = 0
     failed: dict[str, str] = Field(default_factory=dict)

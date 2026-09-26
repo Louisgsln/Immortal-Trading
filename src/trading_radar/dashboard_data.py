@@ -17,6 +17,7 @@ from trading_radar.health import check_health
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job, utcnow
 from trading_radar.monitoring import history
+from trading_radar.source_history import source_history
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 from trading_radar.trends import build_trends
 
@@ -266,6 +267,7 @@ def build_dashboard_data(
         }
         result["monitoring"] = {"status": "unavailable", "snapshots": [], "error": error}
         result["warnings"].append(error)
+    result["source_history"] = source_history(config, instant)
     # Historical counters form a separate read-only observation, like health.
     # Failure of an old scan record must not hide the current jobs snapshot.
     try:

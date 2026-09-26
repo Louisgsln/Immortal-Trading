@@ -508,6 +508,17 @@
         status.append(details);
       }
       const success = make("td", date(source.last_success, true));
+      const history = data.source_history;
+      const observation = history?.sources?.[source.source];
+      if (observation) {
+        const details = make("details", undefined, "collection-conflicts");
+        details.append(make("summary", number(observation.success_rate) + " % de collectes réussies · " + number(observation.attempts) + " essais"));
+        details.append(make("p", "Sur les 24 dernières heures, observations depuis le " + date(observation.since, true) + ". Durée moyenne : " + number(observation.average_seconds) + " s.", "source-key"));
+        if (history.legacy_scans) details.append(make("p", "Historique en cours de constitution : les anciens essais sans attribution par source sont exclus.", "source-key"));
+        const labels = { successful: "Réussie", failed: "Échec", partial: "Fiches incomplètes", degraded: "Références en conflit" };
+        observation.latest.forEach((attempt) => details.append(make("p", date(attempt.at, true) + " · " + labels[attempt.status] + (attempt.failure ? " · " + attempt.failure.label : ""), "source-key")));
+        success.append(details);
+      } else success.append(make("span", history?.status === "unavailable" ? "Historique indisponible" : "Historique en cours de constitution", "source-key"));
       if (source.age_hours !== null && source.age_hours !== undefined) success.append(make("span", "Il y a " + number(Math.round(source.age_hours * 10) / 10) + " h", "source-key"));
       const schedule = make("td");
       if (source.schedule) {

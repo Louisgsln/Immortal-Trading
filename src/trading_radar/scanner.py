@@ -147,6 +147,7 @@ async def scan(
                 return
             metrics.sources += 1
             source_start = time.monotonic()
+            outcome = "failed"
             source_http = http
             separate_session = own_http and collectors is None and len(selected) > 1
             if separate_session:
@@ -238,6 +239,13 @@ async def scan(
                 metrics.new += counts["new"]
                 metrics.updated += counts["updated"]
                 metrics.closed += counts["closed"]
+                outcome = (
+                    "degraded"
+                    if result.conflicts
+                    else "partial"
+                    if result.listing_gaps
+                    else "successful"
+                )
                 log(
                     "source_degraded" if result.conflicts else "source_success",
                     source=key,
@@ -259,6 +267,11 @@ async def scan(
                 metrics.failed[key] = error
                 log("source_failed", source=key, collector=co.ats, company=co.name, error=error)
             finally:
+                metrics.source_results[key] = {
+                    "completed_at": utcnow().isoformat(),
+                    "status": outcome,
+                    "duration": round(time.monotonic() - source_start, 3),
+                }
                 metrics.requests += source_http.counts.pop(key, 0)
                 if separate_session:
                     await source_http.close()

@@ -95,6 +95,9 @@ vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le C
 
 ## Prochains lots
 
+Lot 79 développé : historique des essais attribués par source, sans reconstituer
+des succès anciens à partir de totaux globaux. Voir [validation](VALIDATION-LOT79.md).
+
 1. Poursuivre la fiabilité sur les incidents réels, notamment les accès
    intermittents Nomura et les changements de présentation des employeurs.
 2. Compléter les rubriques et les rôles quantitatifs encore non reconnus, avec

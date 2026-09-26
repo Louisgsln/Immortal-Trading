@@ -880,3 +880,9 @@ Voir [validation et limites](VALIDATION-LOT77.md).
 
 Date et heure seules dans les messages, le dashboard et les exports CSV.
 La conversion saisonnière reste active ; voir [validation](VALIDATION-LOT78.md).
+
+## Lot 79 — Historique de fiabilité par source
+
+Essais attribués sur 24 heures, taux de réussite, durée et derniers passages
+consultables dans la santé des sources. L'historique antérieur non attribuable
+est explicitement exclu. Voir [validation](VALIDATION-LOT79.md).
