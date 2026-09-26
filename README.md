@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 73 ajoute **dix employeurs** de trading et de gestion quantitative :
+34 sources, 30 employeurs. Les offres initiales sont importées sans avalanche
+d’alertes ; les nouvelles opportunités restent surveillées en continu. Voir
+[les employeurs et le périmètre](docs/EMPLOYER-EXPANSION.md).
+
 Le lot 72 complète les **fiches UBS, BNP et Barclays** (197 offres avec missions,
 206 avec mentions de diplôme), corrige des faux négatifs de ciblage documentés
 et mesure les recherches supplémentaires. Voir le [bilan](docs/VALIDATION-LOT72.md).

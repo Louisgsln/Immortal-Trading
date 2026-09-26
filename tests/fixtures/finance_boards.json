@@ -1,0 +1,263 @@
+{
+  "akuna_capital": {
+    "id": 7986086,
+    "internal_job_id": 3465474,
+    "company_name": "Akuna Capital",
+    "absolute_url": "https://www.akunacapital.com/careers/job/7986086/?gh_jid=7986086",
+    "metadata": [
+      {
+        "id": 15984,
+        "name": "Employment Type",
+        "value": "Intern",
+        "value_type": "single_select"
+      },
+      {
+        "id": 22806,
+        "name": "Careers Site Section",
+        "value": [
+          "Student - Intern - Summer"
+        ],
+        "value_type": "multi_select"
+      },
+      {
+        "id": 169382,
+        "name": "Specialty",
+        "value": [
+          "SNEAK PEEK",
+          "SNEAK PEEK WEEK"
+        ],
+        "value_type": "multi_select"
+      },
+      {
+        "id": 169753,
+        "name": "Experience",
+        "value": "Intern",
+        "value_type": "single_select"
+      },
+      {
+        "id": 250234,
+        "name": "Crossfilter",
+        "value": [
+          "Trading"
+        ],
+        "value_type": "multi_select"
+      }
+    ],
+    "location": {
+      "name": "Chicago"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "maven_securities": {
+    "id": 8048591,
+    "internal_job_id": 3488404,
+    "company_name": "Maven",
+    "absolute_url": "https://job-boards.greenhouse.io/mavensecuritiesholdingltd/jobs/8048591",
+    "metadata": [
+      {
+        "id": 4912575,
+        "name": "Flexi Persona",
+        "value": [
+          "Anchor (4 days)"
+        ],
+        "value_type": "multi_select"
+      }
+    ],
+    "location": {
+      "name": "Amsterdam"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "point72": {
+    "id": 7045987002,
+    "internal_job_id": 5693265002,
+    "company_name": "Point72 ",
+    "absolute_url": "https://boards.greenhouse.io/point72/jobs/7045987002?gh_jid=7045987002",
+    "metadata": [
+      {
+        "id": 4076300002,
+        "name": "Time Type",
+        "value": "Full Time",
+        "value_type": "single_select"
+      }
+    ],
+    "location": {
+      "name": "Chicago, New York, Seattle "
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "virtu_financial": {
+    "id": 8631180002,
+    "internal_job_id": 6447168002,
+    "company_name": "Virtu Financial",
+    "absolute_url": "https://job-boards.greenhouse.io/virtu/jobs/8631180002",
+    "metadata": null,
+    "location": {
+      "name": "Dublin, Ireland"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "tower_research": {
+    "id": 7816571,
+    "internal_job_id": 3412247,
+    "company_name": "Tower Research Capital",
+    "absolute_url": "https://www.tower-research.com/open-positions/?gh_jid=7816571",
+    "metadata": null,
+    "location": {
+      "name": "Singapore"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "old_mission": {
+    "id": 7993756003,
+    "internal_job_id": 5885251003,
+    "company_name": "Old Mission",
+    "absolute_url": "https://www.oldmissioncapital.com/careers/?gh_jid=7993756003",
+    "metadata": [
+      {
+        "id": 4658361003,
+        "name": "Employment Type",
+        "value": "Full-time",
+        "value_type": "single_select"
+      },
+      {
+        "id": 5412626003,
+        "name": "Team Assignment",
+        "value": "Options Floor Team",
+        "value_type": "long_text"
+      }
+    ],
+    "location": {
+      "name": "Chicago, IL, United States"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "schonfeld": {
+    "id": 8207942,
+    "internal_job_id": 3552454,
+    "company_name": "Schonfeld ",
+    "absolute_url": "https://job-boards.greenhouse.io/schonfeld/jobs/8207942",
+    "metadata": null,
+    "location": {
+      "name": "London, England, United Kingdom"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "five_rings": {
+    "id": 5255334008,
+    "internal_job_id": 4489560008,
+    "company_name": "Five Rings LLC - Careers",
+    "absolute_url": "https://job-boards.greenhouse.io/fiveringsllc/jobs/5255334008",
+    "metadata": [
+      {
+        "id": 4020247008,
+        "name": "Employment Type",
+        "value": "Full-time",
+        "value_type": "single_select"
+      },
+      {
+        "id": 4033205008,
+        "name": "Job Classification",
+        "value": "Campus Hire",
+        "value_type": "single_select"
+      }
+    ],
+    "location": {
+      "name": "New York"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "hudson_river_trading": {
+    "id": 8052050,
+    "internal_job_id": 3489891,
+    "company_name": "Hudson River Trading",
+    "absolute_url": "https://www.hudsonrivertrading.com/careers/job/?gh_jid=8052050",
+    "metadata": [
+      {
+        "id": 31586,
+        "name": "Employment Type",
+        "value": "Full-Time",
+        "value_type": "single_select"
+      },
+      {
+        "id": 4118765,
+        "name": "Job Type",
+        "value": [
+          "Full-Time: New Grad"
+        ],
+        "value_type": "multi_select"
+      },
+      {
+        "id": 4168241,
+        "name": "Job Category",
+        "value": [
+          "Strategy Development"
+        ],
+        "value_type": "multi_select"
+      },
+      {
+        "id": 832649,
+        "name": "Role Priority",
+        "value": "High",
+        "value_type": "single_select"
+      },
+      {
+        "id": 40628704,
+        "name": "Career Site Metadata",
+        "value": [],
+        "value_type": "multi_select"
+      },
+      {
+        "id": 45550074,
+        "name": "Career Site Ranking",
+        "value": "2",
+        "value_type": "single_select"
+      }
+    ],
+    "location": {
+      "name": "London, United Kingdom; New York, NY, United States; Singapore"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  },
+  "transmarket_group": {
+    "id": 5151581007,
+    "internal_job_id": 4639210007,
+    "company_name": "TransMarket Group",
+    "absolute_url": "https://job-boards.greenhouse.io/transmarketgroup/jobs/5151581007?gh_jid=5151581007",
+    "metadata": null,
+    "location": {
+      "name": "Chicago, Illinois, United States"
+    },
+    "title": "Graduate Trader",
+    "content": "<p>Trade FX options and manage risk.</p>",
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-09-26T12:00:00Z"
+  }
+}

@@ -67,3 +67,13 @@ officielles et de leurs offres réelles. Leur inscription au plan ne signifie
 pas qu'ils sont déjà surveillés. Priorité aux accès publics stables et aux offres
 pertinentes ; vérifier séparément chaque portail et garder le premier import
 silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
+
+## Livraisons de cette reprise
+
+- Lot 71 : fiabilité et collectes indépendantes, installé et observé.
+- Lot 72 : fiches BNP/UBS/Barclays, ciblage documenté et audit de recherches
+  additionnelles sans gain ciblé chez Barclays/DB, installé et vérifié.
+- Lot 73 : dix employeurs supplémentaires ; voir le [périmètre vérifié](EMPLOYER-EXPANSION.md).
+
+Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
+vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.

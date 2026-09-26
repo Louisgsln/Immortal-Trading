@@ -22,6 +22,39 @@ BOARDS = {
     "flowtraders": ("Flow Traders", "job-boards.greenhouse.io"),
     "jumptrading": ("Jump Trading", "www.jumptrading.com"),
     "xtxmarketstechnologies": ("XTX Markets", "job-boards.greenhouse.io"),
+    "akunacapital": ("Akuna Capital", "www.akunacapital.com"),
+    "mavensecuritiesholdingltd": ("Maven Securities", "job-boards.greenhouse.io"),
+    "point72": ("Point72", "boards.greenhouse.io"),
+    "virtu": ("Virtu Financial", "job-boards.greenhouse.io"),
+    "towerresearchcapital": ("Tower Research Capital", "www.tower-research.com"),
+    "oldmissioncapital": ("Old Mission", "www.oldmissioncapital.com"),
+    "schonfeld": ("Schonfeld", "job-boards.greenhouse.io"),
+    "fiveringsllc": ("Five Rings", "job-boards.greenhouse.io"),
+    "wehrtyou": ("Hudson River Trading", "www.hudsonrivertrading.com"),
+    "transmarketgroup": ("TransMarket Group", "job-boards.greenhouse.io"),
+}
+_EMPLOYER_NAMES = {"mavensecuritiesholdingltd": "Maven", "fiveringsllc": "Five Rings LLC - Careers"}
+_NULL_METADATA = {
+    "xtxmarketstechnologies",
+    "virtu",
+    "towerresearchcapital",
+    "schonfeld",
+    "transmarketgroup",
+}
+_CUSTOM_PATHS = {
+    "akunacapital": "/careers/job/{id}/",
+    "point72": "/point72/jobs/{id}",
+    "towerresearchcapital": "/open-positions/",
+    "oldmissioncapital": "/careers/",
+    "wehrtyou": "/careers/job/",
+    "transmarketgroup": "/transmarketgroup/jobs/{id}",
+}
+_CONTRACT_FIELDS: dict[str, tuple[str, set[str | None]]] = {
+    "akunacapital": ("Employment Type", {"Full-time", "Intern"}),
+    "oldmissioncapital": ("Employment Type", {"Full-time", None}),
+    "fiveringsllc": ("Employment Type", {"Full-time", "Intern"}),
+    "wehrtyou": ("Employment Type", {"Full-Time", "Intern"}),
+    "point72": ("Time Type", {"Full Time"}),
 }
 
 
@@ -254,7 +287,7 @@ def parse_board(
             for k in ["title", "company_name", "absolute_url"]
         ):
             raise SourceUnavailable("incomplete Greenhouse posting")
-        if row["company_name"].strip() != expected_company:
+        if row["company_name"].strip() != _EMPLOYER_NAMES.get(config.tenant, expected_company):
             raise SourceUnavailable("Greenhouse employer mismatch")
         url = row["absolute_url"]
         parts = urlsplit(url)
@@ -262,6 +295,9 @@ def parse_board(
         valid_query = not parts.query
         if config.tenant == "jumptrading":
             path = "/hr/job"
+            valid_query = parse_qsl(parts.query, keep_blank_values=True) == [("gh_jid", identifier)]
+        elif config.tenant in _CUSTOM_PATHS:
+            path = _CUSTOM_PATHS[config.tenant].format(id=identifier)
             valid_query = parse_qsl(parts.query, keep_blank_values=True) == [("gh_jid", identifier)]
         if (
             (parts.scheme, parts.netloc, parts.path) != ("https", host, path)
@@ -279,7 +315,11 @@ def parse_board(
             continue
         is_xtx = config.tenant == "xtxmarketstechnologies"
         # XTX explicitly returns metadata: null; absence is not an accepted schema change.
-        fields = {} if is_xtx and "metadata" in row and row["metadata"] is None else metadata(row)
+        fields = (
+            {}
+            if config.tenant in _NULL_METADATA and "metadata" in row and row["metadata"] is None
+            else metadata(row)
+        )
         trading_technology = (
             xtx_trading_technology(row)
             if is_xtx
@@ -317,6 +357,47 @@ def parse_board(
             raise SourceUnavailable("Greenhouse posting location missing")
         contract, start = None, None
         junior: Literal["junior", "senior"] | None = None
+        if config.tenant in _CONTRACT_FIELDS:
+            field, allowed = _CONTRACT_FIELDS[config.tenant]
+            value = fields.get(field)
+            if (
+                field not in fields
+                or not isinstance(value, (str, type(None)))
+                or value not in allowed
+            ):
+                raise SourceUnavailable("Greenhouse employment type missing or changed")
+            contract = value
+        if config.tenant == "akunacapital":
+            if not isinstance(fields.get("Experience"), str) or fields["Experience"] not in {
+                "Junior",
+                "Experienced",
+                "Intern",
+            }:
+                raise SourceUnavailable("Akuna experience metadata missing or changed")
+            junior = "junior" if fields["Experience"] == "Junior" else None
+        elif config.tenant == "fiveringsllc":
+            if not isinstance(fields.get("Job Classification"), str) or fields[
+                "Job Classification"
+            ] not in {
+                "Campus Hire",
+                "Full-time",
+                "Summer Intern",
+            }:
+                raise SourceUnavailable("Five Rings classification missing or changed")
+            junior = "junior" if fields["Job Classification"] == "Campus Hire" else None
+        elif config.tenant == "wehrtyou":
+            types = fields.get("Job Type")
+            if (
+                not isinstance(types, list)
+                or not types
+                or any(
+                    not isinstance(t, str)
+                    or t not in {"Full-Time: Experienced", "Full-Time: New Grad", "Internship"}
+                    for t in types
+                )
+            ):
+                raise SourceUnavailable("HRT job type missing or changed")
+            junior = "junior" if types == ["Full-Time: New Grad"] else None
         if config.tenant == "imc":
             if "Worker Sub Type" not in fields or fields["Worker Sub Type"] not in {
                 "Graduate",

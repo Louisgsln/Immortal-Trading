@@ -9,11 +9,13 @@ import re
 from collections.abc import Iterator
 
 from trading_radar.description_sections import labelled_lists, normalize_heading, visible_text
+from trading_radar.finance_sections import QUALIFICATIONS
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
+    **QUALIFICATIONS,
     "macquarie": set(),
     "credit_agricole_cib": set(),
     "societe_generale": set(),

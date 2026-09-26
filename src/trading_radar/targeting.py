@@ -1,7 +1,13 @@
 """Narrow role evidence from audited employer descriptions, not firm boilerplate."""
 
+import html
+import re
+
+from trading_radar.description_sections import labelled_lists, visible_text
+from trading_radar.finance_sections import EMPLOYERS, RESPONSIBILITIES
+from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
-from trading_radar.normalizer import normalize_text
+from trading_radar.normalizer import has, normalize_text
 
 
 def _section(text: str, start: str, end: str) -> str:
@@ -16,6 +22,35 @@ def research_trading_evidence(job: Job) -> bool:
         return False
     text = normalize_text(job.description_text.replace("’", "'"))
     title = job.title_normalized
+    if job.company_normalized == EMPLOYERS.get(job.source) and any(
+        has(title, term) for term in ["quantitative researcher", "quant researcher"]
+    ):
+        sections = list(
+            labelled_lists(
+                Document(html.unescape(job.description)).root, RESPONSIBILITIES[job.source]
+            )
+        )
+        if len(sections) != 1:
+            return False
+        for item in sections[0][1].children:
+            if not isinstance(item, Element) or item.tag != "li":
+                continue
+            duty = normalize_text(visible_text(item))
+            if (
+                has(duty, "trading")
+                and re.search(r"\b(?:develop|build|design|implement|research)\w*\b", duty)
+                and any(
+                    has(duty, term)
+                    for term in [
+                        "trading strategies",
+                        "trading signals",
+                        "pricing models",
+                        "predictive models",
+                    ]
+                )
+            ):
+                return True
+        return False
     if (
         job.source == "jane_street"
         and job.company_normalized == "jane street"

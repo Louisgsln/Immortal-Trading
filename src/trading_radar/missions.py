@@ -3,11 +3,13 @@
 import html
 
 from trading_radar.description_sections import labelled_lists, normalize_heading, visible_text
+from trading_radar.finance_sections import RESPONSIBILITIES
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
+    **RESPONSIBILITIES,
     "bnp_paribas": {
         "direct responsibilities",
         "main responsibilities",

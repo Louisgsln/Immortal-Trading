@@ -266,3 +266,459 @@ companies:
       results_wanted: 50
       hours_old: 72
     notes: Optional dependency; bounded search, never used for closure detection.
+
+  # Official employer expansion, validated 2026-09-26.
+  akuna_capital:
+    name: Akuna Capital
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: akunacapital
+    career_url: https://akunacapital.com/careers/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+  maven_securities:
+    name: Maven Securities
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: mavensecuritiesholdingltd
+    career_url: https://www.mavensecurities.com/jobs/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+  point72:
+    name: Point72
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: point72
+    career_url: https://careers.point72.com/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+  virtu_financial:
+    name: Virtu Financial
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: virtu
+    career_url: https://www.virtu.com/careers/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+  tower_research:
+    name: Tower Research Capital
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: towerresearchcapital
+    career_url: https://tower-research.com/roles/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - central trading analyst
+      - production trader
+  old_mission:
+    name: Old Mission
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: oldmissioncapital
+    career_url: https://www.oldmissioncapital.com/careers/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+  schonfeld:
+    name: Schonfeld
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: schonfeld
+    career_url: https://www.schonfeld.com/careers/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - trading assistant
+  five_rings:
+    name: Five Rings
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: fiveringsllc
+    career_url: https://fiverings.com/careers/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - trading assistant
+  hudson_river_trading:
+    name: Hudson River Trading
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: wehrtyou
+    career_url: https://www.hudsonrivertrading.com/careers/
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+  transmarket_group:
+    name: TransMarket Group
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: transmarketgroup
+    career_url: https://www.transmarketgroup.com/careers
+    country: global
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles excluded
+      from collection. Explicit contract and junior metadata only; no date inferred
+      from updates. Partial scope, no closure by absence; initial import silent. See
+      docs/EMPLOYER-EXPANSION.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral

@@ -820,3 +820,17 @@ requêtes inchangées. Voir [validation](VALIDATION-LOT72.md).
 
 Prochain lot : intégration d’un groupe important d’employeurs officiels de trading
 et de gestion quantitative, avec import initial silencieux et contrôle de chaque portail.
+
+## Lot 73 — Extension de dix employeurs officiels
+
+Akuna, Maven, Point72/Cubist, Virtu, Tower Research, Old Mission, Schonfeld,
+Five Rings, HRT et TransMarket : 34 sources et 30 employeurs au total.
+136 offres additionnelles dans le périmètre audité, dont 52 pertinentes et 29
+prioritaires, avec 65 missions et 98 mentions de diplôme supplémentaires.
+Les 787 offres déjà présentes et leur suivi sont préservés. Voir
+[le périmètre](EMPLOYER-EXPANSION.md) et [la validation](VALIDATION-LOT73.md).
+
+Suite : import du suivi avec aperçu, confirmations de clôture, puis nouveaux
+portails de banques, courtiers et négociants énergie/matières premières.
+Les sauvegardes distantes, le VPS et l’accès multiappareil attendent une destination
+et un mode d’accès choisis. Aucune IA d’enrichissement ou comparaison CV prévue.

@@ -47,4 +47,13 @@ le prochain gain de couverture ; aucune exhaustivité globale n'est revendiquée
 3 690 tests Windows réussis, quatre ignorés. Ruff et mypy réussis.
 Cas négatifs : fausses rubriques, preuves cachées, employeur différent, stages,
 minimum de cinq ans, préférences et frontières de sections ambiguës.
-Publication, installation et observation active à consigner après livraison.
+Commit `4a43ade` publié sur main. [Contrôles GitHub](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36258299194) tous réussis : Python 3.11–3.14, dashboard et conteneur.
+Installation terminée le 26 septembre à 19:18, après sauvegardes vérifiées et
+conservation du paquet précédent. Le lanceur de services ne prend pas en charge
+le recalcul : la finalisation utilise le paquet installé et un chemin de base
+explicite, sans hériter d'une autre configuration de base. Neuf offres avaient
+été recalculées normalement par le scanner ; trois restaient à finaliser.
+Dashboard vérifié : 787 offres, 197 missions, 206 diplômes ; DRW Trader à 80,
+Jump Research Analyst à 68. Suivi et alertes inchangés par le recalcul final.
+Les trois services sont Running ; 23 sources à jour, Nomura campus encore
+signalée pour son accès CAPTCHA.
