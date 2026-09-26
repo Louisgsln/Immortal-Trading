@@ -886,3 +886,9 @@ La conversion saisonnière reste active ; voir [validation](VALIDATION-LOT78.md)
 Essais attribués sur 24 heures, taux de réussite, durée et derniers passages
 consultables dans la santé des sources. L'historique antérieur non attribuable
 est explicitement exclu. Voir [validation](VALIDATION-LOT79.md).
+
+## Lot 80 — Fiches Jane Street et Flow Traders
+
+130 fiches avec missions et 30 avec indications de diplôme supplémentaires dans
+la copie auditée. Rubriques bornées, sans inférence d'éligibilité ni changement
+de score ; voir [validation](VALIDATION-LOT80.md).

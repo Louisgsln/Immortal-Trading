@@ -38,3 +38,37 @@ def labelled_lists(node: Element, headings: set[str]) -> Iterator[tuple[str, Ele
         if text:
             previous = text if child.tag in {"p", "h2", "h3", "h4", "strong"} else ""
         yield from labelled_lists(child, headings)
+
+
+def bounded_paragraphs(root: Element, start: str, end: str) -> tuple[str, list[str]] | None:
+    """One sibling section with both exact headings; keep complete paragraphs."""
+    matches: list[tuple[str, list[str]]] = []
+    labels: list[str] = []
+
+    def visit(node: Element) -> None:
+        if node.tag in _HIDDEN or "hidden" in node.attrs:
+            return
+        active: tuple[str, list[str]] | None = None
+        for child in node.children:
+            if isinstance(child, str):
+                if child.strip():
+                    active = None
+                continue
+            label = normalize_heading(visible_text(child))
+            is_heading = child.tag in {"h2", "h3", "h4"}
+            if is_heading and label in {start, end}:
+                labels.append(label)
+            if is_heading and label == end and active is not None:
+                matches.append(active)
+                active = None
+            elif is_heading and label == start:
+                active = (visible_text(child), [])
+            elif active is not None:
+                if child.tag == "p" and "hidden" not in child.attrs and visible_text(child).strip():
+                    active[1].append(visible_text(child))
+                else:
+                    active = None
+            visit(child)
+
+    visit(root)
+    return matches[0] if labels == [start, end] and len(matches) == 1 else None

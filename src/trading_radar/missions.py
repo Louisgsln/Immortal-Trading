@@ -2,13 +2,19 @@
 
 import html
 
-from trading_radar.description_sections import labelled_lists, normalize_heading, visible_text
+from trading_radar.description_sections import (
+    bounded_paragraphs,
+    labelled_lists,
+    normalize_heading,
+    visible_text,
+)
 from trading_radar.finance_sections import RESPONSIBILITIES
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
+    "flow_traders": {"what you will do"},
     **RESPONSIBILITIES,
     "bnp_paribas": {
         "direct responsibilities",
@@ -107,10 +113,16 @@ def mission_excerpts(job: Job) -> dict | None:
     if job.source not in _HEADINGS and job.source not in {
         "hsbc_professionals",
         "ubs_professionals",
+        "jane_street",
     }:
         return None
     root = Document(html.unescape(job.description)).root
-    if job.source == "ubs_professionals":
+    if job.source == "jane_street":
+        section = bounded_paragraphs(root, "about the position", "about you")
+        if section is None:
+            return None
+        heading, items = section
+    elif job.source == "ubs_professionals":
         lines = field_lines(root, "key responsibilities", {"your career comeback", "the team"})
         ubs_items = bullet_items(lines) if lines is not None else None
         if not ubs_items:

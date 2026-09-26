@@ -15,6 +15,8 @@ from trading_radar.models import Job
 from trading_radar.ubs_sections import bullet_items, field_lines
 
 _HEADINGS = {
+    "flow_traders": {"what you need to succeed", "what you will need to succeed"},
+    "jane_street": {"about you"},
     **QUALIFICATIONS,
     "macquarie": set(),
     "credit_agricole_cib": set(),
@@ -386,7 +388,7 @@ def education_mentions(job: Job) -> dict:
             _UNSPECIFIED_DEGREE.search(excerpt)
             or job.source == "barclays"
             and _BARCLAYS_UNSPECIFIED_DEGREE.search(excerpt)
-            or job.source == "ubs_professionals"
+            or job.source in {"ubs_professionals", "flow_traders"}
             and _UBS_UNSPECIFIED_DEGREE.search(excerpt)
             or job.source == "macquarie"
             and _MACQUARIE_UNSPECIFIED.search(excerpt)
