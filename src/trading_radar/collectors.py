@@ -173,6 +173,10 @@ class VendorCollector:
 
 
 def build_collector(source: str, config: Company, http: HTTPClient) -> Collector:
+    if config.ats == "lever_filtered":
+        from trading_radar.lever_filtered import LeverFilteredCollector
+
+        return LeverFilteredCollector(source, config, http)
     if config.ats == "nomura_professionals":
         from trading_radar.nomura_professionals import NomuraProfessionalsCollector
 

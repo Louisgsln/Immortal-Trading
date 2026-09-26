@@ -1,4 +1,4 @@
-"""List headings audited on the ten official employer boards added in lot 73."""
+"""List headings audited on official finance employer boards."""
 
 EMPLOYERS = {
     "akuna_capital": "akuna capital",
@@ -11,6 +11,12 @@ EMPLOYERS = {
     "five_rings": "five rings",
     "hudson_river_trading": "hudson river trading",
     "transmarket_group": "transmarket group",
+    "dv_trading": "dv trading",
+    "walleye_capital": "walleye capital",
+    "squarepoint_capital": "squarepoint capital",
+    "chicago_trading": "chicago trading company",
+    "chicago_trading_campus": "chicago trading company",
+    "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
     "akuna_capital": {
@@ -26,6 +32,23 @@ QUALIFICATIONS = {
     "five_rings": {"about you"},
     "hudson_river_trading": {"qualifications", "skills"},
     "transmarket_group": {"requirements"},
+    "dv_trading": {"requirements", "requirements：", "preferred skills"},
+    "walleye_capital": {"qualifications"},
+    "squarepoint_capital": {
+        "qualifications",
+        "required qualifications",
+        "preferred candidate profile",
+        "nice to have",
+    },
+    "chicago_trading": {"what we're looking for", "nice to have", "nice to haves"},
+    "chicago_trading_campus": {
+        "qualifications",
+        "key requirements",
+        "what we're looking for",
+        "what it takes for you to be successful",
+        "nice to have",
+    },
+    "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
     "akuna_capital": {"in this role, you will"},
@@ -38,4 +61,21 @@ RESPONSIBILITIES = {
     "five_rings": {"about the role"},
     "hudson_river_trading": {"responsibilities"},
     "transmarket_group": {"responsibilities"},
+    "dv_trading": {"responsibilities", "responsibilities：", "job responsibilities"},
+    "walleye_capital": {"responsibilities"},
+    "squarepoint_capital": {
+        "responsibilities",
+        "key responsibilities",
+        "role and responsibilities",
+        "typical day of desk quant analyst",
+        "typical day of quant researcher",
+        "typical day",
+    },
+    "chicago_trading": {"what you'll do"},
+    "chicago_trading_campus": {"responsibilities"},
+    "belvedere_trading": {
+        "what you'll do",
+        "what our quantitative traders do",
+        "what our quantitative trading interns do",
+    },
 }

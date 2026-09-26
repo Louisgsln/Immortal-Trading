@@ -843,3 +843,19 @@ le dashboard et `/status`. Le portail d'erreur Macquarie est identifié sans
 redirection automatique. Cinq assistants opérationnels audités et un Middle
 Officer sortent des priorités ; le rôle Nomura reste retenu comme technologie
 quantitative. Voir [le bilan](VALIDATION-LOT74.md).
+
+## Lot 75 — Cinq employeurs supplémentaires et portails campus
+
+DV Trading, Walleye Capital, Squarepoint Capital, Chicago Trading Company
+(professionnels et campus) et Belvedere Trading : 40 sources et 35 employeurs.
+50 annonces supplémentaires dans l'audit, dont 29 pertinentes et 21 prioritaires.
+33 fiches avec missions, 25 avec diplôme et 46 dates de publication supplémentaires.
+Le contrôle d'identité inclut l'employeur, les URL, les identifiants, les contrats
+et la pagination. Six rôles de recherche ou développement quantitatifs sont
+qualifiés à partir de missions délimitées. Associate seul et stages restent exclus.
+Le premier import reste silencieux ; aucune fermeture n'est déduite d'une absence.
+Voir [les limites, les preuves et les contrôles](VALIDATION-LOT75.md).
+
+Suite : incidents observés, rubriques et ciblage encore non reconnus, puis
+diversification vers banques, courtiers et négociants énergie/matières premières.
+Les fermetures explicites, l'import du suivi et la restauration restent au carnet.

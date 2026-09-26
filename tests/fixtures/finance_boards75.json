@@ -1,0 +1,81 @@
+{
+  "dv_trading": {
+    "id": 4719126005,
+    "title": "Junior Quantitative Trader",
+    "company_name": "DV Trading",
+    "absolute_url": "https://job-boards.greenhouse.io/dvtrading/jobs/4719126005",
+    "internal_job_id": 4446991005,
+    "content": "<p>Responsibilities</p><ul><li>Develop trading strategies.</li></ul><p>Requirements</p><ul><li>Bachelor degree required.</li></ul>",
+    "location": {
+      "name": "Chicago, United States"
+    },
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-10-01T12:00:00Z",
+    "metadata": null
+  },
+  "walleye_capital": {
+    "id": 4571842006,
+    "title": "Junior Quantitative Trader",
+    "company_name": "Walleye Capital Full Time",
+    "absolute_url": "https://job-boards.greenhouse.io/walleyecapital-external-fulltime/jobs/4571842006",
+    "internal_job_id": 4497600006,
+    "content": "<p>Responsibilities</p><ul><li>Develop trading strategies.</li></ul><p>Requirements</p><ul><li>Bachelor degree required.</li></ul>",
+    "location": {
+      "name": "Chicago, United States"
+    },
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-10-01T12:00:00Z",
+    "metadata": []
+  },
+  "squarepoint_capital": {
+    "id": 7454476,
+    "title": "Junior Quantitative Trader",
+    "company_name": "Squarepoint Capital",
+    "absolute_url": "https://www.squarepoint-capital.com/open-opportunities?id=7454476&gh_jid=7454476",
+    "internal_job_id": 3313277,
+    "content": "<p>Responsibilities</p><ul><li>Develop trading strategies.</li></ul><p>Requirements</p><ul><li>Bachelor degree required.</li></ul>",
+    "location": {
+      "name": "Chicago, United States"
+    },
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-10-01T12:00:00Z",
+    "metadata": [
+      {
+        "name": "Employment Type",
+        "value": "Full-time"
+      },
+      {
+        "name": "Job Board Experience Level",
+        "value": "Early Careers Opportunity"
+      }
+    ]
+  },
+  "chicago_trading": {
+    "id": 4730408005,
+    "title": "Junior Quantitative Trader",
+    "company_name": "CTC Lateral - Website & LinkedIn",
+    "absolute_url": "https://job-boards.greenhouse.io/chicagotrading/jobs/4730408005",
+    "internal_job_id": 4452712005,
+    "content": "<p>Responsibilities</p><ul><li>Develop trading strategies.</li></ul><p>Requirements</p><ul><li>Bachelor degree required.</li></ul>",
+    "location": {
+      "name": "Chicago, United States"
+    },
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-10-01T12:00:00Z",
+    "metadata": []
+  },
+  "chicago_trading_campus": {
+    "id": 4716937005,
+    "title": "Junior Quantitative Trader",
+    "company_name": "CTC Campus - Website",
+    "absolute_url": "https://job-boards.greenhouse.io/chicagotradingcampus/jobs/4716937005",
+    "internal_job_id": 4442721005,
+    "content": "<p>Responsibilities</p><ul><li>Develop trading strategies.</li></ul><p>Requirements</p><ul><li>Bachelor degree required.</li></ul>",
+    "location": {
+      "name": "Chicago, United States"
+    },
+    "first_published": "2026-09-26T10:00:00Z",
+    "updated_at": "2026-10-01T12:00:00Z",
+    "metadata": []
+  }
+}

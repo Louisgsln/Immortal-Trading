@@ -76,6 +76,10 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
 - Lot 73 : dix employeurs supplémentaires, installé et vérifié sur deux collectes
   réelles par source ; voir le [périmètre vérifié](EMPLOYER-EXPANSION.md) et
   le [bilan de livraison](VALIDATION-LOT73.md).
+- Lot 74 : causes des incidents et calendrier de reprise visibles, six faux
+  positifs opérationnels retirés et rôle Nomura requalifié ; installé et vérifié.
+- Lot 75 : cinq employeurs, six portails, contrôles Lever, rubriques de fiches
+  et six cas de ciblage quantitatif audités ; voir [validation](VALIDATION-LOT75.md).
 
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.
@@ -93,6 +97,6 @@ vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le C
 5. Définir la destination et le budget de l'hébergement, des sauvegardes
    distantes et de l'accès multiappareil avant leur mise en place.
 
-Ces points restent à réaliser ; les trois lots livrés ne clôturent pas la
+Ces points restent à réaliser ; les lots livrés ne clôturent pas la
 feuille de route entière. L'ajout d'un employeur signifie une collecte testée,
 pas une garantie d'offres éligibles ni de disponibilité permanente du portail.

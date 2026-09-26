@@ -53,4 +53,12 @@ Résultat : 923 offres, 253 pertinentes et 154 prioritaires.
 - Mypy, Ruff et formatage réussis ; tableau de santé vérifié dans le navigateur
   sur une copie de la base avec les incidents réels Nomura et Macquarie.
 - Suite complète Windows : **3 826 tests réussis, quatre ignorés**.
-- Publication et observation après installation à consigner à l'issue de la livraison.
+- Publié sur `main` : `ff2aa68538b52a260c64bc938fd7fe5591d891ed`, installé
+  le 26 septembre 2026 à 20:11 Paris après sauvegarde vérifiée. Les 89 fichiers
+  applicatifs et ressources installés correspondent au dépôt. Les sept recalculs
+  conservent intégralement candidatures, historiques et alertes.
+- Scanner, Telegram et dashboard redémarrés ; Macquarie réussit à 20:11:57.
+  À ce contrôle, 33 sources sur 34 sont à jour ; Nomura campus reste soumis au CAPTCHA.
+  La reprise Macquarie reflète la réponse du portail, pas une suppression de ses contrôles.
+- Python 3.11–3.14, dashboard et conteneur réussis en
+  [CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36261595222).

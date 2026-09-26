@@ -1,7 +1,10 @@
 # Extension des employeurs — septembre 2026
 
-Dix employeurs officiels ajoutés au lot 73 : **34 sources et 30 employeurs**
-activés au total, contre 24 sources et 20 employeurs auparavant.
+Quinze employeurs officiels ajoutés aux lots 73 et 75 : **40 sources et 35 employeurs**
+configurés au total. Le lot 73 avait porté le périmètre à 34 sources et 30 employeurs.
+Le lot 75 ajoute DV Trading, Walleye, Squarepoint, CTC professionnels/campus et
+Belvedere ; voir les [preuves officielles et les mesures](VALIDATION-LOT75.md).
+Les chiffres des sections ci-dessous décrivent la photographie du lot 73.
 
 ## Portails vérifiés
 
@@ -66,8 +69,9 @@ Les sessions sont séparées et l'espacement des requêtes Greenhouse est partag
 
 ## Extensions encore à auditer
 
-Squarepoint, Qube, G-Research et Balyasny ont été examinés mais ne sont pas activés
-par ce lot : catalogue non complètement validé ou accès automatisé restreint.
+Squarepoint, Qube, G-Research et Balyasny ont été examinés mais n'étaient pas activés
+par le lot 73 : catalogue non complètement validé ou accès automatisé restreint.
+Squarepoint est validé et ajouté au lot 75 ; les trois autres restent à auditer.
 Quantlab a répondu HTTP 403. Aucun de ces employeurs n'est compté comme surveillé.
 Poursuivre avec les banques, courtiers, fonds et négociants énergie/matières premières,
 en conservant une preuve officielle et une simulation d'import par source.

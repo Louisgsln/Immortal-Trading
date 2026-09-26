@@ -90,9 +90,95 @@ def _section(text: str, start: str, end: str) -> str:
     return rest.split(end)[0] if rest.count(end) == 1 else ""
 
 
+_FINANCE_ROLES = {
+    ("squarepoint_capital", "junior quant researcher"): (
+        "research",
+        "position overview",
+        "required qualifications",
+        (
+            "research and implement strategies within the firm s automated trading framework",
+            "identify trading opportunities",
+            "researching and implementing trading ideas",
+        ),
+    ),
+    ("squarepoint_capital", "junior quant researcher ml alpha research"): (
+        "research",
+        "position overview",
+        "required qualifications",
+        (
+            "identify trading opportunities",
+            "researching new statistical and ml techniques",
+            "deploy and monitor models used to generate trading signals",
+        ),
+    ),
+    ("squarepoint_capital", "junior quant developer"): (
+        "technology",
+        "position overview",
+        "required qualifications",
+        (
+            "implement novel trading strategies",
+            "identify new trading opportunities",
+            "backtesting simulations",
+        ),
+    ),
+    ("squarepoint_capital", "graduate quant developer"): (
+        "technology",
+        "role and responsibilities",
+        "required qualifications",
+        (
+            "software engineering skills to support investment research and trading",
+            "work closely with quantitative researchers",
+            "workflows for alpha generation",
+            "frameworks used by researchers and traders globally",
+        ),
+    ),
+    ("chicago_trading_campus", "systematic quantitative researcher phd"): (
+        "research",
+        "the role",
+        "qualifications phd in science or engineering fields",
+        (
+            "trading strategy generation",
+            "back testing",
+            "statistical analysis",
+            "build predictive and explanatory models",
+            "trading infrastructure",
+        ),
+    ),
+    ("dv_trading", "quantitative researcher"): (
+        "research",
+        "responsibilities",
+        "requirements",
+        (
+            "develop and refine signals grounded in market microstructure analysis",
+            "collaborate with traders to translate research into deployable strategies",
+            "signal research backtesting and production deployment",
+        ),
+    ),
+}
+
+
+def finance_role_evidence(job: Job, role: str) -> bool:
+    """Audited exact roles; general employer language cannot supply missing duties."""
+    rule = _FINANCE_ROLES.get((job.source, job.title_normalized))
+    if (
+        job.source_type != "official"
+        or rule is None
+        or rule[0] != role
+        or job.company_normalized != EMPLOYERS.get(job.source)
+    ):
+        return False
+    text = normalize_text(
+        visible_text(Document(html.unescape(job.description)).root).replace("’", "'")
+    )
+    section = _section(text, rule[1], rule[2])
+    return all(has(section, phrase) for phrase in rule[3])
+
+
 def research_trading_evidence(job: Job) -> bool:
     if job.source_type != "official":
         return False
+    if finance_role_evidence(job, "research"):
+        return True
     text = normalize_text(job.description_text.replace("’", "'"))
     title = job.title_normalized
     if job.company_normalized == EMPLOYERS.get(job.source) and any(

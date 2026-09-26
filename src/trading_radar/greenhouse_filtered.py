@@ -32,14 +32,26 @@ BOARDS = {
     "fiveringsllc": ("Five Rings", "job-boards.greenhouse.io"),
     "wehrtyou": ("Hudson River Trading", "www.hudsonrivertrading.com"),
     "transmarketgroup": ("TransMarket Group", "job-boards.greenhouse.io"),
+    "dvtrading": ("DV Trading", "job-boards.greenhouse.io"),
+    "walleyecapital-external-fulltime": ("Walleye Capital", "job-boards.greenhouse.io"),
+    "squarepointcapital": ("Squarepoint Capital", "www.squarepoint-capital.com"),
+    "chicagotrading": ("Chicago Trading Company", "job-boards.greenhouse.io"),
+    "chicagotradingcampus": ("Chicago Trading Company", "job-boards.greenhouse.io"),
 }
-_EMPLOYER_NAMES = {"mavensecuritiesholdingltd": "Maven", "fiveringsllc": "Five Rings LLC - Careers"}
+_EMPLOYER_NAMES = {
+    "mavensecuritiesholdingltd": "Maven",
+    "fiveringsllc": "Five Rings LLC - Careers",
+    "walleyecapital-external-fulltime": "Walleye Capital Full Time",
+    "chicagotrading": "CTC Lateral - Website & LinkedIn",
+    "chicagotradingcampus": "CTC Campus - Website",
+}
 _NULL_METADATA = {
     "xtxmarketstechnologies",
     "virtu",
     "towerresearchcapital",
     "schonfeld",
     "transmarketgroup",
+    "dvtrading",
 }
 _CUSTOM_PATHS = {
     "akunacapital": "/careers/job/{id}/",
@@ -55,6 +67,10 @@ _CONTRACT_FIELDS: dict[str, tuple[str, set[str | None]]] = {
     "fiveringsllc": ("Employment Type", {"Full-time", "Intern"}),
     "wehrtyou": ("Employment Type", {"Full-Time", "Intern"}),
     "point72": ("Time Type", {"Full Time"}),
+    "squarepointcapital": (
+        "Employment Type",
+        {"Full-time", "Employee-Regular", "Employee-Intern", "Intern Full-time"},
+    ),
 }
 
 
@@ -296,6 +312,12 @@ def parse_board(
         if config.tenant == "jumptrading":
             path = "/hr/job"
             valid_query = parse_qsl(parts.query, keep_blank_values=True) == [("gh_jid", identifier)]
+        elif config.tenant == "squarepointcapital":
+            path = "/open-opportunities"
+            valid_query = sorted(parse_qsl(parts.query, keep_blank_values=True)) == [
+                ("gh_jid", identifier),
+                ("id", identifier),
+            ]
         elif config.tenant in _CUSTOM_PATHS:
             path = _CUSTOM_PATHS[config.tenant].format(id=identifier)
             valid_query = parse_qsl(parts.query, keep_blank_values=True) == [("gh_jid", identifier)]
@@ -375,6 +397,23 @@ def parse_board(
             }:
                 raise SourceUnavailable("Akuna experience metadata missing or changed")
             junior = "junior" if fields["Experience"] == "Junior" else None
+        elif config.tenant == "squarepointcapital":
+            level = fields.get("Job Board Experience Level")
+            if not isinstance(level, str) or level not in {
+                "Early Careers Opportunity",
+                "Experienced Professional",
+                "Internship",
+            }:
+                raise SourceUnavailable("Squarepoint experience metadata missing or changed")
+            internship = contract in {"Employee-Intern", "Intern Full-time"}
+            if internship != (level == "Internship"):
+                raise SourceUnavailable("Squarepoint contradictory contract and experience")
+            contract = "Intern" if internship else "Full-time"
+            junior = "junior" if level == "Early Careers Opportunity" else None
+        elif config.tenant == "chicagotradingcampus":
+            # The official campus board is evidence of career stage; title/contract
+            # exclusions for internships and Associate still take precedence.
+            junior = "junior"
         elif config.tenant == "fiveringsllc":
             if not isinstance(fields.get("Job Classification"), str) or fields[
                 "Job Classification"
@@ -488,6 +527,7 @@ def parse_board(
                             "Website Job Category Filter",
                             "Start Date",
                             "Division",
+                            "Job Board Experience Level",
                         }
                     },
                 },

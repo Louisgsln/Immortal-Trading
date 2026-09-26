@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 75 ajoute **DV Trading, Walleye Capital, Squarepoint Capital, Chicago
+Trading Company et Belvedere Trading**, avec deux portails distincts pour CTC.
+Le périmètre passe à **40 sources et 35 employeurs**. Simulation vérifiée :
+50 annonces supplémentaires, dont 29 pertinentes et 21 prioritaires, sans
+renvoyer les anciennes alertes. Voir le [périmètre et la validation](docs/VALIDATION-LOT75.md).
+
 Le lot 74 explique les **incidents et délais de reprise** dans le dashboard et
 Telegram, et corrige six faux positifs opérationnels sans exclure tous les postes
 Assistant/Support. Le rôle quantitatif Nomura reste retenu. Voir le

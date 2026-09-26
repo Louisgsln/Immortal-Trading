@@ -722,3 +722,266 @@ companies:
       - women in trading
       - experienced
       - lateral
+  dv_trading:
+    name: DV Trading
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: dvtrading
+    career_url: https://dvtrading.co/join-dv/
+    country: global
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - principal
+      - applications specialist
+      - application specialist
+  walleye_capital:
+    name: Walleye Capital
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: walleyecapital-external-fulltime
+    career_url: https://walleyecapital.com/careers
+    country: global
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+    options:
+      title_terms:
+      - junior trader
+      - quantitative analyst
+      - quantitative researcher
+      - quantitative trader
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - principal
+      - applications specialist
+      - application specialist
+  squarepoint_capital:
+    name: Squarepoint Capital
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: squarepointcapital
+    career_url: https://www.squarepoint-capital.com/open-opportunities
+    country: global
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      - desk quant analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - principal
+      - applications specialist
+      - application specialist
+  chicago_trading:
+    name: Chicago Trading Company
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: chicagotrading
+    career_url: https://www.chicagotrading.com/search
+    country: global
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - principal
+      - applications specialist
+      - application specialist
+  chicago_trading_campus:
+    name: Chicago Trading Company
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: chicagotradingcampus
+    career_url: https://www.chicagotrading.com/campus
+    country: global
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - principal
+      - applications specialist
+      - application specialist
+  belvedere_trading:
+    name: Belvedere Trading
+    enabled: true
+    ats: lever_filtered
+    tenant: belvederetrading
+    career_url: https://www.belvederetrading.com/open-positions-1
+    country: global
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative researcher
+      - quant researcher
+      - quantitative developer
+      - quant developer
+      - quant strategist
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - reliability
+      - infrastructure
+      - women in trading
+      - experienced
+      - lateral
+      - principal
+      - applications specialist
+      - application specialist

@@ -11,6 +11,7 @@ from trading_radar.role_evidence import role_evidence_text
 from trading_radar.targeting import (
     OPERATIONAL_EXCLUSION,
     drw_junior_role,
+    finance_role_evidence,
     nomura_trading_technology,
     operational_role,
     research_trading_evidence,
@@ -229,8 +230,10 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     tech = any(
         has(title, t) for t in ["software", "developer", "engineer", "technology", "systems"]
     )
+    verified_technology = job.role_hint == "trading_technology" or finance_role_evidence(
+        job, "technology"
+    )
     if tech:
-        verified_technology = job.role_hint == "trading_technology"
         embedded = (
             verified_technology
             or bool(roles)
@@ -325,7 +328,7 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     fo = (
         verified_research
         or verified_nomura_technology
-        or (tech and job.role_hint == "trading_technology")
+        or (tech and verified_technology)
         or any(
             has(text, t)
             for t in [
