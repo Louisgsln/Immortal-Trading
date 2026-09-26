@@ -32,6 +32,8 @@ def observed(job, content, source="drw"):
         ("imc", "Core Responsibilities"),
         ("imc", "Key Responsibilities"),
         ("imc", "YOUR CORE RESPONSIBILTIES"),
+        ("jump_trading", "What You’ll Do:"),
+        ("jump_trading", "What you will do:"),
     ],
 )
 def test_audited_lists_keep_first_three_complete_items(job, source, heading, escaped):

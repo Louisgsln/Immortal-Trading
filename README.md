@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 58 étend les **missions et diplômes à Jump Trading** : 12 offres avec
+extraits de missions pour les prochaines cartes Telegram et le dashboard,
+11 avec diplômes cités dans le filtre et le détail. Les alternatives sont
+conservées, sans recalcul de score ni renvoi d'anciennes alertes.
+Voir le [bilan du lot 58](docs/VALIDATION-LOT58.md).
+
 Le lot 56 rétablit la **collecte BNP** et reprend les offres complètes de
 **Deutsche Bank et Citi**, en signalant leurs références sans titre ni lien.
 Nomura campus reste bloqué par un CAPTCHA public, désormais indiqué clairement.

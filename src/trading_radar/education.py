@@ -27,6 +27,7 @@ _HEADINGS = {
         "you'll feel right at home if you",
     },
     "imc": {"skills and experience", "your skills and experience"},
+    "jump_trading": {"skills you'll need", "skills you will need"},
 }
 _SHORT_DEGREE_CONTEXT = r"\b\.?(?=\s*(?:[,/]|(?:or|and|in|degree|preferably|preferred)\b|$))"
 _DEGREES = {
@@ -34,7 +35,7 @@ _DEGREES = {
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
     ),
     "master": re.compile(
-        r"\b(?i:master(?:['’]s|s|(?=\s+(?:degree|of)\b)))\b|\bM\.?S\.?[cC]\b|\bM\.?S"
+        r"\b(?i:master(?:['’]s|s|(?=\s+(?:degree|of|or\s+Ph\.?D)\b)))\b|\bM\.?S\.?[cC]\b|\bM\.?S"
         + _SHORT_DEGREE_CONTEXT
     ),
     "doctorate": re.compile(r"\bPh\.?D\b|\bdoctorate\b|\bdoctoral\s+degree\b", re.I),

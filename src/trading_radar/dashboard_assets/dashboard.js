@@ -397,7 +397,7 @@
     content.append(experienceSection);
     const educationSection = detailSection("Diplômes mentionnés");
     const educationEvidence = ((job.education || {}).evidence || []);
-    if (!educationEvidence.length) educationSection.append(make("p", "Aucune mention reconnue dans les rubriques prises en charge (DRW, IMC et Nomura professionnels). Cela ne signifie pas qu’aucun diplôme n’est demandé."));
+    if (!educationEvidence.length) educationSection.append(make("p", "Aucune mention reconnue dans les rubriques prises en charge (DRW, IMC, Jump Trading et Nomura professionnels). Cela ne signifie pas qu’aucun diplôme n’est demandé."));
     educationEvidence.forEach((item) => {
       educationSection.append(make("p", "Critères de l’annonce · " + item.heading, "detail-company"),
         make("blockquote", item.excerpt, "description experience-excerpt"));

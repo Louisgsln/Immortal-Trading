@@ -587,7 +587,16 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   3 188 tests Linux, couverture 96 %.
   Bilan [VALIDATION-LOT57.md](VALIDATION-LOT57.md).
 
-## Les cinq améliorations prioritaires après le lot 57
+## Lot 58 — Missions et diplômes Jump Trading
+
+- Extraits des rubriques de missions vérifiées dans les prochaines cartes Telegram
+  et le dashboard ; diplômes cités dans les critères visibles et filtrables.
+- Sur la copie de 787 offres : 12 nouvelles fiches avec missions et 11 avec
+  diplômes, soit 66 et 45 au total ; données et scores inchangés.
+- Filtre et détail vérifiés dans le navigateur. Validation complète et livraison
+  en cours ; bilan [VALIDATION-LOT58.md](VALIDATION-LOT58.md).
+
+## Les cinq améliorations prioritaires après le lot 58
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée et la copie distante des sauvegardes. Le lot 56 résout les conflits BNP et reprend les collectes Deutsche Bank/Citi avec lacunes explicites ; Nomura campus reste soumis au CAPTCHA public. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman. Le lot 51 couvre les libellés Nomura `Position Specifications → Experience` : six preuves sur les 16 offres actuelles, valeurs et scores inchangés. Le minimum hors tableau de l'offre Equity Sales Trader reste numérique sans provenance inventée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.

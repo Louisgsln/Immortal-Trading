@@ -24,6 +24,7 @@ _HEADINGS = {
         "key responsibilities",
         "your core responsibilties",  # Employer spelling in two audited descriptions.
     },
+    "jump_trading": {"what you'll do", "what you will do"},
 }
 _HSBC_SECTIONS = (
     ("purpose of the job", "environment of the job", False),
