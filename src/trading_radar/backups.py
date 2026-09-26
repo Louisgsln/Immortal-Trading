@@ -90,7 +90,7 @@ def _require_new(path: Path, *, database: bool = False) -> None:
 def _protect_path(destination: Path, source: Path) -> None:
     protected = {
         source.resolve(),
-        *(Path(str(source.resolve()) + suffix) for suffix in (*SIDECARS, ".lock")),
+        *(Path(str(source.resolve()) + suffix) for suffix in (*SIDECARS, ".lock", ".scan.lock")),
     }
     if any(
         destination.resolve() == path

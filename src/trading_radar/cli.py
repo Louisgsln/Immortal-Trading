@@ -2,7 +2,6 @@ import asyncio
 import importlib.util
 import json
 import os
-import random
 import sqlite3
 from pathlib import Path
 
@@ -31,6 +30,7 @@ from trading_radar.score_audit import build_score_audit
 from trading_radar.scoring import score_job
 from trading_radar.storage import Repository
 from trading_radar.trends_cli import trends
+from trading_radar.watcher import watch_sources
 
 app = typer.Typer(
     help="Trading Job Radar — public postings, explainable fit scores.",
@@ -154,23 +154,18 @@ def watch(config_dir: Path = Path("config")):
     if not any(c.enabled for c in config.companies.values()):
         repo.close()
         raise typer.BadParameter("Enable at least one source before watch")
-    # Only opted-in collectors use this bounded in-memory cache. Every scan keeps
-    # a fresh HTTP client, so robots policies are fetched again between scans.
+    # Sessions and robots policies are renewed per source; only opted-in cache
+    # entries and host-wide request pacing survive between attempts.
     json_cache = JSONCache()
 
     async def loop():
         async with WatcherPulse(config) as pulse:
-            while True:
-                pulse.check()
-                pulse.publish("scanning")
-                result = await scan(
-                    config, repo, due_only=True, notifier=notifier, json_cache=json_cache
-                )
+            async for result in watch_sources(
+                config, repo, pulse, notifier=notifier, json_cache=json_cache
+            ):
                 if result.sources:
                     export_csv(repo, Path("data/jobs.csv"))
                     typer.echo(result.model_dump_json())
-                pulse.publish("waiting")
-                await asyncio.sleep(10 + random.uniform(0, 3))
 
     try:
         with FileLock(str(pulse_path(config)) + ".lock", timeout=0):

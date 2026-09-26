@@ -34,6 +34,7 @@ class Settings(BaseModel):
     concurrency: int = Field(default=4, ge=1, le=16)
     timeout: float = Field(default=20, gt=0, le=120)
     retries: int = Field(default=3, ge=0, le=5)
+    source_timeout: float = Field(default=600, ge=10, le=1800)
     store_raw: bool = False
     closure_after_missing_scans: int = Field(default=2, ge=2)
     database_url: str = "sqlite:///data/jobs.db"

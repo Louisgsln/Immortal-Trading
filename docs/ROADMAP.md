@@ -765,7 +765,35 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   Optiver et UBS professionnels ont repris leurs collectes.
   [Bilan du lot 70](VALIDATION-LOT70.md).
 
-## Les cinq améliorations prioritaires après le lot 70
+## Lot 71 — Fiabilité des sources
+
+- Sources planifiées indépendamment, sessions anonymes séparées et espacement
+  partagé par site ; une source lente ne retarde plus le résultat des autres.
+- Reprise unique et complète des paginations instables UBS/Optiver, contrôle de
+  la première page et budgets conservés ; refus d'accès toujours explicites.
+- Suivi éditable pendant les requêtes employeur, collectes concurrentes refusées,
+  temporisation corrigée et alertes différées lorsqu'une source échoue.
+- Audit public de 75 offres sur trois sources puis deux scans sur copie sans
+  changement métier. [Mesures, contrôles et livraison](VALIDATION-LOT71.md).
+
+## Ordre de développement confirmé le 26 septembre 2026
+
+1. Fiabilité des sources : planification indépendante, sessions isolées,
+   pagination cohérente, reprises bornées, diagnostics et validation en exploitation.
+2. Fiches plus complètes : missions, critères d'études, expérience et dates avec
+   preuves employeur, en commençant par les variantes BNP, UBS et Barclays restantes.
+3. Ciblage des offres : rôles ambigus et faux positifs, sans lever les exclusions
+   Associate seul ou stage ; conserver les offres explicitement Analyst/Associate.
+4. Couverture des recherches : catégories et mots-clés supplémentaires mesurés
+   sur les portails existants, sans présenter une recherche partielle comme exhaustive.
+5. Autres chantiers : cycle de vie des offres, exploitation durable et suivi.
+6. Extension importante à de nouveaux employeurs de finance et trading, à la
+   place de l'enrichissement IA et de la comparaison avec le CV, retirés du périmètre.
+
+Voir le [plan détaillé et ses critères de livraison](DEVELOPMENT-PLAN.md).
+L'ordre ci-dessus remplace la priorité historique des points ci-dessous.
+
+## Travaux restants identifiés après le lot 70
 
 1. **Valider l’exploitation continue** : depuis le 24 septembre, le collecteur et le dashboard tournent via des tâches Windows natives, avec démarrage à l’ouverture de session, reprise après échec et sauvegarde locale quotidienne vérifiée. Telegram est activé après accusé positif du message de test privé. Voir [exploitation Windows](WINDOWS-LIVE.md). Restent la surveillance prolongée et la copie distante des sauvegardes. Le lot 60 permet d’archiver et comparer un contrôle de santé depuis le dashboard local. Goldman professionnels a repris le 26 septembre à 12:21 ; UBS professionnels a repris à 16:02 après un nouvel échec de pagination. Poursuivre la surveillance de ces variations sans assouplir les contrôles. Le lot 59 corrige le faux `invalid_timestamp` observé pendant une collecte et aligne la date des archives sur celle du contrôle de santé. Le lot 56 résout les conflits BNP et reprend les collectes Deutsche Bank/Citi avec lacunes explicites ; Nomura campus reste soumis au CAPTCHA public. Docker Linux reste validé en CI et sur le poste via WSL 2 ; aucun VPS n’est provisionné.
 2. **Étendre la provenance des exigences** : les deux lacunes DB `R0452740` et `R0450097` sont corrigées au lot 47, avec deux améliorations Goldman. Le lot 51 couvre les libellés Nomura `Position Specifications → Experience` : six preuves sur les 16 offres actuelles, valeurs et scores inchangés. Le minimum hors tableau de l'offre Equity Sales Trader reste numérique sans provenance inventée. Les lots 39–41 couvrent déjà les qualifications `years in`, Jump, Crédit Agricole et Macquarie. Le cas Jane Street HR et les rôles hybrides IMC/Jump/Research Analyst/Trading Assistant restent à qualifier ; ne pas lever leurs exclusions globalement. Revoir Citadel lorsque son accès public redevient disponible.
@@ -779,6 +807,6 @@ Ordre prévu : Goldman Sachs, JPMorgan, Morgan Stanley, Citi, Barclays, Deutsche
 
 La liste de banques et sociétés plus large du master prompt reste la cible à terme. La présence d'un nom dans cette feuille de route ne signifie pas que ses offres sont actuellement surveillées.
 
-## Phase 3
+## Dashboard et suivi
 
-Dashboard en lecture seule livré au lot 22, statistiques historiques au lot 24, suivi interactif local au lot 25 ; rappels conditionnels livrés au lot 17. Les lots 55, 58, 61, 63, 64, 65 et 67 livrent une première lecture synthétique des missions par extraits employeur vérifiés (DRW, IMC, HSBC professionnels, Jump Trading, Goldman Sachs professionnels, Citi, Deutsche Bank, Morgan Stanley, Barclays, BNP Paribas), couvrant 168 offres sur la copie auditée. Restent l’extension à d’autres rubriques auditées, l'enrichissement IA facultatif et le matching CV. Les fonctions de candidature automatique, les recherches de contacts privés et les prédictions de calendrier ne font pas partie de ce premier lot.
+Dashboard en lecture seule livré au lot 22, statistiques historiques au lot 24, suivi interactif local au lot 25 ; rappels conditionnels livrés au lot 17. Les lots 55, 58, 61, 63, 64, 65 et 67 livrent une première lecture synthétique des missions par extraits employeur vérifiés (DRW, IMC, HSBC professionnels, Jump Trading, Goldman Sachs professionnels, Citi, Deutsche Bank, Morgan Stanley, Barclays, BNP Paribas), couvrant 168 offres sur la copie auditée. Restent l’extension à d’autres rubriques auditées, l'import du suivi et les évolutions d'exploitation. La suite privilégie désormais l'élargissement des employeurs de finance et trading. Les fonctions de candidature automatique, les recherches de contacts privés et les prédictions de calendrier restent hors périmètre.

@@ -192,9 +192,9 @@ def list_applications(config: Config) -> list[dict]:
 def mark_applied(config: Config, job_id: str, instant: datetime) -> dict:
     """An idempotent transition; never replace notes or regress later workflow stages.
 
-    The scanner holds the broad file lock across network requests but only inserts
-    missing application rows. BEGIN IMMEDIATE serializes this application-only
-    write with its short SQLite transactions and with dashboard/CLI edits.
+    The scanner only inserts missing application rows. BEGIN IMMEDIATE serializes
+    this application-only write with its short SQLite transactions and with
+    dashboard/CLI edits, independently of collection or notification requests.
     """
     _job_id(job_id)
     with _connection(config, writing=True, application_only=True) as db:

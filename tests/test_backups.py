@@ -133,14 +133,14 @@ def test_missing_database_is_not_created(tmp_path):
     assert not source.exists()
 
 
-@pytest.mark.parametrize("suffix", ["", "-wal", "-shm", "-journal", ".lock"])
+@pytest.mark.parametrize("suffix", ["", "-wal", "-shm", "-journal", ".lock", ".scan.lock"])
 def test_backup_cannot_target_source_or_sidecars(repo, suffix):
     source = source_path(repo)
     with pytest.raises(ValueError, match="overlaps"):
         create_backup(source, Path(str(source) + suffix))
 
 
-@pytest.mark.parametrize("suffix", ["", "-wal", "-shm", "-journal", ".lock"])
+@pytest.mark.parametrize("suffix", ["", "-wal", "-shm", "-journal", ".lock", ".scan.lock"])
 def test_restore_protects_configured_database_even_if_missing(archive, tmp_path, suffix):
     protected = tmp_path / "absent.db"
     with pytest.raises(ValueError, match="overlaps"):

@@ -14,6 +14,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.snapshot_retry import SnapshotChanged, stable_listing
 
 ORIGIN = "https://www.optiver.com"
 SEARCH = ORIGIN + "/join-us/jobs"
@@ -57,6 +58,10 @@ def parse_page(payload: object, offset: int, limit: int) -> tuple[list[dict], in
         if row["experience"] not in {"Experienced", "Graduate", "Early Careers", "Internship"}:
             raise SourceUnavailable("unknown Optiver experience level")
         result.append({**row, "title": row["title"].strip(), "url": job_url(row["href"])})
+    if len({row["componentID"] for row in result}) != len(result) or len(
+        {row["url"] for row in result}
+    ) != len(result):
+        raise SourceUnavailable("Optiver duplicate cards within one page")
     return result, total
 
 
@@ -162,21 +167,25 @@ class OptiverCollector:
         )
         return parse_page(payload, offset, self.options.max_results_per_query)
 
-    async def _collect(self) -> Collection:
-        before = self.http.counts[self.source]
+    async def _list(self) -> list[dict]:
         rows, total = await self.page(0)
         first = list(rows)
         while len(rows) < total:
             page, page_total = await self.page(len(rows))
             if page_total != total:
-                raise SourceUnavailable("Optiver total changed during pagination")
+                raise SnapshotChanged("Optiver total changed during pagination")
             rows.extend(page)
         if len({r["componentID"] for r in rows}) != total or len({r["url"] for r in rows}) != total:
-            raise SourceUnavailable("Optiver duplicate cards or repeated page")
+            raise SnapshotChanged("Optiver duplicate cards or repeated page")
         # Detect a shifting newest-first listing before fetching details.
         check, check_total = await self.page(0)
         if check_total != total or check != first:
-            raise SourceUnavailable("Optiver board changed during pagination")
+            raise SnapshotChanged("Optiver board changed during pagination")
+        return rows
+
+    async def _collect(self) -> Collection:
+        before = self.http.counts[self.source]
+        rows = await stable_listing(self._list, self.source)
         targets = [
             r
             for r in rows

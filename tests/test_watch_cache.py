@@ -15,17 +15,13 @@ def test_watch_passes_one_cache_to_successive_scans(config, repo, monkeypatch, t
     config.settings.database_url = f"sqlite:///{tmp_path / 'jobs.db'}"
     caches = []
 
-    async def scan(*args, **kwargs):
-        caches.append(kwargs["json_cache"])
-        return ScanMetrics()
-
-    async def pause(*args):
-        if len(caches) == 2:
-            raise KeyboardInterrupt
+    async def watch_sources(*args, **kwargs):
+        for _ in range(2):
+            caches.append(kwargs["json_cache"])
+            yield ScanMetrics()
 
     monkeypatch.setattr(cli, "resources", lambda directory: (config, repo, None))
-    monkeypatch.setattr(cli, "scan", scan)
-    monkeypatch.setattr(cli.asyncio, "sleep", pause)
+    monkeypatch.setattr(cli, "watch_sources", watch_sources)
     result = CliRunner().invoke(cli.app, ["watch"])
     assert result.exit_code == 0, result.output
     assert len(caches) == 2 and caches[0] is caches[1]

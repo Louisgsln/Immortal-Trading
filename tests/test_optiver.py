@@ -207,7 +207,7 @@ def test_unstable_pagination_fails(monkeypatch, kind):
             payload["totalCount"] += 1
         if kind == "repeated_page" and offset:
             payload["items"] = rows[:2]
-        if kind == "shifted_first" and not offset and count > 1:
+        if kind == "shifted_first" and not offset and count % 2 == 0:
             payload["items"] = list(reversed(payload["items"]))
         if kind == "short_page" and offset:
             payload["items"].pop()
@@ -215,6 +215,34 @@ def test_unstable_pagination_fails(monkeypatch, kind):
 
     with pytest.raises(SourceUnavailable):
         execute(monkeypatch, transport(rows, [], mutate))
+
+
+@pytest.mark.parametrize("kind", ["changed_total", "repeated_page", "shifted_first"])
+def test_changed_listing_restarts_once_without_fetching_partial_details(monkeypatch, kind):
+    rows = [row(i) for i in range(1, 5)]
+    calls = []
+
+    def mutate(payload, offset, count):
+        if kind == "changed_total" and offset and count == 1:
+            payload["totalCount"] += 1
+        if kind == "repeated_page" and offset and count == 1:
+            payload["items"] = rows[:2]
+        if kind == "shifted_first" and not offset and count == 2:
+            payload["items"] = list(reversed(payload["items"]))
+        return payload
+
+    result = execute(monkeypatch, transport(rows, calls, mutate))
+    assert {job.external_id for job in result.jobs} == {"1", "2", "3", "4"}
+    details = [url for url in calls if "role-" in url]
+    assert len(details) == 4 and len(set(details)) == 4
+    assert all("/en/api/" not in url for url in calls[calls.index(details[0]) :])
+
+
+def test_duplicate_inside_one_page_is_not_retried(monkeypatch):
+    calls = []
+    with pytest.raises(SourceUnavailable, match="within one page"):
+        execute(monkeypatch, transport([row(), row()], calls))
+    assert len([url for url in calls if "/en/api/" in url]) == 1
 
 
 def test_budget_and_failed_detail_prevent_partial_collection(monkeypatch):

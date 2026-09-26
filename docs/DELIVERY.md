@@ -9,6 +9,13 @@ uniquement **Associate**. Conserver les intitulés explicitement ouverts aux deu
 niveaux **Analyst / Associate**, sous réserve des autres critères habituels.
 Cette préférence de ciblage n'attribue aucun nombre d'années à un grade.
 
+Priorités confirmées le 26 septembre 2026 : fiabilité des sources, fiches plus
+complètes, ciblage, couverture des recherches, puis les autres chantiers
+d'exploitation et de suivi. L'enrichissement IA et la comparaison avec un CV
+sont retirés du périmètre. Leur place revient à une extension importante du
+nombre d'employeurs de finance, trading, market making et activités de marchés.
+Le [plan de développement](DEVELOPMENT-PLAN.md) précise les livrables attendus.
+
 1. Choisir un périmètre borné dans la roadmap et vérifier l'état du dépôt distant.
 2. Développer dans la copie de travail, indépendante du scanner en exploitation.
 3. Vérifier le code, les tests pertinents et les parcours utilisateur modifiés.

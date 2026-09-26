@@ -1,6 +1,6 @@
 """SQLite repository. All persistence lives here to allow a PostgreSQL replacement.
 
-One scanner process owns writes (OS file lock in the orchestration layer).
+One scanner process owns collection; short writer locks protect state changes.
 Source identities remain separate from canonical job identity.
 """
 

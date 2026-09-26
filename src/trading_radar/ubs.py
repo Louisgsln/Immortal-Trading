@@ -14,6 +14,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.snapshot_retry import SnapshotChanged, stable_listing
 
 ROOT = "https://jobs.ubs.com"
 BOARD = (
@@ -155,6 +156,30 @@ class UBSCollector:
                 "UBS scan time budget exceeded; no snapshot committed"
             ) from None
 
+    def _page(self, result: object) -> tuple[int, int, list]:
+        if not isinstance(result, dict):
+            raise SourceUnavailable("invalid UBS search response")
+        if result.get("ShowCaptcha") is True:
+            raise SourceUnavailable("UBS public search access challenge")
+        total, size = result.get("JobsCount"), result.get("PageSize")
+        if type(size) is int and size == 0:
+            size = 50
+        rows = result.get("Jobs")
+        rows = rows.get("Job") if isinstance(rows, dict) else None
+        if total == 0 and rows is None:
+            rows = []
+        if (
+            type(total) is not int
+            or total < 0
+            or type(size) is not int
+            or not 1 <= size <= 100
+            or not isinstance(rows, list)
+        ):
+            raise SourceUnavailable("invalid UBS pagination metadata")
+        if total > self.options.max_results_per_query:
+            raise SourceUnavailable("UBS result limit exceeded")
+        return total, size, rows
+
     async def _list(self) -> dict[str, dict]:
         inputs, preload = page_data(
             await self.http.get_text(
@@ -190,36 +215,19 @@ class UBSCollector:
             raise SourceUnavailable("UBS anonymous search context missing") from None
         expected, page_size, number = None, None, 1
         found: dict[str, dict] = {}
+        first_page = None
         while expected is None or len(found) < expected:
             body["pageNumber"] = number
             result = await self.http.post_search_json(
                 SEARCH, body, self.config.request_interval, self.source
             )
-            if not isinstance(result, dict):
-                raise SourceUnavailable("invalid UBS search response")
-            total, size = result.get("JobsCount"), result.get("PageSize")
-            # The public response reports 0 for its default; the UI paginates by 50.
-            if type(size) is int and size == 0:
-                size = 50
-            rows = result.get("Jobs")
-            rows = rows.get("Job") if isinstance(rows, dict) else None
-            if total == 0 and rows is None:
-                rows = []
-            if (
-                type(total) is not int
-                or total < 0
-                or type(size) is not int
-                or not 1 <= size <= 100
-                or not isinstance(rows, list)
-            ):
-                raise SourceUnavailable("invalid UBS pagination metadata")
-            if total > self.options.max_results_per_query:
-                raise SourceUnavailable("UBS result limit exceeded")
+            total, size, rows = self._page(result)
             if expected is not None and (total != expected or size != page_size):
-                raise SourceUnavailable("UBS total or page size changed during pagination")
+                raise SnapshotChanged("UBS total or page size changed during pagination")
             expected, page_size = total, size
             if len(rows) != min(size, total - len(found)):
                 raise SourceUnavailable("UBS returned a short or inconsistent page")
+            page_ids: set[str] = set()
             for row in rows:
                 if not isinstance(row, dict):
                     raise SourceUnavailable("invalid UBS listing")
@@ -231,10 +239,23 @@ class UBSCollector:
                 ):
                     raise SourceUnavailable("UBS listing identifier or title missing")
                 values["url"] = detail_url(row.get("Link"), identifier, self.site_id)
+                if identifier in page_ids:
+                    raise SourceUnavailable("UBS repeated posting within one page")
+                page_ids.add(identifier)
                 if identifier in found:
-                    raise SourceUnavailable("UBS pagination repeated a posting")
+                    raise SnapshotChanged("UBS pagination repeated a posting")
                 found[identifier] = values
+            if number == 1:
+                first_page = (total, size, rows)
             number += 1
+        # The catalogue sorts by LastUpdated. Verify the starting boundary again
+        # before requesting any details, including when counts stay unchanged.
+        body["pageNumber"] = 1
+        check = await self.http.post_search_json(
+            SEARCH, body, self.config.request_interval, self.source
+        )
+        if self._page(check) != first_page:
+            raise SnapshotChanged("UBS board changed during pagination")
         # Session/bootstrap context deliberately never enters RawJob or persisted payloads.
         return found
 
@@ -246,7 +267,7 @@ class UBSCollector:
 
     async def _collect(self) -> Collection:
         before = self.http.counts[self.source]
-        rows = await self._list()
+        rows = await stable_listing(self._list, self.source)
         targets = [row for row in rows.values() if self.selected(row["jobtitle"])]
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("UBS detail limit exceeded; narrow title scope")

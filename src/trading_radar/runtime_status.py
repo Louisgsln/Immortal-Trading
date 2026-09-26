@@ -43,11 +43,13 @@ class WatcherPulse:
             "scan_started": None,
         }
 
-    def publish(self, phase: str | None = None) -> None:
+    def publish(self, phase: str | None = None, *, scan_started: datetime | None = None) -> None:
         now = utcnow().isoformat()
         if phase:
             self.value["phase"] = phase
-            self.value["scan_started"] = now if phase == "scanning" else None
+            self.value["scan_started"] = (
+                (scan_started.isoformat() if scan_started else now) if phase == "scanning" else None
+            )
         self.value["at"] = now
         atomic_json(self.path, self.value)
 

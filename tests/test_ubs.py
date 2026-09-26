@@ -124,7 +124,7 @@ def test_anonymous_pagination_all_descriptions_and_no_session_storage(monkeypatc
         return httpx.Response(200, text=bootstrap())
 
     result = execute(handler, monkeypatch)
-    assert pages == [1, 2] and len(result.jobs) == 1 and not result.complete
+    assert pages == [1, 2, 1] and len(result.jobs) == 1 and not result.complete
     job = result.jobs[0]
     assert (
         "Your role" in job.description
@@ -272,7 +272,90 @@ def test_zero_page_size_means_ui_default_fifty(monkeypatch):
         return httpx.Response(200, json={"JobsCount": 51, "PageSize": 0, "Jobs": {"Job": rows}})
 
     assert not execute(handler, monkeypatch).jobs
-    assert numbers == [1, 2]
+    assert numbers == [1, 2, 1]
+
+
+@pytest.mark.parametrize("kind", ["repeated_page", "changed_total", "shifted_first"])
+def test_one_complete_restart_recovers_changing_listing(monkeypatch, kind):
+    sessions = 0
+    pages = []
+    detail_requests = []
+
+    def handler(req):
+        nonlocal sessions
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method == "POST":
+            number = json.loads(req.content)["pageNumber"]
+            pages.append((sessions, number))
+            total = 2
+            identifier = str(number)
+            if sessions == 1:
+                if kind == "repeated_page" and number == 2:
+                    identifier = "1"
+                if kind == "changed_total" and number == 2:
+                    total = 3
+                if kind == "shifted_first" and pages.count((1, 1)) > 1:
+                    identifier = "3"
+            return httpx.Response(
+                200,
+                json={"JobsCount": total, "PageSize": 1, "Jobs": {"Job": [listing(identifier)]}},
+            )
+        if req.url.params.get("PageType") == "JobDetails":
+            identifier = req.url.params["jobid"]
+            detail_requests.append((sessions, identifier))
+            return httpx.Response(200, text=page(detail(identifier)))
+        sessions += 1
+        return httpx.Response(200, text=bootstrap())
+
+    result = execute(handler, monkeypatch)
+    assert sessions == 2 and {j.external_id for j in result.jobs} == {"1", "2"}
+    assert detail_requests == [(2, "1"), (2, "2")]
+    assert pages[-3:] == [(2, 1), (2, 2), (2, 1)]
+
+
+def test_changing_boundary_twice_never_fetches_details(monkeypatch):
+    sessions = 0
+    page_numbers = []
+
+    def handler(req):
+        nonlocal sessions
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method == "POST":
+            number = json.loads(req.content)["pageNumber"]
+            page_numbers.append((sessions, number))
+            identifier = "2" if page_numbers.count((sessions, 1)) == 2 else "1"
+            return httpx.Response(
+                200, json={"JobsCount": 1, "PageSize": 50, "Jobs": {"Job": [listing(identifier)]}}
+            )
+        assert req.url.params.get("PageType") != "JobDetails"
+        sessions += 1
+        return httpx.Response(200, text=bootstrap())
+
+    with pytest.raises(SourceUnavailable, match="board changed"):
+        execute(handler, monkeypatch)
+    assert sessions == 2 and len(page_numbers) == 4
+
+
+def test_captcha_during_recheck_is_not_retried(monkeypatch):
+    calls = []
+
+    def handler(req):
+        calls.append(req)
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method != "POST":
+            return httpx.Response(200, text=bootstrap())
+        if len([r for r in calls if r.method == "POST"]) == 2:
+            return httpx.Response(200, json={"ShowCaptcha": True})
+        return httpx.Response(
+            200, json={"JobsCount": 1, "PageSize": 50, "Jobs": {"Job": [listing()]}}
+        )
+
+    with pytest.raises(SourceUnavailable, match="access challenge"):
+        execute(handler, monkeypatch)
+    assert len(calls) == 4
 
 
 @pytest.mark.parametrize("wrong_context", [None, "siteId", "linkId", "partnerId"])

@@ -1,5 +1,16 @@
 # Trading Job Radar
 
+Le lot 71 rend les **collectes indépendantes**, isole les sessions des sources
+et ajoute une reprise bornée des paginations UBS/Optiver instables. Les éditions
+du suivi restent disponibles pendant les requêtes employeur. Voir le
+[guide de fiabilité](docs/SOURCE-RELIABILITY.md) et le [bilan](docs/VALIDATION-LOT71.md).
+
+La suite du développement privilégie la **fiabilité**, les fiches complètes,
+le ciblage, la couverture des recherches et l'extension à davantage d'employeurs
+de finance et trading. L'enrichissement IA et la comparaison avec le CV sont
+retirés du périmètre à la demande du propriétaire. Voir le
+[plan de développement](docs/DEVELOPMENT-PLAN.md).
+
 Le lot 70 conserve la provenance des **critères Macquarie** et ajoute cinq
 fiches aux filtres de diplôme : 192 offres couvertes au total. La rubrique
 complète garde les alternatives et préférences ; un diplôme sans niveau explicite

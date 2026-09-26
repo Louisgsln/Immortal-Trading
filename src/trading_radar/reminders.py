@@ -99,6 +99,7 @@ def queue_reminders(
     max_age_hours: float = 24,
     now: datetime | None = None,
     skip_sources: set[str] | None = None,
+    only_sources: set[str] | None = None,
 ) -> int:
     """Caller owns the scanner lock and must check both alert enablement flags."""
     plans = reminder_plans(repo, min_score, max_age_hours, now)
@@ -106,5 +107,7 @@ def queue_reminders(
         return sum(
             repo.enqueue_reminder(p["job_id"], p["event_key"])
             for p in plans
-            if p["eligible"] and p["source"] not in (skip_sources or set())
+            if p["eligible"]
+            and p["source"] not in (skip_sources or set())
+            and (only_sources is None or p["source"] in only_sources)
         )

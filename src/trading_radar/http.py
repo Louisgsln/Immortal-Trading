@@ -19,6 +19,15 @@ class SourceUnavailable(RuntimeError):
     """Public source cannot currently be collected safely/reliably."""
 
 
+class RequestPacing:
+    """Host-wide spacing shared by otherwise independent anonymous sessions."""
+
+    def __init__(self):
+        self.locks: dict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+        self.next_request: dict[str, float] = defaultdict(float)
+        self.last_request: dict[str, float] = defaultdict(float)
+
+
 class HTTPClient:
     def __init__(
         self,
@@ -27,6 +36,7 @@ class HTTPClient:
         transport=None,
         *,
         json_cache: JSONCache | None = None,
+        pacing: RequestPacing | None = None,
     ):
         self.client = httpx.AsyncClient(
             timeout=timeout,
@@ -36,9 +46,10 @@ class HTTPClient:
         )
         self.retries = retries
         self.json_cache = json_cache
-        self.locks: dict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
-        self.next_request: dict[str, float] = defaultdict(float)
-        self.last_request: dict[str, float] = defaultdict(float)
+        self.pacing = pacing or RequestPacing()
+        self.locks = self.pacing.locks
+        self.next_request = self.pacing.next_request
+        self.last_request = self.pacing.last_request
         self.robots: dict[str, RobotsPolicy | None] = {}
         self.counts: dict[str, int] = defaultdict(int)
 
