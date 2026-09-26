@@ -1,11 +1,12 @@
 import os
 import re
-from datetime import UTC, datetime
+from datetime import datetime
 from html import unescape
 from typing import Protocol
 
 import httpx
 
+from trading_radar.display_time import format_paris
 from trading_radar.experience import experience_requirement
 from trading_radar.models import Job
 from trading_radar.telegram_cards import application_keyboard, format_alert
@@ -26,7 +27,7 @@ def format_message(job: Job, event: str) -> str:
     minimum = experience_requirement(job)["minimum_years"]
 
     def date(value: datetime | None) -> str:
-        return value.astimezone(UTC).strftime("%d/%m/%Y %H:%M UTC") if value else "Non précisée"
+        return format_paris(value)
 
     lines = [
         (

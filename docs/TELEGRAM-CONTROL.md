@@ -77,9 +77,10 @@ La source doit être activée, avoir réussi depuis 24 heures et ne pas avoir un
 une ancienne fiche. Les données indisponibles produisent un message explicite,
 jamais une liste partielle présentée comme complète.
 
-Les dates et heures sont en UTC ; une échéance sans heure reste affichée avec
+Les dates et heures sont affichées à Paris, avec UTC+2 en été et UTC+1 en hiver ;
+une échéance sans heure reste affichée avec
 son heure et son fuseau inconnus. Elle est écartée lorsque son jour précède le
-jour UTC du rapport. L'absence de deadline n'est pas une garantie d'ouverture.
+jour de Paris du rapport. L'absence de deadline n'est pas une garantie d'ouverture.
 Le minimum d'expérience affiché peut rester inconnu ou dépasser deux ans : le
 classement reste un outil de tri, à vérifier sur le site employeur.
 
@@ -109,7 +110,7 @@ récapitulatif d'une date déjà tentée.
 Le message reprend les découvertes des 24 heures précédant son exécution,
 avec les mêmes critères que `/new`, et le nombre de sources à jour. Un jour
 sans offre correspondante reste signalé par un message explicite. Les dates
-des fiches restent en UTC ; l'horaire de programmation est en Europe/Paris.
+des fiches et l'horaire de programmation utilisent Europe/Paris.
 
 Le service vérifie l'horaire environ toutes les minutes. Il peut rattraper un
 créneau manqué pendant les quatre heures suivantes, y compris après minuit.
@@ -129,7 +130,7 @@ Si l'heure choisie tombe dans l'heure inexistante du printemps, elle est décal�
 d'une heure réelle locale (02:30 devient 03:30). Lors du retour à l'heure d'hiver,
 la première occurrence est retenue ; la seconde ne provoque pas un autre envoi.
 
-Les dates du rapport sont explicitement en UTC. « Activité récente confirmée »
+Les dates du rapport portent la mention Paris et leur décalage UTC. « Actif »
 signifie qu'un signal du collecteur a moins de 90 secondes ; cela ne garantit
 pas la réussite de chaque source. Un cycle dépassant 30 minutes est signalé.
 Ces commandes consultent la base sans modifier les offres ou les candidatures.
@@ -151,6 +152,38 @@ le contrôle est effectué à intervalles d'au moins une minute.
 Le service Telegram est indépendant du collecteur et peut signaler son arrêt.
 **Il ne peut pas prévenir si le PC entier est éteint ou privé d'Internet.**
 Une surveillance depuis un autre système reste à installer pour ce cas.
+
+Depuis le lot 77, les avis automatiques sont courts : trois sources à vérifier
+au maximum, leur cause et la prochaine reprise possible si elle est connue.
+Les incidents de base, de collecteur ou de livraison restent visibles.
+Le retour à la normale tient en trois lignes de contenu. `/status` fournit les
+dernières observations, le seuil, huit sources à vérifier au maximum et les
+compteurs ; le dashboard garde le détail de toutes les sources.
+
+Exemples de présentation (valeurs illustratives) :
+
+```text
+⚠️ Radar à surveiller
+
+Nomura · Campus · accès bloqué · CAPTCHA
+Reprise possible dès 26/09/2026 · 21:23 · Paris (UTC+2)
+
+39/40 sources à jour · alertes actives
+26/09/2026 · 21:11 · Paris (UTC+2)
+Détails · /status
+```
+
+```text
+✅ Radar opérationnel
+
+40/40 sources à jour · alertes actives
+26/09/2026 · 21:30 · Paris (UTC+2)
+```
+
+Les délais et la mémoire des notifications sont conservés : la mise à jour
+n'envoie pas de test ni de rappel rétrospectif. Les anciens messages ne sont pas
+réécrits. Les données internes conservent leurs instants UTC ; la présentation
+utilise le fuseau Europe/Paris. Les dates sans heure restent des jours calendaires.
 
 ## Configuration et exploitation
 

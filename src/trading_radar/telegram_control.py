@@ -17,7 +17,13 @@ from trading_radar.backups import database_path
 from trading_radar.config import Config
 from trading_radar.dashboard_applications import ApplicationEditError, mark_applied
 from trading_radar.notifications import TelegramNotifier
-from trading_radar.runtime_status import atomic_json, format_status, incident_keys, runtime_report
+from trading_radar.runtime_status import (
+    atomic_json,
+    format_incident_notice,
+    format_status,
+    incident_keys,
+    runtime_report,
+)
 from trading_radar.telegram_cards import application_keyboard, callback_job
 from trading_radar.telegram_digest import (
     DigestState,
@@ -268,9 +274,8 @@ async def check_incidents(
     # No repeated notice after an uncertain send or restart. /status is always available.
     state.notified, state.last_notice = signature, now
     store.save()
-    heading = "⚠️ ÉTAT DU RADAR MODIFIÉ" if signature else "✅ RETOUR À UN ÉTAT NORMAL"
     try:
-        await notifier.send_text(heading + "\n\n" + format_status(report))
+        await notifier.send_text(format_incident_notice(report))
         logger.info("telegram_incident_notice_delivered")
     except Exception as error:
         logger.warning("telegram_incident_delivery_unconfirmed type=%s", type(error).__name__)

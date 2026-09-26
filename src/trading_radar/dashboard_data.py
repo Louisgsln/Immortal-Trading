@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from trading_radar.applications import Application, ApplicationStatus
 from trading_radar.config import Config
 from trading_radar.deadlines import resolve_deadline
+from trading_radar.display_time import PARIS
 from trading_radar.education import education_mentions
 from trading_radar.experience import experience_requirement
 from trading_radar.health import check_health
@@ -105,12 +106,12 @@ def _job(row: sqlite3.Row) -> dict:
     ):
         raise DashboardDataError("invalid_data")
     deadline = resolve_deadline(job)
-    # Sources normalize publication dates to UTC. Do not expose a fabricated hour
+    # Present normalized publication instants as Paris calendar days. Do not expose a fabricated hour
     # or substitute discovery/update dates when publication is unknown.
     publication_day = None
     if job.date_posted is not None and job.date_posted.utcoffset() is not None:
         try:
-            publication_day = job.date_posted.astimezone(UTC).date().isoformat()
+            publication_day = job.date_posted.astimezone(PARIS).date().isoformat()
         except (ValueError, OverflowError):
             pass
     return {
@@ -286,7 +287,7 @@ def build_dashboard_data(
             }
         )
     jobs = result["jobs"]
-    today = instant.date().isoformat()
+    today = instant.astimezone(PARIS).date().isoformat()
     result["summary"] = {
         "total": len(jobs),
         "active": sum(job["is_active"] for job in jobs),

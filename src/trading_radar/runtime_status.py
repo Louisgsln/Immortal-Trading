@@ -12,6 +12,7 @@ from uuid import uuid4
 from trading_radar.audit import timestamp
 from trading_radar.backups import database_path
 from trading_radar.config import Config
+from trading_radar.display_time import format_paris
 from trading_radar.health import check_health
 from trading_radar.models import utcnow
 
@@ -133,71 +134,130 @@ def incident_keys(report: dict) -> list[str]:
     return sorted(set(keys))
 
 
+SOURCE_LABELS = {
+    "fresh": "à jour",
+    "recent_failure": "collecte en échec",
+    "stale": "collecte ancienne",
+    "never_scanned": "jamais collectée",
+    "partial": "fiches incomplètes",
+    "collection_degraded": "références contradictoires",
+    "access_restricted": "accès bloqué · CAPTCHA",
+    "invalid_timestamp": "date incohérente",
+}
+WATCHER_LABELS = {
+    "active": "actif",
+    "stopped": "arrêté",
+    "stale": "sans signal récent",
+    "unknown": "activité non vérifiable",
+    "long_scan": "cycle supérieur à 30 minutes",
+}
+
+
+def _short(value: str, limit: int) -> str:
+    text = " ".join(value.split())
+    encoded = text.encode("utf-16-le")
+    return (
+        text
+        if len(encoded) <= limit * 2
+        else encoded[: (limit - 1) * 2].decode("utf-16-le", errors="ignore") + "…"
+    )
+
+
+def _summary(report: dict) -> str:
+    health = report["health"]
+    sources = (
+        f"{health['source_summary'].get('fresh', 0)}/{len(health['sources'])} sources à jour"
+        if health["database"]["status"] == "ok"
+        else "État des sources indisponible"
+    )
+    return sources + (
+        " · alertes actives" if report["alerts_enabled"] else " · alertes désactivées"
+    )
+
+
+def _problems(report: dict, limit: int, *, details: str = "/status") -> list[str]:
+    health = report["health"]
+    lines = []
+    if health["database"]["status"] != "ok":
+        lines.append("Base locale inaccessible ou à vérifier.")
+    if report["watcher"]["status"] != "active":
+        lines.append("Collecteur " + WATCHER_LABELS[report["watcher"]["status"]] + ".")
+    codes = {issue["code"] for issue in health["issues"] if not issue.get("source")}
+    if "alerts_need_review" in codes:
+        lines.append("Livraison d’alertes à vérifier · /status")
+    if "no_enabled_sources" in codes:
+        lines.append("Aucune source surveillée.")
+    if "scan_invalid_timestamp" in codes:
+        lines.append("Date du dernier cycle incohérente.")
+    known = {"alerts_need_review", "no_enabled_sources", "scan_invalid_timestamp"}
+    if any(code not in known and not code.startswith("database_") for code in codes):
+        lines.append("Un contrôle du radar demande une vérification · /status")
+    affected = {issue.get("source") for issue in health["issues"] if issue.get("source")}
+    problems = [s for s in health["sources"] if s["status"] != "fresh" or s["source"] in affected]
+    for source in problems[:limit]:
+        label = SOURCE_LABELS.get(source["status"], "à vérifier")
+        if source["status"] == "fresh":
+            label = (
+                "références contradictoires" if source.get("collection_conflicts") else "à vérifier"
+            )
+        # The failure label is a curated explanation, never the raw employer error.
+        elif source.get("failure") and source["status"] == "recent_failure":
+            label = _short(source["failure"]["label"], 110)
+        channel = (
+            " · Campus"
+            if source["source"].endswith("_campus")
+            else " · Professionnels"
+            if source["source"].endswith("_professionals")
+            else ""
+        )
+        lines.append(_short(source["company"], 65) + channel + " · " + label)
+        schedule = source.get("schedule", {})
+        if source.get("failure") and schedule.get("eligible_now") is False:
+            retry = format_paris(schedule.get("next_eligible_at"), unknown="")
+            if retry:
+                lines.append("Reprise possible dès " + retry)
+    if len(problems) > limit:
+        lines.append(f"+ {len(problems) - limit} autres sources · {details}")
+    return lines
+
+
+def format_incident_notice(report: dict) -> str:
+    """Automatic notices summarize the current state, without the full /status."""
+    problems = _problems(report, 3)
+    heading = (
+        "⚠️ Radar à surveiller" if incident_keys(report) or problems else "✅ Radar opérationnel"
+    )
+    lines = [heading, "", *problems]
+    if problems:
+        lines.append("")
+    lines += [_summary(report), format_paris(report["health"].get("generated_at"), unknown="")]
+    if problems:
+        lines.append("Détails · /status")
+    return "\n".join(lines).rstrip()
+
+
 def format_status(report: dict) -> str:
     health, watcher = report["health"], report["watcher"]
-
-    def moment(value):
-        parsed = timestamp(value)
-        return parsed.strftime("%d/%m/%Y %H:%M:%S UTC") if parsed else "inconnu"
-
-    labels = {
-        "active": "activité récente confirmée",
-        "stopped": "arrêté",
-        "stale": "plus de signal récent",
-        "unknown": "activité non vérifiable",
-        "long_scan": "cycle supérieur à 30 minutes, à vérifier",
-    }
-    source_labels = {
-        "fresh": "à jour",
-        "recent_failure": "dernier essai en échec",
-        "stale": "ancienne collecte",
-        "never_scanned": "jamais collectée",
-        "partial": "collecte partielle — fiches incomplètes",
-        "collection_degraded": "collecte partielle — références contradictoires",
-        "access_restricted": "accès bloqué par CAPTCHA",
-        "invalid_timestamp": "date incohérente",
-    }
     lines = [
-        "📡 ÉTAT DU RADAR",
+        "📡 Radar · " + WATCHER_LABELS[watcher["status"]],
+        _summary(report),
+        f"Seuil des alertes · {report['threshold']}/100",
         "",
-        "Collecteur : " + labels[watcher["status"]],
-        "Dernier signal : " + moment(watcher["at"]),
-        "Dernier cycle terminé : " + moment(health["latest_scan"]),
-        "Base : " + ("accessible" if health["database"]["status"] == "ok" else "à vérifier"),
-        f"Alertes offres : {'activées' if report['alerts_enabled'] else 'désactivées'} — seuil {report['threshold']}/100",
-        "",
-        (
-            f"Sources : {len(health['sources'])} surveillées"
-            if health["database"]["status"] == "ok"
-            else "Sources : état indisponible"
-        ),
+        "Dernier cycle · " + format_paris(health["latest_scan"]),
+        "Dernier signal · " + format_paris(watcher["at"]),
     ]
-    for status, count in sorted(health["source_summary"].items()):
-        lines.append(f"• {count} {source_labels.get(status, status)}")
-    problems = [s for s in health["sources"] if s["status"] != "fresh"]
+    problems = _problems(report, 8, details="dashboard")
     if problems:
-        lines += ["", "Sources à vérifier :"] + [
-            f"• {s['company']} ({s['source']}) : {source_labels.get(s['status'], s['status'])}"
-            + (f" ({len(s['listing_gaps'])})" if s.get("listing_gaps") else "")
-            + (" — " + s["failure"]["label"] if s.get("failure") else "")
-            + (
-                " Reprise possible après " + moment(s["schedule"]["next_eligible_at"]) + "."
-                if s.get("failure") and s.get("schedule", {}).get("eligible_now") is False
-                else ""
-            )
-            for s in problems[:12]
-        ]
-        if len(problems) > 12:
-            lines.append(f"… et {len(problems) - 12} autres.")
+        lines += ["", *problems]
     if report["deliveries"] is not None:
         deliveries = report["deliveries"]
         lines += [
             "",
-            f"Alertes offres envoyées : {deliveries.get('sent', 0)}",
-            f"En attente : {deliveries.get('pending', 0)} ; livraison à vérifier : {deliveries.get('unknown', 0) + deliveries.get('sending', 0)}",
+            f"{deliveries.get('sent', 0)} alertes envoyées · {deliveries.get('pending', 0)} en attente",
         ]
-    lines += [
-        "",
-        "Contrôle local : si ce PC est éteint ou hors ligne, le bot ne peut pas répondre.",
-    ]
+        uncertain = deliveries.get("unknown", 0) + deliveries.get("sending", 0)
+        if uncertain:
+            lines.append(f"{uncertain} livraisons à vérifier")
+    else:
+        lines += ["", "Compteur des alertes indisponible"]
     return "\n".join(lines)

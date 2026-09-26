@@ -190,7 +190,7 @@ def test_status_preserves_all_business_tables(local_config, repo, job):
     report = runtime_report(local_config)
     assert report["watcher"]["status"] == "unknown"
     assert "activité non vérifiable" in format_status(report)
-    assert "Base : accessible" in format_status(report)
+    assert "1 sources à jour" in format_status(report)
     assert list(repo.db.iterdump()) == before
 
 
@@ -255,10 +255,13 @@ def test_incident_debounce_cooldown_recovery_and_restart(local_config, tmp_path)
     tick(14000)
     assert len(notifier.sent) == 1
     report["health"]["issues"] = []
+    for source in report["health"]["sources"]:
+        source["status"] = "fresh"
+    report["health"]["source_summary"] = {"fresh": len(report["health"]["sources"])}
     report["watcher"]["status"] = "active"
     tick(14001)
     tick(14121)
-    assert len(notifier.sent) == 2 and "RETOUR À UN ÉTAT NORMAL" in notifier.sent[-1]
+    assert len(notifier.sent) == 2 and "✅ Radar opérationnel" in notifier.sent[-1]
 
 
 def test_uncertain_incident_is_not_retried(local_config, tmp_path):
@@ -338,7 +341,7 @@ def test_listener_registers_private_menu_and_resumes_cursor(local_config, monkey
     monkeypatch.setattr(control, "api", remote)
     with pytest.raises(asyncio.CancelledError):
         asyncio.run(control.run_control(local_config))
-    assert len(notifier.sent) == 1 and "ÉTAT DU RADAR" in notifier.sent[0]
+    assert len(notifier.sent) == 1 and "📡 Radar" in notifier.sent[0]
     menu = next(payload for method, payload in calls if method == "setMyCommands")
     assert menu["scope"] == {"type": "chat", "chat_id": "456"}
     assert calls[-1][1]["offset"] == 2

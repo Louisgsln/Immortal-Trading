@@ -6,6 +6,7 @@ from typing import Literal
 from trading_radar.audit import timestamp
 from trading_radar.config import Config
 from trading_radar.dashboard_data import DashboardDataError, read_jobs
+from trading_radar.display_time import PARIS, format_paris
 from trading_radar.health import check_health
 from trading_radar.models import utcnow
 
@@ -42,7 +43,7 @@ def eligible(job: dict, sources: set[str], threshold: int, now: datetime) -> boo
         instant = timestamp(deadline["instant"])
         return instant is not None and instant > now
     if deadline["precision"] == "date":
-        return date.fromisoformat(deadline["day"]) >= now.date()
+        return date.fromisoformat(deadline["day"]) >= now.astimezone(PARIS).date()
     return deadline["precision"] == "unknown"
 
 
@@ -56,14 +57,14 @@ def card(job: dict, number: int) -> str:
         short(job["location"] or "Lieu non précisé", 80),
         "Expérience : "
         + (f"minimum reconnu {experience} an(s)" if experience is not None else "minimum inconnu"),
-        "Découverte : " + first.strftime("%d/%m %H:%M UTC"),
-        "Vérifiée : " + last.strftime("%d/%m %H:%M UTC"),
+        "Découverte : " + format_paris(first),
+        "Vérifiée : " + format_paris(last),
     ]
     deadline = job["deadline"]
     if deadline["precision"] == "instant":
         instant = timestamp(deadline["instant"])
         assert instant is not None
-        lines.append("Échéance : " + instant.strftime("%d/%m/%Y %H:%M UTC"))
+        lines.append("Échéance : " + format_paris(instant))
     elif deadline["precision"] == "date":
         lines.append(f"Échéance : {deadline['day']} (heure/fuseau inconnus)")
     else:
@@ -125,7 +126,7 @@ def jobs_message(
             )
         )
     title = "🏆 OFFRES À EXAMINER" if mode == "top" else "🆕 DÉCOUVERTES DEPUIS 24 H"
-    header = f"{title}\nAu {instant:%d/%m/%Y %H:%M UTC} · score ≥ {threshold}/100"
+    header = f"{title}\nAu {format_paris(instant)} · score ≥ {threshold}/100"
     footer = (
         "Sources et fiches vérifiées depuis 24 h ; offres actives, à examiner. "
         "Candidatures déjà envoyées et échéances dépassées/ambiguës exclues.\n"

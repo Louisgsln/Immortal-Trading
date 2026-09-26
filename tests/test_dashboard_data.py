@@ -18,8 +18,8 @@ NOW = datetime(2026, 9, 17, 12, tzinfo=UTC)
     [
         (None, None),
         ("2026-09-01T00:00:00Z", "2026-09-01"),
-        ("2026-09-01T23:59:59Z", "2026-09-01"),
-        ("2026-09-01T01:30:00+02:00", "2026-08-31"),
+        ("2026-09-01T23:59:59Z", "2026-09-02"),
+        ("2026-09-01T01:30:00+02:00", "2026-09-01"),
         ("2026-09-01T23:30:00-04:00", "2026-09-02"),
         ("2024-02-29T00:00:00Z", "2024-02-29"),
         ("2026-09-01T00:00:00", None),
@@ -27,7 +27,7 @@ NOW = datetime(2026, 9, 17, 12, tzinfo=UTC)
         ("9999-12-31T23:00:00-02:00", None),
     ],
 )
-def test_publication_is_source_day_in_utc_without_discovery_fallback(
+def test_publication_is_source_day_in_paris_without_discovery_fallback(
     dashboard_config, repo, job, tmp_path, posted, expected
 ):
     job.date_posted = datetime.fromisoformat(posted) if posted else None

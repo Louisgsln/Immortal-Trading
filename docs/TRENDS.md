@@ -1,6 +1,6 @@
 # Tendances de l'activité observée
 
-La commande `trends` résume l'historique local par jour UTC. Elle lit la base existante
+La commande `trends` résume l'historique local par jour de Paris. Elle lit la base existante
 sans collecter de nouvelles offres, lancer de watcher, modifier les candidatures ou
 envoyer de notification.
 
@@ -10,9 +10,9 @@ trading-radar trends --days 7
 trading-radar trends --days 90 --config-dir config
 ```
 
-La fenêtre vaut **30 jours par défaut**, de 1 à 365 jours. Elle comprend le jour UTC
+La fenêtre vaut **30 jours par défaut**, de 1 à 365 jours. Elle comprend le jour de Paris
 en cours, jusqu'à l'instant de génération, et les jours précédents. Par exemple, un
-rapport de 7 jours généré le 17 septembre à 14 h UTC commence le 11 septembre à 0 h UTC.
+rapport de 7 jours généré le 17 septembre à 14 h à Paris commence le 11 septembre à 0 h à Paris.
 Le dernier jour est donc partiel. Les journées sans événement figurent avec des zéros.
 Les enregistrements datés après l'instant de génération sont exclus des compteurs.
 
@@ -43,7 +43,7 @@ exécutions en échec sur la même source comptent deux occurrences.
 ## Format et erreurs
 
 Le résultat JSON est écrit sur la sortie standard. Il comprend `status`, `error`,
-`generated_at`, `timezone` (`UTC`), `days`, `window` (`start`, `end`), `daily` et `summary`.
+`generated_at`, `timezone` (`Europe/Paris`), `days`, `window` (`start`, `end`), `daily` et `summary`.
 Chaque élément de `daily` comprend `date` et les sept compteurs ci-dessus. `summary`
 contient leurs sommes sur la fenêtre. Aucune description d'offre, note de candidature,
 information de recruteur ou valeur de configuration n'est incluse.
@@ -85,3 +85,7 @@ Les tendances, les offres et le diagnostic de santé sont des lectures distincte
 Pendant une collecte concurrente, leurs instants d'observation peuvent donc différer
 légèrement. Les tendances ne remplacent pas le contrôle de santé actuel des sources.
 Une indisponibilité des tendances est signalée sans empêcher la consultation des offres.
+
+Depuis le lot 77, les journées suivent Europe/Paris, y compris les journées de
+23 ou 25 heures aux changements saisonniers. `generated_at` reste un instant
+UTC canonique ; les événements enregistrés ne sont ni réécrits ni déplacés.

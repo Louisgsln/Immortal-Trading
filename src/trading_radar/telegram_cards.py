@@ -7,6 +7,7 @@ from html import escape
 from urllib.parse import urlsplit
 from uuid import UUID
 
+from trading_radar.display_time import format_paris
 from trading_radar.experience import experience_requirement
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job
@@ -81,11 +82,7 @@ def format_alert(job: Job, event: str) -> str:
         heading = "ÉCHÉANCE · " + event.replace("deadline_j", "J−")
     minimum = experience_requirement(job)["minimum_years"]
     experience = f"minimum reconnu : {minimum} an(s)" if minimum is not None else "à vérifier"
-    deadline = (
-        job.application_deadline.strftime("%d/%m/%Y")
-        if job.application_deadline
-        else "non précisée"
-    )
+    deadline = format_paris(job.application_deadline, unknown="non précisée")
     blocks = min(10, max(0, score // 10))
     missions = mission_excerpts(job)
     if missions:

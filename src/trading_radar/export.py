@@ -1,6 +1,7 @@
 import csv
 from pathlib import Path
 
+from trading_radar.display_time import export_paris
 from trading_radar.storage import Repository
 
 
@@ -48,9 +49,9 @@ def export_csv(repo: Repository, path: Path) -> int:
                         job.location_normalized,
                         job.score_breakdown.total,
                         job.score_breakdown.priority,
-                        job.date_posted,
-                        job.first_seen,
-                        job.application_deadline,
+                        export_paris(job.date_posted),
+                        export_paris(job.first_seen),
+                        export_paris(job.application_deadline),
                         job.source,
                         job.apply_url,
                         application.status.value,

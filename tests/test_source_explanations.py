@@ -113,7 +113,7 @@ def test_telegram_status_uses_sanitized_reason_and_possible_retry(config, repo):
         "threshold": 70,
     }
     text = format_status(report)
-    assert "page d’erreur" in text and "Reprise possible après" in text
+    assert "page d’erreur" in text and "Reprise possible dès" in text
     assert "http" not in text and len(text.encode("utf-16-le")) // 2 < 4096
 
 

@@ -235,7 +235,7 @@ def test_nomura_restriction_is_explicit_and_recovers(config, repo):
             "threshold": 70,
         }
     )
-    assert "accès bloqué par CAPTCHA" in text and "jamais collectée" not in text
+    assert "accès bloqué · CAPTCHA" in text and "jamais collectée" not in text
     asyncio.run(scan(config, repo, collectors={"nomura_campus": Snapshot([])}))
     assert check_health(config)["source_summary"] == {"fresh": 1}
 

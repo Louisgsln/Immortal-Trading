@@ -142,7 +142,7 @@ def test_real_report_preserves_database_and_never_initializes_notifications(
     assert result.exit_code == 0, result.output
     report = json.loads(result.stdout)
     assert report["status"] == "ok"
-    assert report["timezone"] == "UTC"
+    assert report["timezone"] == "Europe/Paris"
     assert report["days"] == 1
     assert len(report["daily"]) == 1
     assert report["summary"]["new_jobs"] == 1

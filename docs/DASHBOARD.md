@@ -66,7 +66,7 @@ dernières observations et les rapports de santé conservés.
 
 Depuis le lot 62, **Publiée le** affiche le jour de publication fourni par la source,
 à côté de **Repéré le**, qui reste la première découverte par le radar. Le détail
-de l'offre reprend ces deux repères. Les publications sont affichées au jour UTC,
+de l'offre reprend ces deux repères. Les publications sont affichées au jour de Paris,
 sans heure inventée ; ce jour reste identique quel que soit le fuseau du navigateur.
 Une source ne fournissant pas de date exploitable affiche **Non précisée** : ni la
 première détection ni la dernière mise à jour ne servent de remplacement.
@@ -125,7 +125,7 @@ exacte du champ dédié, y compris zéro. Macquarie affiche la preuve de sales t
 alimente le filtre et le score ; les 21 minima Crédit Agricole restent identiques.
 Ces preuves viennent des captures conservées et ne changent pas la date de collecte.
 
-La vue **Tendances** présente les 7, 30 ou 90 derniers jours UTC (30 par défaut).
+La vue **Tendances** présente les 7, 30 ou 90 derniers jours de Paris (30 par défaut).
 Elle distingue premières détections locales, mises à jour, recalculs, fermetures,
 réouvertures, scans et échecs de sources. Le graphique montre au maximum les 14 derniers
 jours avec détection ; le journal liste tous les jours avec activité de la période.
@@ -219,7 +219,7 @@ aucun niveau précis dans ce filtre. Le profil de stage dépassant 1 500 caract�
 reste uniquement dans la description intégrale. Les anciennes descriptions
 non étiquetées attendent une collecte réussie ; aucune origine n'est supposée.
 
-Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
+Les actions échues sont les dates de prochaine action inférieures ou égales au jour de Paris
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière
 observation de l'offre ; il ne remplace pas la lecture de l'échéance et de sa précision.
@@ -278,3 +278,10 @@ Pour modifier le suivi, utiliser [les commandes de candidature](APPLICATIONS.md)
 générer un nouvel instantané. Pour préserver l'ensemble de la base et de ses historiques,
 utiliser une [sauvegarde SQLite vérifiée](BACKUPS.md) : le HTML est une vue de consultation,
 pas une sauvegarde restaurable.
+
+Depuis le lot 77, tous les horaires affichés utilisent Europe/Paris, quel que
+soit le fuseau du navigateur. Le libellé indique Paris (UTC+2) en été et Paris
+(UTC+1) en hiver. Publication, filtres calendaires, actions échues et tendances
+utilisent le jour de Paris. Les dates saisies sans heure restent inchangées.
+Recharger les onglets existants après installation ; régénérer les anciens
+exports HTML pour bénéficier de ce format.

@@ -8,14 +8,7 @@
     return element;
   };
   const number = (value) => Number(value || 0).toLocaleString("fr-FR");
-  const date = (value, full = false) => {
-    if (!value) return "Non renseigné";
-    const parsed = new Date(value);
-    if (Number.isNaN(parsed.getTime())) return "Date indisponible";
-    return parsed.toLocaleString("fr-FR", full
-      ? {day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZoneName: "short"}
-      : {day: "2-digit", month: "short", year: "numeric"});
-  };
+  const date = radarTime.date;
   const statusLabels = {
     "New": "À découvrir", "Reviewing": "En revue", "To Apply": "À candidater",
     "Applied": "Postulé", "Online Assessment": "Test en ligne",
@@ -208,7 +201,7 @@
           }
         }
       });
-      $("snapshot-refresh-help").textContent = "Suivi synchronisé · " + new Date().toLocaleTimeString("fr-FR") + ". Rechargez pour actualiser les offres et les sources.";
+      $("snapshot-refresh-help").textContent = "Suivi synchronisé · " + date(new Date().toISOString(), true) + ". Rechargez pour actualiser les offres et les sources.";
     } catch (_) {
       $("snapshot-refresh-help").textContent = "Synchronisation du suivi indisponible. Nouvelle tentative automatique ; rechargez la page si le radar a redémarré.";
     } finally { clearTimeout(timer); refreshingApplications = false; }
@@ -407,7 +400,7 @@
     const timing = detailSection("Repères"); const grid = make("dl", null, "detail-grid");
     const deadline = job.deadline || {};
     const timingValues = [
-      ["Publication · source (jour UTC)", radarPublication.label(job.publication_day)],
+      ["Publication · source (jour de Paris)", radarPublication.label(job.publication_day)],
       ["Première détection", date(job.first_seen, true)], ["Dernière observation", date(job.last_seen, true)],
       ["Échéance", deadline.precision === "instant" ? date(deadline.instant, true) : deadline.precision === "date" ? (deadline.day || "Non renseignée") + " · heure non précisée" : "Non confirmée"],
       ["Source", job.source || "Non renseignée"]
@@ -611,7 +604,7 @@
     const daily = trends.daily.slice(-days);
     const totals = Object.fromEntries(trendFields.map((field) => [field, daily.reduce((sum, day) => sum + day[field], 0)]));
     const activeDays = daily.filter((day) => trendFields.some((field) => day[field] > 0));
-    $("trend-window").textContent = daily.length ? "Du " + trendDate(daily[0].date) + " au " + trendDate(daily[daily.length - 1].date) + " · " + daily.length + " jours calendaires en UTC · journée en cours incluse." : "Aucun jour d’historique disponible · UTC.";
+    $("trend-window").textContent = daily.length ? "Du " + trendDate(daily[0].date) + " au " + trendDate(daily[daily.length - 1].date) + " · " + daily.length + " jours calendaires à Paris · journée en cours incluse." : "Aucun jour d’historique disponible · Paris.";
     $("trend-metrics").replaceChildren();
     [
       ["Premières détections", totals.new_jobs, "Offres repérées pour la première fois", "primary"],
@@ -634,7 +627,7 @@
       const label = make("span", trendDate(day.date), "trend-bar-date");
       const bar = make("meter", null, "trend-meter");
       bar.min = 0; bar.max = max; bar.value = day.new_jobs;
-      bar.setAttribute("aria-label", "Premières détections le " + trendDate(day.date) + " UTC");
+      bar.setAttribute("aria-label", "Premières détections le " + trendDate(day.date) + " · Paris");
       bar.setAttribute("aria-valuetext", number(day.new_jobs) + " offres");
       row.append(label, bar, make("strong", number(day.new_jobs), "trend-bar-value"));
       $("trend-chart").append(row);

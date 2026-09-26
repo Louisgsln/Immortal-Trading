@@ -104,3 +104,6 @@ vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le C
 Ces points restent à réaliser ; les lots livrés ne clôturent pas la
 feuille de route entière. L'ajout d'un employeur signifie une collecte testée,
 pas une garantie d'offres éligibles ni de disponibilité permanente du portail.
+
+- Lot 77 : affichages en heure de Paris et avis Telegram épurés à la demande du
+  propriétaire ; voir [validation](VALIDATION-LOT77.md).

@@ -53,7 +53,7 @@ def fingerprint(repo):
 def test_empty_days_are_zero_filled_and_window_inclusive(trends_config):
     result = observe(trends_config, days=3)
     assert result["status"] == "ok" and result["error"] is None
-    assert result["format_version"] == 1 and result["timezone"] == "UTC"
+    assert result["format_version"] == 1 and result["timezone"] == "Europe/Paris"
     assert result["window"] == {"start": "2026-09-15", "end": "2026-09-17"}
     assert [row["date"] for row in result["daily"]] == ["2026-09-15", "2026-09-16", "2026-09-17"]
     assert result["summary"] == dict.fromkeys(trends.COUNTERS, 0)
@@ -87,16 +87,18 @@ def test_events_scans_and_detection_are_independent(trends_config, repo, job):
 @pytest.mark.parametrize(
     "timestamp,expected",
     [
-        ("2026-09-16T23:59:59Z", 0),
+        ("2026-09-16T21:59:59Z", 0),
+        ("2026-09-16T22:00:00Z", 1),
+        ("2026-09-16T23:59:59Z", 1),
         ("2026-09-17T00:00:00Z", 1),
         ("2026-09-17T12:00:00Z", 1),
         ("2026-09-17T12:00:00.000001Z", 0),
         ("2026-09-18T00:00:00Z", 0),
-        ("2026-09-17T00:30:00+02:00", 0),
+        ("2026-09-17T00:30:00+02:00", 1),
         ("2026-09-16T23:30:00-01:00", 1),
     ],
 )
-def test_utc_boundaries_apply_to_all_tables(trends_config, repo, job, timestamp, expected):
+def test_paris_boundaries_apply_to_all_tables(trends_config, repo, job, timestamp, expected):
     seed(repo, job, timestamp)
     with repo.transaction():
         version(repo, job, timestamp, "updated")
@@ -111,11 +113,29 @@ def test_utc_boundaries_apply_to_all_tables(trends_config, repo, job, timestamp,
     )
 
 
-def test_now_is_normalized_to_utc(trends_config):
+def test_generated_instant_stays_utc_but_day_uses_paris(trends_config):
     local = datetime(2026, 9, 18, 1, tzinfo=timezone(timedelta(hours=2)))
     result = trends.build_trends(trends_config, days=1, now=local)
     assert result["generated_at"] == "2026-09-17T23:00:00+00:00"
-    assert result["daily"][0]["date"] == "2026-09-17"
+    assert result["daily"][0]["date"] == "2026-09-18"
+
+
+@pytest.mark.parametrize(
+    "now,start,end,hours",
+    [
+        ("2026-03-29T21:59:59Z", "2026-03-28T23:00:00Z", "2026-03-29T22:00:00Z", 23),
+        ("2026-10-25T22:59:59Z", "2026-10-24T22:00:00Z", "2026-10-25T23:00:00Z", 25),
+    ],
+)
+def test_daily_window_counts_whole_paris_dst_day(trends_config, repo, now, start, end, hours):
+    first, last = datetime.fromisoformat(start), datetime.fromisoformat(end)
+    with repo.transaction():
+        scan(repo, (first - timedelta(seconds=1)).isoformat())
+        for index in range(hours):
+            scan(repo, (first + timedelta(hours=index)).isoformat())
+        scan(repo, last.isoformat())
+    result = trends.build_trends(trends_config, days=1, now=datetime.fromisoformat(now))
+    assert result["summary"]["scans"] == hours
 
 
 @pytest.mark.parametrize("days", [0, -1, 366, 1.0, True, False, "30", None])

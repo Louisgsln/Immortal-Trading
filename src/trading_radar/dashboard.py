@@ -24,6 +24,8 @@ def _assets() -> tuple[str, str, str]:
         root.joinpath("dashboard.css").read_text(encoding="utf-8"),
         root.joinpath("publication.js").read_text(encoding="utf-8")
         + "\n"
+        + root.joinpath("time.js").read_text(encoding="utf-8")
+        + "\n"
         + root.joinpath("dashboard.js").read_text(encoding="utf-8"),
     )
 

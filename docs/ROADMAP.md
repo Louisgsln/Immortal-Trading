@@ -867,3 +867,11 @@ L'adaptateur peut désormais reprendre une fois la liste complète et toutes ses
 recherches, sans mélanger les lignes précédentes et dans le même budget de temps.
 Un deuxième changement échoue ; aucun refus d'accès ni format invalide n'est
 masqué par cette reprise. Voir [validation](VALIDATION-LOT76.md).
+
+## Lot 77 — Paris et Telegram minimaliste
+
+Horaires Europe/Paris explicites dans le dashboard, les messages et les exports.
+Journées locales pour les publications, les filtres et les tendances. Les avis
+d'incident sont synthétiques et le retour à la normale tient en trois lignes.
+Les contrôles détaillés restent accessibles avec `/status` et le dashboard.
+Voir [validation et limites](VALIDATION-LOT77.md).

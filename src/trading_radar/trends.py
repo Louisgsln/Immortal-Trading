@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from trading_radar.config import Config
+from trading_radar.display_time import PARIS
 from trading_radar.models import utcnow
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 
@@ -129,7 +130,11 @@ def _read(config: Config, instant: datetime, daily: dict[str, dict]) -> None:
 
         def bucket(timestamp: str) -> dict | None:
             observed = _timestamp(timestamp)
-            return daily.get(observed.date().isoformat()) if observed <= instant else None
+            return (
+                daily.get(observed.astimezone(PARIS).date().isoformat())
+                if observed <= instant
+                else None
+            )
 
         for (timestamp,) in db.execute("SELECT first_seen FROM jobs"):
             if (row := bucket(timestamp)) is not None:
@@ -153,7 +158,7 @@ def _read(config: Config, instant: datetime, daily: dict[str, dict]) -> None:
 
 
 def build_trends(config: Config, days: int = 30, now: datetime | None = None) -> dict:
-    """Count detections and stored events by UTC day, never publication dates.
+    """Count detections and stored events by Paris calendar day, never publication dates.
 
     Invalid arguments raise ValueError. Unusable histories return an explicit error,
     with no partial daily rows or zero summary masquerading as a successful reading.
@@ -167,7 +172,8 @@ def build_trends(config: Config, days: int = 30, now: datetime | None = None) ->
         raise ValueError("Statistics time must include a timezone")
     try:
         instant = instant.astimezone(UTC)
-        start = instant.date() - timedelta(days=days - 1)
+        end = instant.astimezone(PARIS).date()
+        start = end - timedelta(days=days - 1)
     except (ValueError, OverflowError):
         raise ValueError("Statistics time is outside the supported calendar") from None
     daily = {
@@ -182,9 +188,9 @@ def build_trends(config: Config, days: int = 30, now: datetime | None = None) ->
         "status": "ok",
         "error": None,
         "generated_at": instant.isoformat(),
-        "timezone": "UTC",
+        "timezone": "Europe/Paris",
         "days": days,
-        "window": {"start": start.isoformat(), "end": instant.date().isoformat()},
+        "window": {"start": start.isoformat(), "end": end.isoformat()},
         "daily": [],
         "summary": {},
     }
