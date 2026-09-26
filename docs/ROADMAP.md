@@ -903,3 +903,11 @@ opérationnel. Voir [périmètre et limites](VALIDATION-LOT81.md).
 Suite : traiter les incidents constatés, préserver les rubriques encore aplaties
 (notamment Optiver), qualifier les brokers restants, valider Marex/Vitol/Trafigura,
 puis confirmations de clôture et import du suivi avec aperçu. L'IA/CV reste exclue.
+
+## Lot 82 — UBS et accès Nomura
+
+Les permutations d'offres identiques dans la première page UBS ne déclenchent
+plus de faux échec. Les changements de contenu et de catalogue restent contrôlés.
+Les deux collecteurs sont validés sur copie. CAPTCHA Nomura résolu avec accord
+dans le navigateur, 44 offres accessibles ; le collecteur HTTP reste bloqué dans
+sa session distincte. Voir [preuves et limites](VALIDATION-LOT82.md).

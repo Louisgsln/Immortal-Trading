@@ -102,6 +102,10 @@ sur copie et limites explicites. Voir [validation](VALIDATION-LOT80.md).
 Lot 81 installé et vérifié : BP, Shell et TP ICAP, avec qualification des missions de
 courtage et import sur copie. Voir [validation](VALIDATION-LOT81.md).
 
+Lot 82 : comparaison UBS indépendante de l'ordre des lignes, protections de
+pagination conservées. Nomura accessible après CAPTCHA dans le navigateur ;
+accès du scanner encore restreint. Voir [validation](VALIDATION-LOT82.md).
+
 ## Prochains lots
 
 1. Poursuivre la fiabilité sur les incidents réels, notamment les accès

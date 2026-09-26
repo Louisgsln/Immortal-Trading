@@ -28,6 +28,12 @@ même tentative, pour ne pas mélanger des réponses de deux instantanés. Les
 conflits entre recherches, les limites et les fiches invalides restent des
 échecs explicites. Le compteur de requêtes inclut la tentative abandonnée.
 
+Depuis le lot 82, UBS compare les lignes de la première page par identifiant,
+avec l'intégralité de leur contenu. Le tri par date peut permuter des offres
+identiques : cette seule permutation ne signifie plus que le catalogue a changé.
+Un identifiant remplacé, un contenu modifié, un doublon ou un total différent
+reste rejeté. Les doublons et liens invalides sont aussi contrôlés à la relecture.
+
 Le verrou `.scan.lock` réserve les collectes à un seul processus. Le verrou
 historique `.lock` protège les écritures et la livraison des notifications,
 sans rester détenu pendant les lectures des sites employeurs. Les modifications

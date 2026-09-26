@@ -180,6 +180,22 @@ class UBSCollector:
             raise SourceUnavailable("UBS result limit exceeded")
         return total, size, rows
 
+    def _rows(self, rows: list) -> tuple[dict[str, dict], dict[str, dict]]:
+        """Validate one page and retain its full contents keyed by public identity."""
+        parsed, snapshot = {}, {}
+        for row in rows:
+            if not isinstance(row, dict):
+                raise SourceUnavailable("invalid UBS listing")
+            values = fields(row.get("Questions"), "QuestionName", "Value")
+            identifier = values.get("reqid", "")
+            if not re.fullmatch(r"[0-9]+", identifier) or not values.get("jobtitle", "").strip():
+                raise SourceUnavailable("UBS listing identifier or title missing")
+            values["url"] = detail_url(row.get("Link"), identifier, self.site_id)
+            if identifier in parsed:
+                raise SourceUnavailable("UBS repeated posting within one page")
+            parsed[identifier], snapshot[identifier] = values, row
+        return parsed, snapshot
+
     async def _list(self) -> dict[str, dict]:
         inputs, preload = page_data(
             await self.http.get_text(
@@ -227,34 +243,23 @@ class UBSCollector:
             expected, page_size = total, size
             if len(rows) != min(size, total - len(found)):
                 raise SourceUnavailable("UBS returned a short or inconsistent page")
-            page_ids: set[str] = set()
-            for row in rows:
-                if not isinstance(row, dict):
-                    raise SourceUnavailable("invalid UBS listing")
-                values = fields(row.get("Questions"), "QuestionName", "Value")
-                identifier = values.get("reqid", "")
-                if (
-                    not re.fullmatch(r"[0-9]+", identifier)
-                    or not values.get("jobtitle", "").strip()
-                ):
-                    raise SourceUnavailable("UBS listing identifier or title missing")
-                values["url"] = detail_url(row.get("Link"), identifier, self.site_id)
-                if identifier in page_ids:
-                    raise SourceUnavailable("UBS repeated posting within one page")
-                page_ids.add(identifier)
+            parsed, snapshot = self._rows(rows)
+            for identifier, values in parsed.items():
                 if identifier in found:
                     raise SnapshotChanged("UBS pagination repeated a posting")
                 found[identifier] = values
             if number == 1:
-                first_page = (total, size, rows)
+                first_page = (total, size, snapshot)
             number += 1
-        # The catalogue sorts by LastUpdated. Verify the starting boundary again
-        # before requesting any details, including when counts stay unchanged.
+        # LastUpdated ties can reorder identical rows. Verify page membership and
+        # every row's contents, not its position, before requesting any details.
         body["pageNumber"] = 1
         check = await self.http.post_search_json(
             SEARCH, body, self.config.request_interval, self.source
         )
-        if self._page(check) != first_page:
+        total, size, rows = self._page(check)
+        _, snapshot = self._rows(rows)
+        if (total, size, snapshot) != first_page:
             raise SnapshotChanged("UBS board changed during pagination")
         # Session/bootstrap context deliberately never enters RawJob or persisted payloads.
         return found

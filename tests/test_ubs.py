@@ -338,6 +338,97 @@ def test_changing_boundary_twice_never_fetches_details(monkeypatch):
     assert sessions == 2 and len(page_numbers) == 4
 
 
+def test_reordered_identical_first_page_does_not_restart(monkeypatch):
+    pages, detail_requests = [], []
+
+    def handler(req):
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method == "POST":
+            number = json.loads(req.content)["pageNumber"]
+            pages.append(number)
+            rows = [listing("1"), listing("2")] if number == 1 else [listing("3")]
+            if pages.count(1) == 2:
+                rows.reverse()
+            return httpx.Response(200, json={"JobsCount": 3, "PageSize": 2, "Jobs": {"Job": rows}})
+        if req.url.params.get("PageType") == "JobDetails":
+            identifier = req.url.params["jobid"]
+            detail_requests.append(identifier)
+            return httpx.Response(200, text=page(detail(identifier)))
+        assert not pages, "Harmless ordering change must not restart the listing"
+        return httpx.Response(200, text=bootstrap())
+
+    result = execute(handler, monkeypatch)
+    assert pages == [1, 2, 1]
+    assert detail_requests == ["1", "2", "3"]
+    assert {j.external_id for j in result.jobs} == {"1", "2", "3"}
+
+
+@pytest.mark.parametrize("change", ["title", "description", "date", "url", "metadata"])
+def test_reordered_boundary_with_changed_contents_still_aborts(monkeypatch, change):
+    reads = 0
+    sessions = 0
+
+    def handler(req):
+        nonlocal reads, sessions
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method == "POST":
+            reads += 1
+            rows = [listing("1"), listing("2")]
+            if reads % 2 == 0:
+                item = rows[0]
+                if change == "title":
+                    item["Questions"][1]["Value"] = "Graduate Rates Trader"
+                elif change in {"description", "date"}:
+                    item["Questions"].append({"QuestionName": change, "Value": "changed"})
+                elif change == "url":
+                    item["Link"] = url(1).replace("siteid=5131", "siteid=5132") + "&frmSiteId=5131"
+                else:
+                    item["IsActive"] = True
+                rows.reverse()
+            return httpx.Response(200, json={"JobsCount": 2, "PageSize": 50, "Jobs": {"Job": rows}})
+        assert req.url.params.get("PageType") != "JobDetails"
+        sessions += 1
+        return httpx.Response(200, text=bootstrap())
+
+    with pytest.raises(SourceUnavailable, match="board changed"):
+        execute(handler, monkeypatch)
+    assert sessions == 2 and reads == 4
+
+
+@pytest.mark.parametrize(
+    "change,match",
+    [("duplicate", "repeated"), ("bad_url", "URL"), ("bad_fields", "repeated UBS job field")],
+)
+def test_malformed_boundary_recheck_is_not_retried(monkeypatch, change, match):
+    reads = 0
+    sessions = 0
+
+    def handler(req):
+        nonlocal reads, sessions
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method == "POST":
+            reads += 1
+            rows = [listing("1"), listing("2")]
+            if reads == 2:
+                if change == "duplicate":
+                    rows[1] = listing("1")
+                elif change == "bad_url":
+                    rows[0]["Link"] = "https://evil.example/1"
+                else:
+                    rows[0]["Questions"].append({"QuestionName": "reqid", "Value": "1"})
+            return httpx.Response(200, json={"JobsCount": 2, "PageSize": 50, "Jobs": {"Job": rows}})
+        assert req.url.params.get("PageType") != "JobDetails"
+        sessions += 1
+        return httpx.Response(200, text=bootstrap())
+
+    with pytest.raises(SourceUnavailable, match=match):
+        execute(handler, monkeypatch)
+    assert sessions == 1 and reads == 2
+
+
 def test_captcha_during_recheck_is_not_retried(monkeypatch):
     calls = []
 
