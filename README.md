@@ -3,7 +3,11 @@
 Le lot 73 ajoute **dix employeurs** de trading et de gestion quantitative :
 34 sources, 30 employeurs. Les offres initiales sont importées sans avalanche
 d’alertes ; les nouvelles opportunités restent surveillées en continu. Voir
-[les employeurs et le périmètre](docs/EMPLOYER-EXPANSION.md).
+[les employeurs et le périmètre](docs/EMPLOYER-EXPANSION.md). Au contrôle après
+installation : 923 offres, dont 159 prioritaires ; 262 fiches avec missions,
+304 avec mentions de diplôme et 477 avec date de publication connue.
+Les dix nouvelles sources ont réussi deux collectes réelles et les contrôles
+GitHub sont réussis : [bilan de livraison](docs/VALIDATION-LOT73.md).
 
 Le lot 72 complète les **fiches UBS, BNP et Barclays** (197 offres avec missions,
 206 avec mentions de diplôme), corrige des faux négatifs de ciblage documentés

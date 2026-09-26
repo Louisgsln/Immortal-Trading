@@ -73,7 +73,26 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
 - Lot 71 : fiabilité et collectes indépendantes, installé et observé.
 - Lot 72 : fiches BNP/UBS/Barclays, ciblage documenté et audit de recherches
   additionnelles sans gain ciblé chez Barclays/DB, installé et vérifié.
-- Lot 73 : dix employeurs supplémentaires ; voir le [périmètre vérifié](EMPLOYER-EXPANSION.md).
+- Lot 73 : dix employeurs supplémentaires, installé et vérifié sur deux collectes
+  réelles par source ; voir le [périmètre vérifié](EMPLOYER-EXPANSION.md) et
+  le [bilan de livraison](VALIDATION-LOT73.md).
 
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.
+
+## Prochains lots
+
+1. Poursuivre la fiabilité sur les incidents réels, notamment les accès
+   intermittents Nomura et les changements de présentation des employeurs.
+2. Compléter les rubriques et les rôles quantitatifs encore non reconnus, avec
+   des preuves employeur et un aperçu des scores avant tout recalcul.
+3. Ajouter un nouveau groupe de banques, fonds, courtiers ou négociants
+   énergie/matières premières après validation de leurs portails publics.
+4. Confirmer plus précisément les offres fermées et préparer l'import du suivi
+   avec aperçu et historique ; poursuivre les exercices de restauration.
+5. Définir la destination et le budget de l'hébergement, des sauvegardes
+   distantes et de l'accès multiappareil avant leur mise en place.
+
+Ces points restent à réaliser ; les trois lots livrés ne clôturent pas la
+feuille de route entière. L'ajout d'un employeur signifie une collecte testée,
+pas une garantie d'offres éligibles ni de disponibilité permanente du portail.

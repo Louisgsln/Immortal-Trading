@@ -830,7 +830,8 @@ prioritaires, avec 65 missions et 98 mentions de diplôme supplémentaires.
 Les 787 offres déjà présentes et leur suivi sont préservés. Voir
 [le périmètre](EMPLOYER-EXPANSION.md) et [la validation](VALIDATION-LOT73.md).
 
-Suite : import du suivi avec aperçu, confirmations de clôture, puis nouveaux
-portails de banques, courtiers et négociants énergie/matières premières.
+Suite : incidents de sources observés, rubriques et ciblage encore non reconnus,
+puis nouveaux portails de banques, courtiers et négociants énergie/matières premières.
+Les confirmations de clôture et l'import du suivi avec aperçu restent prévus.
 Les sauvegardes distantes, le VPS et l’accès multiappareil attendent une destination
 et un mode d’accès choisis. Aucune IA d’enrichissement ou comparaison CV prévue.
