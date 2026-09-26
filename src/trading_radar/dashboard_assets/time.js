@@ -10,11 +10,7 @@ const radarTime = (() => {
     if (!Number.isFinite(parsed.getTime())) return "Date indisponible";
     const options = {day: "2-digit", month: "short", year: "numeric", timeZone: "Europe/Paris"};
     if (full) Object.assign(options, {hour: "2-digit", minute: "2-digit"});
-    const label = parsed.toLocaleString("fr-FR", options);
-    if (!full) return label;
-    const offset = new Intl.DateTimeFormat("fr-FR", {timeZone: "Europe/Paris", timeZoneName: "shortOffset"})
-      .formatToParts(parsed).find(part => part.type === "timeZoneName").value;
-    return label + " · Paris (" + offset + ")";
+    return parsed.toLocaleString("fr-FR", options);
   };
   return {date};
 })();

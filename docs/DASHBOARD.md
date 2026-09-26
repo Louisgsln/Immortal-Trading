@@ -280,8 +280,8 @@ utiliser une [sauvegarde SQLite vérifiée](BACKUPS.md) : le HTML est une vue de
 pas une sauvegarde restaurable.
 
 Depuis le lot 77, tous les horaires affichés utilisent Europe/Paris, quel que
-soit le fuseau du navigateur. Le libellé indique Paris (UTC+2) en été et Paris
-(UTC+1) en hiver. Publication, filtres calendaires, actions échues et tendances
+soit le fuseau du navigateur. Depuis le lot 78, le libellé affiche uniquement la date et l’heure, sans
+mention du fuseau ni du décalage ; les changements saisonniers restent automatiques. Publication, filtres calendaires, actions échues et tendances
 utilisent le jour de Paris. Les dates saisies sans heure restent inchangées.
 Recharger les onglets existants après installation ; régénérer les anciens
 exports HTML pour bénéficier de ce format.

@@ -12,13 +12,13 @@ from trading_radar.telegram_cards import format_alert
 @pytest.mark.parametrize(
     "instant,expected",
     [
-        ("2026-09-26T19:11:55Z", "26/09/2026 · 21:11 · Paris (UTC+2)"),
-        ("2026-12-26T19:11:55Z", "26/12/2026 · 20:11 · Paris (UTC+1)"),
-        ("2026-09-26T23:30:00Z", "27/09/2026 · 01:30 · Paris (UTC+2)"),
-        ("2026-03-29T00:30:00Z", "29/03/2026 · 01:30 · Paris (UTC+1)"),
-        ("2026-03-29T01:30:00Z", "29/03/2026 · 03:30 · Paris (UTC+2)"),
-        ("2026-10-25T00:30:00Z", "25/10/2026 · 02:30 · Paris (UTC+2)"),
-        ("2026-10-25T01:30:00Z", "25/10/2026 · 02:30 · Paris (UTC+1)"),
+        ("2026-09-26T19:11:55Z", "26/09/2026 · 21:11"),
+        ("2026-12-26T19:11:55Z", "26/12/2026 · 20:11"),
+        ("2026-09-26T23:30:00Z", "27/09/2026 · 01:30"),
+        ("2026-03-29T00:30:00Z", "29/03/2026 · 01:30"),
+        ("2026-03-29T01:30:00Z", "29/03/2026 · 03:30"),
+        ("2026-10-25T00:30:00Z", "25/10/2026 · 02:30"),
+        ("2026-10-25T01:30:00Z", "25/10/2026 · 02:30"),
     ],
 )
 def test_paris_time_handles_midnight_and_both_dst_transitions(instant, expected):
@@ -39,7 +39,7 @@ def test_job_alerts_and_csv_use_same_paris_instant_without_changing_storage(repo
     )
     repo.upsert(job)
     before = list(repo.db.iterdump())
-    expected = "27/09/2026 · 01:30 · Paris (UTC+2)"
+    expected = "27/09/2026 · 01:30"
     assert expected in format_alert(job, "new")
     assert expected in format_message(job, "new")
     destination = tmp_path / "jobs.csv"
@@ -47,6 +47,6 @@ def test_job_alerts_and_csv_use_same_paris_instant_without_changing_storage(repo
     with destination.open(encoding="utf-8-sig", newline="") as stream:
         row = next(csv.DictReader(stream))
     for key in ("date_posted", "first_seen", "deadline"):
-        assert row[key] == "2026-09-27T01:30:00+02:00"
+        assert row[key] == "2026-09-27T01:30:00"
     assert list(repo.db.iterdump()) == before
     assert export_paris(None) == ""

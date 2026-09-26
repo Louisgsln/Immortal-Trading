@@ -506,7 +506,7 @@ Une date de début inconnue vaut 7/15 ; un titre explicitement junior vaut 20/20
 
 Les intitulés de stage, Summer Analyst/Associate et apprentissage sont exclus de la priorité full-time. VIE et graduate programmes à temps plein restent admissibles. Une contradiction entre année du titre et début annoncé dans la description est signalée et reçoit une note de date prudente. Après modification des règles, `rescore` actualise les offres déjà stockées et le CSV hors réseau, sans changer les dates d'observation ni envoyer de message.
 
-L'urgence est séparée du score d'adéquation : bonus de récence +5/+3/+1 et bonus de deadline +5/+3/+1. Ce bonus n'altère jamais le /100. Les timestamps des offres et de l'historique sont conservés en UTC et affichés en heure de Paris, avec le décalage été/hiver explicite. Les exports CSV utilisent le décalage de Paris (+02:00 ou +01:00). Les dates saisies dans le suivi de candidature sont des jours calendaires, sans heure ni conversion de fuseau.
+L'urgence est séparée du score d'adéquation : bonus de récence +5/+3/+1 et bonus de deadline +5/+3/+1. Ce bonus n'altère jamais le /100. Les timestamps des offres et de l'historique sont conservés en UTC et affichés en heure locale, sans mention du fuseau. Le calcul utilise toujours Europe/Paris et ses changements saisonniers. Les exports CSV utilisent cette même heure locale sans suffixe de décalage. Les dates saisies dans le suivi de candidature sont des jours calendaires, sans heure ni conversion de fuseau.
 
 ## Stockage et fiabilité
 

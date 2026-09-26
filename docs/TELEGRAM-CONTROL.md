@@ -77,7 +77,7 @@ La source doit être activée, avoir réussi depuis 24 heures et ne pas avoir un
 une ancienne fiche. Les données indisponibles produisent un message explicite,
 jamais une liste partielle présentée comme complète.
 
-Les dates et heures sont affichées à Paris, avec UTC+2 en été et UTC+1 en hiver ;
+Les dates et heures utilisent le calendrier local, sans suffixe de fuseau ;
 une échéance sans heure reste affichée avec
 son heure et son fuseau inconnus. Elle est écartée lorsque son jour précède le
 jour de Paris du rapport. L'absence de deadline n'est pas une garantie d'ouverture.
@@ -130,7 +130,7 @@ Si l'heure choisie tombe dans l'heure inexistante du printemps, elle est décal�
 d'une heure réelle locale (02:30 devient 03:30). Lors du retour à l'heure d'hiver,
 la première occurrence est retenue ; la seconde ne provoque pas un autre envoi.
 
-Les dates du rapport portent la mention Paris et leur décalage UTC. « Actif »
+Les dates du rapport affichent uniquement la date et l’heure locale. « Actif »
 signifie qu'un signal du collecteur a moins de 90 secondes ; cela ne garantit
 pas la réussite de chaque source. Un cycle dépassant 30 minutes est signalé.
 Ces commandes consultent la base sans modifier les offres ou les candidatures.
@@ -166,10 +166,10 @@ Exemples de présentation (valeurs illustratives) :
 ⚠️ Radar à surveiller
 
 Nomura · Campus · accès bloqué · CAPTCHA
-Reprise possible dès 26/09/2026 · 21:23 · Paris (UTC+2)
+Reprise possible dès 26/09/2026 · 21:23
 
 39/40 sources à jour · alertes actives
-26/09/2026 · 21:11 · Paris (UTC+2)
+26/09/2026 · 21:11
 Détails · /status
 ```
 
@@ -177,7 +177,7 @@ Détails · /status
 ✅ Radar opérationnel
 
 40/40 sources à jour · alertes actives
-26/09/2026 · 21:30 · Paris (UTC+2)
+26/09/2026 · 21:30
 ```
 
 Les délais et la mémoire des notifications sont conservés : la mise à jour

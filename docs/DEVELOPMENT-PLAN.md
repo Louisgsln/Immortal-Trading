@@ -87,6 +87,9 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
 - Lot 77 : affichages en heure de Paris et avis Telegram épurés à la demande du
   propriétaire ; installé et vérifié, voir [validation](VALIDATION-LOT77.md).
 
+- Lot 78 : suppression des mentions de fuseau dans les affichages, tout en
+  conservant les conversions saisonnières ; voir [validation](VALIDATION-LOT78.md).
+
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.
 

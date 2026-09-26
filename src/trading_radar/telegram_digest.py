@@ -52,7 +52,7 @@ def digest_status(state: DigestState) -> str:
     status = "activé" if state.digest_enabled else "désactivé"
     last = state.digest_last_day or "aucune"
     return (
-        f"Récapitulatif {status} · {state.digest_time}, heure de Paris (été/hiver).\n"
+        f"Récapitulatif {status} · {state.digest_time}.\n"
         f"Dernière tentative automatique : {last}.\n"
         "/digest_on HH:MM pour activer/régler · /digest_off pour arrêter."
     )

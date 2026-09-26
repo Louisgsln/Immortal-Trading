@@ -400,7 +400,7 @@
     const timing = detailSection("Repères"); const grid = make("dl", null, "detail-grid");
     const deadline = job.deadline || {};
     const timingValues = [
-      ["Publication · source (jour de Paris)", radarPublication.label(job.publication_day)],
+      ["Publication · source", radarPublication.label(job.publication_day)],
       ["Première détection", date(job.first_seen, true)], ["Dernière observation", date(job.last_seen, true)],
       ["Échéance", deadline.precision === "instant" ? date(deadline.instant, true) : deadline.precision === "date" ? (deadline.day || "Non renseignée") + " · heure non précisée" : "Non confirmée"],
       ["Source", job.source || "Non renseignée"]
@@ -604,7 +604,7 @@
     const daily = trends.daily.slice(-days);
     const totals = Object.fromEntries(trendFields.map((field) => [field, daily.reduce((sum, day) => sum + day[field], 0)]));
     const activeDays = daily.filter((day) => trendFields.some((field) => day[field] > 0));
-    $("trend-window").textContent = daily.length ? "Du " + trendDate(daily[0].date) + " au " + trendDate(daily[daily.length - 1].date) + " · " + daily.length + " jours calendaires à Paris · journée en cours incluse." : "Aucun jour d’historique disponible · Paris.";
+    $("trend-window").textContent = daily.length ? "Du " + trendDate(daily[0].date) + " au " + trendDate(daily[daily.length - 1].date) + " · " + daily.length + " jours calendaires · journée en cours incluse." : "Aucun jour d’historique disponible.";
     $("trend-metrics").replaceChildren();
     [
       ["Premières détections", totals.new_jobs, "Offres repérées pour la première fois", "primary"],
@@ -627,7 +627,7 @@
       const label = make("span", trendDate(day.date), "trend-bar-date");
       const bar = make("meter", null, "trend-meter");
       bar.min = 0; bar.max = max; bar.value = day.new_jobs;
-      bar.setAttribute("aria-label", "Premières détections le " + trendDate(day.date) + " · Paris");
+      bar.setAttribute("aria-label", "Premières détections le " + trendDate(day.date) );
       bar.setAttribute("aria-valuetext", number(day.new_jobs) + " offres");
       row.append(label, bar, make("strong", number(day.new_jobs), "trend-bar-value"));
       $("trend-chart").append(row);

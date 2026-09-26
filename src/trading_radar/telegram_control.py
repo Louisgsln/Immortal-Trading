@@ -36,7 +36,7 @@ from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
 HELP = "📡 Immortal Trading\n/status : activité du radar, état des sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
-HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure de Paris.\n/digest_off : arrêter le récapitulatif."
+HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure.\n/digest_off : arrêter le récapitulatif."
 HELP += "\n\nSous chaque nouvelle alerte : Voir l’offre ouvre le site employeur. J’ai postulé enregistre ta confirmation dans le dashboard, avec la date du jour."
 
 
@@ -228,7 +228,7 @@ async def process_updates(
         replies += 1
         instant = datetime.fromtimestamp(now, UTC)
         if command == "digest_usage":
-            text = "Utilise /digest, /digest_on HH:MM (heure de Paris) ou /digest_off. Exemple : /digest_on 09:00."
+            text = "Utilise /digest, /digest_on HH:MM ou /digest_off. Exemple : /digest_on 09:00."
         elif command.startswith("digest_on"):
             enable_digest(store.state, command.partition(" ")[2] or None, instant)
             store.save()
@@ -315,7 +315,7 @@ async def run_control(config: Config) -> None:
                     {"command": "digest", "description": "Aperçu et réglage du récapitulatif"},
                     {
                         "command": "digest_on",
-                        "description": "Activer le récapitulatif (HH:MM Paris)",
+                        "description": "Activer le récapitulatif (HH:MM)",
                     },
                     {"command": "digest_off", "description": "Désactiver le récapitulatif"},
                     {"command": "help", "description": "Aide du radar"},

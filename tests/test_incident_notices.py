@@ -27,8 +27,7 @@ def report():
 
 def test_recovery_is_three_short_lines_without_full_status(report):
     assert format_incident_notice(report) == (
-        "✅ Radar opérationnel\n\n40/40 sources à jour · alertes actives\n"
-        "26/09/2026 · 21:11 · Paris (UTC+2)"
+        "✅ Radar opérationnel\n\n40/40 sources à jour · alertes actives\n26/09/2026 · 21:11"
     )
     report["alerts_enabled"] = False
     assert "alertes désactivées" in format_incident_notice(report)
@@ -47,7 +46,7 @@ def test_captcha_only_shows_problem_and_earliest_retry(report):
     before = deepcopy(report)
     text = format_incident_notice(report)
     assert "Nomura · Campus · accès bloqué · CAPTCHA" in text
-    assert "Reprise possible dès 26/09/2026 · 21:23 · Paris (UTC+2)" in text
+    assert "Reprise possible dès 26/09/2026 · 21:23" in text
     assert "39/40 sources à jour" in text and "Détails · /status" in text
     assert "Dernier signal" not in text and "alertes envoyées" not in text
     assert len(text) < 320 and report == before

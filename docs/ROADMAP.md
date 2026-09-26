@@ -875,3 +875,8 @@ Journées locales pour les publications, les filtres et les tendances. Les avis
 d'incident sont synthétiques et le retour à la normale tient en trois lignes.
 Les contrôles détaillés restent accessibles avec `/status` et le dashboard.
 Voir [validation et limites](VALIDATION-LOT77.md).
+
+## Lot 78 — Horaires sans mention de fuseau
+
+Date et heure seules dans les messages, le dashboard et les exports CSV.
+La conversion saisonnière reste active ; voir [validation](VALIDATION-LOT78.md).

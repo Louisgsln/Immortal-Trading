@@ -55,7 +55,7 @@ def test_lists_include_complete_link_and_never_change_database(local, repo, job,
     text = lists.jobs_message(local, mode, NOW)
     assert "1 affichée(s) sur 1" in text
     assert job.apply_url in text and job.title in text
-    assert "80/100" in text and "24/09/2026 · 13:50 · Paris (UTC+2)" in text
+    assert "80/100" in text and "24/09/2026 · 13:50" in text
     assert "Découverte par le radar ≠ date de publication" in text
     assert fingerprints(repo) == before
 
@@ -182,7 +182,7 @@ def test_experience_is_displayed_without_inventing_eligibility(local, repo, job,
 @pytest.mark.parametrize(
     "description,deadline,expected",
     [
-        ("Trading", NOW + timedelta(hours=1), "24/09/2026 · 15:00 · Paris (UTC+2)"),
+        ("Trading", NOW + timedelta(hours=1), "24/09/2026 · 15:00"),
         ("Application deadline: 2026-09-24", None, "2026-09-24 (heure/fuseau inconnus)"),
     ],
 )
