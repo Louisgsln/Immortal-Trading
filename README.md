@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 59 corrige les **fausses dates invalides pendant une collecte** : le
+dashboard et les archives de santé comparent les données à l'heure de leur
+observation. Les dates réellement futures restent signalées.
+Voir le [bilan du lot 59](docs/VALIDATION-LOT59.md).
+
 Le lot 58 étend les **missions et diplômes à Jump Trading** : 12 offres avec
 extraits de missions pour les prochaines cartes Telegram et le dashboard,
 11 avec diplômes cités dans le filtre et le détail. Les alternatives sont

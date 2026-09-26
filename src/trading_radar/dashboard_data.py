@@ -232,7 +232,9 @@ def build_dashboard_data(
         result.update(status="error", error={"code": exc.code, "message": str(exc)})
         result["database"] = {"status": exc.code, "schema_version": None}
     try:
-        result["health"] = check_health(config, now=instant)
+        # Health is a separate snapshot, potentially newer than the jobs read.
+        # Only propagate a cutoff when the caller explicitly supplied one.
+        result["health"] = check_health(config, now=now)
     except (ValueError, OSError, sqlite3.Error):
         result["health"] = {
             "status": "unavailable",

@@ -27,9 +27,10 @@ def _schema(connection: sqlite3.Connection) -> list[tuple]:
 
 
 def check_health(config: Config, max_age_hours: float = 24, now: datetime | None = None) -> dict:
-    """Return readiness plus actionable warnings; never create a missing database."""
+    """Inspect one snapshot, using its read completion time unless now is explicit."""
     if not math.isfinite(max_age_hours) or not 0 < max_age_hours <= 87600:
         raise ValueError("max_age_hours must be positive and at most 87600")
+    live = now is None
     now = now or utcnow()
     if now.tzinfo is None:
         raise ValueError("Health check time must have a timezone")
@@ -130,6 +131,13 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
         )
         issue("database_" + report["database"]["status"], "critical")
         return report
+
+    if live:
+        # A writer may commit between entering this function and establishing
+        # SQLite's read snapshot. Compare that snapshot to a clock sampled after
+        # reading it, not to the earlier request time. Explicit cutoffs stay exact.
+        now = utcnow().astimezone(UTC)
+        report["generated_at"] = now.isoformat()
 
     enabled = [(key, company) for key, company in config.companies.items() if company.enabled]
     if not enabled:

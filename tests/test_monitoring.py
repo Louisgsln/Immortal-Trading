@@ -269,7 +269,7 @@ def test_cli_critical_is_archived_before_exit_one(config, tmp_path, monkeypatch)
 
 def test_cli_healthy_exit_zero(monitored, tmp_path, monkeypatch):
     monkeypatch.setattr("trading_radar.monitoring_cli.load_config", lambda _: monitored)
-    monkeypatch.setattr(monitoring, "utcnow", lambda: NOW)
+    monkeypatch.setattr("trading_radar.health.utcnow", lambda: NOW)
     result = CliRunner().invoke(app, ["record", "--history-dir", str(tmp_path / "history")])
     assert result.exit_code == 0, result.output
 

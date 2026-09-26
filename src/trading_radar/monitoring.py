@@ -12,7 +12,6 @@ from typing import Any
 
 from trading_radar.config import Config
 from trading_radar.health import check_health
-from trading_radar.models import utcnow
 
 FORMAT_VERSION = 1
 MAX_REPORT_BYTES = 2 * 1024 * 1024
@@ -99,12 +98,11 @@ def record_health(
 ) -> dict:
     """Record even critical health; never create or migrate the primary database."""
     root = _history_path(directory, config)
-    instant = now or utcnow()
-    if instant.tzinfo is None:
+    if now is not None and now.tzinfo is None:
         raise ValueError("Monitoring time must include a timezone")
-    instant = instant.astimezone(UTC)
-    report = check_health(config, max_age_hours=max_age_hours, now=instant)
+    report = check_health(config, max_age_hours=max_age_hours, now=now)
     _validate_report(report)
+    instant = parse_time(report["generated_at"])
     identifier = instant.strftime("%Y%m%dT%H%M%S%fZ") + "-" + uuid.uuid4().hex
     envelope = {
         "format_version": FORMAT_VERSION,
