@@ -7,6 +7,7 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "citi": {"responsibilities", "key responsibilities", "what you'll do"},
     "drw": {
         "responsibilities",
         "key responsibilities",

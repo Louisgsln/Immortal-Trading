@@ -142,6 +142,16 @@ missions et qualifications ne sont pas découpées arbitrairement. Les contenus
 masqués et listes sans titre reconnu ne servent pas de preuve. Le portail campus
 reste hors du périmètre de cette extension.
 
+Le [lot 63](VALIDATION-LOT63.md) ajoute les listes Citi des rubriques
+Responsibilities, Key Responsibilities et What you'll do pour les missions,
+Education, Qualifications et Recommended Qualifications pour les diplômes.
+Sur les 51 fiches Citi conservées, 15 gagnent des missions et 20 des diplômes,
+soit 117 et 97 offres couvertes au total. « Master préféré » et « expérience
+équivalente » restent dans les extraits ; un diplôme universitaire sans niveau
+explicite reste classé **Diplôme sans niveau précis**. Une rubrique non reconnue
+ou du texte sans liste adjacente n'est pas extrapolé. La description complète
+reste disponible, et l'ajout d'extraits ne rend pas une offre éligible aux alertes.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

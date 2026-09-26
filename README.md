@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 63 étend les **missions et diplômes à Citi** : 15 offres gagnent des
+extraits de missions pour le dashboard et les prochaines alertes éligibles,
+20 des mentions de diplôme consultables et filtrables. Les alternatives et
+préférences restent visibles, sans changement du ciblage ni des scores.
+Voir le [bilan du lot 63](docs/VALIDATION-LOT63.md).
+
 Le lot 62 ajoute les **dates de publication au dashboard**, avec les tris plus
 récentes / plus anciennes et un filtre par période. La date de découverte reste
 distincte ; les publications inconnues ne sont pas estimées. Sur la copie auditée,
