@@ -5,6 +5,11 @@ le même diagnostic dans un dossier séparé : `data/health-history` par défaut
 Ces commandes n'effectuent aucune collecte réseau, aucun envoi, aucune migration SQLite
 et aucune planification. L'historique de santé ne remplace pas une sauvegarde métier.
 
+Le [dashboard modifiable](DASHBOARD.md) propose aussi **Enregistrer un contrôle**
+dans la vue Santé, avec le seuil de 24 heures et le dossier configuré au démarrage
+du serveur. Il affiche la comparaison des deux derniers rapports après chaque
+enregistrement. L'export et l'aperçu en lecture seule n'offrent pas cette action.
+
 ## Enregistrer et consulter
 
 ```powershell
@@ -57,6 +62,11 @@ d'une dégradation. L'apparition ou la disparition de sources peut aussi proveni
 changement de configuration. Si l'une des bases n'a pas pu être inspectée,
 `sources_comparable` vaut faux et `source_changes` reste vide : l'absence d'observation
 ne permet pas de conclure que des sources ont été retirées. Le statut global reste comparé.
+
+Les états `partial`, `collection_degraded` et `access_restricted` sont archivés
+avec leurs diagnostics et partagent le rang d'avertissement de `recent_failure`.
+Un passage entre ces états est un changement de diagnostic, pas une amélioration
+ni une dégradation. Les anciens rapports restent lisibles sans conversion.
 
 ## Format et intégrité
 

@@ -40,11 +40,26 @@ sont toutes deux indiquées, sans inviter à répéter l'écriture.
 
 ## Livraison
 
-Publication, installation après sauvegarde et contrôles GitHub à consigner
-après leur exécution.
+- Code `3a906cc` publié sur `main` et installé le 26 septembre à 12:04 Paris,
+  après sauvegarde vérifiée ; paquet précédent conservé.
+- Les cinq fichiers applicatifs installés correspondent au paquet publié.
+  Scanner, dashboard et Telegram actifs ; sauvegarde quotidienne prête.
+- Dashboard et API de suivi répondent correctement : 787 offres, 66 avec missions,
+  45 avec diplômes, six preuves Nomura ; exclusion Associate seul conservée et
+  13 intitulés mixtes Analyst/Associate toujours présents.
+- À 12:05, enregistrement depuis le navigateur sur l'instance active, confirmation
+  visible et archive relue avec empreinte valide ; aucune erreur JavaScript.
+- Collectes Susquehanna, HSBC professionnels, Nomura professionnels, UBS, Barclays,
+  Goldman campus, Jane Street, DRW et IMC réussies après redémarrage.
+- Au contrôle de 12:09, 23 sources sur 24 sont à jour. Goldman professionnels
+  reste en échec récent après `Goldman total changed during pagination` à 12:04,
+  avant l'installation. Le scanner conserve sa reprise et ses contrôles d'identité.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36234672061)
+  réussie sur Python 3.11–3.14 et Docker : 3 272 tests Linux, couverture 96 %,
+  construction et exercice de restauration du conteneur réussis.
 
 ## Suite du carnet
 
 Poursuivre l'audit des rubriques employeur et la surveillance prolongée des
-sources. L'historique reste alimenté explicitement ; aucune tâche de capture
+sources ; examiner la pagination Goldman professionnels si l'échec persiste. L'historique reste alimenté explicitement ; aucune tâche de capture
 automatique n'est ajoutée. La copie distante des sauvegardes attend une destination.
