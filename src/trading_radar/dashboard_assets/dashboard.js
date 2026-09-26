@@ -501,15 +501,71 @@
       if (source.age_hours !== null && source.age_hours !== undefined) success.append(make("span", "Il y a " + number(Math.round(source.age_hours * 10) / 10) + " h", "source-key"));
       row.append(name, status, success, make("td", number(source.last_snapshot_jobs ?? source.last_count)), make("td", number(source.consecutive_failures))); $("source-rows").append(row);
     });
+    $("record-health").hidden = !editingEnabled;
+    $("health-capture-help").hidden = !editingEnabled;
+    renderHealthHistory();
+  }
+  function renderHealthHistory() {
+    $("health-history").replaceChildren();
     const monitoring = data.monitoring || {};
     const snapshots = monitoring.snapshots || [];
     if (monitoring.status === "unavailable") $("health-history").append(make("p", "L’historique local est indisponible. " + ((monitoring.error || {}).message || ""), "history-empty"));
     else if (!snapshots.length) $("health-history").append(make("p", "Aucun rapport de santé enregistré. Cette vue affiche les rapports déjà présents dans le projet.", "history-empty"));
+    const comparison = monitoring.latest_comparison;
+    if (comparison) {
+      const panel = make("div", null, "health-comparison");
+      panel.append(make("strong", "Évolution entre les deux derniers contrôles"));
+      const periods = [comparison.previous_id, comparison.current_id].map((id) => snapshots.find((snapshot) => snapshot.id === id));
+      if (periods.every(Boolean)) panel.append(make("p", "Du " + date(periods[0].recorded_at, true) + " au " + date(periods[1].recorded_at, true)));
+      panel.append(make("p", "État général : " + (healthLabels[comparison.before] || comparison.before) + " → " + (healthLabels[comparison.after] || comparison.after)));
+      if (!comparison.same_freshness_threshold) panel.append(make("p", "Les seuils de fraîcheur diffèrent : les changements peuvent venir du seuil choisi."));
+      if (!comparison.sources_comparable) panel.append(make("p", "Sources non comparables : la base était indisponible lors d’un contrôle."));
+      else if (!comparison.source_changes.length) panel.append(make("p", "Aucun changement d’état des sources."));
+      else {
+        const list = make("ul");
+        const labels = { improved: "Amélioration", regressed: "Dégradation", changed: "Diagnostic modifié", added: "Source ajoutée", removed: "Source retirée" };
+        comparison.source_changes.forEach((change) => {
+          const source = (health.sources || []).find((item) => item.source === change.source);
+          const name = source ? source.company + " (" + change.source + ")" : change.source;
+          list.append(make("li", name + " · " + labels[change.change] + " : " + (healthLabels[change.before] || "Hors périmètre") + " → " + (healthLabels[change.after] || "Hors périmètre")));
+        });
+        panel.append(list);
+      }
+      $("health-history").append(panel);
+    } else if (snapshots.length === 1) $("health-history").append(make("p", "Un second contrôle permettra de comparer l’état des sources.", "history-empty"));
     snapshots.forEach((snapshot) => {
       const row = make("article", null, "history-row"); const description = make("div");
       description.append(make("strong", date(snapshot.recorded_at, true)), make("div", number((snapshot.source_summary || {}).fresh || 0) + " sources à jour · " + number((snapshot.issues || []).length) + " points à examiner", "history-meta"));
       row.append(description, healthBadge(snapshot.status)); $("health-history").append(row);
     });
+  }
+  async function recordHealth() {
+    const button = $("record-health");
+    if (!editingEnabled || button.disabled) return;
+    button.disabled = true;
+    const message = $("health-capture-message");
+    message.textContent = "Enregistrement du contrôle…";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch("/api/health-snapshots", {
+        method: "POST", credentials: "same-origin", cache: "no-store", signal: controller.signal,
+        headers: { "Content-Type": "application/json", "X-Radar-Token": data.editing.token }, body: "{}"
+      });
+      const result = await response.json();
+      if (response.status !== 201 || result.status !== "ok" || !result.snapshot || !result.monitoring) {
+        message.textContent = (result.error || {}).message || "Enregistrement non confirmé. Rechargez la page pour vérifier l’historique.";
+        return;
+      }
+      data.monitoring = result.monitoring;
+      renderHealthHistory();
+      message.textContent = "Contrôle enregistré le " + date(result.snapshot.recorded_at, true) + ". " + (result.monitoring.status === "ok" ? "Historique actualisé ci-dessous." : "L’historique reste indisponible ; le nouveau contrôle a bien été conservé.");
+    } catch (_) {
+      message.textContent = "Enregistrement non confirmé. Rechargez la page pour vérifier l’historique avant de réessayer.";
+    } finally {
+      clearTimeout(timeout);
+      button.disabled = false;
+    }
   }
   const trendFields = ["new_jobs", "updates", "rescored", "closed", "reopened", "scans", "failed_sources"];
   const trendDate = (value) => new Date(value + "T00:00:00Z").toLocaleDateString("fr-FR", {day: "2-digit", month: "short", year: "numeric", timeZone: "UTC"});
@@ -589,6 +645,7 @@
   document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
   $("filters").addEventListener("submit", (event) => event.preventDefault());
   $("trend-days").addEventListener("change", renderTrends);
+  $("record-health").addEventListener("click", recordHealth);
   ["search", "company", "score", "active", "application-status", "experience", "education", "sort"].forEach((id) => $(id).addEventListener(id === "search" ? "input" : "change", () => { state.page = 1; renderJobs(); }));
   $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (state.view === "applications") $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); });
   $("previous").addEventListener("click", () => { state.page -= 1; renderJobs(); });

@@ -11,6 +11,7 @@ from trading_radar.config import Company
 from trading_radar.health import check_health
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, CollectionConflict
+from trading_radar.monitoring import history, read_snapshot, record_health
 from trading_radar.runtime_status import format_status
 from trading_radar.scan_preview import preview_scan
 from trading_radar.scanner import scan
@@ -299,6 +300,47 @@ def test_never_clean_bnp_is_described_as_partial_not_never_collected(config, rep
     report = check_health(config)
     assert report["source_summary"] == {"collection_degraded": 1}
     assert repo.state("test")["last_success"] is None
+
+
+@pytest.mark.parametrize("diagnostic", ["partial", "collection_degraded", "access_restricted"])
+def test_health_archives_real_collection_diagnostics_and_recovery(
+    config, repo, tmp_path, diagnostic
+):
+    config.settings.database_url = (
+        "sqlite:///" + repo.db.execute("PRAGMA database_list").fetchone()[2]
+    )
+    source = "nomura_campus" if diagnostic == "access_restricted" else "test"
+    config.companies = {source: Company(name="Fixture", ats="fixture", enabled=True)}
+    directory = tmp_path / "history"
+
+    def run(snapshot):
+        asyncio.run(scan(config, repo, collectors={source: snapshot}))
+
+    run(Snapshot([]))
+    clean = record_health(config, directory)
+    affected = Snapshot([], gaps=["R0427551"] if diagnostic == "partial" else [])
+    if diagnostic == "collection_degraded":
+        affected.result.conflicts = [
+            CollectionConflict(external_id="REF1", urls=[], fields=["title"])
+        ]
+    if diagnostic == "access_restricted":
+        affected.error = "Nomura campus access restricted: CAPTCHA challenge; retry later"
+    run(affected)
+    before = list(repo.db.iterdump())
+    archived = record_health(config, directory)
+    assert list(repo.db.iterdump()) == before
+    assert archived["report"]["sources"][0]["status"] == diagnostic
+    assert read_snapshot(directory, archived["id"]) == archived
+    comparison = history(directory)["latest_comparison"]
+    assert comparison["previous_id"] == clean["id"]
+    assert comparison["source_changes"] == [
+        {"source": source, "before": "fresh", "after": diagnostic, "change": "regressed"}
+    ]
+    run(Snapshot([]))
+    record_health(config, directory)
+    assert history(directory)["latest_comparison"]["source_changes"] == [
+        {"source": source, "before": diagnostic, "after": "fresh", "change": "improved"}
+    ]
 
 
 def test_preview_explicitly_reports_incomplete_listings_without_live_writes(config, repo, raw):

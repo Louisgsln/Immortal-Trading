@@ -289,3 +289,30 @@ def test_temp_files_are_not_reported(monitored, tmp_path):
     record_health(monitored, tmp_path, now=NOW)
     (tmp_path / ".health-interrupted.tmp").write_bytes(b"partial")
     assert history(tmp_path)["total"] == 1
+
+
+@pytest.mark.parametrize(
+    "before,after",
+    [
+        ("partial", "collection_degraded"),
+        ("collection_degraded", "access_restricted"),
+        ("access_restricted", "recent_failure"),
+    ],
+)
+def test_warning_diagnostic_change_is_not_a_recovery(monitored, tmp_path, before, after):
+    previous = record_health(monitored, tmp_path, now=NOW)
+    current = record_health(monitored, tmp_path, now=NOW + timedelta(seconds=1))
+    previous["report"]["sources"][0]["status"] = before
+    current["report"]["sources"][0]["status"] = after
+    assert compare_snapshots(previous, current)["source_changes"] == [
+        {"source": "test", "before": before, "after": after, "change": "changed"}
+    ]
+
+
+def test_unknown_source_status_still_cannot_be_archived(monitored, tmp_path, monkeypatch):
+    report = monitoring.check_health(monitored, now=NOW)
+    report["sources"][0]["status"] = "invented"
+    monkeypatch.setattr(monitoring, "check_health", lambda *args, **kwargs: report)
+    with pytest.raises(ValueError, match="Invalid source health"):
+        record_health(monitored, tmp_path / "history", now=NOW)
+    assert not (tmp_path / "history").exists()

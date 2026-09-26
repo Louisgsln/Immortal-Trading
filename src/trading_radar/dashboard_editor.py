@@ -1,4 +1,4 @@
-"""Opt-in loopback application editor; exports and ordinary previews stay read-only."""
+"""Opt-in local application edits and health archives; exports remain read-only."""
 
 import json
 import re
@@ -18,6 +18,7 @@ from trading_radar.dashboard_applications import (
 )
 from trading_radar.dashboard_data import build_dashboard_data
 from trading_radar.dashboard_http import discard_small_body
+from trading_radar.monitoring import history, record_health
 
 MAX_BODY_BYTES = 131_072
 
@@ -38,7 +39,7 @@ def _reject_constant(value: str) -> None:
 def create_editable_dashboard_server(
     config: Config, history_dir: Path = Path("data/health-history"), port: int = 8765
 ) -> ThreadingHTTPServer:
-    """Expose only explicit application edits, with a per-process token and origin checks."""
+    """Protect explicit local actions with a per-process token and origin checks."""
     initial = build_dashboard_data(config, history_dir=history_dir)
     if initial["status"] != "ok":
         raise ValueError("Dashboard data unavailable")
@@ -159,7 +160,8 @@ def create_editable_dashboard_server(
             if not self.local(write=True) or not self.authorized():
                 return
             job_id = self.job_id()
-            if job_id is None:
+            capture_health = self.path == "/api/health-snapshots"
+            if job_id is None and not capture_health:
                 self.error(404, "not_found", "Cette ressource n’existe pas.")
                 return
             lengths = self.headers.get_all("Content-Length", [])
@@ -194,16 +196,49 @@ def create_editable_dashboard_server(
                     object_pairs_hook=_unique_object,
                     parse_constant=_reject_constant,
                 )
-                if not isinstance(payload, dict) or set(payload) != {"revision", "changes"}:
+                expected = set() if capture_health else {"revision", "changes"}
+                if not isinstance(payload, dict) or set(payload) != expected:
                     raise ValueError("Invalid envelope")
             except (ValueError, RecursionError, TimeoutError, OSError):
                 self.error(400, "invalid_request", "Le format de la requête est invalide.")
                 return
+            if capture_health:
+                self.capture_health()
+                return
+            assert job_id is not None
             try:
                 result = update_application(config, job_id, payload["changes"], payload["revision"])
                 self.json(200, {"status": "ok", **result})
             except ApplicationEditError as exc:
                 self.error(exc.status, exc.code, exc.message)
+
+        def capture_health(self) -> None:
+            try:
+                snapshot = record_health(config, history_dir)
+            except (OSError, ValueError):
+                self.error(
+                    503,
+                    "health_capture_unavailable",
+                    "Enregistrement non confirmé. Rechargez la page pour vérifier l’historique.",
+                )
+                return
+            # A published archive remains successful even if another archive is unreadable.
+            # Never suggest retrying a write just because refreshing its history failed.
+            try:
+                monitoring = {"status": "ok", **history(history_dir, limit=10)}
+            except (OSError, ValueError):
+                monitoring = {
+                    "status": "unavailable",
+                    "error": {"message": "Les archives locales n’ont pas pu être relues."},
+                }
+            self.json(
+                201,
+                {
+                    "status": "ok",
+                    "snapshot": {"id": snapshot["id"], "recorded_at": snapshot["recorded_at"]},
+                    "monitoring": monitoring,
+                },
+            )
 
         def unsupported(self):
             self.error(405, "method_not_allowed", "Cette action n’est pas disponible.")

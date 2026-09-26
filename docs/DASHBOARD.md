@@ -133,6 +133,21 @@ par l'export : [monitor record](MONITORING.md) enregistre explicitement un diagn
 Des captures utilisant des seuils de fraîcheur différents peuvent expliquer une évolution
 de statut sans changement du collecteur.
 
+Dans le serveur modifiable (`--edit-applications`), la vue **Santé des sources**
+propose **Enregistrer un contrôle** sous le tableau. Chaque clic conserve un
+diagnostic actuel dans ce dossier, sans lancer de collecte ni envoyer d'alerte.
+L'historique affiche les dix derniers contrôles et l'évolution entre les deux
+plus récents : amélioration, dégradation, diagnostic modifié ou changement de
+périmètre. Deux diagnostics d'avertissement différents ne sont pas présentés
+comme une guérison. Les seuils différents et bases indisponibles sont signalés.
+
+L'enregistrement actualise seulement l'historique ; le tableau des sources reste
+daté du chargement de la page. Le suivi et ses éventuels brouillons sont conservés.
+Le bouton est absent de l'export et de l'aperçu en lecture seule. Une erreur de
+communication n'entraîne aucune nouvelle tentative automatique : recharger pour
+vérifier l'historique avant de réessayer. Si un ancien rapport est illisible, un
+nouveau contrôle peut être enregistré mais l'erreur de l'historique reste visible.
+
 Une erreur de l'historique de santé ou des tendances est signalée sans empêcher la consultation des offres. En
 revanche, une base métier absente, corrompue, incompatible ou contenant des enregistrements
 incohérents bloque l'export. La limite actuelle est de 5 000 offres : au-delà, la génération

@@ -20,6 +20,9 @@ ID_PATTERN = re.compile(r"\d{8}T\d{12}Z-[0-9a-f]{32}")
 SOURCE_RANK = {
     "fresh": 0,
     "recent_failure": 1,
+    "partial": 1,
+    "collection_degraded": 1,
+    "access_restricted": 1,
     "stale": 2,
     "never_scanned": 2,
     "invalid_timestamp": 2,

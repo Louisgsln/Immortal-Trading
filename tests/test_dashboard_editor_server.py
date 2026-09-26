@@ -1,4 +1,4 @@
-"""The opt-in editor accepts only intentional local application updates."""
+"""The opt-in server accepts only intentional, protected local actions."""
 
 import json
 import re
@@ -15,6 +15,7 @@ from trading_radar import dashboard_cli, dashboard_editor
 from trading_radar.cli import app
 from trading_radar.dashboard import render_dashboard
 from trading_radar.dashboard_editor import MAX_BODY_BYTES, create_editable_dashboard_server
+from trading_radar.monitoring import history, read_snapshot
 
 
 def rows(repo):
@@ -370,3 +371,132 @@ def test_unauthorized_small_upload_gets_error_even_when_partial(editor, repo, bo
             assert response.status == 403
             assert json.loads(response.read())["error"]["code"] == "invalid_session"
     assert rows(repo) == before
+
+
+def test_capture_health_updates_history_without_business_writes(editor, repo, tmp_path):
+    client, headers, _ = editor
+    before = rows(repo)
+    directory = tmp_path / "history"
+    with FileLock(repo.db.execute("PRAGMA database_list").fetchone()[2] + ".lock"):
+        first = client.post("/api/health-snapshots", headers=headers, json={})
+    assert first.status_code == 201
+    assert first.headers["cache-control"] == "no-store"
+    saved = first.json()
+    assert saved["monitoring"]["total"] == 1
+    assert saved["monitoring"]["latest_comparison"] is None
+    archive = read_snapshot(directory, saved["snapshot"]["id"])
+    assert saved["snapshot"]["recorded_at"] == archive["report"]["generated_at"]
+    second = client.post("/api/health-snapshots", headers=headers, json={})
+    assert second.status_code == 201
+    comparison = second.json()["monitoring"]["latest_comparison"]
+    assert comparison["previous_id"] == saved["snapshot"]["id"]
+    assert comparison["source_changes"] == []
+    assert rows(repo) == before
+    assert history(directory)["total"] == 2
+    assert saved["snapshot"]["id"] in client.get("/").text
+
+
+@pytest.mark.parametrize(
+    "override",
+    [
+        {"X-Radar-Token": "wrong"},
+        {"Origin": "null"},
+        {"Origin": "https://evil.example"},
+        {"Host": "evil.example"},
+        {"Sec-Fetch-Site": "cross-site"},
+        {"X-Radar-Token": None},
+        {"Origin": None},
+    ],
+)
+def test_capture_health_requires_local_session(editor, repo, tmp_path, override):
+    client, headers, _ = editor
+    before = rows(repo)
+    headers = {k: v for k, v in (headers | override).items() if v is not None}
+    assert client.post("/api/health-snapshots", headers=headers, json={}).status_code == 403
+    assert not (tmp_path / "history").exists()
+    assert rows(repo) == before
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        "[]",
+        "null",
+        "{",
+        '{"directory":"../private"}',
+        '{"max_age_hours":1}',
+        '{"revision":"x","changes":{}}',
+        '{"x":1,"x":2}',
+        '{"x":NaN}',
+    ],
+)
+def test_capture_health_accepts_no_configuration(editor, repo, tmp_path, body):
+    client, headers, _ = editor
+    before = rows(repo)
+    response = client.post(
+        "/api/health-snapshots",
+        content=body,
+        headers=headers | {"Content-Type": "application/json"},
+    )
+    assert response.status_code == 400
+    assert not (tmp_path / "history").exists()
+    assert rows(repo) == before
+
+
+@pytest.mark.parametrize(
+    "method,expected",
+    [("GET", 404), ("HEAD", 404), ("PUT", 405), ("PATCH", 405), ("DELETE", 405), ("OPTIONS", 405)],
+)
+def test_capture_health_only_explicit_post(editor, tmp_path, method, expected):
+    client, headers, _ = editor
+    assert client.request(method, "/api/health-snapshots", headers=headers).status_code == expected
+    assert not (tmp_path / "history").exists()
+
+
+@pytest.mark.parametrize("suffix", ["/", "?directory=elsewhere", "/extra"])
+def test_capture_health_route_cannot_be_extended(editor, tmp_path, suffix):
+    client, headers, _ = editor
+    assert (
+        client.post("/api/health-snapshots" + suffix, headers=headers, json={}).status_code == 404
+    )
+    assert not (tmp_path / "history").exists()
+
+
+@pytest.mark.parametrize("failure", [OSError, ValueError])
+def test_capture_health_failure_sanitized(editor, tmp_path, monkeypatch, failure):
+    def fail(*args, **kwargs):
+        raise failure("private path or credentials")
+
+    monkeypatch.setattr(dashboard_editor, "record_health", fail)
+    client, headers, _ = editor
+    response = client.post("/api/health-snapshots", headers=headers, json={})
+    assert response.status_code == 503
+    assert response.json()["error"]["code"] == "health_capture_unavailable"
+    assert "private" not in response.text
+    assert not (tmp_path / "history").exists()
+
+
+def test_capture_health_success_survives_unreadable_older_archive(editor, tmp_path):
+    directory = tmp_path / "history"
+    directory.mkdir()
+    (directory / "broken.json").write_text("private contents", encoding="utf-8")
+    client, headers, _ = editor
+    response = client.post("/api/health-snapshots", headers=headers, json={})
+    assert response.status_code == 201
+    result = response.json()
+    assert result["monitoring"]["status"] == "unavailable"
+    assert "private" not in response.text and "broken.json" not in response.text
+    assert read_snapshot(directory, result["snapshot"]["id"])
+    assert len(list(directory.glob("*.json"))) == 2
+
+
+def test_capture_health_records_critical_missing_database(editor, config, tmp_path):
+    missing = tmp_path / "missing.db"
+    config.settings.database_url = "sqlite:///" + str(missing)
+    client, headers, _ = editor
+    response = client.post("/api/health-snapshots", headers=headers, json={})
+    assert response.status_code == 201
+    result = response.json()
+    archive = read_snapshot(tmp_path / "history", result["snapshot"]["id"])
+    assert archive["report"]["status"] == "critical"
+    assert not missing.exists()

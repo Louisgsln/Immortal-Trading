@@ -482,6 +482,11 @@ trading-radar dashboard serve --edit-applications --port 8765
 
 Le serveur d'aperçu écoute sur `http://127.0.0.1:8765` uniquement. Relancer la commande pour actualiser sa vue. L'export inclut les notes du suivi et doit rester privé. Utiliser `--overwrite` pour remplacer explicitement un export existant.
 
+Dans le serveur modifiable, **Santé des sources → Enregistrer un contrôle**
+conserve le diagnostic actuel et compare les deux derniers contrôles. L'action
+n'envoie pas d'alerte et ne lance pas de collecte. Les états de collecte partielle,
+de références contradictoires et d'accès bloqué sont aussi archivés.
+
 ## Architecture
 
 ```text
