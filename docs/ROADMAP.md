@@ -697,8 +697,11 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   totale de 138 offres. Missions et 11 tables inchangées.
 - Puces de qualification bornées par les champs employeur, avec leur introduction,
   préférences et alternatives. Aucun niveau académique déduit par équivalence.
-- Parcours navigateur vérifié sur copie ; validations et livraison en cours.
-  [Bilan du lot 66](VALIDATION-LOT66.md).
+- Publié sur `main` et installé après sauvegarde ; parcours navigateur vérifié
+  sur copie puis sur l'instance active. Scanner, dashboard et Telegram actifs.
+- 3 477 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 réussie :
+  3 481 tests Linux, couverture 96 %. Dix tests JavaScript et Docker réussis.
+  Les 24 sources sont à jour au dernier contrôle. [Bilan du lot 66](VALIDATION-LOT66.md).
 
 ## Les cinq améliorations prioritaires après le lot 66
 

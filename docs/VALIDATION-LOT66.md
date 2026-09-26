@@ -49,7 +49,19 @@ transformées en diplôme.
 
 ## Livraison
 
-Publication, installation et contrôles GitHub à consigner après la validation locale.
+- Code `5f845fa` publié sur `main` et installé le 26 septembre 2026 à 14:44:26 Paris,
+  après sauvegarde vérifiée à 14:44:21 ; paquet précédent conservé.
+- Le fichier applicatif installé correspond au paquet publié.
+- Dashboard et API de suivi disponibles : 138 mentions de diplôme, 158 missions
+  et 342 dates de publication. Ancienne couverture et ciblage conservés.
+- Les deux parcours de filtre et de détail sont vérifiés sur l'instance active,
+  sans erreur JavaScript. Scanner, dashboard et Telegram actifs.
+- Collectes Crédit Agricole CIB, Macquarie, Société Générale et UBS campus/professionnels
+  réussies après installation.
+  Les 24 sources sont à jour au contrôle de 14:48:51 ; historique disponible.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36242861388)
+  réussie sur Python 3.11–3.14 : 3 481 tests Linux, couverture 96 %. Dix tests
+  JavaScript sous Node 22 réussis ; construction et restauration Docker réussies.
 
 ## Suite du carnet
 
