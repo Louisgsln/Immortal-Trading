@@ -93,23 +93,24 @@ silencieux pour ne pas renvoyer l'historique comme de nouvelles opportunités.
 Le chantier d’extension reste ouvert : intégrer d’autres entreprises par portails
 vérifiés, sans revenir à l’enrichissement IA ou à la comparaison avec le CV.
 
-## Prochains lots
-
-Lot 79 développé : historique des essais attribués par source, sans reconstituer
+Lot 79 installé et vérifié : historique des essais attribués par source, sans reconstituer
 des succès anciens à partir de totaux globaux. Voir [validation](VALIDATION-LOT79.md).
 
-Lot 80 développé : missions et diplômes Jane Street/Flow Traders, avec mesure
+Lot 80 installé et vérifié : missions et diplômes Jane Street/Flow Traders, avec mesure
 sur copie et limites explicites. Voir [validation](VALIDATION-LOT80.md).
 
-Lot 81 développé : BP, Shell et TP ICAP, avec qualification des missions de
+Lot 81 installé et vérifié : BP, Shell et TP ICAP, avec qualification des missions de
 courtage et import sur copie. Voir [validation](VALIDATION-LOT81.md).
+
+## Prochains lots
 
 1. Poursuivre la fiabilité sur les incidents réels, notamment les accès
    intermittents Nomura et les changements de présentation des employeurs.
-2. Compléter les rubriques et les rôles quantitatifs encore non reconnus, avec
+2. Préserver les rubriques Optiver encore aplaties, qualifier les brokers TP ICAP
+   non reconnus et compléter les rôles quantitatifs restants, avec
    des preuves employeur et un aperçu des scores avant tout recalcul.
-3. Ajouter un nouveau groupe de banques, fonds, courtiers ou négociants
-   énergie/matières premières après validation de leurs portails publics.
+3. Valider les catalogues Marex, Vitol et Trafigura, puis d'autres banques,
+   fonds et négociants. Les programmes fermés ne sont pas des offres ouvertes.
 4. Confirmer plus précisément les offres fermées et préparer l'import du suivi
    avec aperçu et historique ; poursuivre les exercices de restauration.
 5. Définir la destination et le budget de l'hébergement, des sauvegardes

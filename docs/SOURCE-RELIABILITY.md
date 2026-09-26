@@ -56,3 +56,15 @@ Les causes d'échec sont présentées par catégories courtes. Les messages brut
 URLs de transport et paramètres ne sont pas exposés. `/status` reprend les causes
 et les reprises possibles. La reconnaissance de la page d'erreur Macquarie
 n'autorise aucune redirection et ne garantit pas une réparation du portail.
+
+## Historique attribué depuis le lot 79
+
+Dans la colonne de dernière réussite, déplier le taux pour consulter la durée
+moyenne et les cinq derniers passages sur 24 heures. Chaque résultat inclut
+désormais sa source et son heure de fin en base. Les anciens succès globaux
+ne sont pas attribués par déduction ; l'interface signale cet historique incomplet.
+Une liste partielle volontairement ciblée peut être collectée avec succès ; ce
+taux ne mesure pas la couverture de tout le catalogue employeur. Les références
+en conflit et les fiches manquantes comptent comme essais non pleinement réussis.
+Une lecture invalide ou dépassant 10 000 cycles dans la fenêtre n'affiche aucun
+taux partiel. Cette vue ne change pas le calendrier ni les notifications Telegram.
