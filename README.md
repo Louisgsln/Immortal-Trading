@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot 64 étend les **missions et diplômes à Deutsche Bank et Morgan Stanley** :
+24 nouvelles fiches avec missions et 11 avec diplômes dans le dashboard.
+Les prochaines alertes éligibles reprennent les missions. Les mentions
+« undergraduate degree » et « educated to degree level » restent sans niveau
+académique déduit. Voir le [bilan du lot 64](docs/VALIDATION-LOT64.md).
+
 Le lot 63 étend les **missions et diplômes à Citi** : 15 offres gagnent des
 extraits de missions pour le dashboard et les prochaines alertes éligibles,
 20 des mentions de diplôme consultables et filtrables. Les alternatives et

@@ -152,6 +152,14 @@ explicite reste classé **Diplôme sans niveau précis**. Une rubrique non recon
 ou du texte sans liste adjacente n'est pas extrapolé. La description complète
 reste disponible, et l'ajout d'extraits ne rend pas une offre éligible aux alertes.
 
+Le [lot 64](VALIDATION-LOT64.md) étend cette lecture à Deutsche Bank et Morgan
+Stanley : 24 nouvelles fiches avec missions et 11 avec diplômes, portant la
+couverture à 141 et 108 offres sur la copie auditée. Les formulations
+**undergraduate degree** et **educated to degree level** sont visibles dans
+**Diplôme sans niveau précis**, avec l'extrait complet. Elles ne deviennent pas
+un Bachelor ou un Master par équivalence supposée ; préférences, disciplines
+et alternatives par expérience restent consultables.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

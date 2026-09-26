@@ -13,6 +13,17 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "deutsche_bank": {
+        "your skills and experience",
+        "skills you'll need",
+        "skills that will help you excel",
+    },
+    "morgan_stanley": {
+        "qualifications",
+        "requirements",
+        "what you'll bring to the role",
+        "skills desirable",
+    },
     "citi": {"education", "qualifications", "recommended qualifications"},
     "drw": {
         "key skills",
@@ -40,6 +51,12 @@ _HEADINGS = {
     },
 }
 _SHORT_DEGREE_CONTEXT = r"\b\.?(?=\s*(?:[,/]|(?:or|and|in|degree|preferably|preferred)\b|$))"
+_UNSPECIFIED_DEGREE = re.compile(
+    r"\bdegree\s+(?:in|from|required|preferred)\b"
+    r"|\beducated\s+to\s+(?:a\s+)?degree\s+level\b"
+    r"|\bundergraduate\s+degree\b",
+    re.I,
+)
 _DEGREES = {
     "bachelor": re.compile(
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
@@ -115,7 +132,7 @@ def education_mentions(job: Job) -> dict:
         if not excerpt or len(excerpt) > 1500:
             continue
         levels = [key for key, pattern in _DEGREES.items() if pattern.search(excerpt)]
-        if not levels and re.search(r"\bdegree\s+(?:in|from|required|preferred)\b", excerpt, re.I):
+        if not levels and _UNSPECIFIED_DEGREE.search(excerpt):
             levels = ["unspecified_level"]
         if not levels or any(e["excerpt"] == excerpt for e in result["evidence"]):
             continue
