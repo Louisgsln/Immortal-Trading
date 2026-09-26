@@ -179,6 +179,12 @@ def format_status(report: dict) -> str:
         lines += ["", "Sources à vérifier :"] + [
             f"• {s['company']} ({s['source']}) : {source_labels.get(s['status'], s['status'])}"
             + (f" ({len(s['listing_gaps'])})" if s.get("listing_gaps") else "")
+            + (" — " + s["failure"]["label"] if s.get("failure") else "")
+            + (
+                " Reprise possible après " + moment(s["schedule"]["next_eligible_at"]) + "."
+                if s.get("failure") and s.get("schedule", {}).get("eligible_now") is False
+                else ""
+            )
             for s in problems[:12]
         ]
         if len(problems) > 12:

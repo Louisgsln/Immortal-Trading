@@ -16,6 +16,8 @@ from trading_radar.collection_diagnostics import (
 )
 from trading_radar.config import Config
 from trading_radar.models import utcnow
+from trading_radar.source_failure import failure_summary
+from trading_radar.source_schedule import cooldown_seconds, due_at
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 
 
@@ -180,6 +182,13 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
             issue("source_incomplete_listings", "warning", key)
         else:
             status = "fresh"
+        state = {
+            "last_success": success_raw,
+            "last_failure": failure_raw,
+            "consecutive_failures": failures,
+        }
+        next_eligible = due_at(company, state) if not invalid and (success or failure) else None
+        current_failure = bool(not invalid and failure and (success is None or failure >= success))
         report["sources"].append(
             {
                 "source": key,
@@ -190,6 +199,15 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
                 "age_hours": round(age, 3) if age is not None else None,
                 "consecutive_failures": failures,
                 "last_snapshot_jobs": count,
+                "failure": failure_summary(failure_messages.get(key)) if current_failure else None,
+                "schedule": {
+                    "interval_seconds": company.scan_interval,
+                    "cooldown_seconds": cooldown_seconds(company, failures),
+                    "next_eligible_at": next_eligible.isoformat() if next_eligible else None,
+                    "eligible_now": None
+                    if invalid
+                    else next_eligible is None or next_eligible <= now,
+                },
                 **({"collection_conflicts": conflicts[key]} if conflicts.get(key) else {}),
                 **({"listing_gaps": gaps[key]} if gaps.get(key) else {}),
             }

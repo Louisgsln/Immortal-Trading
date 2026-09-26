@@ -40,3 +40,15 @@ leurs historiques. Le signal d'activité suit la tentative active la plus ancien
 Les alertes en attente d'une source en échec restent différées jusqu'à une
 collecte réussie. Une collecte ciblée n'envoie pas les alertes des autres sources.
 Les livraisons incertaines ne sont jamais répétées automatiquement.
+# Causes et calendrier visibles depuis le lot 74
+
+Dans Santé des sources, chaque ligne indique l'intervalle configuré et la
+première heure possible de la prochaine collecte. Après échec, le délai est
+calculé avec la même règle que le scanner. Une heure passée signifie que la
+source peut être prise en charge, sans affirmer qu'elle a déjà été collectée :
+le scanner doit être actif et disposer d'une place. L'état est daté du chargement.
+
+Les causes d'échec sont présentées par catégories courtes. Les messages bruts,
+URLs de transport et paramètres ne sont pas exposés. `/status` reprend les causes
+et les reprises possibles. La reconnaissance de la page d'erreur Macquarie
+n'autorise aucune redirection et ne garantit pas une réparation du portail.

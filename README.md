@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 74 explique les **incidents et délais de reprise** dans le dashboard et
+Telegram, et corrige six faux positifs opérationnels sans exclure tous les postes
+Assistant/Support. Le rôle quantitatif Nomura reste retenu. Voir le
+[bilan et les changements de score](docs/VALIDATION-LOT74.md).
+
 Le lot 73 ajoute **dix employeurs** de trading et de gestion quantitative :
 34 sources, 30 employeurs. Les offres initiales sont importées sans avalanche
 d’alertes ; les nouvelles opportunités restent surveillées en continu. Voir

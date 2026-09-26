@@ -12,15 +12,19 @@ from trading_radar.models import utcnow
 from trading_radar.storage import Repository
 
 
+def cooldown_seconds(company: Company, failures: int) -> int:
+    failures = max(0, failures)
+    return max(company.scan_interval, min(3600, company.scan_interval * 2 ** min(failures, 4)))
+
+
 def due_at(company: Company, state: dict) -> datetime:
     attempts = [state.get("last_success"), state.get("last_failure")]
     last = max((datetime.fromisoformat(value) for value in attempts if value), default=None)
     if last is None:
         return datetime.min.replace(tzinfo=utcnow().tzinfo)
-    failures = max(0, state.get("consecutive_failures", 0))
     # Failure backoff also applies before the first successful collection. Never
     # shorten a configured interval longer than the one-hour backoff cap.
-    cooldown = max(company.scan_interval, min(3600, company.scan_interval * 2 ** min(failures, 4)))
+    cooldown = cooldown_seconds(company, state.get("consecutive_failures", 0))
     return last + timedelta(seconds=cooldown)
 
 

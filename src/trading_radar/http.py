@@ -212,6 +212,13 @@ class HTTPClient:
         response = await self._request(
             url, interval, source, method=method, body=body, headers=headers
         )
+        if (
+            parts.netloc == "recruitment.macquarie.com"
+            and response.status_code in {301, 302, 303, 307, 308}
+            and response.headers.get("location")
+            in {"/en_US/careers/Error", "https://recruitment.macquarie.com/en_US/careers/Error"}
+        ):
+            raise SourceUnavailable("Macquarie public portal error page")
         if response.status_code != 200 and not (allow_not_modified and response.status_code == 304):
             raise SourceUnavailable(f"HTTP {response.status_code}")
         return response

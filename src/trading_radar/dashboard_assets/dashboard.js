@@ -493,10 +493,14 @@
   }
   function renderHealth() {
     const badge = healthBadge(health.status); $("health-status").className = badge.className; $("health-status").textContent = badge.textContent;
-    $("health-explanation").textContent = (editingEnabled ? "État calculé au chargement de la page. " : "État calculé lors de l’export. ") + "Une source est à jour si sa dernière collecte réussie date de moins de " + (health.max_age_hours || 24) + " heures, sans échec ultérieur ni fiche incomplète signalée. " + (editingEnabled ? "Rechargez la page pour actualiser toutes les données depuis votre radar local. Aucune collecte automatique." : "Les données ne s’actualisent pas automatiquement.");
+    $("health-explanation").textContent = (editingEnabled ? "État calculé au chargement de la page. " : "État calculé lors de l’export. ") + "Une source est à jour si sa dernière collecte réussie date de moins de " + (health.max_age_hours || 24) + " heures, sans échec ultérieur ni fiche incomplète signalée. " + (editingEnabled ? "Rechargez la page pour actualiser toutes les données depuis votre radar local. Le calendrier indique la première heure possible, pas une garantie de passage ; il dépend du scanner et des places disponibles." : "Les données ne s’actualisent pas automatiquement. Le calendrier est une estimation au moment de l’export.");
     (health.sources || []).forEach((source) => {
       const row = make("tr"); const name = make("td"); name.append(make("span", source.company, "source-name"), make("span", source.source, "source-key"));
       const status = make("td"); status.append(healthBadge(source.status));
+      if (source.failure) {
+        status.append(make("p", source.failure.label, "source-key"));
+        status.append(make("span", "Dernier échec : " + date(source.last_failure, true), "source-key"));
+      }
       if ((source.listing_gaps || []).length) {
         status.append(make("p", "Fiches sans titre ni lien : " + source.listing_gaps.join(", ") + ". Les autres offres sont actualisées ; ces références ne sont pas déclarées fermées.", "source-key"));
       }
@@ -512,7 +516,15 @@
       }
       const success = make("td", date(source.last_success, true));
       if (source.age_hours !== null && source.age_hours !== undefined) success.append(make("span", "Il y a " + number(Math.round(source.age_hours * 10) / 10) + " h", "source-key"));
-      row.append(name, status, success, make("td", number(source.last_snapshot_jobs ?? source.last_count)), make("td", number(source.consecutive_failures))); $("source-rows").append(row);
+      const schedule = make("td");
+      if (source.schedule) {
+        schedule.append(make("span", "Intervalle : " + number(source.schedule.interval_seconds / 60) + " min", "source-name"));
+        if (source.schedule.eligible_now === null) schedule.append(make("span", "Date incohérente : calendrier indisponible", "source-key"));
+        else if (source.schedule.eligible_now) schedule.append(make("span", "Collecte possible · en cours ou en attente du scanner", "source-key"));
+        else schedule.append(make("span", "Prochaine collecte possible : " + date(source.schedule.next_eligible_at, true), "source-key"));
+        if (source.failure) schedule.append(make("span", "Délai après échec : " + number(source.schedule.cooldown_seconds / 60) + " min", "source-key"));
+      } else schedule.textContent = "Non précisé";
+      row.append(name, status, success, schedule, make("td", number(source.last_snapshot_jobs ?? source.last_count)), make("td", number(source.consecutive_failures))); $("source-rows").append(row);
     });
     $("record-health").hidden = !editingEnabled;
     $("health-capture-help").hidden = !editingEnabled;

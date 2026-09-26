@@ -835,3 +835,11 @@ puis nouveaux portails de banques, courtiers et négociants énergie/matières p
 Les confirmations de clôture et l'import du suivi avec aperçu restent prévus.
 Les sauvegardes distantes, le VPS et l’accès multiappareil attendent une destination
 et un mode d’accès choisis. Aucune IA d’enrichissement ou comparaison CV prévue.
+
+## Lot 74 — Causes des incidents et ciblage opérationnel
+
+Calendrier de collecte et délai de reprise visibles, causes d'échec bornées dans
+le dashboard et `/status`. Le portail d'erreur Macquarie est identifié sans
+redirection automatique. Cinq assistants opérationnels audités et un Middle
+Officer sortent des priorités ; le rôle Nomura reste retenu comme technologie
+quantitative. Voir [le bilan](VALIDATION-LOT74.md).

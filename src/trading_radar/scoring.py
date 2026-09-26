@@ -8,7 +8,13 @@ from trading_radar.models import Job, Score
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.range_experience import plain_range_experience_years
 from trading_radar.role_evidence import role_evidence_text
-from trading_radar.targeting import drw_junior_role, research_trading_evidence
+from trading_radar.targeting import (
+    OPERATIONAL_EXCLUSION,
+    drw_junior_role,
+    nomura_trading_technology,
+    operational_role,
+    research_trading_evidence,
+)
 
 ROLE_TERMS = {
     "TRADING": ["trader", "trading"],
@@ -164,6 +170,10 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     evidence_text = normalize_text(job.title + " " + evidence_description)
     result = Score()
     roles = classify(title, ROLE_TERMS)
+    verified_nomura_technology = nomura_trading_technology(job)
+    if verified_nomura_technology:
+        roles = ["TRADING_TECH"]
+        result.reasons.append("Verified Nomura duties describe quantitative trading technology")
     verified_research = research_trading_evidence(job)
     if verified_research:
         roles = list(dict.fromkeys([*roles, "QUANT_RESEARCH"]))
@@ -193,6 +203,8 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         )
     )
     result.exclusions = [t for t in keywords["excluded_titles"] if has(title, t)]
+    if operational_role(job):
+        result.exclusions.append(OPERATIONAL_EXCLUSION)
     if verified_research and "research analyst" in result.exclusions:
         result.exclusions.remove("research analyst")
     excluded_associate = associate_only(job)
@@ -312,6 +324,7 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     direct = result.trading >= 25
     fo = (
         verified_research
+        or verified_nomura_technology
         or (tech and job.role_hint == "trading_technology")
         or any(
             has(text, t)

@@ -9,6 +9,79 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 from trading_radar.normalizer import has, normalize_text
 
+OPERATIONAL_EXCLUSION = "Missions vérifiées de support opérationnel, hors cible trading"
+_OPERATIONAL_ASSISTANTS = {
+    ("ubs_professionals", "ubs", "trader assistant"): (
+        "key responsibilities",
+        "your career comeback",
+        (
+            "provide operations support to the trading desk",
+            "trade bookings",
+            "ensure data integrity",
+        ),
+    ),
+    ("bnp_paribas", "bnp paribas", "institutional sales trading assistant"): (
+        "your main activities are",
+        "profile and skills to success",
+        ("finalise their onboarding", "finalising booking of traded deals", "pre trade checks"),
+    ),
+    ("morgan_stanley", "morgan stanley", "investment management trading assistant analyst"): (
+        "primary responsibilities",
+        "qualifications external",
+        ("perform post trade functions", "ensure settlement of trades", "confirm and clear"),
+    ),
+    ("morgan_stanley", "morgan stanley", "asia rates trading assistant"): (
+        "primary responsibilities",
+        "educational background",
+        ("trade bookings and amendments", "end of day p and l reviews", "lifecycle management"),
+    ),
+    ("morgan_stanley", "morgan stanley", "msim emerging markets trading assistant analyst"): (
+        "key responsibilities",
+        "candidate profile",
+        (
+            "settlement and reconciliation",
+            "account maintenance and onboarding",
+            "resolve trading and settlement issues",
+        ),
+    ),
+}
+
+
+def operational_role(job: Job) -> bool:
+    """Reviewed operational duties, not all assistant/support job titles."""
+    rule = _OPERATIONAL_ASSISTANTS.get((job.source, job.company_normalized, job.title_normalized))
+    if job.source_type != "official" or rule is None:
+        return False
+    start, end, requirements = rule
+    section = _section(
+        normalize_text(visible_text(Document(html.unescape(job.description)).root)), start, end
+    )
+    return all(has(section, phrase) for phrase in requirements)
+
+
+def nomura_trading_technology(job: Job) -> bool:
+    if (job.source_type, job.source, job.company_normalized, job.title_normalized) != (
+        "official",
+        "nomura_professionals",
+        "nomura",
+        "trading support",
+    ):
+        return False
+    section = _section(
+        normalize_text(visible_text(Document(html.unescape(job.description)).root)),
+        "r ole and responsibilities",
+        "we are committed to providing equal opportunities",
+    )
+    return all(
+        has(section, term)
+        for term in (
+            "quants to work on our algorithmic trading platform for efx",
+            "talented programmers",
+            "guiding models through the entire development lifecycle",
+            "develop and manage quantitative analytics",
+        )
+    )
+
 
 def _section(text: str, start: str, end: str) -> str:
     if text.count(start) != 1:
