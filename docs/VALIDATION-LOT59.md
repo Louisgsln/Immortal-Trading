@@ -33,7 +33,22 @@ et autres traitements à heure fixée ; aucune marge de tolérance n'est ajouté
 - L'audit observe 24 sources à jour sur cette copie, sans garantie de disponibilité
   permanente des portails publics.
 - Suite complète Windows : 3 232 tests réussis, quatre ignorés. Ruff, vérification
-  des types et tests ciblés réussis. Livraison et CI à consigner.
+  des types et tests ciblés réussis.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36233005518)
+  réussie sur Python 3.11–3.14 et Docker : 3 236 tests Linux, couverture 96 %,
+  construction et exercice de restauration du conteneur réussis.
+
+## Livraison
+
+- Code `d8c280a` publié sur `main`, installé après sauvegarde vérifiée le
+  26 septembre à 11:31 Paris ; version précédente conservée.
+- Les trois fichiers applicatifs installés correspondent au code publié.
+- Dashboard et lecture du suivi répondent correctement : 787 offres, 66 extraits
+  de missions, 45 mentions de diplôme ; règles Analyst/Associate préservées.
+- Vue Santé vérifiée dans le navigateur à 11:32 : 24 sources à jour, aucun
+  message d'erreur JavaScript. L'accès des sources peut varier ensuite.
+- Scanner, dashboard et Telegram actifs ; collectes DRW, HSBC, Macquarie et
+  Crédit Agricole réussies après redémarrage.
 
 ## Suite du carnet
 

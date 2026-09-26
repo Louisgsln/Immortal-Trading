@@ -605,8 +605,10 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   instantané ; une heure explicitement fournie garde sa signification exacte.
 - Archives de santé datées comme leur rapport, sans modification de format.
 - Reproduction sur copie des 787 offres : faux signal supprimé, résultats à
-  heure fixe identiques, 11 tables préservées. Validation complète et livraison
-  en cours ; bilan [VALIDATION-LOT59.md](VALIDATION-LOT59.md).
+  heure fixe identiques, 11 tables préservées. Publié sur `main` et installé
+  après sauvegarde, services actifs ; 3 232 tests Windows réussis, quatre ignorés.
+  CI Python 3.11–3.14 et Docker réussie, 3 236 tests Linux et couverture 96 %.
+  Bilan [VALIDATION-LOT59.md](VALIDATION-LOT59.md).
 
 ## Les cinq améliorations prioritaires après le lot 59
 
