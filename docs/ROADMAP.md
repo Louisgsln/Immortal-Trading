@@ -920,3 +920,17 @@ ni du navigateur intégré n'est extrait. L'accord sur Playwright et la conserva
 locale a été reçu le 27 septembre. Restent la validation manuelle de cette
 session et une collecte réelle réussie avant l'activation sur l'instance.
 Voir [validation](VALIDATION-LOT83.md) et [mode d'emploi](NOMURA-ACCESS.md).
+
+## Lots 84–85 — Fiches Optiver et ciblage du courtage
+
+Les rubriques Optiver sont conservées : 17 fiches supplémentaires avec missions
+et 10 avec diplôme, texte et scores préservés. Une variante de rubrique TP ICAP
+permet de qualifier Global Broking à 66/100 ; les deux autres brokers examinés
+restent hors cible faute de preuves suffisantes de rôle débutant et de cotation
+ou exécution client. Suivis et alertes préservés sur copie.
+Voir les validations [84](VALIDATION-LOT84.md) et [85](VALIDATION-LOT85.md).
+
+Suite : autres structures Optiver et rôles quantitatifs à qualifier, catalogues
+Marex/Vitol/Trafigura, confirmations de fermeture et import du suivi avec aperçu.
+Nomura attend toujours la validation manuelle de sa session dédiée. L'IA/CV
+reste hors périmètre.

@@ -57,7 +57,7 @@ QUALIFICATIONS = {
 RESPONSIBILITIES = {
     "bp": set(),
     "shell": {"what you'll be doing"},
-    "tp_icap": {"role responsibilities", "day-to-day responsibilities"},
+    "tp_icap": {"role responsibilities", "day-to-day responsibilities", "responsibilities"},
     "akuna_capital": {"in this role, you will"},
     "maven_securities": {"what you will be doing"},
     "point72": {"responsibilities", "role/responsibilities"},

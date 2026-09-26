@@ -114,13 +114,21 @@ voir [état et limites](VALIDATION-LOT83.md).
 
 ## Prochains lots
 
+Lots 84–85 développés et collectes réelles validées sur copie : rubriques Optiver
+conservées (17 missions, 10 diplômes supplémentaires), variante TP ICAP reconnue
+(un poste de 0 à 66 ; deux contre-exemples restent exclus). Voir les bilans
+[84](VALIDATION-LOT84.md) et [85](VALIDATION-LOT85.md) pour l'état d'installation.
+
 1. Poursuivre la fiabilité sur les incidents réels, notamment les accès
    intermittents Nomura et les changements de présentation des employeurs.
-2. Préserver les rubriques Optiver encore aplaties, qualifier les brokers TP ICAP
-   non reconnus et compléter les rôles quantitatifs restants, avec
-   des preuves employeur et un aperçu des scores avant tout recalcul.
-3. Valider les catalogues Marex, Vitol et Trafigura, puis d'autres banques,
-   fonds et négociants. Les programmes fermés ne sont pas des offres ouvertes.
+2. Étendre les missions Optiver aux dix structures encore non reconnues, puis
+   qualifier les rôles quantitatifs et Trading Assistant restants, avec preuves
+   employeur et aperçu des scores. Les brokers TP ICAP audités au lot 85 dont les
+   preuves sont insuffisantes ne doivent pas être promus globalement.
+3. Valider les catalogues Marex (priorité au catalogue et au programme UK 2027),
+   Vitol et Trafigura, puis d'autres banques, fonds et négociants. Voir les
+   [accès et points de vigilance vérifiés](NEXT-EMPLOYERS.md). Les programmes
+   fermés ne sont pas des offres ouvertes.
 4. Confirmer plus précisément les offres fermées et préparer l'import du suivi
    avec aperçu et historique ; poursuivre les exercices de restauration.
 5. Définir la destination et le budget de l'hébergement, des sauvegardes

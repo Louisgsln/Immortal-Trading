@@ -20,7 +20,9 @@ def broker(raw, config, content=QUOTES, **updates):
     return score_job(normalize(raw.model_copy(update=values)), config.keywords)
 
 
-@pytest.mark.parametrize("content", [QUOTES, EXECUTION])
+@pytest.mark.parametrize(
+    "content", [QUOTES, EXECUTION, QUOTES.replace("Role Responsibilities", "Responsibilities")]
+)
 def test_broking_requires_client_quotes_or_execution_not_corporate_presentation(
     raw, config, content
 ):
@@ -37,6 +39,7 @@ def test_broking_requires_client_quotes_or_execution_not_corporate_presentation(
     [
         "<p>About us</p>" + QUOTES.replace("Role Responsibilities:", "Corporate services"),
         QUOTES + QUOTES,
+        QUOTES + QUOTES.replace("Role Responsibilities", "Responsibilities"),
         "<section hidden>" + QUOTES + "</section>",
         QUOTES.replace("Give live quotes to traders", "Enter trade records"),
         QUOTES.replace("Give live quotes to traders", "Do not give live quotes to traders"),
@@ -110,3 +113,20 @@ def test_new_employer_degree_and_mission_sections(job):
     job.description = "<p>What you’ll be doing</p><ul><li>Price gas options within limits.</li></ul><p>What you bring</p><ul><li>BSc or MSc in a quantitative discipline.</li></ul>"
     assert mission_excerpts(job)["excerpts"] == ["Price gas options within limits."]
     assert education_mentions(job)["levels"] == ["bachelor", "master"]
+
+
+def test_internal_quotes_and_operational_support_are_not_client_broking(raw, config):
+    content = "<p>Role Responsibilities</p><ul><li>Provide complete support to the brokers.</li><li>Ensure timely input of trades into trading systems.</li><li>Provide live quotes through the link line to our internal regional offices.</li><li>Monitor markets and follow financial news and developments.</li></ul>"
+    job = broker(raw, config, content, title="Trainee Broker, Forward FX")
+    assert not tp_broking_duties(job)
+    assert job.score_breakdown.total == 0
+
+
+@pytest.mark.parametrize(
+    "title", ["Associate Broker", "Senior Trainee Broker", "Trainee Broker Internship"]
+)
+def test_new_section_keeps_seniority_and_internship_exclusions(raw, config, title):
+    job = broker(
+        raw, config, QUOTES.replace("Role Responsibilities", "Responsibilities"), title=title
+    )
+    assert job.score_breakdown.total == 0

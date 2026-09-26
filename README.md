@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Les lots **84–85** préservent les rubriques Optiver (**17 fiches avec missions,
+10 avec diplôme supplémentaires**) et reconnaissent une variante des missions
+de courtage TP ICAP. Sur copie, un seul poste passe de 0 à 66 ; aucun ancien
+score Optiver, suivi ou alerte n'est modifié. Voir les validations
+[84](docs/VALIDATION-LOT84.md) et [85](docs/VALIDATION-LOT85.md).
+
 Les lots 79–81 ajoutent un **historique de fiabilité par source**, 130 fiches
 supplémentaires avec missions chez Jane Street/Flow Traders, puis **BP, Shell
 et TP ICAP**. Le périmètre configuré atteint **43 sources et 38 employeurs**.

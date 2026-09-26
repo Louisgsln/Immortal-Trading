@@ -21,7 +21,10 @@ def tp_broking_duties(job: Job) -> str:
     ) or not re.fullmatch(r"trainee broker(?: .+)?", job.title_normalized):
         return ""
     sections = list(
-        labelled_lists(Document(html.unescape(job.description)).root, {"role responsibilities"})
+        labelled_lists(
+            Document(html.unescape(job.description)).root,
+            {"role responsibilities", "responsibilities"},
+        )
     )
     if len(sections) != 1:
         return ""
