@@ -209,6 +209,16 @@ dernière apparaît dans Master et Doctorat, avec l'alternative complète visibl
 le Bac+5 ne devient pas un Master par équivalence. Les scores et candidatures
 restent identiques. Le texte d'aide distingue exigences, préférences et alternatives.
 
+Le [lot 70](VALIDATION-LOT70.md) conserve la provenance de **What you offer**
+pour les 15 fiches Macquarie auditées. Cinq fiches affichent des mentions d'études :
+une avec Master et quatre avec **Diplôme sans niveau précis**, soit 192 offres
+couvertes au total. La rubrique complète rassemble tous ses paragraphes, y compris
+les alternatives et la mention **preferred, but not required**. **Postgraduate
+degree**, **quantitative degree** et **tertiary qualification** ne définissent
+aucun niveau précis dans ce filtre. Le profil de stage dépassant 1 500 caractères
+reste uniquement dans la description intégrale. Les anciennes descriptions
+non étiquetées attendent une collecte réussie ; aucune origine n'est supposée.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

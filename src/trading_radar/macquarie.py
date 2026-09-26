@@ -6,7 +6,8 @@ import re
 from urllib.parse import parse_qs, urlencode, urlsplit
 
 from trading_radar.config import Company
-from trading_radar.html_page import Document, clean, with_class
+from trading_radar.description_sections import visible_text
+from trading_radar.html_page import Document, Element, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.macquarie_experience import macquarie_sales_trading_evidence
 from trading_radar.models import Collection, RawJob
@@ -17,6 +18,58 @@ ORIGIN = "https://recruitment.macquarie.com"
 SEARCH = ORIGIN + "/en_US/careers/SearchJobs/"
 DETAIL = ORIGIN + "/en_US/careers/JobDetail"
 PAGE_SIZE = 9
+
+
+def _description(parts: list[tuple[Element, str]], section: Element | None, root: Element) -> str:
+    """Retain the whole verified requirements section without changing plain text."""
+    paragraphs = ["<p>" + html.escape(value) + "</p>" for _, value in parts]
+    if section is None:
+        return "\n".join(paragraphs)
+
+    def visible_nodes(node: Element):
+        if (
+            node.tag in {"script", "style", "template", "noscript"}
+            or "hidden" in node.attrs
+            or node.attrs.get("aria-hidden", "").lower() == "true"
+            or re.search(
+                r"(?:display\s*:\s*none|visibility\s*:\s*hidden)", node.attrs.get("style", ""), re.I
+            )
+        ):
+            return
+        yield id(node)
+        for child in node.children:
+            if isinstance(child, Element):
+                yield from visible_nodes(child)
+
+    visible = set(visible_nodes(root))
+    headings = [node for node in section.walk() if node.tag in {"h1", "h2", "h3", "h4", "h5", "h6"}]
+    values = with_class(section.walk(), "article__content__view__field__value")
+    indices = [
+        index for index, (node, _) in enumerate(parts) if any(node is value for value in values)
+    ]
+    if (
+        all(id(node) in visible for node in section.walk())
+        and len(headings) == 1
+        and headings[0].tag == "h3"
+        and clean(headings[0]) == "What you offer"
+        and values
+        and len(indices) == len(values)
+        and indices == list(range(indices[0], indices[-1] + 1))
+        and clean(section)
+        in {
+            " ".join([prefix, *(clean(value) for value in values)])
+            for prefix in (
+                "What you offer",
+                "What you offer Press space or enter keys to toggle section visibility",
+            )
+        }
+        and all(clean(value) == " ".join(visible_text(value).split()) for value in values)
+    ):
+        paragraphs[indices[0]] = (
+            '<section data-macquarie-section="What you offer">' + paragraphs[indices[0]]
+        )
+        paragraphs[indices[-1]] += "</section>"
+    return "\n".join(paragraphs)
 
 
 def job_url(value: str) -> tuple[str, str]:
@@ -72,7 +125,8 @@ def parse_page(text: str, term: str, offset: int, limit: int) -> tuple[int, list
 
 
 def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
-    nodes = list(Document(text).root.walk())
+    root = Document(text).root
+    nodes = list(root.walk())
     titles = [n for n in with_class(nodes, "title--11") if n.tag == "h2"]
     roots = with_class(nodes, "article__content__fields")
     body = with_class(nodes, "section--without--border--top")
@@ -81,6 +135,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     fields = with_class([*roots[0].walk(), *body[0].walk()], "article__content__view__field")
     metadata = {}
     descriptions, locations, contracts = [], [], []
+    description_parts = []
     for field in fields:
         labels = with_class(field.walk(), "article__content__view__field__label")
         values = with_class(field.walk(), "article__content__view__field__value")
@@ -99,10 +154,12 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
             contracts.append(value)
         elif not any(c.startswith("field--") for c in classes):
             descriptions.append(value)
+            description_parts.append((values[0], value))
     headings = {clean(n) for n in body[0].walk() if n.tag == "h3"}
     # Both the actual role and the candidate requirements must be present, beyond boilerplate.
     requirements = ""
     requirement_paragraphs = ""
+    requirement_section = None
     for label in ("What role will you play?", "What you offer"):
         sections = [
             n
@@ -119,6 +176,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         ):
             raise SourceUnavailable("Macquarie responsibilities or requirements missing")
         if label == "What you offer":
+            requirement_section = sections[0]
             requirement_values = [
                 clean(n)
                 for n in with_class(sections[0].walk(), "article__content__view__field__value")
@@ -155,7 +213,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         external_id=row["id"],
         apply_url=row["url"],
         source_url=row["url"],
-        description="\n".join("<p>" + html.escape(value) + "</p>" for value in descriptions),
+        description=_description(description_parts, requirement_section, root),
         location="; ".join(dict.fromkeys(locations)),
         employment_type=contracts[0],
         minimum_experience_years=max(minima, default=None),

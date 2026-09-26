@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 70 conserve la provenance des **critères Macquarie** et ajoute cinq
+fiches aux filtres de diplôme : 192 offres couvertes au total. La rubrique
+complète garde les alternatives et préférences ; un diplôme sans niveau explicite
+n'est pas transformé en Bachelor ou Master. Voir le [bilan du lot 70](docs/VALIDATION-LOT70.md).
+
 Le lot 69 ajoute les **critères d'études Crédit Agricole CIB** : 21 fiches
 consultables dans les filtres Bachelor, Bac+5, Master et Doctorat, soit 187 offres
 couvertes. Le champ et son intitulé d'origine sont conservés lors des prochaines

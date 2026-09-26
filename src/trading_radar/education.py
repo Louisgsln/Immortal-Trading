@@ -13,6 +13,7 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "macquarie": set(),
     "credit_agricole_cib": set(),
     "societe_generale": set(),
     "bnp_paribas": {
@@ -82,6 +83,9 @@ _SG_PROFILE = re.compile(r"^(Et si c[’']était vous\s*\?|Profile required)\s+(
 _SG_MASTER = re.compile(r"\bde\s+type\s+master\b", re.I)
 _BAC = re.compile(r"\bbac\s*\+\s*(4\s*/\s*5|[45])(?!\w|\s*/)", re.I)
 _CA_BAC5 = re.compile(r"bac\s*\+\s*5\s*/\s*M2\s+et\s+plus", re.I)
+_MACQUARIE_UNSPECIFIED = re.compile(
+    r"\b(?:postgraduate|quantitative)\s+degree\b|\btertiary\s+qualification\b", re.I
+)
 _DEGREES = {
     "bachelor": re.compile(
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
@@ -248,6 +252,29 @@ def _ubs_qualification_items(root: Element) -> Iterator[tuple[str, str]]:
 
 def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
     document = Document(html.unescape(job.description))
+    if job.source == "macquarie":
+        sections = [
+            node
+            for node in document.root.children
+            if isinstance(node, Element) and "data-macquarie-section" in node.attrs
+        ]
+        if len(sections) == 1:
+            section = sections[0]
+            paragraphs = [p for p in section.children if not isinstance(p, str) or p.strip()]
+            if (
+                section.tag == "section"
+                and section.attrs == {"data-macquarie-section": "What you offer"}
+                and paragraphs
+                and all(
+                    isinstance(p, Element)
+                    and p.tag == "p"
+                    and not p.attrs
+                    and all(isinstance(part, str) for part in p.children)
+                    for p in paragraphs
+                )
+            ):
+                yield "What you offer", " ".join(visible_text(section).split())
+        return
     if job.source == "credit_agricole_cib":
         # Only the collector's verified field survives storage without raw data.
         fields = [
@@ -326,6 +353,8 @@ def education_mentions(job: Job) -> dict:
             and _BARCLAYS_UNSPECIFIED_DEGREE.search(excerpt)
             or job.source == "ubs_professionals"
             and _UBS_UNSPECIFIED_DEGREE.search(excerpt)
+            or job.source == "macquarie"
+            and _MACQUARIE_UNSPECIFIED.search(excerpt)
         ):
             levels = ["unspecified_level"]
         if not levels or any(e["excerpt"] == excerpt for e in result["evidence"]):
