@@ -985,3 +985,152 @@ companies:
       - principal
       - applications specialist
       - application specialist
+  bp:
+    name: BP
+    enabled: true
+    ats: workday
+    tenant: bpinternational
+    career_url: https://bpinternational.wd3.myworkdayjobs.com/bpCareers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative
+      and broking searches only; partial scope, no closures inferred from absence. First
+      import silent. See docs/VALIDATION-LOT81.md.
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - operator
+      - sanctions
+      - support
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - brokerage
+      - systems engineer
+  shell:
+    name: Shell
+    enabled: true
+    ats: workday
+    tenant: shell
+    career_url: https://shell.wd3.myworkdayjobs.com/ShellCareers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative
+      and broking searches only; partial scope, no closures inferred from absence. First
+      import silent. See docs/VALIDATION-LOT81.md.
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - operator
+      - sanctions
+      - support
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - brokerage
+      - systems engineer
+  tp_icap:
+    name: TP ICAP
+    enabled: true
+    ats: workday
+    tenant: tp
+    career_url: https://tp.wd107.myworkdayjobs.com/TP-ICAP
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative
+      and broking searches only; partial scope, no closures inferred from absence. First
+      import silent. See docs/VALIDATION-LOT81.md.
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - broker
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - broker
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - operator
+      - sanctions
+      - support
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - brokerage
+      - systems engineer

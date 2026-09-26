@@ -1,5 +1,9 @@
 # Extension des employeurs — septembre 2026
 
+Le lot 81 ajoute BP, Shell et TP ICAP : **43 sources et 38 employeurs**.
+Cadence de 30 minutes pour ces trois portails, contrôles Workday et premier
+import silencieux. Voir [preuves, qualification et limites](VALIDATION-LOT81.md).
+
 Quinze employeurs officiels ajoutés aux lots 73 et 75 : **40 sources et 35 employeurs**
 configurés au total. Le lot 73 avait porté le périmètre à 34 sources et 30 employeurs.
 Le lot 75 ajoute DV Trading, Walleye, Squarepoint, CTC professionnels/campus et

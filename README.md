@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Les lots 79–81 ajoutent un **historique de fiabilité par source**, 130 fiches
+supplémentaires avec missions chez Jane Street/Flow Traders, puis **BP, Shell
+et TP ICAP**. Le périmètre configuré atteint **43 sources et 38 employeurs**.
+Les trois nouveaux portails sont interrogés toutes les 30 minutes ; premier
+import silencieux. Voir les validations [79](docs/VALIDATION-LOT79.md),
+[80](docs/VALIDATION-LOT80.md) et [81](docs/VALIDATION-LOT81.md).
+
 Le lot 76 étend à **HSBC professionnels** la reprise bornée des catalogues
 qui changent pendant leur lecture. Les pages de la tentative abandonnée sont
 jetées avant une unique reprise ; les refus d'accès et erreurs de format

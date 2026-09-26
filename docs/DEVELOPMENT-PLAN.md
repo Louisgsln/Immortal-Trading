@@ -101,6 +101,9 @@ des succès anciens à partir de totaux globaux. Voir [validation](VALIDATION-LO
 Lot 80 développé : missions et diplômes Jane Street/Flow Traders, avec mesure
 sur copie et limites explicites. Voir [validation](VALIDATION-LOT80.md).
 
+Lot 81 développé : BP, Shell et TP ICAP, avec qualification des missions de
+courtage et import sur copie. Voir [validation](VALIDATION-LOT81.md).
+
 1. Poursuivre la fiabilité sur les incidents réels, notamment les accès
    intermittents Nomura et les changements de présentation des employeurs.
 2. Compléter les rubriques et les rôles quantitatifs encore non reconnus, avec

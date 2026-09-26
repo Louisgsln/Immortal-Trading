@@ -17,4 +17,8 @@ historique ou alerte n'est modifié par cet enrichissement de présentation.
 
 101 tests locaux des missions/diplômes réussis. Les contrôles couvrent les
 conditions et alternatives, rubriques cachées, absentes, répétées, inversées ou
-interrompues, et les limites de longueur. Déploiement à confirmer.
+interrompues, et les limites de longueur. Suite complète après les lots 79–80 :
+3 969 réussis, 4 ignorés. Installé à 22:52 ; contrôle à 22:59 : 425 fiches avec
+missions, 359 avec diplôme, scanner actif, suivis et anciens scores/alertes
+conservés. Une nouvelle offre a été détectée naturellement entre les contrôles
+(974 au total, toujours 175 prioritaires). Tous les contrôles GitHub réussis.

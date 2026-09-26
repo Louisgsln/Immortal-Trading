@@ -1,6 +1,7 @@
 """List headings audited on official finance employer boards."""
 
 EMPLOYERS = {
+    "tp_icap": "tp icap",
     "akuna_capital": "akuna capital",
     "maven_securities": "maven securities",
     "point72": "point72",
@@ -19,6 +20,9 @@ EMPLOYERS = {
     "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
+    "bp": {"to be eligible for the stands graduate programme you should"},
+    "shell": {"what you bring"},
+    "tp_icap": {"essential", "desired"},
     "akuna_capital": {
         "qualities that make great candidates",
         "additional qualities that make great candidates",
@@ -51,6 +55,9 @@ QUALIFICATIONS = {
     "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
+    "bp": set(),
+    "shell": {"what you'll be doing"},
+    "tp_icap": {"role responsibilities", "day-to-day responsibilities"},
     "akuna_capital": {"in this role, you will"},
     "maven_securities": {"what you will be doing"},
     "point72": {"responsibilities", "role/responsibilities"},

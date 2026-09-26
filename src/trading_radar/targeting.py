@@ -10,6 +10,50 @@ from trading_radar.models import Job
 from trading_radar.normalizer import has, normalize_text
 
 OPERATIONAL_EXCLUSION = "Missions vérifiées de support opérationnel, hors cible trading"
+
+
+def tp_broking_duties(job: Job) -> str:
+    """Audited trainee broking duties, including execution/quotes beyond support."""
+    if (job.source_type, job.source, job.company_normalized) != (
+        "official",
+        "tp_icap",
+        "tp icap",
+    ) or not re.fullmatch(r"trainee broker(?: .+)?", job.title_normalized):
+        return ""
+    sections = list(
+        labelled_lists(Document(html.unescape(job.description)).root, {"role responsibilities"})
+    )
+    if len(sections) != 1:
+        return ""
+    duties = visible_text(sections[0][1])
+    items = [
+        normalize_text(visible_text(item))
+        for item in sections[0][1].children
+        if isinstance(item, Element) and item.tag == "li"
+    ]
+
+    def stated(term: str) -> bool:
+        return any(item == term or item.startswith(term + " ") for item in items)
+
+    quoted = all(
+        stated(term)
+        for term in (
+            "identify trade opportunities and calculate strategies",
+            "give live quotes to traders",
+            "liaise with clients",
+        )
+    )
+    execution = all(
+        stated(term)
+        for term in (
+            "arrange or introduce trades from client orders",
+            "develop existing and new client relationships",
+            "understand the underlying products being traded by clients",
+        )
+    )
+    return duties if quoted or execution else ""
+
+
 _OPERATIONAL_ASSISTANTS = {
     ("ubs_professionals", "ubs", "trader assistant"): (
         "key responsibilities",
@@ -91,6 +135,16 @@ def _section(text: str, start: str, end: str) -> str:
 
 
 _FINANCE_ROLES = {
+    ("tp_icap", "algorithmic trading developer"): (
+        "technology",
+        "role responsibilities",
+        "experience competences",
+        (
+            "work closely with quants on implementation of trading algorithms",
+            "quantitative models and analytical signals",
+            "low latency trading strategies",
+        ),
+    ),
     ("squarepoint_capital", "junior quant researcher"): (
         "research",
         "position overview",

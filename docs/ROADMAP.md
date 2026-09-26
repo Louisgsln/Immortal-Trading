@@ -892,3 +892,14 @@ est explicitement exclu. Voir [validation](VALIDATION-LOT79.md).
 130 fiches avec missions et 30 avec indications de diplôme supplémentaires dans
 la copie auditée. Rubriques bornées, sans inférence d'éligibilité ni changement
 de score ; voir [validation](VALIDATION-LOT80.md).
+
+## Lot 81 — BP, Shell et TP ICAP
+
+Trois employeurs énergie/courtage ; 43 sources, 38 employeurs. Recherche toutes
+les 30 minutes sur ces ajouts, 16 annonces dans la simulation, premier import
+silencieux. Courtage débutant qualifié par ses missions et séparé du support
+opérationnel. Voir [périmètre et limites](VALIDATION-LOT81.md).
+
+Suite : traiter les incidents constatés, préserver les rubriques encore aplaties
+(notamment Optiver), qualifier les brokers restants, valider Marex/Vitol/Trafigura,
+puis confirmations de clôture et import du suivi avec aperçu. L'IA/CV reste exclue.

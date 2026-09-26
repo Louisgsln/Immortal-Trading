@@ -15,4 +15,11 @@ Ce suivi ne modifie ni la cadence, ni les reprises, ni les avis Telegram.
 Validation locale : 124 tests réussis, un test ignoré ; 11 tests JavaScript
 réussis ; analyse statique de 88 modules. Contrôles des fenêtres temporelles,
 des données invalides, des limites, de l'absence de création de base et de
-l'enregistrement réel du scanner. Déploiement et contrôles distants à confirmer.
+l'enregistrement réel du scanner. Installé le 26 septembre à 22:44, paquet vérifié,
+scanner actif et suivis/alertes conservés. Historique consulté dans le navigateur,
+avec 39 sources attribuées au contrôle de 22:59. Tous les contrôles GitHub réussis,
+y compris Python 3.11–3.14, JavaScript et restauration en conteneur.
+
+La réussite concerne le périmètre configuré de la recherche ; elle ne prouve pas
+que tout le catalogue de l'employeur est couvert. Les limites des sources restent
+documentées séparément.

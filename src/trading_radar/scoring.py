@@ -15,6 +15,7 @@ from trading_radar.targeting import (
     nomura_trading_technology,
     operational_role,
     research_trading_evidence,
+    tp_broking_duties,
 )
 
 ROLE_TERMS = {
@@ -167,10 +168,16 @@ def required_experience_years(text: str) -> list[int]:
 def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     title = job.title_normalized
     text = normalize_text(job.title + " " + job.description_text)
-    evidence_description = role_evidence_text(job)
+    broking_duties = tp_broking_duties(job)
+    evidence_description = broking_duties or role_evidence_text(job)
     evidence_text = normalize_text(job.title + " " + evidence_description)
     result = Score()
     roles = classify(title, ROLE_TERMS)
+    if broking_duties:
+        roles = ["BROKING"]
+        result.reasons.append(
+            "Audited trainee broking duties include client quotes or order execution"
+        )
     verified_nomura_technology = nomura_trading_technology(job)
     if verified_nomura_technology:
         roles = ["TRADING_TECH"]
@@ -182,12 +189,13 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
             "Audited role duties link quantitative research to pricing and trading decisions"
         )
     assets = classify(evidence_text, ASSET_TERMS)
-    if evidence_description != job.description_text:
+    if evidence_description != job.description_text and not broking_duties:
         result.reasons.append(
             "Asset and profile evidence excludes a verified DRW company paragraph"
         )
     junior = (
         job.seniority_hint == "junior"
+        or bool(broking_duties)
         or drw_junior_role(job)
         or any(
             has(title, t)
@@ -326,7 +334,8 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         )
     direct = result.trading >= 25
     fo = (
-        verified_research
+        bool(broking_duties)
+        or verified_research
         or verified_nomura_technology
         or (tech and verified_technology)
         or any(
