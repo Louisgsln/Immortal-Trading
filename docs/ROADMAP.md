@@ -632,7 +632,11 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
 - Sur la copie des 787 offres : 36 missions et 32 mentions de diplôme ajoutées,
   soit 102 et 77 au total ; 11 tables et scores inchangés.
 - Listes masquées exclues des preuves, formulations mixtes et campus non extrapolés.
-  Parcours navigateur vérifié ; bilan [VALIDATION-LOT61.md](VALIDATION-LOT61.md).
+  Parcours navigateur vérifié sur copie puis sur l'instance active.
+- Publié sur `main` et installé après sauvegarde ; scanner, dashboard et Telegram
+  actifs. 3 322 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 et
+  Docker réussie : 3 326 tests Linux, couverture 96 %.
+  Bilan [VALIDATION-LOT61.md](VALIDATION-LOT61.md).
 - Goldman professionnels a repris sa collecte à 12:21 le 26 septembre : 60 fiches,
   sans assouplissement des contrôles. Les 24 sources sont à jour au contrôle suivant.
 

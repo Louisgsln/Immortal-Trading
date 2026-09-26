@@ -22,7 +22,7 @@ ne changent pas.
 Les titres mêlant missions et qualifications, les introductions, les sous-rubriques
 non auditées et le portail campus restent hors périmètre. Plusieurs rubriques de
 missions reconnues entraînent le repli habituel vers la description. Une liste
-masquée n'est plus retenue ni utilisée pour relier un ancien titre à une liste
+masquée par l'attribut `hidden` n'est plus retenue ni utilisée pour relier un ancien titre à une liste
 sans titre : cette correction du lecteur commun protège aussi les sources existantes.
 
 ## Impact sur sauvegarde restaurée
@@ -51,6 +51,9 @@ des extraits dans le dashboard sans devenir éligible aux alertes.
   Présentation visuelle et absence d'erreur JavaScript vérifiées.
 - Suite complète Windows : 3 322 tests réussis, quatre ignorés. Ruff, formatage
   et vérification des types réussis.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36235758177)
+  réussie sur Python 3.11–3.14 et Docker : 3 326 tests Linux, couverture 96 %,
+  construction et exercice de restauration du conteneur réussis.
 
 ## Exploitation
 
@@ -59,7 +62,16 @@ avec 60 fiches, sans assouplissement des contrôles de pagination. Les 24 source
 sont à jour au contrôle suivant ; leur disponibilité publique peut varier.
 La fiche conservée absente de cette collecte n'est pas déclarée fermée.
 
-Publication et installation après sauvegarde à consigner après leur exécution.
+- Code `cabd16a` publié sur `main` et installé après sauvegarde vérifiée le
+  26 septembre à 12:26 Paris ; paquet précédent conservé.
+- Les quatre fichiers applicatifs installés correspondent au code publié.
+- Dashboard et API de suivi disponibles : 787 offres, 102 avec missions,
+  77 avec diplômes ; six preuves Nomura et ciblage Analyst/Associate conservés.
+- Parcours Master et fiche STS AI Structuring vérifiés aussi sur l'instance
+  active, sans erreur JavaScript. Scanner, dashboard et Telegram actifs ; collectes
+  XTX, Flow Traders, IMC et DRW réussies après redémarrage.
+- Les 24 sources sont à jour au contrôle de 12:26 ; l'historique de santé reste
+  disponible. Aucun message de démonstration envoyé sur Telegram.
 
 ## Suite du carnet
 
