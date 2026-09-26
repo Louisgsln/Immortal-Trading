@@ -42,3 +42,33 @@ que sa validation manuelle et sa collecte réelle n'ont pas abouti.
 
 Les portails des prochains employeurs ont aussi été relus ; voir l'[audit Marex,
 Vitol et Trafigura](NEXT-EMPLOYERS.md). Ils ne sont pas encore surveillés.
+
+
+## Installation et observation
+
+Les deux lots sont publiés sur `main`, version applicative `cb49ae8f462f2896744feb6ddb2dff9b4acee331`,
+installée le **27/09/2026 · 01:45** après sauvegarde locale vérifiée.
+Les collectes du paquet installé réussissent : 27 fiches Optiver et 12 TP ICAP,
+sans nouvelle annonce ni clôture, sans message de test. Les services de scan,
+dashboard et Telegram ont repris ; le contrôle confirme le scanner actif.
+
+Contrôle du **27/09/2026 · 01:47** : **991 offres,
+296 pertinentes, 182 prioritaires,
+454 fiches avec missions et 375 avec diplôme**.
+Les 95 fichiers du paquet installé correspondent au paquet construit. Le
+dashboard et son API de suivi répondent ; les 17 missions et 10 indications de
+diplôme Optiver sont présentes dans les données servies au navigateur.
+
+Vérification visuelle à 01:49 : filtre Optiver et Bachelor/Licence (10 résultats),
+fiche Institutional Trader avec missions, introduction et critère d'études,
+puis fiche Global Broking à 66 avec explication BROKING. Aucun avertissement ni
+erreur JavaScript observé. Les filtres ont été réinitialisés après le contrôle.
+
+Une seule variation de score confirmée : Global Broking, de 0 à 66. Les autres
+scores, textes Optiver, dates de modification, candidatures et alertes antérieures
+sont préservés. La surveillance conserve les 43 sources ; Nomura campus reste
+en attente de sa validation manuelle.
+
+Tous les [contrôles GitHub du code livré](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36279972194) ont réussi : Python 3.11 à 3.14,
+dashboard et construction/restauration en conteneur. Les mises à jour ultérieures
+de cette livraison ne concernent que le bilan et le carnet.

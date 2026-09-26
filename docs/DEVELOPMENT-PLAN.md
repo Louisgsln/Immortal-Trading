@@ -114,7 +114,7 @@ voir [état et limites](VALIDATION-LOT83.md).
 
 ## Prochains lots
 
-Lots 84–85 développés et collectes réelles validées sur copie : rubriques Optiver
+Lots 84–85 installés et vérifiés sur copie puis en exploitation : rubriques Optiver
 conservées (17 missions, 10 diplômes supplémentaires), variante TP ICAP reconnue
 (un poste de 0 à 66 ; deux contre-exemples restent exclus). Voir les bilans
 [84](VALIDATION-LOT84.md) et [85](VALIDATION-LOT85.md) pour l'état d'installation.
@@ -125,6 +125,9 @@ conservées (17 missions, 10 diplômes supplémentaires), variante TP ICAP recon
    qualifier les rôles quantitatifs et Trading Assistant restants, avec preuves
    employeur et aperçu des scores. Les brokers TP ICAP audités au lot 85 dont les
    preuves sont insuffisantes ne doivent pas être promus globalement.
+   Auditer aussi les fourchettes d'expérience des rubriques Optiver conservées :
+   Institutional Trader cite une fourchette de 2–5 ans encore non reconnue.
+   Cette observation ne change pas son score au lot 84.
 3. Valider les catalogues Marex (priorité au catalogue et au programme UK 2027),
    Vitol et Trafigura, puis d'autres banques, fonds et négociants. Voir les
    [accès et points de vigilance vérifiés](NEXT-EMPLOYERS.md). Les programmes

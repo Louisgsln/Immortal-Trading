@@ -2,7 +2,7 @@
 
 Les lots **84–85** préservent les rubriques Optiver (**17 fiches avec missions,
 10 avec diplôme supplémentaires**) et reconnaissent une variante des missions
-de courtage TP ICAP. Sur copie, un seul poste passe de 0 à 66 ; aucun ancien
+de courtage TP ICAP. Installés et vérifiés : un seul poste passe de 0 à 66 ; aucun ancien
 score Optiver, suivi ou alerte n'est modifié. Voir les validations
 [84](docs/VALIDATION-LOT84.md) et [85](docs/VALIDATION-LOT85.md).
 
