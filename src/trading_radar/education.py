@@ -13,6 +13,7 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "ubs_professionals": set(),
     "barclays": {"essential skills/basic qualifications"},
     "deutsche_bank": {
         "your skills and experience",
@@ -64,6 +65,7 @@ _BARCLAYS_UNSPECIFIED_DEGREE = re.compile(
     r"|\bpost[- ]?graduate\s+degree\b",
     re.I,
 )
+_UBS_UNSPECIFIED_DEGREE = re.compile(r"\b(?:university|law|graduate)\s+degree\b", re.I)
 _DEGREES = {
     "bachelor": re.compile(
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
@@ -172,8 +174,67 @@ def _barclays_qualification(root: Element) -> tuple[str, str] | None:
     return matches[0] if len(matches) == 1 else None
 
 
+def _ubs_qualification_items(root: Element) -> Iterator[tuple[str, str]]:
+    # The UBS collector preserves field names as top-level h2 headings. Require
+    # the audited next field, rather than scanning the unbounded page remainder.
+    headings = [
+        (index, node)
+        for index, node in enumerate(root.children)
+        if isinstance(node, Element) and node.tag == "h2"
+    ]
+    matches = [
+        i
+        for i, (_, node) in enumerate(headings)
+        if normalize_heading(visible_text(node)) == "your skills and experience"
+    ]
+    if len(matches) != 1:
+        return
+    position = matches[0]
+    if (
+        position + 1 == len(headings)
+        or normalize_heading(visible_text(headings[position + 1][1])) != "about us"
+    ):
+        return
+    start, end = headings[position][0], headings[position + 1][0]
+
+    def inline_text(node: Element | str) -> str | None:
+        if isinstance(node, str):
+            return node
+        if node.tag == "br" and "hidden" not in node.attrs:
+            return "\n"
+        if not visible_text(node).strip():
+            return ""
+        if node.tag not in {"b", "strong", "span", "i", "em", "a", "font"}:
+            return None
+        parts = [inline_text(child) for child in node.children]
+        return "".join(part for part in parts if part is not None) if None not in parts else None
+
+    parts = [inline_text(node) for node in root.children[start + 1 : end]]
+    if None in parts:
+        return
+    lines = [
+        line.strip()
+        for line in "".join(part for part in parts if part is not None).splitlines()
+        if line.strip()
+    ]
+    first = next((i for i, line in enumerate(lines) if line.startswith("•")), None)
+    if first is None or any(
+        not line.startswith("•") or not line[1:].strip() for line in lines[first:]
+    ):
+        # Mixed subheadings or wrapped lines may change a requirement's scope.
+        # Keep the full description instead of guessing where that scope ends.
+        return
+    preface = " ".join(lines[:first])
+    heading = " ".join(visible_text(headings[position][1]).split())
+    for line in lines[first:]:
+        yield heading, " ".join((preface + " " + line[1:]).split())
+
+
 def _qualification_items(job: Job) -> Iterator[tuple[str, str]]:
     document = Document(html.unescape(job.description))
+    if job.source == "ubs_professionals":
+        yield from _ubs_qualification_items(document.root)
+        return
     if job.source == "nomura_professionals":
         excerpt = _nomura_qualification(document.root)
         if excerpt:
@@ -202,6 +263,8 @@ def education_mentions(job: Job) -> dict:
             _UNSPECIFIED_DEGREE.search(excerpt)
             or job.source == "barclays"
             and _BARCLAYS_UNSPECIFIED_DEGREE.search(excerpt)
+            or job.source == "ubs_professionals"
+            and _UBS_UNSPECIFIED_DEGREE.search(excerpt)
         ):
             levels = ["unspecified_level"]
         if not levels or any(e["excerpt"] == excerpt for e in result["evidence"]):

@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 66 ajoute les **diplômes UBS professionnels** au filtre et au détail du
+dashboard : 16 fiches enrichies, 138 offres couvertes au total. Les préférences,
+alternatives et introductions des critères restent dans l'extrait ; les scores
+et alertes sont conservés. Voir le [bilan du lot 66](docs/VALIDATION-LOT66.md).
+
 Le lot 65 étend les **missions et diplômes à Barclays** : 17 fiches avec des
 missions et 14 avec des mentions de diplôme consultables et filtrables.
 Les conditions de fin d'études et les alternatives restent dans les extraits ;

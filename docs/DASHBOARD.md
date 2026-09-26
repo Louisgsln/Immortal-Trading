@@ -170,6 +170,16 @@ et ses préférences. Les formulations « degree or expected degree »,
 sans niveau précis. Le format de Tokyo, réparti entre plusieurs paragraphes,
 reste accessible dans la description sans extraction de diplôme.
 
+Le [lot 66](VALIDATION-LOT66.md) ajoute les diplômes UBS professionnels dans
+**Your skills and experience**, jusqu'à la rubrique suivante **About us**.
+Les puces complètes et leur éventuelle introduction sont conservées. Seize
+fiches supplémentaires disposent d'une mention, soit 138 au total. Les diplômes
+universitaires, de droit ou « graduate » sans niveau explicite restent classés
+**Diplôme sans niveau précis**. Un doctorat préféré ne devient pas une exigence
+minimale. Les rubriques comportant des sous-titres intermédiaires ou des lignes
+ambiguës restent dans la description complète ; le portail campus n'est pas
+inclus dans cette extension.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière
