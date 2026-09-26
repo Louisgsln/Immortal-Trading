@@ -44,5 +44,16 @@ Collecte réelle sur copie : les deux sources UBS réussissent, **48 offres lues
 Les scores, suivis et historiques existants sont identiques avant et après.
 
 Validation locale : **3 997 tests réussis, 4 ignorés**. Format et lint de
-244 fichiers, analyse statique de 88 modules réussis. Les résultats de
-l'installation et des contrôles GitHub sont consignés après leur vérification.
+244 fichiers, analyse statique de 88 modules réussis.
+
+Version `1023e9421afeb39af54b50fa15a47dfa8cf53a02` publiée sur main et installée
+le 26 septembre à **23:35**, après sauvegarde vérifiée. Les deux collectes
+automatiques UBS réussissent à 23:37 : 15 offres campus, 33 professionnelles.
+Le contrôle de 23:38 confirme **42/43 sources à jour**, Nomura campus seul bloqué,
+990 offres, scanner actif, dashboard et API du suivi disponibles. Les 93 fichiers
+du paquet sont vérifiés ; scores, candidatures, historiques et alertes préservés.
+
+Tous les [contrôles GitHub du correctif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36273416703)
+sont réussis : Python 3.11–3.14, tests JavaScript, construction du conteneur et
+exercice de restauration isolée. La mise à jour suivante du dépôt consigne
+uniquement ce bilan, sans changement applicatif supplémentaire.
