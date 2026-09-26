@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot 67 ajoute les **missions et diplômes BNP Paribas** : dix fiches avec
+missions dans le dashboard et les prochaines alertes éligibles, onze avec des
+diplômes consultables et filtrables. Les alternatives académiques restent
+visibles, sans changement des scores. Voir le [bilan du lot 67](docs/VALIDATION-LOT67.md).
+
 Le lot 66 ajoute les **diplômes UBS professionnels** au filtre et au détail du
 dashboard : 16 fiches enrichies, 138 offres couvertes au total. Les préférences,
 alternatives et introductions des critères restent dans l'extrait ; les scores

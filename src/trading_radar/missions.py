@@ -7,6 +7,13 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "bnp_paribas": {
+        "direct responsibilities",
+        "main responsibilities",
+        "principal role accountabilities",
+        "your main activities are",
+        "what you will do",
+    },
     "barclays": {"accountabilities"},
     "deutsche_bank": {"your key responsibilities", "key responsibilities", "what you'll do"},
     "morgan_stanley": {

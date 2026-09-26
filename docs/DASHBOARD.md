@@ -180,6 +180,15 @@ minimale. Les rubriques comportant des sous-titres intermédiaires ou des lignes
 ambiguës restent dans la description complète ; le portail campus n'est pas
 inclus dans cette extension.
 
+Le [lot 67](VALIDATION-LOT67.md) ajoute BNP Paribas : dix fiches avec missions et
+onze avec mentions de diplôme, soit 168 et 149 au total. La formulation
+**Master in Engineering or Finance** est reconnue dans les critères BNP.
+Les alternatives « recent graduate, final year undergraduate, or master's
+student » restent dans l'extrait ; aucun diplôme minimum n'en est déduit.
+Les parcours conditionnels Sales/Trading des programmes ne sont pas substitués
+à une rubrique commune. Les tableaux et descriptions non reconnus restent
+accessibles sans extraction ; les exclusions et priorités sont conservées.
+
 Les actions échues sont les dates de prochaine action inférieures ou égales au jour UTC
 de génération, y compris lorsqu'une candidature est clôturée. Le suivi en cours inclut
 le statut `Offer`. Un indicateur d'expiration enregistré provient de la dernière

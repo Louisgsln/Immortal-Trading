@@ -13,6 +13,15 @@ from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 
 _HEADINGS = {
+    "bnp_paribas": {
+        "profile and skills to success",
+        "to be considered for the placement, you will",
+        "what is required for you to succeed?",
+        "your profile",
+        "essential",
+        "technical and behavioral competencies",
+        "requirements",
+    },
     "ubs_professionals": set(),
     "barclays": {"essential skills/basic qualifications"},
     "deutsche_bank": {
@@ -66,6 +75,7 @@ _BARCLAYS_UNSPECIFIED_DEGREE = re.compile(
     re.I,
 )
 _UBS_UNSPECIFIED_DEGREE = re.compile(r"\b(?:university|law|graduate)\s+degree\b", re.I)
+_BNP_MASTER = re.compile(r"^master\s+in\s+\w", re.I)
 _DEGREES = {
     "bachelor": re.compile(
         r"\b(?i:bachelor(?:['’]s|s)?)\b|\bB\.?S\.?[cC]\b|\bB\.?S" + _SHORT_DEGREE_CONTEXT
@@ -259,6 +269,8 @@ def education_mentions(job: Job) -> dict:
         if not excerpt or len(excerpt) > 1500:
             continue
         levels = [key for key, pattern in _DEGREES.items() if pattern.search(excerpt)]
+        if job.source == "bnp_paribas" and _BNP_MASTER.search(excerpt) and "master" not in levels:
+            levels.append("master")
         if not levels and (
             _UNSPECIFIED_DEGREE.search(excerpt)
             or job.source == "barclays"
