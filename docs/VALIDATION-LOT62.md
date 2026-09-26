@@ -44,9 +44,20 @@ jeux de données sans ce champ restent affichables. Aucune migration SQLite.
 
 ## Livraison
 
-Publication sur `main`, installation après sauvegarde et vérifications d'exploitation
-prévues après les contrôles locaux. Le résultat de la CI et du déploiement sera
-consigné ici après confirmation.
+- Code `79be0e9` publié sur `main` et installé le 26 septembre 2026 à 12:55 Paris,
+  après sauvegarde vérifiée à 12:55:01 ; paquet précédent conservé.
+- Les six fichiers applicatifs installés correspondent au paquet publié.
+- Dashboard et API de suivi disponibles : 787 offres, 342 dates connues,
+  445 inconnues ; 102 missions et 77 diplômes conservés, ainsi que le ciblage
+  Associate seul exclu / Analyst-Associate explicitement accepté.
+- Parcours sur l'instance active : période du 20 au 25 septembre, 48 offres,
+  tri récent/ancien et détail de publication vérifiés sans erreur JavaScript.
+- Scanner, dashboard et Telegram redémarrés et actifs. Collectes HSBC campus,
+  Crédit Agricole, Macquarie, Optiver et Barclays réussies après installation.
+  Les 24 sources sont à jour au contrôle de 12:55:57 ; historique disponible.
+- [CI du lot](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36237190361)
+  réussie sur Python 3.11–3.14 : 3 335 tests Linux, couverture 96 %. Dix tests
+  JavaScript réussis sous Node 22 ; construction et restauration Docker réussies.
 
 ## Suite du carnet
 

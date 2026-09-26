@@ -647,9 +647,11 @@ de suivi depuis Telegram, puis une copie distante et une supervision extérieure
   bornes facultatives et combinaison avec les filtres existants et Candidatures.
 - Sur la copie de 787 offres : 342 dates connues, 445 non précisées ; 11 tables et
   tous les anciens champs du dashboard inchangés. Jour UTC stable dans le navigateur.
-- Parcours navigateur vérifié, 3 331 tests Windows réussis et quatre ignorés,
-  dix tests JavaScript réussis. Livraison et CI à confirmer dans le
-  [bilan du lot 62](VALIDATION-LOT62.md).
+- Publié sur `main` et installé après sauvegarde ; scanner, dashboard et Telegram
+  actifs. Parcours navigateur vérifié sur copie puis sur l'instance active.
+- 3 331 tests Windows réussis, quatre ignorés ; CI Python 3.11–3.14 réussie :
+  3 335 tests Linux, couverture 96 %. Dix tests JavaScript et Docker réussis.
+  Les 24 sources sont à jour au contrôle suivant. [Bilan du lot 62](VALIDATION-LOT62.md).
 
 ## Les cinq améliorations prioritaires après le lot 62
 
