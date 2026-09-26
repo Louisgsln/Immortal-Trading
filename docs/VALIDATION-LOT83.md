@@ -28,11 +28,23 @@ ou invalides, les entêtes malformés, le stockage atomique, l'absence de fuite
 dans les offres, la fermeture du navigateur et la reprise bornée après validation.
 Le guide [NOMURA-ACCESS.md](NOMURA-ACCESS.md) décrit l'activation et les limites.
 
-Le test réel et l'activation attendent l'accord explicite du propriétaire pour
-utiliser Playwright avec une fenêtre dédiée et conserver localement sa session.
-Le mode n'est pas activé sur l'instance en l'absence de cette validation.
+Le propriétaire a autorisé le 27 septembre l'utilisation de Playwright avec une
+fenêtre dédiée et la conservation locale de cette session. La fenêtre Edge
+ouverte a présenté le CAPTCHA. L'attente de dix minutes s'est terminée le
+27 septembre à 01:14 sans tableau validé ; aucune session n'a été enregistrée.
+L'accord ne reste donc pas à obtenir. Un raccourci local permet de rouvrir la
+fenêtre lorsque le propriétaire est disponible pour la validation manuelle.
+
+L'activation attend encore une session validée, puis une collecte réelle réussie
+sur copie de la base. Le scanner existant continue de fonctionner pendant cette
+préparation ; aucune réussite Nomura n'est déclarée avant cette vérification.
+Contrôle à 01:14 : scanner actif, 42/43 sources à jour, Nomura campus toujours
+bloqué par CAPTCHA ; quatre alertes envoyées au total, aucune en attente.
 
 Validation locale : suite complète **4 025 tests réussis, 4 ignorés** ; les
 deux cas ajoutés ensuite sur la reprise après renouvellement ont été validés
 avec les 75 tests pertinents de session, planification et explications d'incident.
 Format et lint de 248 fichiers, analyse statique de 89 modules réussis.
+
+Les [contrôles GitHub du code](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36276833900)
+sont tous réussis : Python 3.11 à 3.14, dashboard et restauration en conteneur.

@@ -108,7 +108,8 @@ accès du scanner encore restreint. Voir [validation](VALIDATION-LOT82.md).
 
 Lot 83 préparé : session Nomura locale optionnelle, validation manuelle dans une
 fenêtre dédiée, contrôles de portée/expiration et reprise après renouvellement.
-L'activation attend l'accord sur Playwright et une collecte réelle validée ;
+Accord sur Playwright et la session locale reçu le 27 septembre. L'activation
+attend la validation du CAPTCHA dans la fenêtre dédiée et une collecte réelle ;
 voir [état et limites](VALIDATION-LOT83.md).
 
 ## Prochains lots

@@ -917,5 +917,6 @@ sa session distincte. Voir [preuves et limites](VALIDATION-LOT82.md).
 Mode optionnel de session locale, fenêtre de validation dédiée et reprise après
 renouvellement. Le CAPTCHA reste manuel. Aucun cookie issu du navigateur personnel
 ni du navigateur intégré n'est extrait. L'accord sur Playwright et la conservation
-locale, puis une collecte réelle réussie, précèdent l'activation sur l'instance.
+locale a été reçu le 27 septembre. Restent la validation manuelle de cette
+session et une collecte réelle réussie avant l'activation sur l'instance.
 Voir [validation](VALIDATION-LOT83.md) et [mode d'emploi](NOMURA-ACCESS.md).
