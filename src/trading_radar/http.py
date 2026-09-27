@@ -3,8 +3,9 @@ import json
 import random
 import time
 from collections import defaultdict
+from collections.abc import Callable
 from email.utils import parsedate_to_datetime
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 
 import httpx
 
@@ -160,6 +161,28 @@ class HTTPClient:
     ) -> str:
         return (await self._public_response(url, interval, source, headers=headers)).text
 
+    async def get_career_page(
+        self, url: str, interval: float, source: str, allowed: Callable[[str], bool]
+    ) -> tuple[str, str]:
+        """Follow at most two explicitly allowed public career redirects.
+
+        Robots and pacing apply separately to every destination. Other methods
+        retain their no-redirect policy; authentication redirects are never implicit.
+        """
+        visited: set[str] = set()
+        for _ in range(3):
+            if url in visited or not allowed(url):
+                raise SourceUnavailable("career redirect outside verified scope or loop")
+            visited.add(url)
+            response = await self._public_response(url, interval, source, allow_redirect=True)
+            if response.status_code == 200:
+                return url, response.text
+            location = response.headers.get("location", "")
+            if not location:
+                raise SourceUnavailable("career redirect destination missing")
+            url = urljoin(url, location)
+        raise SourceUnavailable("career redirect limit exceeded")
+
     async def post_search_json(self, url: str, body: dict, interval: float, source: str):
         """Read-only public search endpoints that require a POST body."""
         return await self._json(url, interval, source, method="POST", body=body)
@@ -189,6 +212,7 @@ class HTTPClient:
         body: dict | None = None,
         headers: dict[str, str] | None = None,
         allow_not_modified: bool = False,
+        allow_redirect: bool = False,
     ):
         parts = urlsplit(url)
         if parts.scheme != "https" or not parts.hostname or parts.username or parts.password:
@@ -221,6 +245,10 @@ class HTTPClient:
             in {"/en_US/careers/Error", "https://recruitment.macquarie.com/en_US/careers/Error"}
         ):
             raise SourceUnavailable("Macquarie public portal error page")
-        if response.status_code != 200 and not (allow_not_modified and response.status_code == 304):
+        if (
+            response.status_code != 200
+            and not (allow_not_modified and response.status_code == 304)
+            and not (allow_redirect and response.status_code in {301, 302, 303, 307, 308})
+        ):
             raise SourceUnavailable(f"HTTP {response.status_code}")
         return response

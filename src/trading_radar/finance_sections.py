@@ -20,6 +20,21 @@ EMPLOYERS = {
     "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
+    "totalenergies": {"candidate profile", "qualifications"},
+    "engie": {
+        "qualifications and experience",
+        "candidate profile",
+        "what you'll bring",
+        "what you’ll bring",
+        "your profile as algorithmic trader",
+        "your profile as structurer",
+    },
+    "edf_trading": {
+        "requirements and qualifications",
+        "requirements",
+        "experience required",
+        "technical requirements",
+    },
     "marex": {"skills and experience"},
     "bp": {"to be eligible for the stands graduate programme you should"},
     "shell": {"what you bring"},
@@ -56,6 +71,16 @@ QUALIFICATIONS = {
     "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
+    "totalenergies": {"activities", "responsibilities"},
+    "engie": {
+        "key responsibilities",
+        "responsibilities",
+        "your responsibilities as algorithmic trader",
+        "your responsibilities as structurer",
+        "what you can expect",
+        "summary of what you will do",
+    },
+    "edf_trading": {"responsibilities", "main responsibilities"},
     "marex": {"responsibilities", "overall responsibilities"},
     "bp": set(),
     "shell": {"what you'll be doing"},

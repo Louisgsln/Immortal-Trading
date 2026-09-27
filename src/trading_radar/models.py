@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any, Literal, Self
 
 from pydantic import BaseModel, Field, model_validator
@@ -17,13 +17,16 @@ class ExperienceEvidence(BaseModel):
         "ca_cib_experience_level",
         "macquarie_sales_trading_experience",
         "nomura_position_specifications",
+        "totalenergies_experience_level",
     ] = "jump_coding_track_record"
     excerpt: str
 
     @model_validator(mode="after")
     def consistent_provenance(self) -> Self:
         expected_origin = (
-            "employer_field" if self.method == "ca_cib_experience_level" else "description"
+            "employer_field"
+            if self.method in {"ca_cib_experience_level", "totalenergies_experience_level"}
+            else "description"
         )
         if self.origin != expected_origin:
             raise ValueError("experience evidence origin does not match its extraction method")
@@ -43,6 +46,7 @@ class RawJob(BaseModel):
     location: str = ""
     source_url: str = ""
     date_posted: datetime | None = None
+    publication_day: date | None = None
     application_deadline: datetime | None = None
     expected_start_date: str | None = None
     employment_type: str | None = None

@@ -63,7 +63,7 @@ def format_message(job: Job, event: str) -> str:
         "",
         f"Détectée le : {date(job.first_seen)}",
         f"Dernière observation : {date(job.last_seen)}",
-        f"Publication : {date(job.date_posted)}",
+        f"Publication : {job.publication_day.strftime('%d/%m/%Y') if job.publication_day else date(job.date_posted)}",
         f"Source : {job.source[:100]}",
         "Un minimum non reconnu ne signifie pas absence d’exigence.",
         "Score de priorité, pas une probabilité de recrutement.",

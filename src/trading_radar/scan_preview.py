@@ -25,6 +25,7 @@ CHANGE_FIELDS = (
     "company",
     "country",
     "date_posted",
+    "publication_day",
     "description_text",
     "desk",
     "employment_type",

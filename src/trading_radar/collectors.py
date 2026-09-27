@@ -173,6 +173,14 @@ class VendorCollector:
 
 
 def build_collector(source: str, config: Company, http: HTTPClient) -> Collector:
+    if config.ats == "totalenergies":
+        from trading_radar.totalenergies import TotalEnergiesCollector
+
+        return TotalEnergiesCollector(source, config, http)
+    if config.ats == "engie":
+        from trading_radar.engie import EngieCollector
+
+        return EngieCollector(source, config, http)
     if config.ats == "marex":
         from trading_radar.marex import MarexCollector
 

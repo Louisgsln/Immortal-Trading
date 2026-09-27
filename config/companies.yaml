@@ -1177,3 +1177,190 @@ companies:
       - business manager
       max_results_per_query: 500
       max_details: 60
+  totalenergies:
+    name: TotalEnergies
+    enabled: true
+    ats: totalenergies
+    tenant: totalenergies
+    career_url: https://jobs.totalenergies.com/en_US/careers/SearchJobs
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer catalogue verified 2026-09-27. Filtered market roles; partial scope,
+      no absence closures. First import silent. See docs/VALIDATION-LOT87.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - origination
+      - originator
+      - market analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - operator
+      - regulatory
+      - treasury
+      - mid office
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - evergreen
+      - engineer
+      - shipping
+      - documents
+      - stage
+      max_details: 80
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+  engie:
+    name: ENGIE
+    enabled: true
+    ats: engie
+    tenant: engie
+    career_url: https://jobs.engie.com/sitemap.xml
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer catalogue verified 2026-09-27. Filtered market roles; partial scope,
+      no absence closures. First import silent. See docs/VALIDATION-LOT87.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - origination
+      - originator
+      - market analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - operator
+      - regulatory
+      - treasury
+      - mid office
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - evergreen
+      - engineer
+      - shipping
+      - documents
+      - stage
+      max_details: 80
+      max_results_per_query: 5000
+  edf_trading:
+    name: EDF Trading
+    enabled: true
+    ats: workday
+    tenant: edftrading
+    career_url: https://edftrading.wd1.myworkdayjobs.com/EDFTrading
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer catalogue verified 2026-09-27. Filtered market roles; partial scope,
+      no absence closures. First import silent. See docs/VALIDATION-LOT87.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - origination
+      - originator
+      - market analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - operator
+      - regulatory
+      - treasury
+      - mid office
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - evergreen
+      - engineer
+      - shipping
+      - documents
+      - stage
+      max_details: 80
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring

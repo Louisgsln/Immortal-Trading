@@ -49,7 +49,9 @@ def export_csv(repo: Repository, path: Path) -> int:
                         job.location_normalized,
                         job.score_breakdown.total,
                         job.score_breakdown.priority,
-                        export_paris(job.date_posted),
+                        job.publication_day.isoformat()
+                        if job.publication_day
+                        else export_paris(job.date_posted),
                         export_paris(job.first_seen),
                         export_paris(job.application_deadline),
                         job.source,

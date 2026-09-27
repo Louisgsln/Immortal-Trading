@@ -1,7 +1,7 @@
 import hashlib
 import json
 import sqlite3
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 
 import pytest
 
@@ -11,6 +11,22 @@ from trading_radar.monitoring import record_health
 from trading_radar.storage import Repository
 
 NOW = datetime(2026, 9, 17, 12, tzinfo=UTC)
+
+
+def test_explicit_publication_day_is_kept_without_inventing_an_instant(
+    dashboard_config, repo, job, tmp_path
+):
+    job.publication_day = date(2026, 9, 10)
+    job.date_posted = None
+    job.first_seen = job.last_seen = job.date_updated = NOW
+    with repo.transaction():
+        repo.upsert(job)
+    before = fingerprints(repo)
+    result = observation(dashboard_config, tmp_path)
+    assert result["status"] == "ok"
+    assert result["jobs"][0]["publication_day"] == "2026-09-10"
+    assert repo.list_jobs()[0].date_posted is None
+    assert fingerprints(repo) == before
 
 
 @pytest.mark.parametrize(

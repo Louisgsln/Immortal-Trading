@@ -2,7 +2,8 @@
 
 Ces pages officielles ont été relues pendant la validation des lots 84–85.
 Marex est installé et vérifié au [lot 86](VALIDATION-LOT86.md).
-Le radar surveille **44 sources pour 39 employeurs**. Vitol et Trafigura restent
+Le lot 87 porte le périmètre configuré à **47 sources pour 42 employeurs**.
+TotalEnergies, ENGIE et EDF Trading : [validation et état d’installation](VALIDATION-LOT87.md). Vitol et Trafigura restent
 à intégrer ; leurs audits ne constituent pas une surveillance active.
 
 | Employeur | Accès public vérifié | Travail suivant |
@@ -25,3 +26,25 @@ métaux dans des limites définies ; une pratique des futures est requise. Il re
 Les deux FX Dealer exigent un an mais décrivent surtout développement du
 portefeuille, objectifs commerciaux et acquisition de clients : ne pas promouvoir
 tous les titres Dealer comme postes de trading. Aucun score n'est modifié par cet audit.
+
+### Vague énergie demandée le 27 septembre
+
+- TotalEnergies : [catalogue officiel](https://jobs.totalenergies.com/en_US/careers/SearchJobs),
+  relié depuis sa page Trading Careers ; lot 87.
+- ENGIE : [catalogue public](https://jobs.engie.com/sitemap.xml), fiches du domaine
+  officiel ; lot 87. Sa recherche `/services/` reste interdite par robots.txt.
+- EDF Trading : [page employeur](https://www.edftrading.com/careers/job-opportunities)
+  reliant le portail Workday EDFTrading ; lot 87.
+- RWE : [portail officiel](https://jobs.rwe.com/RWE/go/All-Jobs_RWE-(EN)/8740401/),
+  prochain audit de pagination et des fiches, non activé.
+- Statkraft : [opportunités officielles](https://www.statkraft.com/careers/job-opportunities),
+  mécanisme de catalogue à vérifier, non activé.
+
+Le programme TotalEnergies Trading Graduate à Houston reste dans le catalogue :
+[fiche 83558](https://jobs.totalenergies.com/en_US/careers/JobDetail/TotalEnergies-Trading-Graduate-Program/83558).
+La description indique une clôture le 18 octobre 2026, un début le 1er octobre 2027
+(éventuellement plus tôt) et l’absence de sponsoring de visa ou d’admission avec
+un visa temporaire. Ces conditions restent lisibles dans le texte employeur ;
+le score de 92 ne garantit ni une rotation immédiate en front office, ni l’éligibilité.
+Les dates de début et de clôture de cette formulation restent à structurer ;
+aucun horaire ni fuseau ne doit être inventé.

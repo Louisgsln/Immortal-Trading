@@ -109,8 +109,12 @@ def _job(row: sqlite3.Row) -> dict:
     deadline = resolve_deadline(job)
     # Present normalized publication instants as Paris calendar days. Do not expose a fabricated hour
     # or substitute discovery/update dates when publication is unknown.
-    publication_day = None
-    if job.date_posted is not None and job.date_posted.utcoffset() is not None:
+    publication_day = job.publication_day.isoformat() if job.publication_day else None
+    if (
+        not publication_day
+        and job.date_posted is not None
+        and job.date_posted.utcoffset() is not None
+    ):
         try:
             publication_day = job.date_posted.astimezone(PARIS).date().isoformat()
         except (ValueError, OverflowError):

@@ -942,3 +942,20 @@ de 70 ; missions structurées sur six fiches. Deux collectes réelles sur copie,
 sans alerte historique. Le programme UK 2027 reste exclu : échéance dépassée.
 Voir [validation et état du déploiement](VALIDATION-LOT86.md). Prochains catalogues :
 Vitol et Trafigura ; poursuivre aussi la qualification des rôles et les fiches Optiver.
+
+## Lot 87 — TotalEnergies, ENGIE et EDF Trading
+
+Trois catalogues officiels supplémentaires, toutes les 30 minutes. ENGIE utilise
+son sitemap public et les redirections de fiches, sans interroger son API de
+recherche interdite aux robots. Les versions linguistiques sont dédupliquées ;
+seules les versions du portail en anglais sont importées, même si une description
+est rédigée dans une autre langue. TotalEnergies contrôle ses recherches paginées ;
+EDF Trading utilise le collecteur Workday existant. Premier import silencieux.
+
+Dates au jour prises en charge sans heure inventée, rubriques conservées et
+expérience explicite TotalEnergies avec provenance. Aucun élargissement global
+des règles de score. Voir [validation et installation](VALIDATION-LOT87.md).
+
+Suite énergie : auditer RWE et Statkraft, puis Vitol/Trafigura. Qualifier séparément
+les Market Analyst, Quant Developer et Originator encore hors cible ; approfondir
+les échéances et conditions des programmes, notamment autorisation de travail.
