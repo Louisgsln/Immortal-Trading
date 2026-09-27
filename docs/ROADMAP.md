@@ -959,3 +959,26 @@ des règles de score. Voir [validation et installation](VALIDATION-LOT87.md).
 Suite énergie : auditer RWE et Statkraft, puis Vitol/Trafigura. Qualifier séparément
 les Market Analyst, Quant Developer et Originator encore hors cible ; approfondir
 les échéances et conditions des programmes, notamment autorisation de travail.
+
+
+## Lots 88 à 90 — Diversification au-delà des matières premières
+
+1. **Teneurs de marché** : Mako, Geneva Trading et Da Vinci ; identités Greenhouse
+   contrôlées et réparation des liens Mako à partir de la page officielle.
+2. **Fonds quantitatifs** : Qube Research & Technologies et Man Group ; contrats
+   employeur préservés, stages exclus même sans mention dans le titre.
+3. **Banques de marchés** : Bank of America, RBC et Wells Fargo ; quatre recherches
+   Workday bornées, catégories officielles pour limiter le bruit chez Wells Fargo.
+
+Huit nouvelles sources toutes les 30 minutes : **55 sources / 50 employeurs**.
+Rubriques missions et diplômes des huit employeurs, dates de première publication
+Greenhouse ; ciblage existant conservé et aucun changement des anciens scores.
+Voir [validation, limites et installation](VALIDATION-LOTS88-90.md).
+
+La suite privilégie désormais une expansion équilibrée : autres banques de
+marchés, fonds systématiques et teneurs de marché avant de reprendre les autres
+énergéticiens. Auditer Balyasny et ses accès publics, les portails campus des
+nouvelles banques, puis les rôles quantitatifs/front office encore non qualifiés
+avec exemples et contre-exemples. Les confirmations de fermeture et l'import
+du suivi avec aperçu restent au carnet. Enrichissement IA et comparaison CV
+restent retirés.

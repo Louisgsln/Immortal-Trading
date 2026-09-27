@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Les lots **88 à 90** élargissent le radar à **Mako, Geneva Trading, Da Vinci,
+Qube Research & Technologies, Man Group, Bank of America, RBC et Wells Fargo**.
+Le périmètre configuré atteint **55 sources pour 50 employeurs**, avec davantage
+d'options, actions, taux, crédit, change et trading quantitatif. Chaque nouveau
+catalogue est interrogé toutes les 30 minutes ; premier import silencieux.
+Voir [couverture, mesures et état de l'installation](docs/VALIDATION-LOTS88-90.md).
+
 Le lot **87** ajoute **TotalEnergies, ENGIE et EDF Trading**, toutes les 30 minutes.
 Installé et vérifié : **47 sources pour 42 employeurs**, **24 offres ajoutées**,
 dont **9 pertinentes et 3 au seuil de 70**. Les dates

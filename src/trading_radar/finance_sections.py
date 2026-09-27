@@ -20,6 +20,34 @@ EMPLOYERS = {
     "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
+    "wells_fargo": {"required qualifications", "desired qualification"},
+    "bank_of_america": {
+        "required qualifications",
+        "desired qualifications",
+        "required skills",
+        "desired skills",
+        "required education, skills and experience",
+        "required education, skills, and experience",
+        "minimum education requirement",
+    },
+    "rbc": {
+        "must have",
+        "must-have",
+        "nice-to-have",
+        "basic qualifications",
+        "other required qualifications",
+    },
+    "mako": {"what we need from you", "what we're looking for"},
+    "geneva_trading": {"the ideal candidate", "what we're looking for", "preferred extras"},
+    "da_vinci": {"requirements"},
+    "qube_research": {"your present skillset", "your profile", "eligible candidates"},
+    "man_group": {
+        "skills and qualifications",
+        "essential competencies",
+        "desired qualifications",
+        "technology and business skills",
+        "advantageous competencies",
+    },
     "totalenergies": {"candidate profile", "qualifications"},
     "engie": {
         "qualifications and experience",
@@ -71,6 +99,14 @@ QUALIFICATIONS = {
     "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
+    "wells_fargo": {"in this role, you will"},
+    "bank_of_america": {"responsibilities", "key responsibilities"},
+    "rbc": {"what will you do?", "what will you do ?", "principle responsibilities"},
+    "mako": {"what you'll be doing", "what you'll be involved in"},
+    "geneva_trading": {"the role", "how you can make an impact"},
+    "da_vinci": {"responsibilities"},
+    "qube_research": {"your future role within qrt", "responsibilities"},
+    "man_group": {"role and responsibilities", "roles and responsibilities"},
     "totalenergies": {"activities", "responsibilities"},
     "engie": {
         "key responsibilities",

@@ -48,3 +48,29 @@ un visa temporaire. Ces conditions restent lisibles dans le texte employeur ;
 le score de 92 ne garantit ni une rotation immédiate en front office, ni l’éligibilité.
 Les dates de début et de clôture de cette formulation restent à structurer ;
 aucun horaire ni fuseau ne doit être inventé.
+
+
+## Priorité révisée — univers trading multi-actifs (lots 88 à 90)
+
+La demande du propriétaire donne la priorité à un panel au-delà des commodities.
+Mako, Geneva Trading, Da Vinci, Qube Research & Technologies, Man Group, Bank of
+America, RBC et Wells Fargo sont intégrés ;
+[preuves, périmètres et état de livraison](VALIDATION-LOTS88-90.md).
+
+Prochaines pistes à auditer avant activation :
+
+- **Balyasny** : la [page officielle](https://www.bamfunds.com/careers) renvoie
+  à un portail Salesforce public (`bambusdev.my.site.com`). Pas de collecteur
+  validé ; vérifier sa pagination et les fiches, sans inventer un tenant Greenhouse.
+- Autres banques de marchés : vérifier les catalogues publics, le périmètre
+  géographique, puis les programmes campus séparés. Le portail professionnel
+  Bank of America ne couvre pas son autre plateforme campus.
+- Fonds et teneurs de marché supplémentaires : choisir à partir d'offres
+  publiques et de missions réelles ; un nom d'employeur seul ne suffit pas.
+- RWE, Statkraft, Vitol et Trafigura restent des pistes énergie, après ce travail
+  de diversification. Les formulaires d'intérêt ne deviennent pas des offres.
+
+Dans les nouvelles sources, un intitulé Quant/Research Analyst ne suffit pas
+à obtenir un score trading : poursuivre une qualification avec preuves issues
+des missions, notamment Qube, Man Group et les quants de banques, sans assimiler
+les postes de risque ou validation de modèles à un poste front office.

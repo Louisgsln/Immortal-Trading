@@ -37,6 +37,14 @@ BOARDS = {
     "squarepointcapital": ("Squarepoint Capital", "www.squarepoint-capital.com"),
     "chicagotrading": ("Chicago Trading Company", "job-boards.greenhouse.io"),
     "chicagotradingcampus": ("Chicago Trading Company", "job-boards.greenhouse.io"),
+    "mako": ("Mako", "www.mako.com"),
+    "genevatrading": ("Geneva Trading", "job-boards.greenhouse.io"),
+    "davinciderivatives": ("Da Vinci", "job-boards.eu.greenhouse.io"),
+    "quberesearchandtechnologies": (
+        "Qube Research & Technologies",
+        "job-boards.greenhouse.io",
+    ),
+    "mangroup": ("Man Group", "job-boards.eu.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
     "mavensecuritiesholdingltd": "Maven",
@@ -52,6 +60,8 @@ _NULL_METADATA = {
     "schonfeld",
     "transmarketgroup",
     "dvtrading",
+    "mako",
+    "davinciderivatives",
 }
 _CUSTOM_PATHS = {
     "akunacapital": "/careers/job/{id}/",
@@ -60,8 +70,11 @@ _CUSTOM_PATHS = {
     "oldmissioncapital": "/careers/",
     "wehrtyou": "/careers/job/",
     "transmarketgroup": "/transmarketgroup/jobs/{id}",
+    "mako": "/opportunities/job-listing/{id}",
 }
 _CONTRACT_FIELDS: dict[str, tuple[str, set[str | None]]] = {
+    "quberesearchandtechnologies": ("Employment Type", {"Full-time", "Contract", "Intern", None}),
+    "mangroup": ("Workforce Sub-Type", {"Regular", "Fixed Term", "Intern", None}),
     "akunacapital": ("Employment Type", {"Full-time", "Intern"}),
     "oldmissioncapital": ("Employment Type", {"Full-time", None}),
     "fiveringsllc": ("Employment Type", {"Full-time", "Intern"}),
@@ -327,6 +340,11 @@ def parse_board(
             or parts.fragment
         ):
             raise SourceUnavailable("Greenhouse posting URL identity mismatch")
+        if config.tenant == "mako":
+            # The feed's /job-listing/{id} path returns 404. The employer's own
+            # openings page links to this query-based application page instead.
+            # Validate both feed identifiers before using that observed route.
+            url = f"https://www.mako.com/opportunities/job-listing?gh_jid={identifier}"
         if "internal_job_id" not in row or (
             row["internal_job_id"] is not None
             and (type(row["internal_job_id"]) is not int or row["internal_job_id"] <= 0)
