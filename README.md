@@ -2,7 +2,8 @@
 
 Le lot **86** ajoute **Marex**, avec une collecte toutes les 30 minutes : neuf
 fiches de marché, dont deux au seuil de 70, neuf dates de publication et six
-fiches avec missions sur la copie de validation. Premier import silencieux,
+fiches avec missions. Installé et vérifié : **44 sources et 39 employeurs**,
+premier import silencieux,
 contrôles de catalogue et d'identité ; le programme Graduate 2027 déjà échu
 reste exclu. Voir [validation et installation](docs/VALIDATION-LOT86.md).
 

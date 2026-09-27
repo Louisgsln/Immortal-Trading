@@ -1,9 +1,9 @@
 # Prochains employeurs — vérification du 27 septembre 2026
 
 Ces pages officielles ont été relues pendant la validation des lots 84–85.
-Marex est maintenant validé sur deux collectes sur copie au [lot 86](VALIDATION-LOT86.md).
-Vitol et Trafigura restent à intégrer. Le passage à 44 sources et 39 employeurs
-sera confirmé par la vérification de l'instance après installation.
+Marex est installé et vérifié au [lot 86](VALIDATION-LOT86.md).
+Le radar surveille **44 sources pour 39 employeurs**. Vitol et Trafigura restent
+à intégrer ; leurs audits ne constituent pas une surveillance active.
 
 | Employeur | Accès public vérifié | Travail suivant |
 | --- | --- | --- |
@@ -15,3 +15,13 @@ Pour chaque intégration : vérifier l'origine employeur, les règles d'accès,
 la pagination complète, l'identité des fiches et le filtrage ; mesurer les
 annonces nouvelles et pertinentes sur copie, puis effectuer un premier import
 silencieux. Aucune inscription aux formulaires employeur n'a été effectuée.
+
+### Rôles Marex à reprendre séparément
+
+L'audit du 27 septembre relève un cas à qualifier : [Metals Execution Specialist (VN2527)](https://www.marex.com/careers/career-opportunities/2515d090ad9801-metals-execution-specialist-vn2527), annoncé junior/mid-level, avec exécution des flux et gestion du risque
+métaux dans des limites définies ; une pratique des futures est requise. Il reste
+à zéro au lot 86, faute de règle de ciblage correspondante. Toute évolution doit
+être bornée aux missions constatées et testée contre les fonctions de support.
+Les deux FX Dealer exigent un an mais décrivent surtout développement du
+portefeuille, objectifs commerciaux et acquisition de clients : ne pas promouvoir
+tous les titres Dealer comme postes de trading. Aucun score n'est modifié par cet audit.

@@ -68,3 +68,29 @@ Suite complète : **4 096 tests réussis, 4 ignorés**. Lint et format des
 contient 96 fichiers applicatifs vérifiés contre les sources. La vérification de
 l'installation sera consignée ci-dessous après déploiement. Vitol et Trafigura
 restent à intégrer.
+
+
+## Installation et observation
+
+Publié sur `main`, commit applicatif `910e5f36b1befaac895d2e76395f2586d4a10351`, installé le
+**27/09/2026 · 14:19** après sauvegarde vérifiée. Première collecte avec le paquet
+installé : neuf nouvelles fiches, 12 requêtes, aucune alerte créée, aucune clôture.
+Scanner, dashboard et Telegram redémarrés ; le scanner continu est actif.
+
+Contrôle du **27/09/2026 · 14:21** : **1 000 offres**, **298 pertinentes**,
+**184 au seuil d'alerte**, **460 fiches avec missions**, **375 avec diplôme**,
+**548 avec date de publication**. **44 sources / 39 employeurs**, dont
+**43 sources à jour** ; Nomura campus reste bloquée par CAPTCHA, sans session
+locale validée. Les 96 fichiers du paquet installé correspondent au paquet
+construit. Les scores et suivis antérieurs, ainsi que les anciennes alertes,
+sont préservés ; le premier import Marex reste silencieux.
+
+Dans le navigateur, contrôles du 27 septembre à 14:23 : neuf résultats Marex,
+tri par publication dans les deux sens, fiche Agricultural Trading Assistant
+avec missions, publication du 18 septembre distincte de la découverte du 27.
+Suivi synchronisé et aucun avertissement ou erreur JavaScript. Vue générale
+rétablie après le contrôle ; aucun suivi de candidature modifié pour les tests.
+
+Tous les [contrôles GitHub du code livré](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36318581561) ont réussi : Python 3.11, 3.12, 3.13 et 3.14,
+dashboard, construction et restauration en conteneur. La dernière mise à jour
+de cette livraison concerne uniquement le bilan et le carnet.

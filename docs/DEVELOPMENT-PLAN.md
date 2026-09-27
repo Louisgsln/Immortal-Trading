@@ -142,5 +142,6 @@ Ces points restent à réaliser ; les lots livrés ne clôturent pas la
 feuille de route entière. L'ajout d'un employeur signifie une collecte testée,
 pas une garantie d'offres éligibles ni de disponibilité permanente du portail.
 
-Lot 86 : collecte Marex et rubriques de fiches validées sur deux passages sur copie.
-Installation et résultats finaux : [bilan](VALIDATION-LOT86.md).
+Lot 86 installé et vérifié : Marex, neuf dates de publication, six fiches avec
+missions et exercice de restauration isolé corrigé. 44 sources, 39 employeurs ;
+voir le [bilan](VALIDATION-LOT86.md).
