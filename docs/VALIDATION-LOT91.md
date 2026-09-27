@@ -93,3 +93,31 @@ sur 257 fichiers, mypy sur 93 modules ; **11 tests JavaScript réussis**.
 Le paquet construit hors réseau a été comparé aux 98 fichiers applicatifs
 du dépôt. Les copies de bases, captures, configurations locales et sauvegardes
 ne font pas partie du commit.
+
+
+## Installation vérifiée
+
+Commit applicatif `b57f36f8a940a1dd7ca767172a09aa544e8839b4`, publié sur `main` et installé le
+**27/09/2026 · 21:51** après sauvegarde vérifiée. Les huit collectes du
+paquet installé ont réussi : 32 offres, 41 requêtes, aucune alerte historique.
+Les 98 fichiers applicatifs installés correspondent au paquet construit.
+
+Contrôle à **27/09/2026 · 21:53** : **1125 offres**,
+**331 pertinentes**, **203 prioritaires**,
+**673 dates de publication**, **518 fiches avec missions**,
+**440 avec indications de diplôme**. Scanner actif, dashboard
+et API du suivi accessibles, services programmés relancés. Le suivi, les anciens
+scores et l'historique des alertes sont conservés ; premier import silencieux.
+À 22:05, 44 sources existantes ont réussi une collecte automatique après la reprise.
+
+Le dashboard rechargé a été vérifié dans le navigateur : nouveaux employeurs,
+fiches, liens de candidature, tri de publication et filtres de dates.
+ING figure dans la santé des sources avec zéro offre retenue. Les filtres ont
+été réinitialisés et aucune candidature n'a été modifiée.
+
+Dernier contrôle à **27/09/2026 · 22:05** : **63/63 sources à jour**.
+Toutes les sources sont à jour.
+
+Tous les [contrôles GitHub du commit applicatif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36345787412) ont réussi :
+Python 3.11, 3.12, 3.13 et 3.14, tests JavaScript, construction de l'image et
+exercice de sauvegarde/restauration en conteneur isolé.
