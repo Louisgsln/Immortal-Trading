@@ -173,6 +173,10 @@ class VendorCollector:
 
 
 def build_collector(source: str, config: Company, http: HTTPClient) -> Collector:
+    if config.ats == "marex":
+        from trading_radar.marex import MarexCollector
+
+        return MarexCollector(source, config, http)
     if config.ats == "lever_filtered":
         from trading_radar.lever_filtered import LeverFilteredCollector
 

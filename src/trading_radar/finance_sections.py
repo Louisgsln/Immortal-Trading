@@ -20,6 +20,7 @@ EMPLOYERS = {
     "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
+    "marex": {"skills and experience"},
     "bp": {"to be eligible for the stands graduate programme you should"},
     "shell": {"what you bring"},
     "tp_icap": {"essential", "desired"},
@@ -55,6 +56,7 @@ QUALIFICATIONS = {
     "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
+    "marex": {"responsibilities", "overall responsibilities"},
     "bp": set(),
     "shell": {"what you'll be doing"},
     "tp_icap": {"role responsibilities", "day-to-day responsibilities", "responsibilities"},

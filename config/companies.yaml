@@ -1134,3 +1134,46 @@ companies:
       - principal
       - brokerage
       - systems engineer
+  marex:
+    name: Marex
+    enabled: true
+    ats: marex
+    tenant: marex
+    career_url: https://www.marex.com/careers/career-opportunities
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: 'Official public catalogue verified 2026-09-27. Title-filtered market roles,
+      no absence closures. First import silent. Graduate programme 2027 omitted: published
+      deadline has passed and it is absent from the catalogue. See docs/VALIDATION-LOT86.md.'
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - broker
+      - fx dealer
+      - commodity sales
+      - commodities sales
+      - execution
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - implementation
+      - business manager
+      max_results_per_query: 500
+      max_details: 60

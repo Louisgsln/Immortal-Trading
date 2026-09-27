@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot **86** ajoute **Marex**, avec une collecte toutes les 30 minutes : neuf
+fiches de marché, dont deux au seuil de 70, neuf dates de publication et six
+fiches avec missions sur la copie de validation. Premier import silencieux,
+contrôles de catalogue et d'identité ; le programme Graduate 2027 déjà échu
+reste exclu. Voir [validation et installation](docs/VALIDATION-LOT86.md).
+
 Les lots **84–85** préservent les rubriques Optiver (**17 fiches avec missions,
 10 avec diplôme supplémentaires**) et reconnaissent une variante des missions
 de courtage TP ICAP. Installés et vérifiés : un seul poste passe de 0 à 66 ; aucun ancien

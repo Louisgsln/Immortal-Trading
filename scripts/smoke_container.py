@@ -63,6 +63,13 @@ def run_smoke(project_root: Path, data_dir: Path, *, local: bool = False) -> dic
         if key != "DATABASE_URL" and not key.startswith("TELEGRAM_")
     }
     environment.update(ALERTS_ENABLED="false", PYTHON_DOTENV_DISABLED="1", PYTHONIOENCODING="utf-8")
+    # If the OS temporary directory is inaccessible, Python falls back to cwd.
+    # Verification would then change the directory being audited by retention.
+    # Give each isolated exercise its own writable child instead; keep the real
+    # audit's directory-change protection intact.
+    temporary = work / "temporary"
+    temporary.mkdir()
+    environment.update({key: str(temporary) for key in ("TMPDIR", "TEMP", "TMP")})
     commands: list[list[str]] = []
 
     def cli(*arguments: str) -> str:

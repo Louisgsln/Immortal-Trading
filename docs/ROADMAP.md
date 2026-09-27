@@ -934,3 +934,11 @@ Suite : autres structures Optiver et rôles quantitatifs à qualifier, catalogue
 Marex/Vitol/Trafigura, confirmations de fermeture et import du suivi avec aperçu.
 Nomura attend toujours la validation manuelle de sa session dédiée. L'IA/CV
 reste hors périmètre.
+
+## Lot 86 — Marex
+
+Catalogue complet contrôlé, sélection de 9 fiches de marché et 2 scores au seuil
+de 70 ; missions structurées sur six fiches. Deux collectes réelles sur copie,
+sans alerte historique. Le programme UK 2027 reste exclu : échéance dépassée.
+Voir [validation et état du déploiement](VALIDATION-LOT86.md). Prochains catalogues :
+Vitol et Trafigura ; poursuivre aussi la qualification des rôles et les fiches Optiver.

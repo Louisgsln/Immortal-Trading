@@ -128,8 +128,9 @@ conservées (17 missions, 10 diplômes supplémentaires), variante TP ICAP recon
    Auditer aussi les fourchettes d'expérience des rubriques Optiver conservées :
    Institutional Trader cite une fourchette de 2–5 ans encore non reconnue.
    Cette observation ne change pas son score au lot 84.
-3. Valider les catalogues Marex (priorité au catalogue et au programme UK 2027),
-   Vitol et Trafigura, puis d'autres banques, fonds et négociants. Voir les
+3. Marex est validé au lot 86 : 9 fiches supplémentaires sur copie, dont 2 au seuil
+   de 70 ; le programme UK 2027 a dépassé sa date limite. Poursuivre avec les
+   catalogues Vitol et Trafigura, puis d'autres banques, fonds et négociants. Voir les
    [accès et points de vigilance vérifiés](NEXT-EMPLOYERS.md). Les programmes
    fermés ne sont pas des offres ouvertes.
 4. Confirmer plus précisément les offres fermées et préparer l'import du suivi
@@ -140,3 +141,6 @@ conservées (17 missions, 10 diplômes supplémentaires), variante TP ICAP recon
 Ces points restent à réaliser ; les lots livrés ne clôturent pas la
 feuille de route entière. L'ajout d'un employeur signifie une collecte testée,
 pas une garantie d'offres éligibles ni de disponibilité permanente du portail.
+
+Lot 86 : collecte Marex et rubriques de fiches validées sur deux passages sur copie.
+Installation et résultats finaux : [bilan](VALIDATION-LOT86.md).
