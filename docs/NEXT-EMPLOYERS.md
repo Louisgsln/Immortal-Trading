@@ -1,4 +1,10 @@
-# Prochains employeurs — vérification du 27 septembre 2026
+# Prochains employeurs - vérification du 27 septembre 2026
+
+Mise à jour : Aquatic, Graviton, AQR, Winton, WorldQuant, G-Research, ING et
+BlackRock sont intégrés au [lot 91](VALIDATION-LOT91.md). Le périmètre configuré
+atteint **63 sources / 58 employeurs**. Les sections suivantes gardent leurs
+mesures historiques. NatWest a répondu HTTP 403 au présent audit et reste
+non activé ; Balyasny nécessite toujours un collecteur Salesforce vérifié.
 
 Ces pages officielles ont été relues pendant la validation des lots 84–85.
 Marex est installé et vérifié au [lot 86](VALIDATION-LOT86.md).

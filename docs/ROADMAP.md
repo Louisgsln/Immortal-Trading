@@ -1,5 +1,13 @@
 # Suivi de construction
 
+Dernière extension : [lot 91](VALIDATION-LOT91.md), huit employeurs supplémentaires
+(Aquatic, Graviton, AQR, Winton, WorldQuant, G-Research, ING, BlackRock), soit
+63 sources et 58 employeurs. Deux collectes sur copie : 32 offres nouvelles,
+6 pertinentes, 3 prioritaires, 32 dates, 12 fiches avec missions et 18 avec
+indications de diplôme. Les preuves de tests et d'installation figurent dans le bilan.
+Suite : autres banques et fonds, campus distincts, qualification des quants
+sur preuve de missions, puis fermetures explicites et import du suivi avec aperçu.
+
 Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document suit le périmètre demandé ; le master prompt original est conservé sans modification.
 
 ## Livraison des prochains lots

@@ -1,5 +1,11 @@
 # Développement confirmé le 26 septembre 2026
 
+Extension du 27 septembre : lots 88–90 puis [lot 91](VALIDATION-LOT91.md),
+soit 16 employeurs supplémentaires au-delà du lot énergie 87. Le périmètre
+configuré atteint 63 sources pour 58 employeurs. La qualification des rôles
+quantitatifs et les portails campus distincts restent à auditer ; aucun employeur
+n'est présenté comme exhaustivement couvert par ces recherches partielles.
+
 Le propriétaire demande un travail substantiel dans l'ordre suivant. Chaque
 livraison inclut une mesure d'impact, les contrôles pertinents, une sauvegarde,
 une publication sur main et une vérification sur l'instance active.

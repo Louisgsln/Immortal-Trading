@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Le lot **91** ajoute **Aquatic, Graviton, AQR, Winton, WorldQuant, G-Research,
+ING et BlackRock** : **63 sources pour 58 employeurs**, avec une collecte
+toutes les 30 minutes pour les nouveaux catalogues. Deux essais sur copie ont
+importé **32 offres**, dont **6 pertinentes et 3 au seuil de 70**, sans alerte
+historique ni modification des anciens scores. Voir les
+[mesures, limites et preuves de livraison](docs/VALIDATION-LOT91.md).
+
 Les lots **88 à 90** élargissent le radar à **Mako, Geneva Trading, Da Vinci,
 Qube Research & Technologies, Man Group, Bank of America, RBC et Wells Fargo**.
 Installés et vérifiés : **55 sources pour 50 employeurs**, **69 offres ajoutées**

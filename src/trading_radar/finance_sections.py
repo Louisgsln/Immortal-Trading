@@ -20,6 +20,20 @@ EMPLOYERS = {
     "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
+    "aquatic": {"candidate requirements", "requirements", "technical requirements"},
+    "graviton": {"requirements", "required skills and qualifications", "who we're looking for"},
+    "aqr": {"what you'll bring"},
+    "winton": {"what we are looking for"},
+    "worldquant": {"what you'll bring", "additional preferred qualifications"},
+    "g_research": {
+        "the ideal candidate will have",
+        "the ideal candidate will have the following skills and experience",
+    },
+    "blackrock": {
+        "qualifications, knowledge and experience",
+        "skills / knowledge",
+        "you have",
+    },
     "wells_fargo": {"required qualifications", "desired qualification"},
     "bank_of_america": {
         "required qualifications",
@@ -99,6 +113,12 @@ QUALIFICATIONS = {
     "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
+    "graviton": {"responsibilities", "key responsibilities", "what you'll work on"},
+    "aqr": {"your role"},
+    "winton": {"your responsibilities will include"},
+    "worldquant": {"the role", "key responsibilities"},
+    "g_research": {"the role"},
+    "blackrock": {"key responsibilities", "responsibilities", "your responsibilities"},
     "wells_fargo": {"in this role, you will"},
     "bank_of_america": {"responsibilities", "key responsibilities"},
     "rbc": {"what will you do?", "what will you do ?", "principle responsibilities"},

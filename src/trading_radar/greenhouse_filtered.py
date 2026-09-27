@@ -45,8 +45,14 @@ BOARDS = {
         "job-boards.greenhouse.io",
     ),
     "mangroup": ("Man Group", "job-boards.eu.greenhouse.io"),
+    "aquaticcapitalmanagement": ("Aquatic Capital Management", "job-boards.greenhouse.io"),
+    "gravitonresearchcapital": ("Graviton Research Capital", "job-boards.greenhouse.io"),
+    "aqr": ("AQR", "careers.aqr.com"),
+    "winton": ("Winton", "job-boards.eu.greenhouse.io"),
+    "worldquant": ("WorldQuant", "job-boards.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
+    "gravitonresearchcapital": "Graviton Research Capital LLP",
     "mavensecuritiesholdingltd": "Maven",
     "fiveringsllc": "Five Rings LLC - Careers",
     "walleyecapital-external-fulltime": "Walleye Capital Full Time",
@@ -54,6 +60,10 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "aquaticcapitalmanagement",
+    "gravitonresearchcapital",
+    "winton",
+    "worldquant",
     "xtxmarketstechnologies",
     "virtu",
     "towerresearchcapital",
@@ -331,6 +341,14 @@ def parse_board(
                 ("gh_jid", identifier),
                 ("id", identifier),
             ]
+        elif config.tenant == "aqr":
+            # The official feed repeats the same ID twice. Accept only this
+            # audited shape; conflicting IDs or extra parameters fail closed.
+            path = "/jobs"
+            valid_query = parse_qsl(parts.query, keep_blank_values=True) == [
+                ("gh_jid", identifier),
+                ("gh_jid", identifier),
+            ]
         elif config.tenant in _CUSTOM_PATHS:
             path = _CUSTOM_PATHS[config.tenant].format(id=identifier)
             valid_query = parse_qsl(parts.query, keep_blank_values=True) == [("gh_jid", identifier)]
@@ -378,6 +396,15 @@ def parse_board(
             ):
                 raise SourceUnavailable("IMC visibility metadata changed")
             if fields["Is Hidden Job?"] is True:
+                continue
+        if config.tenant == "aqr":
+            if "Post Job?" not in fields or (
+                fields["Post Job?"] is not None and type(fields["Post Job?"]) is not bool
+            ):
+                raise SourceUnavailable("AQR visibility metadata changed")
+            # Only explicit publication approval is sufficient. Null is unknown,
+            # not permission to publish a potentially hidden opening.
+            if fields["Post Job?"] is not True:
                 continue
         title = normalize_text(row["title"])
         if (
@@ -546,6 +573,7 @@ def parse_board(
                             "Start Date",
                             "Division",
                             "Job Board Experience Level",
+                            "Post Job?",
                         }
                     },
                 },
