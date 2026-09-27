@@ -2,7 +2,7 @@
 
 Ces pages officielles ont été relues pendant la validation des lots 84–85.
 Marex est installé et vérifié au [lot 86](VALIDATION-LOT86.md).
-Le lot 87 porte le périmètre configuré à **47 sources pour 42 employeurs**.
+Le lot 87 installé porte le périmètre à **47 sources pour 42 employeurs**.
 TotalEnergies, ENGIE et EDF Trading : [validation et état d’installation](VALIDATION-LOT87.md). Vitol et Trafigura restent
 à intégrer ; leurs audits ne constituent pas une surveillance active.
 

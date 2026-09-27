@@ -146,7 +146,7 @@ Lot 86 installé et vérifié : Marex, neuf dates de publication, six fiches ave
 missions et exercice de restauration isolé corrigé. 44 sources, 39 employeurs ;
 voir le [bilan](VALIDATION-LOT86.md).
 
-Lot 87 : extension demandée à TotalEnergies et ENGIE, complétée par EDF Trading.
+Lot 87 installé et vérifié : extension demandée à TotalEnergies et ENGIE, complétée par EDF Trading.
 Collectes bornées et dates au jour ; état de validation et installation dans le
 [bilan](VALIDATION-LOT87.md). Prochaine vague énergie : RWE et Statkraft à auditer,
 puis poursuivre Vitol et Trafigura. Aucun de ces quatre catalogues n’est encore

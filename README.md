@@ -1,7 +1,8 @@
 # Trading Job Radar
 
 Le lot **87** ajoute **TotalEnergies, ENGIE et EDF Trading**, toutes les 30 minutes.
-Le périmètre configuré atteint **47 sources pour 42 employeurs**. Les dates
+Installé et vérifié : **47 sources pour 42 employeurs**, **24 offres ajoutées**,
+dont **9 pertinentes et 3 au seuil de 70**. Les dates
 de publication précises au jour sont conservées sans inventer une heure,
 et restent disponibles dans les tris et filtres du dashboard. Premier import
 silencieux ; voir [mesures, limites et installation](docs/VALIDATION-LOT87.md).

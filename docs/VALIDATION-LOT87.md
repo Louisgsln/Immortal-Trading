@@ -74,4 +74,33 @@ Suite locale : **4 158 tests réussis, 4 ignorés**, dont 62 contrôles supplém
 sur les nouvelles sources et les dates. **11 tests JavaScript réussis**, lint
 et format de 255 fichiers validés, analyse statique des 93 modules réussie.
 Le paquet construit contient 98 fichiers applicatifs comparés aux sources.
-Les contrôles après installation sont consignés ci-dessous une fois terminés.
+Les contrôles après installation sont consignés ci-dessous.
+
+
+## Installation et observation
+
+Publié sur `main`, commit applicatif `def6c864b56f2b89b56422beba1f4f4f83c7fb50`, installé le
+**27/09/2026 à 20:31** après sauvegarde vérifiée. Première collecte avec le paquet
+installé : **3 sources réussies**, **24 offres nouvelles**, **76 requêtes**,
+aucune alerte historique, aucune fermeture et aucun ancien score modifié.
+Scanner, dashboard et Telegram sont actifs ; la sauvegarde planifiée est prête.
+
+Contrôle du **27/09/2026 à 20:33** : **1 024 offres**, **307 pertinentes**,
+**187 au seuil d’alerte**, **572 dates de publication**, **465 fiches avec missions**
+et **383 avec diplôme mentionné**. **47/47 sources à jour** au moment du contrôle.
+Ce constat ne garantit pas l’accès permanent aux portails. Les 98 fichiers du
+paquet installé correspondent à la construction validée. Les scores, candidatures,
+historiques et alertes antérieurs sont conservés.
+
+Navigateur contrôlé à **20:35** : filtres TotalEnergies (7), ENGIE (12) et
+EDF Trading (5), tri de publication dans les deux sens et filtre du 1er au
+31 août (cinq offres TotalEnergies). La fiche Energy Analyst and Energy Trader
+affiche la publication du 23 mai 2025 distincte du repérage du 27 septembre 2026,
+ainsi que la preuve « Experience: Minimum 3 years ». Aucun avertissement ni
+erreur JavaScript ; suivi synchronisé et vue générale rétablie sans modification
+de candidature.
+
+Tous les [contrôles GitHub du commit applicatif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36340966698) ont réussi :
+Python 3.11, 3.12, 3.13 et 3.14, dashboard, construction du paquet en conteneur
+et exercice isolé de sauvegarde/restauration. La mise à jour finale ne touche
+que la documentation de livraison.
