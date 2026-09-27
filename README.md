@@ -2,7 +2,8 @@
 
 Les lots **88 à 90** élargissent le radar à **Mako, Geneva Trading, Da Vinci,
 Qube Research & Technologies, Man Group, Bank of America, RBC et Wells Fargo**.
-Le périmètre configuré atteint **55 sources pour 50 employeurs**, avec davantage
+Installés et vérifiés : **55 sources pour 50 employeurs**, **69 offres ajoutées**
+dont **18 pertinentes et 13 au seuil de 70**, avec davantage
 d'options, actions, taux, crédit, change et trading quantitatif. Chaque nouveau
 catalogue est interrogé toutes les 30 minutes ; premier import silencieux.
 Voir [couverture, mesures et état de l'installation](docs/VALIDATION-LOTS88-90.md).

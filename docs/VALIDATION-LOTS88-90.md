@@ -126,3 +126,33 @@ contrôles** ; **11 tests JavaScript réussis**, lint et format de **256 fichier
 analyse statique de **93 modules**. Le paquet contient **98 fichiers applicatifs**
 comparés aux sources. Les nouveaux tests portent sur les identités, liens Mako,
 dates, contrats, exclusions Associate/stages, bornes et extraits des fiches.
+
+
+## Installation vérifiée
+
+Publié sur `main`, commit applicatif `b533c15751d8519941bdb075a62b512f1f416515`, installé le
+**27/09/2026 · 21:10** après sauvegarde vérifiée. Les huit premières
+collectes avec le paquet installé ont réussi : **69 nouvelles offres**,
+**112 requêtes**, aucune alerte historique, aucun ancien score ni suivi modifié.
+
+Contrôle à **27/09/2026 · 21:18** : **1093 offres**, **325 pertinentes**,
+**200 prioritaires**, **55/55 sources à jour**.
+**641 dates de publication**, **506 fiches avec missions**, **422 avec
+indications de diplôme**. Scanner actif, dashboard et API du suivi répondent ;
+paquet installé comparé fichier par fichier et services programmés relancés.
+Vingt sources existantes ont déjà réussi une collecte automatique après la
+reprise. Les deux anomalies Goldman Sachs/Citi présentes dans la sauvegarde
+d'avant installation ont disparu au passage suivant, sans changement de code.
+
+Le dashboard a été vérifié dans le navigateur après rechargement : nouveaux
+employeurs présents dans le filtre, tris de publication, fiches et liens visibles.
+Les filtres ont été réinitialisés après le contrôle, sans modifier de candidature.
+
+Observation ultérieure à **27/09/2026 · 21:22** : **54/55 sources à jour**.
+Nomura professionnels a signalé une pagination incohérente à 21:19 ; reprise
+automatique possible après 21:29. Les huit nouvelles sources restent à jour.
+Il s'agit du portail professionnel existant, distinct du portail campus/CAPTCHA.
+
+Tous les [contrôles GitHub du commit applicatif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36343372166) ont réussi : Python
+3.11, 3.12, 3.13 et 3.14, tests JavaScript, construction de l'image et exercice
+de sauvegarde/restauration en conteneur isolé.
