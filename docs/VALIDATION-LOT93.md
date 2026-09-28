@@ -67,5 +67,34 @@ ne ferme une offre.
 Suite locale complète : **4 481 tests Python réussis, 4 ignorés**. Les deux
 nouveaux cas BP/Morgan Stanley, ajoutés ensuite, passent aussi dans les 74 tests
 ciblés de récupération. **11 tests JavaScript**, Ruff sur **263 fichiers** et
-mypy sur **95 modules** réussis. Les preuves d'installation et de CI seront
-ajoutées après les vérifications effectives.
+mypy sur **95 modules** réussis. Les preuves d'installation et de CI sont
+consignées ci-dessous.
+
+
+## Installation vérifiée
+
+Commit applicatif `6b310e47f445cb6820ba570238dc02442b8b0773`, poussé sur `main` et installé le
+**28/09/2026 · 09:41**, après sauvegarde vérifiée. Les **100 fichiers
+applicatifs** correspondent au paquet construit. Le fichier privé, les paramètres
+locaux et le lanceur de session sont inchangés ; les trois services déjà actifs
+ont été redémarrés, sans message Telegram de test.
+
+Le paquet installé collecte **153 offres sur six sources**.
+Aucun ajout, modification, fermeture ou alerte de test ; les anciens scores,
+candidatures et historiques sont conservés. Dashboard et API du suivi accessibles,
+scanner repris. La page Santé des sources a été rechargée et vérifiée dans le
+navigateur, avec les lacunes explicitement affichées et les heures locales.
+
+Au contrôle **28/09/2026 · 10:00** : **69/71 sources à jour**.
+Sources encore à examiner : Citi (refus temporaire d'accès), BP (fiche manquante).
+**57 sources**, dont UBS, Optiver et BNP,
+ont été recollectées automatiquement après la vérification d'installation.
+Morgan Stanley est revenue à jour au passage suivant. Citi a réussi les deux
+scans sur copie et la collecte installée, puis son portail a renvoyé un nouveau
+**HTTP 403 à 09:57**. Les offres restent conservées ; ce refus d'accès distinct
+du défaut de fiches déclenche la temporisation normale, sans contournement.
+Le radar n'est donc pas présenté comme intégralement sain.
+
+Les [six contrôles GitHub du commit applicatif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36392933793) ont réussi :
+Python 3.11 à 3.14 (**4 483 tests réussis, 4 ignorés**), les **11 tests JavaScript**
+et le contrôle de l'image avec restauration isolée.
