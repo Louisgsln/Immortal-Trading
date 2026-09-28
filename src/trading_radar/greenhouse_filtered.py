@@ -17,6 +17,10 @@ from trading_radar.search_scope import SearchOptions
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
+    "engineersgate": ("Engineers Gate", "job-boards.greenhouse.io"),
+    "pdtpartners": ("PDT Partners", "job-boards.greenhouse.io"),
+    "grahamcapitalmanagement": ("Graham Capital Management", "boards.greenhouse.io"),
+    "quantbot-technologies": ("Quantbot Technologies", "www.quantbot.com"),
     "headlandstechnologiesllc": ("Headlands Technologies", "job-boards.greenhouse.io"),
     "radixuniversity": ("Radix Trading", "job-boards.greenhouse.io"),
     "radixexperienced": ("Radix Trading", "job-boards.greenhouse.io"),
@@ -61,6 +65,7 @@ BOARDS = {
     "worldquant": ("WorldQuant", "job-boards.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
+    "grahamcapitalmanagement": "Graham Capital Management, L.P.",
     "headlandstechnologiesllc": "Headlands Technologies LLC",
     "radixuniversity": "Radix Trading University Job Board",
     "radixexperienced": "Radix Trading Experienced Job Board",
@@ -75,6 +80,9 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "engineersgate",
+    "grahamcapitalmanagement",
+    "quantbot-technologies",
     "headlandstechnologiesllc",
     "radixuniversity",
     "radixexperienced",
@@ -98,6 +106,8 @@ _NULL_METADATA = {
     "davinciderivatives",
 }
 _CUSTOM_PATHS = {
+    "grahamcapitalmanagement": "/grahamcapitalmanagement/jobs/{id}",
+    "quantbot-technologies": "/careers/{id}",
     "acadianassetmanagementllc": "/careers/open-positions",
     "veritiongroupllc": "/open-positions",
     "akunacapital": "/careers/job/{id}/",
@@ -109,6 +119,7 @@ _CUSTOM_PATHS = {
     "mako": "/opportunities/job-listing/{id}",
 }
 _CONTRACT_FIELDS: dict[str, tuple[str, set[str | None]]] = {
+    "pdtpartners": ("Employment Type", {"Full-time", "Intern"}),
     "quberesearchandtechnologies": ("Employment Type", {"Full-time", "Contract", "Intern", None}),
     "mangroup": ("Workforce Sub-Type", {"Regular", "Fixed Term", "Intern", None}),
     "akunacapital": ("Employment Type", {"Full-time", "Intern"}),

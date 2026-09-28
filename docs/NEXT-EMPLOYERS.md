@@ -1,5 +1,12 @@
 # Prochains employeurs - vérification du 27 septembre 2026
 
+Extension du 28 septembre : [lots 95 à 97](VALIDATION-LOTS95-97.md), Valkyrie,
+Engineers Gate, PDT Partners, Graham Capital, Quantbot, Wellington, AllianceBernstein
+et Dimensional. **86 sources / 80 employeurs**. GSA masqué et Voleon inaccessible
+restent hors activation ; Sunrise Trakstar et Caxton Workable sont les prochaines
+pistes techniques vérifiées. Quantbot ne propose pour le moment que des stages,
+exclus ; Dimensional ne retourne aucun intitulé ciblé.
+
 Mise à jour du 28 septembre : [lot 94](VALIDATION-LOT94.md), Headlands, Radix
 (campus et professionnels), 3Red, Tudor, Acadian et Arrowstreet. **78 sources /
 72 employeurs** ; 12 nouvelles fiches sur copie, dont deux prioritaires. Les

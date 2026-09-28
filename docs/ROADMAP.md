@@ -1,6 +1,13 @@
 # Suivi de construction
 
-Dernier lot : [94](VALIDATION-LOT94.md), réparation ENGIE, réduction des accès
+Dernière extension : [lots 95 à 97](VALIDATION-LOTS95-97.md), huit employeurs
+supplémentaires, soit **86 sources / 80 employeurs**. Import initial silencieux,
+contrats Lever distincts, identité Greenhouse stricte et expérience AllianceBernstein
+corrigée sur preuve de rubrique. Le bilan précise l’état réel de livraison.
+Suite : structurer les fiches de ces nouveaux employeurs, qualifier les rôles
+quantitatifs sur leurs missions, puis auditer Trakstar Sunrise et Workable Caxton.
+
+Lot précédent : [94](VALIDATION-LOT94.md), réparation ENGIE, réduction des accès
 Nomura Campus et six employeurs supplémentaires (**78 sources / 72 employeurs**).
 Le bilan distingue validation sur copie, installation et disponibilité réelle.
 Suite : qualifier les dix nouveaux rôles quantitatifs sur leurs missions,

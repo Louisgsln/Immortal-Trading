@@ -15,7 +15,10 @@ from trading_radar.normalizer import has, normalize_text, plain_text
 from trading_radar.search_scope import SearchOptions
 
 API = "https://api.lever.co/v0/postings/"
-BOARDS = {"belvederetrading": "Belvedere Trading"}
+BOARDS = {
+    "belvederetrading": "Belvedere Trading",
+    "valkyrietrading": "Valkyrie Trading",
+}
 PAGE_SIZE = 100
 
 
@@ -75,16 +78,27 @@ def parse_board(
         if not isinstance(row.get("text"), str) or not row["text"].strip():
             raise SourceUnavailable("Lever posting title missing")
         fields = row.get("categories")
+        valkyrie = config.tenant == "valkyrietrading"
+        required: tuple[str, ...] = ("location", "team", "commitment")
+        if not valkyrie:
+            required += ("department",)
         if not isinstance(fields, dict) or any(
-            not isinstance(fields.get(k), str) or not fields[k].strip()
-            for k in ("department", "location", "team", "commitment")
+            not isinstance(fields.get(k), str) or not fields[k].strip() for k in required
         ):
             raise SourceUnavailable("Lever job categories missing or changed")
-        if fields["commitment"] not in {"Full-Time", "Intern"}:
+        # Valkyrie's published board has no department and spells Full Time
+        # without a hyphen. Keep Belvedere's separate contract unchanged.
+        contracts = {"Full Time", "Intern"} if valkyrie else {"Full-Time", "Intern"}
+        if fields["commitment"] not in contracts:
             raise SourceUnavailable("Lever employment type missing or changed")
+        in_scope = (
+            fields["team"] in {"Trading", "Quants"}
+            if valkyrie
+            else fields["department"] == "Trading"
+        )
         title = normalize_text(row["text"])
         if (
-            fields["department"] != "Trading"
+            not in_scope
             or (options.title_terms and not any(has(title, term) for term in options.title_terms))
             or any(has(title, term) for term in options.exclude_title_terms)
         ):
@@ -127,15 +141,12 @@ def parse_board(
                 location=fields["location"].strip(),
                 employment_type=fields["commitment"],
                 seniority_hint="junior"
-                if fields["team"] == "Campus - Quantitative Trading"
+                if not valkyrie
+                and fields["team"] == "Campus - Quantitative Trading"
                 and fields["commitment"] == "Full-Time"
                 else None,
                 # Lever createdAt is not documented as a publication date.
-                raw_payload={
-                    "categories": {
-                        k: fields[k] for k in ("department", "location", "team", "commitment")
-                    }
-                },
+                raw_payload={"categories": {k: fields[k] for k in required}},
             )
         )
     if len(jobs) > options.max_details:

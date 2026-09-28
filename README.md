@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Les lots **95 à 97** ajoutent **Valkyrie, Engineers Gate, PDT Partners, Graham
+Capital, Quantbot, Wellington, AllianceBernstein et Dimensional** :
+**86 sources / 80 employeurs**. Sur copie : **12 fiches supplémentaires,
+3 prioritaires et 9 dates de publication**, sans alerte historique.
+Un faux positif AllianceBernstein demandant cinq ans est corrigé avant activation.
+Voir [périmètre, limites et état de livraison](docs/VALIDATION-LOTS95-97.md).
+
 Le lot **94** corrige le nouveau format ENGIE, allège les accès Nomura Campus
 et ajoute **Headlands, Radix, 3Red, Tudor, Acadian et Arrowstreet** :
 **78 sources pour 72 employeurs**. Deux scans sur copie : **12 nouvelles fiches**,

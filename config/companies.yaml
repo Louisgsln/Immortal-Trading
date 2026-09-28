@@ -3390,3 +3390,566 @@ companies:
       - structuring
       max_details: 80
       max_scan_seconds: 600
+  valkyrie:
+    name: Valkyrie Trading
+    enabled: true
+    ats: lever_filtered
+    tenant: valkyrietrading
+    career_url: https://www.valkyrietrading.com/careers/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 95. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+  pdt:
+    name: PDT Partners
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: pdtpartners
+    career_url: https://pdtpartners.com/careers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+  graham:
+    name: Graham Capital Management
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: grahamcapitalmanagement
+    career_url: https://www.grahamcapital.com/careers/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+  quantbot:
+    name: Quantbot Technologies
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: quantbot-technologies
+    career_url: https://www.quantbot.com/careers/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+  wellington:
+    name: Wellington Management
+    enabled: true
+    ats: workday
+    tenant: wellington
+    career_url: https://wellington.wd5.myworkdayjobs.com/External
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 97. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  alliancebernstein:
+    name: AllianceBernstein
+    enabled: true
+    ats: workday
+    tenant: abglobal
+    career_url: https://abglobal.wd1.myworkdayjobs.com/alliancebernsteincareers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 97. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  dimensional:
+    name: Dimensional Fund Advisors
+    enabled: true
+    ats: workday
+    tenant: dimensional
+    career_url: https://dimensional.wd5.myworkdayjobs.com/DFA_Careers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28, lot 97. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  engineers_gate:
+    name: Engineers Gate
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: engineersgate
+    career_url: https://www.eglp.com/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer script links to Greenhouse engineersgate; verified 2026-09-28,
+      lot 95. Partial trading scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500

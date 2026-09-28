@@ -110,14 +110,24 @@ def optional_text(record: dict, field: str) -> str | None:
 
 
 def workday_minimum_experience(source: str, company: str, description: str) -> int | None:
-    """Two audited professional requirements missed by the general prose parser.
+    """Audited professional requirements missed by the general prose parser.
 
     Only explicit qualification bullets on these new boards are evidence; no
     inference from company history, the team, or merely preferred experience.
     """
-    if (source, company) not in {("pimco", "PIMCO"), ("td", "TD")}:
+    if (source, company) not in {
+        ("pimco", "PIMCO"),
+        ("td", "TD"),
+        ("alliancebernstein", "AllianceBernstein"),
+    }:
         return None
-    headings = {"requirements"} if source == "pimco" else {"qualifications"}
+    headings = {
+        "pimco": {"requirements"},
+        "td": {"qualifications"},
+        "alliancebernstein": {
+            "the successful candidate is likely to have the following qualifications"
+        },
+    }[source]
     years = []
     for _, section in labelled_lists(Document(description).root, headings):
         for item in section.children:
@@ -132,6 +142,19 @@ def workday_minimum_experience(source: str, company: str, description: str) -> i
                     re.I,
                 )
                 if match:
+                    years.append(int(match[1]))
+            elif source == "alliancebernstein":
+                # This bullet abbreviates years as yrs. The preference applies
+                # to IG/HY market exposure, not to the preceding experience range.
+                # Keep this audited wording and candidate section separate from
+                # generic prose, optional experience and the firm's introduction.
+                match = re.fullmatch(
+                    r"([1-9][0-9]?)\s*-\s*([1-9][0-9]?)\s*yrs experience in a credit "
+                    r"trading role, with a preference to IG or HY US markets exposure",
+                    text,
+                    re.I,
+                )
+                if match and int(match[1]) <= int(match[2]):
                     years.append(int(match[1]))
             elif re.fullmatch(
                 r"Minimum five years experience in financial markets in a trading capacity "
