@@ -94,3 +94,32 @@ professionnelles. Validation locale : **4 446 tests Python réussis**, **4 ignor
 mypy sur **94 modules**, verrouillage des dépendances vérifié. Le paquet contient
 **99 fichiers applicatifs**, comparés aux sources avant installation.
 La preuve d'installation est ajoutée après les vérifications effectives.
+
+
+## Installation vérifiée
+
+Commit applicatif `712e3b2d6d2b6d79662cfdaf57215b311d2a3659`, poussé sur `main` et installé le
+**28/09/2026 · 08:32** après sauvegarde vérifiée. Les huit collectes du
+paquet installé ont réussi : **33 offres**, **94 requêtes utiles**,
+aucune alerte historique. Les **99 fichiers applicatifs**
+installés correspondent au paquet construit. Réglages locaux et fichier privé
+inchangés ; seuls les trois services déjà actifs ont été brièvement redémarrés.
+
+Contrôle à **28/09/2026 · 08:35** : **1160 offres**,
+**347 pertinentes**, **211 au seuil de 70**,
+**706 dates**, **541 fiches avec missions**,
+**460 avec diplômes**. Scanner actif, dashboard et API du suivi
+accessibles ; anciens scores, candidatures et historiques préservés.
+**53 sources existantes**
+ont réussi une collecte automatique après la reprise.
+
+Dashboard rechargé et vérifié dans le navigateur : nouveaux employeurs, détails,
+dates, liens de candidature, tri et filtres de publication. CIBC figure dans la
+santé des sources avec zéro offre retenue ; filtres réinitialisés, aucun suivi modifié.
+
+Dernier état à **28/09/2026 · 08:50** : **65/71 sources à jour**. Sources à vérifier : nomura_professionals, ubs_professionals, optiver, bnp_paribas, citi, bp.
+
+**4 446 tests Python réussis**, 4 ignorés,
+**11 tests JavaScript réussis**, Ruff (261 fichiers) et mypy (94 modules) validés.
+Les [six contrôles GitHub du commit applicatif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36386900856) ont réussi :
+Python 3.11 à 3.14, dashboard JavaScript, image et récupération en conteneur isolé.

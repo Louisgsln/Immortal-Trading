@@ -1006,3 +1006,13 @@ autres teneurs de marché et fonds avec postes publics réels. Auditer séparém
 les intitulés quantitatifs encore exclus, avec contre-exemples et mesure d'impact.
 ExodusPoint ne publie dans le catalogue vérifié que deux formulaires génériques :
 à revisiter lors d'une vraie ouverture, sans le compter comme source active.
+
+Priorité de fiabilité relevée après le lot 92 : reproduire les pages répétées
+UBS/Optiver, la référence BNP contradictoire, la ligne Workday BP mal formée
+et la fiche Citi manquante `26985835`. Les erreurs UBS, Optiver, BNP et BP sont
+également présentes dans les journaux antérieurs à cette installation. Garder
+les derniers instantanés valides et ne pas assouplir les contrôles d'identité
+pour masquer ces incidents. Voir l'état daté dans la validation du lot 92.
+Le contrôle final du 28 septembre à 08:50 relève aussi une incohérence de
+pagination Nomura Professionnels, après une collecte réussie à 08:37 ; à
+inclure dans ce prochain audit de fiabilité, sans l'assimiler à un CAPTCHA.

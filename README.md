@@ -2,7 +2,7 @@
 
 Le lot **92** ajoute **Wolverine Trading, Gelber Group, Verition, Marshall Wace,
 PIMCO, CIBC, TD et State Street** : **71 sources pour 66 employeurs**.
-Deux collectes sur copie : **33 offres**, dont **16 pertinentes et 8 au seuil de 70**,
+Installé et vérifié : **33 offres ajoutées**, dont **16 pertinentes et 8 au seuil de 70**,
 avec **33 dates**, **21 fiches avec missions** et **18 avec diplômes**.
 Nouveaux catalogues toutes les 30 minutes, premier import silencieux.
 Voir [périmètre, limites et vérification](docs/VALIDATION-LOT92.md).
