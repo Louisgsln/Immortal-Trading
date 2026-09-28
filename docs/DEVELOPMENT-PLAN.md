@@ -4,6 +4,7 @@ Extension du 28 septembre : [lots 95 à 97](VALIDATION-LOTS95-97.md), huit
 employeurs supplémentaires en trading, recherche systématique et gestion d’actifs.
 **86 sources / 80 employeurs** ; les catalogues actuellement sans résultat ciblé
 restent distingués des collectes en échec. Aucun changement des anciens scores.
+Installés le 28 septembre à 13:21 ; les huit collectes actives ont réussi.
 
 Reprise du 28 septembre : [lot 94](VALIDATION-LOT94.md), format ENGIE réparé,
 accès Nomura allégés et six employeurs supplémentaires, soit **78 sources /

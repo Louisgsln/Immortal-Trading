@@ -2,7 +2,7 @@
 
 Les lots **95 à 97** ajoutent **Valkyrie, Engineers Gate, PDT Partners, Graham
 Capital, Quantbot, Wellington, AllianceBernstein et Dimensional** :
-**86 sources / 80 employeurs**. Sur copie : **12 fiches supplémentaires,
+**86 sources / 80 employeurs**. Installés et vérifiés : **12 fiches supplémentaires,
 3 prioritaires et 9 dates de publication**, sans alerte historique.
 Un faux positif AllianceBernstein demandant cinq ans est corrigé avant activation.
 Voir [périmètre, limites et état de livraison](docs/VALIDATION-LOTS95-97.md).

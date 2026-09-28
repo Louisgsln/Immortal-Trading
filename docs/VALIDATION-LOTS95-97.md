@@ -99,6 +99,60 @@ Lever/Greenhouse et Workday/PIMCO/TD. **11 tests JavaScript** réussissent ; Ruf
 le formatage, mypy sur 95 modules et le contrôle du verrou de dépendances passent.
 Les 100 fichiers applicatifs du paquet construit correspondent au code source.
 
-La publication, l'installation et l'état réel des services sont consignés
-ci-dessous après leur vérification. Ces lots étendent le radar ; ils ne clôturent
-pas les autres chantiers de la roadmap.
+## Installation vérifiée le 28 septembre
+
+Le code applicatif `7aed140` est publié sur `main` et installé à **13:21**, après
+une sauvegarde dont l'intégrité a été vérifiée. Les 100 fichiers applicatifs
+installés correspondent au paquet et au code source. Les réglages locaux, les
+secrets et l'entrée isolée des services sont préservés. Le scanner, le dashboard
+et le service Telegram ont repris ; la tâche de sauvegarde reste prête.
+
+La collecte d'activation se termine à **13:22:49** : **8 succès sur 8**,
+43 requêtes, 12 nouvelles fiches, aucun ancien poste modifié ou fermé et aucune
+alerte historique. Les scores préexistants et les suivis de candidature sont
+inchangés. L'instance contient alors 1 187 fiches repérées, dont 1 185 actives
+et 216 au seuil de 70. Les deux nouveaux catalogues sans résultat ciblé ont bien
+un état de succès enregistré.
+
+Le dashboard répond et l'affichage a été vérifié dans le navigateur : huit
+nouvelles sources à jour, intervalle de 30 minutes, filtres employeur, descriptions
+complètes, dates et tri par publication. La fiche AllianceBernstein indique le
+minimum de cinq ans avec un score de 0 ; les cinq Wellington sont triées par
+publication décroissante. Les dates Valkyrie restent inconnues. Aucune candidature
+ni action de suivi n'a été envoyée pendant ces contrôles.
+
+## Disponibilité des sources existantes
+
+Au contrôle de **13:34**, les huit nouvelles sources sont à jour et **57 autres
+sources** ont été recollectées automatiquement depuis l'activation. L'état global
+est de **83 sources à jour sur 86**. Trois sources déjà présentes restent en
+échec : Barclays et State Street (ligne Workday mal formée), Goldman Sachs
+(format de réponse inattendu). L'ajout des huit entreprises ne vaut donc pas
+résolution de tous les incidents du radar.
+
+State Street avait échoué à 13:21:03, avant l'installation ; une lecture publique
+et une collecte sur copie ont ensuite réussi (3 fiches). La même collecte sur
+copie échoue encore pour Barclays. Aucune reprise forcée en production ni
+réinitialisation artificielle de l'état de santé n'a été effectuée ; les
+offres existantes sont conservées et le scanner poursuit ses reprises planifiées.
+Ces incidents doivent être audités dans le prochain lot de fiabilité.
+
+Ces lots étendent le radar ; ils ne clôturent pas les autres chantiers de la roadmap.
+
+
+## Contrôles GitHub et dernier état
+
+Les [six contrôles GitHub](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36415159000) du code
+applicatif `7aed140` sont réussis : Python 3.11, 3.12, 3.13 et 3.14,
+dashboard JavaScript, puis construction et vérification du conteneur isolé.
+
+Dernier état vérifié : **28/09/2026 · 13:46**, **83/86
+sources à jour**, dont les huit ajouts. Depuis l'activation,
+**74 sources déjà présentes** ont réussi une collecte automatique.
+Restent signalées à cet instant : **Barclays, Deutsche Bank, State Street**. Leurs reprises planifiées restent actives.
+
+- Barclays : La collecte n’a pas pu être validée.
+
+- Deutsche Bank : Collecte partielle : références encore invérifiables.
+
+- State Street : La collecte n’a pas pu être validée.

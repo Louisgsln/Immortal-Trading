@@ -3,8 +3,10 @@
 Dernière extension : [lots 95 à 97](VALIDATION-LOTS95-97.md), huit employeurs
 supplémentaires, soit **86 sources / 80 employeurs**. Import initial silencieux,
 contrats Lever distincts, identité Greenhouse stricte et expérience AllianceBernstein
-corrigée sur preuve de rubrique. Le bilan précise l’état réel de livraison.
-Suite : structurer les fiches de ces nouveaux employeurs, qualifier les rôles
+corrigée sur preuve de rubrique. Installés et vérifiés ; les huit sources ont
+réussi leur première collecte sur l'instance active, avec 12 nouvelles fiches.
+Suite : diagnostiquer les nouveaux incidents Workday et Goldman sans supprimer
+les contrôles de cohérence, structurer les fiches de ces nouveaux employeurs, qualifier les rôles
 quantitatifs sur leurs missions, puis auditer Trakstar Sunrise et Workable Caxton.
 
 Lot précédent : [94](VALIDATION-LOT94.md), réparation ENGIE, réduction des accès
