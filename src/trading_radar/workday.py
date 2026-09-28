@@ -13,6 +13,7 @@ from urllib.parse import unquote, urlsplit
 from pydantic import Field, field_validator
 
 from trading_radar.config import Company
+from trading_radar.description_sections import labelled_lists, visible_text
 from trading_radar.html_page import Document, Element, clean
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
@@ -104,6 +105,40 @@ def optional_text(record: dict, field: str) -> str | None:
     if value is not None and not isinstance(value, str):
         raise SourceUnavailable(f"invalid Workday {field}; no snapshot committed")
     return value
+
+
+def workday_minimum_experience(source: str, company: str, description: str) -> int | None:
+    """Two audited professional requirements missed by the general prose parser.
+
+    Only explicit qualification bullets on these new boards are evidence; no
+    inference from company history, the team, or merely preferred experience.
+    """
+    if (source, company) not in {("pimco", "PIMCO"), ("td", "TD")}:
+        return None
+    headings = {"requirements"} if source == "pimco" else {"qualifications"}
+    years = []
+    for _, section in labelled_lists(Document(description).root, headings):
+        for item in section.children:
+            if not isinstance(item, Element) or item.tag != "li":
+                continue
+            text = " ".join(visible_text(item).split()).rstrip(".")
+            if source == "pimco":
+                match = re.fullmatch(
+                    r"([1-9][0-9]?)\+ years of experience in a fixed income trading capacity "
+                    r"\(investment grade preferred\)",
+                    text,
+                    re.I,
+                )
+                if match:
+                    years.append(int(match[1]))
+            elif re.fullmatch(
+                r"Minimum five years experience in financial markets in a trading capacity "
+                r"across a breadth of interest rate products",
+                text,
+                re.I,
+            ):
+                years.append(5)
+    return max(years, default=None)
 
 
 def workday_seniority_hint(
@@ -313,6 +348,9 @@ class WorkdayCollector:
             location=loc or listing_location or "",
             date_posted=parse_date(start_date),
             employment_type=time_type,
+            minimum_experience_years=workday_minimum_experience(
+                self.source, self.config.name, description
+            ),
             seniority_hint=workday_seniority_hint(
                 self.source, self.config.name, title, description, info.get("jobPostingId")
             ),

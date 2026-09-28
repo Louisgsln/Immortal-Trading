@@ -17,6 +17,9 @@ from trading_radar.search_scope import SearchOptions
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
+    "gelbergroup": ("Gelber Group", "job-boards.greenhouse.io"),
+    "veritiongroupllc": ("Verition", "www.verition.com"),
+    "mw-tech-grad": ("Marshall Wace", "job-boards.greenhouse.io"),
     "imc": ("IMC", "job-boards.eu.greenhouse.io"),
     "drweng": ("DRW", "job-boards.greenhouse.io"),
     "flowtraders": ("Flow Traders", "job-boards.greenhouse.io"),
@@ -52,6 +55,8 @@ BOARDS = {
     "worldquant": ("WorldQuant", "job-boards.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
+    "veritiongroupllc": "Verition Group LLC",
+    "mw-tech-grad": "Marshall Wace - Graduate & Associate roles",
     "gravitonresearchcapital": "Graviton Research Capital LLP",
     "mavensecuritiesholdingltd": "Maven",
     "fiveringsllc": "Five Rings LLC - Careers",
@@ -60,6 +65,9 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "gelbergroup",
+    "veritiongroupllc",
+    "mw-tech-grad",
     "aquaticcapitalmanagement",
     "gravitonresearchcapital",
     "winton",
@@ -74,6 +82,7 @@ _NULL_METADATA = {
     "davinciderivatives",
 }
 _CUSTOM_PATHS = {
+    "veritiongroupllc": "/open-positions",
     "akunacapital": "/careers/job/{id}/",
     "point72": "/point72/jobs/{id}",
     "towerresearchcapital": "/open-positions/",

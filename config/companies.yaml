@@ -2362,3 +2362,529 @@ companies:
       - structuring
       max_details: 80
       max_scan_seconds: 600
+  wolverine:
+    name: Wolverine Trading
+    enabled: true
+    ats: pinpoint_rss
+    tenant: wolve
+    career_url: https://careers.wolve.com/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+  gelber:
+    name: Gelber Group
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: gelbergroup
+    career_url: https://www.gelbergroup.com/careers/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+  verition:
+    name: Verition
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: veritiongroupllc
+    career_url: https://www.verition.com/open-positions
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+  marshall_wace_graduates:
+    name: Marshall Wace
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: mw-tech-grad
+    career_url: https://www.mwam.com/join-us/early-careers/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+  pimco:
+    name: PIMCO
+    enabled: true
+    ats: workday
+    tenant: pimco
+    career_url: https://pimco.wd1.myworkdayjobs.com/pimco-careers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  cibc:
+    name: CIBC
+    enabled: true
+    ats: workday
+    tenant: cibc
+    career_url: https://cibc.wd3.myworkdayjobs.com/search
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  td:
+    name: TD
+    enabled: true
+    ats: workday
+    tenant: td
+    career_url: https://td.wd3.myworkdayjobs.com/TD_Bank_Careers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  state_street:
+    name: State Street
+    enabled: true
+    ats: workday
+    tenant: statestreet
+    career_url: https://statestreet.wd1.myworkdayjobs.com/Global
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+      applied_facets:
+        jobFamilyGroup:
+        - 56250981e7cb01de6d22a5893041350c
+        - 56250981e7cb0196f798ca8930414b0c
+        - 56250981e7cb014c5ea0b8893041410c
+        - 56250981e7cb01951c88df893041570c

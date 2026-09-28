@@ -201,6 +201,10 @@ def build_collector(source: str, config: Company, http: HTTPClient) -> Collector
         from trading_radar.sig import SIGCollector
 
         return SIGCollector(source, config, http)
+    if config.ats == "pinpoint_rss":
+        from trading_radar.pinpoint_rss import PinpointRSSCollector
+
+        return PinpointRSSCollector(source, config, http)
     if config.ats == "greenhouse_filtered":
         from trading_radar.greenhouse_filtered import GreenhouseFilteredCollector
 

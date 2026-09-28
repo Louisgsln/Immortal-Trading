@@ -20,6 +20,17 @@ EMPLOYERS = {
     "belvedere_trading": "belvedere trading",
 }
 QUALIFICATIONS = {
+    "wolverine": {"what we're looking for"},
+    "gelber": {"what you'll need", "what we'd like to see"},
+    "verition": {"qualifications"},
+    "marshall_wace_graduates": {"what we look for"},
+    "pimco": {"requirements", "qualifications", "position requirements"},
+    "td": {"qualifications"},
+    "state_street": {
+        "requirements",
+        "education and preferred qualifications",
+        "desired skills and experience",
+    },
     "aquatic": {"candidate requirements", "requirements", "technical requirements"},
     "graviton": {"requirements", "required skills and qualifications", "who we're looking for"},
     "aqr": {"what you'll bring"},
@@ -113,6 +124,16 @@ QUALIFICATIONS = {
     "belvedere_trading": {"what you'll need", "key qualities in great candidates"},
 }
 RESPONSIBILITIES = {
+    "wolverine": {"what you'll do"},
+    "gelber": {"what you'll do"},
+    "verition": {"responsibilities"},
+    "pimco": {"responsibilities"},
+    "td": {"roles and responsibilities include"},
+    "state_street": {
+        "responsibilities",
+        "as a junior trader, you will",
+        "as an efx quant analyst you will",
+    },
     "graviton": {"responsibilities", "key responsibilities", "what you'll work on"},
     "aqr": {"your role"},
     "winton": {"your responsibilities will include"},

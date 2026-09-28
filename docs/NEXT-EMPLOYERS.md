@@ -1,5 +1,12 @@
 # Prochains employeurs - vérification du 27 septembre 2026
 
+Mise à jour du 28 septembre : le [lot 92](VALIDATION-LOT92.md) ajoute Wolverine
+Trading, Gelber Group, Verition, Marshall Wace, PIMCO, CIBC, TD et State Street.
+Le périmètre atteint **71 sources / 66 employeurs**. Les catalogues professionnels
+Marshall Wace vides et les deux formulaires génériques ExodusPoint restent hors
+du décompte. Les entrées suivantes conservent leurs mesures historiques.
+
+
 Mise à jour : Aquatic, Graviton, AQR, Winton, WorldQuant, G-Research, ING et
 BlackRock sont intégrés au [lot 91](VALIDATION-LOT91.md). Le périmètre configuré
 atteint **63 sources / 58 employeurs**. Les sections suivantes gardent leurs

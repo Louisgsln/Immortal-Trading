@@ -1,5 +1,11 @@
 # Développement confirmé le 26 septembre 2026
 
+Extension du 28 septembre : [lot 92](VALIDATION-LOT92.md), huit employeurs
+supplémentaires et **71 sources / 66 employeurs**. Le RSS Wolverine complète les
+catalogues Greenhouse et Workday. Les paragraphes suivants gardent leur contexte
+historique ; enrichissement IA et comparaison CV restent retirés.
+
+
 Extension du 27 septembre : lots 88–90 puis [lot 91](VALIDATION-LOT91.md),
 soit 16 employeurs supplémentaires au-delà du lot énergie 87. Le périmètre
 configuré atteint 63 sources pour 58 employeurs. La qualification des rôles

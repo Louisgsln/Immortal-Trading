@@ -990,3 +990,19 @@ nouvelles banques, puis les rôles quantitatifs/front office encore non qualifi�
 avec exemples et contre-exemples. Les confirmations de fermeture et l'import
 du suivi avec aperçu restent au carnet. Enrichissement IA et comparaison CV
 restent retirés.
+
+
+## Lot 92 - Nouvelle vague diversifiée
+
+Wolverine Trading, Gelber Group, Verition, Marshall Wace (graduate), PIMCO,
+CIBC, TD et State Street : **71 sources / 66 employeurs**, 30 minutes pour
+chaque nouveau catalogue, premier import silencieux. RSS Wolverine vérifié,
+catégories State Street bornées, descriptions complètes et publication conservée.
+Deux exigences professionnelles PIMCO/TD reconnues sans recalcul des anciens
+scores. Voir [mesures et installation](VALIDATION-LOT92.md).
+
+À poursuivre : accès Salesforce Balyasny, portails campus des banques, puis
+autres teneurs de marché et fonds avec postes publics réels. Auditer séparément
+les intitulés quantitatifs encore exclus, avec contre-exemples et mesure d'impact.
+ExodusPoint ne publie dans le catalogue vérifié que deux formulaires génériques :
+à revisiter lors d'une vraie ouverture, sans le compter comme source active.
