@@ -4,7 +4,8 @@ Lot correctif [98](VALIDATION-LOT98.md) : le VIE One Delta Desk Analyst de
 Société Générale était éliminé avant lecture, puis non classé par le score.
 Le filtre retient désormais les variantes Delta One et Desk Analyst ; des missions
 vérifiées permettent la catégorie technologie de trading, sans inférer un droit
-d'exécuter des transactions. Priorité suivante : auditer les titres de desk et
+d'exécuter des transactions. Installé et vérifié : score 90, une fiche et une alerte.
+Priorité suivante : auditer les titres de desk et
 quantitatifs manqués avec des exemples réels, puis poursuivre la fiabilité.
 
 Dernière extension : [lots 95 à 97](VALIDATION-LOTS95-97.md), huit employeurs

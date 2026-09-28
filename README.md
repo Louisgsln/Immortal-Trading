@@ -2,7 +2,8 @@
 
 Le lot **98** corrige l'offre Société Générale **V.I.E. One Delta Desk Analyst**
 manquée : extension du filtre de titres et reconnaissance des missions de desk
-vérifiées, avec un score de **90/100**. Voir la
+vérifiées, avec un score de **90/100**. Installé et vérifié : offre visible dans
+le dashboard, une alerte envoyée, sans doublon. Voir la
 [cause, les contrôles et l'état de livraison](docs/VALIDATION-LOT98.md).
 
 Les lots **95 à 97** ajoutent **Valkyrie, Engineers Gate, PDT Partners, Graham

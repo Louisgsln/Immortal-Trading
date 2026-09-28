@@ -49,7 +49,7 @@ contre-exemples supplémentaires : import depuis l'annuaire, titre alternatif,
 missions manquantes, niées ou cachées, mauvais employeur/source, exclusions
 et unicité de l'alerte après deux collectes. Ruff, le formatage et mypy passent.
 La suite complète et les preuves de collecte et d'installation sont consignées
-ci-dessous une fois vérifiées.
+ci-dessous.
 
 Deux collectes publiques sur une copie de la base ont réussi : **35 fiches**, avec
 **une nouvelle offre au premier passage**, puis **zéro ajout et zéro modification**
@@ -57,3 +57,29 @@ au second. Le premier passage consomme 38 requêtes (contrôle d'accès compris)
 le second 37. L'offre 26000JD4 atteint 90 ; une seule alerte normale est mise en
 file sur la copie, sans aucun envoi réseau. Les **1 196 anciens scores**, les
 suivis et les alertes existantes sont préservés. Aucune fiche n'est fermée.
+
+## Installation et résultat réel
+
+Le code `12f70ae` est publié sur `main` et installé le **28 septembre à 18:34**,
+après sauvegarde vérifiée. Les **100 fichiers applicatifs** installés correspondent
+au paquet construit ; les paramètres locaux et les secrets sont préservés.
+Le scanner, le dashboard et Telegram ont repris leur activité.
+
+Le cycle autonome Société Générale se termine à **18:40:40** : **35 fiches,
+1 nouvelle, 0 modifiée, 0 fermée, aucun conflit ni fiche manquante**. Il délivre
+**une seule alerte Telegram** pour l'offre signalée. La base confirme son score
+de 90 et l'état envoyé de cette alerte. Les 34 anciennes fiches Société Générale
+conservent leurs scores et leurs catégories.
+
+Le deuxième cycle autonome, terminé à **18:49:13**, retrouve les mêmes
+35 fiches : **0 ajout, 0 modification, 0 fermeture et 0 nouvelle alerte**.
+
+La fiche est vérifiée dans le navigateur à **18:42** : une seule ligne en
+recherchant « One Delta », New York, score 90, publication au 28 septembre,
+description complète, conditions de diplôme et explication du classement.
+Le passage dans le dashboard n'envoie aucune candidature et ne modifie pas le suivi.
+
+La suite locale complète termine avec **4 702 tests réussis et 4 ignorés**.
+Les 36 cas nouveaux y sont inclus. Les [six contrôles GitHub](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36451741028)
+du code applicatif `12f70ae` sont réussis : Python 3.11 à 3.14, dashboard
+JavaScript, puis construction et vérification du conteneur isolé.
