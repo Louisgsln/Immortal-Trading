@@ -15,6 +15,7 @@ from trading_radar.targeting import (
     nomura_trading_technology,
     operational_role,
     research_trading_evidence,
+    sg_desk_technology,
     tp_broking_duties,
 )
 
@@ -241,7 +242,8 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     verified_technology = job.role_hint == "trading_technology" or finance_role_evidence(
         job, "technology"
     )
-    if tech:
+    verified_sg_desk = sg_desk_technology(job)
+    if tech or verified_sg_desk:
         embedded = (
             verified_technology
             or bool(roles)
@@ -254,7 +256,9 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
             roles = list(dict.fromkeys([*roles, "TRADING_TECH"]))
             if verified_technology:
                 result.reasons.append(
-                    "Employer department and role description confirm trading technology"
+                    "Verified SG duties link desk technology to pricing and backtesting; no trade execution"
+                    if verified_sg_desk
+                    else "Employer department and role description confirm trading technology"
                 )
         else:
             result.exclusions.append("software role without embedded trading evidence")
@@ -338,6 +342,7 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         or verified_research
         or verified_nomura_technology
         or (tech and verified_technology)
+        or verified_sg_desk
         or any(
             has(text, t)
             for t in [

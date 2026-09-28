@@ -1,5 +1,10 @@
 # Développement confirmé le 26 septembre 2026
 
+Signalement traité au [lot 98](VALIDATION-LOT98.md) : offre VIE One Delta Desk
+Analyst manquée malgré une collecte Société Générale à jour. Le contrôle de
+couverture doit distinguer réussite technique du catalogue et rappel des métiers
+ciblés ; les missions vérifiées peuvent qualifier un titre de desk atypique.
+
 Extension du 28 septembre : [lots 95 à 97](VALIDATION-LOTS95-97.md), huit
 employeurs supplémentaires en trading, recherche systématique et gestion d’actifs.
 **86 sources / 80 employeurs** ; les catalogues actuellement sans résultat ciblé

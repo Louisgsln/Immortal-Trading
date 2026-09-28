@@ -10,17 +10,45 @@ from urllib.parse import urljoin, urlsplit
 from pydantic import Field
 
 from trading_radar.config import Company
+from trading_radar.description_sections import labelled_lists, visible_text
 from trading_radar.html_page import Document, Element, clean
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.targeting import sg_desk_title
 
 ORIGIN = "https://careers.societegenerale.com"
 DIRECTORIES = {
     "fr": ORIGIN + "/fr/Technical/toutes-les-offres",
     "en": ORIGIN + "/en/Technical/all-job-offers",
 }
+
+
+def desk_technology(title: str, section: Element) -> bool:
+    """Verified Delta One desk duties, including the explicit no-trading limit."""
+    if not sg_desk_title(normalize_text(title)):
+        return False
+    lists = list(labelled_lists(section, {"tasks and responsibilities"}))
+    if len(lists) != 1:
+        return False
+    items = {
+        normalize_text(visible_text(node))
+        for node in lists[0][1].children
+        if isinstance(node, Element) and node.tag == "li"
+    }
+    # Whole observed bullets prevent negated duties or company boilerplate from
+    # supplying role evidence. Unknown rewrites remain unclassified for review.
+    required = {
+        "You will be able to contribute to the build out of the desk’s infrastructure. "
+        "Your focus will be on the technical and innovation side with a strong focus on programming.",
+        "He will be working closely with traders (but as a VIE won't be allowed to trade himself).",
+        "Working on specific projects to improve trading tools and risk management of the book "
+        "(automation, testing new models, new booking systems…)",
+        "Pricing and back testing of trading strategies on existing datasets",
+        "Risk and PNL analysis",
+    }
+    return {normalize_text(item) for item in required} <= items
 
 
 def job_url(value: str) -> tuple[str, str, str]:
@@ -175,6 +203,16 @@ def parse_detail(text: str, listing: dict, config: Company, source: str) -> RawJ
         date_posted=posted,
         expected_start_date=start,
         employment_type=info.get("employmentType"),
+        role_hint=(
+            "trading_technology"
+            if source == "societe_generale"
+            and normalize_text(config.name) == "societe generale"
+            and desk_technology(
+                clean(titles[0]),
+                next(n for n in sections if n.attrs["id"] == "job-detail-description"),
+            )
+            else None
+        ),
         raw_payload={"structured": info, "labels": labels, "language": listing["language"]},
     )
 

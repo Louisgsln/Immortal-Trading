@@ -12,6 +12,20 @@ from trading_radar.normalizer import has, normalize_text
 OPERATIONAL_EXCLUSION = "Missions vérifiées de support opérationnel, hors cible trading"
 
 
+def sg_desk_title(title: str) -> bool:
+    return bool(re.fullmatch(r"(?:(?:vie|v i e) )?(?:one delta|delta one) desk analyst", title))
+
+
+def sg_desk_technology(job: Job) -> bool:
+    """SG's collector verified the actual duty bullets before storing this hint."""
+    return (
+        (job.source_type, job.source, job.company_normalized)
+        == ("official", "societe_generale", "societe generale")
+        and sg_desk_title(job.title_normalized)
+        and job.role_hint == "trading_technology"
+    )
+
+
 def tp_broking_duties(job: Job) -> str:
     """Audited trainee broking duties, including execution/quotes beyond support."""
     if (job.source_type, job.source, job.company_normalized) != (

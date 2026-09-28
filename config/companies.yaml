@@ -166,8 +166,8 @@ companies:
     career_url: https://careers.societegenerale.com/fr/Technical/toutes-les-offres
     country: global
     options:
-      title_terms: [trading, trader, markets, structuring, structurer, structuration, repo, securities finance, salle des marches, front office developer]
-    notes: Public French and English directories; English preferred for shared employer references. Full visible descriptions and profile requirements. validThrough not interpreted as deadline. No authenticated API used.
+      title_terms: [trading, trader, markets, structuring, structurer, structuration, repo, securities finance, salle des marches, front office developer, delta one, one delta, desk analyst]
+    notes: Public French and English directories; English preferred for shared employer references. Desk Analyst and both Delta One title orders included; role classification still requires verified duties. Full visible descriptions and profile requirements. validThrough not interpreted as deadline. No authenticated API used.
   bnp_paribas:
     name: BNP Paribas
     enabled: true
