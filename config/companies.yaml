@@ -106,7 +106,36 @@ companies:
     ats: nomura
     career_url: https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/
     country: global
-    notes: Public campus vacancies verified 2026-09-16, excluding events. Context-free detail URLs verified; form tokens never stored. Current selected programmes are internships, excluded from priority. Professional SuccessFactors portal is a separate source.
+    notes: 'Public campus vacancies verified 2026-09-16, excluding events. Context-free
+      detail URLs verified; form tokens never stored. Current selected programmes are
+      internships, excluded from priority. Professional SuccessFactors portal is a separate
+      source. Lot 94: scan every 30 minutes; explicit internships and discovery programmes
+      filtered before reading details, preserving graduate roles. CAPTCHA is never solved
+      automatically.'
+    scan_interval: 1800
+    options:
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - intern
+      - internship
+      - internships
+      - stage
+      - summer analyst
+      - industrial placement
+      - immersion
+      - insight programme
+      - explore nomura
   credit_agricole_cib:
     name: Crédit Agricole CIB
     enabled: true
@@ -2891,3 +2920,473 @@ companies:
         - 56250981e7cb0196f798ca8930414b0c
         - 56250981e7cb014c5ea0b8893041410c
         - 56250981e7cb01951c88df893041570c
+  headlands:
+    name: Headlands Technologies
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: headlandstechnologiesllc
+    career_url: https://www.headlandstech.com/careers/
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      max_results_per_query: 500
+  radix_campus:
+    name: Radix Trading
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: radixuniversity
+    career_url: https://job-boards.greenhouse.io/radixuniversity
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      max_results_per_query: 500
+  radix_professionals:
+    name: Radix Trading
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: radixexperienced
+    career_url: https://job-boards.greenhouse.io/radixexperienced
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      max_results_per_query: 500
+  3red:
+    name: 3Red Partners
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: 3redpartners
+    career_url: https://job-boards.greenhouse.io/3redpartners
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      max_results_per_query: 500
+  tudor:
+    name: Tudor Group
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: tudorgroup
+    career_url: https://job-boards.greenhouse.io/tudorgroup
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      max_results_per_query: 500
+  acadian:
+    name: Acadian Asset Management
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: acadianassetmanagementllc
+    career_url: https://www.acadian-asset.com/careers/open-positions
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      - equity analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general trading submissions
+      - opportunistic applications
+      - global macro application
+      - business strategist
+      - stewardship
+      max_results_per_query: 500
+  arrowstreet:
+    name: Arrowstreet Capital
+    enabled: true
+    ats: workday
+    tenant: arrowstreetcapital
+    career_url: https://arrowstreetcapital.wd5.myworkdayjobs.com/Arrowstreet
+    country: ''
+    scan_interval: 1800
+    request_interval: 2.0
+    notes: Official employer link verified 2026-09-28. Bounded trading and quantitative
+      searches; silent bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600

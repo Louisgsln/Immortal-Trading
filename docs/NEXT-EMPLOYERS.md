@@ -1,5 +1,10 @@
 # Prochains employeurs - vérification du 27 septembre 2026
 
+Mise à jour du 28 septembre : [lot 94](VALIDATION-LOT94.md), Headlands, Radix
+(campus et professionnels), 3Red, Tudor, Acadian et Arrowstreet. **78 sources /
+72 employeurs** ; 12 nouvelles fiches sur copie, dont deux prioritaires. Les
+formulaires génériques et viviers ne sont pas comptés comme des offres ouvertes.
+
 Mise à jour du 28 septembre : le [lot 92](VALIDATION-LOT92.md) ajoute Wolverine
 Trading, Gelber Group, Verition, Marshall Wace, PIMCO, CIBC, TD et State Street.
 Le périmètre atteint **71 sources / 66 employeurs**. Les catalogues professionnels

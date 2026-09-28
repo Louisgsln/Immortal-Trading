@@ -1,5 +1,11 @@
 # Suivi de construction
 
+Dernier lot : [94](VALIDATION-LOT94.md), réparation ENGIE, réduction des accès
+Nomura Campus et six employeurs supplémentaires (**78 sources / 72 employeurs**).
+Le bilan distingue validation sur copie, installation et disponibilité réelle.
+Suite : qualifier les dix nouveaux rôles quantitatifs sur leurs missions,
+structurer leurs fiches, puis poursuivre les catalogues encore à auditer ci-dessous.
+
 Dernière extension : [lot 91](VALIDATION-LOT91.md), huit employeurs supplémentaires
 (Aquatic, Graviton, AQR, Winton, WorldQuant, G-Research, ING, BlackRock), soit
 63 sources et 58 employeurs. Deux collectes sur copie : 32 offres nouvelles,

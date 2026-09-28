@@ -401,7 +401,7 @@ def test_catalogue_change_during_details_discards_snapshot(monkeypatch, key):
                 return httpx.Response(
                     200,
                     text=sitemap(
-                        [engie_url()] + ([engie_url("456-en_US")] if listings > 1 else [])
+                        [engie_url()] + ([engie_url("456-en_US")] if listings % 2 == 0 else [])
                     ),
                 )
             return httpx.Response(

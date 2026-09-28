@@ -21,6 +21,10 @@ SEARCH = ORIGIN + "/sitemap.xml"
 _PATH = re.compile(r"/job/[^/]+/(\d+)(?:-([a-z]{2}_[A-Z]{2}))?/")
 
 
+class SnapshotChanged(SourceUnavailable):
+    pass
+
+
 def allowed_job_url(url: str) -> bool:
     parts = urlsplit(url)
     decoded = unquote(parts.path)
@@ -101,19 +105,30 @@ def parse_detail(text: str, url: str, config: Company, source: str) -> RawJob:
     values = [clean(n) for n in tokens]
     titles = [clean(n) for n in nodes if n.attrs.get("itemprop") == "title"]
     if (
-        len(tokens) != 18
+        len(tokens) not in {15, 18}
         or titles != [values[0]]
         or not values[0]
         or values[2] != "Requisition ID: " + ident
         or not values[1].startswith("Posting Start Date: ")
     ):
         raise SourceUnavailable("ENGIE detail layout or requisition mismatch")
-    if (
-        not all(values[i] for i in range(3, 8))
-        or values[8]
-        or values[10]
-        or not values[11].startswith("Business Unit: ")
+    if not all(values[i] for i in range(3, 8)) or values[8] or values[10]:
+        raise SourceUnavailable("ENGIE detail metadata boundaries changed")
+    # September 2026 pages omit the three organisation fields, leaving all
+    # vacancy fields in place. Validate both observed layouts explicitly.
+    if len(tokens) == 18 and (
+        not values[11].startswith("Business Unit: ")
+        or not values[12].startswith("Division: ")
         or values[13] != "Legal Entity: " + values[4]
+    ):
+        raise SourceUnavailable("ENGIE detail organisation metadata changed")
+    if not all(
+        value.startswith(label)
+        for value, label in zip(
+            values[-4:],
+            ("Company Name: ", "Minimum Base Salary:", "Maximum Base Salary:", "Pay Basis:"),
+            strict=True,
+        )
     ):
         raise SourceUnavailable("ENGIE detail metadata boundaries changed")
     dates = re.fullmatch(r"Posting Start Date: (\d{1,2})/(\d{1,2})/(\d{2})", values[1])
@@ -165,19 +180,27 @@ class EngieCollector:
         self.options = EngieOptions(**config.options)
 
     async def collect(self) -> Collection:
+        before = self.http.counts[self.source]
         try:
             async with asyncio.timeout(self.options.max_scan_seconds):
-                return await self._collect()
+                for attempt in range(2):
+                    try:
+                        result = await self._collect()
+                    except SnapshotChanged:
+                        if attempt:
+                            raise
+                    else:
+                        result.requests = self.http.counts[self.source] - before
+                        return result
         except TimeoutError:
             raise SourceUnavailable("ENGIE scan time budget exceeded") from None
+        raise SourceUnavailable("ENGIE snapshot retry exhausted")
 
     async def listing(self) -> list[str]:
         text = await self.http.get_text(SEARCH, self.config.request_interval, self.source)
         return parse_sitemap(text, self.options.max_results_per_query)
 
-    async def _collect(self) -> Collection:
-        before = self.http.counts[self.source]
-        urls = await self.listing()
+    def targets(self, urls: list[str]) -> list[str]:
         targets = []
         for url in urls:
             title = normalize_text(unquote(urlsplit(url).path.split("/")[2]))
@@ -187,6 +210,10 @@ class EngieCollector:
                 targets.append(url)
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("ENGIE detail limit exceeded")
+        return targets
+
+    async def _collect(self) -> Collection:
+        targets = self.targets(await self.listing())
         jobs: dict[str, RawJob] = {}
         for url in targets:
             resolved, text = await self.http.get_career_page(
@@ -206,10 +233,9 @@ class EngieCollector:
             if locale[1] in jobs and jobs[locale[1]] != job:
                 raise SourceUnavailable("conflicting ENGIE vacancy translations")
             jobs[locale[1]] = job
-        if await self.listing() != urls:
-            raise SourceUnavailable("ENGIE sitemap changed during collection")
+        if self.targets(await self.listing()) != targets:
+            raise SnapshotChanged("ENGIE sitemap changed during collection")
         return Collection(
             jobs=list(jobs.values()),
             complete=False,
-            requests=self.http.counts[self.source] - before,
         )

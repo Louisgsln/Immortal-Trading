@@ -1,5 +1,11 @@
 # Développement confirmé le 26 septembre 2026
 
+Reprise du 28 septembre : [lot 94](VALIDATION-LOT94.md), format ENGIE réparé,
+accès Nomura allégés et six employeurs supplémentaires, soit **78 sources /
+72 employeurs**. La limite CAPTCHA et l'état réel d'installation restent
+explicités dans le bilan ; le prochain travail de ciblage concerne les dix
+nouvelles fiches quantitatives encore non qualifiées.
+
 Fiabilité du 28 septembre : [lot 93](VALIDATION-LOT93.md), réparation des
 incidents UBS, Optiver, BNP, Citi et BP ; même défaut Workday pris en charge
 chez Morgan Stanley. Les lacunes non vérifiables restent explicites.

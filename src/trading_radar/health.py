@@ -159,8 +159,7 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
             key == "nomura_campus"
             and failure
             and (success is None or failure >= success)
-            and failure_messages.get(key)
-            == "Nomura campus access restricted: CAPTCHA challenge; retry later"
+            and failure_summary(failure_messages.get(key))["code"] == "captcha"
         ):
             status = "access_restricted"
             issue("source_access_restricted", "warning", key)

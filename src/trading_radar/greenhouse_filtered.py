@@ -17,6 +17,12 @@ from trading_radar.search_scope import SearchOptions
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
+    "headlandstechnologiesllc": ("Headlands Technologies", "job-boards.greenhouse.io"),
+    "radixuniversity": ("Radix Trading", "job-boards.greenhouse.io"),
+    "radixexperienced": ("Radix Trading", "job-boards.greenhouse.io"),
+    "3redpartners": ("3Red Partners", "job-boards.greenhouse.io"),
+    "tudorgroup": ("Tudor Group", "job-boards.greenhouse.io"),
+    "acadianassetmanagementllc": ("Acadian Asset Management", "www.acadian-asset.com"),
     "gelbergroup": ("Gelber Group", "job-boards.greenhouse.io"),
     "veritiongroupllc": ("Verition", "www.verition.com"),
     "mw-tech-grad": ("Marshall Wace", "job-boards.greenhouse.io"),
@@ -55,6 +61,10 @@ BOARDS = {
     "worldquant": ("WorldQuant", "job-boards.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
+    "headlandstechnologiesllc": "Headlands Technologies LLC",
+    "radixuniversity": "Radix Trading University Job Board",
+    "radixexperienced": "Radix Trading Experienced Job Board",
+    "acadianassetmanagementllc": "Acadian Asset Management LLC",
     "veritiongroupllc": "Verition Group LLC",
     "mw-tech-grad": "Marshall Wace - Graduate & Associate roles",
     "gravitonresearchcapital": "Graviton Research Capital LLP",
@@ -65,6 +75,12 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "headlandstechnologiesllc",
+    "radixuniversity",
+    "radixexperienced",
+    "3redpartners",
+    "tudorgroup",
+    "acadianassetmanagementllc",
     "gelbergroup",
     "veritiongroupllc",
     "mw-tech-grad",
@@ -82,6 +98,7 @@ _NULL_METADATA = {
     "davinciderivatives",
 }
 _CUSTOM_PATHS = {
+    "acadianassetmanagementllc": "/careers/open-positions",
     "veritiongroupllc": "/open-positions",
     "akunacapital": "/careers/job/{id}/",
     "point72": "/point72/jobs/{id}",

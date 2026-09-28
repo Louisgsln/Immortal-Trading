@@ -225,12 +225,19 @@ def test_partial_scan_updates_valid_jobs_keeps_absent_jobs_and_clears_on_recover
     assert check_health(config)["source_summary"] == {"fresh": 1}
 
 
-def test_nomura_restriction_is_explicit_and_recovers(config, repo):
+@pytest.mark.parametrize(
+    "error",
+    [
+        "Nomura campus access restricted: CAPTCHA challenge; retry later",
+        "Nomura campus CAPTCHA session invalid or expired; renewal required",
+        "Nomura campus CAPTCHA session unavailable; renewal required",
+    ],
+)
+def test_nomura_restriction_is_explicit_and_recovers(config, repo, error):
     config.settings.database_url = (
         "sqlite:///" + repo.db.execute("PRAGMA database_list").fetchone()[2]
     )
     config.companies = {"nomura_campus": Company(name="Nomura", ats="fixture", enabled=True)}
-    error = "Nomura campus access restricted: CAPTCHA challenge; retry later"
     asyncio.run(scan(config, repo, collectors={"nomura_campus": Snapshot([], error=error)}))
     health = check_health(config)
     assert health["source_summary"] == {"access_restricted": 1}
