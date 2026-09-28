@@ -68,3 +68,40 @@ explicite tant que le site bloque l'accès.
 
 Les preuves de tests, installation et fonctionnement continu sont ajoutées
 après leur vérification effective.
+
+
+## Installation vérifiée
+
+Commit applicatif `dd2a10eded794165ad4aac194fe11f56945ffbda`, publié directement sur `main` et
+installé le **28/09/2026 · 12:23**, après sauvegarde vérifiée. Les
+**100 fichiers applicatifs** correspondent au paquet construit.
+Les paramètres privés sont préservés, ainsi que les anciens scores, candidatures
+et historiques. Les services scanner, dashboard et Telegram sont actifs.
+
+L'import installé réussit sur les huit sources : **24 fiches reçues, 12 ajouts,
+aucune modification des anciennes fiches, fermeture ou alerte historique**.
+ENGIE retrouve ses 12 fiches. Au contrôle du **28/09/2026 · 12:26**,
+le dashboard affiche **1 175 offres repérées,
+1 173 actives et 213 prioritaires** ; les filtres d'employeurs, la fiche Acadian,
+sa date de publication et le suivi local ont été vérifiés. Les réponses du
+dashboard et de l'API de suivi sont valides ; les heures sont affichées sans
+suffixe de fuseau.
+
+Au contrôle de **28/09/2026 · 12:41** : **77 sources à jour
+sur 78**. Après l'activation, **63 autres sources**
+ont déjà été collectées automatiquement.
+
+Nomura Campus reste signalé comme bloqué par CAPTCHA. Aucun fichier de session
+utilisable par le scanner n’a été activé ; la validation dans un onglet Codex
+ne suffit pas à renouveler celle du collecteur. La collecte professionnelle
+Nomura reste indépendante et fonctionne.
+
+Validation locale : **4,572 tests Python réussis, 4 ignorés**,
+plus les deux variantes supplémentaires de session Nomura, **11 tests JavaScript**,
+Ruff sur **265 fichiers** et mypy sur **95 modules**. Les six contrôles
+[GitHub Actions](https://github.com/Louisgsln/Immortal-Trading/actions/runs/36408867781) du commit installé sont réussis :
+Python 3.11 à 3.14, JavaScript et construction/exercice du conteneur.
+
+La suite porte sur les dix rôles quantitatifs à qualifier et les rubriques
+de missions/diplômes de ces nouveaux employeurs. Une session manuelle Nomura
+ne garantit jamais la suppression durable des contrôles du site.

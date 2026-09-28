@@ -4,6 +4,8 @@ Le lot **94** corrige le nouveau format ENGIE, allège les accès Nomura Campus
 et ajoute **Headlands, Radix, 3Red, Tudor, Acadian et Arrowstreet** :
 **78 sources pour 72 employeurs**. Deux scans sur copie : **12 nouvelles fiches**,
 toutes datées, dont **2 prioritaires**, sans alerte historique.
+Installé et vérifié : ENGIE opérationnel, scanner actif ; disponibilité Nomura
+précisée dans le bilan.
 Voir [validation, état d'installation et limite CAPTCHA](docs/VALIDATION-LOT94.md).
 
 Le lot **93** renforce UBS, Optiver, BNP et les lignes Workday incomplètes de
