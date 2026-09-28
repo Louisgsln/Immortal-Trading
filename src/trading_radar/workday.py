@@ -5,6 +5,7 @@ HR API. A POST here submits a search, never an application.
 """
 
 import html
+import logging
 import re
 import unicodedata
 from typing import Literal
@@ -19,6 +20,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text, parse_date
 from trading_radar.search_scope import SearchOptions
+from trading_radar.workday_recovery import SITES, citi_operations_reference, public_reference_title
 
 
 class WorkdayOptions(SearchOptions):
@@ -256,7 +258,12 @@ class WorkdayCollector:
                 # Audited CXS placeholders expose only a requisition number.
                 # Preserve their position/count and report the coverage gap; never
                 # invent a title/path or treat the reference as a closed vacancy.
-                pattern = {"deutsche_bank": r"R[0-9]{7}", "citi": r"[0-9]{8}"}.get(self.source)
+                pattern = {
+                    "deutsche_bank": r"R[0-9]{7}",
+                    "citi": r"[0-9]{8}",
+                    "bp": r"RQ[0-9]{6}",
+                    "morgan_stanley": r"JR[0-9]{6}",
+                }.get(self.source)
                 if (
                     pattern
                     and isinstance(row, dict)
@@ -387,6 +394,37 @@ class WorkdayCollector:
                 )
             identifiers.add(job.external_id)
             jobs.append(job)
+        for reference in sorted(self.listing_gaps):
+            title = await public_reference_title(
+                self.source, self.site, reference, self.http, self.config.request_interval
+            )
+            if title is not None and not self.selected(title):
+                self.listing_gaps.remove(reference)
+                logging.getLogger("trading_radar").info(
+                    "Verified out-of-scope public title: %s %s", self.source, reference
+                )
+            elif title is None and self.source == "citi" and self.site == SITES["citi"]:
+                try:
+                    evidence = await self.http.post_search_json(
+                        self.api + "/jobs",
+                        {
+                            "appliedFacets": self.options.applied_facets,
+                            "limit": 20,
+                            "offset": 0,
+                            "searchText": reference,
+                        },
+                        self.config.request_interval,
+                        self.source,
+                    )
+                except SourceUnavailable:
+                    continue
+                if citi_operations_reference(evidence, reference):
+                    self.listing_gaps.remove(reference)
+                    logging.getLogger("trading_radar").info(
+                        "Verified out-of-scope public transaction-operations category: %s %s",
+                        self.source,
+                        reference,
+                    )
         # Searches and title filters are partial inventories. Never infer closure from absence.
         return Collection(
             jobs=jobs,

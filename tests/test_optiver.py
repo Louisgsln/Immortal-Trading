@@ -117,7 +117,7 @@ def test_full_pagination_then_title_filter_and_stable_ids(monkeypatch):
     )
     assert [j.external_id for j in result.jobs] == ["1", "4"]
     assert not result.complete
-    assert len([url for url in calls if "/en/api/" in url]) == 3
+    assert len([url for url in calls if "/en/api/" in url]) == 4
     assert all("role-2" not in url and "role-3" not in url for url in calls)
     assert result.jobs[0].date_posted is None
     assert "Unrelated" not in result.jobs[0].description
@@ -223,7 +223,7 @@ def test_changed_listing_restarts_once_without_fetching_partial_details(monkeypa
     calls = []
 
     def mutate(payload, offset, count):
-        if kind == "changed_total" and offset and count == 1:
+        if kind == "changed_total" and offset == 1 and count == 1:
             payload["totalCount"] += 1
         if kind == "repeated_page" and offset and count == 1:
             payload["items"] = rows[:2]

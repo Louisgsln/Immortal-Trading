@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Le lot **93** renforce UBS, Optiver, BNP et les lignes Workday incomplètes de
+Citi, BP et Morgan Stanley. Deux collectes sur copie conservent les données et
+le suivi ; les références encore invérifiables restent signalées.
+Voir [corrections, limites et validation](docs/VALIDATION-LOT93.md).
+
 Le lot **92** ajoute **Wolverine Trading, Gelber Group, Verition, Marshall Wace,
 PIMCO, CIBC, TD et State Street** : **71 sources pour 66 employeurs**.
 Installé et vérifié : **33 offres ajoutées**, dont **16 pertinentes et 8 au seuil de 70**,

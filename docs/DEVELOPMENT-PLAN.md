@@ -1,5 +1,9 @@
 # Développement confirmé le 26 septembre 2026
 
+Fiabilité du 28 septembre : [lot 93](VALIDATION-LOT93.md), réparation des
+incidents UBS, Optiver, BNP, Citi et BP ; même défaut Workday pris en charge
+chez Morgan Stanley. Les lacunes non vérifiables restent explicites.
+
 Extension du 28 septembre : [lot 92](VALIDATION-LOT92.md), huit employeurs
 supplémentaires et **71 sources / 66 employeurs**. Le RSS Wolverine complète les
 catalogues Greenhouse et Workday. Les paragraphes suivants gardent leur contexte

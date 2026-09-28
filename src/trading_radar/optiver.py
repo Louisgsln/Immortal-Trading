@@ -173,12 +173,24 @@ class OptiverCollector:
     async def _list(self) -> list[dict]:
         rows, total = await self.page(0)
         first = list(rows)
-        while len(rows) < total:
-            page, page_total = await self.page(len(rows))
+        found = {row["componentID"]: row for row in rows}
+        offset = 0
+        # The public API caps pages at 16, even when a larger size is requested.
+        # Overlap one slot to recover tied records moving across a page boundary.
+        # Count positions independently of unique records; never extend the loop
+        # until an arbitrary number of unique jobs happens to have accumulated.
+        while offset + PAGE_SIZE < total:
+            offset += PAGE_SIZE - 1
+            page, page_total = await self.page(offset)
             if page_total != total:
                 raise SnapshotChanged("Optiver total changed during pagination")
-            rows.extend(page)
-        if len({r["componentID"] for r in rows}) != total or len({r["url"] for r in rows}) != total:
+            for row in page:
+                identifier = row["componentID"]
+                if identifier in found and found[identifier] != row:
+                    raise SnapshotChanged("Optiver repeated card changed during pagination")
+                found[identifier] = row
+        rows = list(found.values())
+        if len(rows) != total or len({r["url"] for r in rows}) != total:
             raise SnapshotChanged("Optiver duplicate cards or repeated page")
         # Detect a shifting newest-first listing before fetching details.
         check, check_total = await self.page(0)

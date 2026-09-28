@@ -25,7 +25,9 @@ companies:
     ats: ubs
     career_url: https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231
     country: global
-    notes: Public professional board verified 2026-09-17; 547 listings, full pagination then Trading/Markets title filter. Separate source from campus, shared employer identity. No inferred seniority or dates; no closure by absence.
+    options:
+      partition_titles: true
+    notes: Public professional board; keyword partitions matching every configured title term, anonymous public form token, alphabetical pagination and first-page recheck. Conflicting query overlaps rejected. Separate source from campus, shared employer identity. No inferred seniority or dates; no closure by absence.
   jump_trading:
     name: Jump Trading
     enabled: true
@@ -147,7 +149,8 @@ companies:
     request_interval: 2
     options:
       search_terms: [trading]
-    notes: Public French-language search portal and JobPosting data verified 2026-09-15. Broad search then title filtering; subsidiaries grouped under BNP Paribas.
+      exclude_title_terms: [operations, product control, compliance, audit, market risk, director, vice president, vp, svp, avp, head of, senior, stage, stages, stagiaire, internship, internships, intern]
+    notes: Public French-language search portal and JobPosting data. Explicit internship titles excluded before detail import, consistent with the user's target; contradictory eligible aliases still quarantined. Subsidiaries grouped under BNP Paribas. No closure by absence.
   goldman_campus:
     name: Goldman Sachs
     enabled: true

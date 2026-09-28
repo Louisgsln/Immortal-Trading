@@ -10,6 +10,7 @@ from urllib.parse import parse_qs, urlsplit
 from pydantic import Field
 
 from trading_radar.config import Company
+from trading_radar.html_page import Document
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
@@ -29,6 +30,7 @@ SEARCH = ROOT + "/TgNewUI/Search/Ajax/ProcessSortAndShowMoreJobs"
 class UBSOptions(SearchOptions):
     # Enumerate the selected board, then filter titles locally.
     search_terms: list[str] = Field(default_factory=list, max_length=0)
+    partition_titles: bool = Field(default=False, strict=True)
 
 
 class PageInputs(HTMLParser):
@@ -196,12 +198,11 @@ class UBSCollector:
             parsed[identifier], snapshot[identifier] = values, row
         return parsed, snapshot
 
-    async def _list(self) -> dict[str, dict]:
-        inputs, preload = page_data(
-            await self.http.get_text(
-                self.config.career_url, self.config.request_interval, self.source
-            )
+    async def _list(self, term: str = "") -> dict[str, dict]:
+        html_page = await self.http.get_text(
+            self.config.career_url, self.config.request_interval, self.source
         )
+        inputs, preload = page_data(html_page)
         try:
             context = json.loads(preload["SmartSearchJSONValue"])
             if (
@@ -214,21 +215,53 @@ class UBSCollector:
             body = {
                 "partnerId": "25008",
                 "siteId": self.site_id,
-                "keyword": "",
+                "keyword": term,
                 "location": "",
                 "keywordCustomSolrFields": context["KeywordCustomSolrFields"],
                 "locationCustomSolrFields": context["LocationCustomSolrFields"],
-                "linkId": inputs["linkId"],
+                "linkId": "" if term else inputs["linkId"],
                 "Latitude": 0,
                 "Longitude": 0,
                 "facetfilterfields": {"Facet": []},
                 "powersearchoptions": {"PowerSearchOption": []},
-                "SortType": "LastUpdated",
+                # Public "Alphabetical" sort. Many postings share LastUpdated,
+                # which moves tied rows across page boundaries between requests.
+                "SortType": "JobTitle",
                 "pageNumber": 1,
                 "encryptedSessionValue": inputs["CookieValue"],
             }
         except (ValueError, KeyError, TypeError):
             raise SourceUnavailable("UBS anonymous search context missing") from None
+        initial_total = None
+        if term:
+            tokens = [
+                n.attrs.get("value", "")
+                for n in Document(html_page).root.walk()
+                if n.tag == "input" and n.attrs.get("name") == "__RequestVerificationToken"
+            ]
+            if len(tokens) != 1 or not tokens[0] or len(tokens[0]) > 4096:
+                raise SourceUnavailable("UBS anonymous search form token missing")
+            initial = await self.http.post_search_json(
+                SEARCH.replace("ProcessSortAndShowMoreJobs", "MatchedJobs"),
+                {
+                    "PartnerId": "25008",
+                    "SiteId": self.site_id,
+                    "Keyword": term,
+                    "Location": "",
+                    "KeywordCustomSolrFields": context["KeywordCustomSolrFields"],
+                    "LocationCustomSolrFields": context["LocationCustomSolrFields"],
+                    "FacetFilterFields": None,
+                    "TurnOffHttps": False,
+                    "Latitude": 0,
+                    "Longitude": 0,
+                    "PowerSearchOptions": {"PowerSearchOption": []},
+                    "encryptedsessionvalue": inputs["CookieValue"],
+                },
+                self.config.request_interval,
+                self.source,
+                headers={"RFT": tokens[0]},
+            )
+            initial_total, _, _ = self._page(initial)
         expected, page_size, number = None, None, 1
         found: dict[str, dict] = {}
         first_page = None
@@ -238,6 +271,8 @@ class UBSCollector:
                 SEARCH, body, self.config.request_interval, self.source
             )
             total, size, rows = self._page(result)
+            if initial_total is not None and total != initial_total:
+                raise SnapshotChanged("UBS keyword scope changed after search")
             if expected is not None and (total != expected or size != page_size):
                 raise SnapshotChanged("UBS total or page size changed during pagination")
             expected, page_size = total, size
@@ -264,6 +299,23 @@ class UBSCollector:
         # Session/bootstrap context deliberately never enters RawJob or persisted payloads.
         return found
 
+    async def _scope(self) -> dict[str, dict]:
+        if not self.options.partition_titles:
+            return await self._list()
+        terms = self.options.title_terms
+        if not 1 <= len(terms) <= 10 or any(not t.strip() or len(t) > 100 for t in terms):
+            raise SourceUnavailable("UBS title partition requires 1 to 10 bounded terms")
+        found: dict[str, dict] = {}
+        # Each public keyword query is independently paginated and rechecked.
+        # Identical records may belong to several queries, never to two pages
+        # of the same query. Contradictions still abort the whole collection.
+        for term in dict.fromkeys(terms):
+            for identifier, row in (await self._list(term)).items():
+                if identifier in found and found[identifier] != row:
+                    raise SnapshotChanged("UBS posting changed between keyword queries")
+                found[identifier] = row
+        return found
+
     def selected(self, title: str) -> bool:
         title = normalize_text(title)
         return (
@@ -272,7 +324,7 @@ class UBSCollector:
 
     async def _collect(self) -> Collection:
         before = self.http.counts[self.source]
-        rows = await stable_listing(self._list, self.source)
+        rows = await stable_listing(self._scope, self.source)
         targets = [row for row in rows.values() if self.selected(row["jobtitle"])]
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("UBS detail limit exceeded; narrow title scope")

@@ -183,9 +183,17 @@ class HTTPClient:
             url = urljoin(url, location)
         raise SourceUnavailable("career redirect limit exceeded")
 
-    async def post_search_json(self, url: str, body: dict, interval: float, source: str):
+    async def post_search_json(
+        self,
+        url: str,
+        body: dict,
+        interval: float,
+        source: str,
+        *,
+        headers: dict[str, str] | None = None,
+    ):
         """Read-only public search endpoints that require a POST body."""
-        return await self._json(url, interval, source, method="POST", body=body)
+        return await self._json(url, interval, source, method="POST", body=body, headers=headers)
 
     async def _json(
         self,
@@ -195,8 +203,11 @@ class HTTPClient:
         *,
         method: str = "GET",
         body: dict | None = None,
+        headers: dict[str, str] | None = None,
     ):
-        response = await self._public_response(url, interval, source, method=method, body=body)
+        response = await self._public_response(
+            url, interval, source, method=method, body=body, headers=headers
+        )
         try:
             return response.json()
         except ValueError:

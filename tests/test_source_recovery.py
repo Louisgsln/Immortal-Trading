@@ -140,7 +140,15 @@ def workday(monkeypatch, rows, source="deutsche_bank", total=None):
     return asyncio.run(run()), calls
 
 
-@pytest.mark.parametrize(("source", "ref"), [("deutsche_bank", "R0427551"), ("citi", "26988331")])
+@pytest.mark.parametrize(
+    ("source", "ref"),
+    [
+        ("deutsche_bank", "R0427551"),
+        ("citi", "26988331"),
+        ("bp", "RQ123456"),
+        ("morgan_stanley", "JR123456"),
+    ],
+)
 def test_workday_reference_only_placeholder_is_counted_and_reported(monkeypatch, source, ref):
     rows = [{"title": "Operations", "externalPath": f"/job/Paris/{i}"} for i in range(22)]
     rows.insert(13, {"bulletFields": [ref]})

@@ -1016,3 +1016,12 @@ pour masquer ces incidents. Voir l'état daté dans la validation du lot 92.
 Le contrôle final du 28 septembre à 08:50 relève aussi une incohérence de
 pagination Nomura Professionnels, après une collecte réussie à 08:37 ; à
 inclure dans ce prochain audit de fiabilité, sans l'assimiler à un CAPTCHA.
+
+Le [lot 93](VALIDATION-LOT93.md) traite ces incidents : recherches UBS
+correctement initialisées et partitionnées, pages Optiver chevauchantes,
+stages BNP écartés avant import, vérification officielle des références Citi
+hors cible, import partiel protégé pour les lignes opaques BP et Morgan Stanley.
+Deux collectes réelles sur copie conservent scores et suivi. Les références
+encore invérifiables restent visibles ; leur disparition n'établit aucune
+fermeture. La prochaine étape de fiabilité est leur récupération lorsque les
+employeurs publient à nouveau des fiches identifiables.

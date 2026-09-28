@@ -74,3 +74,28 @@ taux ne mesure pas la couverture de tout le catalogue employeur. Les référence
 en conflit et les fiches manquantes comptent comme essais non pleinement réussis.
 Une lecture invalide ou dépassant 10 000 cycles dans la fenêtre n'affiche aucun
 taux partiel. Cette vue ne change pas le calendrier ni les notifications Telegram.
+
+## Récupérations du lot 93
+
+UBS Professionnels utilise les sept recherches correspondant au filtre de
+titres. Chaque recherche commence par le formulaire public et son jeton
+anonyme, puis parcourt le tri alphabétique et relit la première page. Un doublon
+entre pages, un changement de total ou des contenus contradictoires entre
+recherches relancent une seule fois tout le parcours. Aucune session n'est stockée.
+
+Optiver chevauche une position entre pages, en vérifiant l'identité et tout le
+contenu des annonces communes, le nombre unique final et la première page.
+La boucle avance selon les positions du catalogue, jamais jusqu'à accumuler
+un nombre arbitraire d'annonces. Un trou de couverture demeure un échec.
+
+Les références seules Workday reconnues sont comptées et limitées à dix.
+Les fiches valides continuent d'être importées, sans fermeture par absence.
+Chez Citi et BP, une référence n'est retirée des lacunes que si des données
+officielles identifient un rôle hors cible. Recherche absente, 403, 404, titre
+admissible ou métadonnées ambiguës conservent la lacune. Chez Citi, seule la
+catégorie de traitement des transactions auditée permet l'exclusion par
+catégorie : référence unique, identifiant, libellé et compte doivent concorder.
+
+Les stages BNP explicitement intitulés sont exclus avant import selon le
+ciblage demandé. Les conflits des autres offres restent en quarantaine.
+Voir les [preuves et limites](VALIDATION-LOT93.md).
