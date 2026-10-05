@@ -10,8 +10,11 @@ from filelock import FileLock
 from trading_radar.collection_diagnostics import quarantined_sources
 from trading_radar.collectors import Collector, build_collector
 from trading_radar.config import Config
+from trading_radar.deadlines import resolve_deadline
+from trading_radar.display_time import PARIS
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.http_cache import JSONCache
+from trading_radar.job_conditions import material_changes
 from trading_radar.models import Job, ScanMetrics, utcnow
 from trading_radar.normalizer import normalize
 from trading_radar.notifications import DeliveryUnknown, Notifier
@@ -40,7 +43,7 @@ def log(event: str, **fields) -> None:
     )
 
 
-def meaningful_update(repo: Repository, job: Job) -> bool:
+def meaningful_update(repo: Repository, job: Job, min_score: int = 70) -> bool:
     previous = repo.db.execute(
         "SELECT payload FROM job_versions WHERE job_id=? ORDER BY id DESC LIMIT 1 OFFSET 1",
         (job.id,),
@@ -48,10 +51,17 @@ def meaningful_update(repo: Repository, job: Job) -> bool:
     if not previous:
         return False
     old = Job.model_validate_json(previous[0])
-    return any(
-        getattr(old, field) != getattr(job, field)
-        for field in ("title_normalized", "location_normalized", "application_deadline")
-    )
+    return bool(material_changes(old, job, min_score))
+
+
+def expired_deadline(job: Job) -> bool:
+    deadline = resolve_deadline(job)
+    now = utcnow()
+    if deadline.precision == "instant":
+        return deadline.instant is not None and deadline.instant <= now
+    if deadline.precision == "date":
+        return deadline.day is not None and deadline.day < now.astimezone(PARIS).date()
+    return False
 
 
 async def deliver(
@@ -65,7 +75,16 @@ async def deliver(
     only_sources: set[str] | None = None,
 ) -> int:
     delivered = 0
-    for alert in repo.pending():
+    pending = repo.pending()
+    updates: dict[str, list] = {}
+    initial = set()
+    for alert in pending:
+        event = alert["event_key"].split(":")[-2]
+        if event == "updated":
+            updates.setdefault(alert["job_id"], []).append(alert)
+        elif event in {"new", "reopened"}:
+            initial.add(alert["job_id"])
+    for alert in pending:
         job = repo.get(alert["job_id"])
         if job.source in (skip_sources or set()):
             continue
@@ -82,7 +101,7 @@ async def deliver(
             job = job.model_copy(
                 update={"application_deadline": datetime.fromisoformat(plan["deadline"])}
             )
-        expired = job.application_deadline and job.application_deadline < utcnow()
+        expired = expired_deadline(job)
         if (
             not job.is_active
             or expired
@@ -91,6 +110,31 @@ async def deliver(
         ):
             repo.set_alert(alert["id"], "suppressed")
             continue
+        if event == "updated":
+            related = updates[job.id]
+            if job.id in initial:
+                repo.set_alert(alert["id"], "suppressed")
+                continue
+            if alert["id"] != related[0]["id"]:
+                continue
+            # One notice for the net change since the first undelivered update.
+            version = min(int(item["event_key"].rsplit(":", 1)[1]) for item in related)
+            previous = repo.db.execute(
+                "SELECT payload FROM job_versions WHERE job_id=? AND id<? ORDER BY id DESC LIMIT 1",
+                (job.id, version),
+            ).fetchone()
+            if previous:
+                changes = material_changes(Job.model_validate_json(previous[0]), job, min_score)
+                if not changes:
+                    for item in related:
+                        repo.set_alert(item["id"], "suppressed")
+                    continue
+                job = job.model_copy(update={"notification_changes": changes})
+            # Keep the oldest baseline for a known-failure retry. Suppress the
+            # absorbed notices before I/O so crash recovery cannot resend them.
+            for item in related:
+                if item["id"] != alert["id"]:
+                    repo.set_alert(item["id"], "suppressed")
         # Commit before network I/O. Crash recovery must not resend uncertain deliveries.
         repo.set_alert(alert["id"], "sending")
         try:
@@ -148,6 +192,7 @@ async def scan(
             metrics.sources += 1
             source_start = time.monotonic()
             outcome = "failed"
+            selection = None
             source_http = http
             separate_session = own_http and collectors is None and len(selected) > 1
             if separate_session:
@@ -173,6 +218,8 @@ async def scan(
                     ) from None
                 if result.listing_gaps:
                     metrics.listing_gaps[key] = result.listing_gaps
+                if result.selection is not None:
+                    selection = result.selection.model_dump(mode="json")
                 excluded = {conflict.external_id for conflict in result.conflicts}
                 if any(str(raw.external_id) in excluded for raw in result.jobs):
                     raise ValueError("collector returned a quarantined identifier")
@@ -207,13 +254,15 @@ async def scan(
                             elif event in {"updated", "reopened", "rescored"}:
                                 counts["updated"] += 1
                             alertable = event in {"new", "reopened"} or (
-                                event == "updated" and meaningful_update(repo, job)
+                                event == "updated"
+                                and meaningful_update(repo, job, config.settings.alert_min_score)
                             )
                             if (
                                 not silent
                                 and not result.conflicts
                                 and alertable
                                 and not job.is_expired
+                                and not expired_deadline(job)
                                 and not job.score_breakdown.exclusions
                                 and job.score_breakdown.total >= config.settings.alert_min_score
                             ):
@@ -271,6 +320,7 @@ async def scan(
                     "completed_at": utcnow().isoformat(),
                     "status": outcome,
                     "duration": round(time.monotonic() - source_start, 3),
+                    "selection": selection,
                 }
                 metrics.requests += source_http.counts.pop(key, 0)
                 if separate_session:

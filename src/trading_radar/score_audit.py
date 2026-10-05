@@ -1,7 +1,8 @@
 """Preview stored-job recalculations without opening a writable repository."""
 
 import sqlite3
-from contextlib import closing
+from collections.abc import Iterator
+from contextlib import closing, contextmanager
 from pathlib import Path
 
 from trading_radar.config import Config
@@ -36,7 +37,9 @@ def _schema(db: sqlite3.Connection) -> list[tuple]:
     )
 
 
-def _read(config: Config) -> list[Job]:
+@contextmanager
+def job_snapshot(config: Config) -> Iterator[sqlite3.Connection]:
+    """One validated, read-only transaction shared by offline job audits."""
     url = config.settings.database_url
     if (
         not url.startswith("sqlite:///")
@@ -63,22 +66,31 @@ def _read(config: Config) -> list[Job]:
             raise ScoreAuditError("corrupt")
         if db.execute("SELECT COUNT(*) FROM jobs").fetchone()[0] > MAX_JOBS:
             raise ScoreAuditError("limit_exceeded")
-        jobs = []
-        for identifier, score, active, size, payload in db.execute(
-            "SELECT id,score,is_active,length(payload),substr(payload,1,?) FROM jobs ORDER BY id",
-            (MAX_PAYLOAD + 1,),
+        yield db
+
+
+def snapshot_jobs(db: sqlite3.Connection) -> list[Job]:
+    jobs = []
+    for identifier, score, active, size, payload in db.execute(
+        "SELECT id,score,is_active,length(payload),substr(payload,1,?) FROM jobs ORDER BY id",
+        (MAX_PAYLOAD + 1,),
+    ):
+        if not isinstance(size, int) or size > MAX_PAYLOAD:
+            raise ScoreAuditError("limit_exceeded")
+        job = Job.model_validate_json(payload)
+        if (
+            job.id != identifier
+            or job.score_breakdown.total != score
+            or active != int(job.is_active)
         ):
-            if not isinstance(size, int) or size > MAX_PAYLOAD:
-                raise ScoreAuditError("limit_exceeded")
-            job = Job.model_validate_json(payload)
-            if (
-                job.id != identifier
-                or job.score_breakdown.total != score
-                or active != int(job.is_active)
-            ):
-                raise ScoreAuditError("invalid_data")
-            jobs.append(job)
-        return jobs
+            raise ScoreAuditError("invalid_data")
+        jobs.append(job)
+    return jobs
+
+
+def _read(config: Config) -> list[Job]:
+    with job_snapshot(config) as db:
+        return snapshot_jobs(db)
 
 
 def _scoring(job: Job) -> dict:

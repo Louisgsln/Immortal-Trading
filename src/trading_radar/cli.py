@@ -47,6 +47,39 @@ app.command()(health)
 app.command()(trends)
 
 
+@app.command("coverage")
+def coverage(
+    reference: Path = typer.Option(
+        ...,
+        exists=True,
+        dir_okay=False,
+        help="JSON list of independently verified source/external_id/title records.",
+    ),
+    config_dir: Path = Path("config"),
+):
+    """Measure imported coverage of a reviewed reference, offline and read-only."""
+    from trading_radar.coverage import coverage_report
+    from trading_radar.score_audit import ScoreAuditError
+
+    try:
+        result = coverage_report(load_config(config_dir), reference)
+    except (
+        OSError,
+        sqlite3.Error,
+        ScoreAuditError,
+        ValueError,
+        TypeError,
+        KeyError,
+        yaml.YAMLError,
+    ):
+        typer.echo(
+            "Coverage audit unavailable: check the reference, configuration and local database.",
+            err=True,
+        )
+        raise typer.Exit(1) from None
+    typer.echo(json.dumps(result, ensure_ascii=False, indent=2))
+
+
 def runtime_config(directory: Path, demo: bool = False):
     config = load_config(directory)
     if demo:

@@ -7,8 +7,8 @@ from html import escape
 from urllib.parse import urlsplit
 from uuid import UUID
 
-from trading_radar.display_time import format_paris
 from trading_radar.experience import experience_requirement
+from trading_radar.job_conditions import authorization_evidence, deadline_label, start_label
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job
 
@@ -82,9 +82,10 @@ def format_alert(job: Job, event: str) -> str:
         heading = "ÉCHÉANCE · " + event.replace("deadline_j", "J−")
     minimum = experience_requirement(job)["minimum_years"]
     experience = f"minimum reconnu : {minimum} an(s)" if minimum is not None else "à vérifier"
-    deadline = format_paris(job.application_deadline, unknown="non précisée")
+    deadline = deadline_label(job)
     blocks = min(10, max(0, score // 10))
     missions = mission_excerpts(job)
+    authorization = authorization_evidence(job)
     if missions:
         excerpt_label = "Missions · extraits"
         excerpt = "\n".join("• " + clean(item, 240) for item in missions["excerpts"])
@@ -94,14 +95,20 @@ def format_alert(job: Job, event: str) -> str:
     return "\n".join(
         [
             f"{'🔥' if score >= 85 else '💼'} <b>{heading}</b>",
+            *(
+                ["Changement : " + clean(" · ".join(job.notification_changes), 240)]
+                if job.notification_changes
+                else []
+            ),
             "",
             f"<b>{clean(job.title, 180)}</b>",
             clean(job.company, 100),
             "",
             f"📍 {clean(job.location_normalized or 'Lieu non précisé', 100)}",
-            f"🗓 Début : {clean(job.expected_start_date or 'non précisé', 80)}",
+            f"🗓 Début : {clean(start_label(job), 120)}",
             f"🎓 Expérience : {experience}",
             f"⏳ Échéance : {deadline}",
+            *(["🛂 " + clean(authorization[0], 260)] if authorization else []),
             "",
             f"<b>Priorité · {score}/100</b>  {'▰' * blocks}{'▱' * (10 - blocks)}",
             f"Trading {job.score_breakdown.trading}/30 · Junior {job.score_breakdown.junior}/20 · Front office {job.score_breakdown.front_office}/15",

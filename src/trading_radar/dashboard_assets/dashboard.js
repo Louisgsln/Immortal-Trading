@@ -367,6 +367,16 @@
       link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer";
       link.setAttribute("aria-label", "Consulter l’offre officielle (nouvel onglet)"); content.append(link);
     } else content.append(make("p", "Lien officiel indisponible.", "detail-company"));
+    const conditions = job.conditions || {};
+    const start = conditions.start || {};
+    const authorization = ((conditions.authorization || {}).evidence || []);
+    const dates = detailSection("Calendrier et droit au travail");
+    const startLabels = {preferred: "Début dans les périodes prioritaires de 2027.", outside: "Début hors des périodes prioritaires de 2027.", mixed: "Fenêtre de début partiellement compatible avec les périodes prioritaires de 2027."};
+    dates.append(make("p", start.precision === "conflict" ? "Dates de début contradictoires : à vérifier." : (startLabels[start.target_window] || "Fenêtre de début à vérifier dans l’annonce.")));
+    (start.evidence || []).forEach((excerpt) => dates.append(make("blockquote", excerpt, "description")));
+    authorization.forEach((excerpt) => dates.append(make("blockquote", excerpt, "description")));
+    if (!authorization.length) dates.append(make("p", "Aucune condition de visa ou de droit au travail reconnue. À vérifier dans l’offre officielle."));
+    content.append(dates);
     if (job.missions && job.missions.excerpts.length) {
       const missions = detailSection("Missions · extraits");
       missions.append(make("p", "Rubrique de l’annonce · " + job.missions.heading, "detail-company"));
@@ -518,6 +528,14 @@
         if (history.legacy_scans) details.append(make("p", "Historique en cours de constitution : les anciens essais sans attribution par source sont exclus.", "source-key"));
         const labels = { successful: "Réussie", failed: "Échec", partial: "Fiches incomplètes", degraded: "Références en conflit" };
         observation.latest.forEach((attempt) => details.append(make("p", date(attempt.at, true) + " · " + labels[attempt.status] + (attempt.failure ? " · " + attempt.failure.label : ""), "source-key")));
+        const selectionAttempt = observation.latest.find((attempt) => attempt.selection);
+        if (selectionAttempt) {
+          const selection = selectionAttempt.selection;
+          details.append(make("p", number(selection.examined) + " annonces examinées · " + number(selection.selected) + " retenues par les filtres. " + (selection.scope === "search_results" ? "Périmètre limité aux recherches configurées." : "Catalogue public examiné ; ciblage partiel."), "source-key"));
+          const rejectionLabel = (reason) => reason.startsWith("excluded_title:") ? "Terme exclu : " + reason.slice(15) : ({no_title_match: "Intitulé hors du ciblage", prospect: "Formulaire général", event: "Événement", hidden: "Annonce masquée", unpublished: "Publication non confirmée", department: "Équipe hors du ciblage"}[reason] || "Hors du ciblage");
+          Object.entries(selection.rejected).forEach(([reason, count]) => details.append(make("p", rejectionLabel(reason) + " · " + number(count), "source-key")));
+          selection.samples.forEach((sample) => details.append(make("p", sample.title + " · " + rejectionLabel(sample.reason), "source-key")));
+        }
         success.append(details);
       } else success.append(make("span", history?.status === "unavailable" ? "Historique indisponible" : "Historique en cours de constitution", "source-key"));
       if (source.age_hours !== null && source.age_hours !== undefined) success.append(make("span", "Il y a " + number(Math.round(source.age_hours * 10) / 10) + " h", "source-key"));

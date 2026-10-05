@@ -14,8 +14,9 @@ from trading_radar.description_sections import labelled_lists, visible_text
 from trading_radar.html_page import Document, Element, clean
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
-from trading_radar.normalizer import has, normalize_text
+from trading_radar.normalizer import normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.selection import SelectionAudit, rejection_reason
 from trading_radar.targeting import sg_desk_title
 
 ORIGIN = "https://careers.societegenerale.com"
@@ -229,10 +230,7 @@ class SocieteGeneraleCollector:
         self.options = SGOptions(**config.options)
 
     def selected(self, title: str) -> bool:
-        title = normalize_text(title)
-        return (
-            not self.options.title_terms or any(has(title, t) for t in self.options.title_terms)
-        ) and not any(has(title, t) for t in self.options.exclude_title_terms)
+        return rejection_reason(title, self.options) is None
 
     async def collect(self) -> Collection:
         try:
@@ -248,7 +246,13 @@ class SocieteGeneraleCollector:
             text = await self.http.get_text(url, self.config.request_interval, self.source)
             # English wins consistently when the employer reference exists in both languages.
             rows.update(directory(text, language, self.options.max_results_per_query))
-        targets = [row for row in rows.values() if self.selected(row["title"])]
+        audit = SelectionAudit("public_catalogue")
+        targets = []
+        for row in rows.values():
+            reason = rejection_reason(row["title"], self.options)
+            audit.record(reason, row["title"])
+            if reason is None:
+                targets.append(row)
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("SG detail limit exceeded; narrow title scope")
         jobs = []
@@ -256,5 +260,8 @@ class SocieteGeneraleCollector:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            requests=self.http.counts[self.source] - before,
+            selection=audit.summary(),
         )

@@ -1,7 +1,13 @@
 from datetime import UTC, date, datetime
 from typing import Any, Literal, Self
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import (
+    BaseModel,
+    Field,
+    SerializerFunctionWrapHandler,
+    model_serializer,
+    model_validator,
+)
 
 
 def utcnow() -> datetime:
@@ -113,6 +119,7 @@ class Job(RawJob):
     is_new: bool = True
     is_active: bool = True
     is_expired: bool = False
+    notification_changes: list[str] = Field(default_factory=list, exclude=True)
 
     def urgency(self, now: datetime | None = None) -> int:
         now = now or utcnow()
@@ -133,12 +140,37 @@ class CollectionConflict(BaseModel):
     fields: list[str]
 
 
+class SelectionSummary(BaseModel):
+    scope: Literal["public_catalogue", "search_results"]
+    examined: int = Field(ge=0)
+    selected: int = Field(ge=0)
+    rejected: dict[str, int] = Field(default_factory=dict)
+    samples: list[dict[str, str]] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def consistent_counts(self) -> Self:
+        if any(
+            value < 0 for value in self.rejected.values()
+        ) or self.examined != self.selected + sum(self.rejected.values()):
+            raise ValueError("selection counts do not reconcile")
+        return self
+
+
 class Collection(BaseModel):
     jobs: list[RawJob]
     complete: bool = False
     requests: int = 0
     conflicts: list[CollectionConflict] = Field(default_factory=list)
     listing_gaps: list[str] = Field(default_factory=list)
+    selection: SelectionSummary | None = None
+
+    @model_serializer(mode="wrap")
+    def serialize(self, handler: SerializerFunctionWrapHandler) -> dict:
+        payload = handler(self)
+        # Keep historical archive contracts when no selection audit was observed.
+        if self.selection is None:
+            payload.pop("selection", None)
+        return payload
 
 
 class ScanMetrics(BaseModel):

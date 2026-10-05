@@ -8,6 +8,7 @@ import httpx
 
 from trading_radar.display_time import format_paris
 from trading_radar.experience import experience_requirement
+from trading_radar.job_conditions import deadline_label, start_label
 from trading_radar.models import Job
 from trading_radar.telegram_cards import application_keyboard, format_alert
 
@@ -25,6 +26,11 @@ def format_message(job: Job, event: str) -> str:
     badge = "🚨" if score.total >= 85 else "🟠"
     events = {"new": "NOUVELLE OFFRE", "updated": "OFFRE MODIFIÉE", "reopened": "OFFRE ROUVERTE"}
     minimum = experience_requirement(job)["minimum_years"]
+    start, deadline = start_label(job), deadline_label(job)
+    if start == "non précisé":
+        start = "Non précisé"
+    if deadline == "non précisée":
+        deadline = "Non précisée"
 
     def date(value: datetime | None) -> str:
         return format_paris(value)
@@ -36,14 +42,19 @@ def format_message(job: Job, event: str) -> str:
             else f"{badge} {events.get(event, 'OPPORTUNITÉ TRADING')} — {score.total}/100"
         ),
         "",
+        *(
+            ["Changement : " + " · ".join(job.notification_changes)]
+            if job.notification_changes
+            else []
+        ),
         job.company[:150],
         job.title[:300],
         job.location_normalized[:150],
         "",
-        f"Début : {(job.expected_start_date or 'Non précisé')[:100]}",
+        f"Début : {start[:120]}",
         "Expérience professionnelle : "
         + (f"minimum reconnu {minimum} an(s)" if minimum is not None else "minimum non reconnu"),
-        f"Échéance : {date(job.application_deadline)}",
+        f"Échéance : {deadline}",
         "",
         "Pourquoi ce score :",
     ]

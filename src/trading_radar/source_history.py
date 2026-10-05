@@ -10,6 +10,7 @@ from pathlib import Path
 
 from trading_radar.audit import timestamp
 from trading_radar.config import Config
+from trading_radar.models import SelectionSummary
 from trading_radar.source_failure import failure_summary
 
 MAX_ROWS = 10000
@@ -102,6 +103,10 @@ def source_history(config: Config, now: datetime) -> dict:
                 entry["latest"].append(
                     {"at": ended.isoformat(), "status": status, "failure": cause}
                 )
+                if status != "failed" and record.get("selection") is not None:
+                    entry["latest"][-1]["selection"] = SelectionSummary.model_validate(
+                        record["selection"]
+                    ).model_dump(mode="json")
         for entry in result["sources"].values():
             durations = entry.pop("durations")
             entry["attempts"] = len(durations)

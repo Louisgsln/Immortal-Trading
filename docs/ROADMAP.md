@@ -1,5 +1,11 @@
 # Suivi de construction
 
+Lot correctif [99](VALIDATION-LOT99.md) : calendrier par périodes de début,
+conditions de candidature et franchissements de seuil signalés, alertes en
+attente regroupées, rejets de filtres mesurés et audit de couverture sur référence
+indépendante. Le bilan précise les validations locales et les limites d'accès
+avant toute affirmation d'installation Windows ou de collecte réelle.
+
 Lot correctif [98](VALIDATION-LOT98.md) : le VIE One Delta Desk Analyst de
 Société Générale était éliminé avant lecture, puis non classé par le score.
 Le filtre retient désormais les variantes Delta One et Desk Analyst ; des missions

@@ -1,5 +1,11 @@
 # Développement confirmé le 26 septembre 2026
 
+Corrections du 5 octobre : [lot 99](VALIDATION-LOT99.md), périodes de début,
+conditions importantes désormais signalées, regroupement des alertes en attente
+et couverture des filtres observable. L'installation Windows et les lectures
+employeur réelles attendent les accès correspondants ; aucun état d'exploitation
+actuel n'est déduit des validations historiques ci-dessous.
+
 Signalement traité au [lot 98](VALIDATION-LOT98.md) : offre VIE One Delta Desk
 Analyst manquée malgré une collecte Société Générale à jour. Le contrôle de
 couverture doit distinguer réussite technique du catalogue et rappel des métiers

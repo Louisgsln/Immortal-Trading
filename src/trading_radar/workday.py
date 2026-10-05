@@ -18,8 +18,9 @@ from trading_radar.description_sections import labelled_lists, visible_text
 from trading_radar.html_page import Document, Element, clean
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
-from trading_radar.normalizer import has, normalize_text, parse_date
+from trading_radar.normalizer import parse_date
 from trading_radar.search_scope import SearchOptions
+from trading_radar.selection import SelectionAudit, rejection_reason
 from trading_radar.workday_recovery import SITES, citi_operations_reference, public_reference_title
 
 
@@ -319,10 +320,7 @@ class WorkdayCollector:
         return rows
 
     def selected(self, title: str) -> bool:
-        title = normalize_text(title)
-        return (
-            not self.options.title_terms or any(has(title, t) for t in self.options.title_terms)
-        ) and not any(has(title, term) for term in self.options.exclude_title_terms)
+        return rejection_reason(title, self.options) is None
 
     async def _detail(self, path: str, listing: dict) -> RawJob:
         get_json = (
@@ -402,7 +400,13 @@ class WorkdayCollector:
                         "Workday title changed between queries; retry next scan"
                     )
                 candidates[path] = row
-        targets = {path: row for path, row in candidates.items() if self.selected(row["title"])}
+        audit = SelectionAudit("search_results")
+        targets = {}
+        for path, row in candidates.items():
+            reason = rejection_reason(row["title"], self.options)
+            audit.record(reason, row["title"], path)
+            if reason is None:
+                targets[path] = row
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("Workday detail limit exceeded; narrow search scope")
         jobs: list[RawJob] = []
@@ -454,4 +458,5 @@ class WorkdayCollector:
             complete=False,
             requests=self.http.counts[self.source] - before,
             listing_gaps=sorted(self.listing_gaps),
+            selection=audit.summary(),
         )

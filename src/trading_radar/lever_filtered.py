@@ -11,8 +11,9 @@ from trading_radar.description_sections import visible_text
 from trading_radar.html_page import Document, Element
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
-from trading_radar.normalizer import has, normalize_text, plain_text
+from trading_radar.normalizer import plain_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.selection import SelectionAudit, rejection_reason
 
 API = "https://api.lever.co/v0/postings/"
 BOARDS = {
@@ -61,7 +62,11 @@ def section_content(content: str) -> str:
 
 
 def parse_board(
-    payload: object, source: str, config: Company, options: LeverOptions
+    payload: object,
+    source: str,
+    config: Company,
+    options: LeverOptions,
+    audit: SelectionAudit | None = None,
 ) -> list[RawJob]:
     if not isinstance(payload, list) or len(payload) > options.max_results_per_query:
         raise SourceUnavailable("Lever incomplete or excessive board")
@@ -96,12 +101,10 @@ def parse_board(
             if valkyrie
             else fields["department"] == "Trading"
         )
-        title = normalize_text(row["text"])
-        if (
-            not in_scope
-            or (options.title_terms and not any(has(title, term) for term in options.title_terms))
-            or any(has(title, term) for term in options.exclude_title_terms)
-        ):
+        reason = rejection_reason(row["text"], options) if in_scope else "department"
+        if audit is not None:
+            audit.record(reason, row["text"], identifier)
+        if reason is not None:
             continue
         if not isinstance(row.get("description"), str) or not plain_text(row["description"]):
             raise SourceUnavailable("Lever full description missing")
@@ -163,6 +166,7 @@ class LeverFilteredCollector:
 
     async def collect(self) -> Collection:
         before = self.http.counts[self.source]
+        audit = SelectionAudit("public_catalogue")
 
         async def page(offset: int) -> list:
             result = await self.http.get_json(
@@ -194,9 +198,12 @@ class LeverFilteredCollector:
                         break
                 if len(first) == PAGE_SIZE and await page(0) != first:
                     raise SourceUnavailable("Lever pagination changed during scan")
-                jobs = parse_board(rows, self.source, self.config, self.options)
+                jobs = parse_board(rows, self.source, self.config, self.options, audit)
         except TimeoutError:
             raise SourceUnavailable("Lever scan time budget exceeded") from None
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            requests=self.http.counts[self.source] - before,
+            selection=audit.summary(),
         )

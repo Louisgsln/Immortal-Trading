@@ -14,6 +14,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, ExperienceEvidence, RawJob
 from trading_radar.normalizer import has, normalize_text, plain_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.selection import SelectionAudit, rejection_reason
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
@@ -336,7 +337,11 @@ def jump_track_record_minimum(content: str) -> int | None:
 
 
 def parse_board(
-    payload: object, source: str, config: Company, options: GreenhouseOptions
+    payload: object,
+    source: str,
+    config: Company,
+    options: GreenhouseOptions,
+    audit: SelectionAudit | None = None,
 ) -> list[RawJob]:
     if not isinstance(payload, dict) or not isinstance(payload.get("meta"), dict):
         raise SourceUnavailable("Greenhouse board metadata missing")
@@ -407,6 +412,8 @@ def parse_board(
             raise SourceUnavailable("Greenhouse job identity missing")
         # Greenhouse documents null internal_job_id as a prospect post, not an open role.
         if row["internal_job_id"] is None:
+            if audit is not None:
+                audit.record("prospect")
             continue
         is_xtx = config.tenant == "xtxmarketstechnologies"
         # XTX explicitly returns metadata: null; absence is not an accepted schema change.
@@ -426,6 +433,8 @@ def parse_board(
             if not isinstance(fields.get("Division"), str) or not fields["Division"].strip():
                 raise SourceUnavailable("Flow Traders division missing")
             if fields["Division"] == "Events":
+                if audit is not None:
+                    audit.record("event")
                 continue
         if config.tenant == "imc":
             if "Is Hidden Job?" not in fields or (
@@ -433,6 +442,8 @@ def parse_board(
             ):
                 raise SourceUnavailable("IMC visibility metadata changed")
             if fields["Is Hidden Job?"] is True:
+                if audit is not None:
+                    audit.record("hidden")
                 continue
         if config.tenant == "aqr":
             if "Post Job?" not in fields or (
@@ -442,13 +453,13 @@ def parse_board(
             # Only explicit publication approval is sufficient. Null is unknown,
             # not permission to publish a potentially hidden opening.
             if fields["Post Job?"] is not True:
+                if audit is not None:
+                    audit.record("unpublished")
                 continue
-        title = normalize_text(row["title"])
-        if (
-            not trading_technology
-            and options.title_terms
-            and not any(has(title, t) for t in options.title_terms)
-        ) or any(has(title, t) for t in options.exclude_title_terms):
+        reason = rejection_reason(row["title"], options, verified_role=trading_technology)
+        if audit is not None:
+            audit.record(reason, row["title"], identifier)
+        if reason is not None:
             continue
         if not isinstance(row.get("content"), str) or not plain_text(row["content"]):
             raise SourceUnavailable("Greenhouse full description missing")
@@ -630,6 +641,7 @@ class GreenhouseFilteredCollector:
 
     async def collect(self) -> Collection:
         before = self.http.counts[self.source]
+        audit = SelectionAudit("public_catalogue")
         try:
             async with asyncio.timeout(self.options.max_scan_seconds):
                 payload = await self.http.get_json(
@@ -637,9 +649,12 @@ class GreenhouseFilteredCollector:
                     self.config.request_interval,
                     self.source,
                 )
-                jobs = parse_board(payload, self.source, self.config, self.options)
+                jobs = parse_board(payload, self.source, self.config, self.options, audit)
         except TimeoutError:
             raise SourceUnavailable("Greenhouse scan time budget exceeded") from None
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            requests=self.http.counts[self.source] - before,
+            selection=audit.summary(),
         )

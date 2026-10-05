@@ -8,6 +8,7 @@ from trading_radar.models import Job, Score
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.range_experience import plain_range_experience_years
 from trading_radar.role_evidence import role_evidence_text
+from trading_radar.start_dates import start_period
 from trading_radar.targeting import (
     OPERATIONAL_EXCLUSION,
     drw_junior_role,
@@ -336,6 +337,19 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         result.reasons.append(
             "Conflicting intake years in title and description; verify start date"
         )
+    period = start_period(job)
+    if period["precision"] == "conflict":
+        result.start = 7
+        if not any("Conflicting intake" in reason for reason in result.reasons):
+            result.reasons.append("Conflicting intake periods; verify start date")
+    elif period["target_window"] == "preferred":
+        result.start = 15
+    elif period["target_window"] == "outside":
+        result.start = 8
+        result.reasons.append("Explicit start outside January–April and June–September 2027")
+    elif period["target_window"] == "mixed":
+        result.start = 11
+        result.reasons.append("Start window only partly overlaps the preferred 2027 periods")
     direct = result.trading >= 25
     fo = (
         bool(broking_duties)
