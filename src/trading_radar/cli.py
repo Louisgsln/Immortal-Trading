@@ -47,6 +47,14 @@ app.command()(health)
 app.command()(trends)
 
 
+@app.command("runtime")
+def runtime():
+    """Inspect known local launchers and duplicate workers; never start or stop services."""
+    from trading_radar.launchers import launcher_report
+
+    typer.echo(json.dumps(launcher_report(), ensure_ascii=False, indent=2))
+
+
 @app.command("coverage")
 def coverage(
     reference: Path = typer.Option(

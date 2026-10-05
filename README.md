@@ -1,5 +1,12 @@
 # Trading Job Radar
 
+Les lots **99–102** ajoutent le calendrier de candidature par périodes, les
+changements importants dans les alertes, un audit de couverture, des priorités
+sans échéance dépassée, l'import révisé du suivi et le diagnostic des lanceurs.
+Bilans : [99](docs/VALIDATION-LOT99.md), [100](docs/VALIDATION-LOT100.md),
+[101](docs/VALIDATION-LOT101.md), [102](docs/VALIDATION-LOT102.md).
+Leur publication ne vaut pas installation sur l'instance Windows.
+
 Le lot **98** corrige l'offre Société Générale **V.I.E. One Delta Desk Analyst**
 manquée : extension du filtre de titres et reconnaissance des missions de desk
 vérifiées, avec un score de **90/100**. Installé et vérifié : offre visible dans
@@ -473,6 +480,8 @@ trading-radar applications list --status "To Apply"
 trading-radar applications show JOB_ID
 trading-radar applications update JOB_ID --status "Reviewing" --notes "Relire les exigences"
 trading-radar applications history JOB_ID
+trading-radar applications import tracking.json
+trading-radar applications import tracking.json --apply --expect TOKEN --backup data/backups/import-reviewed.zip
 trading-radar deadlines list --days 30
 trading-radar deadlines reminders
 trading-radar alerts list
@@ -482,6 +491,8 @@ trading-radar alerts history ALERT_ID
 trading-radar audit
 trading-radar audit --max-age-hours 48 --output data/freshness.json
 trading-radar doctor
+trading-radar runtime
+trading-radar coverage --reference data/coverage-reference.json
 trading-radar doctor --network
 ```
 

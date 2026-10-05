@@ -77,9 +77,11 @@ def test_duplicate_worker_does_not_launch(environment, monkeypatch):
     mode(monkeypatch, "watch")
     runtime = root / "data/windows-service"
     runtime.mkdir(parents=True)
+    (runtime / "watch.pid").write_text("12345")
     monkeypatch.setattr(service.runpy, "run_module", lambda *a, **kw: pytest.fail("Started"))
     with FileLock(str(runtime / "watch.lock")):
         assert service.main() == 0
+    assert (runtime / "watch.pid").read_text() == "12345"
 
 
 @pytest.mark.parametrize("exit_code", [0, 7])
@@ -98,3 +100,4 @@ def test_worker_redacts_output_and_requests_restart(environment, monkeypatch, ex
     assert service.main() == (exit_code or 1)
     log = (root / "data/windows-service/watch.log").read_text()
     assert "synthetic-secret" not in log and "[REDACTED]" in log
+    assert not (root / "data/windows-service/watch.pid").exists()

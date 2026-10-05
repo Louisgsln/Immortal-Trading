@@ -6,7 +6,7 @@ import logging
 import os
 import runpy
 import sys
-from contextlib import redirect_stderr, redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout, suppress
 from datetime import UTC, datetime
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
@@ -64,6 +64,7 @@ def main() -> int:
     )
     handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
     logger.addHandler(handler)
+    pid_file = None
     try:
         with FileLock(str(runtime / (args.mode + ".lock")), timeout=0):
             config = load_config(ROOT / "config")
@@ -102,7 +103,8 @@ def main() -> int:
                 ]
             logger.info("Starting %s", args.mode)
             # Run in the task's own process: stopping a task must not orphan a child watcher.
-            (runtime / (args.mode + ".pid")).write_text(str(os.getpid()), encoding="ascii")
+            pid_file = runtime / (args.mode + ".pid")
+            pid_file.write_text(str(os.getpid()), encoding="ascii")
             output = LogStream(logger)
             previous_argv = sys.argv
             result = 0
@@ -127,6 +129,10 @@ def main() -> int:
         )
         return 1
     finally:
+        if pid_file is not None:
+            with suppress(OSError, UnicodeError):
+                if pid_file.read_text(encoding="ascii") == str(os.getpid()):
+                    pid_file.unlink(missing_ok=True)
         handler.close()
         logger.removeHandler(handler)
 

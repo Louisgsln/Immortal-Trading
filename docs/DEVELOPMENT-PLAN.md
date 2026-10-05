@@ -1,5 +1,9 @@
 # Développement confirmé le 26 septembre 2026
 
+Le [lot 102](VALIDATION-LOT102.md) ajoute le diagnostic local des lanceurs et
+doublons. Les lots 99–101 sont publiés avec tests locaux ; la fin des contrôles
+hébergés et la validation de l'instance Windows restent distinctes.
+
 Le [lot 101](VALIDATION-LOT101.md) prépare l'import du suivi par identifiants
 exacts : aperçu, refus d'écrasement après modification, sauvegarde et historique
 atomique. Cette fonction locale n'envoie pas de candidature.

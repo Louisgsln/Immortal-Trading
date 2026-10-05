@@ -1,5 +1,10 @@
 # Suivi de construction
 
+Lot [102](VALIDATION-LOT102.md) : commande `runtime` en lecture seule, lanceurs
+et configurations distingués, doublons potentiels visibles, PID Windows nettoyé
+à l'arrêt. Lots 99–101 publiés. Suite : accès à l'instance Windows pour installer
+et mesurer les collectes, puis nouveaux titres et employeurs sur preuves réelles.
+
 Lot [101](VALIDATION-LOT101.md) : import JSON du suivi, aperçu par défaut,
 contrôle des modifications depuis l'aperçu, sauvegarde vérifiée et transaction
 avec historique. Suite : diagnostic des lanceurs et doublons.

@@ -40,6 +40,7 @@ class WatcherPulse:
         self.value = {
             "version": 1,
             "instance": uuid4().hex,
+            "pid": os.getpid(),
             "phase": "starting",
             "scan_started": None,
         }
