@@ -68,7 +68,7 @@
   $("nav-jobs").textContent = number(summary.total ?? jobs.length);
   const cards = [
     ["Offres actives", summary.active, "sur " + number(summary.total) + " offres repérées", "↗", "primary"],
-    ["Offres prioritaires", summary.high_priority, "Actives · score ≥ 70 / 100", "◎", ""],
+    ["Offres prioritaires", summary.high_priority, "Actives · échéance non dépassée · score ≥ 70", "◎", ""],
     ["Candidatures en cours", summary.applications_in_progress ?? jobs.filter((j) => !["New", "Rejected", "Withdrawn", "Closed"].includes((j.application || {}).status)).length, "Votre suivi de candidatures", "◫", ""],
     ["Sources à jour", (summary.fresh_sources ?? (health.source_summary || {}).fresh ?? 0) + " / " + (summary.enabled_sources ?? (health.sources || []).length), "Seuil : " + (health.max_age_hours || 24) + " h", "⌁", ""]
   ];
@@ -360,6 +360,8 @@
     const top = make("div", null, "detail-top");
     const statusBadge = make("span", statusLabel((job.application || {}).status), "badge");
     top.append(scorePill(job.score), make("span", job.is_active ? "Offre active" : "Offre inactive", "badge"), statusBadge);
+    if (job.is_expired) top.append(make("span", "Échéance dépassée", "badge"));
+    else if ((job.deadline || {}).precision === "conflict") top.append(make("span", "Échéance à vérifier", "badge"));
     content.append(title, make("p", [job.company, job.location].filter(Boolean).join(" · "), "detail-company"), top);
     const url = safeURL(job.apply_url);
     if (url) {
@@ -451,7 +453,7 @@
     ["publication-from", "publication-to"].forEach((id) => $(id).setAttribute("aria-invalid", String(!validPeriod)));
     let results = jobs.filter((job) =>
       (!query || searchText.get(job.id).includes(query)) && (!company || job.company === company) &&
-      job.score >= score && (active === "all" || Boolean(job.is_active) === (active === "active")) &&
+      job.score >= score && (active === "all" || (active === "available" ? job.is_active && !job.is_expired : active === "expired" ? job.is_expired : Boolean(job.is_active) === (active === "active"))) &&
       (!application || (job.application || {}).status === application) &&
       (!experienceCategory || experience(job).category === experienceCategory) &&
       (!education || (education === "unrecognized" ? !educationLevels(job).length : educationLevels(job).includes(education))) &&
@@ -470,6 +472,7 @@
       const button = make("button", job.title, "job-title"); button.type = "button"; button.addEventListener("click", () => showDetail(job));
       const companyLine = make("div", null, "company-line"); const initial = make("span", job.company.slice(0, 2).toUpperCase(), "company-initial"); initial.setAttribute("aria-hidden", "true");
       companyLine.append(initial, make("span", job.company)); if (!job.is_active) companyLine.append(make("span", "Inactive", "badge"));
+      if (job.is_expired) companyLine.append(make("span", "Échéance dépassée", "badge"));
       jobCell.append(button, companyLine, make("span", experienceLabel(job), "experience-indicator"));
       experienceEvidence(job).filter((item) => item.kind === "industry_or_academia").forEach((item) => {
         jobCell.append(make("span", evidenceLabel(item), "experience-indicator experience-practice"));

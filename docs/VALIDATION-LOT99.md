@@ -90,10 +90,11 @@ Les nouveaux employeurs, qualifications de rôles supplémentaires, fermetures
 officielles et sauvegardes distantes nécessitent leurs preuves ou accès réels.
 Ils ne sont pas déclarés résolus par ces corrections. Avant installation,
 vérifier une sauvegarde de production et consulter `rescore --dry-run` sur copie.
-La publication GitHub a été refusée par le contrôle automatique d'approbation :
-il exige une autorisation explicite pour envoyer le correctif vers
-`Louisgsln/Immortal-Trading`. Aucun commit distant, aucune tâche Windows et aucune
-notification réelle n'ont été créés. Le correctif reste disponible localement.
+Publication initialement refusée par le contrôle automatique d'approbation,
+puis autorisée explicitement par le propriétaire le 6 octobre 2026. Le lot est
+publié sur `main` : [commit bef729e](https://github.com/Louisgsln/Immortal-Trading/commit/bef729e4ee0f8e810c4ae29afb985da113410a86).
+Son arbre Git correspond exactement au correctif local validé `a4907a4`.
+Aucune installation Windows et aucune notification réelle ne sont annoncées.
 
 ## Validation locale
 
@@ -117,7 +118,7 @@ notification réelle n'ont été créés. Le correctif reste disponible localeme
   monitoring, tendances et rétention réussis. Ce contrôle local ne vaut pas
   validation Docker ou Windows.
 
-Les contrôles GitHub de ce correctif ne sont pas lancés, sa publication restant
-bloquée. Les rapports JUnit, le paquet et les traces synthétiques restent dans
+Les [contrôles GitHub](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37387329577)
+ont démarré après publication. Les rapports JUnit, le paquet et les traces synthétiques restent dans
 le répertoire temporaire de validation ; aucune donnée d'exploitation n'est
 incluse dans le dépôt.

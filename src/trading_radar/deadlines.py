@@ -4,7 +4,8 @@ import re
 from dataclasses import dataclass, field
 from datetime import UTC, date, datetime, timedelta, timezone
 
-from trading_radar.models import Job
+from trading_radar.display_time import PARIS
+from trading_radar.models import Job, utcnow
 
 MONTHS = {
     name.lower(): i
@@ -39,6 +40,20 @@ class Deadline:
     instant: datetime | None = None
     source: str = "description"
     evidence: list[str] = field(default_factory=list)
+
+
+def deadline_status(deadline: Deadline, now: datetime | None = None) -> str:
+    """Elapsed application window, independently of employer/source closure."""
+    instant = now or utcnow()
+    if instant.tzinfo is None or instant.utcoffset() is None:
+        raise ValueError("Deadline observation requires a timezone")
+    if deadline.precision == "conflict":
+        return "conflict"
+    if deadline.precision == "instant" and deadline.instant is not None:
+        return "expired" if deadline.instant <= instant else "upcoming"
+    if deadline.precision == "date" and deadline.day is not None:
+        return "expired" if deadline.day < instant.astimezone(PARIS).date() else "upcoming"
+    return "unknown"
 
 
 def aware_instant(value: object) -> datetime | None:

@@ -2,14 +2,14 @@
 
 import sqlite3
 from contextlib import closing
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
 from trading_radar.applications import Application, ApplicationStatus
 from trading_radar.config import Config
-from trading_radar.deadlines import resolve_deadline
+from trading_radar.deadlines import Deadline, aware_instant, deadline_status, resolve_deadline
 from trading_radar.display_time import PARIS
 from trading_radar.education import education_mentions
 from trading_radar.experience import experience_requirement
@@ -295,12 +295,25 @@ def build_dashboard_data(
             }
         )
     jobs = result["jobs"]
+    for job in jobs:
+        value = job["deadline"]
+        observed = Deadline(
+            precision=value["precision"],
+            day=date.fromisoformat(value["day"]) if value["day"] else None,
+            instant=aware_instant(value["instant"]),
+        )
+        value["status"] = deadline_status(observed, instant)
+        job["is_expired"] = value["status"] == "expired"
     today = instant.astimezone(PARIS).date().isoformat()
     result["summary"] = {
         "total": len(jobs),
         "active": sum(job["is_active"] for job in jobs),
-        "high_priority": sum(job["is_active"] and job["score"] >= 70 for job in jobs),
-        "relevant": sum(job["is_active"] and job["score"] >= 55 for job in jobs),
+        "high_priority": sum(
+            job["is_active"] and not job["is_expired"] and job["score"] >= 70 for job in jobs
+        ),
+        "relevant": sum(
+            job["is_active"] and not job["is_expired"] and job["score"] >= 55 for job in jobs
+        ),
         "applications_due": sum(
             bool(job["application"]["next_action_date"])
             and job["application"]["next_action_date"] <= today

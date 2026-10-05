@@ -161,6 +161,7 @@ def test_complete_data_and_manual_fields_are_preserved(dashboard_config, repo, j
         "instant": "2026-10-01T12:00:00+00:00",
         "source": "description",
         "evidence": ["Application deadline: 2026-10-01 at 12:00 UTC"],
+        "status": "upcoming",
     }
     assert result["summary"]["applications_due"] == 1
     assert result["summary"]["applications_in_progress"] == 1

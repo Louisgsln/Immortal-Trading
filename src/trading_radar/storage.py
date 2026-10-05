@@ -14,6 +14,7 @@ from filelock import FileLock
 
 from trading_radar.alerts import SYSTEM_TRANSITIONS, AlertDecision, AlertStatus, resolved_status
 from trading_radar.applications import Application, ApplicationStatus, calendar_date
+from trading_radar.deadlines import deadline_status, resolve_deadline
 from trading_radar.models import Job, utcnow
 from trading_radar.normalizer import canonical_url, digest
 
@@ -632,10 +633,15 @@ class Repository:
 
     def stats(self) -> dict[str, Any]:
         row = self.db.execute(
-            "SELECT COUNT(*) total, SUM(is_active) active, SUM(score>=70) high_priority FROM jobs"
+            "SELECT COUNT(*) total, COALESCE(SUM(is_active),0) active FROM jobs"
         ).fetchone()
+        now = utcnow()
         return {
             **dict(row),
+            "high_priority": sum(
+                job.is_active and deadline_status(resolve_deadline(job), now) != "expired"
+                for job in self.list_jobs(min_score=70)
+            ),
             "sources": [dict(r) for r in self.db.execute("SELECT * FROM companies")],
             "alerts": [
                 dict(r)

@@ -1,5 +1,10 @@
 # Suivi de construction
 
+Lot [100](VALIDATION-LOT100.md) : échéances recalculées à l'heure de consultation,
+priorités cohérentes, badges et filtre des échéances dépassées. Une échéance ne
+vaut pas fermeture employeur. Le lot 99 est maintenant publié après autorisation.
+Suite : import du suivi avec aperçu, puis diagnostic des lanceurs concurrents.
+
 Lot correctif [99](VALIDATION-LOT99.md) : calendrier par périodes de début,
 conditions de candidature et franchissements de seuil signalés, alertes en
 attente regroupées, rejets de filtres mesurés et audit de couverture sur référence

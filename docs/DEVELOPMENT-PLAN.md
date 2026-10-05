@@ -1,5 +1,10 @@
 # Développement confirmé le 26 septembre 2026
 
+Livraison du 6 octobre : [lot 100](VALIDATION-LOT100.md), priorités sans échéance
+dépassée et consultation des offres expirées, sans fermeture automatique de la
+source. Publication des lots suivants autorisée par le propriétaire ; installation
+Windows distincte des validations dans le cloud.
+
 Corrections du 5 octobre : [lot 99](VALIDATION-LOT99.md), périodes de début,
 conditions importantes désormais signalées, regroupement des alertes en attente
 et couverture des filtres observable. L'installation Windows et les lectures

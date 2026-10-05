@@ -10,8 +10,7 @@ from filelock import FileLock
 from trading_radar.collection_diagnostics import quarantined_sources
 from trading_radar.collectors import Collector, build_collector
 from trading_radar.config import Config
-from trading_radar.deadlines import resolve_deadline
-from trading_radar.display_time import PARIS
+from trading_radar.deadlines import deadline_status, resolve_deadline
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.http_cache import JSONCache
 from trading_radar.job_conditions import material_changes
@@ -55,13 +54,7 @@ def meaningful_update(repo: Repository, job: Job, min_score: int = 70) -> bool:
 
 
 def expired_deadline(job: Job) -> bool:
-    deadline = resolve_deadline(job)
-    now = utcnow()
-    if deadline.precision == "instant":
-        return deadline.instant is not None and deadline.instant <= now
-    if deadline.precision == "date":
-        return deadline.day is not None and deadline.day < now.astimezone(PARIS).date()
-    return False
+    return deadline_status(resolve_deadline(job), utcnow()) == "expired"
 
 
 async def deliver(
