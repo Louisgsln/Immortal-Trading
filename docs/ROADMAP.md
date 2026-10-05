@@ -1,5 +1,9 @@
 # Suivi de construction
 
+Lot [101](VALIDATION-LOT101.md) : import JSON du suivi, aperçu par défaut,
+contrôle des modifications depuis l'aperçu, sauvegarde vérifiée et transaction
+avec historique. Suite : diagnostic des lanceurs et doublons.
+
 Lot [100](VALIDATION-LOT100.md) : échéances recalculées à l'heure de consultation,
 priorités cohérentes, badges et filtre des échéances dépassées. Une échéance ne
 vaut pas fermeture employeur. Le lot 99 est maintenant publié après autorisation.

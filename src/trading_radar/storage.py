@@ -101,14 +101,20 @@ CREATE TABLE IF NOT EXISTS score_history(
 
 
 class Repository:
-    def __init__(self, url: str):
+    def __init__(self, url: str, *, existing_only: bool = False):
         if not url.startswith("sqlite:///"):
             raise ValueError("This release supports sqlite:/// URLs only")
         path = url.removeprefix("sqlite:///")
-        if path != ":memory:":
+        if existing_only and (path == ":memory:" or not Path(path).is_file()):
+            raise ValueError("Existing file-backed database required")
+        if path != ":memory:" and not existing_only:
             Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.lock_path = path + ".lock"
-        self.db = sqlite3.connect(path, timeout=30)
+        self.db = (
+            sqlite3.connect(Path(path).resolve().as_uri() + "?mode=rw", uri=True, timeout=30)
+            if existing_only
+            else sqlite3.connect(path, timeout=30)
+        )
         self.db.row_factory = sqlite3.Row
         if self.db.execute(
             "SELECT 1 FROM sqlite_master WHERE type='table' AND name='schema_version'"
@@ -118,6 +124,15 @@ class Repository:
                 self.db.close()
                 raise ValueError("Database schema is newer than this application")
         self.db.execute("PRAGMA foreign_keys=ON")
+        if existing_only:
+            self.db.execute("PRAGMA trusted_schema=OFF")
+            if (
+                self.db.execute("SELECT MAX(version) FROM schema_version").fetchone()[0]
+                != SCHEMA_VERSION
+            ):
+                self.db.close()
+                raise ValueError("Existing database requires the current schema")
+            return
         self.db.execute("PRAGMA journal_mode=WAL")
         self.db.executescript(SCHEMA)
         version = self.db.execute("SELECT MAX(version) FROM schema_version").fetchone()[0]
@@ -191,41 +206,45 @@ class Repository:
         return Application.model_validate(dict(row))
 
     def update_application(self, job_id: str, changes: dict) -> Application:
+        with FileLock(self.lock_path, timeout=0), self.transaction():
+            return self.record_application_update(job_id, changes)
+
+    def record_application_update(self, job_id: str, changes: dict) -> Application:
+        """Record an edit inside the caller's writer lock and transaction."""
         allowed = set(Application.model_fields) - {"job_id"}
         if not changes or set(changes) - allowed:
             raise ValueError("Provide at least one editable application field")
-        with FileLock(self.lock_path, timeout=0), self.transaction():
-            previous = self.application(job_id)
-            updated = Application.model_validate(previous.model_dump() | changes)
-            if previous != updated:
-                values = updated.model_dump(mode="json")
-                self.db.execute(
-                    """UPDATE applications SET status=?,application_date=?,recruiter=?,notes=?,
+        previous = self.application(job_id)
+        updated = Application.model_validate(previous.model_dump() | changes)
+        if previous != updated:
+            values = updated.model_dump(mode="json")
+            self.db.execute(
+                """UPDATE applications SET status=?,application_date=?,recruiter=?,notes=?,
                     next_action=?,next_action_date=? WHERE job_id=?""",
-                    tuple(
-                        values[k]
-                        for k in [
-                            "status",
-                            "application_date",
-                            "recruiter",
-                            "notes",
-                            "next_action",
-                            "next_action_date",
-                            "job_id",
-                        ]
-                    ),
-                )
-                self.db.execute(
-                    """INSERT INTO application_history(job_id,changed_at,before_payload,after_payload)
+                tuple(
+                    values[k]
+                    for k in [
+                        "status",
+                        "application_date",
+                        "recruiter",
+                        "notes",
+                        "next_action",
+                        "next_action_date",
+                        "job_id",
+                    ]
+                ),
+            )
+            self.db.execute(
+                """INSERT INTO application_history(job_id,changed_at,before_payload,after_payload)
                     VALUES(?,?,?,?)""",
-                    (
-                        job_id,
-                        utcnow().isoformat(),
-                        previous.model_dump_json(),
-                        updated.model_dump_json(),
-                    ),
-                )
-            return updated
+                (
+                    job_id,
+                    utcnow().isoformat(),
+                    previous.model_dump_json(),
+                    updated.model_dump_json(),
+                ),
+            )
+        return updated
 
     def list_applications(
         self,

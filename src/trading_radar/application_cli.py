@@ -6,6 +6,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import typer
+import yaml
 from filelock import Timeout
 
 from trading_radar.applications import ApplicationField, ApplicationStatus
@@ -43,6 +44,37 @@ def repository(config_dir: Path, demo: bool):
 
 def display(value):
     typer.echo(json.dumps(value, ensure_ascii=False, indent=2))
+
+
+@app.command("import")
+def import_tracking(
+    path: Path = typer.Argument(..., exists=True, dir_okay=False),
+    apply: bool = typer.Option(False, "--apply", help="Apply the exact reviewed preview."),
+    expect: str | None = typer.Option(None, help="Token returned by the preview."),
+    backup: Path | None = typer.Option(None, help="New local ZIP backup required with --apply."),
+    config_dir: Path = Path("config"),
+):
+    """Preview a JSON tracking import by default; preserve omitted fields and edit history."""
+    from trading_radar.application_import import apply_import, preview_import
+
+    if apply and (not expect or backup is None):
+        raise typer.BadParameter("--apply requires --expect TOKEN and --backup NEW.zip")
+    if not apply and (expect is not None or backup is not None):
+        raise typer.BadParameter("--expect and --backup require --apply")
+    try:
+        config = load_config(config_dir)
+        result = (
+            apply_import(config, path, expect or "", backup)
+            if apply and backup is not None
+            else preview_import(config, path)
+        )
+    except (OSError, ValueError, TypeError, sqlite3.Error, Timeout, yaml.YAMLError):
+        typer.echo(
+            "Import unavailable: check the file, database, preview token and new backup path; no tracking edits were committed.",
+            err=True,
+        )
+        raise typer.Exit(1) from None
+    display(result)
 
 
 @app.command("list")

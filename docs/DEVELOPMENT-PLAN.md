@@ -1,5 +1,9 @@
 # Développement confirmé le 26 septembre 2026
 
+Le [lot 101](VALIDATION-LOT101.md) prépare l'import du suivi par identifiants
+exacts : aperçu, refus d'écrasement après modification, sauvegarde et historique
+atomique. Cette fonction locale n'envoie pas de candidature.
+
 Livraison du 6 octobre : [lot 100](VALIDATION-LOT100.md), priorités sans échéance
 dépassée et consultation des offres expirées, sans fermeture automatique de la
 source. Publication des lots suivants autorisée par le propriétaire ; installation
