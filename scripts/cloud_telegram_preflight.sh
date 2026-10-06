@@ -4,18 +4,30 @@
 set -euo pipefail
 cd "${RADAR_PROJECT_DIR:-$HOME/Immortal-Trading}"
 sudo docker compose --env-file .env.cloud -f compose.cloud.yaml ps
-radar_lanceurs_ok="$(sudo python3 - <<'PY'
+radar_preflight_context="$(sudo python3 - <<'PY'
+import ast
 import json
 import re
 import runpy
 import subprocess
 import sys
+from pathlib import Path
 inventory = runpy.run_path('src/trading_radar/launchers.py')['launcher_report']()
 workers = [p for p in inventory['processes'] if p['kind'] == 'worker']
 counts = {mode: sum(p['mode'] == mode for p in workers) for mode in ('watch', 'telegram')}
 print('LANCEURS_CONNUS=' + json.dumps({'status': inventory['status'], 'counts': counts, 'issues': inventory['issues']}, sort_keys=True), file=sys.stderr)
 logs = subprocess.run(['docker', 'compose', '--env-file', '.env.cloud', '-f', 'compose.cloud.yaml', 'logs', '--no-color', '--no-log-prefix', '--since', '2h', '--tail', '1500', 'radar'], capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=30, check=True)
 explain = runpy.run_path('src/trading_radar/source_failure.py')['failure_summary']
+checks = set()
+for name in ('greenhouse_filtered', 'ca_cib', 'hsbc', 'bnp', 'http'):
+    tree = ast.parse(Path('src/trading_radar/' + name + '.py').read_text(encoding='utf-8'))
+    for node in ast.walk(tree):
+        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and
+            node.func.id == 'SourceUnavailable' and node.args and
+            isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str)):
+            message = node.args[0].value
+            if len(message) <= 140 and not re.search(r'https?://|[\r\n]', message):
+                checks.add(message)
 latest = {}
 for line in (logs.stdout + '\n' + logs.stderr).splitlines():
     try:
@@ -25,25 +37,28 @@ for line in (logs.stdout + '\n' + logs.stderr).splitlines():
     if isinstance(event, dict) and event.get('event') == 'source_failed':
         raw = event.get('error')
         match = re.search(r'\bHTTP\s+(\d{3})\b', raw, re.I) if isinstance(raw, str) else None
-        latest[str(event.get('source'))] = {'at': event.get('timestamp'), 'failure': explain(raw), 'http_status': int(match[1]) if match else None}
+        latest[str(event.get('source'))] = {'at': event.get('timestamp'), 'failure': explain(raw), 'http_status': int(match[1]) if match else None, 'validation_check': raw if isinstance(raw, str) and raw in checks else None}
 print('ECHECS_RECENTS=' + json.dumps(latest, ensure_ascii=False, sort_keys=True), file=sys.stderr)
-print('true' if inventory['status'] == 'ok' and counts == {'watch': 1, 'telegram': 0} and not inventory['issues'] else 'false')
+print(json.dumps({'launchers_ok': inventory['status'] == 'ok' and counts == {'watch': 1, 'telegram': 0} and not inventory['issues'], 'public_checks': sorted(checks)}))
 PY
 )"
-sudo docker compose --env-file .env.cloud -f compose.cloud.yaml exec -T -e "RADAR_LANCEURS_OK=$radar_lanceurs_ok" radar python - <<'PY'
+sudo docker compose --env-file .env.cloud -f compose.cloud.yaml exec -T -e "RADAR_PREFLIGHT_CONTEXT=$radar_preflight_context" radar python - <<'PY'
 import asyncio
 import hashlib
 import json
 import os
+import re
 import sqlite3
 from contextlib import closing
 from trading_radar.backups import database_path
+from trading_radar.collection_diagnostics import source_observation
 from trading_radar.config import load_config
 from trading_radar.health import check_health
 from trading_radar.http import SourceUnavailable
 from trading_radar.nomura_session import load_session, session_path
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import watcher_status
+from trading_radar.source_failure import failure_summary
 from trading_radar.telegram_control import ControlState, api
 
 def emit(name, value):
@@ -51,6 +66,7 @@ def emit(name, value):
 
 config = load_config()
 health = check_health(config)
+context = json.loads(os.environ['RADAR_PREFLIGHT_CONTEXT'])
 emit('SOURCES_A_VERIFIER', [{k: s[k] for k in ('source', 'company', 'status', 'age_hours', 'last_success', 'last_failure', 'consecutive_failures', 'failure', 'schedule')} for s in health['sources'] if s['status'] != 'fresh'])
 nomura_path = session_path()
 nomura_ok = False
@@ -68,12 +84,20 @@ path = database_path(config.settings.database_url)
 with closing(sqlite3.connect(path.as_uri() + '?mode=ro', uri=True, timeout=1)) as db:
     db.execute('PRAGMA query_only=ON')
     counts = dict(db.execute('SELECT status,COUNT(*) FROM alerts GROUP BY status'))
+    failures = {}
+    for source in health['sources']:
+        if source['status'] == 'fresh' or not source['last_failure']:
+            continue
+        raw = source_observation(db, source['source'], source['last_failure'], 'failed')
+        match = re.search(r'\bHTTP\s+(\d{3})\b', raw, re.I) if isinstance(raw, str) else None
+        failures[source['source']] = {'failure': failure_summary(raw), 'http_status': int(match[1]) if match else None, 'validation_check': raw if isinstance(raw, str) and raw in context['public_checks'] else None}
+    emit('ECHECS_MEMORISES', failures)
 emit('ALERTES_PAR_ETAT', counts)
 if any(counts.get(s, 0) for s in ('pending', 'sending', 'unknown')):
     blocked.append('alertes_a_revoir')
 if watcher_status(config)['status'] != 'active':
     blocked.append('watcher_inactif')
-if os.getenv('RADAR_LANCEURS_OK') != 'true':
+if context['launchers_ok'] is not True:
     blocked.append('lanceurs_a_verifier')
 if os.getenv('RADAR_CUTOVER_CONFIRMED') != 'true':
     blocked.append('bascule_non_confirmee')

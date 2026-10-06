@@ -35,7 +35,9 @@ def preparation(config, repo, job, monkeypatch):
     binding = hashlib.sha256(b"123:456").hexdigest()
     state_path.write_text(ControlState(binding=binding, offset=42).model_dump_json())
     for key, value in {
-        "RADAR_LANCEURS_OK": "true",
+        "RADAR_PREFLIGHT_CONTEXT": json.dumps(
+            {"launchers_ok": True, "public_checks": ["CA CIB result count missing"]}
+        ),
         "RADAR_CUTOVER_CONFIRMED": "true",
         "TELEGRAM_BOT_TOKEN": "123:fixture_private_token",
         "TELEGRAM_CHAT_ID": "456",
@@ -103,6 +105,13 @@ def test_clean_queue_checks_identity_without_sending_or_consuming_updates(prepar
     assert set(preparation.methods) == {"getMe", "getChat", "getWebhookInfo"}
 
 
+def test_last_stored_failure_is_diagnosed_when_it_has_left_recent_logs(preparation):
+    preparation.repo.record_failure("test")
+    preparation.repo.record_scan({"failed": {"test": "CA CIB result count missing"}})
+    rows = inspect(preparation, True)
+    assert rows["ECHECS_MEMORISES"]["test"]["validation_check"] == "CA CIB result count missing"
+
+
 @pytest.mark.parametrize("status", ["pending", "sending", "unknown"])
 def test_pending_or_uncertain_alerts_block_preparation(preparation, status):
     with preparation.repo.db:
@@ -144,7 +153,9 @@ def test_first_listener_can_be_prepared_when_no_updates_are_waiting(preparation)
 
 
 def test_known_competing_workers_block_preparation(preparation, monkeypatch):
-    monkeypatch.setenv("RADAR_LANCEURS_OK", "false")
+    monkeypatch.setenv(
+        "RADAR_PREFLIGHT_CONTEXT", json.dumps({"launchers_ok": False, "public_checks": []})
+    )
     assert "lanceurs_a_verifier" in inspect(preparation, False)["PREACTIVATION"]["blocages"]
 
 
@@ -189,8 +200,39 @@ def test_host_inventory_and_failure_logs_are_sanitized(monkeypatch, worker_count
     )
     with redirect_stdout(io.StringIO()) as output, redirect_stderr(io.StringIO()) as errors:
         exec(compile(ROOT_CHECK, str(SCRIPT), "exec"), {})
-    assert output.getvalue().strip() == str(ready).lower()
+    assert json.loads(output.getvalue())["launchers_ok"] is ready
     assert "fixture_private_token" not in errors.getvalue()
     assert "https://example.com" not in errors.getvalue()
     failures = json.loads(errors.getvalue().split("ECHECS_RECENTS=", 1)[1])
     assert failures["fixture"]["http_status"] == 403
+
+
+@pytest.mark.parametrize(
+    "error,expected",
+    [
+        ("IMC worker level missing or unknown", "IMC worker level missing or unknown"),
+        ("CA CIB result count missing", "CA CIB result count missing"),
+        ("HSBC detail limit exceeded", "HSBC detail limit exceeded"),
+        ("IMC worker level missing or unknown https://example.com/private_token", None),
+        ("unexpected failure private_token", None),
+    ],
+)
+def test_detailed_diagnostics_print_only_literal_checks_from_public_source(
+    monkeypatch, error, expected
+):
+    inventory = {"status": "ok", "processes": [{"kind": "worker", "mode": "watch"}], "issues": []}
+    logs = json.dumps({"event": "source_failed", "source": "fixture", "error": error})
+    monkeypatch.setattr(
+        "runpy.run_path",
+        lambda path: (
+            {"launcher_report": lambda: inventory}
+            if path.endswith("launchers.py")
+            else {"failure_summary": failure_summary}
+        ),
+    )
+    monkeypatch.setattr("subprocess.run", lambda *a, **k: SimpleNamespace(stdout=logs, stderr=""))
+    with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()) as errors:
+        exec(compile(ROOT_CHECK, str(SCRIPT), "exec"), {})
+    failures = json.loads(errors.getvalue().split("ECHECS_RECENTS=", 1)[1])
+    assert failures["fixture"]["validation_check"] == expected
+    assert "private_token" not in errors.getvalue()

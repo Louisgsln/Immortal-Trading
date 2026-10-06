@@ -121,6 +121,10 @@ consulte SQLite en lecture seule et vérifie le bot, le chat privé et le webhoo
 avec `getMe`, `getChat` et `getWebhookInfo`. Il ne modifie ni configuration ni
 curseur, ne consomme aucune mise à jour Telegram et n'envoie aucun message.
 Les journaux sont résumés sans URLs, erreurs brutes ou identifiants d'accès.
+Pour les quatre connecteurs IMC, Crédit Agricole CIB, HSBC et BNP, le champ
+`validation_check` peut identifier exactement un contrôle littéral présent dans
+le code public. Un autre message n'est pas reproduit. `ECHECS_MEMORISES` consulte
+aussi le dernier échec du journal SQLite lorsqu'il a quitté les logs récents.
 
 `PREACTIVATION.prete=true` et une sortie 0 indiquent que ces contrôles ont passé.
 Une file `pending`, `sending` ou `unknown`, un lanceur concurrent identifié, un
@@ -143,6 +147,43 @@ Conserver l'historique des alertes et l'état Telegram, puis vérifier la file
 une dernière fois avant de modifier les deux réglages concernés. Les offres
 collectées avec les alertes désactivées restent en base sans file historique
 automatique à vider lors de l'activation.
+
+## Activer les alertes et les commandes après l'audit
+
+Le helper du lot 105 utilise la même image et la même configuration métier ;
+il ne met pas à jour le scanner. Garder les anciens services Windows désactivés,
+puis, depuis le projet OVH :
+
+```bash
+RADAR_PROJECT_DIR="$PWD" python3 scripts/cloud_telegram_activation.py
+```
+
+Le helper refait l'audit, arrête le scanner et vérifie la libération des verrous
+des deux rôles et du writer SQLite. Il refuse une file `pending`, `sending` ou
+`unknown`, crée une archive SQLite vérifiée et conserve séparément l'état de
+commande et l'environnement dans des répertoires privés. Les avis d'incident et
+les rappels doivent être désactivés pour cette première reprise.
+
+Seules les affectations explicites `ALERTS_ENABLED=false` et
+`TELEGRAM_CONTROL_ENABLED=false` deviennent `true` dans `.env.cloud` ; les autres
+octets, notamment les secrets et l'option Nomura, sont conservés. Le fichier doit
+appartenir à l'opérateur, être régulier et avoir le mode 0600. Les deux services
+sont recréés avec `up --no-deps`, et les sauvegardes continuent indépendamment.
+Le contrôle final confirme un worker par rôle, un watcher actif et la
+conservation de chaque alerte déjà envoyée, même si de nouveaux envois ont eu lieu.
+
+En cas d'échec après l'arrêt, le helper arrête l'écouteur, restaure seulement les
+réglages précédents et reprend le scanner avec les envois désactivés. Il ne
+restaure jamais une ancienne base ou un ancien curseur après un envoi possible.
+Une modification concurrente de l'environnement interrompt cette reprise
+automatique au lieu d'être écrasée ; `REPRISE_A_VERIFIER` demande alors un examen.
+Un verrou d'hôte empêche deux activations simultanées.
+
+`ACTIVATION_TERMINEE` confirme ces contrôles locaux. Envoyer ensuite `/status`
+une fois au bot privé et vérifier une réponse unique pour confirmer le dialogue
+réel. Le récapitulatif quotidien conserve la préférence et la date importées.
+Les sources périmées continuent d'apparaître dans la santé ; l'activation ne
+masque pas leurs échecs.
 
 ## Sauvegardes, maintenance et arrêt
 

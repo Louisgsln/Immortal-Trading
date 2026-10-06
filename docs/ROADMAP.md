@@ -1089,3 +1089,20 @@ Quatorze tests ciblés vérifient l'absence de mutation et d'envoi, les curseurs
 restaurés, les attentes sans curseur, les états de livraison et la confidentialité
 des journaux. Six tests existants de reprise sans réenvoi ont aussi passé.
 Voir [le guide d'exploitation cloud](CLOUD-DEPLOYMENT.md#diagnostiquer-les-sources-et-préparer-telegram).
+
+## Lot 105 — Activation Telegram avec conservation des états
+
+Helper autonome pour appliquer les deux réglages Telegram après un nouvel audit,
+sans changer l'image du scanner ni les configurations métier. L'arrêt contrôlé
+permet une dernière vérification de la file et des verrous, une sauvegarde SQLite
+vérifiée et une copie privée de l'environnement et de l'état de commandes.
+Le contrôle de reprise conserve chaque alerte déjà envoyée et vérifie un worker
+par rôle. Un échec rétablit les réglages désactivés sans restaurer la base ou le
+curseur après un envoi possible ; les changements concurrents sont préservés.
+
+Le diagnostic nomme les contrôles littéraux des quatre connecteurs en échec et
+consulte aussi le journal SQLite lorsque les logs récents ne les contiennent
+plus. Aucun message brut extérieur n'est reproduit. Trente-huit tests ciblés
+valident les deux helpers, leurs garde-fous, les états privés et les reprises ;
+lint, format et typage passent. L'exécution d'activation et le dialogue `/status`
+restent à constater sur le VPS. Voir [le guide cloud](CLOUD-DEPLOYMENT.md#activer-les-alertes-et-les-commandes-après-laudit).
