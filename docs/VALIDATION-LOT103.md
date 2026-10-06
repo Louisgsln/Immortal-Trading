@@ -11,7 +11,7 @@ dossier absent n'est pas créé implicitement par Compose. Aucun port public
 n'est exposé. Secrets locaux dans `.env.cloud`, exemple sans identifiant réel.
 
 Le lanceur exige une base compatible existante, sans initialisation ni migration.
-Le transfert Windows est décrit dans [CLOUD-FREE.md](CLOUD-FREE.md) : arrêt des
+Le transfert Windows est décrit dans [CLOUD-DEPLOYMENT.md](CLOUD-DEPLOYMENT.md) : arrêt des
 anciens écrivains, sauvegarde cohérente, restauration vers une destination neuve,
 revue du suivi et de la file d'alertes. Le démarrage du scanner et de Telegram
 exige `RADAR_CUTOVER_CONFIRMED=true` ; ce paramètre ne remplace pas la vérification
@@ -58,7 +58,9 @@ inventé. Les conteneurs et volumes synthétiques sont supprimés après vérifi
 Les CI des lots **99, 100, 101 et 102** sont désormais toutes réussies ; le lot
 102 inclut les quatre versions Python et le parcours Docker :
 [run 37389509439](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37389509439).
-La CI du présent lot sera vérifiée séparément après publication.
+La CI du lot 103 a également réussi :
+[run 37417323727](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37417323727),
+quatre versions Python, dashboard et parcours Docker inclus.
 
 ## Mise en service encore bloquée
 
@@ -69,3 +71,8 @@ d'hébergement gratuit, l'hôte accessible et la configuration de production
 doivent être fournis pour terminer. L'offre gratuite proposée est documentée
 avec ses limites de capacité et de reprise des machines inactives ; aucun
 fonctionnement continu garanti ni collecte réelle n'est revendiqué.
+
+Après cette préparation sous budget zéro, le propriétaire a choisi OVH et
+confirmé ne pas avoir de compte ni de VPS. Le [guide OVH](OVH-SETUP.md) décrit
+la suite ; il ne crée ni abonnement ni serveur. Le code de runtime du lot 103
+reste identique.

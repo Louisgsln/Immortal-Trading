@@ -1,9 +1,11 @@
 # Suivi de construction
 
-Lot [103](VALIDATION-LOT103.md) : déploiement cloud préparé sous budget zéro,
-Compose indépendant, base existante exigée, migration explicite et sauvegardes
-vérifiées. Suite : compte/hôte gratuit accessible, transfert de l'état Windows,
-puis preuve d'une collecte réelle. Aucun achat ni provisionnement effectué.
+Hôte choisi après le lot 103 : [OVH VPS-1](OVH-SETUP.md), compte et VPS encore
+absents. Le lot [103](VALIDATION-LOT103.md) fournit le Compose indépendant,
+une base existante exigée, la migration explicite et les sauvegardes vérifiées ;
+sa CI a réussi. Suite : création du compte et du serveur, accès SSH, transfert
+de l'état Windows, puis preuve d'une collecte réelle. Aucun achat ni
+provisionnement effectué depuis cette session.
 
 Lot [102](VALIDATION-LOT102.md) : commande `runtime` en lecture seule, lanceurs
 et configurations distingués, doublons potentiels visibles, PID Windows nettoyé

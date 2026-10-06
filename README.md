@@ -1,10 +1,11 @@
 # Trading Job Radar
 
-Le lot **103** prépare le scanner sur un hôte Linux gratuit : services Docker,
-données persistantes, sauvegardes quotidiennes et démarrage protégé pendant la
-migration. Aucun hôte gratuit n'est encore connecté et aucun scanner distant
-de production n'est annoncé. Voir [le guide cloud](docs/CLOUD-FREE.md) et
-[les contrôles](docs/VALIDATION-LOT103.md).
+La cible choisie pour le scanner continu est **OVH VPS-1 sous Ubuntu 24.04**.
+Le compte et le VPS restent à créer : voir [les options et l'installation](docs/OVH-SETUP.md).
+Le lot **103**, validé par la CI, fournit les services Docker, les données
+persistantes, les sauvegardes quotidiennes et le démarrage protégé pendant la
+migration. Voir [le guide commun](docs/CLOUD-DEPLOYMENT.md) et
+[les contrôles](docs/VALIDATION-LOT103.md). Aucun VPS de production n'est encore connecté.
 
 Les lots **99–102** ajoutent le calendrier de candidature par périodes, les
 changements importants dans les alertes, un audit de couverture, des priorités

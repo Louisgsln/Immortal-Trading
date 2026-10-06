@@ -1,9 +1,10 @@
 # Exploitation Docker et contrôles de reprise
 
 Le [lot 103](VALIDATION-LOT103.md) prépare un déploiement distant indépendant :
-guide [cloud gratuit](CLOUD-FREE.md), Compose dédié et sauvegardes quotidiennes.
+guide [de migration](CLOUD-DEPLOYMENT.md), Compose dédié et sauvegardes quotidiennes.
 Son build et la reprise sont exécutés dans Docker dans cette session, sans
-réseau et sous UID 10001. Aucun VPS de production n'est encore connecté.
+réseau et sous UID 10001. La cible choisie est [OVH VPS-1](OVH-SETUP.md).
+Aucun VPS de production n'est encore connecté.
 
 ## État de validation
 

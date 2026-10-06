@@ -1,9 +1,10 @@
 # Développement confirmé le 26 septembre 2026
 
-Le [lot 103](VALIDATION-LOT103.md) prépare le déplacement du scanner vers une
-VM gratuite, selon le budget zéro confirmé le 6 octobre. L'hébergement n'est
-pas connecté ; compte, accès et état de production sont nécessaires avant
-installation. Les CI des lots 99–102 ont toutes réussi.
+Le propriétaire a choisi [OVH VPS-1](OVH-SETUP.md) après l'étude gratuite du
+[lot 103](VALIDATION-LOT103.md), le 6 octobre. Il n'a pas encore de compte ni de
+VPS. Le déploiement Docker est validé ; le compte, l'accès au serveur et l'état
+Windows restent nécessaires pour l'installation. Les CI des lots 99–103 ont
+toutes réussi. Le prix mensuel final OVH doit être vérifié dans le panier.
 
 Le [lot 102](VALIDATION-LOT102.md) ajoute le diagnostic local des lanceurs et
 doublons. Les lots 99–101 sont publiés avec tests locaux ; la fin des contrôles
