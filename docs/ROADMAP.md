@@ -1,5 +1,10 @@
 # Suivi de construction
 
+Lot [103](VALIDATION-LOT103.md) : déploiement cloud préparé sous budget zéro,
+Compose indépendant, base existante exigée, migration explicite et sauvegardes
+vérifiées. Suite : compte/hôte gratuit accessible, transfert de l'état Windows,
+puis preuve d'une collecte réelle. Aucun achat ni provisionnement effectué.
+
 Lot [102](VALIDATION-LOT102.md) : commande `runtime` en lecture seule, lanceurs
 et configurations distingués, doublons potentiels visibles, PID Windows nettoyé
 à l'arrêt. Lots 99–101 publiés. Suite : accès à l'instance Windows pour installer

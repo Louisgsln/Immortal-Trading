@@ -1,5 +1,11 @@
 # Trading Job Radar
 
+Le lot **103** prépare le scanner sur un hôte Linux gratuit : services Docker,
+données persistantes, sauvegardes quotidiennes et démarrage protégé pendant la
+migration. Aucun hôte gratuit n'est encore connecté et aucun scanner distant
+de production n'est annoncé. Voir [le guide cloud](docs/CLOUD-FREE.md) et
+[les contrôles](docs/VALIDATION-LOT103.md).
+
 Les lots **99–102** ajoutent le calendrier de candidature par périodes, les
 changements importants dans les alertes, un audit de couverture, des priorités
 sans échéance dépassée, l'import révisé du suivi et le diagnostic des lanceurs.

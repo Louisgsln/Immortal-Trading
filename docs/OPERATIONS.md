@@ -1,5 +1,10 @@
 # Exploitation Docker et contrôles de reprise
 
+Le [lot 103](VALIDATION-LOT103.md) prépare un déploiement distant indépendant :
+guide [cloud gratuit](CLOUD-FREE.md), Compose dédié et sauvegardes quotidiennes.
+Son build et la reprise sont exécutés dans Docker dans cette session, sans
+réseau et sous UID 10001. Aucun VPS de production n'est encore connecté.
+
 ## État de validation
 
 Le **lot 36 valide le build et la reprise dans Docker Linux sur GitHub Actions**, au commit `28bda22` : image construite, ENTRYPOINT exécuté, huit offres synthétiques et onze tables identiques après restauration, sous UID 10001 et sans réseau. Les 2 068 tests passent aussi sur les quatre versions Python 3.11 à 3.14. Voir les preuves dans [VALIDATION-LOT36.md](VALIDATION-LOT36.md).

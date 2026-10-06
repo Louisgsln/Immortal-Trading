@@ -5,7 +5,10 @@ ENV UV_PYTHON_DOWNLOADS=never UV_LINK_MODE=copy
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
 COPY src ./src
-RUN uv sync --locked --no-dev --no-editable
+RUN --mount=type=secret,id=proxy_ca \
+    if [ -f /run/secrets/proxy_ca ]; then \
+      SSL_CERT_FILE=/run/secrets/proxy_ca uv sync --locked --no-dev --no-editable; \
+    else uv sync --locked --no-dev --no-editable; fi
 
 FROM ${PYTHON_IMAGE} AS runtime
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PATH="/app/.venv/bin:$PATH"
@@ -14,10 +17,11 @@ RUN groupadd --gid 10001 radar \
     && useradd --no-log-init --create-home --uid 10001 --gid 10001 radar \
     && mkdir -p /app/data \
     && chown radar:radar /app/data
-COPY --from=builder /app/.venv /app/.venv
-COPY config ./config
-COPY tests/fixtures/jobs.json ./tests/fixtures/jobs.json
-COPY scripts/smoke_container.py ./scripts/smoke_container.py
+COPY --chown=10001:10001 --from=builder /app/.venv /app/.venv
+COPY --chown=10001:10001 config ./config
+COPY --chown=10001:10001 tests/fixtures/jobs.json ./tests/fixtures/jobs.json
+COPY --chown=10001:10001 scripts/smoke_container.py ./scripts/smoke_container.py
+COPY --chown=10001:10001 scripts/cloud_runtime.py ./scripts/cloud_runtime.py
 USER 10001:10001
 HEALTHCHECK --interval=5m --timeout=30s --start-period=10m --retries=3 \
     CMD ["trading-radar", "health"]

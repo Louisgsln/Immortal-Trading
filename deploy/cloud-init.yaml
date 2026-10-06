@@ -1,0 +1,11 @@
+#cloud-config
+# Supply only when creating an already confirmed free Ubuntu 24.04 VM.
+# This file creates no cloud resource and contains no credential.
+package_update: true
+packages:
+  - git
+  - docker.io
+  - docker-compose-v2
+runcmd:
+  - [systemctl, enable, --now, docker]
+  - [install, -d, -o, '10001', -g, '10001', -m, '0700', /srv/immortal-trading/data]

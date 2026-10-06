@@ -11,6 +11,7 @@ dist/
 .env
 .env.*
 !.env.example
+!.env.cloud.example
 data/*
 !data/.gitkeep
 *.db*

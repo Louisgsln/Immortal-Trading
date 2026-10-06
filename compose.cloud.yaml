@@ -1,0 +1,57 @@
+# Independent deployment: docker compose --env-file .env.cloud -f compose.cloud.yaml ...
+name: immortal-trading-cloud
+x-runtime: &runtime
+  image: ${RADAR_IMAGE:?Set an image tag for the validated release}
+  build: .
+  restart: unless-stopped
+  init: true
+  read_only: true
+  tmpfs:
+    - /tmp
+  stop_grace_period: 30s
+  env_file: .env.cloud
+  environment:
+    DATABASE_URL: sqlite:////app/data/jobs.db
+  volumes:
+    - type: bind
+      source: ${RADAR_DATA_DIR:?Set an existing persistent data directory}
+      target: /app/data
+      bind:
+        create_host_path: false
+    - type: bind
+      source: ./config
+      target: /app/config
+      read_only: true
+      bind:
+        create_host_path: false
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+  entrypoint: ["python", "scripts/cloud_runtime.py"]
+services:
+  radar:
+    <<: *runtime
+    command: ["watch"]
+    healthcheck:
+      test: ["CMD", "python", "scripts/cloud_runtime.py", "check-live"]
+      interval: 5m
+      timeout: 30s
+      start_period: 10m
+      retries: 3
+  backups:
+    <<: *runtime
+    command: ["backups"]
+    healthcheck:
+      disable: true
+  telegram:
+    <<: *runtime
+    profiles: ["telegram"]
+    command: ["telegram"]
+    healthcheck:
+      disable: true
