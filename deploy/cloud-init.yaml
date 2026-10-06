@@ -1,5 +1,5 @@
 #cloud-config
-# Supply only when creating an already chosen Ubuntu 24.04 VM.
+# Supply only when creating an already chosen Ubuntu 24.04 or 26.04 LTS VM.
 # This file creates no cloud resource and contains no credential.
 package_update: true
 packages:

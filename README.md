@@ -1,6 +1,6 @@
 # Trading Job Radar
 
-La cible choisie pour le scanner continu est **OVH VPS-1 sous Ubuntu 24.04**.
+La cible choisie pour le scanner continu est **OVH VPS-1 sous Ubuntu 26.04 LTS**.
 Le compte et le VPS restent à créer : voir [les options et l'installation](docs/OVH-SETUP.md).
 Le lot **103**, validé par la CI, fournit les services Docker, les données
 persistantes, les sauvegardes quotidiennes et le démarrage protégé pendant la

@@ -1,7 +1,8 @@
 # Installer le scanner sur OVH
 
-Cible choisie le **6 octobre 2026** : OVH VPS-1. Le propriétaire n'a pas encore
-de compte ni de VPS. Le scanner distant reste à installer ; le lot 103 et son
+Cible choisie le **6 octobre 2026** : OVH VPS-1 sous Ubuntu 26.04 LTS.
+Le propriétaire n'a pas encore de compte ni de VPS. Le scanner distant reste
+à installer ; le lot 103 et son
 parcours Docker sont déjà [validés par la CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37417323727).
 
 ## 1. Créer le compte et choisir le VPS
@@ -13,7 +14,7 @@ de paiement et la validation de la commande se renseignent directement chez OVH.
 | Réglage | Choix pour démarrer |
 |---|---|
 | Offre | VPS-1 : 2 vCores, 4 Go de RAM, 40 Go SSD NVMe |
-| Système | Ubuntu 24.04 LTS, installation Linux simple |
+| Système | Ubuntu 26.04 LTS, installation Linux simple |
 | Localisation | France, centre de données standard disponible |
 | Facturation | Mensuelle, sans engagement annuel pour le premier essai |
 | Options | Conserver les inclusions ; aucun supplément payant nécessaire au scanner |
@@ -24,6 +25,13 @@ pas un prix mensuel sans engagement confirmé. Vérifier dans le panier le total
 TTC dû aujourd'hui, la durée d'engagement, la périodicité et le tarif de
 renouvellement avant paiement. Le prix exact du panier n'est pas vérifiable
 dans cette session. Ce choix OVH est payant, contrairement au budget initial.
+
+Ubuntu 26.04 LTS figure parmi les [OS inclus chez OVH](https://www.ovhcloud.com/fr/vps/os/).
+[Docker prend en charge cette version](https://docs.docker.com/engine/install/ubuntu/).
+Les paquets Ubuntu `docker.io`, `docker-buildx` et `docker-compose-v2` existent
+dans [Resolute 26.04](https://packages.ubuntu.com/resolute/docker.io).
+Le scanner conserve son environnement Python dans l'image Docker validée.
+L'installation et les collectes sur ce VPS restent à vérifier après sa création.
 
 Les ressources constituent un point de départ pour le scanner Python et SQLite ;
 leur utilisation sera mesurée après installation. Aucun domaine, panneau
@@ -57,9 +65,10 @@ authentification à cet hôte. La session cloud actuelle n'a pas cet accès.
 
 ## 3. Préparer Ubuntu
 
-Sur un VPS Ubuntu 24.04 neuf, dans la session SSH :
+Sur un VPS Ubuntu 26.04 LTS neuf, dans la session SSH :
 
 ```bash
+cat /etc/os-release
 sudo apt-get update
 sudo apt-get install -y git docker.io docker-buildx docker-compose-v2
 sudo systemctl enable --now docker
