@@ -107,6 +107,43 @@ Les instances sont séparées mais partagent les mêmes données. Les verrous
 existants du radar protègent une seule instance locale de chaque rôle ; ils ne
 peuvent pas constater l'arrêt d'un ancien PC distant.
 
+## Diagnostiquer les sources et préparer Telegram
+
+Depuis le dossier du projet, avec le scanner actif et les envois encore désactivés :
+
+```bash
+RADAR_PROJECT_DIR="$PWD" bash scripts/cloud_telegram_preflight.sh
+```
+
+Le script inspecte les lanceurs connus sur l'hôte, les derniers échecs du
+collecteur, les sources à vérifier et l'état local de la session Nomura. Il
+consulte SQLite en lecture seule et vérifie le bot, le chat privé et le webhook
+avec `getMe`, `getChat` et `getWebhookInfo`. Il ne modifie ni configuration ni
+curseur, ne consomme aucune mise à jour Telegram et n'envoie aucun message.
+Les journaux sont résumés sans URLs, erreurs brutes ou identifiants d'accès.
+
+`PREACTIVATION.prete=true` et une sortie 0 indiquent que ces contrôles ont passé.
+Une file `pending`, `sending` ou `unknown`, un lanceur concurrent identifié, un
+état lié à une autre destination ou une attente sans curseur exploitable
+bloquent la préparation. Le script conserve les états `sent`, les révisions,
+le curseur des commandes et le dernier récapitulatif. Les lanceurs importés ou
+les autres machines restent hors de cet inventaire : confirmer séparément
+l'arrêt des services Windows avant l'activation.
+
+Une source `stale` n'a pas de succès validé depuis plus de 24 heures. Elle
+maintient la santé critique même si d'autres collectes réussissent et si le
+watcher est actif. Le healthcheck dispose de dix minutes de grâce, vérifie
+toutes les cinq minutes et demande trois échecs comptabilisés avant de déclarer
+le conteneur unhealthy. Un échec de santé ne redémarre pas à lui seul le collecteur. Examiner le dernier
+échec et le délai de reprise de chaque source. L'accès Nomura soumis au CAPTCHA
+demande une validation manuelle selon [le guide de session](NOMURA-ACCESS.md).
+
+Ce contrôle prépare l'activation ; celle-ci reste une opération distincte.
+Conserver l'historique des alertes et l'état Telegram, puis vérifier la file
+une dernière fois avant de modifier les deux réglages concernés. Les offres
+collectées avec les alertes désactivées restent en base sans file historique
+automatique à vider lors de l'activation.
+
 ## Sauvegardes, maintenance et arrêt
 
 Le service `backups` crée immédiatement une archive cohérente vérifiée, puis

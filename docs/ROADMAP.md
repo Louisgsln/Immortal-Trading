@@ -1075,3 +1075,17 @@ Deux collectes réelles sur copie conservent scores et suivi. Les références
 encore invérifiables restent visibles ; leur disparition n'établit aucune
 fermeture. La prochaine étape de fiabilité est leur récupération lorsque les
 employeurs publient à nouveau des fiches identifiables.
+
+## Lot 104 — Diagnostic cloud et préactivation Telegram
+
+Outil d'exploitation en lecture seule pour identifier les sources en retard,
+classer les échecs récents sans divulguer les erreurs brutes et vérifier les
+lanceurs connus, la file d'alertes et le curseur Telegram. Les trois appels de
+préparation contrôlent l'identité du bot, le chat privé et le webhook sans
+consommer les commandes ni envoyer de message. Une file ou une reprise ambiguë
+produit un blocage explicite et une sortie non nulle.
+
+Quatorze tests ciblés vérifient l'absence de mutation et d'envoi, les curseurs
+restaurés, les attentes sans curseur, les états de livraison et la confidentialité
+des journaux. Six tests existants de reprise sans réenvoi ont aussi passé.
+Voir [le guide d'exploitation cloud](CLOUD-DEPLOYMENT.md#diagnostiquer-les-sources-et-préparer-telegram).
