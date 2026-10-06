@@ -1,11 +1,12 @@
 # Suivi de construction
 
-Hôte choisi après le lot 103 : [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md),
-livraison Ubuntu 26.04 confirmée. Le lot [103](VALIDATION-LOT103.md) fournit le Compose indépendant,
-une base existante exigée, la migration explicite et les sauvegardes vérifiées ;
-sa CI a réussi. Suite : accès SSH, transfert
-de l'état Windows, puis preuve d'une collecte réelle. Aucun achat ni
-provisionnement effectué depuis cette session.
+Hôte actif : [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md). Migration de la base,
+scanner, sauvegardes et activation Telegram confirmés par les relevés transmis
+par le propriétaire ; les 34 alertes déjà envoyées ont été conservées à l'activation.
+L'image active reste le lot [103](VALIDATION-LOT103.md). Suite :
+[raccorder directement le VPS à ce chat](REMOTE-ACCESS.md), relever les champs publics
+en échec, puis livrer les corrections des collecteurs. Aucun accès distant depuis
+ce chat n'est encore vérifié.
 
 Lot [102](VALIDATION-LOT102.md) : commande `runtime` en lecture seule, lanceurs
 et configurations distingués, doublons potentiels visibles, PID Windows nettoyé
@@ -1127,3 +1128,20 @@ et niveau d'embauche restent à choisir sur les valeurs réelles ; aucun nouveau
 libellé n'est supposé être Graduate et aucun pays ou jour n'est inventé.
 Les sources BNP/Nomura restent soumises au refus HTTP 403/CAPTCHA rapporté.
 L'image OVH actuelle n'est pas mise à jour par le helper de diagnostic.
+
+## Lot 107 — Accès d'administration directement sur le VPS
+
+Le propriétaire demande une chaîne « chat → VPS → scanner et Telegram », sans
+transfert manuel des commandes et résultats ni dépendance au PC allumé.
+Le helper installe une version inspectée de l'agent Remote Desktop Commander,
+vérifie son intégrité npm et prépare un service persistant sous `ubuntu`.
+Les instructions d'appairage restent privées et les sorties des outils sont
+écartées avant les journaux systemd. Les services applicatifs et leurs états
+restent indépendants de cette installation.
+
+Les contrôles locaux sont consignés dans [le bilan](VALIDATION-LOT107.md).
+L'installation du plugin est confirmée, mais aucun outil du plugin n'est encore
+accessible dans cette session. L'installation sur le VPS, la validation navigateur
+par le propriétaire et une commande réelle depuis ce chat restent à effectuer.
+Le lot 107 prépare cet accès ; il ne prétend ni établir la connexion ni résoudre
+les incidents des sources avant leur diagnostic.

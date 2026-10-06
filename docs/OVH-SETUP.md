@@ -1,10 +1,14 @@
 # Installer le scanner sur OVH
 
 Cible choisie le **6 octobre 2026** : OVH VPS-1 sous Ubuntu 26.04 LTS.
-La livraison d'un VPS sous Ubuntu 26.04 avec l'utilisateur `ubuntu` est
-confirmée. L'accès SSH depuis cette session et le transfert de la base Windows
-restent à établir. Le scanner distant reste à installer ; le lot 103 et son
-parcours Docker sont déjà [validés par la CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37417323727).
+La livraison d'un VPS sous Ubuntu 26.04 avec l'utilisateur `ubuntu`, la migration
+de la base et le démarrage du scanner, des sauvegardes et de Telegram sont
+confirmés par les résultats transmis par le propriétaire. L'image installée
+reste celle du lot 103, dont le parcours Docker est
+[validé par la CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37417323727).
+L'accès SSH fonctionne depuis le PC Windows. Pour administrer le serveur depuis
+ce chat sans dépendre du PC, le [raccordement direct du VPS](REMOTE-ACCESS.md) est
+préparé ; son installation et son appairage restent à confirmer.
 
 ## 1. Créer le compte et choisir le VPS
 
