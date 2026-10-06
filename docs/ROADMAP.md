@@ -1,9 +1,9 @@
 # Suivi de construction
 
 Hôte choisi après le lot 103 : [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md),
-compte et VPS encore absents. Le lot [103](VALIDATION-LOT103.md) fournit le Compose indépendant,
+livraison Ubuntu 26.04 confirmée. Le lot [103](VALIDATION-LOT103.md) fournit le Compose indépendant,
 une base existante exigée, la migration explicite et les sauvegardes vérifiées ;
-sa CI a réussi. Suite : création du compte et du serveur, accès SSH, transfert
+sa CI a réussi. Suite : accès SSH, transfert
 de l'état Windows, puis preuve d'une collecte réelle. Aucun achat ni
 provisionnement effectué depuis cette session.
 

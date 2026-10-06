@@ -2,9 +2,10 @@
 
 Le propriétaire a choisi [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md) après
 l'étude gratuite du [lot 103](VALIDATION-LOT103.md), le 6 octobre.
-Il n'a pas encore de compte ni de
-VPS. Le déploiement Docker est validé ; le compte, l'accès au serveur et l'état
-Windows restent nécessaires pour l'installation. Les CI des lots 99–103 ont
+La livraison Ubuntu 26.04 et l'utilisateur `ubuntu` sont maintenant confirmés.
+Le PC Windows est disponible ; l'accès SSH depuis la session et le transfert
+de l'état Windows restent nécessaires pour l'installation. Le déploiement
+Docker est validé. Les CI des lots 99–103 ont
 toutes réussi. Le prix mensuel final OVH doit être vérifié dans le panier.
 
 Le [lot 102](VALIDATION-LOT102.md) ajoute le diagnostic local des lanceurs et

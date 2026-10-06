@@ -1,8 +1,9 @@
 # Installer le scanner sur OVH
 
 Cible choisie le **6 octobre 2026** : OVH VPS-1 sous Ubuntu 26.04 LTS.
-Le propriétaire n'a pas encore de compte ni de VPS. Le scanner distant reste
-à installer ; le lot 103 et son
+La livraison d'un VPS sous Ubuntu 26.04 avec l'utilisateur `ubuntu` est
+confirmée. L'accès SSH depuis cette session et le transfert de la base Windows
+restent à établir. Le scanner distant reste à installer ; le lot 103 et son
 parcours Docker sont déjà [validés par la CI](https://github.com/Louisgsln/Immortal-Trading/actions/runs/37417323727).
 
 ## 1. Créer le compte et choisir le VPS
@@ -31,7 +32,7 @@ Ubuntu 26.04 LTS figure parmi les [OS inclus chez OVH](https://www.ovhcloud.com/
 Les paquets Ubuntu `docker.io`, `docker-buildx` et `docker-compose-v2` existent
 dans [Resolute 26.04](https://packages.ubuntu.com/resolute/docker.io).
 Le scanner conserve son environnement Python dans l'image Docker validée.
-L'installation et les collectes sur ce VPS restent à vérifier après sa création.
+L'installation et les collectes sur ce VPS restent à vérifier après connexion.
 
 Les ressources constituent un point de départ pour le scanner Python et SQLite ;
 leur utilisation sera mesurée après installation. Aucun domaine, panneau
@@ -53,6 +54,7 @@ ssh ubuntu@IP_DU_VPS
 
 Si OVH demande de changer le mot de passe temporaire, le faire ; la session
 peut se fermer après ce changement. Se reconnecter ensuite avec la même commande.
+Pendant la saisie du mot de passe SSH, aucun caractère ni astérisque ne s'affiche.
 L'utilisateur indiqué dans l'e-mail prévaut s'il diffère de `ubuntu`.
 Pour l'accès durable par clé, suivre le
 [guide officiel SSH](https://docs.ovhcloud.com/en/guides/bare-metal-cloud/dedicated-servers/creating-ssh-keys).
