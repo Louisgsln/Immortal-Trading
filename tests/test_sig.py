@@ -198,12 +198,90 @@ def test_pagination_drift_fails(monkeypatch, mode):
             return page(rows[2:], 5)
         if n == 2 and mode == "short":
             return page(rows[2:3], 4)
-        if n == 1 and c == 2 and mode == "shift":
+        if n == 1 and c % 2 == 0 and mode == "shift":
             return page(list(reversed(rows[:2])), 4)
         return p
 
     with pytest.raises(SourceUnavailable):
         execute(monkeypatch, rows, mutate)
+
+
+@pytest.mark.parametrize("mode", ["repeat", "count", "shift"])
+def test_transient_pagination_change_restarts_from_page_one_and_returns_only_valid_attempt(
+    monkeypatch, mode
+):
+    rows = [row(i) for i in range(1, 5)]
+    modified = False
+
+    def mutate(payload, number, count):
+        nonlocal modified
+        if not modified and number == 2 and mode == "repeat":
+            modified = True
+            return page(rows[:2], 4)
+        if not modified and number == 2 and mode == "count":
+            modified = True
+            return page(rows[2:], 5)
+        if not modified and number == 1 and count == 2 and mode == "shift":
+            modified = True
+            return page(list(reversed(rows[:2])), 4)
+        # An obsolete row from the failed attempt must not escape the collector.
+        if modified:
+            payload = page(
+                [
+                    dict(item["data"], description="<p>Current trading duties.</p>")
+                    for item in payload["jobs"]
+                ],
+                4,
+            )
+        return payload
+
+    result = execute(monkeypatch, rows, mutate)
+    assert [job.external_id for job in result.jobs] == ["1", "2", "3", "4"]
+    assert all("Current trading duties." in job.description for job in result.jobs)
+    assert result.requests == (7 if mode == "shift" else 6)
+    assert result.complete is False
+
+
+def test_persistent_pagination_change_retries_only_once(monkeypatch):
+    pages = []
+
+    def mutate(payload, number, count):
+        pages.append(number)
+        return page([row(1), row(2)], 4) if number == 2 else payload
+
+    with pytest.raises(SourceUnavailable, match="duplicate jobs"):
+        execute(monkeypatch, [row(i) for i in range(1, 5)], mutate)
+    assert pages == [1, 2, 1, 2]
+
+
+def test_malformed_page_does_not_trigger_catalogue_retry(monkeypatch):
+    pages = []
+
+    def mutate(payload, number, count):
+        pages.append(number)
+        return page([row(3)], 4) if number == 2 else payload
+
+    with pytest.raises(SourceUnavailable, match="incomplete"):
+        execute(monkeypatch, [row(i) for i in range(1, 5)], mutate)
+    assert pages == [1, 2]
+
+
+def test_retry_keeps_a_single_collection_time_budget(monkeypatch):
+    collector = SIGCollector("sig", config(), type("HTTP", (), {"counts": {"sig": 0}})())
+    collector.options.max_scan_seconds = 0.02
+    calls = 0
+
+    async def collect():
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise SourceUnavailable("SIG board changed during pagination")
+        await asyncio.Event().wait()
+
+    monkeypatch.setattr(collector, "_collect", collect)
+    with pytest.raises(SourceUnavailable, match="time budget"):
+        asyncio.run(collector.collect())
+    assert calls == 2
 
 
 def test_empty_board_limits_and_failed_second_job(monkeypatch):

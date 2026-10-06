@@ -531,7 +531,9 @@ def parse_board(
                 raise SourceUnavailable("HRT job type missing or changed")
             junior = "junior" if types == ["Full-Time: New Grad"] else None
         if config.tenant == "imc":
-            if "Worker Sub Type" not in fields or fields["Worker Sub Type"] not in {
+            if not isinstance(fields.get("Worker Sub Type"), str) or fields[
+                "Worker Sub Type"
+            ] not in {
                 "Graduate",
                 "Experienced",
                 "Intern",

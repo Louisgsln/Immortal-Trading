@@ -185,6 +185,32 @@ réel. Le récapitulatif quotidien conserve la préférence et la date importée
 Les sources périmées continuent d'apparaître dans la santé ; l'activation ne
 masque pas leurs échecs.
 
+## Extraire les champs en cause sans interrompre les services
+
+Lorsqu'un contrôle nomme le champ fautif mais ne montre pas sa valeur, le helper
+du lot 106 interroge uniquement les sources publiques IMC, CA CIB, HSBC programmes
+et SIG avec les collecteurs actuellement installés :
+
+```bash
+sudo docker compose --env-file .env.cloud -f compose.cloud.yaml exec -T radar \
+  python - < scripts/probe_source_fields.py
+```
+
+Les lignes `CHAMPS_SOURCE=` contiennent les valeurs bornées des champs concernés
+et les compteurs de pagination SIG. Une réussite est une observation isolée,
+sans import en base. Le helper n'ouvre aucune base, ne crée aucun notifier et ne
+modifie aucun service, configuration ou curseur. Les réglages Telegram peuvent
+rester actifs. Les robots, HTTPS et la cadence publique sont conservés, avec un
+minimum de trois secondes entre requêtes, aucun retry HTTP et des limites de
+40 requêtes et 120 secondes par source. L'extraction peut prendre plusieurs
+minutes ; ses limites sont distinguées d'un refus de l'employeur.
+
+Les URLs, emails et formes de tokens sont masqués ; descriptions complètes,
+identifiants d'accès et sessions ne sont pas extraits. BNP et Nomura ne sont
+pas interrogés par ce helper : leurs HTTP 403 et CAPTCHA demandent un examen
+distinct de l'accès public. Le helper peut être transmis via stdin à l'image du
+lot 103 : aucune mise à jour du scanner n'est implicitement effectuée.
+
 ## Sauvegardes, maintenance et arrêt
 
 Le service `backups` crée immédiatement une archive cohérente vérifiée, puis

@@ -1104,5 +1104,26 @@ Le diagnostic nomme les contrôles littéraux des quatre connecteurs en échec e
 consulte aussi le journal SQLite lorsque les logs récents ne les contiennent
 plus. Aucun message brut extérieur n'est reproduit. Trente-huit tests ciblés
 valident les deux helpers, leurs garde-fous, les états privés et les reprises ;
-lint, format et typage passent. L'exécution d'activation et le dialogue `/status`
-restent à constater sur le VPS. Voir [le guide cloud](CLOUD-DEPLOYMENT.md#activer-les-alertes-et-les-commandes-après-laudit).
+lint, format et typage passent. L'opérateur a confirmé l'activation sur OVH : un
+worker par rôle, alertes et commandes actives, incidents/rappels désactivés et
+34 alertes déjà envoyées conservées. Le dialogue `/status` reste à confirmer.
+Voir [le guide cloud](CLOUD-DEPLOYMENT.md#activer-les-alertes-et-les-commandes-après-laudit).
+
+## Lot 106 — Reprise SIG bornée et preuves des champs en échec
+
+Une pagination SIG qui change entre les pages est relue une fois depuis la
+première page, dans le même budget de temps et avec la cadence existante. Les
+données de la tentative rejetée ne sont jamais retournées et le compteur de
+requêtes inclut les deux tentatives. Une incohérence persistante ou un autre
+défaut de validation reste un échec visible. Les contrôles IMC refusent aussi
+explicitement une classification de type liste, au lieu d'une erreur Python.
+
+Un helper indépendant extrait les seuls champs publics nécessaires au diagnostic
+CA CIB, HSBC et IMC, ainsi que les compteurs et références de pagination SIG.
+Les tests interdisent tout usage de SQLite, des notifications et des commandes
+de service pendant cette extraction. Les refus robots, budgets, identités
+privées et masquages sont vérifiés. Les correctifs sémantiques de date, adresse
+et niveau d'embauche restent à choisir sur les valeurs réelles ; aucun nouveau
+libellé n'est supposé être Graduate et aucun pays ou jour n'est inventé.
+Les sources BNP/Nomura restent soumises au refus HTTP 403/CAPTCHA rapporté.
+L'image OVH actuelle n'est pas mise à jour par le helper de diagnostic.

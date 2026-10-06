@@ -169,11 +169,28 @@ class SIGCollector:
         return parse_page(payload, number, self.options.max_results_per_query)
 
     async def collect(self) -> Collection:
+        before = self.http.counts[self.source]
         try:
             async with asyncio.timeout(self.options.max_scan_seconds):
-                return await self._collect()
+                for attempt in range(2):
+                    try:
+                        result = await self._collect()
+                        result.requests = self.http.counts[self.source] - before
+                        return result
+                    except SourceUnavailable as error:
+                        # A live catalogue can change between pages. Re-read it
+                        # once from page 1, retaining pacing and the same budget.
+                        # A persistent drift or another validation failure stays
+                        # unavailable; no rows from a failed attempt are returned.
+                        if attempt or str(error) not in {
+                            "SIG total changed during pagination",
+                            "SIG duplicate jobs or repeated page",
+                            "SIG board changed during pagination",
+                        }:
+                            raise
         except TimeoutError:
             raise SourceUnavailable("SIG scan time budget exceeded") from None
+        raise AssertionError("SIG collection did not complete")
 
     async def _collect(self) -> Collection:
         before = self.http.counts[self.source]

@@ -322,6 +322,10 @@ def test_prospect_hidden_and_duplicate_ids():
             {"name": "Is Hidden Job?", "value": None},
             {"name": "Worker Sub Type", "value": "Unknown"},
         ],
+        [
+            {"name": "Is Hidden Job?", "value": None},
+            {"name": "Worker Sub Type", "value": ["Graduate"]},
+        ],
         [{"name": "Is Hidden Job?", "value": None}, {"name": "Is Hidden Job?", "value": None}],
         [None],
     ],
