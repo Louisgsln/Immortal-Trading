@@ -128,6 +128,73 @@ def test_goldman_page_numbers(monkeypatch):
     assert pages == [0, 1]
 
 
+@pytest.mark.parametrize("failure", ["changed_total", "repeated", "short"])
+@pytest.mark.parametrize("recovers", [True, False])
+def test_goldman_restarts_inconsistent_search_once(monkeypatch, failure, recovers):
+    pages, details = [], []
+    attempt = 0
+
+    def handler(req):
+        nonlocal attempt
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if req.method != "POST":
+            identifier = req.url.path.rsplit("/", 1)[1]
+            details.append(identifier)
+            return httpx.Response(200, text=gs_html(gs_role(identifier)))
+        number = json.loads(req.content)["variables"]["searchQueryInput"]["page"]["pageNumber"]
+        pages.append(number)
+        if number == 0:
+            attempt += 1
+        if attempt == 2 and recovers:
+            rows = [gs_row(str(i)) for i in range(100 + number * 20, min(120 + number * 20, 124))]
+            return httpx.Response(200, json=gs_page(rows, 24))
+        if number == 0:
+            return httpx.Response(200, json=gs_page([gs_row(str(i)) for i in range(20)], 23))
+        rows = [gs_row(str(i)) for i in range(20, 23)]
+        total = 23
+        if failure == "changed_total":
+            total = 24
+        elif failure == "repeated":
+            rows[0] = gs_row("0")
+        else:
+            rows.pop()
+        return httpx.Response(200, json=gs_page(rows, total))
+
+    if recovers:
+        result = run("goldman", handler, monkeypatch)
+        assert [job.external_id for job in result.jobs] == [str(i) for i in range(100, 124)]
+        assert details == [str(i) for i in range(100, 124)]
+    else:
+        with pytest.raises(SourceUnavailable):
+            run("goldman", handler, monkeypatch)
+        assert details == []
+    assert pages == [0, 1, 0, 1]
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"errors": [{"message": "Unavailable"}]},
+        gs_page([], True),
+        gs_page([], 2000),
+        gs_page([{**gs_row(), "externalSource": {"sourceId": "../1"}}]),
+    ],
+)
+def test_goldman_does_not_retry_other_validation_failures(monkeypatch, payload):
+    posts = []
+
+    def handler(req):
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        posts.append(req.method)
+        return httpx.Response(200, json=payload)
+
+    with pytest.raises(SourceUnavailable):
+        run("goldman", handler, monkeypatch)
+    assert posts == ["POST"]
+
+
 def test_campus_search_uses_own_category_and_ignores_scheduling_date(monkeypatch):
     async def no_sleep(_):
         pass
@@ -397,7 +464,7 @@ def test_changed_total_aborts(ats, monkeypatch):
         count += 1
         if ats == "goldman":
             payload = gs_page(
-                [gs_row(str(i), "Trading Operations") for i in range(20)], 21 if count == 1 else 22
+                [gs_row(str(i), "Trading Operations") for i in range(20)], 21 if count % 2 else 22
             )
         else:
             payload = oracle_page([oracle_row(123, "Trading Operations")], 2 if count == 1 else 3)

@@ -85,7 +85,7 @@ def execute(monkeypatch, rows, mutate=None, **options):
 def test_all_pages_then_filter_and_no_application_requests(monkeypatch):
     result = execute(monkeypatch, [row(), row(2, title="Accountant"), row(3)])
     assert [j.external_id for j in result.jobs] == ["1", "3"]
-    assert result.requests == 4 and not result.complete
+    assert result.requests == 4 and not result.complete and result.scope_complete
     job = result.jobs[0]
     assert job.seniority_hint == "junior"
     assert job.expected_start_date == "June 2027 Start"

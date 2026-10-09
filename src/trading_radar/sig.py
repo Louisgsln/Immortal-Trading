@@ -236,5 +236,8 @@ class SIGCollector:
         if len(jobs) > self.options.max_details:
             raise SourceUnavailable("SIG selected-job limit exceeded")
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )

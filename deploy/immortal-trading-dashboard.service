@@ -1,0 +1,15 @@
+[Unit]
+Description=Immortal Trading private live Dashboard and HTTPS
+Requires=docker.service
+After=docker.service network-online.target immortal-trading-cloud.service
+Wants=network-online.target immortal-trading-cloud.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/ubuntu/Immortal-Trading
+ExecStart=/usr/bin/docker compose --env-file .env.dashboard -f compose.dashboard.yaml up -d --no-build --no-recreate --wait --wait-timeout 120
+TimeoutStartSec=180
+
+[Install]
+WantedBy=multi-user.target

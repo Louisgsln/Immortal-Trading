@@ -159,7 +159,12 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     start = fields.get("fldjobdescription_date1") or None
     if start:
         try:
-            start = datetime.strptime(start, "%d/%m/%Y").date().isoformat()
+            # The same public field uses slash and dot day-first dates.
+            shape = re.fullmatch(r"[0-9]{1,2}([/.])[0-9]{1,2}\1[0-9]{4}", start)
+            if shape is None:
+                raise ValueError("Unsupported employment start date")
+            separator = shape[1]
+            start = datetime.strptime(start, f"%d{separator}%m{separator}%Y").date().isoformat()
         except ValueError:
             raise SourceUnavailable("invalid CA CIB employment start date") from None
     evidence = ca_experience_evidence(fields.get("fldapplicantcriteria_experiencelevel", ""))
@@ -250,5 +255,8 @@ class CACIBCollector:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )

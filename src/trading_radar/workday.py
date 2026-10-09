@@ -456,6 +456,7 @@ class WorkdayCollector:
         return Collection(
             jobs=jobs,
             complete=False,
+            scope_complete=True,
             requests=self.http.counts[self.source] - before,
             listing_gaps=sorted(self.listing_gaps),
             selection=audit.summary(),

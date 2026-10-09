@@ -245,6 +245,42 @@ def test_duplicate_inside_one_page_is_not_retried(monkeypatch):
     assert len([url for url in calls if "/en/api/" in url]) == 1
 
 
+def test_stale_detail_card_does_not_block_verified_optiver_jobs(monkeypatch):
+    rows = [row(), row(2)]
+    base = transport(rows, [])
+
+    def handler(req):
+        return httpx.Response(404) if req.url.path.endswith("role-2/") else base(req)
+
+    result = execute(monkeypatch, handler)
+    assert [job.external_id for job in result.jobs] == ["1"]
+    assert result.listing_gaps == [job_url(rows[1]["href"])]
+    assert not result.complete and not result.scope_complete
+    clean = execute(monkeypatch, base)
+    assert clean.scope_complete and not clean.complete and not clean.listing_gaps
+
+
+@pytest.mark.parametrize("status", [403, 429, 500])
+def test_optiver_access_and_transport_failures_still_fail_the_source(monkeypatch, status):
+    base = transport([row(), row(2)], [])
+
+    def handler(req):
+        return httpx.Response(status) if req.url.path.endswith("role-2/") else base(req)
+
+    with pytest.raises(SourceUnavailable):
+        execute(monkeypatch, handler)
+
+
+def test_optiver_all_detail_cards_missing_never_claims_partial_success(monkeypatch):
+    base = transport([row(), row(2)], [])
+
+    def handler(req):
+        return httpx.Response(404) if "/role-" in req.url.path else base(req)
+
+    with pytest.raises(SourceUnavailable, match="HTTP 404"):
+        execute(monkeypatch, handler)
+
+
 def test_budget_and_failed_detail_prevent_partial_collection(monkeypatch):
     rows = [row(), row(2)]
     with pytest.raises(SourceUnavailable, match="detail limit"):

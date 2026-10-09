@@ -1,0 +1,303 @@
+{
+  "format_version": 1,
+  "date": "2026-10-07",
+  "lots": [
+    {
+      "lot": 118,
+      "purpose": "Références stages partagées et collectes Greenhouse/SIG validées",
+      "coverage": {
+        "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+        "enabled_sources": 25,
+        "status": "ok",
+        "validated_sources": 17
+      },
+      "https_verified": true,
+      "incidents": [
+        {
+          "source": "optiver",
+          "status": "partial"
+        },
+        {
+          "source": "nomura_campus",
+          "status": "access_restricted"
+        },
+        {
+          "source": "bnp_paribas",
+          "status": "stale"
+        },
+        {
+          "source": "morgan_stanley_campus",
+          "status": "recent_failure"
+        }
+      ],
+      "jobs": 990,
+      "preservation": {
+        "checks": {
+          "alert_history_preserved": true,
+          "application_history_preserved": true,
+          "application_ids_preserved": true,
+          "backup_verified": true,
+          "database_inode_preserved": true,
+          "job_ids_preserved": true,
+          "sent_alerts_preserved": true,
+          "telegram_binding_preserved": true,
+          "telegram_cursor_preserved": true
+        },
+        "counts_after": {
+          "alert_history": 88,
+          "alerts": 44,
+          "application_history": 0,
+          "applications": 990,
+          "jobs": 990
+        },
+        "counts_before": {
+          "alert_history": 88,
+          "alerts": 44,
+          "application_history": 0,
+          "applications": 990,
+          "jobs": 990
+        },
+        "database": {
+          "schema_version": 4,
+          "status": "ok"
+        },
+        "stage": "verification",
+        "telegram_offset_after": 850284405,
+        "telegram_offset_before": 850284405
+      },
+      "release": "immortal-trading:lot118-baselines-20261007",
+      "services_running": 5
+    },
+    {
+      "lot": 119,
+      "purpose": "Année du stage, raccourcis 2027 et préférences mobile",
+      "coverage": {
+        "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+        "enabled_sources": 25,
+        "status": "ok",
+        "validated_sources": 23
+      },
+      "https_verified": true,
+      "incidents": [
+        {
+          "source": "nomura_professionals",
+          "status": "recent_failure"
+        },
+        {
+          "source": "optiver",
+          "status": "partial"
+        },
+        {
+          "source": "nomura_campus",
+          "status": "access_restricted"
+        },
+        {
+          "source": "bnp_paribas",
+          "status": "stale"
+        }
+      ],
+      "jobs": 990,
+      "preservation": {
+        "checks": {
+          "alert_history_preserved": true,
+          "application_history_preserved": true,
+          "application_ids_preserved": true,
+          "backup_verified": true,
+          "database_inode_preserved": true,
+          "job_ids_preserved": true,
+          "sent_alerts_preserved": true,
+          "telegram_binding_preserved": true,
+          "telegram_cursor_preserved": true
+        },
+        "counts_after": {
+          "alert_history": 88,
+          "alerts": 44,
+          "application_history": 0,
+          "applications": 990,
+          "jobs": 990
+        },
+        "counts_before": {
+          "alert_history": 88,
+          "alerts": 44,
+          "application_history": 0,
+          "applications": 990,
+          "jobs": 990
+        },
+        "database": {
+          "schema_version": 4,
+          "status": "ok"
+        },
+        "stage": "verification",
+        "telegram_offset_after": 850284405,
+        "telegram_offset_before": 850284405
+      },
+      "release": "immortal-trading:lot119-year-20261007",
+      "services_running": 5
+    },
+    {
+      "lot": 120,
+      "purpose": "Critères d’alerte et indicateur de politique radar isolé",
+      "coverage": {
+        "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+        "enabled_sources": 25,
+        "status": "ok",
+        "validated_sources": 23
+      },
+      "https_verified": true,
+      "incidents": [
+        {
+          "source": "optiver",
+          "status": "partial"
+        },
+        {
+          "source": "nomura_campus",
+          "status": "access_restricted"
+        },
+        {
+          "source": "bnp_paribas",
+          "status": "stale"
+        },
+        {
+          "source": "morgan_stanley_campus",
+          "status": "collection_degraded"
+        }
+      ],
+      "jobs": 990,
+      "preservation": {
+        "checks": {
+          "alert_history_preserved": true,
+          "application_history_preserved": true,
+          "application_ids_preserved": true,
+          "backup_verified": true,
+          "database_inode_preserved": true,
+          "job_ids_preserved": true,
+          "sent_alerts_preserved": true,
+          "telegram_binding_preserved": true,
+          "telegram_cursor_preserved": true
+        },
+        "counts_after": {
+          "alert_history": 88,
+          "alerts": 44,
+          "application_history": 0,
+          "applications": 990,
+          "jobs": 990
+        },
+        "counts_before": {
+          "alert_history": 88,
+          "alerts": 44,
+          "application_history": 0,
+          "applications": 990,
+          "jobs": 990
+        },
+        "database": {
+          "schema_version": 4,
+          "status": "ok"
+        },
+        "stage": "verification",
+        "telegram_offset_after": 850284405,
+        "telegram_offset_before": 850284405
+      },
+      "release": "immortal-trading:lot120-policy-20261007",
+      "services_running": 5
+    }
+  ],
+  "validation": {
+    "python_radar": 296,
+    "python_dashboard": 272,
+    "python_total": 568,
+    "javascript": 30,
+    "mobile_width": 390,
+    "mobile_flows": [
+      "year_filters",
+      "preferences",
+      "alert_explanations",
+      "private_application_edits",
+      "calendar_download"
+    ],
+    "mobile_errors": 0
+  },
+  "final_audit": {
+    "actual_image_verified": true,
+    "coverage": {
+      "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+      "enabled_sources": 25,
+      "status": "ok",
+      "validated_sources": 23
+    },
+    "dashboard_editable": true,
+    "dashboard_notifications_disabled": true,
+    "dashboard_radar_policy_matches": true,
+    "dashboard_without_telegram_credentials": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "https_trusted": true,
+    "incidents": [
+      {
+        "source": "optiver",
+        "status": "partial"
+      },
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "morgan_stanley_campus",
+        "status": "collection_degraded"
+      }
+    ],
+    "internship_pending_sources": [
+      "optiver",
+      "bnp_paribas"
+    ],
+    "internships": {
+      "active": 208,
+      "available": 204,
+      "criteria_met": 19,
+      "formats": {
+        "long": 25,
+        "off_cycle": 44,
+        "summer": 56
+      },
+      "total": 210,
+      "year_status": {
+        "confirmed": 134,
+        "conflict": 20,
+        "unknown": 50
+      }
+    },
+    "same_private_link": true,
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_control_enabled": true,
+      "telegram_incident_notices_enabled": false
+    },
+    "services_running": 5,
+    "summary": {
+      "active": 981,
+      "applications_due": 0,
+      "applications_in_progress": 0,
+      "enabled_sources": 25,
+      "fresh_sources": 21,
+      "high_priority": 257,
+      "relevant": 358,
+      "total": 990
+    },
+    "systemd_active_enabled": 4
+  }
+}

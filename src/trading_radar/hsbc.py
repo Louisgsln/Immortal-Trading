@@ -142,11 +142,20 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         values = {}
         for node in address.walk():
             key = node.attrs.get("itemprop")
-            if key in {"addressLocality", "addressRegion", "addressCountry"}:
+            if key in {"addressLocality", "addressRegion", "addressCountry", "streetAddress"}:
                 if key in values:
                     raise SourceUnavailable("HSBC conflicting address metadata")
                 values[key] = node.attrs.get("content") or clean(node)
         if not values.get("addressLocality") or not values.get("addressCountry"):
+            # Current emerging-talent pages can put the full address in this
+            # single field (e.g. London, GB, E14 5HQ). Retain it verbatim rather
+            # than guessing components or combining it with partial metadata.
+            combined = values.get("streetAddress", "")
+            if set(values) == {"streetAddress"} and re.fullmatch(
+                r"[^,\r\n]+,\s*[A-Z]{2}(?:,\s*[^,\r\n]+)?", combined
+            ):
+                places.append(combined)
+                continue
             raise SourceUnavailable("HSBC incomplete address")
         places.append(
             ", ".join(
@@ -262,5 +271,8 @@ class HSBCCollector:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )

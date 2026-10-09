@@ -1,11 +1,13 @@
 import html
 import re
 
+from trading_radar.config import Settings
 from trading_radar.degree_experience import degree_experience_years
 from trading_radar.in_experience import candidate_in_experience_years
 from trading_radar.internship_evidence import INTERNSHIP_EXCLUSION, explicit_jane_street_internship
 from trading_radar.models import Job, Score
 from trading_radar.normalizer import has, normalize_text
+from trading_radar.programmes import INTERNSHIP_TERMS, internship_selected, programme
 from trading_radar.range_experience import plain_range_experience_years
 from trading_radar.role_evidence import role_evidence_text
 from trading_radar.start_dates import start_period
@@ -167,13 +169,15 @@ def required_experience_years(text: str) -> list[int]:
     return list(dict.fromkeys([*minima, *additive_minima, *range_minima, *in_minima]))
 
 
-def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
+def score_job(job: Job, keywords: dict[str, list[str]], *, settings: Settings | None = None) -> Job:
     title = job.title_normalized
     text = normalize_text(job.title + " " + job.description_text)
     broking_duties = tp_broking_duties(job)
     evidence_description = broking_duties or role_evidence_text(job)
     evidence_text = normalize_text(job.title + " " + evidence_description)
     result = Score()
+    observed = programme(job) if settings and settings.include_internships else None
+    included_intern = bool(observed and settings and internship_selected(observed, settings))
     roles = classify(title, ROLE_TERMS)
     if broking_duties:
         roles = ["BROKING"]
@@ -196,7 +200,8 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
             "Asset and profile evidence excludes a verified DRW company paragraph"
         )
     junior = (
-        job.seniority_hint == "junior"
+        included_intern
+        or job.seniority_hint == "junior"
         or bool(broking_duties)
         or drw_junior_role(job)
         or any(
@@ -214,6 +219,17 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         )
     )
     result.exclusions = [t for t in keywords["excluded_titles"] if has(title, t)]
+    if included_intern:
+        result.exclusions = [
+            t for t in result.exclusions if normalize_text(t) not in INTERNSHIP_TERMS
+        ]
+        result.reasons.append(
+            "Stage off-cycle/long activé ; format et année vérifiés séparément pour les alertes"
+        )
+    elif observed and observed["kind"] == "internship":
+        result.exclusions.append(
+            "Stage hors des formats/année ciblés ou informations contradictoires"
+        )
     if operational_role(job):
         result.exclusions.append(OPERATIONAL_EXCLUSION)
     if verified_research and "research analyst" in result.exclusions:
@@ -222,12 +238,12 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
     if excluded_associate:
         result.exclusions.append(ASSOCIATE_EXCLUSION)
     contract = normalize_text(job.employment_type or "")
-    if any(
+    if not included_intern and any(
         has(contract, t)
         for t in ["internship", "intern", "stage", "apprenticeship", "apprentice", "alternance"]
     ):
         result.exclusions.append("internship or apprenticeship contract")
-    if explicit_jane_street_internship(job):
+    if not included_intern and explicit_jane_street_internship(job):
         result.exclusions.append(INTERNSHIP_EXCLUSION)
     # Senior titles override 'Analyst' when both occur (e.g. VP / Trading Analyst).
     result.exclusions += [t for t in keywords["senior_titles"] if has(title, t)]
@@ -275,7 +291,9 @@ def score_job(job: Job, keywords: dict[str, list[str]]) -> Job:
         else "unknown"
     )
     job.programme_type = (
-        "graduate"
+        "internship"
+        if observed and observed["kind"] == "internship"
+        else "graduate"
         if has(title, "graduate")
         else "VIE"
         if has(title, "vie") or has(title, "v i e")

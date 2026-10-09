@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-07",
+  "lots": [
+    "111-campus",
+    "112-filters",
+    "113-mobile"
+  ],
+  "runtime": {
+    "enabled_sources": 25,
+    "internship_sources_baselined": 17,
+    "alerts_enabled": true,
+    "telegram_control_enabled": true,
+    "internship_alerts_enabled": true,
+    "jobs": 979,
+    "alerts": 40,
+    "alert_history": 80,
+    "application_history": 0,
+    "telegram_offset": 850284405
+  },
+  "services_running": 5,
+  "same_private_link": true,
+  "backup_and_history_preserved": true,
+  "sudo_block_restored": true,
+  "mobile_browser": {
+    "width": 390,
+    "filters": true,
+    "save": true,
+    "agenda": true,
+    "persistence": true,
+    "no_horizontal_overflow": true,
+    "page_errors": 0
+  },
+  "validation": {
+    "full_python_suite": 4980,
+    "python_followup": 119,
+    "private_and_conditions": 110,
+    "node_tests": 19,
+    "caddy_https_synthetic": true
+  },
+  "limits": [
+    "JPMorgan Campus: robots.txt HTTP 403",
+    "Deutsche Bank dedicated campus portal: HTTP 403"
+  ]
+}

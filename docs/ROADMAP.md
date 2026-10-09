@@ -1,5 +1,19 @@
 # Suivi de construction
 
+## Lots 122–124 — Dashboard et architecture sur le VPS
+
+Trois lots : [état du radar et réglage du récapitulatif](VALIDATION-LOT122.md),
+[raccourcis de suivi mobile](VALIDATION-LOT123.md),
+[contrat du Dashboard dans l’image et la CI](VALIDATION-LOT124.md).
+Les livraisons publiques 108–121 déjà installées sont synchronisées depuis la copie
+de développement ; les ajouts distants du lot 107 sont conservés.
+Cible active : VPS OVH, radar et Telegram autonomes, Dashboard HTTPS par lien privé.
+Off-cycle et stages longs 2027 inclus ; Summer hors alertes.
+Preuves locales et de déploiement : [DELIVERY-LOTS122-124.json](DELIVERY-LOTS122-124.json).
+Prochaine priorité : diagnostic des sources Optiver et BNP Paribas sur preuves
+d’accès réelles, puis visibilité des résultats d’envoi des alertes dans les fiches.
+Nomura campus reste en attente si une intervention humaine est nécessaire.
+
 Hôte actif : [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md). Migration de la base,
 scanner, sauvegardes et activation Telegram confirmés par les relevés transmis
 par le propriétaire ; les 34 alertes déjà envoyées ont été conservées à l'activation.

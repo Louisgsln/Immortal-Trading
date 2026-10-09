@@ -1,7 +1,8 @@
 import os
 import re
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import yaml
 from dotenv import load_dotenv
@@ -43,6 +44,20 @@ class Settings(BaseModel):
     telegram_incident_notices_enabled: bool = False
     deadline_reminders_enabled: bool = False
     deadline_reminder_max_age_hours: float = Field(default=24, gt=0, le=168)
+    include_internships: bool = False
+    internship_alerts_enabled: bool = False
+    internship_formats: list[Literal["off_cycle", "long"]] = Field(
+        default=["off_cycle", "long"], min_length=1
+    )
+    internship_target_year: int = Field(default=2027, ge=2026, le=2100)
+    internship_baseline_at: datetime | None = None
+
+    @field_validator("internship_baseline_at")
+    @classmethod
+    def aware_baseline(cls, value: datetime | None) -> datetime | None:
+        if value is not None and value.utcoffset() is None:
+            raise ValueError("internship_baseline_at requires a timezone")
+        return value.astimezone(UTC) if value is not None else None
 
 
 class Config(BaseModel):

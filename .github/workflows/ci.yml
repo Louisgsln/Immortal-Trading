@@ -54,6 +54,8 @@ jobs:
         run: docker build --progress=plain --tag "$IMAGE" . 2>&1 | tee container-build.log
       - name: Check installed entrypoint
         run: docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges:true "$IMAGE" --help
+      - name: Validate packaged Dashboard assets and controls
+        run: docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges:true --entrypoint python "$IMAGE" -m trading_radar.dashboard_contract
       - name: Exercise isolated recovery without network access
         shell: bash
         run: |

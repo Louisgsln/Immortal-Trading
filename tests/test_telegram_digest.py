@@ -212,8 +212,39 @@ def test_digest_length_privacy_and_complete_links(local, store, repo, job):
     )
     text = notifier.sent[0]
     assert units(text) <= 4096 and "PRIVATE NOTE" not in text
-    assert "Sources à jour : 1/1" in text and "sur 6 correspondance(s)" in text
+    assert "Sources à jour : 1/1" in text and "6 offres repérées en 24 h" in text
+    assert "affichées" in text and notifier.options[-1] == {"parse_mode": "HTML"}
     assert "https://example.com/" + "x" * 675 + "0" in text
+    assert fingerprints(repo) == before
+
+
+def test_compact_digest_escapes_employer_text_and_retains_complete_clickable_link(local, repo, job):
+    with repo.transaction():
+        repo.db.execute(
+            "INSERT INTO companies(source,last_success,bootstrapped) VALUES('test',?,1)",
+            ((NOW - timedelta(minutes=1)).isoformat(),),
+        )
+        job.company = "Bank <A> & B"
+        job.company_normalized = "bank a b"
+        job.title = "Trader <b>Delta One</b> & Repo"
+        job.title_normalized = "trader b delta one b repo"
+        job.location = "Montrouge, Europe, France, Ile-de-France, 92 - Hauts-De-Seine"
+        from trading_radar.normalizer import normalize_text
+
+        job.location_normalized = normalize_text(job.location)
+        job.apply_url = "https://example.com/job?id=1&lang=fr"
+        job.first_seen = job.last_seen = NOW - timedelta(minutes=10)
+        job.application_deadline = None
+        job.score_breakdown = Score(trading=30, junior=20, start=15, front_office=15)
+        repo.upsert(job)
+    before = fingerprints(repo)
+    text = digest.digest_message(local, NOW)
+    assert "<b>Bank &lt;A&gt; &amp; B</b>" in text
+    assert "Trader &lt;b&gt;Delta One&lt;/b&gt; &amp; Repo" in text
+    assert 'href="https://example.com/job?id=1&amp;lang=fr"' in text
+    assert "📍 Montrouge · France" in text
+    assert "1 offre repérée en 24 h" in text
+    assert "Échéance : non précisée" not in text and "Vérifiée :" not in text
     assert fingerprints(repo) == before
 
 

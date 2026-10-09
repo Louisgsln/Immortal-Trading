@@ -4,29 +4,12 @@ import logging
 from datetime import UTC, date, datetime, time, timedelta
 from zoneinfo import ZoneInfo
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
-
 from trading_radar.config import Config
-from trading_radar.health import check_health
+from trading_radar.digest_state import DigestState
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
-
-
-class DigestState(BaseModel):
-    model_config = ConfigDict(extra="forbid", strict=True, allow_inf_nan=False)
-    digest_enabled: bool = False
-    digest_time: str = Field(default="09:00", pattern=r"^(?:[01][0-9]|2[0-3]):[0-5][0-9]$")
-    digest_not_before: float = Field(default=0, ge=0)
-    digest_last_day: str | None = None
-
-    @field_validator("digest_last_day")
-    @classmethod
-    def valid_day(cls, value):
-        if value is not None and date.fromisoformat(value).isoformat() != value:
-            raise ValueError("Invalid digest date")
-        return value
 
 
 def scheduled(day: date, clock: str) -> datetime:
@@ -59,15 +42,14 @@ def digest_status(state: DigestState) -> str:
 
 
 def digest_message(config: Config, now: datetime) -> str:
-    body = jobs_message(config, "new", now, max_units=3400)
-    health = check_health(config, now=now)
-    if health["database"]["status"] == "ok":
-        summary = (
-            f"Sources à jour : {health['source_summary'].get('fresh', 0)}/{len(health['sources'])}."
+    body = jobs_message(config, "new", now, max_units=4000, compact=True)
+    if body.startswith("📋 Offres indisponibles"):
+        return (
+            "<b>🗓 Votre veille du jour</b>\n\n"
+            + body
+            + "\n\nÉtat des sources indisponible · /status"
         )
-    else:
-        summary = "État des sources indisponible."
-    return "🗓 RÉCAPITULATIF QUOTIDIEN\n\n" + body + "\n\n" + summary + " Détail : /status."
+    return body
 
 
 async def check_digest(config: Config, notifier: TelegramNotifier, store, now: datetime) -> None:
@@ -92,7 +74,7 @@ async def check_digest(config: Config, notifier: TelegramNotifier, store, now: d
     state.digest_last_day = day
     store.save()
     try:
-        await notifier.send_text(text)
+        await notifier.send_text(text, parse_mode="HTML")
         logger.info("telegram_digest_delivered day=%s", day)
     except Exception as error:
         logger.warning("telegram_digest_delivery_unconfirmed type=%s", type(error).__name__)

@@ -248,6 +248,39 @@ def finance_role_evidence(job: Job, role: str) -> bool:
 def research_trading_evidence(job: Job) -> bool:
     if job.source_type != "official":
         return False
+    if (job.source, job.company_normalized) == (
+        "morgan_stanley_campus",
+        "morgan stanley",
+    ) and re.fullmatch(
+        r"20\d{2} quantitative finance off cycle internship(?: .+)?", job.title_normalized
+    ):
+        nodes = list(Document(html.unescape(job.description)).root.walk())
+        starts = [
+            i
+            for i, node in enumerate(nodes)
+            if node.tag == "strong"
+            and normalize_text(visible_text(node)) == "roles and responsibilities"
+        ]
+        ends = [
+            i
+            for i, node in enumerate(nodes)
+            if node.tag == "strong"
+            and normalize_text(visible_text(node)) == "qualifications skills requirements"
+        ]
+        if len(starts) != 1 or len(ends) != 1 or starts[0] >= ends[0]:
+            return False
+        # Oleeo nests headings in paragraphs with line breaks; use their bounded
+        # DOM section, never firm boilerplate or candidate qualifications.
+        lists = [node for node in nodes[starts[0] + 1 : ends[0]] if node.tag == "ul"]
+        return len(lists) == 1 and any(
+            isinstance(item, Element)
+            and item.tag == "li"
+            and all(
+                has(normalize_text(visible_text(item)), phrase)
+                for phrase in ("pricing models", "hedging", "trading decisions")
+            )
+            for item in lists[0].children
+        )
     if finance_role_evidence(job, "research"):
         return True
     text = normalize_text(job.description_text.replace("’", "'"))

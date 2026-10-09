@@ -215,6 +215,18 @@ companies:
     options:
       search_terms: [trading]
     notes: HTTP 403 from this environment on 2026-09-15. Adapter tested offline only; requires live validation before enabling.
+  jpmorgan_campus:
+    name: JPMorgan
+    enabled: false
+    ats: oracle
+    career_url: https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/
+    country: global
+    scan_interval: 600
+    request_interval: 2
+    options:
+      search_terms: [off-cycle, internship]
+      max_details: 100
+    notes: Public campus searches validated on the VPS in lot 111; initial import is silent. Summer programmes remain outside the internship alert policy.
   barclays:
     name: Barclays
     enabled: true
@@ -251,6 +263,19 @@ companies:
     options:
       search_terms: [trading]
     notes: Public CXS verified 2026-09-15. Early careers on other portals are not covered.
+  morgan_stanley_campus:
+    name: Morgan Stanley
+    enabled: false
+    ats: morgan_stanley_campus
+    career_url: https://morganstanley.tal.net/vx/lang-en-GB/candidate/jobboard/vacancy/1/adv
+    country: global
+    scan_interval: 600
+    request_interval: 2
+    options:
+      title_terms: [trading, trader, markets, structuring, quantitative finance]
+      exclude_title_terms: [operations, product control, business control, compliance, audit, market risk, director, vice president, vp, svp, avp, head of, senior]
+      max_details: 100
+    notes: Only public Global Programs; events, login and application forms are excluded. Runtime activation requires a successful live preview.
   citi:
     name: Citi
     enabled: true

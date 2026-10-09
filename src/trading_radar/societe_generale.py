@@ -262,6 +262,7 @@ class SocieteGeneraleCollector:
         return Collection(
             jobs=jobs,
             complete=False,
+            scope_complete=True,
             requests=self.http.counts[self.source] - before,
             selection=audit.summary(),
         )

@@ -43,9 +43,11 @@ class FakeNotifier:
 
     def __init__(self, fail=False):
         self.sent = []
+        self.options = []
         self.fail = fail
 
-    async def send_text(self, text):
+    async def send_text(self, text, **options):
+        self.options.append(options)
         self.sent.append(text)
         if self.fail:
             raise DeliveryUnknown("synthetic")

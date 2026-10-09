@@ -1,23 +1,31 @@
 """Bounded dashboard observations, without repository migrations or network access."""
 
+import os
 import sqlite3
 from contextlib import closing
+from copy import deepcopy
 from datetime import UTC, date, datetime
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
+from pydantic import TypeAdapter
+
 from trading_radar.applications import Application, ApplicationStatus
 from trading_radar.config import Config
+from trading_radar.dashboard_services import service_observation
 from trading_radar.deadlines import Deadline, aware_instant, deadline_status, resolve_deadline
 from trading_radar.display_time import PARIS
-from trading_radar.education import education_mentions
-from trading_radar.experience import experience_requirement
 from trading_radar.health import check_health
+from trading_radar.internship_alerts import alert_criteria, internship_summary
+from trading_radar.internship_coverage import internship_coverage
 from trading_radar.job_conditions import conditions
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job, utcnow
 from trading_radar.monitoring import history
+from trading_radar.opportunity_facts import country_facts, duration_facts, start_facts
+from trading_radar.programmes import programme
 from trading_radar.source_history import source_history
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 from trading_radar.trends import build_trends
@@ -74,6 +82,31 @@ def _schema(connection: sqlite3.Connection) -> list[tuple]:
     ]
 
 
+@lru_cache(maxsize=MAX_JOBS)
+def _employer_details(payload: str) -> dict:
+    """Reuse expensive description parsing, never database or application observations."""
+    job = Job.model_validate_json(payload)
+    observed = conditions(job)
+    deadline = resolve_deadline(job)
+    return {
+        "experience": observed["experience"],
+        "education": observed["education"],
+        "conditions": observed,
+        "missions": mission_excerpts(job),
+        "programme": programme(job),
+        "location_facts": country_facts(job),
+        "duration": duration_facts(job),
+        "start": start_facts(job),
+        "deadline": {
+            "precision": deadline.precision,
+            "day": deadline.day.isoformat() if deadline.day else None,
+            "instant": deadline.instant.isoformat() if deadline.instant else None,
+            "source": deadline.source,
+            "evidence": deadline.evidence,
+        },
+    }
+
+
 def _job(row: sqlite3.Row) -> dict:
     job = Job.model_validate_json(row["payload"])
     application = Application.model_validate(
@@ -107,7 +140,25 @@ def _job(row: sqlite3.Row) -> dict:
         instant.tzinfo is None for instant in (job.first_seen, job.last_seen, job.date_updated)
     ):
         raise DashboardDataError("invalid_data")
-    deadline = resolve_deadline(job)
+    # These fields do not affect employer statements. Every row is still read
+    # and validated above; scores, dates, applications and health remain live.
+    # Copy cached details because deadline status is added for each observation.
+    details = deepcopy(
+        _employer_details(
+            job.model_dump_json(
+                exclude={
+                    "first_seen",
+                    "last_seen",
+                    "date_updated",
+                    "score_breakdown",
+                    "is_new",
+                    "is_active",
+                    "is_expired",
+                    "raw_payload",
+                }
+            )
+        )
+    )
     # Present normalized publication instants as Paris calendar days. Do not expose a fabricated hour
     # or substitute discovery/update dates when publication is unknown.
     publication_day = job.publication_day.isoformat() if job.publication_day else None
@@ -132,10 +183,7 @@ def _job(row: sqlite3.Row) -> dict:
         "score": job.score_breakdown.total,
         "priority": job.score_breakdown.priority,
         "score_breakdown": job.score_breakdown.model_dump(mode="json"),
-        "experience": experience_requirement(job),
-        "education": education_mentions(job),
-        "conditions": conditions(job),
-        "missions": mission_excerpts(job),
+        **details,
         "is_active": job.is_active,
         "is_expired": job.is_expired,
         "first_seen": job.first_seen.isoformat(),
@@ -145,13 +193,6 @@ def _job(row: sqlite3.Row) -> dict:
         "apply_url": safe_url(job.apply_url),
         "source_url": safe_url(job.source_url),
         "application": application.model_dump(mode="json"),
-        "deadline": {
-            "precision": deadline.precision,
-            "day": deadline.day.isoformat() if deadline.day else None,
-            "instant": deadline.instant.isoformat() if deadline.instant else None,
-            "source": deadline.source,
-            "evidence": deadline.evidence,
-        },
     }
 
 
@@ -232,6 +273,15 @@ def build_dashboard_data(
     if instant.tzinfo is None:
         raise ValueError("Dashboard time must include a timezone")
     instant = instant.astimezone(UTC)
+    # Dashboard cannot send alerts. A nonsecret deployment snapshot tells it
+    # whether the separate radar service has them enabled, without changing
+    # this service's own notification/control settings or sharing bot secrets.
+    advertised_alerts = os.environ.get("DASHBOARD_RADAR_ALERTS_ENABLED")
+    radar_alerts = (
+        config.settings.alerts_enabled
+        if advertised_alerts is None
+        else TypeAdapter(bool).validate_python(advertised_alerts)
+    )
     result: dict[str, Any] = {
         "format_version": 1,
         "generated_at": instant.isoformat(),
@@ -242,6 +292,14 @@ def build_dashboard_data(
         "summary": {},
         "facets": {},
         "warnings": [],
+        "services": service_observation(config, instant),
+        "internship_scope": {
+            "enabled": config.settings.include_internships,
+            "formats": config.settings.internship_formats,
+            "target_year": config.settings.internship_target_year,
+            "alerts_enabled": config.settings.internship_alerts_enabled,
+            "radar_alerts_enabled": radar_alerts,
+        },
     }
     try:
         result["jobs"] = read_jobs(config)
@@ -274,6 +332,11 @@ def build_dashboard_data(
         result["monitoring"] = {"status": "unavailable", "snapshots": [], "error": error}
         result["warnings"].append(error)
     result["source_history"] = source_history(config, instant)
+    result["internship_coverage"] = (
+        internship_coverage(config, instant)
+        if result["database"]["status"] == "ok"
+        else {"status": "unavailable", "sources": {}}
+    )
     # Historical counters form a separate read-only observation, like health.
     # Failure of an old scan record must not hide the current jobs snapshot.
     try:
@@ -295,7 +358,9 @@ def build_dashboard_data(
             }
         )
     jobs = result["jobs"]
+    source_health = {source["source"]: source for source in result["health"]["sources"]}
     for job in jobs:
+        stored_expired = job["is_expired"]
         value = job["deadline"]
         observed = Deadline(
             precision=value["precision"],
@@ -304,6 +369,15 @@ def build_dashboard_data(
         )
         value["status"] = deadline_status(observed, instant)
         job["is_expired"] = value["status"] == "expired"
+        job["internship_alert"] = alert_criteria(
+            job,
+            config,
+            result["internship_coverage"],
+            source_health.get(job["source"], {}),
+            stored_expired=stored_expired,
+            radar_alerts_enabled=radar_alerts,
+        )
+    result["internship_summary"] = internship_summary(jobs)
     today = instant.astimezone(PARIS).date().isoformat()
     result["summary"] = {
         "total": len(jobs),

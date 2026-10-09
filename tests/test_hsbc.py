@@ -168,6 +168,45 @@ def test_multiple_cities_are_kept_without_merging_their_addresses():
         )
 
 
+@pytest.mark.parametrize("value", ["London, GB, E14 5HQ", "Hong Kong, HK"])
+def test_combined_street_address_is_preserved_without_invented_components(value):
+    text = detail().replace(
+        '<meta itemprop="addressLocality" content="Paris"><meta itemprop="addressCountry" content="FR">',
+        f'<meta itemprop="streetAddress" content="{value}">',
+    )
+    job = parse_detail(text, row(), config(), "hsbc")
+    assert job.location == value
+    assert job.raw_payload["locations"] == [value]
+
+
+@pytest.mark.parametrize(
+    "value", ["", "London", "5 Canada Square", "London, GB,", "London, gb, E14 5HQ"]
+)
+def test_incomplete_combined_address_remains_rejected(value):
+    text = detail().replace(
+        '<meta itemprop="addressLocality" content="Paris"><meta itemprop="addressCountry" content="FR">',
+        f'<meta itemprop="streetAddress" content="{value}">',
+    )
+    with pytest.raises(SourceUnavailable, match="incomplete address"):
+        parse_detail(text, row(), config(), "hsbc")
+
+
+def test_combined_address_does_not_fill_partial_or_duplicate_metadata():
+    text = detail().replace(
+        '<meta itemprop="addressCountry" content="FR">',
+        '<meta itemprop="streetAddress" content="London, GB, E14 5HQ">',
+    )
+    with pytest.raises(SourceUnavailable, match="incomplete address"):
+        parse_detail(text, row(), config(), "hsbc")
+    text = detail().replace(
+        '<meta itemprop="addressLocality" content="Paris"><meta itemprop="addressCountry" content="FR">',
+        '<meta itemprop="streetAddress" content="London, GB, E14 5HQ">'
+        '<meta itemprop="streetAddress" content="Paris, FR, 75001">',
+    )
+    with pytest.raises(SourceUnavailable, match="conflicting address"):
+        parse_detail(text, row(), config(), "hsbc")
+
+
 def test_card_and_index_validation():
     for text in [
         card().replace("Mon Jul 19, 2027", "Unknown"),

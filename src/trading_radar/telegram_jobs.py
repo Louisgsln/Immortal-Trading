@@ -1,6 +1,7 @@
 """Small private job lists from validated local observations, without writes."""
 
 from datetime import UTC, date, datetime, timedelta
+from html import escape
 from typing import Literal
 
 from trading_radar.audit import timestamp
@@ -79,12 +80,76 @@ def card(job: dict, number: int) -> str:
     return "\n".join(lines)
 
 
+def digest_card(job: dict, number: int | None = None) -> str:
+    """A compact HTML card; preserve employer facts and complete safe links."""
+    prefix = f"{number}. " if number is not None else ""
+    lines = [
+        f"{prefix}<b>{escape(short(job['company'], 60))}</b> · {job['score']}/100",
+        escape(short(job["title"], 140)),
+    ]
+    location = job["location"] or "Lieu non précisé"
+    parts = [part.strip() for part in location.split(",")]
+    countries = job.get("location_facts", {}).get("countries", [])
+    # This published hierarchy is city, continent, country, administrative area.
+    # Other shapes may list several cities: retain them rather than guessing one.
+    if (
+        len(parts) >= 3
+        and parts[1].casefold()
+        in {"europe", "asia", "africa", "oceania", "north america", "south america"}
+        and len(countries) == 1
+    ):
+        location = parts[0] + " · " + countries[0]["label"]
+    lines.append("📍 " + escape(short(location, 100)))
+    experience = job["experience"]["minimum_years"]
+    if experience is not None:
+        lines.append(f"Expérience min. : {experience} {'an' if experience <= 1 else 'ans'}")
+    deadline = job["deadline"]
+    if deadline["precision"] == "instant":
+        instant = timestamp(deadline["instant"])
+        assert instant is not None
+        lines.append("⏳ Date limite : " + format_paris(instant) + " (Paris)")
+    elif deadline["precision"] == "date":
+        lines.append(
+            "⏳ Date limite : "
+            + date.fromisoformat(deadline["day"]).strftime("%d/%m/%Y")
+            + " (heure non précisée)"
+        )
+    url = job["apply_url"] or job["source_url"]
+    lines.append(
+        f'<a href="{escape(url, quote=True)}">Voir l’offre ↗</a>'
+        if url and units(url) <= 700
+        else "Lien indisponible · consulter le Dashboard."
+    )
+    return "\n".join(lines)
+
+
+def compact_digest(selected: list[dict], health: dict, instant: datetime, max_units: int) -> str:
+    heading = "<b>🗓 Votre veille du jour</b>\n" + format_paris(instant)
+    fresh = health["source_summary"].get("fresh", 0)
+    footer = f"📡 Sources à jour : {fresh}/{len(health['sources'])} · /status"
+    blocks: list[str] = []
+    for index, job in enumerate(selected[:5], 1):
+        block = digest_card(job, index if len(selected) > 1 else None)
+        candidate = heading + "\n\n" + "\n\n".join([*blocks, block]) + "\n\n" + footer
+        # Bound the HTML payload too, reserving the count and preview caption.
+        if units(candidate) > max_units - 100:
+            break
+        blocks.append(block)
+    total, shown = len(selected), len(blocks)
+    count = f"{total} {'offre repérée' if total == 1 else 'offres repérées'} en 24 h"
+    if shown < total:
+        count += f" · {shown} {'affichée' if shown == 1 else 'affichées'}"
+    body = "\n\n".join(blocks) if blocks else "Aucune offre vérifiée à vous proposer aujourd’hui."
+    return heading + "\n<b>" + count + "</b>\n\n" + body + "\n\n" + footer
+
+
 def jobs_message(
     config: Config,
     mode: Literal["top", "new"],
     now: datetime | None = None,
     *,
     max_units: int = 4000,
+    compact: bool = False,
 ) -> str:
     instant = now or utcnow()
     if instant.tzinfo is None:
@@ -125,6 +190,8 @@ def jobs_message(
                 j["id"],
             )
         )
+    if compact:
+        return compact_digest(selected, health, instant, max_units)
     title = "🏆 OFFRES À EXAMINER" if mode == "top" else "🆕 DÉCOUVERTES DEPUIS 24 H"
     header = f"{title}\nAu {format_paris(instant)} · score ≥ {threshold}/100"
     footer = (

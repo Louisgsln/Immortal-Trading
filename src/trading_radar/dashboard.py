@@ -6,6 +6,7 @@ import html
 import json
 import os
 import tempfile
+from collections.abc import Callable
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 from pathlib import Path
@@ -25,6 +26,18 @@ def _assets() -> tuple[str, str, str]:
         root.joinpath("publication.js").read_text(encoding="utf-8")
         + "\n"
         + root.joinpath("time.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("programme.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("opportunity.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("agenda.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("tracking.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("preferences.js").read_text(encoding="utf-8")
+        + "\n"
+        + root.joinpath("calendar.js").read_text(encoding="utf-8")
         + "\n"
         + root.joinpath("dashboard.js").read_text(encoding="utf-8"),
     )
@@ -138,13 +151,36 @@ def export_dashboard(
 
 def create_dashboard_server(content: str, port: int = 8765) -> ThreadingHTTPServer:
     """Serve one in-memory snapshot, never a directory or an API that can write."""
-    body = content.encode("utf-8")
+    return _dashboard_server(lambda: content, port)
+
+
+def create_live_dashboard_server(
+    config: Config, history_dir: Path = Path("data/health-history"), port: int = 8765
+) -> ThreadingHTTPServer:
+    """Read a fresh, read-only observation for every page request."""
+
+    def content() -> str:
+        data = build_dashboard_data(config, history_dir=history_dir)
+        if data["status"] != "ok":
+            raise ValueError("Dashboard data unavailable")
+        data["live"] = True
+        return render_dashboard(data)
+
+    content()  # Refuse startup when the existing database cannot be read.
+    return _dashboard_server(content, port)
+
+
+def _dashboard_server(content: Callable[[], str], port: int) -> ThreadingHTTPServer:
     _, css, script = _assets()
     policy = _policy(css, script) + "; frame-ancestors 'none'"
 
     class Handler(BaseHTTPRequestHandler):
         server_version = "TradingRadar"
         sys_version = ""
+
+        def setup(self) -> None:
+            super().setup()
+            self.connection.settimeout(5)
 
         def log_message(self, format, *args):
             pass
@@ -177,6 +213,15 @@ def create_dashboard_server(content: str, port: int = 8765) -> ThreadingHTTPServ
             elif self.path not in {"/", "/index.html"}:
                 self._respond(404, b"Not found", "text/plain; charset=utf-8")
             else:
+                try:
+                    body = content().encode("utf-8")
+                except Exception:
+                    self._respond(
+                        503,
+                        b"Dashboard temporarily unavailable. Please reload.",
+                        "text/plain; charset=utf-8",
+                    )
+                    return
                 self._respond(200, body, "text/html; charset=utf-8")
 
         def do_HEAD(self):

@@ -221,7 +221,14 @@ def mark_applied(config: Config, job_id: str, instant: datetime) -> dict:
         return {**_snapshot(db, job_id), "apply_url": job.apply_url}
 
 
-def update_application(config: Config, job_id: str, changes: dict, expected_revision: str) -> dict:
+def update_application(
+    config: Config,
+    job_id: str,
+    changes: dict,
+    expected_revision: str,
+    *,
+    application_only: bool = False,
+) -> dict:
     """Compare the revision under a writer lock, then commit fields and history together."""
     _job_id(job_id)
     allowed = set(Application.model_fields) - {"job_id"}
@@ -235,7 +242,7 @@ def update_application(config: Config, job_id: str, changes: dict, expected_revi
         raise ApplicationEditError("invalid_request", status=400)
     if any(value is not None and not isinstance(value, str) for value in changes.values()):
         raise ApplicationEditError("invalid_application", status=422)
-    with _connection(config, writing=True) as db:
+    with _connection(config, writing=True, application_only=application_only) as db:
         previous = _snapshot(db, job_id)
         if previous["revision"] != expected_revision:
             raise ApplicationEditError("conflict", status=409)

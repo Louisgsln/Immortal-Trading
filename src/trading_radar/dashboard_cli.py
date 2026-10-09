@@ -8,7 +8,12 @@ import typer
 import yaml
 
 from trading_radar.config import load_config
-from trading_radar.dashboard import create_dashboard_server, export_dashboard, render_dashboard
+from trading_radar.dashboard import (
+    create_dashboard_server,
+    create_live_dashboard_server,
+    export_dashboard,
+    render_dashboard,
+)
 from trading_radar.dashboard_data import build_dashboard_data
 
 app = typer.Typer(
@@ -56,18 +61,41 @@ def serve(
     edit_applications: bool = typer.Option(
         False, help="Enable local application editing with history and conflict checks."
     ),
+    live: bool = typer.Option(
+        False, help="Read current data on each page load, with consultation only."
+    ),
+    private_editor: bool = typer.Option(
+        False, help="Enable the configured private HTTPS application editor."
+    ),
 ):
     """Serve on 127.0.0.1; read-only unless --edit-applications is supplied. Stop with Ctrl+C."""
     with errors():
+        if sum([live, edit_applications, private_editor]) > 1:
+            raise ValueError("Live consultation and application editing are separate modes")
         config = load_config(config_dir)
-        if edit_applications:
+        if private_editor:
+            from trading_radar.dashboard_editor import create_editable_dashboard_server
+            from trading_radar.dashboard_private import PrivateDashboardAccess
+
+            server = create_editable_dashboard_server(
+                config, history_dir, port, private_access=PrivateDashboardAccess.from_env()
+            )
+        elif edit_applications:
             from trading_radar.dashboard_editor import create_editable_dashboard_server
 
             server = create_editable_dashboard_server(config, history_dir, port)
+        elif live:
+            server = create_live_dashboard_server(config, history_dir, port)
         else:
             data = build_dashboard_data(config, history_dir=history_dir)
             server = create_dashboard_server(render_dashboard(data), port)
-        mode = "Application editor" if edit_applications else "Dashboard snapshot"
+        mode = (
+            "Application editor"
+            if edit_applications
+            else "Live dashboard"
+            if live
+            else "Dashboard snapshot"
+        )
         typer.echo(f"{mode}: http://127.0.0.1:{port} — Ctrl+C to stop.")
         try:
             server.serve_forever()

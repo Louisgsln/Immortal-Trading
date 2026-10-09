@@ -93,6 +93,20 @@ class GoldmanCollector:
             ) from None
 
     async def _search(self, term: str) -> dict[str, dict]:
+        try:
+            return await self._search_once(term)
+        except SourceUnavailable as error:
+            if str(error) not in {
+                "Goldman total changed during pagination",
+                "Goldman pagination repeated a posting",
+                "Goldman returned a short or inconsistent page",
+            }:
+                raise
+        # Restart from page zero once, discarding the inconsistent listing.
+        # The enclosing collection timeout still bounds both attempts.
+        return await self._search_once(term)
+
+    async def _search_once(self, term: str) -> dict[str, dict]:
         rows: dict[str, dict] = {}
         expected, page_number = None, 0
         while expected is None or len(rows) < expected:
@@ -211,5 +225,8 @@ class GoldmanCollector:
             if job is not None:
                 jobs.append(job)
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )

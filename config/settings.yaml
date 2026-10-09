@@ -8,3 +8,9 @@ store_raw: false
 closure_after_missing_scans: 2
 deadline_reminders_enabled: false
 deadline_reminder_max_age_hours: 24
+# Explicit opt-in on the VPS: off-cycle/long stages, with a silent source baseline.
+include_internships: false
+internship_alerts_enabled: false
+internship_formats: [off_cycle, long]
+internship_target_year: 2027
+internship_baseline_at: null

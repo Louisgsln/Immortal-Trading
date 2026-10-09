@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-07",
+  "lots": [
+    "114-coverage",
+    "115-preferences",
+    "116-calendar",
+    "117-resilience"
+  ],
+  "deployment_status": "deployed",
+  "runtime": {
+    "actual_image_verified": true,
+    "coverage": {
+      "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+      "enabled_sources": 25,
+      "status": "ok",
+      "validated_sources": 17
+    },
+    "dashboard_editable": true,
+    "dashboard_without_telegram_credentials": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "https_trusted": true,
+    "incidents": [
+      {
+        "source": "optiver",
+        "status": "recent_failure"
+      },
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "morgan_stanley_campus",
+        "status": "recent_failure"
+      }
+    ],
+    "same_private_link": true,
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_control_enabled": true,
+      "telegram_incident_notices_enabled": false
+    },
+    "services_running": 5,
+    "summary": {
+      "active": 979,
+      "applications_due": 0,
+      "applications_in_progress": 0,
+      "enabled_sources": 25,
+      "fresh_sources": 21,
+      "high_priority": 257,
+      "relevant": 358,
+      "total": 988
+    },
+    "systemd_active_enabled": 4
+  },
+  "counts": {
+    "alert_history": 88,
+    "alerts": 44,
+    "application_history": 0,
+    "applications": 988,
+    "jobs": 988
+  },
+  "preservation": {
+    "alert_history_preserved": true,
+    "application_history_preserved": true,
+    "application_ids_preserved": true,
+    "backup_verified": true,
+    "database_inode_preserved": true,
+    "job_ids_preserved": true,
+    "sent_alerts_preserved": true,
+    "telegram_binding_preserved": true,
+    "telegram_cursor_preserved": true
+  },
+  "telegram_offset": 850284405,
+  "sudo_block_restored": true,
+  "validation": {
+    "python_dashboard": 284,
+    "python_collectors_scanner_rollout": 86,
+    "javascript": 28,
+    "mobile_width": 390,
+    "saved_filters": true,
+    "separate_views": true,
+    "storage_denial_fallback": true,
+    "calendar_real_download": true,
+    "precise_deadline": true,
+    "private_notes_excluded": true,
+    "application_save_and_reload": true,
+    "no_horizontal_overflow": true,
+    "page_errors": 0,
+    "ruff": true,
+    "mypy": true
+  },
+  "source_previews": {
+    "optiver": {
+      "status": "partial",
+      "jobs": 23,
+      "missing_detail": 1,
+      "scope_complete": false
+    },
+    "morgan_stanley_campus": {
+      "status": "successful",
+      "jobs": 18
+    }
+  },
+  "limits": [
+    "BNP access refused; Nomura Campus CAPTCHA remains pending.",
+    "Production source status reflects recorded scans; previews do not clear incidents or reset backoff.",
+    "Calendar export is a snapshot; updates require another export."
+  ]
+}

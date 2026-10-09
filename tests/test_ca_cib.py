@@ -142,6 +142,21 @@ def test_detail_rejects_missing_or_conflicting_fields(key, value):
         parse_detail(detail(**{key: value}), row(), config(), "ca")
 
 
+@pytest.mark.parametrize("value", ["01.01.2027", "01/01/2027", "1.1.2027", "29.02.2028"])
+def test_observed_day_first_start_dates(value):
+    job = parse_detail(detail(fldjobdescription_date1=value), row(), config(), "ca")
+    assert job.expected_start_date == ("2028-02-29" if value == "29.02.2028" else "2027-01-01")
+    assert job.raw_payload["fields"]["fldjobdescription_date1"] == value
+
+
+@pytest.mark.parametrize(
+    "value", ["31.02.2027", "29.02.2027", "01.01/2027", "2027.01.01", "01-01-2027"]
+)
+def test_unverified_or_invalid_start_date_remains_rejected(value):
+    with pytest.raises(SourceUnavailable, match="invalid CA CIB employment start date"):
+        parse_detail(detail(fldjobdescription_date1=value), row(), config(), "ca")
+
+
 def test_missing_criteria_reference_and_duplicate_fields():
     for text in [
         detail().replace("2026-123", "2026-999"),

@@ -39,6 +39,7 @@
     $("jobs-view").hidden = true;
     $("health-view").hidden = true;
     $("trends-view").hidden = true;
+    $("agenda-view").hidden = true;
     document.querySelectorAll(".nav-item").forEach((button) => { button.disabled = true; });
   };
   let data;
@@ -48,13 +49,61 @@
     fail(data && data.error && data.error.message || "Les données du radar sont indisponibles."); return;
   }
   const jobs = data.jobs;
+  if (data.services) {
+    const watcher = data.services.watcher || {};
+    const labels = {active:"Radar actif", stale:"Signal du radar ancien", stopped:"Radar arrêté", long_scan:"Collecte prolongée · à vérifier", unknown:"Activité du radar à vérifier"};
+    $("service-overview").hidden = false;
+    $("watcher-summary").textContent = (labels[watcher.status] || labels.unknown) +
+      (watcher.status === "active" ? (watcher.phase === "scanning" ? " · collecte en cours" : " · en veille") : "");
+    $("watcher-observed").textContent = "État à l’ouverture : " + date(data.services.observed_at, true) +
+      (watcher.at ? " · dernier signal : " + date(watcher.at, true) : "");
+    const digest = data.services.digest || {};
+    $("digest-summary").textContent = digest.status !== "configured" ? "Réglage indisponible" :
+      digest.enabled ? "Programmé chaque jour à " + digest.time + " (Paris)" : "Récapitulatif désactivé";
+  }
+  const countryOptions = new Map(jobs.flatMap((job) => (job.location_facts?.countries || []).map((item) => [item.code, item.label])));
+  [...countryOptions].sort((a, b) => a[1].localeCompare(b[1], "fr")).forEach(([code, label]) => {
+    const option = make("option", label); option.value = code; $("country").append(option);
+  });
+  const programmeYears = new Set(jobs.filter((job) => job.programme?.kind === "internship" && job.programme.year_status === "confirmed" && Number.isInteger(job.programme.year)).map((job) => job.programme.year));
+  if (data.internship_scope?.enabled && Number.isInteger(data.internship_scope.target_year)) programmeYears.add(data.internship_scope.target_year);
+  [...programmeYears].filter((year) => year >= 2000 && year <= 2099).sort((a,b) => a-b).forEach((year) => {
+    const option = make("option", year); option.value = String(year); $("programme-year").append(option);
+  });
+  if (data.internship_scope?.enabled) $("programme-help").textContent = "Veille stages : off-cycle et stages longs · " + data.internship_scope.target_year + ". Les Summer Internships restent hors des alertes. Format ou année non confirmé : à vérifier dans la fiche officielle.";
+  if (data.internship_scope?.enabled && data.internship_summary) {
+    const stages = data.internship_summary;
+    $("internship-overview").hidden = false;
+    $("internship-counts").textContent = number(stages.available) + " stages disponibles · " + number(stages.formats.off_cycle) + " off-cycle · " + number(stages.formats.long) + " stages longs · " + number(stages.criteria_met) + " avec les critères d’alerte remplis.";
+    $("internship-policy").textContent = "Alertes stages " + (data.internship_scope.alerts_enabled && data.internship_scope.radar_alerts_enabled ? "activées" : "désactivées") + " · année ciblée : " + data.internship_scope.target_year + ". Les offres sans année ou format confirmé restent consultables.";
+  }
+  const internshipAlertLabels = {eligible:"Critères d’alerte remplis",blocked:"Critères d’alerte non remplis",unavailable:"Critères d’alerte à vérifier"};
+  const liveEnabled = data.live === true;
+  const privateEditing = Boolean(data.editing?.mode === "private" && location.protocol === "https:" &&
+    data.editing.origin === location.origin && /^\/[A-Za-z0-9_-]{32,128}\/api\/applications$/.test(data.editing.api_base || "") &&
+    [data.editing.api_base.replace(/api\/applications$/, ""), data.editing.api_base.replace(/api\/applications$/, "index.html")].includes(location.pathname));
   const editingEnabled = Boolean(data.editing && data.editing.enabled === true &&
     typeof data.editing.token === "string" && data.editing.token &&
-    ["http:", "https:"].includes(location.protocol) && ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname));
+    (privateEditing || (["http:", "https:"].includes(location.protocol) && ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname))));
+  const applicationsAPI = privateEditing ? data.editing.api_base : "/api/applications";
+  const requestCredentials = privateEditing ? "same-origin" : "omit";
   if (editingEnabled) {
-    $("workspace-mode").textContent = "Suivi local modifiable";
-    $("tracking-mode").textContent = "SUIVI LOCAL MODIFIABLE";
+    $("workspace-mode").textContent = "Suivi modifiable";
+    $("tracking-mode").textContent = "SUIVI MODIFIABLE";
+    if (liveEnabled) {
+      $("snapshot-kind").textContent = "DASHBOARD PRIVÉ";
+      $("generated-caption").textContent = "Données actualisées le";
+      $("refresh-dashboard").hidden = false;
+      $("refresh-dashboard").addEventListener("click", () => { if (!detailSession || !dirtyEditor(detailSession)) location.reload(); else detailSession.message.textContent = "Enregistrez ou annulez votre brouillon avant d’actualiser."; });
+    }
     $("snapshot-refresh-help").textContent = "Suivi des candidatures synchronisé toutes les 10 secondes. Rechargez pour actualiser les offres et les sources.";
+  } else if (liveEnabled) {
+    $("workspace-mode").textContent = "Consultation en direct";
+    $("snapshot-kind").textContent = "DASHBOARD PRIVÉ";
+    $("generated-caption").textContent = "Données actualisées le";
+    $("snapshot-refresh-help").textContent = "Les données sont relues à chaque ouverture. Actualisez pour voir les dernières offres et l’état des sources.";
+    $("refresh-dashboard").hidden = false;
+    $("refresh-dashboard").addEventListener("click", () => location.reload());
   }
   const summary = data.summary || {};
   const health = data.health || {};
@@ -165,6 +214,7 @@
     $("metrics").children[2].querySelector(".metric-value").textContent = number(count);
     if (detailSession && detailSession.job === job) detailSession.statusBadge.textContent = statusLabel(application.status);
     renderJobs();
+    if (state.view === "agenda") renderAgenda();
   }
   let refreshingApplications = false;
   async function refreshApplications() {
@@ -174,8 +224,8 @@
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
     try {
-      const response = await fetch("/api/applications", {headers: {"X-Radar-Token": data.editing.token},
-        signal: controller.signal, credentials: "omit", cache: "no-store", redirect: "error", referrerPolicy: "no-referrer"});
+      const response = await fetch(applicationsAPI, {headers: {"X-Radar-Token": data.editing.token},
+        signal: controller.signal, credentials: requestCredentials, cache: "no-store", redirect: "error", referrerPolicy: "no-referrer"});
       const result = await response.json();
       if (!response.ok || result.status !== "ok" || !Array.isArray(result.applications)) throw new Error("Tracking unavailable");
       if (epoch !== applicationEpoch || detailSession?.pending) return;
@@ -234,15 +284,15 @@
   async function requestApplication(session, changes) {
     if (!editingEnabled || !currentSession(session) || session.pending) return;
     setPending(session, true);
-    session.message.textContent = changes ? "Enregistrement du suivi local…" : "Lecture du suivi actuel…";
+    session.message.textContent = changes ? "Enregistrement du suivi…" : "Lecture du suivi actuel…";
     session.message.className = "editor-message";
     const controller = new AbortController(); session.controller = controller;
     const timer = setTimeout(() => controller.abort(), 15000);
     try {
       const options = {method: changes ? "POST" : "GET", headers: {"X-Radar-Token": data.editing.token},
-        signal: controller.signal, credentials: "omit", cache: "no-store", redirect: "error", referrerPolicy: "no-referrer"};
+        signal: controller.signal, credentials: requestCredentials, cache: "no-store", redirect: "error", referrerPolicy: "no-referrer"};
       if (changes) { options.headers["Content-Type"] = "application/json"; options.body = JSON.stringify({revision: session.revision, changes}); }
-      const response = await fetch("/api/applications/" + encodeURIComponent(session.job.id), options);
+      const response = await fetch(applicationsAPI + "/" + encodeURIComponent(session.job.id), options);
       const result = await response.json();
       if (!currentSession(session)) return;
       if (!response.ok || result.status !== "ok") {
@@ -304,7 +354,7 @@
   }
   function renderTracking(session, message = "") {
     const tracking = session.tracking; tracking.replaceChildren(); session.reloadButton = null; session.confirmation = null;
-    tracking.append(make("h3", editingEnabled ? "Suivi de candidature · local" : "Suivi de candidature · lecture seule"));
+    tracking.append(make("h3", editingEnabled ? "Suivi de candidature" : "Suivi de candidature · lecture seule"));
     const trackingGrid = make("dl", null, "detail-grid"); const application = session.job.application || {};
     applicationFields.forEach(([field, label]) => {
       const value = field === "status" ? statusLabel(application[field]) : application[field];
@@ -312,14 +362,14 @@
     });
     tracking.append(trackingGrid);
     if (editingEnabled) {
-      tracking.append(make("p", "Ce suivi reste dans votre radar local. Enregistrer un statut n’envoie aucune candidature.", "editor-help"));
+      tracking.append(make("p", "Vos modifications sont conservées dans le radar et accessibles sur vos appareils. Enregistrer un statut n’envoie aucune candidature.", "editor-help"));
       session.message = make("p", message, "editor-message"); session.message.setAttribute("role", "status"); session.message.setAttribute("aria-live", "polite");
       session.editButton = actionButton("Modifier le suivi", () => requestApplication(session), true);
       tracking.append(session.editButton, session.message); renderApplicationHistory(session);
     }
   }
   function renderApplicationEditor(session) {
-    const form = make("form", null, "application-editor"); form.setAttribute("aria-label", "Modifier le suivi local");
+    const form = make("form", null, "application-editor"); form.setAttribute("aria-label", "Modifier le suivi");
     applicationFields.forEach(([field, label, type, limit]) => {
       const wrap = make("label", null, "application-field" + (type === "textarea" ? " wide" : "")); wrap.append(make("span", label));
       const input = make(type === "select" ? "select" : type === "textarea" ? "textarea" : "input");
@@ -336,6 +386,23 @@
     const save = make("button", "Enregistrer le suivi", "primary-button"); save.type = "submit"; session.saveButton = save;
     buttons.append(save, actionButton("Annuler", () => confirmDiscard(session, () => { session.editor = null; renderTracking(session); })));
     form.append(buttons); session.editor = form; session.baseline = JSON.stringify(applicationValues(session));
+    const shortcuts = make("div", null, "tracking-shortcuts");
+    shortcuts.setAttribute("aria-label", "Raccourcis du suivi");
+    const refreshShortcuts = () => {
+      shortcuts.replaceChildren();
+      const actions = radarTracking.shortcuts(session.job, applicationValues(session), new Date().toISOString());
+      if (!actions.length) return;
+      shortcuts.append(make("p", "Préremplissez une action, puis enregistrez pour valider.", "editor-help"));
+      actions.forEach((action) => shortcuts.append(actionButton(action.label, () => {
+        Object.entries(action.changes).forEach(([field, value]) => { form.elements.namedItem(field).value = value ?? ""; });
+        form.elements.namedItem("next_action").setCustomValidity("");
+        session.message.textContent = "Raccourci préparé. Vérifiez les champs et enregistrez pour valider.";
+        refreshShortcuts(); form.elements.namedItem("next_action").focus();
+      })));
+    };
+    form.prepend(shortcuts); refreshShortcuts();
+    form.addEventListener("change", (event) => { if (event.target.name === "status") refreshShortcuts(); });
+    form.addEventListener("input", (event) => { if (event.target.name === "next_action") refreshShortcuts(); });
     form.addEventListener("submit", (event) => {
       event.preventDefault(); if (session.pending || session.mustReload || !currentSession(session)) return;
       const values = applicationValues(session); const nextAction = form.elements.namedItem("next_action");
@@ -358,6 +425,7 @@
     const content = $("job-detail"); content.replaceChildren();
     const title = make("h2", job.title); title.id = "detail-title";
     const top = make("div", null, "detail-top");
+    top.append(make("span", radarProgramme.label(job.programme), "badge"));
     const statusBadge = make("span", statusLabel((job.application || {}).status), "badge");
     top.append(scorePill(job.score), make("span", job.is_active ? "Offre active" : "Offre inactive", "badge"), statusBadge);
     if (job.is_expired) top.append(make("span", "Échéance dépassée", "badge"));
@@ -370,6 +438,26 @@
       link.setAttribute("aria-label", "Consulter l’offre officielle (nouvel onglet)"); content.append(link);
     } else content.append(make("p", "Lien officiel indisponible.", "detail-company"));
     const conditions = job.conditions || {};
+    const programmeSection = detailSection("Programme");
+    programmeSection.append(make("p", radarProgramme.label(job.programme)));
+    (job.programme?.evidence || []).forEach((excerpt) => programmeSection.append(make("blockquote", excerpt, "description")));
+    (job.programme?.issues || []).forEach((issue) => programmeSection.append(make("p", issue, "editor-error")));
+    content.append(programmeSection);
+    if (job.internship_alert) {
+      const criteria = job.internship_alert;
+      const alertSection = detailSection("Critères d’alerte Telegram");
+      alertSection.append(make("p", internshipAlertLabels[criteria.status] || internshipAlertLabels.unavailable),
+        make("p", "Année ciblée : " + criteria.target_year + " · seuil de score : " + criteria.score_threshold));
+      criteria.reasons.forEach((reason) => alertSection.append(make("p", reason.message, "experience-help")));
+      criteria.warnings.forEach((warning) => alertSection.append(make("p", warning, "experience-help")));
+      alertSection.append(make("p", "Une alerte nécessite aussi une nouvelle détection, une réouverture ou une modification significative dans une collecte validée. Cet état ne confirme pas un envoi Telegram et ne relance pas les anciennes offres.", "experience-help"));
+      content.append(alertSection);
+    }
+    const opportunitySection = detailSection("Pays, durée et début");
+    opportunitySection.append(make("p", (job.location_facts?.countries || []).map((item) => item.label).join(" / ") || "Pays non reconnu"),
+      make("p", radarOpportunity.durationLabel(job.duration)), make("p", radarOpportunity.startLabel(job.start)));
+    (job.duration?.evidence || []).forEach((excerpt) => opportunitySection.append(make("blockquote", excerpt, "description")));
+    content.append(opportunitySection);
     const start = conditions.start || {};
     const authorization = ((conditions.authorization || {}).evidence || []);
     const dates = detailSection("Calendrier et droit au travail");
@@ -446,6 +534,14 @@
     const active = $("active").value; const application = $("application-status").value;
     const experienceCategory = $("experience").value;
     const education = $("education").value;
+    const programmeFilter = $("programme").value;
+    const programmeYear = $("programme-year").value;
+    const countryFilter = $("country").value; const durationFilter = $("duration").value;
+    const startFrom = $("start-from").value; const startTo = $("start-to").value;
+    const validStart = radarPublication.validRange(startFrom, startTo) && !$("start-from").validity.badInput && !$("start-to").validity.badInput;
+    $("start-error").hidden = validStart;
+    $("start-error").textContent = validStart ? "" : "Vérifiez la période de début : la borne de départ doit précéder ou égaler la borne de fin. Ce filtre attend une période valide.";
+    ["start-from", "start-to"].forEach((id) => $(id).setAttribute("aria-invalid", String(!validStart)));
     const from = $("publication-from").value; const to = $("publication-to").value;
     const validPeriod = radarPublication.validRange(from, to) && !$("publication-from").validity.badInput && !$("publication-to").validity.badInput;
     $("publication-error").hidden = validPeriod;
@@ -456,6 +552,11 @@
       job.score >= score && (active === "all" || (active === "available" ? job.is_active && !job.is_expired : active === "expired" ? job.is_expired : Boolean(job.is_active) === (active === "active"))) &&
       (!application || (job.application || {}).status === application) &&
       (!experienceCategory || experience(job).category === experienceCategory) &&
+      radarProgramme.matches(job.programme, programmeFilter) &&
+      radarProgramme.yearMatches(job.programme, programmeYear) &&
+      radarOpportunity.country(job.location_facts, countryFilter) &&
+      radarOpportunity.duration(job.duration, durationFilter) &&
+      (!validStart || radarOpportunity.start(job.start, startFrom, startTo)) &&
       (!education || (education === "unrecognized" ? !educationLevels(job).length : educationLevels(job).includes(education))) &&
       (!validPeriod || radarPublication.within(job.publication_day, from, to)) &&
       (state.view !== "applications" || (job.application || {}).status !== "New")
@@ -467,12 +568,15 @@
     const pages = Math.max(1, Math.ceil(results.length / pageSize)); state.page = Math.min(state.page, pages);
     const start = (state.page - 1) * pageSize;
     $("job-rows").replaceChildren();
+    $("mobile-jobs").replaceChildren();
     results.slice(start, start + pageSize).forEach((job) => {
       const row = make("tr"); const jobCell = make("td");
       const button = make("button", job.title, "job-title"); button.type = "button"; button.addEventListener("click", () => showDetail(job));
       const companyLine = make("div", null, "company-line"); const initial = make("span", job.company.slice(0, 2).toUpperCase(), "company-initial"); initial.setAttribute("aria-hidden", "true");
       companyLine.append(initial, make("span", job.company)); if (!job.is_active) companyLine.append(make("span", "Inactive", "badge"));
       if (job.is_expired) companyLine.append(make("span", "Échéance dépassée", "badge"));
+      if (job.programme?.kind && job.programme.kind !== "unspecified") companyLine.append(make("span", radarProgramme.label(job.programme), "badge"));
+      if (job.internship_alert) companyLine.append(make("span", internshipAlertLabels[job.internship_alert.status], "badge"));
       jobCell.append(button, companyLine, make("span", experienceLabel(job), "experience-indicator"));
       experienceEvidence(job).filter((item) => item.kind === "industry_or_academia").forEach((item) => {
         jobCell.append(make("span", evidenceLabel(item), "experience-indicator experience-practice"));
@@ -490,6 +594,19 @@
       } else publicationCell.textContent = "Non précisée";
       row.append(jobCell, make("td", job.location || "Non précisée", "location-cell"), scoreCell, statusCell, publicationCell, make("td", date(job.first_seen), "date-cell"), detailCell);
       $("job-rows").append(row);
+      const card = make("article", null, "mobile-job-card");
+      const heading = make("h3"); const open = actionButton(job.title, () => showDetail(job));
+      open.className = "job-title"; heading.append(open);
+      const badges = make("div", null, "mobile-badges");
+      badges.append(scorePill(job.score), make("span", statusLabel(job.application?.status || "New"), "badge"));
+      if (job.internship_alert) badges.append(make("span", internshipAlertLabels[job.internship_alert.status], "badge"));
+      card.append(heading, make("p", job.company + " · " + (job.location || "Lieu non précisé")), badges,
+        make("p", radarProgramme.label(job.programme) + " · " + radarOpportunity.durationLabel(job.duration)),
+        make("p", "Début : " + radarOpportunity.startLabel(job.start)));
+      if (job.application?.next_action) card.append(make("p", "Prochaine action : " + job.application.next_action + (job.application.next_action_date ? " · " + date(job.application.next_action_date) : ""), "mobile-next-action"));
+      if (job.deadline?.day) card.append(make("p", "Date limite : " + date(job.deadline.day), job.is_expired ? "editor-error" : ""));
+      card.append(actionButton(editingEnabled ? "Ouvrir le suivi" : "Voir la fiche", () => showDetail(job)));
+      $("mobile-jobs").append(card);
     });
     $("empty-state").hidden = results.length > 0;
     const emptyText = $("empty-state").querySelector("p");
@@ -498,9 +615,68 @@
     $("page-info").textContent = results.length ? (start + 1) + "–" + Math.min(start + pageSize, results.length) + " sur " + number(results.length) + " · Page " + state.page + " / " + pages : "0 offre";
     $("previous").disabled = state.page <= 1; $("next").disabled = state.page >= pages;
   }
+  function agendaSelection(now) {
+    const today = radarAgenda.parisDay(now);
+    const selected = $("agenda-period").value;
+    const end = new Date(today + "T12:00:00Z"); end.setUTCDate(end.getUTCDate() + (selected === "month" ? 29 : 6));
+    const until = end.toISOString().slice(0, 10);
+    return radarAgenda.entries(jobs, now).filter((entry) => selected === "all" || (selected === "overdue" ? entry.overdue : !entry.overdue && entry.day >= today && entry.day <= until));
+  }
+  function renderAgenda() {
+    const entries = agendaSelection(new Date().toISOString());
+    $("agenda-items").replaceChildren();
+    entries.forEach((entry) => {
+      const card = make("article", null, "agenda-card" + (entry.overdue ? " overdue" : ""));
+      const exact = entry.kind === "deadline" && entry.job.deadline?.precision === "instant";
+      const instant = exact ? entry.job.deadline.instant : entry.day;
+      const when = make("time", date(instant, exact)); when.dateTime = instant;
+      card.append(when, make("span", entry.kind === "action" ? "Prochaine action" : "Date limite", "badge"),
+        make("h3", entry.text), make("p", entry.job.company + " · " + entry.job.title),
+        actionButton(editingEnabled ? "Ouvrir le suivi" : "Voir la fiche", () => showDetail(entry.job)));
+      $("agenda-items").append(card);
+    });
+    $("agenda-count").textContent = number(entries.length) + " échéance(s)";
+    $("agenda-empty").hidden = entries.length > 0;
+    $("export-agenda").disabled = entries.length === 0;
+  }
+  function exportAgenda() {
+    const message = $("calendar-message");
+    try {
+      const now = new Date().toISOString(); const calendar = radarCalendar.build(agendaSelection(now),now);
+      if (!calendar.count) {message.textContent = "Aucune échéance datée à exporter dans cette période."; return;}
+      const url = URL.createObjectURL(new Blob([calendar.text],{type:"text/calendar;charset=utf-8"}));
+      const link = make("a");link.href = url;link.download = "radar-echeances-" + radarAgenda.parisDay(now) + ".ics";
+      document.body.append(link);link.click();link.remove();setTimeout(() => URL.revokeObjectURL(url),1000);
+      message.textContent = number(calendar.count) + " échéance(s) exportée(s). Ouvrez le fichier dans votre application de calendrier. Cet export ne se synchronise pas automatiquement.";
+    } catch (_) {message.textContent = "L’export est indisponible dans ce navigateur. Vous pouvez consulter les échéances ici.";}
+  }
+  function renderCoverage() {
+    const coverage = data.internship_coverage || {};
+    const labels = {validated:"Référence stages validée", pending:"Référence stages en attente", prevalidated:"Prévalidée par configuration"};
+    const summary = $("coverage-summary");
+    if (coverage.status === "disabled") summary.textContent = "La veille stages est désactivée.";
+    else if (coverage.status !== "ok") summary.textContent = "La référence des stages est indisponible. Aucun état de couverture n’est déduit.";
+    else summary.textContent = number(coverage.validated_sources) + " / " + number(coverage.enabled_sources) + " sources avec une référence stages observée" + (coverage.baseline_at ? " depuis le " + date(coverage.baseline_at, true) : " · référence prévalidée par configuration, sans date observée") + ".";
+    $("coverage-sources").replaceChildren();
+    if (coverage.status !== "ok") return;
+    const sources = [...(health.sources || [])].sort((a,b) => (a.status === "fresh") - (b.status === "fresh") || (coverage.sources?.[a.source]?.status === "validated") - (coverage.sources?.[b.source]?.status === "validated") || a.company.localeCompare(b.company,"fr"));
+    sources.forEach((source) => {
+      const reference = coverage.sources?.[source.source] || {};
+      const card = make("article", null, "coverage-card");
+      card.append(make("h4", source.company), make("span", source.source, "source-key"), healthBadge(source.status),
+        make("p", labels[reference.status] || "Référence inconnue", reference.status === "validated" ? "coverage-ready" : "coverage-pending"));
+      if (reference.validated_at) card.append(make("p", "Validée le " + date(reference.validated_at, true), "source-key"));
+      if (source.failure) card.append(make("p", source.failure.label));
+      if (source.status !== "fresh") card.append(make("p", "Dernier succès : " + date(source.last_success, true), "source-key"));
+      const stages = jobs.filter((job) => job.source === source.source && job.is_active && job.programme?.kind === "internship");
+      card.append(make("p", number(stages.length) + " stages actifs en base · tous formats confondus", "source-key"));
+      $("coverage-sources").append(card);
+    });
+  }
   function renderHealth() {
+    renderCoverage();
     const badge = healthBadge(health.status); $("health-status").className = badge.className; $("health-status").textContent = badge.textContent;
-    $("health-explanation").textContent = (editingEnabled ? "État calculé au chargement de la page. " : "État calculé lors de l’export. ") + "Une source est à jour si sa dernière collecte réussie date de moins de " + (health.max_age_hours || 24) + " heures, sans échec ultérieur ni fiche incomplète signalée. " + (editingEnabled ? "Rechargez la page pour actualiser toutes les données depuis votre radar local. Le calendrier indique la première heure possible, pas une garantie de passage ; il dépend du scanner et des places disponibles." : "Les données ne s’actualisent pas automatiquement. Le calendrier est une estimation au moment de l’export.");
+    $("health-explanation").textContent = (editingEnabled || liveEnabled ? "État calculé au chargement de la page. " : "État calculé lors de l’export. ") + "Une source est à jour si sa dernière collecte réussie date de moins de " + (health.max_age_hours || 24) + " heures, sans échec ultérieur ni fiche incomplète signalée. " + (editingEnabled || liveEnabled ? "Rechargez la page pour actualiser les offres et les sources. Le calendrier indique la première heure possible, pas une garantie de passage ; il dépend du scanner et des places disponibles." : "Les données ne s’actualisent pas automatiquement. Le calendrier est une estimation au moment de l’export.");
     (health.sources || []).forEach((source) => {
       const row = make("tr"); const name = make("td"); name.append(make("span", source.company, "source-name"), make("span", source.source, "source-key"));
       const status = make("td"); status.append(healthBadge(source.status));
@@ -509,7 +685,7 @@
         status.append(make("span", "Dernier échec : " + date(source.last_failure, true), "source-key"));
       }
       if ((source.listing_gaps || []).length) {
-        status.append(make("p", "Fiches sans titre ni lien : " + source.listing_gaps.join(", ") + ". Les autres offres sont actualisées ; ces références ne sont pas déclarées fermées.", "source-key"));
+        status.append(make("p", "Fiches incomplètes ou détail indisponible : " + source.listing_gaps.join(", ") + ". Les autres offres sont actualisées ; ces références ne sont pas déclarées fermées.", "source-key"));
       }
       if ((source.collection_conflicts || []).length) {
         const details = make("details", undefined, "collection-conflicts");
@@ -552,8 +728,8 @@
       } else schedule.textContent = "Non précisé";
       row.append(name, status, success, schedule, make("td", number(source.last_snapshot_jobs ?? source.last_count)), make("td", number(source.consecutive_failures))); $("source-rows").append(row);
     });
-    $("record-health").hidden = !editingEnabled;
-    $("health-capture-help").hidden = !editingEnabled;
+    $("record-health").hidden = !editingEnabled || privateEditing;
+    $("health-capture-help").hidden = !editingEnabled || privateEditing;
     renderHealthHistory();
   }
   function renderHealthHistory() {
@@ -592,7 +768,7 @@
   }
   async function recordHealth() {
     const button = $("record-health");
-    if (!editingEnabled || button.disabled) return;
+    if (!editingEnabled || privateEditing || button.disabled) return;
     button.disabled = true;
     const message = $("health-capture-message");
     message.textContent = "Enregistrement du contrôle…";
@@ -674,31 +850,77 @@
       $("trend-rows").append(row);
     });
   }
+  const filterOptions = () => Object.fromEntries(radarPreferences.fields.filter((id) => $(id).tagName === "SELECT").map((id) => [id,[...$(id).options].map((option) => option.value)]));
+  const captureFilters = () => Object.fromEntries(radarPreferences.fields.map((id) => [id,$(id).value]));
+  let savedFilterViews = {};
+  const filterStorage = () => window.localStorage;
+  function restoreFilters(view) {
+    HTMLFormElement.prototype.reset.call($("filters")); $("sort").value = "score";
+    if (view === "applications") $("active").value = "all";
+    const saved = savedFilterViews[view];
+    if (saved) Object.entries(saved).forEach(([id,value]) => {if (radarPreferences.fields.includes(id)) $(id).value = value;});
+  }
+  function persistFilters() {
+    if (["jobs","applications"].includes(state.view)) savedFilterViews[state.view] = captureFilters();
+    if (!$("remember-filters").checked) return;
+    let stored = false;
+    try {stored = radarPreferences.save(filterStorage(),savedFilterViews,filterOptions());} catch (_) {}
+    $("filter-memory-message").textContent = stored ? "Filtres retenus sur cet appareil · alertes inchangées." : "La mémorisation est indisponible. Vos filtres restent utilisables dans cette fenêtre.";
+  }
+  try {
+    const saved = radarPreferences.load(filterStorage(),filterOptions());
+    if (saved.status === "ok") {
+      savedFilterViews = saved.views; $("remember-filters").checked = true; restoreFilters("jobs");
+      $("filter-memory-message").textContent = "Vos filtres de consultation ont été restaurés. Réinitialisez pour élargir la sélection.";
+    }
+  } catch (_) {}
   function setView(view) {
-    if (view !== state.view && view === "applications") $("active").value = "all";
+    if (view !== state.view) {
+      if (["jobs","applications"].includes(state.view)) savedFilterViews[state.view] = captureFilters();
+      if (["jobs","applications"].includes(view)) restoreFilters(view);
+    }
     state.view = view; state.page = 1;
     document.querySelectorAll(".nav-item").forEach((button) => {
       const selected = button.dataset.view === view; button.classList.toggle("selected", selected);
       if (selected) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current");
     });
-    $("jobs-view").hidden = !["jobs", "applications"].includes(view); $("health-view").hidden = view !== "health"; $("trends-view").hidden = view !== "trends";
+    $("jobs-view").hidden = !["jobs", "applications"].includes(view); $("health-view").hidden = view !== "health"; $("trends-view").hidden = view !== "trends"; $("agenda-view").hidden = view !== "agenda";
     $("metrics").hidden = view === "trends";
     const headings = {
       jobs: ["OFFRES", "Le marché, à votre portée.", "Repérez les offres pertinentes. Gardez le cap sur votre recherche."],
       applications: ["CANDIDATURES", "Chaque candidature compte.", "Consultez votre suivi, vos contacts et vos prochaines actions."],
+      agenda: ["ÉCHÉANCES", "Gardez une longueur d’avance.", "Vos prochaines actions et vos dates limites, accessibles sur téléphone."],
       health: ["SANTÉ DES SOURCES", "La santé de votre veille.", "Vérifiez la fraîcheur des collectes et les derniers rapports locaux."],
       trends: ["TENDANCES", "Le rythme de votre veille.", "Suivez les détections, les changements et la fiabilité des collectes."]
     };
     ["breadcrumb-view", "page-title", "page-subtitle"].forEach((id, index) => { $(id).textContent = headings[view][index]; });
     $("results-heading").textContent = view === "applications" ? "Votre suivi de candidatures" : "Toutes les offres";
     if (["jobs", "applications"].includes(view)) renderJobs();
+    if (view === "agenda") renderAgenda();
   }
   document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
   $("filters").addEventListener("submit", (event) => event.preventDefault());
   $("trend-days").addEventListener("change", renderTrends);
+  $("agenda-period").addEventListener("change", renderAgenda);
+  $("export-agenda").addEventListener("click", exportAgenda);
   $("record-health").addEventListener("click", recordHealth);
-  ["search", "company", "score", "active", "application-status", "experience", "education", "publication-from", "publication-to", "sort"].forEach((id) => $(id).addEventListener(id === "search" || id.startsWith("publication-") ? "input" : "change", () => { state.page = 1; renderJobs(); }));
-  $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (state.view === "applications") $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); });
+  $("service-details").addEventListener("click", () => setView("health"));
+  radarPreferences.fields.forEach((id) => $(id).addEventListener(id === "search" || id.startsWith("publication-") || id.startsWith("start-") ? "input" : "change", () => { state.page = 1; renderJobs(); persistFilters(); }));
+  $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (state.view === "applications") $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); persistFilters(); });
+  $("remember-filters").addEventListener("change", () => {
+    if ($("remember-filters").checked) persistFilters();
+    else {
+      let cleared = false; try {cleared = radarPreferences.clear(filterStorage());} catch (_) {}
+      $("filter-memory-message").textContent = cleared ? "Filtres oubliés sur cet appareil. Ils restent actifs dans cette fenêtre." : "Cet appareil refuse l’accès à la mémorisation. Vous pouvez supprimer les données du site dans votre navigateur.";
+    }
+  });
+  [["quick-off-cycle","off_cycle"],["quick-long","long"],["quick-priority",null]].forEach(([id,format]) => $(id).addEventListener("click", () => {
+    if (format) {
+      $("programme").value = format;
+      if (data.internship_scope?.enabled) $("programme-year").value = String(data.internship_scope.target_year);
+    } else $("score").value = "70";
+    state.page = 1; renderJobs(); persistFilters();
+  }));
   $("previous").addEventListener("click", () => { state.page -= 1; renderJobs(); });
   $("next").addEventListener("click", () => { state.page += 1; renderJobs(); });
   $("close-detail").addEventListener("click", closeDetail);

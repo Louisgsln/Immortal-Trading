@@ -337,5 +337,8 @@ class UBSCollector:
             if job is not None:
                 jobs.append(job)
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )

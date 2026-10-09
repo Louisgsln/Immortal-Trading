@@ -1,0 +1,15 @@
+[Unit]
+Description=Immortal Trading radar, Telegram and verified backups
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/ubuntu/Immortal-Trading
+ExecStart=/usr/bin/docker compose --env-file .env.cloud -f compose.cloud.yaml --profile telegram up -d --no-build --no-recreate
+TimeoutStartSec=180
+
+[Install]
+WantedBy=multi-user.target

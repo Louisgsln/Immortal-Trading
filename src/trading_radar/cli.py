@@ -24,6 +24,7 @@ from trading_radar.http_cache import JSONCache
 from trading_radar.models import utcnow
 from trading_radar.monitoring_cli import app as monitor_app
 from trading_radar.notifications import TelegramNotifier
+from trading_radar.programmes import programme_company
 from trading_radar.runtime_status import WatcherPulse, pulse_path
 from trading_radar.scanner import configure_logging, scan
 from trading_radar.score_audit import build_score_audit
@@ -347,7 +348,8 @@ def rescore(demo: bool = False, config_dir: Path = Path("config"), dry_run: bool
     try:
         with FileLock(repo.lock_path, timeout=0), repo.transaction():
             changed = sum(
-                repo.update_scoring(score_job(job, config.keywords)) for job in repo.list_jobs()
+                repo.update_scoring(score_job(job, config.keywords, settings=config.settings))
+                for job in repo.list_jobs()
             )
         export_csv(repo, Path("data/demo.csv" if demo else "data/jobs.csv"))
         typer.echo(json.dumps({"rescored": changed}))
@@ -385,7 +387,7 @@ def doctor(network: bool = False, config_dir: Path = Path("config")):
                     report["sources"][key] = {"status": "disabled", "notes": co.notes}
                     continue
                 try:
-                    collector = build_collector(key, co, http)
+                    collector = build_collector(key, programme_company(co, config.settings), http)
                     if co.ats in {"jobspy", "ats_dataset"}:
                         module = "jobspy" if co.ats == "jobspy" else "ats_scrapers"
                         if importlib.util.find_spec(module) is None:

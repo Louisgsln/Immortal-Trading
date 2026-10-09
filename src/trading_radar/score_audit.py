@@ -100,6 +100,8 @@ def _scoring(job: Job) -> dict:
         "breakdown": job.score_breakdown.model_dump(mode="json"),
         "desk": job.desk,
         "asset_class": job.asset_class,
+        "programme_type": job.programme_type,
+        "seniority": job.seniority,
     }
 
 
@@ -113,7 +115,7 @@ def _summary(jobs: list[Job]) -> dict:
 
 
 def build_score_audit(config: Config) -> dict:
-    """Compare exactly the score/desk/asset fields persisted by update_scoring.
+    """Compare the derived fields persisted by update_scoring.
 
     This is an observation, not an approval token for a later write. No application
     notes, full job descriptions or credentials are included in the report.
@@ -133,7 +135,10 @@ def build_score_audit(config: Config) -> dict:
     }
     try:
         jobs = _read(config)
-        recalculated = [score_job(job.model_copy(deep=True), config.keywords) for job in jobs]
+        recalculated = [
+            score_job(job.model_copy(deep=True), config.keywords, settings=config.settings)
+            for job in jobs
+        ]
         changes: list[dict] = [
             {
                 "id": old.id,

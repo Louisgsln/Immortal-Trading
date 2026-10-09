@@ -238,17 +238,16 @@ async def process_updates(
             store.save()
             text = digest_status(store.state)
         elif command == "digest":
-            text = (
-                digest_status(store.state)
-                + "\n\nAPERÇU À LA DEMANDE\n"
-                + digest_message(config, instant)
-            )
+            text = "<b>APERÇU À LA DEMANDE</b>\n\n" + digest_message(config, instant)
         elif command in {"top", "new"}:
             text = jobs_message(config, "top" if command == "top" else "new")
         else:
             text = format_status(runtime_report(config)) if command == "status" else HELP
         try:
-            await notifier.send_text(text)
+            if command == "digest":
+                await notifier.send_text(text, parse_mode="HTML")
+            else:
+                await notifier.send_text(text)
             logger.info("telegram_command_delivered command=%s", command)
         except Exception as error:
             logger.warning("telegram_command_delivery_unconfirmed type=%s", type(error).__name__)

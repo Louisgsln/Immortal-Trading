@@ -1,12 +1,32 @@
 # Trading Job Radar
 
-La cible choisie pour le scanner continu est **OVH VPS-1 sous Ubuntu 26.04 LTS**.
-La livraison d'un VPS Ubuntu 26.04 est confirmée ; l'accès SSH depuis cette
-session et l'installation du scanner restent à établir. Voir [le guide](docs/OVH-SETUP.md).
-Le lot **103**, validé par la CI, fournit les services Docker, les données
-persistantes, les sauvegardes quotidiennes et le démarrage protégé pendant la
-migration. Voir [le guide commun](docs/CLOUD-DEPLOYMENT.md) et
-[les contrôles](docs/VALIDATION-LOT103.md). Aucun VPS de production n'est encore connecté.
+Le radar est déployé sur **vps-b7a073e2.vps.ovh.net**, sous Ubuntu, avec trois
+services Docker permanents : collectes, écouteur Telegram et sauvegardes. Le
+Dashboard possède son propre service et un lien HTTPS privé sans connexion,
+utilisable même quand le poste de développement est fermé. Voir
+[l'accès et l'exploitation](docs/DASHBOARD-CLOUD.md).
+
+L'extension aux **stages off-cycle et longs 2027** conserve le périmètre de
+métiers et de lieux. La classification des programmes est distincte du score,
+avec un filtre Dashboard, des preuves affichées et une référence silencieuse
+avant les nouvelles alertes de stages. Voir
+[le périmètre, l'architecture et les prochaines livraisons](docs/INTERNSHIPS-ARCHITECTURE.md).
+La sélection active du VPS est conservée ; les chiffres du catalogue historique
+ci-dessous ne décrivent pas les sources activées en production.
+
+Les lots **111–113** livrent [Morgan Stanley Campus et la référence de stages](docs/VALIDATION-LOT111.md),
+[les filtres pays, durée et début](docs/VALIDATION-LOT112.md), puis
+[le suivi modifiable sur téléphone et l'agenda](docs/VALIDATION-LOT113.md).
+
+Les lots **114–116** ajoutent [la couverture observable des stages](docs/VALIDATION-LOT114.md),
+[les filtres mémorisés sur chaque appareil](docs/VALIDATION-LOT115.md) et
+[l'export calendrier des échéances](docs/VALIDATION-LOT116.md).
+Le [lot 117](docs/VALIDATION-LOT117.md) poursuit les collectes vérifiées malgré
+une fiche de détail absente chez Optiver ou un intitulé contradictoire chez
+Morgan Stanley Campus, avec signalement et conservation des anciennes offres.
+Le même lien privé donne accès aux statuts, notes et prochaines actions, avec
+historique et protection contre les modifications concurrentes. JPMorgan Campus
+reste désactivé tant que robots.txt renvoie HTTP 403 au collecteur.
 
 Les lots **99–102** ajoutent le calendrier de candidature par périodes, les
 changements importants dans les alertes, un audit de couverture, des priorités

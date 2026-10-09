@@ -1,0 +1,190 @@
+{
+  "lots": [
+    122,
+    123,
+    124
+  ],
+  "release": "immortal-trading:lot124-workflow-final-20261009",
+  "validation": {
+    "python_full": {
+      "tests": 5048,
+      "failures": 0,
+      "errors": 0
+    },
+    "python_http_follow_up": {
+      "tests": 55,
+      "failures": 0
+    },
+    "python_remote_access": {
+      "tests": 21,
+      "failures": 0
+    },
+    "javascript": {
+      "tests": 34,
+      "failures": 0
+    },
+    "mobile": {
+      "width": 390,
+      "tracking_persistence": true,
+      "notes_preserved": true,
+      "discard_guard": true,
+      "calendar_days_paris": true,
+      "agenda": true,
+      "page_errors": 0,
+      "horizontal_overflow": false
+    },
+    "ruff": "passed",
+    "format": "passed",
+    "mypy_modules": 111
+  },
+  "preservation": {
+    "checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "digest_last_day_not_reset": true,
+      "digest_preferences_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true
+    },
+    "counts_before": {
+      "alert_history": 94,
+      "alerts": 47,
+      "application_history": 0,
+      "applications": 1004,
+      "jobs": 1004
+    },
+    "counts_after": {
+      "alert_history": 94,
+      "alerts": 47,
+      "application_history": 0,
+      "applications": 1004,
+      "jobs": 1004
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    }
+  },
+  "production": {
+    "actual_image_verified": true,
+    "coverage": {
+      "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+      "enabled_sources": 25,
+      "status": "ok",
+      "validated_sources": 23
+    },
+    "dashboard_contract": {
+      "asset_hashes": "verified",
+      "controls": 83,
+      "jobs": 1004,
+      "modules": 7,
+      "status": "ok"
+    },
+    "dashboard_editable": true,
+    "dashboard_notifications_disabled": true,
+    "dashboard_radar_policy_matches": true,
+    "dashboard_without_telegram_credentials": true,
+    "digest_preview": {
+      "compact": true,
+      "html": true,
+      "known_facts_only": true
+    },
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "https_trusted": true,
+    "incidents": [
+      {
+        "source": "nomura_professionals",
+        "status": "recent_failure"
+      },
+      {
+        "source": "optiver",
+        "status": "partial"
+      },
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      }
+    ],
+    "internship_pending_sources": [
+      "optiver",
+      "bnp_paribas"
+    ],
+    "internships": {
+      "active": 209,
+      "available": 205,
+      "criteria_met": 30,
+      "formats": {
+        "long": 25,
+        "off_cycle": 44,
+        "summer": 56
+      },
+      "total": 211,
+      "year_status": {
+        "confirmed": 135,
+        "conflict": 20,
+        "unknown": 50
+      }
+    },
+    "same_private_link": true,
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_control_enabled": true,
+      "telegram_incident_notices_enabled": false
+    },
+    "services": {
+      "digest": {
+        "enabled": true,
+        "last_attempt_day": "2026-10-09",
+        "status": "configured",
+        "time": "09:00",
+        "time_zone": "Europe/Paris"
+      },
+      "observed_at": "2026-10-09T09:47:17.077797+00:00",
+      "watcher": {
+        "age_seconds": 4,
+        "at": "2026-10-09T09:47:13.311891+00:00",
+        "phase": "scanning",
+        "status": "active"
+      }
+    },
+    "services_running": 5,
+    "summary": {
+      "active": 992,
+      "applications_due": 0,
+      "applications_in_progress": 0,
+      "enabled_sources": 25,
+      "fresh_sources": 21,
+      "high_priority": 258,
+      "relevant": 361,
+      "total": 1004
+    },
+    "systemd_active_enabled": 4
+  },
+  "github": {
+    "repository": "https://github.com/Louisgsln/Immortal-Trading",
+    "workflow": "Python checks",
+    "packaged_dashboard_contract": "enabled"
+  }
+}

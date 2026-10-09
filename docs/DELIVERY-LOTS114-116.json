@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-07",
+  "lots": [
+    "114-coverage",
+    "115-preferences",
+    "116-calendar"
+  ],
+  "validation": {
+    "python_dashboard": 284,
+    "python_internship_rollout": 4,
+    "javascript": 28,
+    "ruff": true,
+    "mypy_new_coverage_reader": true,
+    "mobile_width": 390,
+    "coverage_cards": true,
+    "saved_filters": true,
+    "separate_views": true,
+    "storage_denial_fallback": true,
+    "calendar_download": true,
+    "precise_deadline": true,
+    "private_notes_excluded": true,
+    "application_persistence": true,
+    "no_horizontal_overflow": true,
+    "page_errors": 0
+  },
+  "runtime": {
+    "jobs": 988,
+    "active_jobs": 979,
+    "enabled_sources": 25,
+    "internship_sources_baselined": 17,
+    "services_running": 5,
+    "alerts": 44,
+    "alert_history": 88,
+    "application_history": 0,
+    "telegram_offset": 850284405
+  },
+  "deployment_status": "deployed",
+  "backup_and_history_preserved": true,
+  "same_private_link": true
+}

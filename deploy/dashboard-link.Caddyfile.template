@@ -1,0 +1,38 @@
+{
+    admin off
+    auto_https disable_redirects
+}
+
+http://__DASHBOARD_HOST__ {
+    redir https://__DASHBOARD_HOST__{uri} permanent
+}
+
+https://__DASHBOARD_HOST__ {
+    encode zstd gzip
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
+    header {
+        -Server
+        X-Robots-Tag "noindex, nofollow, noarchive"
+        Strict-Transport-Security "max-age=31536000"
+        Referrer-Policy "no-referrer"
+    }
+    @without_slash path /__DASHBOARD_LINK_TOKEN__
+    redir @without_slash /__DASHBOARD_LINK_TOKEN__/ permanent
+    @dashboard path /__DASHBOARD_LINK_TOKEN__/ /__DASHBOARD_LINK_TOKEN__/index.html
+    handle @dashboard {
+        uri strip_prefix /__DASHBOARD_LINK_TOKEN__
+        reverse_proxy 127.0.0.1:8765 {
+            header_up Host 127.0.0.1:8765
+            header_up -Authorization
+            header_up -Origin
+            header_up -Sec-Fetch-Site
+        }
+    }
+    handle {
+        respond "Not found" 404
+    }
+}

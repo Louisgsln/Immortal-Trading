@@ -214,12 +214,28 @@ class OptiverCollector:
         ]
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("Optiver detail limit exceeded")
-        jobs = []
+        jobs, gaps = [], []
         for row in targets:
-            text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
+            try:
+                text = await self.http.get_text(
+                    row["url"], self.config.request_interval, self.source
+                )
+            except SourceUnavailable as exc:
+                # A stale public card may outlive its detail. Keep its previous
+                # stored job; neither this gap nor the search closes by absence.
+                if str(exc) != "HTTP 404":
+                    raise
+                gaps.append(row["url"])
+                continue
             jobs.append(parse_detail(text, row, self.config, self.source))
+        if targets and not jobs:
+            raise SourceUnavailable("HTTP 404")
         if len({j.external_id for j in jobs}) != len(jobs):
             raise SourceUnavailable("Optiver duplicate vacancy identifier")
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=not gaps,
+            listing_gaps=gaps,
+            requests=self.http.counts[self.source] - before,
         )

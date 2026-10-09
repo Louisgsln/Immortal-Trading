@@ -18,6 +18,7 @@ from trading_radar.dashboard_applications import (
 )
 from trading_radar.dashboard_data import build_dashboard_data
 from trading_radar.dashboard_http import discard_small_body
+from trading_radar.dashboard_private import PrivateDashboardAccess, PrivateSessions
 from trading_radar.monitoring import history, record_health
 
 MAX_BODY_BYTES = 131_072
@@ -37,13 +38,18 @@ def _reject_constant(value: str) -> None:
 
 
 def create_editable_dashboard_server(
-    config: Config, history_dir: Path = Path("data/health-history"), port: int = 8765
+    config: Config,
+    history_dir: Path = Path("data/health-history"),
+    port: int = 8765,
+    *,
+    private_access: PrivateDashboardAccess | None = None,
 ) -> ThreadingHTTPServer:
     """Protect explicit local actions with a per-process token and origin checks."""
     initial = build_dashboard_data(config, history_dir=history_dir)
     if initial["status"] != "ok":
         raise ValueError("Dashboard data unavailable")
     token = secrets.token_urlsafe(32)
+    sessions = PrivateSessions(private_access) if private_access else None
     _, css, script = _assets()
     policy = _policy(css, script, editable=True) + "; frame-ancestors 'none'"
 
@@ -72,6 +78,8 @@ def create_editable_dashboard_server(
                 "Connection": "close",
             }.items():
                 self.send_header(name, value)
+            if getattr(self, "session_cookie", None):
+                self.send_header("Set-Cookie", self.session_cookie)
             self.end_headers()
             if self.command != "HEAD":
                 try:
@@ -96,6 +104,25 @@ def create_editable_dashboard_server(
             hosts = self.headers.get_all("Host", [])
             origins = self.headers.get_all("Origin", [])
             sites = self.headers.get_all("Sec-Fetch-Site", [])
+            if private_access:
+                gateway = self.headers.get_all("X-Radar-Gateway", [])
+                page = self.command in {"GET", "HEAD"} and self.path in {"/", "/index.html"}
+                if (
+                    len(hosts) != 1
+                    or hosts[0] != f"127.0.0.1:{port}"
+                    or len(gateway) != 1
+                    or not secrets.compare_digest(
+                        gateway[0].encode(), private_access.gateway_secret.encode()
+                    )
+                    or len(origins) > 1
+                    or (origins and origins[0] != private_access.origin)
+                    or (write and origins != [private_access.origin])
+                    or len(sites) > 1
+                    or (sites and sites[0] not in {"same-origin", "same-site", "none"} and not page)
+                ):
+                    self.error(403, "private_access_required", "Accès au Dashboard privé requis.")
+                    return False
+                return True
             if (
                 len(hosts) != 1
                 or hosts[0] not in {f"127.0.0.1:{port}", f"localhost:{port}"}
@@ -111,7 +138,15 @@ def create_editable_dashboard_server(
 
         def authorized(self) -> bool:
             values = self.headers.get_all("X-Radar-Token", [])
-            if len(values) != 1 or not secrets.compare_digest(values[0].encode(), token.encode()):
+            session = sessions.read(self.headers) if sessions else None
+            expected = (
+                sessions.csrf(session) if sessions and session else token if not sessions else ""
+            )
+            if (
+                not expected
+                or len(values) != 1
+                or not secrets.compare_digest(values[0].encode(), expected.encode())
+            ):
                 self.error(
                     403, "invalid_session", "Rechargez la page pour ouvrir une session locale."
                 )
@@ -123,11 +158,34 @@ def create_editable_dashboard_server(
             return match[1] if match else None
 
         def do_GET(self):
+            if private_access and self.path == "/healthz":
+                port = cast(ThreadingHTTPServer, self.server).server_port
+                if self.headers.get_all("Host", []) != [f"127.0.0.1:{port}"]:
+                    self.error(403, "private_access_required", "Accès local requis.")
+                    return
+                self.json(200, {"status": "ok"})
+                return
             if not self.local():
                 return
             if self.path in {"/", "/index.html"}:
                 data = build_dashboard_data(config, history_dir=history_dir)
                 data["editing"] = {"enabled": True, "token": token}
+                if private_access and sessions:
+                    if data["status"] != "ok":
+                        self.error(
+                            503, "unavailable", "Le Dashboard est momentanément indisponible."
+                        )
+                        return
+                    session = sessions.read(self.headers) or sessions.mint()
+                    self.session_cookie = sessions.cookie(session)
+                    data["live"] = True
+                    data["editing"] = {
+                        "enabled": True,
+                        "mode": "private",
+                        "token": sessions.csrf(session),
+                        "origin": private_access.origin,
+                        "api_base": private_access.prefix + "api/applications",
+                    }
                 self.respond(
                     200,
                     render_dashboard(data, editable=True).encode("utf-8"),
@@ -160,7 +218,7 @@ def create_editable_dashboard_server(
             if not self.local(write=True) or not self.authorized():
                 return
             job_id = self.job_id()
-            capture_health = self.path == "/api/health-snapshots"
+            capture_health = private_access is None and self.path == "/api/health-snapshots"
             if job_id is None and not capture_health:
                 self.error(404, "not_found", "Cette ressource n’existe pas.")
                 return
@@ -207,7 +265,13 @@ def create_editable_dashboard_server(
                 return
             assert job_id is not None
             try:
-                result = update_application(config, job_id, payload["changes"], payload["revision"])
+                result = update_application(
+                    config,
+                    job_id,
+                    payload["changes"],
+                    payload["revision"],
+                    application_only=private_access is not None,
+                )
                 self.json(200, {"status": "ok", **result})
             except ApplicationEditError as exc:
                 self.error(exc.status, exc.code, exc.message)

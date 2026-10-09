@@ -445,6 +445,12 @@ def parse_board(
                 if audit is not None:
                     audit.record("hidden")
                 continue
+            # The public IMC feed also contains programme events. They are not
+            # employment levels and must not invalidate the open-role catalogue.
+            if fields.get("Worker Sub Type") == "Program Event":
+                if audit is not None:
+                    audit.record("event")
+                continue
         if config.tenant == "aqr":
             if "Post Job?" not in fields or (
                 fields["Post Job?"] is not None and type(fields["Post Job?"]) is not bool
@@ -657,6 +663,9 @@ class GreenhouseFilteredCollector:
         return Collection(
             jobs=jobs,
             complete=False,
+            # parse_board verifies the entire public feed and its declared total.
+            # Filtering still prevents absence-based closures outside this scope.
+            scope_complete=True,
             requests=self.http.counts[self.source] - before,
             selection=audit.summary(),
         )

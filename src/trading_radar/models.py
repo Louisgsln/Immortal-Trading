@@ -159,6 +159,9 @@ class SelectionSummary(BaseModel):
 class Collection(BaseModel):
     jobs: list[RawJob]
     complete: bool = False
+    # A validated search scope may be exhaustive without being a company inventory.
+    # Only `complete` permits reconciliation by absence.
+    scope_complete: bool = False
     requests: int = 0
     conflicts: list[CollectionConflict] = Field(default_factory=list)
     listing_gaps: list[str] = Field(default_factory=list)
@@ -170,6 +173,8 @@ class Collection(BaseModel):
         # Keep historical archive contracts when no selection audit was observed.
         if self.selection is None:
             payload.pop("selection", None)
+        if not self.scope_complete:
+            payload.pop("scope_complete", None)
         return payload
 
 

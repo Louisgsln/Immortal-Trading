@@ -415,6 +415,8 @@ class Repository:
             old.score_breakdown == job.score_breakdown
             and old.desk == job.desk
             and old.asset_class == job.asset_class
+            and old.programme_type == job.programme_type
+            and old.seniority == job.seniority
         ):
             return False
         self._write(job)

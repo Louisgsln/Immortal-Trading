@@ -11,6 +11,7 @@ from trading_radar.experience import experience_requirement
 from trading_radar.job_conditions import authorization_evidence, deadline_label, start_label
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job
+from trading_radar.programmes import programme
 
 
 def application_callback(job_id: str, token: str, chat_id: str) -> str:
@@ -72,6 +73,12 @@ def format_alert(job: Job, event: str) -> str:
         return escape(text[:limit] + ("…" if len(text) > limit else ""))
 
     score = job.score_breakdown.total
+    observed = programme(job)
+    programme_line = []
+    if observed["kind"] == "internship":
+        names = {"off_cycle": "Off-cycle", "long": "Stage long", "summer": "Summer Internship"}
+        label = " / ".join(names[f] for f in observed["formats"]) or "Stage"
+        programme_line = ["🎯 " + label + " · " + str(observed["year"] or "Année non précisée")]
     heading = {
         "new": "NOUVELLE OPPORTUNITÉ",
         "updated": "OFFRE ACTUALISÉE",
@@ -106,6 +113,7 @@ def format_alert(job: Job, event: str) -> str:
             "",
             f"📍 {clean(job.location_normalized or 'Lieu non précisé', 100)}",
             f"🗓 Début : {clean(start_label(job), 120)}",
+            *programme_line,
             f"🎓 Expérience : {experience}",
             f"⏳ Échéance : {deadline}",
             *(["🛂 " + clean(authorization[0], 260)] if authorization else []),

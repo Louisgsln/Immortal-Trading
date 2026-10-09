@@ -17,6 +17,7 @@ from trading_radar.greenhouse_filtered import (
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.normalizer import normalize
 from trading_radar.scoring import score_job
+from trading_radar.selection import SelectionAudit
 
 
 def config(tenant="imc", **options):
@@ -204,7 +205,12 @@ def test_new_boards_use_public_get_and_partial_collection(tenant, make_row, monk
             await http.close()
 
     result = asyncio.run(run())
-    assert not result.complete and len(result.jobs) == 1 and result.requests == 2
+    assert (
+        not result.complete
+        and result.scope_complete
+        and len(result.jobs) == 1
+        and result.requests == 2
+    )
 
 
 def parse(rows, tenant="imc", **options):
@@ -246,7 +252,7 @@ def test_public_board_wiring_and_filtered_snapshot(tenant, monkeypatch):
             await http.close()
 
     result = asyncio.run(run())
-    assert not result.complete and result.requests == 2
+    assert not result.complete and result.scope_complete and result.requests == 2
     assert len(result.jobs) == 1
     job = result.jobs[0]
     assert job.external_id == "1"
@@ -309,6 +315,16 @@ def test_prospect_hidden_and_duplicate_ids():
         r = row()
         del r["internal_job_id"]
         parse([r])
+
+
+def test_imc_programme_event_does_not_block_open_roles_or_become_a_job():
+    event = row(i=2, content="", location=None)
+    event["metadata"][0]["value"] = "Program Event"
+    audit = SelectionAudit("public_catalogue")
+    jobs = parse_board(payload([event, row()]), "imc", config(), GreenhouseOptions(), audit)
+    assert [job.external_id for job in jobs] == ["1"]
+    assert audit.summary().rejected == {"event": 1}
+    assert audit.summary().examined == 2
 
 
 @pytest.mark.parametrize(

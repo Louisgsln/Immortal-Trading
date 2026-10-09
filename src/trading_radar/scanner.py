@@ -9,14 +9,16 @@ from filelock import FileLock
 
 from trading_radar.collection_diagnostics import quarantined_sources
 from trading_radar.collectors import Collector, build_collector
-from trading_radar.config import Config
+from trading_radar.config import Config, Settings
 from trading_radar.deadlines import deadline_status, resolve_deadline
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.http_cache import JSONCache
+from trading_radar.internship_baseline import observed_baselines
 from trading_radar.job_conditions import material_changes
 from trading_radar.models import Job, ScanMetrics, utcnow
 from trading_radar.normalizer import normalize
 from trading_radar.notifications import DeliveryUnknown, Notifier
+from trading_radar.programmes import programme, programme_alertable, programme_company
 from trading_radar.reminders import deadline_plan, queue_reminders
 from trading_radar.scoring import score_job
 from trading_radar.source_schedule import due_at, scan_lock, writer_lock
@@ -66,6 +68,7 @@ async def deliver(
     reminder_max_age_hours: float = 24,
     skip_sources: set[str] | None = None,
     only_sources: set[str] | None = None,
+    settings: Settings | None = None,
 ) -> int:
     delivered = 0
     pending = repo.pending()
@@ -82,6 +85,9 @@ async def deliver(
         if job.source in (skip_sources or set()):
             continue
         if only_sources is not None and job.source not in only_sources:
+            continue
+        if settings is not None and not programme_alertable(job, settings):
+            repo.set_alert(alert["id"], "suppressed")
             continue
         event = alert["event_key"].split(":")[-2]
         if event.startswith("deadline_j"):
@@ -144,6 +150,20 @@ async def deliver(
     return delivered
 
 
+def internship_baselined(repo: Repository, source: str, settings: Settings) -> bool:
+    """A complete snapshot under the expanded policy precedes new stage alerts.
+
+    Reuse the existing scan journal; no schema migration or source reset. Partial
+    and failed snapshots cannot establish the baseline. An unset rollout date
+    keeps this optional for callers that already imported a reviewed baseline.
+    """
+    if settings.internship_baseline_at is None:
+        return True
+    return source in observed_baselines(
+        repo.db, {source}, settings.internship_baseline_at, utcnow()
+    )
+
+
 async def scan(
     config: Config,
     repo: Repository,
@@ -174,6 +194,17 @@ async def scan(
     }
     if collectors is not None:
         selected = {key: config.companies[key] for key in collectors}
+    # One read for the scan, before any newly collected reference is recorded.
+    # The first validated expanded snapshot remains silent for internship alerts.
+    ready_sources = (
+        set(selected)
+        if config.settings.internship_baseline_at is None
+        else set(
+            observed_baselines(
+                repo.db, set(selected), config.settings.internship_baseline_at, utcnow()
+            )
+        )
+    )
 
     async def run_one(key: str) -> None:
         assert http is not None
@@ -200,7 +231,7 @@ async def scan(
                 collector = (
                     collectors[key]
                     if collectors is not None
-                    else build_collector(key, co, source_http)
+                    else build_collector(key, programme_company(co, config.settings), source_http)
                 )
                 try:
                     async with asyncio.timeout(config.settings.source_timeout):
@@ -218,7 +249,11 @@ async def scan(
                     raise ValueError("collector returned a quarantined identifier")
                 # Normalize whole snapshot before writing. A malformed row cannot close other jobs.
                 normalized = [
-                    score_job(normalize(raw, config.settings.store_raw), config.keywords)
+                    score_job(
+                        normalize(raw, config.settings.store_raw),
+                        config.keywords,
+                        settings=config.settings,
+                    )
                     for raw in result.jobs
                 ]
                 if any(job.source != key for job in normalized):
@@ -231,6 +266,7 @@ async def scan(
                 ):
                     raise SourceUnavailable("unexpected empty full snapshot; closure deferred")
                 silent = config.settings.bootstrap_silent and not state["bootstrapped"]
+                internship_ready = key in ready_sources
                 if silent:
                     bootstrapped_sources.add(key)
                 seen: set[str] = set()
@@ -258,6 +294,8 @@ async def scan(
                                 and not expired_deadline(job)
                                 and not job.score_breakdown.exclusions
                                 and job.score_breakdown.total >= config.settings.alert_min_score
+                                and programme_alertable(job, config.settings)
+                                and (internship_ready or programme(job)["kind"] != "internship")
                             ):
                                 if config.settings.alerts_enabled:
                                     repo.enqueue(job, event)
@@ -314,6 +352,13 @@ async def scan(
                     "status": outcome,
                     "duration": round(time.monotonic() - source_start, 3),
                     "selection": selection,
+                    "internship_baseline_complete": bool(
+                        config.settings.include_internships
+                        and outcome == "successful"
+                        and (result.complete or result.scope_complete)
+                        and not result.conflicts
+                        and not result.listing_gaps
+                    ),
                 }
                 metrics.requests += source_http.counts.pop(key, 0)
                 if separate_session:
@@ -346,6 +391,7 @@ async def scan(
                         reminder_max_age_hours=config.settings.deadline_reminder_max_age_hours,
                         skip_sources=blocked_sources,
                         only_sources=set(selected),
+                        settings=config.settings,
                     )
                 jobs = repo.list_jobs()
                 metrics.relevant = sum(j.is_active and j.score_breakdown.total >= 55 for j in jobs)

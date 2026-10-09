@@ -1,4 +1,4 @@
-"""Public Oracle Candidate Experience adapter; JPMorgan remains unvalidated live."""
+"""Bounded public Oracle Candidate Experience searches, without absence closures."""
 
 import asyncio
 import re
@@ -9,6 +9,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text, parse_date
 from trading_radar.search_scope import SearchOptions
+from trading_radar.selection import SelectionAudit
 
 
 def oracle_base(url: str) -> tuple[str, str, str]:
@@ -103,7 +104,11 @@ class OracleCollector:
             )
             if isinstance(info.get(key), str) and info[key].strip()
         )
-        if actual != identifier or not description:
+        if (
+            actual != identifier
+            or not description
+            or normalize_text(info.get("Title") or "") != normalize_text(listing["Title"])
+        ):
             raise SourceUnavailable("Oracle detail incomplete or mismatched")
         url = f"{self.site}/job/{identifier}"
         return RawJob(
@@ -116,7 +121,12 @@ class OracleCollector:
             source_url=url,
             description=description,
             location=info.get("PrimaryLocation") or listing.get("PrimaryLocation") or "",
-            date_posted=parse_date(info.get("PostedDate") or listing.get("PostedDate")),
+            date_posted=parse_date(
+                info.get("ExternalPostedStartDate")
+                or info.get("PostedDate")
+                or listing.get("PostedDate")
+            ),
+            employment_type=info.get("ContractType") or info.get("JobSchedule"),
             raw_payload={"listing": listing, "detail": info},
         )
 
@@ -124,11 +134,28 @@ class OracleCollector:
         before = self.http.counts[self.source]
         candidates: dict[str, dict] = {}
         for term in self.options.search_terms:
-            candidates.update(await self._search(term))
-        targets = {key: row for key, row in candidates.items() if self.selected(row["Title"])}
+            for key, row in (await self._search(term)).items():
+                if key in candidates and normalize_text(candidates[key]["Title"]) != normalize_text(
+                    row["Title"]
+                ):
+                    raise SourceUnavailable("Oracle posting changed between search scopes")
+                candidates[key] = row
+        audit = SelectionAudit("search_results")
+        targets = {}
+        for key, row in candidates.items():
+            selected = self.selected(row["Title"])
+            audit.record(
+                None if selected else "outside_title_scope", title=row["Title"], identifier=key
+            )
+            if selected:
+                targets[key] = row
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("Oracle detail limit exceeded; narrow scope")
         jobs = [await self._detail(key, row) for key, row in targets.items()]
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
+            selection=audit.summary(),
         )

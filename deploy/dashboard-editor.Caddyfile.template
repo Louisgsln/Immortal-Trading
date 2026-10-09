@@ -1,0 +1,56 @@
+{
+    admin off
+    auto_https disable_redirects
+}
+
+http://__DASHBOARD_HOST__ {
+    redir https://__DASHBOARD_HOST__{uri} permanent
+}
+
+https://__DASHBOARD_HOST__ {
+    encode zstd gzip
+    tls {
+        issuer acme {
+            dir https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
+    header {
+        -Server
+        X-Robots-Tag "noindex, nofollow, noarchive"
+        Strict-Transport-Security "max-age=31536000"
+        Referrer-Policy "no-referrer"
+    }
+    @without_slash path /__DASHBOARD_LINK_TOKEN__
+    redir @without_slash /__DASHBOARD_LINK_TOKEN__/ permanent
+    @page {
+        path /__DASHBOARD_LINK_TOKEN__/ /__DASHBOARD_LINK_TOKEN__/index.html
+        method GET HEAD
+    }
+    @application {
+        path_regexp applications ^/__DASHBOARD_LINK_TOKEN__/api/applications(?:/[A-Za-z0-9_-]{1,128})?$
+        method GET HEAD POST
+    }
+    handle @page {
+        uri strip_prefix /__DASHBOARD_LINK_TOKEN__
+        reverse_proxy 127.0.0.1:8765 {
+            header_up Host 127.0.0.1:8765
+            header_up X-Radar-Gateway __DASHBOARD_GATEWAY_SECRET__
+            header_up -Authorization
+        }
+    }
+    handle @application {
+        uri strip_prefix /__DASHBOARD_LINK_TOKEN__
+        reverse_proxy 127.0.0.1:8765 {
+            header_up Host 127.0.0.1:8765
+            header_up X-Radar-Gateway __DASHBOARD_GATEWAY_SECRET__
+            header_up -Authorization
+        }
+    }
+    @unsupported path /__DASHBOARD_LINK_TOKEN__/ /__DASHBOARD_LINK_TOKEN__/index.html
+    handle @unsupported {
+        respond "Method not allowed" 405
+    }
+    handle {
+        respond "Not found" 404
+    }
+}

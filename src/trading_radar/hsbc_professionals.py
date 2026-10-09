@@ -217,5 +217,8 @@ class HSBCProfessionalsCollector:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )

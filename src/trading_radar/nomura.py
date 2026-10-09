@@ -188,5 +188,8 @@ class NomuraCollector:
             text = await read(row["url"])
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
-            jobs=jobs, complete=False, requests=self.http.counts[self.source] - before
+            jobs=jobs,
+            complete=False,
+            scope_complete=True,
+            requests=self.http.counts[self.source] - before,
         )
