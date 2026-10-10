@@ -1,0 +1,292 @@
+{
+  "date": "2026-10-10",
+  "lot": 128,
+  "code_commit": "72cc3a3b93ddd4d5d13d9923a865daecad0632ef",
+  "code_ci_run": 38035281431,
+  "code_ci_status": "in_progress",
+  "deployment_status": "deployed_and_verified",
+  "active_image": "immortal-trading:lot128-health-performance-final-20261010",
+  "targeted_python_tests": 274,
+  "targeted_python_passed": true,
+  "lint_format_types": "passed",
+  "health_seconds_before_at_half_cpu": 32.11,
+  "health_seconds_after_at_half_cpu": 13.747,
+  "dashboard_cpu_limit": 1,
+  "final_page_seconds": 7.748,
+  "dashboard_contract": {
+    "asset_hashes": "verified",
+    "controls": 86,
+    "jobs": 1320,
+    "modules": 7,
+    "status": "ok"
+  },
+  "preservation_checks": {
+    "alert_history_preserved": true,
+    "application_history_preserved": true,
+    "application_ids_preserved": true,
+    "backup_verified": true,
+    "database_inode_preserved": true,
+    "digest_last_day_not_reset": true,
+    "digest_preferences_preserved": true,
+    "job_ids_preserved": true,
+    "sent_alerts_preserved": true,
+    "telegram_binding_preserved": true,
+    "telegram_cursor_preserved": true
+  },
+  "counts_before": {
+    "alert_history": 96,
+    "alerts": 48,
+    "application_history": 0,
+    "applications": 1320,
+    "jobs": 1320
+  },
+  "counts_after": {
+    "alert_history": 96,
+    "alerts": 48,
+    "application_history": 0,
+    "applications": 1320,
+    "jobs": 1320
+  },
+  "database": {
+    "schema_version": 4,
+    "status": "ok"
+  },
+  "services_running": 5,
+  "systemd_active_enabled": 4,
+  "https_trusted": true,
+  "same_private_link": true,
+  "dashboard_editable": true,
+  "dashboard_without_telegram_credentials": true,
+  "dashboard_notifications_disabled": true,
+  "guards": {
+    "api_without_csrf": 403,
+    "private_file": 404,
+    "private_page_post": 405,
+    "public_root": 404
+  },
+  "scope": {
+    "alerts_enabled": true,
+    "deadline_reminders_enabled": false,
+    "include_internships": true,
+    "internship_alerts_enabled": true,
+    "internship_formats": [
+      "off_cycle",
+      "long"
+    ],
+    "internship_target_year": 2027,
+    "telegram_control_enabled": true,
+    "telegram_incident_notices_enabled": false
+  },
+  "coverage": {
+    "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+    "enabled_sources": 63,
+    "status": "ok",
+    "validated_sources": 61
+  },
+  "source_health": {
+    "fresh": 58,
+    "total": 63,
+    "incidents": [
+      {
+        "source": "optiver",
+        "status": "partial"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "barclays",
+        "status": "recent_failure"
+      },
+      {
+        "source": "morgan_stanley",
+        "status": "recent_failure"
+      },
+      {
+        "source": "citi",
+        "status": "recent_failure"
+      }
+    ]
+  },
+  "internships": {
+    "active": 269,
+    "available": 265,
+    "criteria_met": 31,
+    "formats": {
+      "long": 27,
+      "off_cycle": 45,
+      "summer": 80
+    },
+    "total": 272,
+    "year_status": {
+      "confirmed": 178,
+      "conflict": 23,
+      "unknown": 64
+    }
+  },
+  "internship_collection_policy": {
+    "employer_and_role_exclusions_preserved": true,
+    "sources": [
+      "mako",
+      "geneva_trading",
+      "da_vinci",
+      "qube_research",
+      "man_group",
+      "aquatic",
+      "graviton",
+      "aqr",
+      "winton",
+      "worldquant",
+      "gelber",
+      "verition",
+      "marshall_wace_graduates",
+      "headlands",
+      "radix_campus",
+      "radix_professionals",
+      "3red",
+      "tudor",
+      "acadian",
+      "pdt",
+      "graham",
+      "quantbot",
+      "engineers_gate"
+    ],
+    "sources_expanded": 23
+  },
+  "new_sources_bootstrapped": 38,
+  "watcher": {
+    "age_seconds": 0,
+    "at": "2026-10-10T07:51:02.041825+00:00",
+    "phase": "scanning",
+    "status": "active"
+  },
+  "digest": {
+    "enabled": true,
+    "last_attempt_day": "2026-10-10",
+    "status": "configured",
+    "time": "09:00",
+    "time_zone": "Europe/Paris"
+  },
+  "observed_at": "2026-10-10T07:51:02.238245+00:00",
+  "remaining_architecture_work": "measure_and_batch_conflict_and_listing_gap_reads",
+  "runtime_after_https_audit": {
+    "active_code_sha256": {
+      "compose.dashboard.yaml": "3627fd450a2c5ce2527495b41ec5cc8a29bf94e94c9eb07a659b20925ff6e044",
+      "src/trading_radar/health.py": "0b994c5921e6b24be95916ef1016c50ef893af85f2ba39c38cd6f65bda554023",
+      "tests/test_health.py": "1e4c523c038919120a7d9a442e011cfebe39d4059af7dd6ba27539ab5528eb42"
+    },
+    "active_profile_sha256": "c5ba078915363e31dd67a447eab7b2633b4c2d660e31a5fb3f7fa7c010a18e3b",
+    "cpu_count": 2,
+    "health": {
+      "database": {
+        "schema_version": 4,
+        "status": "ok"
+      },
+      "incidents": [
+        {
+          "failure": {
+            "code": "pagination",
+            "label": "Les pages de résultats sont incohérentes ; import interrompu."
+          },
+          "last_failure": "2026-10-10T07:54:09.499741+00:00",
+          "last_success": "2026-10-10T07:47:29.303092+00:00",
+          "schedule": {
+            "cooldown_seconds": 600,
+            "eligible_now": false,
+            "interval_seconds": 300,
+            "next_eligible_at": "2026-10-10T08:04:09.499741+00:00"
+          },
+          "source": "nomura_professionals",
+          "status": "recent_failure"
+        },
+        {
+          "failure": null,
+          "last_failure": "2026-10-09T10:57:39.335898+00:00",
+          "last_success": "2026-10-10T07:57:17.621356+00:00",
+          "schedule": {
+            "cooldown_seconds": 300,
+            "eligible_now": false,
+            "interval_seconds": 300,
+            "next_eligible_at": "2026-10-10T08:02:17.621356+00:00"
+          },
+          "source": "optiver",
+          "status": "partial"
+        },
+        {
+          "failure": {
+            "code": "access_restricted",
+            "label": "Le portail refuse temporairement l’accès."
+          },
+          "last_failure": "2026-10-10T07:56:49.799073+00:00",
+          "last_success": "2026-09-16T19:06:21.927986+00:00",
+          "schedule": {
+            "cooldown_seconds": 3600,
+            "eligible_now": false,
+            "interval_seconds": 300,
+            "next_eligible_at": "2026-10-10T08:56:49.799073+00:00"
+          },
+          "source": "bnp_paribas",
+          "status": "stale"
+        },
+        {
+          "failure": {
+            "code": "portal_error",
+            "label": "Le serveur employeur est indisponible."
+          },
+          "last_failure": "2026-10-10T07:17:02.320628+00:00",
+          "last_success": "2026-10-10T05:59:47.254525+00:00",
+          "schedule": {
+            "cooldown_seconds": 3600,
+            "eligible_now": false,
+            "interval_seconds": 300,
+            "next_eligible_at": "2026-10-10T08:17:02.320628+00:00"
+          },
+          "source": "barclays",
+          "status": "recent_failure"
+        },
+        {
+          "failure": {
+            "code": "portal_error",
+            "label": "Le serveur employeur est indisponible."
+          },
+          "last_failure": "2026-10-10T07:15:18.226394+00:00",
+          "last_success": "2026-10-10T05:58:59.847453+00:00",
+          "schedule": {
+            "cooldown_seconds": 3600,
+            "eligible_now": false,
+            "interval_seconds": 300,
+            "next_eligible_at": "2026-10-10T08:15:18.226394+00:00"
+          },
+          "source": "morgan_stanley",
+          "status": "recent_failure"
+        },
+        {
+          "failure": {
+            "code": "portal_error",
+            "label": "Le serveur employeur est indisponible."
+          },
+          "last_failure": "2026-10-10T07:15:07.648687+00:00",
+          "last_success": "2026-10-10T05:57:20.241787+00:00",
+          "schedule": {
+            "cooldown_seconds": 3600,
+            "eligible_now": false,
+            "interval_seconds": 300,
+            "next_eligible_at": "2026-10-10T08:15:07.648687+00:00"
+          },
+          "source": "citi",
+          "status": "recent_failure"
+        }
+      ],
+      "ready": false,
+      "source_summary": {
+        "fresh": 57,
+        "partial": 1,
+        "recent_failure": 4,
+        "stale": 1
+      },
+      "status": "critical"
+    },
+    "status": "ok"
+  }
+}

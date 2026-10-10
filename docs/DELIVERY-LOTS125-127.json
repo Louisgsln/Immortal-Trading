@@ -66,7 +66,16 @@
     "selected": 306,
     "score70_preview": 76,
     "original_config_sha256": "5188688f9eba3f2643752968ceaaac7ea20c006b8f0e2a86c741d27eaa31934f",
-    "profile_sha256": "c5ba078915363e31dd67a447eab7b2633b4c2d660e31a5fb3f7fa7c010a18e3b"
+    "profile_sha256": "c5ba078915363e31dd67a447eab7b2633b4c2d660e31a5fb3f7fa7c010a18e3b",
+    "initial_import_jobs": 307,
+    "initial_import_score70": 78,
+    "initial_import_ready_at_final_observation": 69,
+    "new_employers": 36,
+    "sources_bootstrapped": 38,
+    "initial_import_alerts_created": 0,
+    "initial_import_high_score_not_ready": 9,
+    "initial_import_high_score_block_reason": "internship_format_unconfirmed",
+    "initial_import_high_score_year_also_unconfirmed": 4
   },
   "local_validation": {
     "python_tests": 5092,
@@ -100,7 +109,7 @@
       "score70_before_research_fix": 10
     }
   ],
-  "deployment_status": "pending",
+  "deployment_status": "deployed_and_verified",
   "simulation": {
     "status": "ok",
     "simulation_only": true,
@@ -159,5 +168,493 @@
     "generated_at": "2026-10-10T07:13:20.654208+00:00"
   },
   "code_commit": "1a1cc71ee839378edd9fb7289d94e337da751dde",
-  "code_ci_run": 38033781246
+  "code_ci_run": 38033781246,
+  "deployment": {
+    "active_image": "immortal-trading:lot128-health-performance-final-20261010",
+    "services_running": 5,
+    "systemd_active_enabled": 4,
+    "total_jobs": 1320,
+    "source_profile_verified": true,
+    "preservation_checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "digest_last_day_not_reset": true,
+      "digest_preferences_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    },
+    "counts_after": {
+      "alert_history": 96,
+      "alerts": 48,
+      "application_history": 0,
+      "applications": 1320,
+      "jobs": 1320
+    },
+    "final_score_audit": {
+      "status": "ok",
+      "evaluated": 1320,
+      "changed": 0,
+      "score_changed": 0
+    },
+    "new_source_counts": [
+      {
+        "source": "3red",
+        "jobs": 3,
+        "score70": 1
+      },
+      {
+        "source": "akuna_capital",
+        "jobs": 10,
+        "score70": 2
+      },
+      {
+        "source": "aqr",
+        "jobs": 3,
+        "score70": 1
+      },
+      {
+        "source": "aquatic",
+        "jobs": 4,
+        "score70": 0
+      },
+      {
+        "source": "chicago_trading",
+        "jobs": 3,
+        "score70": 1
+      },
+      {
+        "source": "chicago_trading_campus",
+        "jobs": 5,
+        "score70": 1
+      },
+      {
+        "source": "da_vinci",
+        "jobs": 10,
+        "score70": 2
+      },
+      {
+        "source": "dv_trading",
+        "jobs": 21,
+        "score70": 13
+      },
+      {
+        "source": "engineers_gate",
+        "jobs": 4,
+        "score70": 0
+      },
+      {
+        "source": "five_rings",
+        "jobs": 5,
+        "score70": 3
+      },
+      {
+        "source": "gelber",
+        "jobs": 10,
+        "score70": 5
+      },
+      {
+        "source": "geneva_trading",
+        "jobs": 5,
+        "score70": 2
+      },
+      {
+        "source": "graham",
+        "jobs": 1,
+        "score70": 0
+      },
+      {
+        "source": "graviton",
+        "jobs": 7,
+        "score70": 1
+      },
+      {
+        "source": "headlands",
+        "jobs": 2,
+        "score70": 0
+      },
+      {
+        "source": "hudson_river_trading",
+        "jobs": 10,
+        "score70": 1
+      },
+      {
+        "source": "mako",
+        "jobs": 3,
+        "score70": 1
+      },
+      {
+        "source": "man_group",
+        "jobs": 8,
+        "score70": 0
+      },
+      {
+        "source": "marshall_wace_graduates",
+        "jobs": 1,
+        "score70": 0
+      },
+      {
+        "source": "maven_securities",
+        "jobs": 10,
+        "score70": 6
+      },
+      {
+        "source": "old_mission",
+        "jobs": 20,
+        "score70": 12
+      },
+      {
+        "source": "pdt",
+        "jobs": 2,
+        "score70": 0
+      },
+      {
+        "source": "point72",
+        "jobs": 31,
+        "score70": 3
+      },
+      {
+        "source": "quantbot",
+        "jobs": 5,
+        "score70": 0
+      },
+      {
+        "source": "qube_research",
+        "jobs": 23,
+        "score70": 5
+      },
+      {
+        "source": "radix_campus",
+        "jobs": 2,
+        "score70": 0
+      },
+      {
+        "source": "radix_professionals",
+        "jobs": 1,
+        "score70": 0
+      },
+      {
+        "source": "schonfeld",
+        "jobs": 11,
+        "score70": 0
+      },
+      {
+        "source": "squarepoint_capital",
+        "jobs": 15,
+        "score70": 4
+      },
+      {
+        "source": "tower_research",
+        "jobs": 22,
+        "score70": 2
+      },
+      {
+        "source": "transmarket_group",
+        "jobs": 4,
+        "score70": 4
+      },
+      {
+        "source": "tudor",
+        "jobs": 2,
+        "score70": 0
+      },
+      {
+        "source": "verition",
+        "jobs": 4,
+        "score70": 0
+      },
+      {
+        "source": "virtu_financial",
+        "jobs": 21,
+        "score70": 5
+      },
+      {
+        "source": "walleye_capital",
+        "jobs": 3,
+        "score70": 1
+      },
+      {
+        "source": "winton",
+        "jobs": 1,
+        "score70": 0
+      },
+      {
+        "source": "worldquant",
+        "jobs": 15,
+        "score70": 2
+      }
+    ],
+    "new_source_bootstraps": {
+      "3red": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 3,
+        "last_success": "2026-10-10T07:48:52.491423+00:00"
+      },
+      "acadian": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 0,
+        "last_success": "2026-10-10T07:49:24.984312+00:00"
+      },
+      "akuna_capital": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 10,
+        "last_success": "2026-10-10T07:53:32.460437+00:00"
+      },
+      "aqr": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 3,
+        "last_success": "2026-10-10T07:49:32.706491+00:00"
+      },
+      "aquatic": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 4,
+        "last_success": "2026-10-10T07:49:43.195459+00:00"
+      },
+      "chicago_trading": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 3,
+        "last_success": "2026-10-10T07:53:37.131382+00:00"
+      },
+      "chicago_trading_campus": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 5,
+        "last_success": "2026-10-10T07:53:41.744191+00:00"
+      },
+      "da_vinci": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 10,
+        "last_success": "2026-10-10T07:49:45.826235+00:00"
+      },
+      "dv_trading": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 21,
+        "last_success": "2026-10-10T07:54:18.116977+00:00"
+      },
+      "engineers_gate": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 4,
+        "last_success": "2026-10-10T07:49:54.281903+00:00"
+      },
+      "five_rings": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 5,
+        "last_success": "2026-10-10T07:47:58.332495+00:00"
+      },
+      "gelber": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 10,
+        "last_success": "2026-10-10T07:49:58.973259+00:00"
+      },
+      "geneva_trading": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 5,
+        "last_success": "2026-10-10T07:50:15.925829+00:00"
+      },
+      "graham": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 1,
+        "last_success": "2026-10-10T07:50:25.251913+00:00"
+      },
+      "graviton": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 7,
+        "last_success": "2026-10-10T07:50:37.766465+00:00"
+      },
+      "headlands": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 2,
+        "last_success": "2026-10-10T07:50:48.762772+00:00"
+      },
+      "hudson_river_trading": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 10,
+        "last_success": "2026-10-10T07:48:08.431126+00:00"
+      },
+      "mako": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 3,
+        "last_success": "2026-10-10T07:51:12.720399+00:00"
+      },
+      "man_group": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 8,
+        "last_success": "2026-10-10T07:51:05.821852+00:00"
+      },
+      "marshall_wace_graduates": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 1,
+        "last_success": "2026-10-10T07:51:00.175022+00:00"
+      },
+      "maven_securities": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 10,
+        "last_success": "2026-10-10T07:48:13.240349+00:00"
+      },
+      "old_mission": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 20,
+        "last_success": "2026-10-10T07:48:18.103725+00:00"
+      },
+      "pdt": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 2,
+        "last_success": "2026-10-10T07:51:25.854519+00:00"
+      },
+      "point72": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 31,
+        "last_success": "2026-10-10T07:48:23.004549+00:00"
+      },
+      "quantbot": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 5,
+        "last_success": "2026-10-10T07:51:39.218210+00:00"
+      },
+      "qube_research": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 23,
+        "last_success": "2026-10-10T07:51:43.529540+00:00"
+      },
+      "radix_campus": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 2,
+        "last_success": "2026-10-10T07:51:49.574794+00:00"
+      },
+      "radix_professionals": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 1,
+        "last_success": "2026-10-10T07:51:51.894855+00:00"
+      },
+      "schonfeld": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 11,
+        "last_success": "2026-10-10T07:48:27.937413+00:00"
+      },
+      "squarepoint_capital": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 15,
+        "last_success": "2026-10-10T07:48:32.748829+00:00"
+      },
+      "tower_research": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 22,
+        "last_success": "2026-10-10T07:48:52.487762+00:00"
+      },
+      "transmarket_group": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 4,
+        "last_success": "2026-10-10T07:49:30.121644+00:00"
+      },
+      "tudor": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 2,
+        "last_success": "2026-10-10T07:52:45.286966+00:00"
+      },
+      "verition": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 4,
+        "last_success": "2026-10-10T07:52:49.946548+00:00"
+      },
+      "virtu_financial": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 21,
+        "last_success": "2026-10-10T07:49:40.950649+00:00"
+      },
+      "walleye_capital": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 3,
+        "last_success": "2026-10-10T07:49:51.870079+00:00"
+      },
+      "winton": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 1,
+        "last_success": "2026-10-10T07:52:54.488770+00:00"
+      },
+      "worldquant": {
+        "bootstrapped": true,
+        "consecutive_failures": 0,
+        "last_count": 15,
+        "last_success": "2026-10-10T07:52:59.249507+00:00"
+      }
+    },
+    "coverage": {
+      "baseline_at": "2026-10-06T20:10:46.616484+00:00",
+      "enabled_sources": 63,
+      "status": "ok",
+      "validated_sources": 61
+    },
+    "fresh_sources": 58,
+    "incidents": [
+      {
+        "source": "optiver",
+        "status": "partial"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "barclays",
+        "status": "recent_failure"
+      },
+      {
+        "source": "morgan_stanley",
+        "status": "recent_failure"
+      },
+      {
+        "source": "citi",
+        "status": "recent_failure"
+      }
+    ],
+    "page_seconds": 7.748,
+    "https_trusted": true,
+    "same_private_link": true
+  },
+  "code_ci_status": "success",
+  "followup_performance_commit": "72cc3a3b93ddd4d5d13d9923a865daecad0632ef"
 }

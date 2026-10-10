@@ -8,7 +8,11 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Priorité actuelle : [audit et extension des lots 125–127](VALIDATION-LOTS125-127.md).
+Livraison actuelle : [audit et extension des lots 125–127](VALIDATION-LOTS125-127.md),
+installés avec le [correctif de performance 128](VALIDATION-LOT128.md).
+63 sources / 56 employeurs sont activés. Suite prioritaire : qualifier les titres
+quantitatifs Jump/Flow/Point72 repérés dans l'[audit](AUDIT-EMPLOYERS-20261010.md),
+reprendre les incidents d'accès et valider les portails bancaires encore absents.
 
 ## Historique des décisions avant la migration VPS
 

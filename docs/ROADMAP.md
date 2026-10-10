@@ -11,14 +11,17 @@ Voir le [bilan détaillé](VALIDATION-LOTS125-127.md).
 
 La configuration de développement (86 sources activées) n’était pas entièrement
 installée sur le VPS (25). Le profil public [VPS](../config/vps-companies.yaml)
-porte la cible de cette livraison à 63 sources / 56 employeurs ; le fichier
+porte la couverture installée à 63 sources / 56 employeurs ; le fichier
 `settings.yaml` de production et son périmètre stages restent conservés.
 L’import initial des employeurs est silencieux. Les découvertes du premier
 import ne sont pas des publications récentes ni un débit hebdomadaire attendu.
 
 Le [lot 128](VALIDATION-LOT128.md) réduit les lectures inutiles du journal
 d’erreurs et augmente la limite CPU du Dashboard après mesure du ralentissement
-observé avec davantage d’employeurs.
+observé avec davantage d'employeurs. Installé et contrôlé en HTTPS : 7,748 s.
+Les 38 ajouts ont réussi ; 307 fiches importées, 78 au seuil et 69 à examiner,
+sans alerte d'import. Le [détail par employeur](AUDIT-EMPLOYERS-20261010.md) fournit
+les chiffres et les prochaines qualifications Jump/Flow/Point72.
 
 ## Historique des livraisons précédentes
 

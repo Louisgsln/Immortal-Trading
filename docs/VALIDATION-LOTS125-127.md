@@ -58,6 +58,29 @@ si CAPTCHA. Des 503 Workday et une redirection Barclays sont consignés au carne
 
 ## Validation et installation
 
-Tests et image en cours de validation ; la livraison ne sera déclarée installée
-qu’après sauvegarde vérifiée, essai sur copie, contrôle des imports silencieux,
-redémarrage et observation HTTPS, services et conservation des historiques.
+Installé et vérifié sur OVH le 10 octobre : 63 sources activées / 56 employeurs,
+38 nouveaux portails initialisés, 307 fiches ajoutées dont 78 au seuil et
+69 à examiner lors du contrôle final. Aucun envoi ni nouvelle alerte lors de
+l'import initial ; les settings et le seuil 70 restent conservés.
+
+Les 5 092 tests Python et 34 tests JavaScript ont réussi, ainsi que Ruff, format,
+mypy, le contrat de l'image et le parcours mobile à 390 px. La CI 38033781246
+du commit `1a1cc71` a réussi. L'essai sur copie a confirmé les 38 collectes,
+l'absence d'envoi et la conservation des données avant installation.
+
+Une sauvegarde vérifiée a précédé chaque déploiement. Les anciens identifiants,
+candidatures, historiques, 48 alertes et le curseur Telegram sont conservés.
+Le recalcul final des 1 320 fiches ne détecte aucun écart de score. Les cinq
+services Docker tournent et les quatre unités systemd sont actives et activées.
+
+L'ouverture HTTPS après extension a révélé un ralentissement corrigé dans le
+[lot 128](VALIDATION-LOT128.md), désormais actif avec la même adresse privée.
+Le contrôle final mesure 7,748 s et valide les modifications mobiles, cookies,
+contrôles d'origine et CSRF. Il relève 58/63 sources fraîches et 61/63 références
+stages validées ; BNP ancien et Optiver partiel restent visibles. Radar et
+Telegram actifs ne signifient pas que toutes les sources réussissent.
+
+L'[audit par employeur](AUDIT-EMPLOYERS-20261010.md) détaille les catalogues,
+les scores et les titres restant à qualifier. Preuves publiques :
+[DELIVERY-LOTS125-127.json](DELIVERY-LOTS125-127.json) et
+[DELIVERY-LOT128.json](DELIVERY-LOT128.json).
