@@ -25,6 +25,9 @@ Le contrôle HTTPS final mesure **7,748 secondes** pour le Dashboard de 1 320 fi
 Cette ouverture observée est distincte du benchmark isolé de contrôle de santé.
 
 Le contrat effectif valide 86 contrôles, sept modules et les empreintes des assets.
+La [CI 38035281431](https://github.com/Louisgsln/Immortal-Trading/actions/runs/38035281431)
+a réussi ses six jobs : Python 3.11 à 3.14, JavaScript et construction Docker
+avec contrôle des assets et restauration isolée.
 Le même lien privé ouvre le suivi modifiable ; Dashboard sans identifiant ni mot
 de passe, cookie protégé, CSRF et contrôles d'origine conservés. Le Dashboard ne
 contient pas les identifiants Telegram et n'envoie pas d'alertes.

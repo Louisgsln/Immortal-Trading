@@ -26,7 +26,7 @@ les anciennes mentions Windows et exclusions globales des stages étaient histor
 | Nomura professionnels | Pagination récente à surveiller | Import interrompu sur pages incohérentes ; reprise selon la cadence normale, accès campus distinct |
 | Banques, courtiers et énergie non inclus au profil VPS | À faire | Relire leurs portails depuis OVH ; activer seulement après validation actuelle |
 | Alertes off-cycle / stages longs 2027 | Activées et vérifiées | 31 fiches satisfont les critères ; 61/63 références validées ; exclusions générales de stages retirées à la collecte pour 23 sources |
-| Réponse du Dashboard avec davantage de sources | Installé et vérifié | Lot 128 : 274 tests ciblés ; HTTPS 7,748 s lors du contrôle ; CPU Dashboard limité à 1 |
+| Réponse du Dashboard avec davantage de sources | Installé et vérifié | Lot 128 : 274 tests ciblés, six jobs CI réussis ; HTTPS 7,748 s lors du contrôle ; CPU Dashboard limité à 1 |
 | Regrouper les lectures de conflits et lacunes | À mesurer | Profilage du lot 128 : lectures par source encore coûteuses ; conserver toutes les preuves de santé |
 | Sauvegarde hors VPS | Destination à définir | Sauvegardes locales automatiques existantes ; aucune destination distante choisie |
 

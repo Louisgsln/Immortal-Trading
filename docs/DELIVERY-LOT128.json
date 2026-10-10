@@ -3,7 +3,7 @@
   "lot": 128,
   "code_commit": "72cc3a3b93ddd4d5d13d9923a865daecad0632ef",
   "code_ci_run": 38035281431,
-  "code_ci_status": "in_progress",
+  "code_ci_status": "success",
   "deployment_status": "deployed_and_verified",
   "active_image": "immortal-trading:lot128-health-performance-final-20261010",
   "targeted_python_tests": 274,
@@ -288,5 +288,43 @@
       "status": "critical"
     },
     "status": "ok"
-  }
+  },
+  "ci_jobs": [
+    {
+      "id": 114164317534,
+      "name": "dashboard",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114164317636,
+      "name": "checks (3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114164317691,
+      "name": "checks (3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114164317716,
+      "name": "checks (3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114164317789,
+      "name": "checks (3.14)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114168815101,
+      "name": "container",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
 }
