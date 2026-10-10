@@ -220,7 +220,7 @@ def test_status_counts_portals_and_distinct_enabled_employers(local_config, repo
     report = runtime_report(local_config)
     assert report["source_counts"] == {"enabled": 3, "employers": 2, "fresh": 0}
     text = format_status(report)
-    assert "3 portails · 2 employeurs" in text
+    assert "3 sources · 2 employeurs" in text
     assert "0/3 sources à jour" in text
     assert list(repo.db.iterdump()) == before
     local_config.settings.database_url = "sqlite:////tmp/missing-radar-count-test.db"
