@@ -68,9 +68,11 @@ def programme(job: Job) -> dict:
 
     formats = []
     if kind == "internship":
-        if has(title, "summer") or has(title, "ete"):
+        if has(title, "summer") or has(title, "ete") or has(contract, "summer"):
             formats.append("summer")
-        if has(title, "off cycle") or has(title, "offcycle"):
+        if any(
+            has(value, term) for value in (title, contract) for term in ("off cycle", "offcycle")
+        ):
             formats.append("off_cycle")
         duration = duration_facts(job)
         if duration["precision"] == "conflict":

@@ -3,16 +3,28 @@
 import json
 from pathlib import Path
 
+from trading_radar.bofa_campus import BofACampusOptions
 from trading_radar.config import Config
+from trading_radar.goldman import GoldmanOptions
 from trading_radar.greenhouse_filtered import GreenhouseOptions
+from trading_radar.jefferies_campus import JefferiesCampusOptions
 from trading_radar.lever_filtered import LeverOptions
 from trading_radar.models import utcnow
+from trading_radar.nomura import NomuraOptions
+from trading_radar.programmes import programme_company
 from trading_radar.score_audit import job_snapshot, snapshot_jobs
+from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import rejection_reason
 from trading_radar.societe_generale import SGOptions
 from trading_radar.workday import WorkdayOptions
 
 OPTIONS = {
+    "bofa_campus": BofACampusOptions,
+    "jefferies_campus": JefferiesCampusOptions,
+    "morgan_stanley_campus": SearchOptions,
+    "nomura": NomuraOptions,
+    "oracle": SearchOptions,
+    "goldman": GoldmanOptions,
     "greenhouse_filtered": GreenhouseOptions,
     "workday": WorkdayOptions,
     "lever_filtered": LeverOptions,
@@ -62,7 +74,7 @@ def coverage_report(config: Config, reference: Path) -> dict:
             associations[source, identifier] = job_id
         entries: list[dict] = []
         for item in expected:
-            company = config.companies[item["source"]]
+            company = programme_company(config.companies[item["source"]], config.settings)
             job_id = associations.get((item["source"], item["external_id"]))
             job = jobs.get(job_id) if job_id else None
             options_type = OPTIONS.get(company.ats)

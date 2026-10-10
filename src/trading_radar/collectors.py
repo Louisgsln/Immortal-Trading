@@ -173,6 +173,14 @@ class VendorCollector:
 
 
 def build_collector(source: str, config: Company, http: HTTPClient) -> Collector:
+    if config.ats == "jefferies_campus":
+        from trading_radar.jefferies_campus import JefferiesCampusCollector
+
+        return JefferiesCampusCollector(source, config, http)
+    if config.ats == "bofa_campus":
+        from trading_radar.bofa_campus import BofACampusCollector
+
+        return BofACampusCollector(source, config, http)
     if config.ats == "morgan_stanley_campus":
         from trading_radar.morgan_stanley_campus import MorganStanleyCampusCollector
 

@@ -4,8 +4,7 @@ import re
 import unicodedata
 from datetime import date
 
-from trading_radar.description_sections import visible_text
-from trading_radar.html_page import Document
+from trading_radar.internship_start_evidence import candidate_start_text
 from trading_radar.models import Job
 from trading_radar.normalizer import normalize_text
 
@@ -49,7 +48,7 @@ MONTHS = {
 }
 MONTH = r"(?:" + "|".join(sorted(MONTHS, key=len, reverse=True)) + r")"
 PERIOD = re.compile(
-    rf"\b(?P<first>{MONTH})(?:\s+(?:to|through|and|a|et)\s+(?P<last>{MONTH}))?"
+    rf"\b(?P<first>{MONTH})(?:\s+(?P<separator>to|through|and|a|et|or)\s+(?P<last>{MONTH}))?"
     r"\s+(?:\d{1,2}\s+)?(?P<year>20\d{2})\b"
 )
 LABEL = re.compile(
@@ -69,11 +68,14 @@ def _periods(text: str) -> list[tuple[int, tuple[int, ...]]]:
             periods.append((int(match[0][:4]), ()))
             continue
         periods.append((parsed.year, (parsed.month,)))
-    normalized = normalize_text(text)
+    alternatives = re.sub(rf"\b({MONTH})\s*/\s*({MONTH})\b", r"\1 or \2", text, flags=re.I)
+    normalized = normalize_text(alternatives)
     for match in PERIOD.finditer(normalized):
         first = MONTHS[match["first"]]
         last = MONTHS[match["last"]] if match["last"] else first
-        if last < first:
+        if match["separator"] == "or":
+            periods.append((int(match["year"]), tuple(sorted({first, last}))))
+        elif last < first:
             periods.append((int(match["year"]), ()))
         else:
             periods.append((int(match["year"]), tuple(range(first, last + 1))))
@@ -86,7 +88,7 @@ def _periods(text: str) -> list[tuple[int, tuple[int, ...]]]:
 def start_period(job: Job) -> dict:
     structured = (job.expected_start_date or "").strip()
     # Keep punctuation for ISO dates, but normalize accents in labels.
-    description = visible_text(Document(job.description).root)
+    description = candidate_start_text(job)
     description = unicodedata.normalize("NFKD", description).encode("ascii", "ignore").decode()
     chunks = []
     for match in LABEL.finditer(description):

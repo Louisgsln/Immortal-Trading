@@ -24,7 +24,7 @@ les anciennes mentions Windows et exclusions globales des stages étaient histor
 | Recherche Point72 collectée mais non qualifiée | À auditer | Cubist Quantitative Researcher et variantes : score nul sans preuve de missions retenue ; ne pas attribuer des points au seul intitulé |
 | Nomura campus | En attente si CAPTCHA | Intervention humaine laissée en attente conformément au choix du propriétaire |
 | Nomura professionnels | Pagination récente à surveiller | Import interrompu sur pages incohérentes ; reprise selon la cadence normale, accès campus distinct |
-| Bank of America campus / off-cycle — prioritaire | Non couvert sur OVH | Offre témoin Global Markets Sales and Trading 2027 Off-Cycle Analyst – Milan absente ; [contrôle du 10/10](BOFA-OFFCYCLE-CHECK-20261010.md), portail étudiants à intégrer et tester |
+| Bank of America campus / off-cycle — lot 129 | En développement | Catalogue étudiants officiel identifié ; vérifier l'offre témoin Milan, les détails et la pagination avant activation OVH |
 | Banques, courtiers et énergie non inclus au profil VPS | À faire | Relire leurs portails depuis OVH ; activer seulement après validation actuelle |
 | Alertes off-cycle / stages longs 2027 | Activées et vérifiées | 31 fiches satisfont les critères ; 61/63 références validées ; exclusions générales de stages retirées à la collecte pour 23 sources |
 | Réponse du Dashboard avec davantage de sources | Installé et vérifié | Lot 128 : 274 tests ciblés, six jobs CI réussis ; HTTPS 7,748 s lors du contrôle ; CPU Dashboard limité à 1 |
@@ -34,3 +34,31 @@ les anciennes mentions Windows et exclusions globales des stages étaient histor
 Chaque livraison clôture ses lignes après tests, sauvegarde vérifiée, installation
 et observation. Les compteurs de premier import ne doivent pas être présentés
 comme un nombre garanti de nouvelles offres par semaine.
+
+## Lots bancaires demandés le 10 octobre
+
+| Lot | Travail et résultat attendu | Validation avant clôture | État |
+|---|---|---|---|
+| 129 — Bank of America campus | Collecteur distinct des professionnels et événements ; témoin Global Markets Sales and Trading 2027 Off-Cycle Analyst – Milan | Catalogue entier paginé, identités et fiches employeur concordantes ; score expliqué ; Summer et événements exclus des alertes | En cours |
+| 130 — Autres banques | Jefferies campus, RBC, ING, Wells Fargo et Santander vérifiés ; JPMorgan campus reste HTTP 403 | Deux lectures cohérentes par source ; offres off-cycle/longues documentées ; contrats et année conservés sans inférence | Développé, import sur copie à vérifier |
+| 131 — Suivi de couverture | [Carnet par portail](BANK-CAMPUS-COVERAGE.md) et [sept témoins](BANK-CAMPUS-REFERENCE.json) ; conversions CDI séparées du stage, mois alternatifs conservés | Tests de régression, premier import sans envoi, ancienne base/historique/curseur préservés, premiers succès en production | Développé, validation de livraison en cours |
+
+### Prochaines priorités après ces lots
+
+1. **Portails campus complémentaires** : Barclays, Citi et Deutsche Bank ; vérifier
+   le portail étudiant distinct et l'absence de trous de recherche avant activation.
+2. **Sources bloquées** : BNP et Nomura campus ; conserver leur état explicite.
+   Nomura reste en attente de validation humaine conformément au choix du propriétaire.
+3. **Missions quantitatives** : Jump off-cycle 2027, Flow et Cubist/Point72 ; qualifier
+   à partir des responsabilités publiées, avec contre-exemples, puis mesurer l'effet
+   sur les scores avant toute réconciliation historique.
+4. **Qualité des informations** : durée, dates de début, graduation et langues ;
+   champs inconnus visibles, aucune date limite transformée arbitrairement en UTC.
+5. **Exploitation** : surveiller la fraîcheur des portails et le temps de réponse
+   mobile ; définir ensuite une destination autorisée pour les sauvegardes hors VPS.
+
+Pour chaque nouveau portail, consigner : URL officielle, accès observé, périmètre,
+pagination, identifiant employeur, offre témoin, date du dernier contrôle et preuve
+du premier succès OVH. Une erreur d'accès reste une tâche ouverte et ne vaut pas
+absence d'offres. Les étapes de livraison sont : développé → testé → installé →
+observé ; seule la dernière permet de marquer une source comme surveillée.

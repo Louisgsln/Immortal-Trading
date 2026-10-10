@@ -36,6 +36,8 @@ def policy(**updates):
         ("Quant Trading Intern 12 months 2027", None, ["long"]),
         ("Trading Summer Analyst 2027", "Full time", ["summer"]),
         ("Trading Internship 2027", "Internship / Trainee", []),
+        ("Fixed Income Trading Desk Internship 2027", "Off-cycle internship", ["off_cycle"]),
+        ("Trading Internship 2027", "Summer Internship", ["summer"]),
     ],
 )
 def test_programme_facts(title, contract, formats):
@@ -131,6 +133,12 @@ def test_conflicts_fail_closed(title, start):
     job = make(title, expected_start_date=start)
     assert programme(job)["issues"]
     assert not programme_alertable(job, policy())
+    assert score_job(job, load_config().keywords, settings=policy()).score_breakdown.total == 0
+
+
+def test_employer_summer_contract_cannot_override_a_conflicting_off_cycle_title():
+    job = make(employment_type="Summer Internship")
+    assert programme(job)["issues"] and not programme_alertable(job, policy())
     assert score_job(job, load_config().keywords, settings=policy()).score_breakdown.total == 0
 
 

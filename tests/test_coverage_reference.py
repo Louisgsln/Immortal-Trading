@@ -74,6 +74,38 @@ def test_secondary_source_association_is_found_without_fuzzy_title_matching(
 
 
 @pytest.mark.parametrize(
+    "ats", ["workday", "bofa_campus", "morgan_stanley_campus", "goldman", "oracle", "nomura"]
+)
+def test_reference_uses_the_same_internship_title_scope_as_the_live_scanner(
+    config, repo, tmp_path, ats
+):
+    config.companies["test"] = Company(
+        name="Bank of America",
+        ats=ats,
+        enabled=True,
+        options={"exclude_title_terms": ["internship", "operations"]},
+    )
+    configure(config, repo)
+    path = reference(
+        tmp_path,
+        [
+            {
+                "source": "test",
+                "external_id": "15033",
+                "title": "Global Markets Off-Cycle Internship 2027",
+            }
+        ],
+    )
+    config.settings.include_internships = True
+    report = coverage_report(config, path)
+    assert report["entries"][0]["title_filter_rejection"] is None
+    assert not report["entries"][0]["found"]
+    config.settings.include_internships = False
+    report = coverage_report(config, path)
+    assert report["entries"][0]["title_filter_rejection"] == "excluded_title:internship"
+
+
+@pytest.mark.parametrize(
     "entries",
     [
         [],

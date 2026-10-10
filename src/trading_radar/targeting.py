@@ -13,6 +13,42 @@ from trading_radar.old_mission_research import research_duties
 OPERATIONAL_EXCLUSION = "Missions vérifiées de support opérationnel, hors cible trading"
 
 
+def jefferies_sales_trading_duties(job: Job) -> str:
+    """The reviewed Fixed Income off-cycle, with candidate duties and department."""
+    if (
+        (job.source_type, job.source, job.company_normalized)
+        != ("official", "jefferies_campus", "jefferies")
+        or not job.title_normalized.startswith("2027 fixed income off cycle internship programme ")
+        or job.employment_type != "Off-Cycle Internship"
+    ):
+        return ""
+    document = Document(html.unescape(job.description))
+    department = [
+        normalize_text(visible_text(n))
+        for n in document.root.walk()
+        if n.tag == "p" and normalize_text(visible_text(n)).startswith("business unit s ")
+    ]
+    if department != ["business unit s sales and trading"]:
+        return ""
+    section = _section(
+        normalize_text(visible_text(document.root)),
+        "your time here will look something like this",
+        "requirements",
+    )
+    return (
+        section
+        if all(
+            has(section, term)
+            for term in (
+                "market commentary research and trade ideas",
+                "work closely with sales trading and emtn teams to enhance information flow and pitches",
+                "development of innovative tools using vba python or other",
+            )
+        )
+        else ""
+    )
+
+
 def sg_desk_title(title: str) -> bool:
     return bool(re.fullmatch(r"(?:(?:vie|v i e) )?(?:one delta|delta one) desk analyst", title))
 

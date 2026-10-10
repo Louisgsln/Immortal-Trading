@@ -187,12 +187,16 @@ def test_three_banks_have_bounded_queries_and_all_new_sources_are_scheduled():
         assert company.options["max_results_per_query"] == 500
         if company.ats == "workday":
             assert company.options["max_details"] == 80
-            assert company.options["search_terms"] == [
+            assert company.options["search_terms"][:4] == [
                 "trading",
                 "trader",
                 "quantitative",
                 "structuring",
             ]
+            if source in {"rbc", "wells_fargo"}:
+                assert {"markets", "off-cycle", "internship"} <= set(
+                    company.options["search_terms"]
+                )
     assert cfg.settings.bootstrap_silent
     assert cfg.companies["wells_fargo"].options["applied_facets"] == {
         "jobFamily": [

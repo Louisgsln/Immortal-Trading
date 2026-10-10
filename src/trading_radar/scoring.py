@@ -15,6 +15,7 @@ from trading_radar.targeting import (
     OPERATIONAL_EXCLUSION,
     drw_junior_role,
     finance_role_evidence,
+    jefferies_sales_trading_duties,
     nomura_trading_technology,
     operational_role,
     research_trading_evidence,
@@ -36,7 +37,12 @@ ROLE_TERMS = {
     "SALES_TRADING": ["sales and trading"],
     "STRUCTURING": ["structuring", "structurer", "structuration"],
     "REPO": ["repo"],
-    "SECURITIES_FINANCE": ["securities finance", "securities lending", "prime finance"],
+    "SECURITIES_FINANCE": [
+        "securities finance",
+        "securities lending",
+        "prime finance",
+        "prime financing",
+    ],
     "TRADING_TECH": [
         "trading technology",
         "trading systems",
@@ -173,7 +179,8 @@ def score_job(job: Job, keywords: dict[str, list[str]], *, settings: Settings | 
     title = job.title_normalized
     text = normalize_text(job.title + " " + job.description_text)
     broking_duties = tp_broking_duties(job)
-    evidence_description = broking_duties or role_evidence_text(job)
+    campus_duties = jefferies_sales_trading_duties(job)
+    evidence_description = broking_duties or campus_duties or role_evidence_text(job)
     evidence_text = normalize_text(job.title + " " + evidence_description)
     result = Score()
     observed = programme(job) if settings and settings.include_internships else None
@@ -183,6 +190,11 @@ def score_job(job: Job, keywords: dict[str, list[str]], *, settings: Settings | 
         roles = ["BROKING"]
         result.reasons.append(
             "Audited trainee broking duties include client quotes or order execution"
+        )
+    if campus_duties:
+        roles = ["SALES_TRADING"]
+        result.reasons.append(
+            "Verified Jefferies Sales and Trading department and candidate duties"
         )
     verified_nomura_technology = nomura_trading_technology(job)
     if verified_nomura_technology:
@@ -195,7 +207,7 @@ def score_job(job: Job, keywords: dict[str, list[str]], *, settings: Settings | 
             "Audited role duties link quantitative research to pricing and trading decisions"
         )
     assets = classify(evidence_text, ASSET_TERMS)
-    if evidence_description != job.description_text and not broking_duties:
+    if evidence_description != job.description_text and not broking_duties and not campus_duties:
         result.reasons.append(
             "Asset and profile evidence excludes a verified DRW company paragraph"
         )

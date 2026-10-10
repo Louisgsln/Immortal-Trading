@@ -1715,9 +1715,9 @@ companies:
     career_url: https://ghr.wd1.myworkdayjobs.com/lateral-us
     country: ''
     scan_interval: 1800
-    request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
-      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md.
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures. Silent
+      bootstrap. See docs/VALIDATION-LOTS88-90.md.
     options:
       title_terms:
       - trading
@@ -1779,19 +1779,19 @@ companies:
     career_url: https://rbc.wd3.myworkdayjobs.com/RBCGLOBAL1
     country: ''
     scan_interval: 1800
-    request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
-      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md.
+    request_interval: 2
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
+      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
+      search scope, silent bootstrap; no absence closures.
     options:
       title_terms:
       - trading
       - trader
+      - markets
       - quantitative
       - quant
       - structuring
       - structurer
-      - market microstructure
-      - securities finance
       exclude_title_terms:
       - operations
       - product control
@@ -1833,6 +1833,9 @@ companies:
       - trader
       - quantitative
       - structuring
+      - markets
+      - off-cycle
+      - internship
       max_details: 80
       max_scan_seconds: 600
   wells_fargo:
@@ -1843,12 +1846,11 @@ companies:
     career_url: https://wf.wd1.myworkdayjobs.com/WellsFargoJobs
     country: ''
     scan_interval: 1800
-    request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
-      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md.
+    request_interval: 2
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
+      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
+      search scope, silent bootstrap; no absence closures.
     options:
-      # Trading, Advanced Analytics, Investment & Trading Products, Early Career Programs.
-      # Public facet identifiers observed on 2026-09-27; avoid unrelated branch banking.
       applied_facets:
         jobFamily:
         - 6cee717ed86e0100b32510f615390000
@@ -1858,12 +1860,11 @@ companies:
       title_terms:
       - trading
       - trader
+      - markets
       - quantitative
       - quant
       - structuring
       - structurer
-      - market microstructure
-      - securities finance
       exclude_title_terms:
       - operations
       - product control
@@ -1905,6 +1906,9 @@ companies:
       - trader
       - quantitative
       - structuring
+      - markets
+      - off-cycle
+      - internship
       max_details: 80
       max_scan_seconds: 600
   aquatic:
@@ -2291,19 +2295,19 @@ companies:
     career_url: https://ing.wd3.myworkdayjobs.com/ICSGBLCOR
     country: ''
     scan_interval: 1800
-    request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
-      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md.
+    request_interval: 2
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
+      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
+      search scope, silent bootstrap; no absence closures.
     options:
       title_terms:
       - trading
       - trader
+      - markets
       - quantitative
       - quant
       - structuring
       - structurer
-      - market microstructure
-      - securities finance
       exclude_title_terms:
       - operations
       - product control
@@ -2349,6 +2353,9 @@ companies:
       - trader
       - quantitative
       - structuring
+      - markets
+      - off-cycle
+      - internship
       max_details: 80
       max_scan_seconds: 600
   blackrock:
@@ -3978,3 +3985,109 @@ companies:
       - expression of interest
       - talent community
       max_results_per_query: 500
+  santander:
+    name: Santander
+    ats: workday
+    career_url: https://santander.wd3.myworkdayjobs.com/SantanderCareers
+    request_interval: 2
+    scan_interval: 1800
+    enabled: true
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - markets
+      - off-cycle
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      max_details: 80
+      max_results_per_query: 500
+      max_scan_seconds: 600
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
+      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
+      search scope, silent bootstrap; no absence closures.
+  bank_of_america_campus:
+    name: Bank of America
+    enabled: true
+    ats: bofa_campus
+    career_url: https://careers.bankofamerica.com/en-us/students/job-search
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    notes: Public student catalogue verified from OVH on 2026-10-10. Exclusive-end pagination, employer
+      detail identity/content/date recheck and first-page recheck. Separate from events and professional
+      Workday. Silent bootstrap; no absence closures.
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - prime financing
+      - securities finance
+      - repo
+      exclude_title_terms:
+      - operations
+      - chief operating
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - head of
+      - senior
+      - summer
+      max_results_per_query: 500
+      max_details: 60
+      max_scan_seconds: 600
+  jefferies_campus:
+    name: Jefferies
+    enabled: true
+    ats: jefferies_campus
+    career_url: https://jefferies.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/candidate/jobboard/vacancy/2/adv/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official Campus Opportunities board 2 verified from OVH 2026-10-10; board 1 is Events. Context-free
+      public details and requisition/application targets verified. Paged catalogue rechecked; no absence
+      closure, silent bootstrap. Fixed Income off-cycle Dubai 2002 is the role witness.
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quant
+      - quantitative
+      - structuring
+      - fixed income
+      exclude_title_terms:
+      - summer
+      - risk
+      - operations
+      - compliance
+      - audit
+      - human resources
+      - chief operating
+      - director
+      - vice president
+      - vp
+      - head of
+      - senior
+      max_results_per_query: 500
+      max_details: 60
+      max_scan_seconds: 600
