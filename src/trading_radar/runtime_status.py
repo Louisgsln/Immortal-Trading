@@ -106,6 +106,7 @@ def watcher_status(config: Config, now: datetime | None = None) -> dict:
 
 def runtime_report(config: Config) -> dict:
     health = check_health(config)
+    observed = {source["source"]: source["status"] for source in health["sources"]}
     counts = None
     try:
         with closing(
@@ -125,6 +126,22 @@ def runtime_report(config: Config) -> dict:
         "deliveries": counts,
         "alerts_enabled": config.settings.alerts_enabled,
         "threshold": config.settings.alert_min_score,
+        "source_counts": {
+            "enabled": sum(company.enabled for company in config.companies.values()),
+            "employers": len(
+                {company.name for company in config.companies.values() if company.enabled}
+            ),
+            "fresh": (
+                health["source_summary"].get("fresh", 0)
+                if health["database"]["status"] == "ok"
+                else None
+            ),
+        },
+        "source_inventory": [
+            {"source": key, "company": company.name, "status": observed.get(key, "unknown")}
+            for key, company in config.companies.items()
+            if company.enabled
+        ],
     }
 
 
@@ -239,8 +256,16 @@ def format_incident_notice(report: dict) -> str:
 
 def format_status(report: dict) -> str:
     health, watcher = report["health"], report["watcher"]
+    counts = report.get("source_counts")
     lines = [
         "📡 Radar · " + WATCHER_LABELS[watcher["status"]],
+        *(
+            [
+                f"Sources surveillées · {counts['enabled']} portails · {counts['employers']} employeurs"
+            ]
+            if counts is not None
+            else []
+        ),
         _summary(report),
         f"Seuil des alertes · {report['threshold']}/100",
         "",
@@ -261,4 +286,29 @@ def format_status(report: dict) -> str:
             lines.append(f"{uncertain} livraisons à vérifier")
     else:
         lines += ["", "Compteur des alertes indisponible"]
+    return "\n".join(lines)
+
+
+def format_sources(report: dict, page: int = 1) -> str:
+    """Same configured inventory as /status, in bounded private Telegram pages."""
+    sources = sorted(
+        report.get("source_inventory", report["health"]["sources"]),
+        key=lambda row: (row["company"].casefold(), row["source"]),
+    )
+    pages = max(1, (len(sources) + 29) // 30)
+    if not 1 <= page <= pages:
+        return f"Page indisponible. Utilise /sources 1 à /sources {pages}."
+    lines = [f"📚 {len(sources)} sources surveillées · page {page}/{pages}", ""]
+    for row in sources[(page - 1) * 30 : page * 30]:
+        label = SOURCE_LABELS.get(row["status"], "état indisponible")
+        lines.append(
+            "• "
+            + _short(row["company"], 40)
+            + " · "
+            + _short(row["source"], 30)
+            + " · "
+            + _short(label, 35)
+        )
+    if page < pages:
+        lines += ["", f"Suite · /sources {page + 1}"]
     return "\n".join(lines)

@@ -5,6 +5,7 @@ from pathlib import Path
 
 from trading_radar.bofa_campus import BofACampusOptions
 from trading_radar.config import Config
+from trading_radar.db_campus import DBCampusOptions
 from trading_radar.goldman import GoldmanOptions
 from trading_radar.greenhouse_filtered import GreenhouseOptions
 from trading_radar.jefferies_campus import JefferiesCampusOptions
@@ -16,6 +17,7 @@ from trading_radar.score_audit import job_snapshot, snapshot_jobs
 from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import rejection_reason
 from trading_radar.societe_generale import SGOptions
+from trading_radar.workable_public import WorkableOptions
 from trading_radar.workday import WorkdayOptions
 
 OPTIONS = {
@@ -27,6 +29,9 @@ OPTIONS = {
     "goldman": GoldmanOptions,
     "greenhouse_filtered": GreenhouseOptions,
     "workday": WorkdayOptions,
+    "millennium_campus": SearchOptions,
+    "workable_public": WorkableOptions,
+    "db_campus": DBCampusOptions,
     "lever_filtered": LeverOptions,
     "societe_generale": SGOptions,
 }

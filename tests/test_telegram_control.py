@@ -11,6 +11,7 @@ from trading_radar.notifications import DeliveryUnknown, TelegramNotifier, forma
 from trading_radar.runtime_status import (
     WatcherPulse,
     atomic_json,
+    format_sources,
     format_status,
     pulse_path,
     runtime_report,
@@ -57,6 +58,16 @@ class FakeNotifier:
     "text,expected",
     [
         ("/status", "status"),
+        ("/statuts", "status"),
+        ("/statut@RadarBot", "status"),
+        ("/statuts@radarbot", "status"),
+        ("/statuts@OtherBot", None),
+        ("/sources", "sources 1"),
+        ("/sources 2", "sources 2"),
+        ("/sources@OtherBot 2", None),
+        ("/sources 0", "sources_usage"),
+        ("/sources 2 /top", "sources_usage"),
+        ("/statuts\n/top", None),
         ("/status@RadarBot", "status"),
         ("/status@radarbot", "status"),
         ("/start radar", "start"),
@@ -194,6 +205,54 @@ def test_status_preserves_all_business_tables(local_config, repo, job):
     assert "activité non vérifiable" in format_status(report)
     assert "1 sources à jour" in format_status(report)
     assert list(repo.db.iterdump()) == before
+
+
+def test_status_counts_portals_and_distinct_enabled_employers(local_config, repo):
+    from trading_radar.config import Company
+
+    local_config.companies = {
+        "bank": Company(name="Bank", ats="fixture", enabled=True),
+        "bank_campus": Company(name="Bank", ats="fixture", enabled=True),
+        "fund": Company(name="Fund", ats="fixture", enabled=True),
+        "blocked": Company(name="Blocked", ats="fixture", enabled=False),
+    }
+    before = list(repo.db.iterdump())
+    report = runtime_report(local_config)
+    assert report["source_counts"] == {"enabled": 3, "employers": 2, "fresh": 0}
+    text = format_status(report)
+    assert "3 portails · 2 employeurs" in text
+    assert "0/3 sources à jour" in text
+    assert list(repo.db.iterdump()) == before
+    local_config.settings.database_url = "sqlite:////tmp/missing-radar-count-test.db"
+    report = runtime_report(local_config)
+    assert report["source_counts"] == {"enabled": 3, "employers": 2, "fresh": None}
+    assert "État des sources indisponible" in format_status(report)
+
+
+@pytest.mark.parametrize("command", ["/status", "/statut", "/statuts@RadarBot"])
+def test_french_status_alias_delivers_same_report_once(command, local_config, tmp_path):
+    store = control.ControlStore(tmp_path / "telegram.json", "binding")
+    notifier = FakeNotifier()
+    items = [update(text=command)]
+    asyncio.run(control.process_updates(items, local_config, notifier, store, "RadarBot", 10000))
+    assert notifier.sent == [format_status(runtime_report(local_config))]
+    asyncio.run(control.process_updates(items, local_config, notifier, store, "RadarBot", 10000))
+    assert len(notifier.sent) == 1
+
+
+def test_sources_pages_include_every_enabled_portal_once_and_fit_telegram(local_config):
+    from trading_radar.config import Company
+
+    local_config.companies = {
+        f"bank_{i:03}": Company(name="😀" * 100, ats="fixture", enabled=True) for i in range(71)
+    }
+    report = runtime_report(local_config)
+    pages = [format_sources(report, page) for page in (1, 2, 3)]
+    text = "\n".join(pages)
+    assert all(len(page.encode("utf-16-le")) <= 4096 * 2 for page in pages)
+    assert all(text.count(f"bank_{i:03}") == 1 for i in range(71))
+    assert all("71 sources surveillées" in page for page in pages)
+    assert "Page indisponible" in format_sources(report, 4)
 
 
 @pytest.mark.parametrize(

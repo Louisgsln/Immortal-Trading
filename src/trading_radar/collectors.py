@@ -209,6 +209,21 @@ def build_collector(source: str, config: Company, http: HTTPClient) -> Collector
         from trading_radar.hsbc_professionals import HSBCProfessionalsCollector
 
         return HSBCProfessionalsCollector(source, config, http)
+
+    if config.ats == "millennium_campus":
+        from trading_radar.millennium_campus import MillenniumCampusCollector
+
+        return MillenniumCampusCollector(source, config, http)
+
+    if config.ats == "workable_public":
+        from trading_radar.workable_public import WorkablePublicCollector
+
+        return WorkablePublicCollector(source, config, http)
+
+    if config.ats == "db_campus":
+        from trading_radar.db_campus import DBCampusCollector
+
+        return DBCampusCollector(source, config, http)
     if config.ats == "sig":
         from trading_radar.sig import SIGCollector
 

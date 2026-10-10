@@ -1,0 +1,217 @@
+{
+  "listing": {
+    "domain": "mlp.com",
+    "isUserAuthenticated": false,
+    "query": {
+      "query": "trading",
+      "location": "",
+      "department": [],
+      "skill": [],
+      "seniority": [],
+      "pid": "",
+      "Department": [],
+      "Skills": [],
+      "Location": [],
+      "campusSkillset": [],
+      "roles": []
+    },
+    "count": 37,
+    "positions": [
+      {
+        "id": 755956742250,
+        "name": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Hong Kong",
+        "posting_name": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Hong Kong",
+        "ats_job_id": "REQ-29722",
+        "locations": [
+          "Hong Kong, Hong Kong"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755956742250",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Quant Strategies"
+      },
+      {
+        "id": 755958163102,
+        "name": "Off-Cycle Trading Intern - AI Engineering, 2026, Hong Kong",
+        "posting_name": "Off-Cycle Trading Intern - AI Engineering, 2026, Hong Kong",
+        "ats_job_id": "REQ-30687",
+        "locations": [
+          "Hong Kong, Hong Kong"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755958163102",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Equities"
+      },
+      {
+        "id": 755958163900,
+        "name": "Off-Cycle Trading Intern - AI Engineering, 2026, Shanghai",
+        "posting_name": "Off-Cycle Trading Intern - AI Engineering, 2026, Shanghai",
+        "ats_job_id": "REQ-30688",
+        "locations": [
+          "Shanghai, Shanghai, China"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755958163900",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Equities"
+      },
+      {
+        "id": 755957819921,
+        "name": "2027 Trading Services Intern, London",
+        "posting_name": "2027 Trading Services Intern, London",
+        "ats_job_id": "REQ-30296",
+        "locations": [
+          "London, London, United Kingdom"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755957819921",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Unknown"
+      },
+      {
+        "id": 755953958409,
+        "name": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Shanghai",
+        "posting_name": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Shanghai",
+        "ats_job_id": "REQ-27820",
+        "locations": [
+          "Shanghai, Shanghai, China"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755953958409",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Equities"
+      },
+      {
+        "id": 755957778837,
+        "name": "2027 Operations & Middle Office Intern, Miami",
+        "posting_name": "2027 Operations & Middle Office Intern, Miami",
+        "ats_job_id": "REQ-30201",
+        "locations": [
+          "Miami, Florida, United States of America"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755957778837",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Unknown"
+      },
+      {
+        "id": 755957778846,
+        "name": "2027 Operations & Middle Office Intern, New York",
+        "posting_name": "2027 Operations & Middle Office Intern, New York",
+        "ats_job_id": "REQ-30202",
+        "locations": [
+          "New York, New York, United States of America"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755957778846",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Unknown"
+      },
+      {
+        "id": 755957778854,
+        "name": "2027 Operations & Middle Office Intern, London",
+        "posting_name": "2027 Operations & Middle Office Intern, London",
+        "ats_job_id": "REQ-30200",
+        "locations": [
+          "London, London, United Kingdom"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755957778854",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Unknown"
+      },
+      {
+        "id": 755957778830,
+        "name": "2027 Sector Specialist Intern, Tokyo",
+        "posting_name": "2027 Sector Specialist Intern, Tokyo",
+        "ats_job_id": "REQ-30212",
+        "locations": [
+          "Tokyo, Tokyo, Japan"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755957778830",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Unknown"
+      },
+      {
+        "id": 755957778888,
+        "name": "2027 Operations & Middle Office Intern, Singapore",
+        "posting_name": "2027 Operations & Middle Office Intern, Singapore",
+        "ats_job_id": "REQ-30203",
+        "locations": [
+          "Singapore, Singapore"
+        ],
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755957778888",
+        "isPrivate": false,
+        "type": "ATS",
+        "business_unit": "Unknown"
+      }
+    ]
+  },
+  "detail": {
+    "domain": "mlp.com",
+    "pid": "755956742250",
+    "singleview": true,
+    "isFallback": false,
+    "isUserAuthenticated": false,
+    "positions": [
+      {
+        "id": 755956742250,
+        "name": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Hong Kong",
+        "posting_name": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Hong Kong",
+        "location": "Hong Kong, Hong Kong",
+        "locations": [
+          "Hong Kong, Hong Kong"
+        ],
+        "hot": 0,
+        "department": "Trading",
+        "business_unit": "Quant Strategies",
+        "t_update": 1781740800,
+        "t_create": 1781740800,
+        "ats_job_id": "REQ-29722",
+        "display_job_id": "REQ-29722",
+        "type": "ATS",
+        "id_locale": "REQ-29722-en-US",
+        "job_description": "",
+        "locale": "en-US",
+        "stars": 0,
+        "medallionProgram": null,
+        "location_flexibility": null,
+        "work_location_option": "onsite",
+        "canonicalPositionUrl": "https://mlp.eightfold.ai/careers/job/755956742250",
+        "isPrivate": false,
+        "latlongs": "22.3193039,114.1693611"
+      }
+    ]
+  },
+  "schema": {
+    "@context": "http://schema.org",
+    "@type": "JobPosting",
+    "datePosted": "2026-10-02T00:00:00",
+    "description": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Hong Kong\n\nAbout Millennium  \nMillennium is a global, diversified alternative investment firm, founded in 1989. Defined by evolution, innovation and focus, Millennium’s mission is to deliver results for our investors.\n\nOur people are empowered with both independence and support: the autonomy to pursue ideas with conviction and the backing of a global network committed to collaboration, disciplined risk management and continuous learning. With opportunities to deepen expertise and accelerate development, talent at Millennium is equipped to adapt, evolve and build lasting impact over time. Discover how transformative growth accelerates impact.\n\nMeet the Team\n\nThe team is part of Millennium’s global trading business that trades APAC and global equity markets from Hong Kong. It is focused on developing proprietary quantitative models for return forecasting, portfolio construction, execution, and risk management. The team’s research spans technical, fundamental, sentiment, and alternative data, with a strong emphasis on applying rigorous quantitative methods to generate insights that support live trading decisions.\n\nWhat You'll Do\n\n  * Conduct quantitative research on trading and investment strategies, primarily in equities and, where relevant, across other markets\n  * Research alpha signals for mid-frequency trading using rigorous, data-driven scientific methods\n  * Analyze technical, fundamental, sentiment, and alternative datasets to identify and evaluate signals that can inform alpha strategy development and support the team’s P&L\n  * Maintain and enhance existing models, codebase, and research tools that support the team’s alpha research platform\n\n\n\nWhat You Bring\n\n  * Pursuing a Master’s or PhD in Computer Science, Mathematics, Statistics, Operations Research, Financial Engineering, Financial Economics, or a closely related quantitative field\n  * Strong foundation in one or more of the following areas: statistics, time series analysis, financial accounting, econometrics, numerical computing, optimization, machine learning, or large language models\n  * Experience working with large, unstructured alternative datasets is preferred\n  * Strong programming skills in Python and C++, with hands-on experience working with data\n  * High intellectual curiosity, a proactive mindset, and the ability to learn quickly\n  * Ability to work independently while contributing effectively in a team environment\n  * Prior internship experience in the financial industry is preferred but not required\n  * Availability to commit to a full-time internship for 3 to 6 months starting in August 2026\n\n\n",
+    "employmentType": "FULL_TIME",
+    "hiringOrganization": {
+      "@type": "Organization",
+      "logo": "",
+      "name": "Millennium",
+      "sameAs": "mlp.com"
+    },
+    "inLanguage": "en-US",
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": {
+          "@type": "Country",
+          "name": "HK"
+        },
+        "addressLocality": "",
+        "addressRegion": ""
+      }
+    },
+    "title": "Off-Cycle Trading Intern - Quantitative Researcher, 2026, Hong Kong",
+    "url": "https://campusjobs.mlp.com/careers/job/755956742250-off-cycle-trading-intern-quantitative-researcher-2026-hong-kong-hong-kong-hong-kong?domain=mlp.com",
+    "validThrough": "2027-03-31T00:00:00"
+  }
+}

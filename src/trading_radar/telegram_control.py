@@ -20,6 +20,7 @@ from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import (
     atomic_json,
     format_incident_notice,
+    format_sources,
     format_status,
     incident_keys,
     runtime_report,
@@ -35,8 +36,9 @@ from trading_radar.telegram_digest import (
 from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
-HELP = "📡 Immortal Trading\n/status : activité du radar, état des sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
+HELP = "📡 Immortal Trading\n/statuts ou /status : activité du radar, nombre de sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
 HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure.\n/digest_off : arrêter le récapitulatif."
+HELP += "\n/sources : liste des portails surveillés ; /sources 2 pour la suite."
 HELP += "\n\nSous chaque nouvelle alerte : Voir l’offre ouvre le site employeur. J’ai postulé enregistre ta confirmation dans le dashboard, avec la date du jour."
 
 
@@ -85,11 +87,18 @@ def command_from(update: dict, chat_id: str, username: str, now: float) -> str |
     if type(date) is not int or not 0 <= now - date <= 300 or not isinstance(text, str):
         return None
     match = re.fullmatch(
-        r"/(status|start|help|top|new|digest|digest_on|digest_off)(?:@([A-Za-z0-9_]+))?(?:[ \t]+([^\r\n]{0,128}))?",
+        r"/(status|statuts|statut|sources|start|help|top|new|digest|digest_on|digest_off)(?:@([A-Za-z0-9_]+))?(?:[ \t]+([^\r\n]{0,128}))?",
         text.strip(),
     )
     if not match or (match[2] and match[2].casefold() != username.casefold()):
         return None
+    if match[1] == "sources":
+        argument = (match[3] or "").strip()
+        return (
+            "sources " + (argument or "1")
+            if re.fullmatch(r"[1-9][0-9]{0,4}", argument or "1")
+            else "sources_usage"
+        )
     if match[1] == "digest_on":
         argument = (match[3] or "").strip()
         if argument and not re.fullmatch(r"(?:[01][0-9]|2[0-3]):[0-5][0-9]", argument):
@@ -97,7 +106,7 @@ def command_from(update: dict, chat_id: str, username: str, now: float) -> str |
         return "digest_on" + (" " + argument if argument else "")
     if match[1] in {"digest", "digest_off"} and match[3]:
         return "digest_usage"
-    return match[1]
+    return "status" if match[1] in {"statuts", "statut"} else match[1]
 
 
 async def api(notifier: TelegramNotifier, method: str, payload: dict):
@@ -241,6 +250,10 @@ async def process_updates(
             text = "<b>APERÇU À LA DEMANDE</b>\n\n" + digest_message(config, instant)
         elif command in {"top", "new"}:
             text = jobs_message(config, "top" if command == "top" else "new")
+        elif command.startswith("sources "):
+            text = format_sources(runtime_report(config), int(command.split()[1]))
+        elif command == "sources_usage":
+            text = "Utilise /sources ou /sources 2 pour la suite."
         else:
             text = format_status(runtime_report(config)) if command == "status" else HELP
         try:
@@ -309,6 +322,8 @@ async def run_control(config: Config) -> None:
                 "scope": {"type": "chat", "chat_id": notifier.chat_id},
                 "commands": [
                     {"command": "status", "description": "État du radar et des sources"},
+                    {"command": "statuts", "description": "Nombre de sources et état du radar"},
+                    {"command": "sources", "description": "Liste des portails surveillés"},
                     {"command": "top", "description": "Meilleures offres à examiner"},
                     {"command": "new", "description": "Offres découvertes depuis 24 h"},
                     {"command": "digest", "description": "Aperçu et réglage du récapitulatif"},

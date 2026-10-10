@@ -30,4 +30,18 @@ def candidate_start_text(job: Job) -> str:
                 # Only this reviewed conditional conversion paragraph is omitted
                 # from start-period extraction. The stored description is intact.
                 node.children = []
-    return visible_text(document.root)
+    text = visible_text(document.root)
+    if (
+        job.source == "deutsche_bank_campus"
+        and job.company == "Deutsche Bank"
+        and job.source_type == "official"
+        and job.employment_type == "Analyst Internship Programme"
+    ):
+        # Reviewed 2027 UK eligibility describes the subsequent full-time job.
+        # Remove only this exact conversion sentence from date extraction;
+        # other years and the original stored description remain untouched.
+        text = text.replace(
+            "Be able to start full time work in July 2028, subject to local working legislation and visa requirements.",
+            "",
+        )
+    return text

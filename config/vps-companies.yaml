@@ -1,4 +1,4 @@
-# Verified OVH production profile, 2026-10-10. Public employer configuration only.
+# Public employer profile; campus extension audited 2026-10-10.
 companies:
   nomura_professionals:
     name: Nomura
@@ -282,13 +282,22 @@ companies:
     tenant: barclays
     career_url: https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays
     country: global
-    scan_interval: 300
+    scan_interval: 1800
     request_interval: 2
     options:
       search_terms:
       - trading
-    notes: Public portal linked from search.jobs.barclays; verified 2026-09-15. Private/unlisted career
-      boards excluded.
+      - markets
+      - off-cycle
+      - internship
+      - quantitative
+      - structuring
+      max_results_per_query: 500
+      max_details: 100
+      max_scan_seconds: 600
+    notes: 'Public portal linked from search.jobs.barclays; verified 2026-09-15. Private/unlisted career
+      boards excluded. Student page and internship portal publicly verified 2026-10-10: same Workday board,
+      expanded six bounded searches, not a separate fictitious employer.'
   deutsche_bank:
     name: Deutsche Bank
     enabled: true
@@ -2854,8 +2863,8 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures. Silent
-      bootstrap. See docs/VALIDATION-LOTS88-90.md.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
+      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md.
     options:
       title_terms:
       - trading
@@ -2986,3 +2995,159 @@ companies:
       max_results_per_query: 500
       max_details: 60
       max_scan_seconds: 600
+  citi_campus:
+    name: Citi
+    enabled: true
+    ats: workday
+    tenant: citi
+    career_url: https://citi.wd5.myworkdayjobs.com/2
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - off-cycle
+      - internship
+      - placement
+      max_results_per_query: 500
+      max_details: 100
+      max_scan_seconds: 600
+    notes: Verified public Citi student roles share the Workday board linked from jobs.citi.com. Separate
+      bounded early-career search scope; campus identity preserved, not a second employer. Paris Markets
+      2027 off-cycle witnessed. Summer and wrong-year eligibility unchanged; no absence closure.
+  deutsche_bank_campus:
+    name: Deutsche Bank
+    enabled: true
+    ats: db_campus
+    career_url: https://careers.db.com/students-graduates/search-programmes/index?language_id=1
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative
+      - fixed income
+      - currencies
+      max_results_per_query: 500
+      max_details: 100
+      max_scan_seconds: 600
+    notes: Official student JavaScript links Beesite graduatesearch and jobhtml. Entire catalogue and
+      recsolu identities verified; 81 roles at audit. Complete bounded read with first-list recheck, no
+      inferred closing dates or absence closures. Off-cycle and long internships retained; Summer and
+      wrong years not alertable.
+  lazard_campus:
+    name: Lazard
+    enabled: true
+    ats: oracle
+    career_url: https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - markets
+      - quantitative
+      - fixed income
+      - off-cycle
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative
+      - fixed income
+      max_results_per_query: 500
+      max_details: 60
+      max_scan_seconds: 600
+    notes: Official lazard.com students page links LazardStudentCareers, which publishes siteNumber CX_2.
+      Public Oracle searches and full descriptions, no absence closures. Selection remains trading/markets/quant;
+      advisory M&A roles are outside the current role scope.
+  millennium_campus:
+    name: Millennium
+    enabled: true
+    ats: millennium_campus
+    career_url: https://campusjobs.mlp.com/careers?domain=mlp.com&microsite=campus-site
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - markets
+      - off-cycle
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative
+      - quant
+      - research
+      max_results_per_query: 500
+      max_details: 100
+      max_scan_seconds: 600
+    notes: Official mlp.com students page links campusjobs.mlp.com. Anonymous Eightfold public campus
+      search, full pages, first-page rechecks, employer/title/ATS identity consistency. Actual 2026 Hong
+      Kong 3-6 month off-cycle detected but excluded from 2027 alerts; no invented year or publication/deadline
+      timezone.
+  capula:
+    name: Capula
+    enabled: true
+    ats: workable_public
+    tenant: capula-investment-management-ltd
+    career_url: https://apply.workable.com/capula-investment-management-ltd/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative
+      - quant
+      - strategist
+      - research
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - speculative applications
+      max_results_per_query: 500
+      max_details: 80
+      max_scan_seconds: 600
+    notes: Official Capula careers links Workable; public llms.txt explicitly advertises complete jobs.md
+      catalogue and full per-ID Markdown details. Counts, metadata, application IDs and two catalogue
+      reads required. Explicitly speculative strategist excluded; calendar publication dates retained
+      without invented UTC instants. Future off-cycle roles will use the same internship policy.
