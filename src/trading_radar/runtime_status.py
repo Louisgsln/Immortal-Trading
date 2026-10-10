@@ -260,9 +260,7 @@ def format_status(report: dict) -> str:
     lines = [
         "📡 Radar · " + WATCHER_LABELS[watcher["status"]],
         *(
-            [
-                f"Couverture · {counts['enabled']} sources · {counts['employers']} employeurs"
-            ]
+            [f"Couverture · {counts['enabled']} sources · {counts['employers']} employeurs"]
             if counts is not None
             else []
         ),
