@@ -8,11 +8,11 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Livraison actuelle : [audit et extension des lots 125–127](VALIDATION-LOTS125-127.md),
-installés avec le [correctif de performance 128](VALIDATION-LOT128.md).
-63 sources / 56 employeurs sont activés. Suite prioritaire : qualifier les titres
-quantitatifs Jump/Flow/Point72 repérés dans l'[audit](AUDIT-EMPLOYERS-20261010.md),
-reprendre les incidents d'accès et valider les portails bancaires encore absents.
+Livraison actuelle : [banques et campus 129–131](VALIDATION-LOTS129-131.md),
+avec **70 sources / 62 employeurs** actifs et sept ajouts observés. Le carnet
+réserve les lots 132–137 : campus complémentaires, missions quantitatives, dates
+des stages, architecture du Dashboard mobile, observation hebdomadaire et
+sauvegarde distante. Les incidents d'accès gardent des tâches ouvertes.
 
 ## Historique des décisions avant la migration VPS
 

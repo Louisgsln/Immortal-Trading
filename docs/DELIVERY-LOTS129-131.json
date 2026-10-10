@@ -1,0 +1,434 @@
+{
+  "release": "immortal-trading:lot129-bank-campus-20261010",
+  "simulation": {
+    "status": "ok",
+    "simulation_only": true,
+    "sources": 7,
+    "successful": 7,
+    "new": 54,
+    "selected": 54,
+    "high_priority": 348,
+    "rescored": 2,
+    "score_changed_preview": 2,
+    "new_alerts": 0,
+    "notifier_calls": 0,
+    "histories_and_applications_unchanged": true,
+    "old_job_ids_preserved": true,
+    "bootstrap_verified": true,
+    "source_counts": {
+      "rbc": 11,
+      "wells_fargo": 2,
+      "ing": 6,
+      "santander": 11,
+      "bank_of_america": 11,
+      "bank_of_america_campus": 10,
+      "jefferies_campus": 3
+    },
+    "reference_found": 7,
+    "reference_count": 7,
+    "witnesses": [
+      {
+        "id": "15033",
+        "score": 96,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "15032",
+        "score": 90,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "15003",
+        "score": 96,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "14724",
+        "score": 96,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "14455",
+        "score": 92,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "14762",
+        "score": 84,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "2002",
+        "score": 82,
+        "source": "jefferies_campus"
+      }
+    ],
+    "at_threshold": {
+      "rbc": 1,
+      "wells_fargo": 0,
+      "ing": 0,
+      "santander": 4,
+      "bank_of_america": 1,
+      "bank_of_america_campus": 6,
+      "jefferies_campus": 1
+    },
+    "programme_eligible": {
+      "rbc": 1,
+      "wells_fargo": 0,
+      "ing": 0,
+      "santander": 4,
+      "bank_of_america": 1,
+      "bank_of_america_campus": 6,
+      "jefferies_campus": 1
+    },
+    "generated_at": "2026-10-10T14:59:54.047504+00:00"
+  },
+  "production_sources": {
+    "status": "ok",
+    "observed_at": "2026-10-10T15:09:27.315968+00:00",
+    "sources": {
+      "rbc": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:07:07.244118+00:00",
+        "last_count": 11,
+        "at_threshold": 1,
+        "programme_eligible": 1,
+        "alerts": 0
+      },
+      "wells_fargo": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:03:10.695346+00:00",
+        "last_count": 2,
+        "at_threshold": 0,
+        "programme_eligible": 0,
+        "alerts": 0
+      },
+      "ing": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:02:31.735309+00:00",
+        "last_count": 6,
+        "at_threshold": 0,
+        "programme_eligible": 0,
+        "alerts": 0
+      },
+      "santander": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:04:05.350744+00:00",
+        "last_count": 11,
+        "at_threshold": 4,
+        "programme_eligible": 4,
+        "alerts": 0
+      },
+      "bank_of_america": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:03:07.455292+00:00",
+        "last_count": 11,
+        "at_threshold": 1,
+        "programme_eligible": 1,
+        "alerts": 0
+      },
+      "bank_of_america_campus": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:02:12.981040+00:00",
+        "last_count": 10,
+        "at_threshold": 6,
+        "programme_eligible": 6,
+        "alerts": 0
+      },
+      "jefferies_campus": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T15:02:46.209066+00:00",
+        "last_count": 3,
+        "at_threshold": 1,
+        "programme_eligible": 1,
+        "alerts": 0
+      }
+    },
+    "all_initial_imports_silent": true,
+    "score_changed": 0,
+    "enabled_sources": 70,
+    "employers": 62
+  },
+  "reference": {
+    "format_version": 1,
+    "generated_at": "2026-10-10T15:09:44.567836+00:00",
+    "read_only": true,
+    "reference_count": 7,
+    "found": 7,
+    "missing": 0,
+    "reference_coverage_percent": 100,
+    "scope": "provided_reference_only",
+    "diagnostic_scope": "title_only",
+    "entries": [
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "15033",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Milan",
+        "found": true,
+        "active": true,
+        "score": 96,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "15032",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Stockholm",
+        "found": true,
+        "active": true,
+        "score": 90,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "15003",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Frankfurt",
+        "found": true,
+        "active": true,
+        "score": 96,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "14724",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Paris",
+        "found": true,
+        "active": true,
+        "score": 96,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "14455",
+        "title": "2027 Brazil Fixed Income Sales & Trading Desk Internship Program",
+        "found": true,
+        "active": true,
+        "score": 92,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "14762",
+        "title": "Prime Financing, 2027 1-Year Placement Analyst - London",
+        "found": true,
+        "active": true,
+        "score": 84,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "jefferies_campus",
+        "external_id": "2002",
+        "title": "2027 Fixed Income Off-Cycle Internship Programme - Dubai, MENA (January/February 2027)",
+        "found": true,
+        "active": true,
+        "score": 82,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      }
+    ]
+  },
+  "rescore": {
+    "status": "ok",
+    "rescored": 2,
+    "score_changed": 2,
+    "before": {
+      "total": 1320,
+      "active": 1306,
+      "high_priority": 335,
+      "relevant": 481
+    },
+    "after": {
+      "total": 1320,
+      "active": 1306,
+      "high_priority": 335,
+      "relevant": 481
+    },
+    "alerts_created": 0
+  },
+  "preservation": {
+    "checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true
+    },
+    "counts_after": {
+      "alert_history": 96,
+      "alerts": 48,
+      "application_history": 0,
+      "applications": 1374,
+      "jobs": 1374
+    },
+    "counts_before": {
+      "alert_history": 96,
+      "alerts": 48,
+      "application_history": 0,
+      "applications": 1320,
+      "jobs": 1320
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    },
+    "stage": "verification"
+  },
+  "runtime": {
+    "page_seconds": 12.549,
+    "services_running": 5,
+    "systemd_active_enabled": 4,
+    "actual_image_verified": true,
+    "https_trusted": true,
+    "same_private_link": true,
+    "dashboard_editable": true,
+    "dashboard_without_telegram_credentials": true,
+    "dashboard_radar_policy_matches": true,
+    "dashboard_notifications_disabled": true,
+    "digest_preview": {
+      "compact": true,
+      "html": true,
+      "known_facts_only": true
+    },
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "reference_found": 7,
+    "reference_count": 7,
+    "milan_score": 96,
+    "summary": {
+      "active": 1360,
+      "applications_due": 0,
+      "applications_in_progress": 0,
+      "enabled_sources": 70,
+      "fresh_sources": 68,
+      "high_priority": 345,
+      "relevant": 492,
+      "total": 1374
+    },
+    "internships": {
+      "active": 290,
+      "available": 286,
+      "criteria_met": 38,
+      "formats": {
+        "long": 30,
+        "off_cycle": 59,
+        "summer": 85
+      },
+      "total": 293,
+      "year_status": {
+        "confirmed": 197,
+        "conflict": 23,
+        "unknown": 66
+      }
+    },
+    "incidents": [
+      {
+        "source": "optiver",
+        "status": "partial"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      }
+    ],
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_control_enabled": true,
+      "telegram_incident_notices_enabled": false
+    },
+    "dashboard_contract": {
+      "asset_hashes": "verified",
+      "controls": 86,
+      "jobs": 1374,
+      "modules": 7,
+      "status": "ok"
+    }
+  },
+  "runtime_code_sha256": {
+    "src/trading_radar/bofa_campus.py": "15513644537b136ba0102d96d1f36a3447521b835dd6ca428950652494c5b5e5",
+    "src/trading_radar/collectors.py": "80bca76c3cbec4608c9ebf6bfce920d95cf10724927860fd279fa73247cb42c3",
+    "src/trading_radar/coverage.py": "e7cb0470ced7fdd7bb35fa516bb8cec23955f644c3d4d1183cd8cf3428a0f3ab",
+    "src/trading_radar/internship_start_evidence.py": "18ff0eacc8c6fb613f8a51346df2de0d4e37382efe841d120d8055fbf8fe9a1e",
+    "src/trading_radar/jefferies_campus.py": "3b06add12fac910cf972af505f66699c05efa38d4ec9df8c8b3891eb088e8673",
+    "src/trading_radar/programmes.py": "8358e139d4c6ef032984a6b2f5494af6186020ad25bba01768f368ee07472594",
+    "src/trading_radar/scoring.py": "023d1c72d869d3f2542b742babe9c26bccef2fe7996de58ca323d45de4d4394f",
+    "src/trading_radar/start_dates.py": "dee05a7d85abb0d54af023fc9dbf6376ab2ffcf9684cffedfb5c58361231a419",
+    "src/trading_radar/targeting.py": "922cb214c60687de3495fb5a22df9b216762d5674745bfd0d9d112e1cf2fa7f6"
+  },
+  "public_profile_sha256": "6c193f647257155b6c07178ca0024c47ad20fec6b1f493b234409164373a9e93",
+  "application_code_commit": "0888b56cede79c10e31ea3a1dad745f2163c52db",
+  "validated_commit": "88b28a894697f275515519b4fa8c7eb87fa91c73",
+  "local_tests": {
+    "python_passed": 5183,
+    "coverage_percent": 96,
+    "node_passed": 34,
+    "source_scheduling_passed_after_test_fix": 23,
+    "ruff_check": "passed",
+    "ruff_format": "passed",
+    "mypy": "passed"
+  },
+  "remote_desktop_permissions": {
+    "sudo_block_restored": true,
+    "original_blocked_commands_preserved": 33
+  },
+  "ci_run_id": 38061580663,
+  "ci_jobs": [
+    {
+      "id": 114240755265,
+      "name": "dashboard",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114240755377,
+      "name": "checks (3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114240755401,
+      "name": "checks (3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114240755403,
+      "name": "checks (3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114240755423,
+      "name": "checks (3.14)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114246124936,
+      "name": "container",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

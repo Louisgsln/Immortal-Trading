@@ -14,6 +14,13 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
+Les lots **129–131**, [installés et vérifiés](docs/VALIDATION-LOTS129-131.md),
+ajoutent Bank of America campus/professionnels, Jefferies campus, RBC, ING,
+Wells Fargo et Santander : **70 sources / 62 employeurs** sur OVH.
+L'offre Bank of America Global Markets 2027 Off-Cycle à Milan est détectée
+à **96/100** ; les sept offres témoins sont retrouvées. Le
+[carnet des tâches](docs/TASK-BOARD.md) suit les livraisons et les lots 132–137.
+
 Les lots **111–113** livrent [Morgan Stanley Campus et la référence de stages](docs/VALIDATION-LOT111.md),
 [les filtres pays, durée et début](docs/VALIDATION-LOT112.md), puis
 [le suivi modifiable sur téléphone et l'agenda](docs/VALIDATION-LOT113.md).

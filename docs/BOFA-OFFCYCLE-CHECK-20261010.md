@@ -1,5 +1,11 @@
 # Offre témoin Bank of America — contrôle du 10 octobre 2026
 
+**Correction installée et vérifiée :** le collecteur campus du lot 129 détecte
+Milan 15033 à **96/100**, off-cycle 2027 de 3–6 mois ; échéance employeur au
+11 octobre 2026. La source a réussi son premier import sans alerte rétroactive.
+Voir [les lots 129–131](VALIDATION-LOTS129-131.md) et la référence 7/7.
+Les constats ci-dessous décrivent l'état antérieur à cette correction.
+
 La capture transmise par le propriétaire montre **Global Markets Sales and
 Trading 2027 Off-Cycle Analyst – Milan**. Ce titre correspond aux métiers et
 au format/année demandés ; il constitue un exemple prioritaire de couverture

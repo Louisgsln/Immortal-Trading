@@ -1,5 +1,16 @@
 # Suivi de construction
 
+## Lots 129–131 — banques et campus installés sur OVH
+
+Bank of America campus et professionnels, Jefferies campus, RBC, ING,
+Wells Fargo et Santander : sept sources ajoutées, toutes observées ; profil
+actif **70 sources / 62 employeurs**, 54 fiches importées et 13 au seuil de 70.
+Milan est détecté à 96/100 ; référence indépendante 7/7. Imports silencieux,
+ancienne base, suivi, alertes et état Telegram préservés. Voir le
+[bilan](VALIDATION-LOTS129-131.md) et le [carnet développé](TASK-BOARD.md),
+qui réserve les lots 132–137. Les bilans suivants conservent leurs chiffres
+historiques ; les blocages employeur restent explicitement ouverts.
+
 ## Lots 125–127 — audit des offres et couverture réelle du VPS
 
 Le [carnet actif](TASK-BOARD.md) suit les tâches et leurs preuves.
