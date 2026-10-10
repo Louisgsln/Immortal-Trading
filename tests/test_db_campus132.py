@@ -60,6 +60,18 @@ def test_unreviewed_conversion_year_keeps_conflict_visible():
     assert programme(job)["year_status"] == "conflict"
 
 
+def test_presentation_whitespace_does_not_change_job_identity():
+    data = fixture()
+    data["listing"]["MatchedObjectDescriptor"]["PositionTitle"] = data["listing"][
+        "MatchedObjectDescriptor"
+    ]["PositionTitle"].replace(" - Investment", " -  Investment")
+    row = position(data["listing"])
+    assert (
+        detail(data["detail"], row, "deutsche_bank_campus", company()).title
+        == fixture()["listing"]["MatchedObjectDescriptor"]["PositionTitle"]
+    )
+
+
 @pytest.mark.parametrize("key,value", [("MatchedObjectId", "1"), ("MatchedObjectId", True)])
 def test_listing_identifier_must_match_descriptor(key, value):
     with pytest.raises(SourceUnavailable):

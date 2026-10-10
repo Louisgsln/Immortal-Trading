@@ -78,7 +78,7 @@ def position(row: object) -> dict:
         raise SourceUnavailable("Deutsche Bank campus hiring year changed")
     return {
         "id": identifier,
-        "title": info["PositionTitle"].strip(),
+        "title": " ".join(info["PositionTitle"].split()),
         "apply_url": url,
         "location": "; ".join(
             dict.fromkeys(loc["CityName"] + ", " + loc["CountryName"] for loc in locations)
