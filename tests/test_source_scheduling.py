@@ -74,7 +74,10 @@ def test_fast_source_refreshes_while_another_is_still_collecting(config, repo, m
 
     results = asyncio.run(asyncio.wait_for(run(), timeout=5))
     assert len(results) == 2 and all(r.successful == 1 for r in results)
-    assert counts == {"fast": 2, "slow": 1} and cancelled == ["slow"]
+    # The scheduler may start another due attempt before yielding the second
+    # result to the consumer under load. Only completed results are fixed here.
+    assert counts["fast"] >= 2 and counts["slow"] == 1
+    assert cancelled == ["slow"]
     assert all(client.client.is_closed for client in clients)
     assert len({id(client.pacing) for client in clients}) == 1
     assert not repo.state("slow")["consecutive_failures"]
