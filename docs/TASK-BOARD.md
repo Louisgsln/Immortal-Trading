@@ -24,6 +24,7 @@ les anciennes mentions Windows et exclusions globales des stages étaient histor
 | Recherche Point72 collectée mais non qualifiée | À auditer | Cubist Quantitative Researcher et variantes : score nul sans preuve de missions retenue ; ne pas attribuer des points au seul intitulé |
 | Nomura campus | En attente si CAPTCHA | Intervention humaine laissée en attente conformément au choix du propriétaire |
 | Nomura professionnels | Pagination récente à surveiller | Import interrompu sur pages incohérentes ; reprise selon la cadence normale, accès campus distinct |
+| Bank of America campus / off-cycle — prioritaire | Non couvert sur OVH | Offre témoin Global Markets Sales and Trading 2027 Off-Cycle Analyst – Milan absente ; [contrôle du 10/10](BOFA-OFFCYCLE-CHECK-20261010.md), portail étudiants à intégrer et tester |
 | Banques, courtiers et énergie non inclus au profil VPS | À faire | Relire leurs portails depuis OVH ; activer seulement après validation actuelle |
 | Alertes off-cycle / stages longs 2027 | Activées et vérifiées | 31 fiches satisfont les critères ; 61/63 références validées ; exclusions générales de stages retirées à la collecte pour 23 sources |
 | Réponse du Dashboard avec davantage de sources | Installé et vérifié | Lot 128 : 274 tests ciblés, six jobs CI réussis ; HTTPS 7,748 s lors du contrôle ; CPU Dashboard limité à 1 |
