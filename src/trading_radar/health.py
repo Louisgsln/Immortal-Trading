@@ -107,10 +107,14 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
             gaps = {
                 key: source_listing_gaps(connection, key, state[0]) for key, state in states.items()
             }
-            failure_messages = {
-                key: source_observation(connection, key, state[1], "failed")
-                for key, state in states.items()
-            }
+            failure_messages = {}
+            for key, state in states.items():
+                failure_time, success_time = timestamp(state[1]), timestamp(state[0])
+                # A missing cutoff scans the entire journal. Historical errors
+                # are irrelevant once a newer successful observation exists.
+                if failure_time is None or (success_time and failure_time < success_time):
+                    continue
+                failure_messages[key] = source_observation(connection, key, state[1], "failed")
             latest = connection.execute(
                 "SELECT created_at FROM scan_runs ORDER BY id DESC LIMIT 1"
             ).fetchone()

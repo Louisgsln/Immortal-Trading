@@ -16,6 +16,10 @@ porte la cible de cette livraison à 63 sources / 56 employeurs ; le fichier
 L’import initial des employeurs est silencieux. Les découvertes du premier
 import ne sont pas des publications récentes ni un débit hebdomadaire attendu.
 
+Le [lot 128](VALIDATION-LOT128.md) réduit les lectures inutiles du journal
+d’erreurs et augmente la limite CPU du Dashboard après mesure du ralentissement
+observé avec davantage d’employeurs.
+
 ## Historique des livraisons précédentes
 
 ## Lots 122–124 — Dashboard et architecture sur le VPS
