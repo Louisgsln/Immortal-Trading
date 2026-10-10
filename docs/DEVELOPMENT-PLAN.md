@@ -8,11 +8,14 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Livraison actuelle : [banques et campus 129–131](VALIDATION-LOTS129-131.md),
-avec **70 sources / 62 employeurs** actifs et sept ajouts observés. Le carnet
-réserve les lots 132–137 : campus complémentaires, missions quantitatives, dates
-des stages, architecture du Dashboard mobile, observation hebdomadaire et
-sauvegarde distante. Les incidents d'accès gardent des tâches ouvertes.
+Livraison actuelle : [campus, fonds et inventaire 132/138/139](VALIDATION-LOTS132-138-139.md),
+avec **75 sources / 65 employeurs** activés et cinq ajouts observés ; Barclays élargi.
+L'[inventaire daté](RADAR-SOURCES-20261010.md) et `/statuts` utilisent le même profil.
+Le carnet conserve 133–137 : missions quantitatives, dates des stages, architecture
+du Dashboard mobile, observation hebdomadaire et sauvegarde distante. Il développe
+140–145 : autres banques UK/FR/US, fonds supplémentaires, témoins de stages et
+export de couverture. Les [accès non intégrés](CAMPUS-FUNDS-AUDIT-20261010.md)
+gardent des tâches ouvertes et ne sont pas ajoutés au total surveillé.
 
 ## Historique des décisions avant la migration VPS
 

@@ -1,5 +1,17 @@
 # Suivi de construction
 
+## Lots 132, 138 et 139 — campus, fonds et inventaire
+
+Citi campus, Deutsche Bank campus, Lazard campus, Millennium campus et Capula
+ont réussi leurs premiers imports OVH ; Barclays utilise six recherches.
+Profil actif : **75 sources / 65 employeurs**, dont **73 à jour** au contrôle daté ;
+Optiver partiel, BNP ancien. L'[inventaire complet](RADAR-SOURCES-20261010.md)
+correspond aux compteurs de `/statuts` et du Dashboard ; `/sources` donne trois pages.
+Off-cycle et stages longs 2027 restent inclus, Summer hors alertes ; imports
+initiaux silencieux, données et état Telegram préservés. Voir le
+[bilan](VALIDATION-LOTS132-138-139.md) et l'[audit des accès restants](CAMPUS-FUNDS-AUDIT-20261010.md).
+Le [carnet](TASK-BOARD.md) développe les suites 140–145 sans les compter comme installées.
+
 ## Lots 129–131 — banques et campus installés sur OVH
 
 Bank of America campus et professionnels, Jefferies campus, RBC, ING,

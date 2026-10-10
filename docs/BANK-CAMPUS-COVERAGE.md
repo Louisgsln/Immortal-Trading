@@ -6,6 +6,12 @@ restent exclus ; Analyst/Associate conserve son traitement existant.
 
 ## Portails vérifiés pour les lots 129–131
 
+Extension actuelle : [lots 132/138/139](VALIDATION-LOTS132-138-139.md), Citi campus,
+Deutsche Bank campus, Lazard campus, Millennium campus et Capula ; Barclays élargi.
+L'[inventaire OVH](RADAR-SOURCES-20261010.md) compte 75 sources / 65 employeurs.
+L'[audit complémentaire](CAMPUS-FUNDS-AUDIT-20261010.md) consigne les portails
+UK/FR/US et fonds non intégrés. Les chiffres ci-dessous décrivent les lots 129–131.
+
 Les sept sources ajoutées ci-dessous sont installées et ont réussi leur premier
 import sur OVH : 54 fiches, 13 au seuil de 70, zéro alerte d'import. Le profil
 actif compte 70 sources pour 62 employeurs. Les trois campus bloqués restent ouverts.
@@ -21,7 +27,7 @@ actif compte 70 sources pour 62 employeurs. Les trois campus bloqués restent ou
 | Santander | Workday officiel relié depuis Santander CIB | 232 résultats distincts, 11 fiches ; recherche partielle ; filtre campus officiel relu, sans résultat ciblé avec `scib` |
 | JPMorgan campus | Oracle `CX_1001` | HTTP 403 observé depuis OVH ; source désactivée conservée, pas déclarée surveillée |
 | NatWest campus | Pages early careers officielles | HTTP 403 ; intégration laissée ouverte |
-| Nomura campus | Portail public distinct des professionnels | Validation humaine du CAPTCHA laissée en attente sur décision du propriétaire |
+| Nomura campus | Portail public distinct des professionnels | Accès public repris, huit fiches vérifiées le 10/10 ; intervention humaine toujours en attente si CAPTCHA |
 
 Les recherches Workday ne sont pas un inventaire exhaustif de chaque banque.
 Les plafonds sont 500 résultats par requête et 80 détails ; un dépassement ou une

@@ -1,15 +1,18 @@
 # Employeurs — prochaine couverture du VPS
 
-État au 10 octobre 2026 : **70 sources / 62 employeurs** sont activés sur OVH.
-Après les 38 ajouts des lots 125–127, les lots 129–131 ajoutent sept sources pour
-Bank of America, Jefferies, RBC, ING, Wells Fargo et Santander. Tous leurs premiers
-imports ont réussi et restent silencieux ; Milan est détecté à 96/100. La configuration générale
+État au 10 octobre 2026 : **75 sources / 65 employeurs** sont activés sur OVH,
+dont 73 à jour au relevé de l'[inventaire](RADAR-SOURCES-20261010.md).
+Les lots 132/138/139 ajoutent Citi campus, Deutsche Bank campus, Lazard campus,
+Millennium campus et Capula, et élargissent Barclays ; tous les premiers imports
+ont réussi sans alerte rétroactive. Les lots 129–131 avaient ajouté Bank of America,
+Jefferies, RBC, ING, Wells Fargo et Santander ; Milan est détecté à 96/100. La configuration générale
 contient aussi des connecteurs antérieurement développés mais non activés dans
 ce profil. Leur disponibilité passée ne prouve pas leur accès actuel depuis OVH.
 
-Suite : lot 132, portails campus Barclays, Citi et Deutsche Bank ; lot 133,
-missions quantitatives ; lot 134, campagnes et dates de stages ING/Santander.
-Voir le [carnet des portails et témoins](BANK-CAMPUS-COVERAGE.md). BNP reste limité par un refus HTTP 403 ;
+Suite : lots 133–137 et 140–145 du [carnet](TASK-BOARD.md), avec autres banques
+UK/FR/US, fonds, missions quantitatives, campagnes/dates et architecture mobile.
+Voir l'[audit public des portails](CAMPUS-FUNDS-AUDIT-20261010.md) et le
+[carnet bancaire](BANK-CAMPUS-COVERAGE.md). BNP reste limité par un refus HTTP 403 ;
 Nomura campus reste en attente lorsque le portail demande une intervention humaine.
 Voir [TASK-BOARD.md](TASK-BOARD.md) et [VALIDATION-LOTS125-127.md](VALIDATION-LOTS125-127.md).
 

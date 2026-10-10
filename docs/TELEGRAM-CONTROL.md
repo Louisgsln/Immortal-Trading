@@ -55,8 +55,13 @@ Références : [boutons Telegram](https://core.telegram.org/bots/api#inlinekeybo
 
 Dans le chat privé avec `@ImmortalTradingBot` :
 
-- `/status` affiche l'activité du collecteur, le dernier cycle terminé, la santé
-  des sources et le nombre d'alertes envoyées ou à vérifier.
+- `/status`, `/statuts` ou `/statut` affiche le même état : activité du collecteur,
+  dernier cycle, sources activées et à jour, employeurs distincts et alertes.
+  Les totaux proviennent du profil OVH, comme ceux du Dashboard ; ils ne comptent
+  pas les connecteurs non activés dans le dépôt.
+- `/sources` donne toutes les sources activées avec leur état, par pages de trente.
+  `/sources 2` et `/sources 3` donnent la suite. Les 75 sources / 65 employeurs
+  de la livraison 132/138/139 sont aussi [publiés ici](RADAR-SOURCES-20261010.md).
 - `/help` affiche l'aide ; `/start` affiche également cette aide.
 - `/top` affiche jusqu'à cinq offres à examiner, triées par score décroissant,
   puis découverte la plus récente.

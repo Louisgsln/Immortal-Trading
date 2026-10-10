@@ -1,0 +1,2911 @@
+{
+  "release": "immortal-trading:lot132-campus-funds-20261010",
+  "simulation": {
+    "status": "ok",
+    "simulation_only": true,
+    "expanded_sources_verified": 1,
+    "sources": 5,
+    "successful": 5,
+    "new": 52,
+    "selected": 64,
+    "high_priority": 353,
+    "rescored": 0,
+    "score_changed_preview": 0,
+    "new_alerts": 0,
+    "notifier_calls": 0,
+    "histories_and_applications_unchanged": true,
+    "old_job_ids_preserved": true,
+    "bootstrap_verified": true,
+    "source_counts": {
+      "citi_campus": 17,
+      "deutsche_bank_campus": 22,
+      "lazard_campus": 4,
+      "millennium_campus": 18,
+      "capula": 3
+    },
+    "reference_found": 7,
+    "reference_count": 7,
+    "witnesses": [
+      {
+        "id": "15033",
+        "score": 96,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "15032",
+        "score": 90,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "15003",
+        "score": 96,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "14724",
+        "score": 96,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "14455",
+        "score": 92,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "14762",
+        "score": 84,
+        "source": "bank_of_america_campus"
+      },
+      {
+        "id": "2002",
+        "score": 82,
+        "source": "jefferies_campus"
+      }
+    ],
+    "generated_at": "2026-10-10T18:33:53.156602+00:00",
+    "score_counting": "high_priority counts the whole simulated database; per-source scores use production_sources job_sources associations"
+  },
+  "production_sources": {
+    "status": "ok",
+    "observed_at": "2026-10-10T18:41:45.853670+00:00",
+    "sources": {
+      "citi_campus": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T18:40:06.960444+00:00",
+        "last_count": 17,
+        "at_threshold": 6,
+        "associated_alerts_including_preexisting": 1,
+        "score_and_programme_policy_compatible": 3,
+        "internships_in_scope_at_threshold": 1
+      },
+      "deutsche_bank_campus": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T18:39:37.563599+00:00",
+        "last_count": 22,
+        "at_threshold": 4,
+        "associated_alerts_including_preexisting": 0,
+        "score_and_programme_policy_compatible": 1,
+        "internships_in_scope_at_threshold": 0
+      },
+      "lazard_campus": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T18:39:13.957436+00:00",
+        "last_count": 4,
+        "at_threshold": 0,
+        "associated_alerts_including_preexisting": 0,
+        "score_and_programme_policy_compatible": 0,
+        "internships_in_scope_at_threshold": 0
+      },
+      "millennium_campus": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T18:40:16.439731+00:00",
+        "last_count": 18,
+        "at_threshold": 1,
+        "associated_alerts_including_preexisting": 0,
+        "score_and_programme_policy_compatible": 0,
+        "internships_in_scope_at_threshold": 0
+      },
+      "capula": {
+        "bootstrapped": true,
+        "last_success": "2026-10-10T18:39:02.419820+00:00",
+        "last_count": 3,
+        "at_threshold": 0,
+        "associated_alerts_including_preexisting": 0,
+        "score_and_programme_policy_compatible": 0,
+        "internships_in_scope_at_threshold": 0
+      }
+    },
+    "all_initial_imports_silent": true,
+    "score_changed": 0,
+    "enabled_sources": 75,
+    "employers": 65
+  },
+  "reference": {
+    "format_version": 1,
+    "generated_at": "2026-10-10T18:41:28.523097+00:00",
+    "read_only": true,
+    "reference_count": 7,
+    "found": 7,
+    "missing": 0,
+    "reference_coverage_percent": 100,
+    "scope": "provided_reference_only",
+    "diagnostic_scope": "title_only",
+    "entries": [
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "15033",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Milan",
+        "found": true,
+        "active": true,
+        "score": 96,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "15032",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Stockholm",
+        "found": true,
+        "active": true,
+        "score": 90,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "15003",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Frankfurt",
+        "found": true,
+        "active": true,
+        "score": 96,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "14724",
+        "title": "Global Markets Sales and Trading 2027 Off-Cycle Analyst - Paris",
+        "found": true,
+        "active": true,
+        "score": 96,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "14455",
+        "title": "2027 Brazil Fixed Income Sales & Trading Desk Internship Program",
+        "found": true,
+        "active": true,
+        "score": 92,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "bank_of_america_campus",
+        "external_id": "14762",
+        "title": "Prime Financing, 2027 1-Year Placement Analyst - London",
+        "found": true,
+        "active": true,
+        "score": 84,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      },
+      {
+        "source": "jefferies_campus",
+        "external_id": "2002",
+        "title": "2027 Fixed Income Off-Cycle Internship Programme - Dubai, MENA (January/February 2027)",
+        "found": true,
+        "active": true,
+        "score": 82,
+        "source_enabled": true,
+        "title_filter_rejection": null
+      }
+    ]
+  },
+  "rescore": {
+    "status": "ok",
+    "rescored": 0,
+    "score_changed": 0,
+    "before": {
+      "total": 1374,
+      "active": 1360,
+      "high_priority": 348,
+      "relevant": 495
+    },
+    "after": {
+      "total": 1374,
+      "active": 1360,
+      "high_priority": 348,
+      "relevant": 495
+    },
+    "alerts_created": 0
+  },
+  "expanded_baseline": {
+    "successful": 1,
+    "new": 8,
+    "alerts_created": 0
+  },
+  "preservation": {
+    "checks": {
+      "database_inode_preserved": true,
+      "job_ids_preserved": true,
+      "application_ids_preserved": true,
+      "application_rows_preserved": true,
+      "sent_alerts_preserved": true,
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true,
+      "backup_verified": true
+    },
+    "counts_before": {
+      "jobs": 1374,
+      "applications": 1374,
+      "alerts": 48,
+      "alert_history": 96,
+      "application_history": 0
+    },
+    "counts_after": {
+      "jobs": 1434,
+      "applications": 1434,
+      "alerts": 48,
+      "alert_history": 96,
+      "application_history": 0
+    },
+    "database": {
+      "status": "ok",
+      "schema_version": 4
+    }
+  },
+  "inventory": {
+    "observed_at": "2026-10-10T18:41:43.909960+00:00",
+    "counts": {
+      "enabled": 75,
+      "employers": 65,
+      "fresh": 73
+    },
+    "distinct_career_urls": 74,
+    "summary": {
+      "fresh": 73,
+      "partial": 1,
+      "stale": 1
+    },
+    "watcher": {
+      "status": "active",
+      "phase": "scanning",
+      "at": "2026-10-10T18:41:37.064711+00:00",
+      "age_seconds": 7
+    },
+    "telegram_status_preview": "📡 Radar · actif\nCouverture · 75 sources · 65 employeurs\n73/75 sources à jour · alertes actives\nSeuil des alertes · 70/100\n\nDernier cycle · 10/10/2026 · 20:41\nDernier signal · 10/10/2026 · 20:41\n\nOptiver · fiches incomplètes\nBNP Paribas · collecte ancienne\nReprise possible dès 10/10/2026 · 21:21\n\n48 alertes envoyées · 0 en attente",
+    "telegram_sources_pages": [
+      "📚 75 sources surveillées · page 1/3\n\n• 3Red Partners · 3red · à jour\n• Acadian Asset Management · acadian · à jour\n• Akuna Capital · akuna_capital · à jour\n• AQR · aqr · à jour\n• Aquatic Capital Management · aquatic · à jour\n• Bank of America · bank_of_america · à jour\n• Bank of America · bank_of_america_campus · à jour\n• Barclays · barclays · à jour\n• BNP Paribas · bnp_paribas · collecte ancienne\n• Capula · capula · à jour\n• Chicago Trading Company · chicago_trading · à jour\n• Chicago Trading Company · chicago_trading_campus · à jour\n• Citi · citi · à jour\n• Citi · citi_campus · à jour\n• Crédit Agricole CIB · credit_agricole_cib · à jour\n• Da Vinci · da_vinci · à jour\n• Deutsche Bank · deutsche_bank · à jour\n• Deutsche Bank · deutsche_bank_campus · à jour\n• DRW · drw · à jour\n• DV Trading · dv_trading · à jour\n• Engineers Gate · engineers_gate · à jour\n• Five Rings · five_rings · à jour\n• Flow Traders · flow_traders · à jour\n• Gelber Group · gelber · à jour\n• Geneva Trading · geneva_trading · à jour\n• Goldman Sachs · goldman_campus · à jour\n• Goldman Sachs · goldman_sachs · à jour\n• Graham Capital Management · graham · à jour\n• Graviton Research Capital · graviton · à jour\n• Headlands Technologies · headlands · à jour\n\nSuite · /sources 2",
+      "📚 75 sources surveillées · page 2/3\n\n• HSBC · hsbc_graduates · à jour\n• HSBC · hsbc_professionals · à jour\n• Hudson River Trading · hudson_river_trading · à jour\n• IMC · imc · à jour\n• ING · ing · à jour\n• Jane Street · jane_street · à jour\n• Jefferies · jefferies_campus · à jour\n• Jump Trading · jump_trading · à jour\n• Lazard · lazard_campus · à jour\n• Macquarie · macquarie · à jour\n• Mako · mako · à jour\n• Man Group · man_group · à jour\n• Marshall Wace · marshall_wace_graduates · à jour\n• Maven Securities · maven_securities · à jour\n• Millennium · millennium_campus · à jour\n• Morgan Stanley · morgan_stanley · à jour\n• Morgan Stanley · morgan_stanley_campus · à jour\n• Nomura · nomura_campus · à jour\n• Nomura · nomura_professionals · à jour\n• Old Mission · old_mission · à jour\n• Optiver · optiver · fiches incomplètes\n• PDT Partners · pdt · à jour\n• Point72 · point72 · à jour\n• Quantbot Technologies · quantbot · à jour\n• Qube Research & Technologies · qube_research · à jour\n• Radix Trading · radix_campus · à jour\n• Radix Trading · radix_professionals · à jour\n• RBC · rbc · à jour\n• Santander · santander · à jour\n• Schonfeld · schonfeld · à jour\n\nSuite · /sources 3",
+      "📚 75 sources surveillées · page 3/3\n\n• Société Générale · societe_generale · à jour\n• Squarepoint Capital · squarepoint_capital · à jour\n• Susquehanna · sig · à jour\n• Tower Research Capital · tower_research · à jour\n• TransMarket Group · transmarket_group · à jour\n• Tudor Group · tudor · à jour\n• UBS · ubs · à jour\n• UBS · ubs_professionals · à jour\n• Verition · verition · à jour\n• Virtu Financial · virtu_financial · à jour\n• Walleye Capital · walleye_capital · à jour\n• Wells Fargo · wells_fargo · à jour\n• Winton · winton · à jour\n• WorldQuant · worldquant · à jour\n• XTX Markets · xtx_markets · à jour"
+    ],
+    "source_profile_sha256": "efd537fd3312083ab06dfe658b33ae10763c2449df6c1ad536cf337b3d402b79",
+    "sources": [
+      {
+        "source": "nomura_professionals",
+        "company": "Nomura",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:31:13.686924+00:00",
+        "last_failure": "2026-10-10T07:54:09.499741+00:00",
+        "age_hours": 0.175,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 16,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:36:13.686924+00:00",
+          "eligible_now": true
+        },
+        "url": "https://careers.nomura.com/Nomura?locale=en_US",
+        "ats": "nomura_professionals",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "etrading",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance"
+        ]
+      },
+      {
+        "source": "hsbc_professionals",
+        "company": "HSBC",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:34:19.504997+00:00",
+        "last_failure": "2026-10-06T18:13:09.119816+00:00",
+        "age_hours": 0.123,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:39:19.504997+00:00",
+          "eligible_now": true
+        },
+        "url": "https://portal.careers.hsbc.com/careers",
+        "ats": "hsbc_professionals",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "ubs_professionals",
+        "company": "UBS",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:32:22.116133+00:00",
+        "last_failure": "2026-10-09T19:07:24.766277+00:00",
+        "age_hours": 0.156,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 31,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:37:22.116133+00:00",
+          "eligible_now": true
+        },
+        "url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231",
+        "ats": "ubs",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "jump_trading",
+        "company": "Jump Trading",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:29.477290+00:00",
+        "last_failure": null,
+        "age_hours": 0.021,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 25,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:45:29.477290+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.jumptrading.com/careers",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "xtx_markets",
+        "company": "XTX Markets",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:34.747298+00:00",
+        "last_failure": null,
+        "age_hours": 0.019,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 1,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:45:34.747298+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.xtxmarkets.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "sig",
+        "company": "Susquehanna",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:32:56.216405+00:00",
+        "last_failure": "2026-10-06T09:42:53.319062+00:00",
+        "age_hours": 0.147,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 51,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:37:56.216405+00:00",
+          "eligible_now": true
+        },
+        "url": "https://careers.sig.com/jobs",
+        "ats": "sig",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "flow_traders",
+        "company": "Flow Traders",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:41:04.833329+00:00",
+        "last_failure": null,
+        "age_hours": 0.011,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 11,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:46:04.833329+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.flowtraders.com/careers/job-search/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "imc",
+        "company": "IMC",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:40.243770+00:00",
+        "last_failure": "2026-10-06T11:36:17.070582+00:00",
+        "age_hours": 0.018,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 28,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:45:40.243770+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.imc.com/us/search-careers",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "drw",
+        "company": "DRW",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:35:16.713267+00:00",
+        "last_failure": null,
+        "age_hours": 0.108,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 29,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:40:16.713267+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.drw.com/work-at-drw/listings",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "optiver",
+        "company": "Optiver",
+        "status": "partial",
+        "last_success": "2026-10-10T18:35:05.446792+00:00",
+        "last_failure": "2026-10-09T10:57:39.335898+00:00",
+        "age_hours": 0.111,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 24,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:40:05.446792+00:00",
+          "eligible_now": true
+        },
+        "listing_gaps": [
+          "https://www.optiver.com/join-us/jobs/trading/chicago/trading-automation-specialist/"
+        ],
+        "url": "https://www.optiver.com/join-us/jobs",
+        "ats": "optiver",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "macquarie",
+        "company": "Macquarie",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:30:46.229565+00:00",
+        "last_failure": "2026-10-02T02:20:48.895818+00:00",
+        "age_hours": 0.183,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 12,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:35:46.229565+00:00",
+          "eligible_now": true
+        },
+        "url": "https://recruitment.macquarie.com/en_US/careers/SearchJobs/",
+        "ats": "macquarie",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "nomura_campus",
+        "company": "Nomura",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:41:01.473500+00:00",
+        "last_failure": "2026-10-10T13:35:31.604141+00:00",
+        "age_hours": 0.012,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 8,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:46:01.473500+00:00",
+          "eligible_now": false
+        },
+        "url": "https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/",
+        "ats": "nomura",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "credit_agricole_cib",
+        "company": "Crédit Agricole CIB",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:57.533971+00:00",
+        "last_failure": "2026-10-09T14:09:16.416420+00:00",
+        "age_hours": 0.013,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 27,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:45:57.533971+00:00",
+          "eligible_now": false
+        },
+        "url": "https://jobs.ca-cib.com/pages/offre/listeoffre.aspx",
+        "ats": "ca_cib",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "structuration",
+          "repo",
+          "securities finance",
+          "front office developer"
+        ]
+      },
+      {
+        "source": "hsbc_graduates",
+        "company": "HSBC",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:30:31.863199+00:00",
+        "last_failure": "2026-10-07T09:18:41.361896+00:00",
+        "age_hours": 0.187,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 8,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:35:31.863199+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.hsbc.com/careers/students-and-graduates/find-a-programme",
+        "ats": "hsbc",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "ubs",
+        "company": "UBS",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:24.452007+00:00",
+        "last_failure": "2026-10-05T20:33:50.724906+00:00",
+        "age_hours": 0.139,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:24.452007+00:00",
+          "eligible_now": true
+        },
+        "url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232",
+        "ats": "ubs",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "societe_generale",
+        "company": "Société Générale",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:34:50.734208+00:00",
+        "last_failure": "2026-10-10T11:55:14.983604+00:00",
+        "age_hours": 0.115,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 34,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:39:50.734208+00:00",
+          "eligible_now": true
+        },
+        "url": "https://careers.societegenerale.com/fr/Technical/toutes-les-offres",
+        "ats": "societe_generale",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "structuration",
+          "repo",
+          "securities finance",
+          "salle des marches",
+          "front office developer"
+        ]
+      },
+      {
+        "source": "bnp_paribas",
+        "company": "BNP Paribas",
+        "status": "stale",
+        "last_success": "2026-09-16T19:06:21.927986+00:00",
+        "last_failure": "2026-10-10T18:21:18.686042+00:00",
+        "age_hours": 575.589,
+        "consecutive_failures": 178,
+        "last_snapshot_jobs": 23,
+        "failure": {
+          "code": "access_restricted",
+          "label": "Le portail refuse temporairement l’accès."
+        },
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-10T19:21:18.686042+00:00",
+          "eligible_now": false
+        },
+        "url": "https://group.bnpparibas/emploi-carriere/toutes-offres-emploi",
+        "ats": "bnp",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "goldman_campus",
+        "company": "Goldman Sachs",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:31:47.825160+00:00",
+        "last_failure": "2026-10-10T13:04:18.136550+00:00",
+        "age_hours": 0.166,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 17,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:36:47.825160+00:00",
+          "eligible_now": true
+        },
+        "url": "https://higher.gs.com/campus",
+        "ats": "goldman",
+        "search_terms": [
+          "trading",
+          "ficc"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "ficc"
+        ]
+      },
+      {
+        "source": "goldman_sachs",
+        "company": "Goldman Sachs",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:35:38.246959+00:00",
+        "last_failure": "2026-10-10T15:16:35.207917+00:00",
+        "age_hours": 0.102,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 37,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:40:38.246959+00:00",
+          "eligible_now": true
+        },
+        "url": "https://higher.gs.com/results",
+        "ats": "goldman",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "barclays",
+        "company": "Barclays",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:38:13.707178+00:00",
+        "last_failure": "2026-10-10T07:17:02.320628+00:00",
+        "age_hours": 0.058,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 23,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:08:13.707178+00:00",
+          "eligible_now": false
+        },
+        "url": "https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays",
+        "ats": "workday",
+        "search_terms": [
+          "trading",
+          "markets",
+          "off-cycle",
+          "internship",
+          "quantitative",
+          "structuring"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "deutsche_bank",
+        "company": "Deutsche Bank",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:32:45.579771+00:00",
+        "last_failure": "2026-10-10T16:40:28.994883+00:00",
+        "age_hours": 0.15,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 21,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:37:45.579771+00:00",
+          "eligible_now": true
+        },
+        "url": "https://db.wd3.myworkdayjobs.com/DBWebsite",
+        "ats": "workday",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "morgan_stanley",
+        "company": "Morgan Stanley",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:06.481682+00:00",
+        "last_failure": "2026-10-10T07:15:18.226394+00:00",
+        "age_hours": 0.144,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 14,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:06.481682+00:00",
+          "eligible_now": true
+        },
+        "url": "https://ms.wd5.myworkdayjobs.com/External",
+        "ats": "workday",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "citi",
+        "company": "Citi",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:29:51.237504+00:00",
+        "last_failure": "2026-10-10T07:15:07.648687+00:00",
+        "age_hours": 0.198,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 42,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:34:51.237504+00:00",
+          "eligible_now": true
+        },
+        "url": "https://citi.wd5.myworkdayjobs.com/2",
+        "ats": "workday",
+        "search_terms": [
+          "trading"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "jane_street",
+        "company": "Jane Street",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:23.988181+00:00",
+        "last_failure": null,
+        "age_hours": 0.022,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 231,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:45:23.988181+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.janestreet.com/join-jane-street/open-roles/",
+        "ats": "greenhouse",
+        "search_terms": null,
+        "title_terms": null
+      },
+      {
+        "source": "morgan_stanley_campus",
+        "company": "Morgan Stanley",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:44.160878+00:00",
+        "last_failure": "2026-10-10T16:40:15.788198+00:00",
+        "age_hours": 0.133,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 18,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 600,
+          "cooldown_seconds": 600,
+          "next_eligible_at": "2026-10-10T18:43:44.160878+00:00",
+          "eligible_now": false
+        },
+        "url": "https://morganstanley.tal.net/vx/lang-en-GB/candidate/jobboard/vacancy/1/adv",
+        "ats": "morgan_stanley_campus",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "quantitative finance"
+        ]
+      },
+      {
+        "source": "akuna_capital",
+        "company": "Akuna Capital",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:41:27.960762+00:00",
+        "last_failure": null,
+        "age_hours": 0.004,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 10,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:46:27.960762+00:00",
+          "eligible_now": false
+        },
+        "url": "https://akunacapital.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "maven_securities",
+        "company": "Maven Securities",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:09.933796+00:00",
+        "last_failure": null,
+        "age_hours": 0.143,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 10,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:09.933796+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.mavensecurities.com/jobs/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "point72",
+        "company": "Point72",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:21.162798+00:00",
+        "last_failure": null,
+        "age_hours": 0.14,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 31,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:21.162798+00:00",
+          "eligible_now": true
+        },
+        "url": "https://careers.point72.com/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "virtu_financial",
+        "company": "Virtu Financial",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:35:02.054038+00:00",
+        "last_failure": null,
+        "age_hours": 0.112,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 21,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:40:02.054038+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.virtu.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "tower_research",
+        "company": "Tower Research Capital",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:34:25.267325+00:00",
+        "last_failure": null,
+        "age_hours": 0.122,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 22,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:39:25.267325+00:00",
+          "eligible_now": true
+        },
+        "url": "https://tower-research.com/roles/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "old_mission",
+        "company": "Old Mission",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:17.072368+00:00",
+        "last_failure": null,
+        "age_hours": 0.141,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 20,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:17.072368+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.oldmissioncapital.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "schonfeld",
+        "company": "Schonfeld",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:29.846890+00:00",
+        "last_failure": null,
+        "age_hours": 0.137,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 11,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:29.846890+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.schonfeld.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "five_rings",
+        "company": "Five Rings",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:32:51.198608+00:00",
+        "last_failure": null,
+        "age_hours": 0.148,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 5,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:37:51.198608+00:00",
+          "eligible_now": true
+        },
+        "url": "https://fiverings.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "hudson_river_trading",
+        "company": "Hudson River Trading",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:02.036115+00:00",
+        "last_failure": null,
+        "age_hours": 0.145,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 10,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:02.036115+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.hudsonrivertrading.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "transmarket_group",
+        "company": "TransMarket Group",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:34:56.022194+00:00",
+        "last_failure": null,
+        "age_hours": 0.113,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:39:56.022194+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.transmarketgroup.com/careers",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "dv_trading",
+        "company": "DV Trading",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:32:29.951406+00:00",
+        "last_failure": null,
+        "age_hours": 0.154,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 21,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:37:29.951406+00:00",
+          "eligible_now": true
+        },
+        "url": "https://dvtrading.co/join-dv/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "walleye_capital",
+        "company": "Walleye Capital",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:35:11.118189+00:00",
+        "last_failure": null,
+        "age_hours": 0.109,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:40:11.118189+00:00",
+          "eligible_now": true
+        },
+        "url": "https://walleyecapital.com/careers",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "junior trader",
+          "quantitative analyst",
+          "quantitative researcher",
+          "quantitative trader"
+        ]
+      },
+      {
+        "source": "squarepoint_capital",
+        "company": "Squarepoint Capital",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:33:34.014625+00:00",
+        "last_failure": null,
+        "age_hours": 0.136,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 15,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:38:34.014625+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.squarepoint-capital.com/open-opportunities",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist",
+          "desk quant analyst"
+        ]
+      },
+      {
+        "source": "chicago_trading",
+        "company": "Chicago Trading Company",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:30:59.965188+00:00",
+        "last_failure": null,
+        "age_hours": 0.179,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:35:59.965188+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.chicagotrading.com/search",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "chicago_trading_campus",
+        "company": "Chicago Trading Company",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:31:19.106239+00:00",
+        "last_failure": null,
+        "age_hours": 0.174,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 5,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 300,
+          "next_eligible_at": "2026-10-10T18:36:19.106239+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.chicagotrading.com/campus",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative researcher",
+          "quant researcher",
+          "quantitative developer",
+          "quant developer",
+          "quant strategist"
+        ]
+      },
+      {
+        "source": "mako",
+        "company": "Mako",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:19:34.077822+00:00",
+        "last_failure": null,
+        "age_hours": 0.369,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:49:34.077822+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.mako.com/opportunities",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "geneva_trading",
+        "company": "Geneva Trading",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:13:33.212646+00:00",
+        "last_failure": null,
+        "age_hours": 0.47,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 5,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:43:33.212646+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.genevatrading.com/careers-open-positions/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance"
+        ]
+      },
+      {
+        "source": "da_vinci",
+        "company": "Da Vinci",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:11:22.126069+00:00",
+        "last_failure": null,
+        "age_hours": 0.506,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 10,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:41:22.126069+00:00",
+          "eligible_now": true
+        },
+        "url": "https://davincitrading.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance"
+        ]
+      },
+      {
+        "source": "qube_research",
+        "company": "Qube Research & Technologies",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:23:17.759897+00:00",
+        "last_failure": null,
+        "age_hours": 0.307,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 23,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:53:17.759897+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/quberesearchandtechnologies",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance"
+        ]
+      },
+      {
+        "source": "man_group",
+        "company": "Man Group",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:19:25.185285+00:00",
+        "last_failure": null,
+        "age_hours": 0.372,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 8,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:49:25.185285+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.man.com/careers",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance"
+        ]
+      },
+      {
+        "source": "aquatic",
+        "company": "Aquatic Capital Management",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:08:09.064057+00:00",
+        "last_failure": null,
+        "age_hours": 0.56,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:38:09.064057+00:00",
+          "eligible_now": true
+        },
+        "url": "https://job-boards.greenhouse.io/aquaticcapitalmanagement",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "graviton",
+        "company": "Graviton Research Capital",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:15:25.376612+00:00",
+        "last_failure": null,
+        "age_hours": 0.438,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 7,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:45:25.376612+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/gravitonresearchcapital",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "aqr",
+        "company": "AQR",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:07:12.358386+00:00",
+        "last_failure": null,
+        "age_hours": 0.575,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:37:12.358386+00:00",
+          "eligible_now": true
+        },
+        "url": "https://careers.aqr.com/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "winton",
+        "company": "Winton",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:24:41.838974+00:00",
+        "last_failure": null,
+        "age_hours": 0.284,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 1,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:54:41.838974+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.eu.greenhouse.io/winton",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "worldquant",
+        "company": "WorldQuant",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:25:10.528260+00:00",
+        "last_failure": null,
+        "age_hours": 0.276,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 15,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:55:10.528260+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/worldquant",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "gelber",
+        "company": "Gelber Group",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:13:18.801671+00:00",
+        "last_failure": null,
+        "age_hours": 0.474,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 10,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:43:18.801671+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.gelbergroup.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "verition",
+        "company": "Verition",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:24:36.056553+00:00",
+        "last_failure": null,
+        "age_hours": 0.286,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:54:36.056553+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.verition.com/open-positions",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "marshall_wace_graduates",
+        "company": "Marshall Wace",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:18:32.150795+00:00",
+        "last_failure": null,
+        "age_hours": 0.387,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 1,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:48:32.150795+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.mwam.com/join-us/early-careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "headlands",
+        "company": "Headlands Technologies",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:17:35.665072+00:00",
+        "last_failure": null,
+        "age_hours": 0.402,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 2,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:47:35.665072+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.headlandstech.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "radix_campus",
+        "company": "Radix Trading",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:23:42.600759+00:00",
+        "last_failure": null,
+        "age_hours": 0.3,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 2,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:53:42.600759+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/radixuniversity",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "radix_professionals",
+        "company": "Radix Trading",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:23:51.740010+00:00",
+        "last_failure": null,
+        "age_hours": 0.298,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 1,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:53:51.740010+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/radixexperienced",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "3red",
+        "company": "3Red Partners",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:41:17.904188+00:00",
+        "last_failure": null,
+        "age_hours": 0.007,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:11:17.904188+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/3redpartners",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "tudor",
+        "company": "Tudor Group",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:24:04.694584+00:00",
+        "last_failure": null,
+        "age_hours": 0.294,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 2,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:54:04.694584+00:00",
+          "eligible_now": false
+        },
+        "url": "https://job-boards.greenhouse.io/tudorgroup",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "acadian",
+        "company": "Acadian Asset Management",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:05:57.477472+00:00",
+        "last_failure": null,
+        "age_hours": 0.596,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 0,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:35:57.477472+00:00",
+          "eligible_now": true
+        },
+        "url": "https://www.acadian-asset.com/careers/open-positions",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "pdt",
+        "company": "PDT Partners",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:20:46.482792+00:00",
+        "last_failure": null,
+        "age_hours": 0.349,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 2,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:50:46.482792+00:00",
+          "eligible_now": false
+        },
+        "url": "https://pdtpartners.com/careers",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "graham",
+        "company": "Graham Capital Management",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:13:38.591869+00:00",
+        "last_failure": null,
+        "age_hours": 0.468,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 1,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:43:38.591869+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.grahamcapital.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "quantbot",
+        "company": "Quantbot Technologies",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:20:51.958041+00:00",
+        "last_failure": null,
+        "age_hours": 0.348,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 5,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:50:51.958041+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.quantbot.com/careers/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "engineers_gate",
+        "company": "Engineers Gate",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:13:13.337424+00:00",
+        "last_failure": null,
+        "age_hours": 0.475,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:43:13.337424+00:00",
+          "eligible_now": false
+        },
+        "url": "https://www.eglp.com/",
+        "ats": "greenhouse_filtered",
+        "search_terms": null,
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance",
+          "equity analyst"
+        ]
+      },
+      {
+        "source": "rbc",
+        "company": "RBC",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:09:11.002517+00:00",
+        "last_failure": null,
+        "age_hours": 0.542,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 11,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:39:11.002517+00:00",
+          "eligible_now": true
+        },
+        "url": "https://rbc.wd3.myworkdayjobs.com/RBCGLOBAL1",
+        "ats": "workday",
+        "search_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "structuring",
+          "markets",
+          "off-cycle",
+          "internship"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer"
+        ]
+      },
+      {
+        "source": "wells_fargo",
+        "company": "Wells Fargo",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:12:48.798363+00:00",
+        "last_failure": null,
+        "age_hours": 0.482,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 2,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:42:48.798363+00:00",
+          "eligible_now": false
+        },
+        "url": "https://wf.wd1.myworkdayjobs.com/WellsFargoJobs",
+        "ats": "workday",
+        "search_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "structuring",
+          "markets",
+          "off-cycle",
+          "internship"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer"
+        ]
+      },
+      {
+        "source": "ing",
+        "company": "ING",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:13:27.748107+00:00",
+        "last_failure": null,
+        "age_hours": 0.471,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 6,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:43:27.748107+00:00",
+          "eligible_now": false
+        },
+        "url": "https://ing.wd3.myworkdayjobs.com/ICSGBLCOR",
+        "ats": "workday",
+        "search_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "structuring",
+          "markets",
+          "off-cycle",
+          "internship"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer"
+        ]
+      },
+      {
+        "source": "santander",
+        "company": "Santander",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:23:05.726335+00:00",
+        "last_failure": null,
+        "age_hours": 0.311,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 11,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:53:05.726335+00:00",
+          "eligible_now": false
+        },
+        "url": "https://santander.wd3.myworkdayjobs.com/SantanderCareers",
+        "ats": "workday",
+        "search_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "structuring",
+          "markets",
+          "off-cycle",
+          "internship"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "quantitative",
+          "quant",
+          "structuring"
+        ]
+      },
+      {
+        "source": "bank_of_america",
+        "company": "Bank of America",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:21:22.130653+00:00",
+        "last_failure": null,
+        "age_hours": 0.339,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 11,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:51:22.130653+00:00",
+          "eligible_now": false
+        },
+        "url": "https://ghr.wd1.myworkdayjobs.com/lateral-us",
+        "ats": "workday",
+        "search_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "structuring"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "market microstructure",
+          "securities finance"
+        ]
+      },
+      {
+        "source": "bank_of_america_campus",
+        "company": "Bank of America",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:12:00.788022+00:00",
+        "last_failure": null,
+        "age_hours": 0.495,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 10,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:42:00.788022+00:00",
+          "eligible_now": false
+        },
+        "url": "https://careers.bankofamerica.com/en-us/students/job-search",
+        "ats": "bofa_campus",
+        "search_terms": [],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "quantitative",
+          "quant",
+          "structuring",
+          "structurer",
+          "prime financing",
+          "securities finance",
+          "repo"
+        ]
+      },
+      {
+        "source": "jefferies_campus",
+        "company": "Jefferies",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:14:42.207294+00:00",
+        "last_failure": null,
+        "age_hours": 0.45,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T18:44:42.207294+00:00",
+          "eligible_now": false
+        },
+        "url": "https://jefferies.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/candidate/jobboard/vacancy/2/adv/",
+        "ats": "jefferies_campus",
+        "search_terms": [],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "quant",
+          "quantitative",
+          "structuring",
+          "fixed income"
+        ]
+      },
+      {
+        "source": "citi_campus",
+        "company": "Citi",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:06.960444+00:00",
+        "last_failure": null,
+        "age_hours": 0.027,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 17,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:10:06.960444+00:00",
+          "eligible_now": false
+        },
+        "url": "https://citi.wd5.myworkdayjobs.com/2",
+        "ats": "workday",
+        "search_terms": [
+          "off-cycle",
+          "internship",
+          "placement"
+        ],
+        "title_terms": null
+      },
+      {
+        "source": "deutsche_bank_campus",
+        "company": "Deutsche Bank",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:39:37.563599+00:00",
+        "last_failure": null,
+        "age_hours": 0.035,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 22,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:09:37.563599+00:00",
+          "eligible_now": false
+        },
+        "url": "https://careers.db.com/students-graduates/search-programmes/index?language_id=1",
+        "ats": "db_campus",
+        "search_terms": [],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative",
+          "fixed income",
+          "currencies"
+        ]
+      },
+      {
+        "source": "lazard_campus",
+        "company": "Lazard",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:39:13.957436+00:00",
+        "last_failure": null,
+        "age_hours": 0.042,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 4,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:09:13.957436+00:00",
+          "eligible_now": false
+        },
+        "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2",
+        "ats": "oracle",
+        "search_terms": [
+          "trading",
+          "markets",
+          "quantitative",
+          "fixed income",
+          "off-cycle",
+          "internship"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative",
+          "fixed income"
+        ]
+      },
+      {
+        "source": "millennium_campus",
+        "company": "Millennium",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:40:16.439731+00:00",
+        "last_failure": null,
+        "age_hours": 0.024,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 18,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:10:16.439731+00:00",
+          "eligible_now": false
+        },
+        "url": "https://campusjobs.mlp.com/careers?domain=mlp.com&microsite=campus-site",
+        "ats": "millennium_campus",
+        "search_terms": [
+          "trading",
+          "quantitative",
+          "markets",
+          "off-cycle"
+        ],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative",
+          "quant",
+          "research"
+        ]
+      },
+      {
+        "source": "capula",
+        "company": "Capula",
+        "status": "fresh",
+        "last_success": "2026-10-10T18:39:02.419820+00:00",
+        "last_failure": null,
+        "age_hours": 0.045,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 3,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-10T19:09:02.419820+00:00",
+          "eligible_now": false
+        },
+        "url": "https://apply.workable.com/capula-investment-management-ltd/",
+        "ats": "workable_public",
+        "search_terms": [],
+        "title_terms": [
+          "trading",
+          "trader",
+          "markets",
+          "structuring",
+          "structurer",
+          "repo",
+          "securities finance",
+          "quantitative",
+          "quant",
+          "strategist",
+          "research"
+        ]
+      }
+    ]
+  },
+  "runtime": {
+    "telegram_inventory": {
+      "private_statuts_alias_verified": true,
+      "sent_test_messages": 0,
+      "source_counts": {
+        "employers": 65,
+        "enabled": 75,
+        "fresh": 73
+      },
+      "sources_pages": 3,
+      "status_preview": "📡 Radar · actif\nCouverture · 75 sources · 65 employeurs\n73/75 sources à jour · alertes actives\nSeuil des alertes · 70/100\n\nDernier cycle · 10/10/2026 · 20:41\nDernier signal · 10/10/2026 · 20:41\n\nOptiver · fiches incomplètes\nBNP Paribas · collecte ancienne\nReprise possible dès 10/10/2026 · 21:21\n\n48 alertes envoyées · 0 en attente"
+    },
+    "page_seconds": 12.712,
+    "services_running": 5,
+    "systemd_active_enabled": 4,
+    "actual_image_verified": true,
+    "https_trusted": true,
+    "same_private_link": true,
+    "dashboard_editable": true,
+    "dashboard_without_telegram_credentials": true,
+    "dashboard_radar_policy_matches": true,
+    "dashboard_notifications_disabled": true,
+    "digest_preview": {
+      "compact": true,
+      "html": true,
+      "known_facts_only": true
+    },
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "reference_found": 7,
+    "reference_count": 7,
+    "milan_score": 96,
+    "summary": {
+      "active": 1420,
+      "applications_due": 0,
+      "applications_in_progress": 0,
+      "enabled_sources": 75,
+      "fresh_sources": 73,
+      "high_priority": 350,
+      "relevant": 497,
+      "total": 1434
+    },
+    "internships": {
+      "active": 337,
+      "available": 333,
+      "criteria_met": 38,
+      "formats": {
+        "long": 34,
+        "off_cycle": 68,
+        "summer": 92
+      },
+      "total": 340,
+      "year_status": {
+        "confirmed": 244,
+        "conflict": 23,
+        "unknown": 66
+      }
+    },
+    "incidents": [
+      {
+        "source": "optiver",
+        "status": "partial"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      }
+    ],
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_control_enabled": true,
+      "telegram_incident_notices_enabled": false
+    },
+    "dashboard_contract": {
+      "asset_hashes": "verified",
+      "controls": 86,
+      "jobs": 1434,
+      "modules": 7,
+      "status": "ok"
+    }
+  },
+  "runtime_code_sha256": {
+    "src/trading_radar/collectors.py": "cc42a453cb9877f73bdf6947109890435c29306b3e774522758d62407d9056d7",
+    "src/trading_radar/coverage.py": "edbc1c55c3e055f292a1156f3229658d04500e504dd6aa9eae2be906484de564",
+    "src/trading_radar/internship_start_evidence.py": "ca429fcbf75fa69822f045564a375db89f81dbd91a505b0fef20dde843a44836",
+    "src/trading_radar/runtime_status.py": "7330206e586dcc1fe3441105bd2632da81e5fcb92ce91a192a64a04b1f1d316e",
+    "src/trading_radar/telegram_control.py": "85a084d63d8e469e421485543a57700e27db9ced9f3b4f5826e84b48b7e20f18",
+    "src/trading_radar/db_campus.py": "0488aa1a9338a4fab12af28d62497f124c9a0a3a6669a240973384c57807453f",
+    "src/trading_radar/millennium_campus.py": "41251dcb257b4debffcdd0d1a4c2d9f6a2df3b7165b2374dadfd0064c520a0f3",
+    "src/trading_radar/workable_public.py": "ce467bb5700577935d46fae625b0b05b250efc730a74e8a487bf26ed32389eb5"
+  },
+  "public_profile_sha256": "efd537fd3312083ab06dfe658b33ae10763c2449df6c1ad536cf337b3d402b79",
+  "code_commit": "4ce3c4d5a41da70ba38dea969776fa3f3a0d8525",
+  "ci": {
+    "run_id": 38076331156,
+    "url": "https://github.com/Louisgsln/Immortal-Trading/actions/runs/38076331156",
+    "status": "completed",
+    "python_tests_per_version": 5253,
+    "coverage_percent": 96,
+    "dashboard_tests": 34,
+    "jobs": [
+      {
+        "id": 114283930161,
+        "name": "dashboard",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 114283930367,
+        "name": "checks (3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 114283930383,
+        "name": "checks (3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 114283930396,
+        "name": "checks (3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 114283930464,
+        "name": "checks (3.14)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 114289578002,
+        "name": "container",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "programme_witnesses": [
+    {
+      "sources": [
+        "citi_campus"
+      ],
+      "title": "Markets – Sales and Trading, Off-Cycle Internship, Paris – France, 2027",
+      "company": "Citi",
+      "score": 100,
+      "apply_url": "https://citi.wd5.myworkdayjobs.com/2/job/Paris--France/Markets---Sales-and-Trading--Off-Cycle-Internship--Paris---France--2027_26992518",
+      "programme": {
+        "kind": "internship",
+        "formats": [
+          "off_cycle",
+          "long"
+        ],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Markets – Sales and Trading, Off-Cycle Internship, Paris – France, 2027",
+          "program runs for six months",
+          "starting in January 2027",
+          "joining our Citi Paris offices, based at 25 rue Balzac, 75008 Paris, you will not only be part of a business casual workplace w"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": true,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "deutsche_bank_campus"
+      ],
+      "title": "Deutsche Bank Graduate Programme (f/m/x) Investment Bank: Global Markets (Sales / Trading / Structuring) 2027",
+      "company": "Deutsche Bank",
+      "score": 92,
+      "apply_url": "https://db.recsolu.com/external/requisitions/eFk2y4S6h6GTFll2vx3LoA",
+      "programme": {
+        "kind": "graduate",
+        "formats": [],
+        "year": null,
+        "year_status": "unknown",
+        "evidence": [],
+        "issues": []
+      },
+      "programme_policy_ok": true,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "deutsche_bank_campus"
+      ],
+      "title": "Deutsche Bank Internship (f/m/x) in Investment Bank: Global Markets (Sales/ Trading/ Structuring/ Financing) 2027",
+      "company": "Deutsche Bank",
+      "score": 92,
+      "apply_url": "https://db.recsolu.com/external/requisitions/WQ55rW9XfufTj1AF-IiiPw",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Deutsche Bank Internship (f/m/x) in Investment Bank: Global Markets (Sales/ Trading/ Structuring/ Financing) 2027",
+          "start to develop your professional network",
+          "commence further studies  A notice on Recruitment Scams#LI-EC1"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "citi_campus"
+      ],
+      "title": "Markets – Sales and Trading, Internship, São Paulo - Brazil, 2027",
+      "company": "Citi",
+      "score": 92,
+      "apply_url": "https://citi.wd5.myworkdayjobs.com/2/job/Sao-Paulo-Sao-Paulo-Brazil/Markets---Sales-and-Trading--Internship--So-Paulo---Brazil--2027_26998305",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Markets – Sales and Trading, Internship, São Paulo - Brazil, 2027"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "millennium_campus"
+      ],
+      "title": "2027 Trading Services Intern, London",
+      "company": "Millennium",
+      "score": 90,
+      "apply_url": "https://campusjobs.mlp.com/careers/job/755957819921?domain=mlp.com&microsite=campus-site",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "2027 Trading Services Intern, London"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "deutsche_bank_campus"
+      ],
+      "title": "Deutsche Bank Quantitative QRD Lab Sales and Trading Internship Programme - London - 2027",
+      "company": "Deutsche Bank",
+      "score": 90,
+      "apply_url": "https://db.recsolu.com/external/requisitions/9V2pZHlm1P6sUhv7XWogog",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Deutsche Bank Quantitative QRD Lab Sales and Trading Internship Programme - London - 2027",
+          "Contrat employeur : Analyst Internship Programme",
+          "start to develop your professional network",
+          "start between May 2027 and June 2027, this means you may still be studying when you join the programme",
+          "start date and must complete your studies (any remaining coursework and have no outstanding requirements for",
+          "start between May and June 2027 and will have a duration of 18 weeks"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "deutsche_bank_campus"
+      ],
+      "title": "Deutsche Bank Internship (f/m/x) in Investment Bank – Central: Transformation, Global Process & Resilience Management, Chief Operating Office for Global Markets (FIC) 2027",
+      "company": "Deutsche Bank",
+      "score": 80,
+      "apply_url": "https://db.recsolu.com/external/requisitions/hKDibOSlEAAh_g4TGcioJw",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Deutsche Bank Internship (f/m/x) in Investment Bank – Central: Transformation, Global Process & Resilience Management, Chief Operating Office for Global Markets (FIC) 2027",
+          "start to develop your professional network",
+          "commence further studies  A notice on Recruitment Scams #LI-EC1"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "citi_campus"
+      ],
+      "title": "Markets – Sales and Trading, Internship, São Paulo - Brazil, 2027",
+      "company": "Citi",
+      "score": 80,
+      "apply_url": "https://citi.wd5.myworkdayjobs.com/2/job/Sao-Paulo-Sao-Paulo-Brazil/Markets---Sales-and-Trading--Internship--So-Paulo---Brazil--2027_26998300",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Markets – Sales and Trading, Internship, São Paulo - Brazil, 2027"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "citi_campus"
+      ],
+      "title": "Markets – Sales and Trading, Internship, Bogotá – Colombia, 2027",
+      "company": "Citi",
+      "score": 80,
+      "apply_url": "https://citi.wd5.myworkdayjobs.com/2/job/Bogota--Colombia/Markets---Sales-and-Trading--Internship--Bogot---Colombia--2027_26996437",
+      "programme": {
+        "kind": "internship",
+        "formats": [],
+        "year": 2027,
+        "year_status": "confirmed",
+        "evidence": [
+          "Markets – Sales and Trading, Internship, Bogotá – Colombia, 2027"
+        ],
+        "issues": []
+      },
+      "programme_policy_ok": false,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "citi_campus"
+      ],
+      "title": "CEEMEA Emerging Markets Credit Trader",
+      "company": "Citi",
+      "score": 77,
+      "apply_url": "https://citi.wd5.myworkdayjobs.com/2/job/London--United-Kingdom/CEEMEA-Emerging-Markets-Credit-Trader_26999463",
+      "programme": {
+        "kind": "unspecified",
+        "formats": [],
+        "year": null,
+        "year_status": "unknown",
+        "evidence": [],
+        "issues": []
+      },
+      "programme_policy_ok": true,
+      "deadline_status": "unknown"
+    },
+    {
+      "sources": [
+        "citi_campus"
+      ],
+      "title": "2025 LATAM Markets Analyst Program - Colombia",
+      "company": "Citi",
+      "score": 70,
+      "apply_url": "https://citi.wd5.myworkdayjobs.com/2/job/Bogota--Colombia/XMLNAME-2025-LATAM-Markets-Analyst-Program---Colombia_25831823",
+      "programme": {
+        "kind": "unspecified",
+        "formats": [],
+        "year": null,
+        "year_status": "unknown",
+        "evidence": [],
+        "issues": []
+      },
+      "programme_policy_ok": true,
+      "deadline_status": "unknown"
+    }
+  ],
+  "administration": {
+    "remote_sudo_block_restored": true,
+    "blocked_commands_count": 33,
+    "original_list_exactly_restored": true
+  }
+}

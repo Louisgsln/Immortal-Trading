@@ -14,12 +14,19 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
-Les lots **129–131**, [installés et vérifiés](docs/VALIDATION-LOTS129-131.md),
-ajoutent Bank of America campus/professionnels, Jefferies campus, RBC, ING,
-Wells Fargo et Santander : **70 sources / 62 employeurs** sur OVH.
+Les lots **132, 138 et 139**, [installés et vérifiés](docs/VALIDATION-LOTS132-138-139.md),
+ajoutent Citi campus, Deutsche Bank campus, Lazard campus, Millennium campus
+et Capula, et élargissent Barclays : **75 sources / 65 employeurs** sur OVH.
+L'[inventaire complet daté](docs/RADAR-SOURCES-20261010.md) distingue les 73 sources
+à jour, Optiver partiel et BNP ancien au contrôle. `/statuts` donne le même total ;
+`/sources`, `/sources 2` et `/sources 3` donnent la liste dans Telegram.
+Les lots [129–131](docs/VALIDATION-LOTS129-131.md) avaient ajouté Bank of America
+campus/professionnels, Jefferies campus, RBC, ING, Wells Fargo et Santander.
 L'offre Bank of America Global Markets 2027 Off-Cycle à Milan est détectée
 à **96/100** ; les sept offres témoins sont retrouvées. Le
-[carnet des tâches](docs/TASK-BOARD.md) suit les livraisons et les lots 132–137.
+[carnet des tâches](docs/TASK-BOARD.md) suit les livraisons et les prochaines tâches
+133–137 et 140–145 ; les [portails encore manquants](docs/CAMPUS-FUNDS-AUDIT-20261010.md)
+restent explicites et hors du total activé.
 
 Les lots **111–113** livrent [Morgan Stanley Campus et la référence de stages](docs/VALIDATION-LOT111.md),
 [les filtres pays, durée et début](docs/VALIDATION-LOT112.md), puis
