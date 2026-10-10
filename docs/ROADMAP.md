@@ -1,5 +1,23 @@
 # Suivi de construction
 
+## Lots 125–127 — audit des offres et couverture réelle du VPS
+
+Le [carnet actif](TASK-BOARD.md) suit les tâches et leurs preuves.
+Le lot 125 mesure les découvertes sur sept jours et explique les offres qui ne
+sont pas à examiner. Le lot 126 ajoute 38 sources publiques au profil OVH.
+Le lot 127 corrige les contrats Old Mission/Point72 et la qualification de
+recherche Old Mission sur les missions, puis réconcilie les scores historiques.
+Voir le [bilan détaillé](VALIDATION-LOTS125-127.md).
+
+La configuration de développement (86 sources activées) n’était pas entièrement
+installée sur le VPS (25). Le profil public [VPS](../config/vps-companies.yaml)
+porte la cible de cette livraison à 63 sources / 56 employeurs ; le fichier
+`settings.yaml` de production et son périmètre stages restent conservés.
+L’import initial des employeurs est silencieux. Les découvertes du premier
+import ne sont pas des publications récentes ni un débit hebdomadaire attendu.
+
+## Historique des livraisons précédentes
+
 ## Lots 122–124 — Dashboard et architecture sur le VPS
 
 Trois lots : [état du radar et réglage du récapitulatif](VALIDATION-LOT122.md),
@@ -17,10 +35,9 @@ Nomura campus reste en attente si une intervention humaine est nécessaire.
 Hôte actif : [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md). Migration de la base,
 scanner, sauvegardes et activation Telegram confirmés par les relevés transmis
 par le propriétaire ; les 34 alertes déjà envoyées ont été conservées à l'activation.
-L'image active reste le lot [103](VALIDATION-LOT103.md). Suite :
+Au relevé historique du 6 octobre, l'image active était le lot [103](VALIDATION-LOT103.md). Suite :
 [raccorder directement le VPS à ce chat](REMOTE-ACCESS.md), relever les champs publics
-en échec, puis livrer les corrections des collecteurs. Aucun accès distant depuis
-ce chat n'est encore vérifié.
+en échec, puis livrer les corrections des collecteurs. L’accès distant n’était pas encore vérifié à cette date ; il est désormais opérationnel.
 
 Lot [102](VALIDATION-LOT102.md) : commande `runtime` en lecture seule, lanceurs
 et configurations distingués, doublons potentiels visibles, PID Windows nettoyé
@@ -78,7 +95,7 @@ Référence : Master Prompt — Trading Job Radar.md, section 61. Ce document su
 ## Livraison des prochains lots
 
 Préférence confirmée le 25 septembre 2026 : publier chaque lot validé directement
-sur `main`, puis mettre à jour l'instance Windows après sauvegarde vérifiée.
+sur `main`, puis mettre à jour l’instance active (VPS OVH depuis le 6 octobre) après sauvegarde vérifiée.
 Le scanner reste indépendant du dépôt de développement. Les contrôles requis,
 la mesure d'impact, les preuves de déploiement et la prochaine priorité sont
 consignés à chaque livraison. Voir [DELIVERY.md](DELIVERY.md).

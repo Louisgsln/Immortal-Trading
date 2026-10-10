@@ -13,6 +13,7 @@ from trading_radar.drw_campus import drw_campus_junior
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, ExperienceEvidence, RawJob
 from trading_radar.normalizer import has, normalize_text, plain_text
+from trading_radar.old_mission_research import research_duties
 from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import SelectionAudit, rejection_reason
 
@@ -124,10 +125,10 @@ _CONTRACT_FIELDS: dict[str, tuple[str, set[str | None]]] = {
     "quberesearchandtechnologies": ("Employment Type", {"Full-time", "Contract", "Intern", None}),
     "mangroup": ("Workforce Sub-Type", {"Regular", "Fixed Term", "Intern", None}),
     "akunacapital": ("Employment Type", {"Full-time", "Intern"}),
-    "oldmissioncapital": ("Employment Type", {"Full-time", None}),
+    "oldmissioncapital": ("Employment Type", {"Full-time", "Intern", None}),
     "fiveringsllc": ("Employment Type", {"Full-time", "Intern"}),
     "wehrtyou": ("Employment Type", {"Full-Time", "Intern"}),
-    "point72": ("Time Type", {"Full Time"}),
+    "point72": ("Time Type", {"Full Time", "Part Time"}),
     "squarepointcapital": (
         "Employment Type",
         {"Full-time", "Employee-Regular", "Employee-Intern", "Intern Full-time"},
@@ -462,7 +463,12 @@ def parse_board(
                 if audit is not None:
                     audit.record("unpublished")
                 continue
-        reason = rejection_reason(row["title"], options, verified_role=trading_technology)
+        verified_research = config.tenant == "oldmissioncapital" and research_duties(
+            row["title"], row.get("content", "") if isinstance(row.get("content"), str) else ""
+        )
+        reason = rejection_reason(
+            row["title"], options, verified_role=trading_technology or verified_research
+        )
         if audit is not None:
             audit.record(reason, row["title"], identifier)
         if reason is not None:

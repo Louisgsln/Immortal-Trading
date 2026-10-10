@@ -1,3 +1,18 @@
+# Employeurs — prochaine couverture du VPS
+
+État au 10 octobre 2026 : le profil OVH passe de 25 à 63 sources activées,
+soit 56 employeurs. Les 38 sources ajoutées ont fait l’objet de deux lectures
+publiques ; leurs premiers imports restent silencieux. La configuration générale
+contient aussi des connecteurs antérieurement développés mais non activés dans
+ce profil. Leur disponibilité passée ne prouve pas leur accès actuel depuis OVH.
+
+Suite : tester les banques et courtiers Workday restants, puis les portails
+campus distincts sur des offres réelles. BNP reste limité par un refus HTTP 403 ;
+Nomura campus reste en attente lorsque le portail demande une intervention humaine.
+Voir [TASK-BOARD.md](TASK-BOARD.md) et [VALIDATION-LOTS125-127.md](VALIDATION-LOTS125-127.md).
+
+## Références historiques d’extension
+
 # Prochains employeurs - vérification du 27 septembre 2026
 
 Extension du 28 septembre : [lots 95 à 97](VALIDATION-LOTS95-97.md), Valkyrie,

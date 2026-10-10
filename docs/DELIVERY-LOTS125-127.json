@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-10",
+  "lots": [
+    125,
+    126,
+    127
+  ],
+  "scope": {
+    "internships": "off_cycle_and_long_2027",
+    "summer_alerts": false,
+    "threshold": 70,
+    "nomura_campus_human_access": "left_pending"
+  },
+  "before": {
+    "sources": 25,
+    "weekly_discoveries": 80,
+    "weekly_score70": 30,
+    "weekly_sent_alerts": 19,
+    "weekly_includes_morgan_stanley_campus_initial_import": 19
+  },
+  "extension": {
+    "sources_before": 25,
+    "sources_after": 63,
+    "employers_after": 56,
+    "added_sources": [
+      "akuna_capital",
+      "maven_securities",
+      "point72",
+      "virtu_financial",
+      "tower_research",
+      "old_mission",
+      "schonfeld",
+      "five_rings",
+      "hudson_river_trading",
+      "transmarket_group",
+      "dv_trading",
+      "walleye_capital",
+      "squarepoint_capital",
+      "chicago_trading",
+      "chicago_trading_campus",
+      "mako",
+      "geneva_trading",
+      "da_vinci",
+      "qube_research",
+      "man_group",
+      "aquatic",
+      "graviton",
+      "aqr",
+      "winton",
+      "worldquant",
+      "gelber",
+      "verition",
+      "marshall_wace_graduates",
+      "headlands",
+      "radix_campus",
+      "radix_professionals",
+      "3red",
+      "tudor",
+      "acadian",
+      "pdt",
+      "graham",
+      "quantbot",
+      "engineers_gate"
+    ],
+    "catalogue_examined": 1486,
+    "selected": 306,
+    "score70_preview": 76,
+    "original_config_sha256": "e4372bde8c58eda7a53772d5dc739a00a5672d2a3dbb61d7056d71a8721a45b0",
+    "profile_sha256": "c5ba078915363e31dd67a447eab7b2633b4c2d660e31a5fb3f7fa7c010a18e3b"
+  },
+  "local_validation": {
+    "python_tests": 5092,
+    "python_passed": true,
+    "javascript_tests": 34,
+    "javascript_passed": true,
+    "ruff": "passed",
+    "format": "315 files formatted",
+    "mypy": "114 source files passed",
+    "mobile": {
+      "width": 390,
+      "weekly_visible": true,
+      "notes_preserved": true,
+      "persistence": true,
+      "agenda": true,
+      "no_horizontal_overflow": true,
+      "page_errors": 0
+    }
+  },
+  "contract_rechecks": [
+    {
+      "source": "point72",
+      "examined": 221,
+      "selected_before_research_fix": 31,
+      "score70_before_research_fix": 3
+    },
+    {
+      "source": "old_mission",
+      "examined": 38,
+      "selected_before_research_fix": 19,
+      "score70_before_research_fix": 10
+    }
+  ],
+  "deployment_status": "pending"
+}

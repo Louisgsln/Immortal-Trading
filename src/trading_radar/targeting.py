@@ -8,6 +8,7 @@ from trading_radar.finance_sections import EMPLOYERS, RESPONSIBILITIES
 from trading_radar.html_page import Document, Element
 from trading_radar.models import Job
 from trading_radar.normalizer import has, normalize_text
+from trading_radar.old_mission_research import research_duties
 
 OPERATIONAL_EXCLUSION = "Missions vérifiées de support opérationnel, hors cible trading"
 
@@ -248,6 +249,8 @@ def finance_role_evidence(job: Job, role: str) -> bool:
 def research_trading_evidence(job: Job) -> bool:
     if job.source_type != "official":
         return False
+    if (job.source, job.company_normalized) == ("old_mission", "old mission"):
+        return research_duties(job.title, job.description)
     if (job.source, job.company_normalized) == (
         "morgan_stanley_campus",
         "morgan stanley",

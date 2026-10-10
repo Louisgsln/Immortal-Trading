@@ -29,6 +29,7 @@ from trading_radar.programmes import programme
 from trading_radar.source_history import source_history
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 from trading_radar.trends import build_trends
+from trading_radar.weekly import weekly_report
 
 MAX_JOBS = 5000
 MESSAGES = {
@@ -378,6 +379,9 @@ def build_dashboard_data(
             radar_alerts_enabled=radar_alerts,
         )
     result["internship_summary"] = internship_summary(jobs)
+    result["weekly"] = weekly_report(
+        jobs, result["health"], config.settings.alert_min_score, instant
+    )
     today = instant.astimezone(PARIS).date().isoformat()
     result["summary"] = {
         "total": len(jobs),

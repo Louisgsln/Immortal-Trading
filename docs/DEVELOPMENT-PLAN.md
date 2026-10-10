@@ -1,3 +1,17 @@
+# Plan de développement — état au 10 octobre 2026
+
+Le [carnet des tâches actif](TASK-BOARD.md) distingue ce qui est installé, ce qui
+est validé hors production et ce qui reste bloqué. La cible active est le VPS OVH,
+accessible avec Remote Desktop Commander. Le radar, Telegram et les sauvegardes
+fonctionnent indépendamment du développement ; le Dashboard HTTPS reste privé,
+sans identifiant ni mot de passe.
+
+Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
+2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
+Priorité actuelle : [audit et extension des lots 125–127](VALIDATION-LOTS125-127.md).
+
+## Historique des décisions avant la migration VPS
+
 # Développement confirmé le 26 septembre 2026
 
 Le propriétaire a choisi [OVH VPS-1 sous Ubuntu 26.04 LTS](OVH-SETUP.md) après
@@ -91,7 +105,7 @@ une publication sur main et une vérification sur l'instance active.
 - Auditer les intitulés techniques, Research Analyst, Trading Assistant et les
   cas DRW/IMC/Jump/Jane Street identifiés dans le carnet.
 - Fournir des exemples positifs et des contre-exemples avant chaque évolution.
-- Conserver Associate seul et stages exclus ; préserver Analyst/Associate.
+- Exclure Associate seul et Summer des alertes ; inclure off-cycle/stages longs 2027 et préserver Analyst/Associate.
 - Produire un aperçu des scores modifiés avant tout recalcul de la base active.
 
 ## 4. Couverture des recherches

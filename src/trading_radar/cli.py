@@ -56,6 +56,22 @@ def runtime():
     typer.echo(json.dumps(launcher_report(), ensure_ascii=False, indent=2))
 
 
+@app.command("weekly")
+def weekly(config_dir: Path = Path("config")):
+    """Explain seven days of discoveries, offline and read-only; never send alerts."""
+    from trading_radar.dashboard_data import build_dashboard_data
+
+    result = build_dashboard_data(load_config(config_dir))
+    if result["status"] != "ok":
+        typer.echo(json.dumps({"status": "error", "error": result["error"]}, ensure_ascii=False))
+        raise typer.Exit(1)
+    typer.echo(
+        json.dumps(
+            {"status": "ok", "read_only": True, **result["weekly"]}, ensure_ascii=False, indent=2
+        )
+    )
+
+
 @app.command("coverage")
 def coverage(
     reference: Path = typer.Option(

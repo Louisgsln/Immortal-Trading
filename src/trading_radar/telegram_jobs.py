@@ -7,11 +7,10 @@ from typing import Literal
 from trading_radar.audit import timestamp
 from trading_radar.config import Config
 from trading_radar.dashboard_data import DashboardDataError, read_jobs
-from trading_radar.display_time import PARIS, format_paris
+from trading_radar.display_time import format_paris
 from trading_radar.health import check_health
 from trading_radar.models import utcnow
-
-REVIEW_STATUSES = {"New", "Reviewing", "To Apply"}
+from trading_radar.opportunity_eligibility import eligible as eligible
 
 
 def units(text: str) -> int:
@@ -23,29 +22,6 @@ def short(text: str, limit: int) -> str:
     if units(text) <= limit:
         return text
     return text.encode("utf-16-le")[: (limit - 1) * 2].decode("utf-16-le", errors="ignore") + "…"
-
-
-def eligible(job: dict, sources: set[str], threshold: int, now: datetime) -> bool:
-    first, last = timestamp(job["first_seen"]), timestamp(job["last_seen"])
-    if (
-        not job["is_active"]
-        or job["is_expired"]
-        or job["score"] < max(1, threshold)
-        or job["application"]["status"] not in REVIEW_STATUSES
-        or job["source"] not in sources
-        or first is None
-        or last is None
-        or not first <= last <= now
-        or now - last > timedelta(hours=24)
-    ):
-        return False
-    deadline = job["deadline"]
-    if deadline["precision"] == "instant":
-        instant = timestamp(deadline["instant"])
-        return instant is not None and instant > now
-    if deadline["precision"] == "date":
-        return date.fromisoformat(deadline["day"]) >= now.astimezone(PARIS).date()
-    return deadline["precision"] == "unknown"
 
 
 def card(job: dict, number: int) -> str:

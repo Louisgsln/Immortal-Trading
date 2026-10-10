@@ -49,6 +49,13 @@
     fail(data && data.error && data.error.message || "Les données du radar sont indisponibles."); return;
   }
   const jobs = data.jobs;
+  if (data.weekly) {
+    const weekly = data.weekly;
+    const labels = {inactive:"inactives",expired:"échéance dépassée",excluded:"hors cible",score_below_threshold:"score sous le seuil",internship_conditions:"stage à vérifier",source_not_fresh:"source à vérifier",tracking_or_verification:"suivi ou vérification à reprendre"};
+    $("weekly-overview").hidden = false;
+    $("weekly-counts").textContent = number(weekly.discovered) + " offres découvertes · " + number(weekly.score70) + " au score ≥ " + number(weekly.threshold) + " · " + number(weekly.ready) + " à examiner maintenant.";
+    $("weekly-blocked").textContent = Object.entries(weekly.blocked || {}).map(([key,value]) => number(value) + " " + (labels[key] || key)).join(" · ");
+  }
   if (data.services) {
     const watcher = data.services.watcher || {};
     const labels = {active:"Radar actif", stale:"Signal du radar ancien", stopped:"Radar arrêté", long_scan:"Collecte prolongée · à vérifier", unknown:"Activité du radar à vérifier"};
