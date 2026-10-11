@@ -1,20 +1,16 @@
 # Employeurs — prochaine couverture du VPS
 
-État au 10 octobre 2026 : **75 sources / 65 employeurs** sont activés sur OVH,
-dont 73 à jour au relevé de l'[inventaire](RADAR-SOURCES-20261010.md).
-Les lots 132/138/139 ajoutent Citi campus, Deutsche Bank campus, Lazard campus,
-Millennium campus et Capula, et élargissent Barclays ; tous les premiers imports
-ont réussi sans alerte rétroactive. Les lots 129–131 avaient ajouté Bank of America,
-Jefferies, RBC, ING, Wells Fargo et Santander ; Milan est détecté à 96/100. La configuration générale
-contient aussi des connecteurs antérieurement développés mais non activés dans
-ce profil. Leur disponibilité passée ne prouve pas leur accès actuel depuis OVH.
+État au 11 octobre : **79 sources / 67 employeurs**, 72 à jour au relevé de
+l'[inventaire](RADAR-SOURCES-20261011.md). [141-A et 143-A](VALIDATION-INTEGRATIONS-20261011.md) ajoutent Rothschild étudiants,
+Millennium professionnels, Brevan Howard et BNP campus (partiel). Imports silencieux vérifiés.
 
-Suite : lots 133–137 et 140–145 du [carnet](TASK-BOARD.md), avec autres banques
-UK/FR/US, fonds, missions quantitatives, campagnes/dates et architecture mobile.
-Voir l'[audit public des portails](CAMPUS-FUNDS-AUDIT-20261010.md) et le
-[carnet bancaire](BANK-CAMPUS-COVERAGE.md). BNP reste limité par un refus HTTP 403 ;
-Nomura campus reste en attente lorsque le portail demande une intervention humaine.
-Voir [TASK-BOARD.md](TASK-BOARD.md) et [VALIDATION-LOTS125-127.md](VALIDATION-LOTS125-127.md).
+Priorités : 141-B pour les 14 fiches BNP inaccessibles et BPCE/Natixis ; 143-B pour
+Balyasny, Rokos, Citadel et Two Sigma. Standard Chartered est bloqué par robots.txt,
+NatWest et JPMorgan campus par HTTP 403 ; Lloyds attend son catalogue ouvert.
+Le lot 147 suit Goldman campus, Point72 et Morgan Stanley campus ; Nomura CAPTCHA reste
+sans intervention humaine, selon le choix du propriétaire. Les lots 133–134 auditent
+Brevan off-cycle (intitulé générique, année inconnue), Rothschild GMS/advisory et les autres témoins.
+Voir le [carnet](TASK-BOARD.md) ; une présentation de programme ou un email ne vaut pas flux d'offres.
 
 ## Références historiques d’extension
 

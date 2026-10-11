@@ -1,4 +1,4 @@
-# Plan de développement — état au 10 octobre 2026
+# Plan de développement — état au 11 octobre 2026
 
 Le [carnet des tâches actif](TASK-BOARD.md) distingue ce qui est installé, ce qui
 est validé hors production et ce qui reste bloqué. La cible active est le VPS OVH,
@@ -8,9 +8,9 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Livraison actuelle : [campus, fonds et inventaire 132/138/139](VALIDATION-LOTS132-138-139.md),
-avec **75 sources / 65 employeurs** activés et cinq ajouts observés ; Barclays élargi.
-L'[inventaire daté](RADAR-SOURCES-20261010.md) et `/statuts` utilisent le même profil.
+Livraison actuelle : [141-A et 143-A](VALIDATION-INTEGRATIONS-20261011.md), quatre périmètres ajoutés,
+**79 sources / 67 employeurs**, 72 à jour au [relevé daté](RADAR-SOURCES-20261011.md).
+BNP stages reste partiel. `/statuts` et le Dashboard utilisent le même profil.
 Le carnet conserve 133–137 : missions quantitatives, dates des stages, architecture
 du Dashboard mobile, observation hebdomadaire et sauvegarde distante. Il développe
 140–145 : autres banques UK/FR/US, fonds supplémentaires, témoins de stages et

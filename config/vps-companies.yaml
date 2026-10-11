@@ -3159,6 +3159,8 @@ companies:
     ats: rothschild_campus
     career_url: https://www.rothschildandco.com/en/careers/students-and-graduates/opportunities/
     country: global
+    scan_interval: 1800
+    request_interval: 2
     options:
       search_terms: []
       title_terms:
@@ -3178,6 +3180,8 @@ companies:
     ats: millennium_professionals
     career_url: https://career.mlp.com/careers?domain=mlp.com
     country: global
+    scan_interval: 1800
+    request_interval: 2
     options:
       search_terms:
       - trading
@@ -3202,6 +3206,8 @@ companies:
     tenant: brevanhoward
     career_url: https://brevanhoward.wd3.myworkdayjobs.com/BH_ExternalCareers
     country: global
+    scan_interval: 1800
+    request_interval: 2
     options:
       search_terms:
       - trading
@@ -3227,6 +3233,8 @@ companies:
     ats: bnp
     career_url: https://group.bnpparibas/en/careers/all-job-offers/trainee-internship
     country: global
+    scan_interval: 1800
+    request_interval: 2
     options:
       search_terms:
       - trading

@@ -60,8 +60,9 @@ Dans le chat privé avec `@ImmortalTradingBot` :
   Les totaux proviennent du profil OVH, comme ceux du Dashboard ; ils ne comptent
   pas les connecteurs non activés dans le dépôt.
 - `/sources` donne toutes les sources activées avec leur état, par pages de trente.
-  `/sources 2` et `/sources 3` donnent la suite. Les 75 sources / 65 employeurs
-  de la livraison 132/138/139 sont aussi [publiés ici](RADAR-SOURCES-20261010.md).
+  `/sources 2` et `/sources 3` donnent la suite. Les 79 sources / 67 employeurs
+  du profil actuel sont aussi [publiés ici](RADAR-SOURCES-20261011.md). La fraîcheur est dynamique ;
+  les sources partielles et anciennes restent signalées.
 - `/help` affiche l'aide ; `/start` affiche également cette aide.
 - `/top` affiche jusqu'à cinq offres à examiner, triées par score décroissant,
   puis découverte la plus récente.

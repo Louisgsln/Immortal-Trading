@@ -1,6 +1,16 @@
 # Suivi de construction
 
-## Lots 132, 138 et 139 — campus, fonds et inventaire
+## Lots 141-A et 143-A — état au 11 octobre
+
+Rothschild étudiants, Millennium professionnels, Brevan Howard et BNP campus installés.
+Profil : 79 sources / 67 employeurs, 72 à jour au [relevé](RADAR-SOURCES-20261011.md).
+BNP campus partiel : deux fiches et 14 lacunes ; source générale encore refusée.
+70 identités supplémentaires, import silencieux et conservation vérifiée ;
+[validation](VALIDATION-INTEGRATIONS-20261011.md). Cadence 30 minutes, radar H24 et même Dashboard privé.
+La suite conserve 140, 141-B et 143-B ; 133–134 qualifient métiers et dates,
+147 traite les erreurs critiques observées. [Carnet](TASK-BOARD.md).
+
+## Historique — lots 132, 138 et 139
 
 Citi campus, Deutsche Bank campus, Lazard campus, Millennium campus et Capula
 ont réussi leurs premiers imports OVH ; Barclays utilise six recherches.

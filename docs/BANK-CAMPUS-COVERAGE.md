@@ -6,11 +6,12 @@ restent exclus ; Analyst/Associate conserve son traitement existant.
 
 ## Portails vérifiés pour les lots 129–131
 
-Extension actuelle : [lots 132/138/139](VALIDATION-LOTS132-138-139.md), Citi campus,
-Deutsche Bank campus, Lazard campus, Millennium campus et Capula ; Barclays élargi.
-L'[inventaire OVH](RADAR-SOURCES-20261010.md) compte 75 sources / 65 employeurs.
-L'[audit complémentaire](CAMPUS-FUNDS-AUDIT-20261010.md) consigne les portails
-UK/FR/US et fonds non intégrés. Les chiffres ci-dessous décrivent les lots 129–131.
+Extension actuelle : [141-A et 143-A](VALIDATION-INTEGRATIONS-20261011.md), Rothschild étudiants,
+Millennium professionnels, Brevan Howard et BNP stages partiel. L'[inventaire OVH](RADAR-SOURCES-20261011.md)
+compte 79 sources / 67 employeurs, 72 à jour au relevé ; `/statuts` affiche les mêmes totaux.
+Les [lots 132/138/139](VALIDATION-LOTS132-138-139.md) et le tableau ci-dessous conservent leurs
+chiffres historiques. Le [carnet](TASK-BOARD.md) suit les accès restants et la qualification
+Brevan off-cycle/Rothschild GMS ; aucun stage au seuil n'est ajouté artificiellement.
 
 Les sept sources ajoutées ci-dessous sont installées et ont réussi leur premier
 import sur OVH : 54 fiches, 13 au seuil de 70, zéro alerte d'import. Le profil
