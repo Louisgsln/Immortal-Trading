@@ -276,9 +276,9 @@ companies:
       - internship
       - internships
       - intern
-    notes: Public French-language search portal and JobPosting data. Explicit internship titles excluded
-      before detail import, consistent with the user's target; contradictory eligible aliases still quarantined.
-      Subsidiaries grouped under BNP Paribas. No closure by absence.
+    notes: French public search HTTP 403; English general search also refuses page 17 on 2026-10-11. Old
+      jobs retained; no truncated import or closure by absence. Dedicated English internship catalogue tracked
+      by bnp_campus. General coverage remains blocked.
   goldman_campus:
     name: Goldman Sachs
     enabled: true
@@ -4382,3 +4382,97 @@ companies:
       catalogue and full per-ID Markdown details. Counts, metadata, application IDs and two catalogue
       reads required. Explicitly speculative strategist excluded; calendar publication dates retained
       without invented UTC instants. Future off-cycle roles will use the same internship policy.
+
+  rothschild_campus:
+    name: Rothschild & Co
+    enabled: true
+    ats: rothschild_campus
+    career_url: https://www.rothschildandco.com/en/careers/students-and-graduates/opportunities/
+    country: global
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - execution
+      - redburn
+    notes: 'Public student catalogue verified 2026-10-11: pages of 50, full catalogue and first-page recheck
+      before filtering market titles. Complete employer descriptions and Tal.net posting ID. Advisory receives
+      no trading points by title alone; Summer excluded from internship alerts. No inferred dates or closure
+      by absence.'
+  millennium_professionals:
+    name: Millennium
+    enabled: true
+    ats: millennium_professionals
+    career_url: https://career.mlp.com/careers?domain=mlp.com
+    country: global
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - off cycle
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - off cycle
+      - internship
+      - intern
+    notes: Official campus page links this independent professional board. Anonymous Eightfold pages of
+      10 with count and first-page recheck; full JobPosting detail and ATS reference, Unicode slugs canonicalized
+      to ID. Same employer as campus, separate source. No inferred publication/deadline or closure by absence.
+  brevan_howard:
+    name: Brevan Howard
+    enabled: true
+    ats: workday
+    tenant: brevanhoward
+    career_url: https://brevanhoward.wd3.myworkdayjobs.com/BH_ExternalCareers
+    country: global
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - off cycle
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - off cycle
+      - internship
+      - intern
+    notes: Official Phenom catalogue links Workday tenant brevanhoward / BH_ExternalCareers. Public CXS
+      and full details verified 2026-10-11. Off-cycle 3–6 months Geneva/London retained; intake year not
+      inferred from 2028 graduate conversion or graduation. Summer excluded from internship alerts; no authenticated
+      HR API or closure by absence.
+
+  bnp_campus:
+    name: BNP Paribas
+    enabled: true
+    ats: bnp
+    career_url: https://group.bnpparibas/en/careers/all-job-offers/trainee-internship
+    country: global
+    options:
+      search_terms:
+      - trading
+      - structuring
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - structuring
+      - structurer
+      - repo
+      - securities finance
+      - quantitative
+      - equity electronic
+    notes: Official English Trainee / Internship catalogue audited 2026-10-11. Trading and structuring queries,
+      complete pages of 10 and first-page recheck; internship contract required on each listing and detail.
+      Refused or missing individual details reported as gaps, source partial, old jobs retained; all-details
+      failure aborts. General search and quantitative query remain access-restricted. Same BNP employer
+      and shared references. Summer excluded; no inferred intake or closure by absence.

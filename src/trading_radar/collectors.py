@@ -210,6 +210,15 @@ def build_collector(source: str, config: Company, http: HTTPClient) -> Collector
 
         return HSBCProfessionalsCollector(source, config, http)
 
+    if config.ats == "rothschild_campus":
+        from trading_radar.rothschild_campus import RothschildCampusCollector
+
+        return RothschildCampusCollector(source, config, http)
+    if config.ats == "millennium_professionals":
+        from trading_radar.millennium_campus import MillenniumProfessionalsCollector
+
+        return MillenniumProfessionalsCollector(source, config, http)
+
     if config.ats == "millennium_campus":
         from trading_radar.millennium_campus import MillenniumCampusCollector
 

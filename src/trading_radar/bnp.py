@@ -8,6 +8,7 @@ from urllib.parse import unquote, urlencode, urljoin, urlsplit
 
 from trading_radar.bnp_authority import matching_alias, recruitment_target
 from trading_radar.config import Company
+from trading_radar.html_page import Document, clean, with_class
 from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, CollectionConflict, RawJob
 from trading_radar.normalizer import canonical_url, has, normalize_text, parse_date
@@ -15,6 +16,9 @@ from trading_radar.search_scope import SearchOptions
 
 ORIGIN = "https://group.bnpparibas"
 SEARCH = ORIGIN + "/emploi-carriere/toutes-offres-emploi"
+ENGLISH_SEARCH = ORIGIN + "/en/careers/all-job-offers"
+CAMPUS_SEARCH = ENGLISH_SEARCH + "/trainee-internship"
+SEARCH_ROOTS = {SEARCH, ENGLISH_SEARCH, CAMPUS_SEARCH}
 
 
 def job_url(value: str) -> str:
@@ -25,15 +29,24 @@ def job_url(value: str) -> str:
         or parts.netloc != "group.bnpparibas"
         or parts.query
         or parts.fragment
-        or not re.fullmatch(r"/emploi-carriere/offre-emploi/[a-zA-Z0-9_-]+", unquote(parts.path))
+        or not re.fullmatch(
+            r"/(?:emploi-carriere/offre-emploi|en/careers/job-offer)/[a-zA-Z0-9_-]+",
+            unquote(parts.path),
+        )
     ):
         raise SourceUnavailable("invalid BNP public job URL")
     return url
 
 
 class SearchPage(HTMLParser):
-    def __init__(self):
+    def __init__(self, root: str = SEARCH):
         super().__init__()
+        self.prefix = (
+            "/en/careers/job-offer/"
+            if root in {ENGLISH_SEARCH, CAMPUS_SEARCH}
+            else "/emploi-carriere/offre-emploi/"
+        )
+        self.internships_only = root == CAMPUS_SEARCH
         self.query: str | None = None
         self.page: int | None = None
         self.totals: list[int] = []
@@ -42,6 +55,15 @@ class SearchPage(HTMLParser):
         self.in_title = False
         self.in_total = False
         self.total_text = ""
+
+    def feed(self, data):
+        super().feed(data)
+        if self.internships_only:
+            cards = with_class(Document(data).root.walk(), "card-offer")
+            for card in cards:
+                types = with_class(card.walk(), "offer-type")
+                if len(types) != 1 or clean(types[0]) != "Trainee / Internship":
+                    raise SourceUnavailable("BNP internship search contract scope changed")
 
     def handle_starttag(self, tag, attrs):
         attr = dict(attrs)
@@ -62,6 +84,8 @@ class SearchPage(HTMLParser):
         if self.card is not None:
             if tag == "a" and "card-link" in classes:
                 self.card["url"] = job_url(attr.get("href", ""))
+                if not urlsplit(self.card["url"]).path.startswith(self.prefix):
+                    raise SourceUnavailable("BNP listing language differs from search root")
             if tag == "h3":
                 self.in_title = True
 
@@ -188,8 +212,8 @@ def parse_detail(html: str, url: str, config: Company, source: str) -> RawJob:
 
 class BNPCollector:
     def __init__(self, source: str, config: Company, http: HTTPClient):
-        if config.career_url != SEARCH:
-            raise ValueError("Use the BNP public French-language search root")
+        if config.career_url not in SEARCH_ROOTS:
+            raise ValueError("Use a verified BNP public French or English search root")
         self.source, self.config, self.http = source, config, http
         self.options = SearchOptions(**config.options)
 
@@ -205,10 +229,11 @@ class BNPCollector:
     async def _search(self, term: str) -> dict[str, dict]:
         rows: dict[str, dict] = {}
         expected, page = None, 1
+        initial = None
         while expected is None or len(rows) < expected:
             # The head rel=next drops the search query. Keep the verified GET form fields.
-            url = SEARCH + "?" + urlencode({"form[q]": term, "page": page})
-            parser = SearchPage()
+            url = self.config.career_url + "?" + urlencode({"form[q]": term, "page": page})
+            parser = SearchPage(self.config.career_url)
             parser.feed(await self.http.get_text(url, self.config.request_interval, self.source))
             if (
                 parser.query != term
@@ -229,11 +254,21 @@ class BNPCollector:
                 raise SourceUnavailable("BNP page number mismatch")
             if len(parser.rows) != min(10, expected - len(rows)):
                 raise SourceUnavailable("BNP returned a short or inconsistent page")
+            if page == 1:
+                initial = (parser.query, parser.page, parser.totals, parser.rows)
             for row in parser.rows:
                 if row["url"] in rows:
                     raise SourceUnavailable("BNP pagination repeated a posting")
                 rows[row["url"]] = row
             page += 1
+        parser = SearchPage(self.config.career_url)
+        url = self.config.career_url + "?" + urlencode({"form[q]": term, "page": 1})
+        parser.feed(await self.http.get_text(url, self.config.request_interval, self.source))
+        if (
+            parser.card is not None
+            or (parser.query, parser.page, parser.totals, parser.rows) != initial
+        ):
+            raise SourceUnavailable("BNP first page changed during pagination")
         return rows
 
     def selected(self, title: str) -> bool:
@@ -252,12 +287,29 @@ class BNPCollector:
             raise SourceUnavailable("BNP detail limit exceeded; narrow scope")
         groups: dict[str, list[RawJob]] = {}
         targets_by_url = {}
+        gaps = []
         for url in targets:
-            html = await self.http.get_text(url, self.config.request_interval, self.source)
+            try:
+                html = await self.http.get_text(url, self.config.request_interval, self.source)
+            except SourceUnavailable as exc:
+                if self.config.career_url != CAMPUS_SEARCH or str(exc) not in {
+                    "access restricted: HTTP 403",
+                    "HTTP 404",
+                }:
+                    raise
+                gaps.append(url)
+                continue
             job = parse_detail(html, url, self.config, self.source)
+            if (
+                self.config.career_url == CAMPUS_SEARCH
+                and job.employment_type != "Trainee / Internship"
+            ):
+                raise SourceUnavailable("BNP internship detail contract differs from listing")
             targets_by_url[url] = recruitment_target(html)
             key = str(job.external_id)
             groups.setdefault(key, []).append(job)
+        if targets and len(gaps) == len(targets):
+            raise SourceUnavailable("BNP internship details unavailable; no verified jobs")
         jobs = []
         conflicts = []
         ignored = {"apply_url", "source_url", "raw_payload"}
@@ -307,6 +359,8 @@ class BNPCollector:
         return Collection(
             jobs=jobs,
             complete=False,
+            scope_complete=not gaps and not conflicts,
+            listing_gaps=gaps,
             requests=self.http.counts[self.source] - before,
             conflicts=conflicts,
         )

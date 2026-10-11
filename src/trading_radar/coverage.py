@@ -13,6 +13,7 @@ from trading_radar.lever_filtered import LeverOptions
 from trading_radar.models import utcnow
 from trading_radar.nomura import NomuraOptions
 from trading_radar.programmes import programme_company
+from trading_radar.rothschild_campus import RothschildOptions
 from trading_radar.score_audit import job_snapshot, snapshot_jobs
 from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import rejection_reason
@@ -30,6 +31,9 @@ OPTIONS = {
     "greenhouse_filtered": GreenhouseOptions,
     "workday": WorkdayOptions,
     "millennium_campus": SearchOptions,
+    "millennium_professionals": SearchOptions,
+    "rothschild_campus": RothschildOptions,
+    "bnp": SearchOptions,
     "workable_public": WorkableOptions,
     "db_campus": DBCampusOptions,
     "lever_filtered": LeverOptions,

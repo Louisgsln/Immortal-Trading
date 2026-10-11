@@ -83,7 +83,14 @@ def test_search_preserves_query_pagination_and_deduplicates_terms(monkeypatch):
         return httpx.Response(200, text=html(detail()))
 
     result = execute(handler, monkeypatch, search_terms=["trading", "rates"])
-    assert searches == [("trading", 1), ("trading", 2), ("rates", 1), ("rates", 2)]
+    assert searches == [
+        ("trading", 1),
+        ("trading", 2),
+        ("trading", 1),
+        ("rates", 1),
+        ("rates", 2),
+        ("rates", 1),
+    ]
     assert len(details) == 1 and len(result.jobs) == 1 and not result.complete
     job = result.jobs[0]
     assert job.external_id == "BNP-1" and job.location == "Paris, FR"

@@ -12,7 +12,7 @@ from trading_radar.normalizer import plain_text
 def recruitment_target(text: str) -> tuple[str, str] | None:
     targets = set()
     for node in Document(text).root.walk():
-        if node.tag != "a" or clean(node) != "Postuler":
+        if node.tag != "a" or clean(node) not in {"Postuler", "Apply", "Apply now"}:
             continue
         url = node.attrs.get("href", "")
         parts = urlsplit(url)

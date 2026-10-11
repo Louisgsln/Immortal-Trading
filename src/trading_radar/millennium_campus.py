@@ -1,10 +1,10 @@
-"""Anonymous Millennium campus search and public JobPosting detail pages."""
+"""Anonymous Millennium search and public JobPosting detail pages."""
 
 import asyncio
 import html
 import json
 import re
-from urllib.parse import parse_qs, urlencode, urlsplit
+from urllib.parse import parse_qs, unquote, urlencode, urlsplit
 
 from trading_radar.config import Company
 from trading_radar.html_page import Document
@@ -17,19 +17,21 @@ from trading_radar.snapshot_retry import SnapshotChanged, stable_listing
 ROOT = "https://campusjobs.mlp.com"
 BOARD = ROOT + "/careers?domain=mlp.com&microsite=campus-site"
 API = ROOT + "/api/apply/v2/jobs"
+PROFESSIONAL_ROOT = "https://career.mlp.com"
+PROFESSIONAL_BOARD = PROFESSIONAL_ROOT + "/careers?domain=mlp.com"
 PAGE_SIZE = 10
 
 
-def job_url(value: object, identifier: str) -> str:
+def job_url(value: object, identifier: str, *, root: str = ROOT) -> str:
     if not isinstance(value, str):
-        raise SourceUnavailable("Millennium campus job URL missing")
+        raise SourceUnavailable("Millennium job URL missing")
     parts = urlsplit(value)
     if (
         parts.scheme != "https"
-        or parts.netloc not in {"campusjobs.mlp.com", "mlp.eightfold.ai"}
+        or parts.netloc not in {urlsplit(root).netloc, "mlp.eightfold.ai"}
         or parts.fragment
         or not re.fullmatch(
-            r"/careers/job/" + re.escape(identifier) + r"(?:-[a-zA-Z0-9_-]+)?", parts.path
+            r"/careers/job/" + re.escape(identifier) + r"(?:-[^/?#\\]+)?", unquote(parts.path)
         )
         or (
             parts.query
@@ -40,15 +42,25 @@ def job_url(value: object, identifier: str) -> str:
             )
         )
     ):
-        raise SourceUnavailable("Millennium campus job URL identity mismatch")
-    return ROOT + "/careers/job/" + identifier + "?domain=mlp.com&microsite=campus-site"
+        raise SourceUnavailable("Millennium job URL identity mismatch")
+    if root not in {ROOT, PROFESSIONAL_ROOT}:
+        raise SourceUnavailable("unverified Millennium career root")
+    if root == PROFESSIONAL_ROOT and "microsite" in parse_qs(parts.query):
+        raise SourceUnavailable("Millennium professional URL has campus scope")
+    return (
+        root
+        + "/careers/job/"
+        + identifier
+        + "?domain=mlp.com"
+        + ("&microsite=campus-site" if root == ROOT else "")
+    )
 
 
-def position(row: object) -> dict:
+def position(row: object, *, root: str = ROOT) -> dict:
     if not isinstance(row, dict) or type(row.get("id")) is not int or row["id"] <= 0:
-        raise SourceUnavailable("Millennium campus position identity missing")
+        raise SourceUnavailable("Millennium position identity missing")
     if row.get("isPrivate") is not False or row.get("type") != "ATS":
-        raise SourceUnavailable("Millennium campus position is not a public ATS job")
+        raise SourceUnavailable("Millennium position is not a public ATS job")
     identifier = str(row["id"])
     if (
         not isinstance(row.get("name"), str)
@@ -62,14 +74,14 @@ def position(row: object) -> dict:
         or "business_unit" not in row
         or (row["business_unit"] is not None and not isinstance(row["business_unit"], str))
     ):
-        raise SourceUnavailable("Millennium campus title, reference or locations missing")
+        raise SourceUnavailable("Millennium title, reference or locations missing")
     return {
         "id": identifier,
         "title": row["name"],
         "ats_id": row["ats_job_id"],
         "business_unit": row["business_unit"],
         "locations": list(dict.fromkeys(row["locations"])),
-        "url": job_url(row.get("canonicalPositionUrl"), identifier),
+        "url": job_url(row.get("canonicalPositionUrl"), identifier, root=root),
     }
 
 
@@ -83,11 +95,13 @@ def public_data(data: object) -> dict:
     return data
 
 
-def parse_page(payload: object, term: str, offset: int, limit: int) -> tuple[list[dict], int]:
+def parse_page(
+    payload: object, term: str, offset: int, limit: int, *, root: str = ROOT
+) -> tuple[list[dict], int]:
     data = public_data(payload)
     query = data.get("query")
     if not isinstance(query, dict) or query.get("query") != term or query.get("location") != "":
-        raise SourceUnavailable("Millennium campus search scope changed")
+        raise SourceUnavailable("Millennium search scope changed")
     total, rows = data.get("count"), data.get("positions")
     if (
         type(total) is not int
@@ -96,35 +110,35 @@ def parse_page(payload: object, term: str, offset: int, limit: int) -> tuple[lis
         or offset > total
         or len(rows) != min(PAGE_SIZE, total - offset)
     ):
-        raise SourceUnavailable("Millennium campus incomplete or excessive page")
-    parsed = [position(row) for row in rows]
+        raise SourceUnavailable("Millennium incomplete or excessive page")
+    parsed = [position(row, root=root) for row in rows]
     if len({r["id"] for r in parsed}) != len(parsed):
-        raise SourceUnavailable("Millennium campus repeated position")
+        raise SourceUnavailable("Millennium repeated position")
     return parsed, total
 
 
-def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
+def parse_detail(text: str, row: dict, config: Company, source: str, *, root: str = ROOT) -> RawJob:
     nodes = list(Document(text).root.walk())
     embedded = [n for n in nodes if n.tag == "code" and n.attrs.get("id") == "smartApplyData"]
     schemas = [
         n for n in nodes if n.tag == "script" and n.attrs.get("type") == "application/ld+json"
     ]
     if len(embedded) != 1 or len(schemas) != 1:
-        raise SourceUnavailable("Millennium campus detail metadata missing or ambiguous")
+        raise SourceUnavailable("Millennium detail metadata missing or ambiguous")
     try:
         data = public_data(json.loads(embedded[0].text()))
         schema = json.loads(schemas[0].text())
     except ValueError:
-        raise SourceUnavailable("invalid Millennium campus detail JSON") from None
+        raise SourceUnavailable("invalid Millennium detail JSON") from None
     if (
         data.get("isFallback") is not False
         or data.get("singleview") is not True
         or str(data.get("pid")) != row["id"]
         or not isinstance(data.get("positions"), list)
         or len(data["positions"]) != 1
-        or position(data["positions"][0]) != row
+        or position(data["positions"][0], root=root) != row
     ):
-        raise SourceUnavailable("Millennium campus detail identity changed or unavailable")
+        raise SourceUnavailable("Millennium detail identity changed or unavailable")
     if (
         not isinstance(schema, dict)
         or schema.get("@type") != "JobPosting"
@@ -136,8 +150,8 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         or not isinstance(schema.get("employmentType"), str)
         or not schema["employmentType"].strip()
     ):
-        raise SourceUnavailable("Millennium campus JobPosting incomplete or mismatched")
-    url = job_url(schema.get("url"), row["id"])
+        raise SourceUnavailable("Millennium JobPosting incomplete or mismatched")
+    url = job_url(schema.get("url"), row["id"], root=root)
     return RawJob(
         company=config.name,
         source=source,
@@ -160,9 +174,11 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
 
 
 class MillenniumCampusCollector:
+    root, board = ROOT, BOARD
+
     def __init__(self, source: str, config: Company, http: HTTPClient):
-        if config.name != "Millennium" or config.career_url != BOARD:
-            raise ValueError("Use the verified Millennium campus board")
+        if config.name != "Millennium" or config.career_url != self.board:
+            raise ValueError("Use the verified Millennium board")
         self.source, self.config, self.http = source, config, http
         self.options = SearchOptions(**config.options)
 
@@ -171,22 +187,22 @@ class MillenniumCampusCollector:
             async with asyncio.timeout(self.options.max_scan_seconds):
                 return await self._collect()
         except TimeoutError:
-            raise SourceUnavailable("Millennium campus scan time budget exceeded") from None
+            raise SourceUnavailable("Millennium scan time budget exceeded") from None
 
     async def page(self, term: str, offset: int) -> tuple[list[dict], int]:
-        query = urlencode(
-            {
-                "domain": "mlp.com",
-                "microsite": "campus-site",
-                "query": term,
-                "start": offset,
-                "num": PAGE_SIZE,
-            }
-        )
+        parameters = {
+            "domain": "mlp.com",
+            "query": term,
+            "start": offset,
+            "num": PAGE_SIZE,
+        }
+        if self.root == ROOT:
+            parameters["microsite"] = "campus-site"
+        query = urlencode(parameters)
         data = await self.http.get_json(
-            API + "?" + query, self.config.request_interval, self.source
+            self.root + "/api/apply/v2/jobs?" + query, self.config.request_interval, self.source
         )
-        return parse_page(data, term, offset, self.options.max_results_per_query)
+        return parse_page(data, term, offset, self.options.max_results_per_query, root=self.root)
 
     async def _list(self) -> dict[str, dict]:
         found: dict[str, dict] = {}
@@ -196,16 +212,16 @@ class MillenniumCampusCollector:
             while len(rows) < total:
                 batch, current = await self.page(term, len(rows))
                 if current != total:
-                    raise SnapshotChanged("Millennium campus total changed during pagination")
+                    raise SnapshotChanged("Millennium total changed during pagination")
                 for row in batch:
                     if row["id"] in rows:
-                        raise SnapshotChanged("Millennium campus repeated page")
+                        raise SnapshotChanged("Millennium repeated page")
                     rows[row["id"]] = row
             if await self.page(term, 0) != (initial, total):
-                raise SnapshotChanged("Millennium campus search changed during pagination")
+                raise SnapshotChanged("Millennium search changed during pagination")
             for identifier, row in rows.items():
                 if identifier in found and found[identifier] != row:
-                    raise SourceUnavailable("Millennium campus conflicting search results")
+                    raise SourceUnavailable("Millennium conflicting search results")
                 found[identifier] = row
         return found
 
@@ -220,14 +236,18 @@ class MillenniumCampusCollector:
             ) and not any(has(title, t) for t in self.options.exclude_title_terms):
                 selected.append(row)
         if len(selected) > self.options.max_details:
-            raise SourceUnavailable("Millennium campus detail limit exceeded")
+            raise SourceUnavailable("Millennium detail limit exceeded")
         jobs = []
         for row in selected:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
-            jobs.append(parse_detail(text, row, self.config, self.source))
+            jobs.append(parse_detail(text, row, self.config, self.source, root=self.root))
         return Collection(
             jobs=jobs,
             complete=False,
             scope_complete=True,
             requests=self.http.counts[self.source] - before,
         )
+
+
+class MillenniumProfessionalsCollector(MillenniumCampusCollector):
+    root, board = PROFESSIONAL_ROOT, PROFESSIONAL_BOARD
