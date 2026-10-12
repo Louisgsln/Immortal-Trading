@@ -27,7 +27,7 @@ https://__DASHBOARD_HOST__ {
         method GET HEAD
     }
     @application {
-        path_regexp applications ^/__DASHBOARD_LINK_TOKEN__/api/applications(?:/[A-Za-z0-9_-]{1,128})?$
+        path_regexp applications ^/__DASHBOARD_LINK_TOKEN__/api/(?:applications(?:/[A-Za-z0-9_-]{1,128}(?:/applied)?)?|wishlist(?:/[A-Za-z0-9_-]{1,128})?)$
         method GET HEAD POST
     }
     handle @page {
