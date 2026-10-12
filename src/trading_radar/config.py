@@ -42,6 +42,10 @@ class Settings(BaseModel):
     alerts_enabled: bool = False
     telegram_control_enabled: bool = False
     telegram_incident_notices_enabled: bool = False
+    telegram_heartbeat_enabled: bool = False
+    telegram_heartbeat_times: list[str] = Field(
+        default=["13:00", "18:00"], min_length=1, max_length=6
+    )
     deadline_reminders_enabled: bool = False
     deadline_reminder_max_age_hours: float = Field(default=24, gt=0, le=168)
     include_internships: bool = False
@@ -59,6 +63,15 @@ class Settings(BaseModel):
             raise ValueError("internship_baseline_at requires a timezone")
         return value.astimezone(UTC) if value is not None else None
 
+    @field_validator("telegram_heartbeat_times")
+    @classmethod
+    def heartbeat_clocks(cls, values: list[str]) -> list[str]:
+        if any(not re.fullmatch(r"(?:[01][0-9]|2[0-3]):[0-5][0-9]", value) for value in values):
+            raise ValueError("Heartbeat times must use HH:MM")
+        if len(set(values)) != len(values):
+            raise ValueError("Heartbeat times must be unique")
+        return sorted(values)
+
 
 class Config(BaseModel):
     settings: Settings
@@ -74,6 +87,7 @@ def load_config(directory: Path = Path("config")) -> Config:
         ("ALERTS_ENABLED", "alerts_enabled"),
         ("TELEGRAM_CONTROL_ENABLED", "telegram_control_enabled"),
         ("TELEGRAM_INCIDENT_NOTICES_ENABLED", "telegram_incident_notices_enabled"),
+        ("TELEGRAM_HEARTBEAT_ENABLED", "telegram_heartbeat_enabled"),
     ]:
         if env in os.environ:
             settings[key] = os.environ[env]

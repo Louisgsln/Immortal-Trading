@@ -1,4 +1,4 @@
-# Public employer profile; campus extension audited 2026-10-10.
+# Public VPS profile, additions verified 2026-10-12.
 companies:
   nomura_professionals:
     name: Nomura
@@ -225,8 +225,8 @@ companies:
       search_terms:
       - trading
     notes: French public search HTTP 403; English general search also refuses page 17 on 2026-10-11. Old
-      jobs retained; no truncated import or closure by absence. Dedicated English internship catalogue tracked
-      by bnp_campus. General coverage remains blocked.
+      jobs retained; no truncated import or closure by absence. Dedicated English internship catalogue
+      tracked by bnp_campus. General coverage remains blocked.
   goldman_campus:
     name: Goldman Sachs
     enabled: true
@@ -324,6 +324,7 @@ companies:
     options:
       search_terms:
       - trading
+      verify_listing_snapshot: true
     notes: Public CXS verified 2026-09-15. Early careers on other portals are not covered.
   citi:
     name: Citi
@@ -3013,6 +3014,7 @@ companies:
       max_results_per_query: 500
       max_details: 100
       max_scan_seconds: 600
+      verify_listing_snapshot: true
     notes: Verified public Citi student roles share the Workday board linked from jobs.citi.com. Separate
       bounded early-career search scope; campus identity preserved, not a second employer. Paris Markets
       2027 off-cycle witnessed. Summer and wrong-year eligibility unchanged; no absence closure.
@@ -3152,7 +3154,6 @@ companies:
       catalogue and full per-ID Markdown details. Counts, metadata, application IDs and two catalogue
       reads required. Explicitly speculative strategist excluded; calendar publication dates retained
       without invented UTC instants. Future off-cycle roles will use the same internship policy.
-
   rothschild_campus:
     name: Rothschild & Co
     enabled: true
@@ -3171,9 +3172,9 @@ companies:
       - execution
       - redburn
     notes: 'Public student catalogue verified 2026-10-11: pages of 50, full catalogue and first-page recheck
-      before filtering market titles. Complete employer descriptions and Tal.net posting ID. Advisory receives
-      no trading points by title alone; Summer excluded from internship alerts. No inferred dates or closure
-      by absence.'
+      before filtering market titles. Complete employer descriptions and Tal.net posting ID. Advisory
+      receives no trading points by title alone; Summer excluded from internship alerts. No inferred dates
+      or closure by absence.'
   millennium_professionals:
     name: Millennium
     enabled: true
@@ -3198,7 +3199,8 @@ companies:
       - intern
     notes: Official campus page links this independent professional board. Anonymous Eightfold pages of
       10 with count and first-page recheck; full JobPosting detail and ATS reference, Unicode slugs canonicalized
-      to ID. Same employer as campus, separate source. No inferred publication/deadline or closure by absence.
+      to ID. Same employer as campus, separate source. No inferred publication/deadline or closure by
+      absence.
   brevan_howard:
     name: Brevan Howard
     enabled: true
@@ -3224,9 +3226,8 @@ companies:
       - intern
     notes: Official Phenom catalogue links Workday tenant brevanhoward / BH_ExternalCareers. Public CXS
       and full details verified 2026-10-11. Off-cycle 3–6 months Geneva/London retained; intake year not
-      inferred from 2028 graduate conversion or graduation. Summer excluded from internship alerts; no authenticated
-      HR API or closure by absence.
-
+      inferred from 2028 graduate conversion or graduation. Summer excluded from internship alerts; no
+      authenticated HR API or closure by absence.
   bnp_campus:
     name: BNP Paribas
     enabled: true
@@ -3249,8 +3250,423 @@ companies:
       - securities finance
       - quantitative
       - equity electronic
-    notes: Official English Trainee / Internship catalogue audited 2026-10-11. Trading and structuring queries,
-      complete pages of 10 and first-page recheck; internship contract required on each listing and detail.
-      Refused or missing individual details reported as gaps, source partial, old jobs retained; all-details
-      failure aborts. General search and quantitative query remain access-restricted. Same BNP employer
-      and shared references. Summer excluded; no inferred intake or closure by absence.
+    notes: Official English Trainee / Internship catalogue audited 2026-10-11. Trading and structuring
+      queries, complete pages of 10 and first-page recheck; internship contract required on each listing
+      and detail. Refused or missing individual details reported as gaps, source partial, old jobs retained;
+      all-details failure aborts. General search and quantitative query remain access-restricted. Same
+      BNP employer and shared references. Summer excluded; no inferred intake or closure by absence.
+  pimco:
+    name: PIMCO
+    enabled: true
+    ats: workday
+    tenant: pimco
+    career_url: https://pimco.wd1.myworkdayjobs.com/pimco-careers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
+      absence closures. See docs/VALIDATION-LOT92.md. Public Workday catalogue and full target details
+      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
+      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
+      Initial import silent.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+      verify_listing_snapshot: true
+  blackrock:
+    name: BlackRock
+    enabled: true
+    ats: workday
+    tenant: blackrock
+    career_url: https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
+      absence closures. See docs/VALIDATION-LOT91.md. Public Workday catalogue and full target details
+      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
+      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
+      Initial import silent.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+      verify_listing_snapshot: true
+  cibc:
+    name: CIBC
+    enabled: true
+    ats: workday
+    tenant: cibc
+    career_url: https://cibc.wd3.myworkdayjobs.com/search
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
+      absence closures. See docs/VALIDATION-LOT92.md. Public Workday catalogue and full target details
+      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
+      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
+      Initial import silent.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+      verify_listing_snapshot: true
+  td:
+    name: TD
+    enabled: true
+    ats: workday
+    tenant: td
+    career_url: https://td.wd3.myworkdayjobs.com/TD_Bank_Careers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
+      absence closures. See docs/VALIDATION-LOT92.md. Public Workday catalogue and full target details
+      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
+      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
+      Initial import silent.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+      verify_listing_snapshot: true
+  g_research:
+    name: G-Research
+    enabled: true
+    ats: workday
+    tenant: gresearch
+    career_url: https://gresearch.wd103.myworkdayjobs.com/G-Research
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
+      absence closures. See docs/VALIDATION-LOT91.md. Public Workday catalogue and full target details
+      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
+      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
+      Initial import silent.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - quantitative
+      - trading
+      max_details: 80
+      max_scan_seconds: 600
+      verify_listing_snapshot: true
+  tp_icap:
+    name: TP ICAP
+    enabled: true
+    ats: workday
+    tenant: tp
+    career_url: https://tp.wd107.myworkdayjobs.com/TP-ICAP
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative and broking
+      searches only; partial scope, no closures inferred from absence. First import silent. See docs/VALIDATION-LOT81.md.
+      Public Workday catalogue and full target details revalidated twice from OVH on 2026-10-12; internships
+      included by the active off-cycle/long policy, no dates or eligibility inferred. First-page recheck
+      on paginated queries. No closure by absence. Initial import silent.
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - broker
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - broker
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - operator
+      - sanctions
+      - support
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - brokerage
+      - systems engineer
+      verify_listing_snapshot: true
+      max_results_per_query: 500
+      max_details: 80
+      max_scan_seconds: 600

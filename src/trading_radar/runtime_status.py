@@ -105,6 +105,9 @@ def watcher_status(config: Config, now: datetime | None = None) -> dict:
 
 
 def runtime_report(config: Config, *, now: datetime | None = None) -> dict:
+    # Capture the pulse before slower database checks. Otherwise a new tick
+    # written during those checks can appear to be in the future at `now`.
+    watcher = watcher_status(config, now=now)
     health = check_health(config, now=now) if now is not None else check_health(config)
     observed = {source["source"]: source["status"] for source in health["sources"]}
     counts = None
@@ -122,10 +125,15 @@ def runtime_report(config: Config, *, now: datetime | None = None) -> dict:
         pass
     return {
         "health": health,
-        "watcher": watcher_status(config, now=now),
+        "watcher": watcher,
         "deliveries": counts,
         "alerts_enabled": config.settings.alerts_enabled,
         "threshold": config.settings.alert_min_score,
+        "heartbeat_schedule": {
+            "enabled": config.settings.telegram_heartbeat_enabled,
+            "times": config.settings.telegram_heartbeat_times,
+            "time_zone": "Europe/Paris",
+        },
         "source_counts": {
             "enabled": sum(company.enabled for company in config.companies.values()),
             "employers": len(
@@ -288,6 +296,15 @@ def format_status(report: dict) -> str:
         ),
         _summary(report),
         f"Seuil des alertes · {report['threshold']}/100",
+        *(
+            [
+                "États automatiques · "
+                + " · ".join(report["heartbeat_schedule"]["times"])
+                + " (Paris)"
+            ]
+            if report.get("heartbeat_schedule", {}).get("enabled")
+            else []
+        ),
         "",
         "Dernier cycle · " + format_paris(health["latest_scan"]),
         "Dernier signal · " + format_paris(watcher["at"]),

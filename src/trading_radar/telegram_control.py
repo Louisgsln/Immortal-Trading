@@ -33,6 +33,7 @@ from trading_radar.telegram_digest import (
     digest_status,
     enable_digest,
 )
+from trading_radar.telegram_heartbeat import check_heartbeat
 from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
@@ -301,6 +302,10 @@ async def check_scheduled_messages(
         await check_digest(config, notifier, store, now)
     except (OSError, ValueError, RuntimeError) as error:
         logger.warning("telegram_digest_check_failed type=%s", type(error).__name__)
+    try:
+        await check_heartbeat(config, notifier, store, now)
+    except (OSError, ValueError, RuntimeError) as error:
+        logger.warning("telegram_heartbeat_check_failed type=%s", type(error).__name__)
     if config.settings.telegram_incident_notices_enabled:
         try:
             await check_incidents(config, notifier, store, runtime_report(config), now.timestamp())

@@ -143,12 +143,13 @@ def verified_title(text: str, source: str, reference: str, url: str) -> str | No
 async def public_reference_title(
     source: str, site: str, reference: str, http: HTTPClient, interval: float
 ) -> str | None:
-    if SITES.get(source) != site or not re.fullmatch(
-        r"[0-9]{8}" if source == "citi" else r"RQ[0-9]{6}", reference
+    owner = "citi" if source == "citi_campus" else source
+    if SITES.get(owner) != site or not re.fullmatch(
+        r"[0-9]{8}" if owner == "citi" else r"RQ[0-9]{6}", reference
     ):
         return None
     try:
-        if source == "citi":
+        if owner == "citi":
             text = await http.get_text(CITI + "/search-jobs?k=" + reference, interval, source)
             url = citi_result(text, reference)
             if url is None:
@@ -156,7 +157,7 @@ async def public_reference_title(
         else:
             url = BP + "/job-description/" + reference
         text = await http.get_text(url, interval, source)
-        return verified_title(text, source, reference, url)
+        return verified_title(text, owner, reference, url)
     except SourceUnavailable:
         # Access restrictions never justify dropping a gap or another valid job.
         return None

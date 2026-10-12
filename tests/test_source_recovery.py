@@ -145,6 +145,7 @@ def workday(monkeypatch, rows, source="deutsche_bank", total=None):
     [
         ("deutsche_bank", "R0427551"),
         ("citi", "26988331"),
+        ("citi_campus", "26988331"),
         ("bp", "RQ123456"),
         ("morgan_stanley", "JR123456"),
     ],

@@ -5,6 +5,7 @@ HR API. A POST here submits a search, never an application.
 """
 
 import html
+import json
 import logging
 import re
 import unicodedata
@@ -26,6 +27,7 @@ from trading_radar.workday_recovery import SITES, citi_operations_reference, pub
 
 class WorkdayOptions(SearchOptions):
     conditional_details: bool = Field(default=False, strict=True)
+    verify_listing_snapshot: bool = Field(default=False, strict=True)
     applied_facets: dict[str, list[str]] = Field(default_factory=dict)
 
     @field_validator("applied_facets", mode="before")
@@ -101,6 +103,28 @@ def external_path(value: object) -> str:
 def comparable_title(value: str) -> str:
     """Ignore presentation differences without erasing punctuation or non-Latin text."""
     return " ".join(unicodedata.normalize("NFKC", html.unescape(value)).casefold().split())
+
+
+def listing_snapshot(payload: dict) -> list[str]:
+    """Compare consumed listing fields, ignoring ordering and display-only dates."""
+    rows = payload.get("jobPostings")
+    if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+        raise SourceUnavailable("Invalid Workday listing recheck")
+    return sorted(
+        json.dumps(
+            {
+                "title": comparable_title(row["title"])
+                if isinstance(row.get("title"), str)
+                else row.get("title"),
+                "externalPath": row.get("externalPath"),
+                "locationsText": row.get("locationsText"),
+                "bulletFields": row.get("bulletFields"),
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+        for row in rows
+    )
 
 
 def optional_text(record: dict, field: str) -> str | None:
@@ -249,6 +273,7 @@ class WorkdayCollector:
     async def _search(self, term: str) -> dict[str, dict]:
         rows: dict[str, dict] = {}
         offset, expected = 0, None
+        first_page: list[str] | None = None
         while expected is None or offset < expected:
             payload = await self.http.post_search_json(
                 self.api + "/jobs",
@@ -278,6 +303,8 @@ class WorkdayCollector:
                 expected = total
             if len(page) != min(20, expected - offset):
                 raise SourceUnavailable("Workday returned a short or inconsistent page")
+            if offset == 0 and self.options.verify_listing_snapshot and expected > 20:
+                first_page = listing_snapshot(payload)
             for row in page:
                 # Audited CXS placeholders expose only a requisition number.
                 # Preserve their position/count and report the coverage gap; never
@@ -285,6 +312,7 @@ class WorkdayCollector:
                 pattern = {
                     "deutsche_bank": r"R[0-9]{7}",
                     "citi": r"[0-9]{8}",
+                    "citi_campus": r"[0-9]{8}",
                     "bp": r"RQ[0-9]{6}",
                     "morgan_stanley": r"JR[0-9]{6}",
                 }.get(self.source)
@@ -317,6 +345,27 @@ class WorkdayCollector:
                     raise SourceUnavailable("Workday pagination repeated a posting")
                 rows[path] = row
             offset += len(page)
+        if first_page is not None:
+            check = await self.http.post_search_json(
+                self.api + "/jobs",
+                {
+                    "appliedFacets": self.options.applied_facets,
+                    "limit": 20,
+                    "offset": 0,
+                    "searchText": term,
+                },
+                self.config.request_interval,
+                self.source,
+            )
+            if (
+                not isinstance(check, dict)
+                or type(check.get("total")) is not int
+                or check["total"] != expected
+                or listing_snapshot(check) != first_page
+            ):
+                raise SourceUnavailable(
+                    "Workday listing changed during pagination; retry next scan"
+                )
         return rows
 
     def selected(self, title: str) -> bool:
@@ -430,7 +479,11 @@ class WorkdayCollector:
                 logging.getLogger("trading_radar").info(
                     "Verified out-of-scope public title: %s %s", self.source, reference
                 )
-            elif title is None and self.source == "citi" and self.site == SITES["citi"]:
+            elif (
+                title is None
+                and self.source in {"citi", "citi_campus"}
+                and self.site == SITES["citi"]
+            ):
                 try:
                     evidence = await self.http.post_search_json(
                         self.api + "/jobs",
