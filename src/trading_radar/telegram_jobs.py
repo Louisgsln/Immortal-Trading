@@ -99,10 +99,18 @@ def digest_card(job: dict, number: int | None = None) -> str:
     return "\n".join(lines)
 
 
-def compact_digest(selected: list[dict], health: dict, instant: datetime, max_units: int) -> str:
+def compact_digest(
+    selected: list[dict], health: dict, instant: datetime, max_units: int, *, radar_status: str = ""
+) -> str:
     heading = "<b>🗓 Votre veille du jour</b>\n" + format_paris(instant)
+    if radar_status:
+        heading += "\n\n" + radar_status
     fresh = health["source_summary"].get("fresh", 0)
-    footer = f"📡 Sources à jour : {fresh}/{len(health['sources'])} · /status"
+    footer = (
+        "Détails du radar · /statuts"
+        if radar_status
+        else f"📡 Sources à jour : {fresh}/{len(health['sources'])} · /status"
+    )
     blocks: list[str] = []
     for index, job in enumerate(selected[:5], 1):
         block = digest_card(job, index if len(selected) > 1 else None)
@@ -126,6 +134,8 @@ def jobs_message(
     *,
     max_units: int = 4000,
     compact: bool = False,
+    radar_status: str = "",
+    health_snapshot: dict | None = None,
 ) -> str:
     instant = now or utcnow()
     if instant.tzinfo is None:
@@ -139,7 +149,7 @@ def jobs_message(
         jobs = read_jobs(config)
     except DashboardDataError:
         return "📋 Offres indisponibles : la base locale ne peut pas être consultée. Réessaie plus tard ou consulte /status."
-    health = check_health(config, now=instant)
+    health = health_snapshot if health_snapshot is not None else check_health(config, now=instant)
     if health["database"]["status"] != "ok":
         return "📋 Offres indisponibles : la fraîcheur des sources ne peut pas être vérifiée. Consulte /status."
     sources = {s["source"] for s in health["sources"] if s["status"] == "fresh"}
@@ -167,7 +177,7 @@ def jobs_message(
             )
         )
     if compact:
-        return compact_digest(selected, health, instant, max_units)
+        return compact_digest(selected, health, instant, max_units, radar_status=radar_status)
     title = "🏆 OFFRES À EXAMINER" if mode == "top" else "🆕 DÉCOUVERTES DEPUIS 24 H"
     header = f"{title}\nAu {format_paris(instant)} · score ≥ {threshold}/100"
     footer = (

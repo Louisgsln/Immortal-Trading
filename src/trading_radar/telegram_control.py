@@ -293,6 +293,21 @@ async def check_incidents(
         logger.warning("telegram_incident_delivery_unconfirmed type=%s", type(error).__name__)
 
 
+async def check_scheduled_messages(
+    config: Config, notifier: TelegramNotifier, store: ControlStore, now: datetime
+) -> None:
+    # Daily delivery must also run when update polling is temporarily unavailable.
+    try:
+        await check_digest(config, notifier, store, now)
+    except (OSError, ValueError, RuntimeError) as error:
+        logger.warning("telegram_digest_check_failed type=%s", type(error).__name__)
+    if config.settings.telegram_incident_notices_enabled:
+        try:
+            await check_incidents(config, notifier, store, runtime_report(config), now.timestamp())
+        except (OSError, ValueError, RuntimeError) as error:
+            logger.warning("telegram_incident_check_failed type=%s", type(error).__name__)
+
+
 async def run_control(config: Config) -> None:
     if not config.settings.telegram_control_enabled:
         raise ValueError("Telegram control is disabled")
@@ -339,6 +354,9 @@ async def run_control(config: Config) -> None:
         store.save()
         last_check = 0.0
         while True:
+            if time.monotonic() - last_check >= 60:
+                await check_scheduled_messages(config, notifier, store, datetime.now(UTC))
+                last_check = time.monotonic()
             try:
                 updates = await api(
                     notifier,
@@ -351,12 +369,6 @@ async def run_control(config: Config) -> None:
                     },
                 )
                 await process_updates(updates, config, notifier, store, me["username"], time.time())
-                if time.monotonic() - last_check >= 60:
-                    await check_incidents(
-                        config, notifier, store, runtime_report(config), time.time()
-                    )
-                    await check_digest(config, notifier, store, datetime.now(UTC))
-                    last_check = time.monotonic()
             except (OSError, ValueError, RuntimeError) as error:
                 logger.warning("telegram_control_cycle_failed type=%s", type(error).__name__)
                 await asyncio.sleep(10)

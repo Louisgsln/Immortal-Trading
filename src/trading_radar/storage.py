@@ -15,6 +15,7 @@ from filelock import FileLock
 from trading_radar.alerts import SYSTEM_TRANSITIONS, AlertDecision, AlertStatus, resolved_status
 from trading_radar.applications import Application, ApplicationStatus, calendar_date
 from trading_radar.deadlines import deadline_status, resolve_deadline
+from trading_radar.location_updates import location_change_key
 from trading_radar.models import Job, utcnow
 from trading_radar.normalizer import canonical_url, digest
 
@@ -366,7 +367,10 @@ class Repository:
             job.last_seen = incoming.last_seen
             job.is_new = False
             changed = authoritative and any(
-                getattr(old, f) != getattr(job, f) for f in CONTENT_FIELDS
+                (location_change_key(old) != location_change_key(job))
+                if f == "location_normalized"
+                else getattr(old, f) != getattr(job, f)
+                for f in CONTENT_FIELDS
             )
             job.date_updated = incoming.last_seen if changed else old.date_updated
             job.is_active = True

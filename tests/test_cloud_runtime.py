@@ -143,13 +143,25 @@ def test_stopped_backup_loop_does_not_make_snapshot(cloud_config, monkeypatch):
     cloud.backup_loop(cloud_config, stop)
 
 
-def test_live_check_requires_fresh_sources_and_pulse(cloud_config, repo, monkeypatch, capsys):
+def test_live_check_keeps_worker_health_separate_from_employer_coverage(
+    cloud_config, repo, monkeypatch, capsys
+):
     monkeypatch.setattr(cloud, "load_config", lambda: cloud_config)
     monkeypatch.setattr(cloud.sys, "argv", ["cloud_runtime.py", "check-live"])
     pulse = WatcherPulse(cloud_config)
     pulse.publish("waiting")
-    assert cloud.main() == 1  # Recent pulse alone cannot prove successful collections.
-    monkeypatch.setattr(cloud, "check_health", lambda _: {"status": "healthy", "ready": True})
+    assert cloud.main() == 0  # The worker is alive; missing collections remain coverage warnings.
+    monkeypatch.setattr(
+        cloud,
+        "check_health",
+        lambda _: {"status": "critical", "ready": False, "database": {"status": "unreadable"}},
+    )
+    assert cloud.main() == 1
+    monkeypatch.setattr(
+        cloud,
+        "check_health",
+        lambda _: {"status": "healthy", "ready": True, "database": {"status": "ok"}},
+    )
     assert cloud.main() == 0
     pulse.publish("stopped")
     assert cloud.main() == 1

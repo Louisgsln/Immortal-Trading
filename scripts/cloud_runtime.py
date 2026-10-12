@@ -81,7 +81,9 @@ def main() -> int:
         if args.mode == "check-live":
             health, pulse = check_health(config), watcher_status(config)
             print(json.dumps({"health": health["status"], "watcher": pulse["status"]}))
-            return 0 if health["ready"] and pulse["status"] == "active" else 1
+            # Employer access problems are coverage warnings, not a dead worker.
+            # They remain visible in /status, the Dashboard and the daily digest.
+            return 0 if health["database"]["status"] == "ok" and pulse["status"] == "active" else 1
         report = preflight(config, "watch" if args.mode == "preflight" else args.mode)
         if args.mode == "preflight":
             print(json.dumps(report))

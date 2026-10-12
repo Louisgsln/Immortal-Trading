@@ -9,6 +9,7 @@ import httpx
 from trading_radar.display_time import format_paris
 from trading_radar.experience import experience_requirement
 from trading_radar.job_conditions import deadline_label, start_label
+from trading_radar.location_updates import location_label
 from trading_radar.models import Job
 from trading_radar.telegram_cards import application_keyboard, format_alert
 
@@ -49,7 +50,7 @@ def format_message(job: Job, event: str) -> str:
         ),
         job.company[:150],
         job.title[:300],
-        job.location_normalized[:150],
+        location_label(job)[:150],
         "",
         f"Début : {start[:120]}",
         "Expérience professionnelle : "

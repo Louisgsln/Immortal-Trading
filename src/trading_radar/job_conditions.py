@@ -8,6 +8,7 @@ from trading_radar.display_time import format_paris
 from trading_radar.education import education_mentions
 from trading_radar.experience import experience_requirement
 from trading_radar.html_page import Document, Element
+from trading_radar.location_updates import location_change_key
 from trading_radar.models import Job
 from trading_radar.normalizer import normalize_text
 from trading_radar.start_dates import start_period
@@ -98,7 +99,12 @@ def material_changes(old: Job, new: Job, min_score: int = 70) -> list[str]:
         ("application_deadline", "Échéance"),
         ("employment_type", "Contrat"),
     ]:
-        if getattr(old, field) != getattr(new, field):
+        changed = (
+            location_change_key(old) != location_change_key(new)
+            if field == "location_normalized"
+            else getattr(old, field) != getattr(new, field)
+        )
+        if changed:
             changes.append(label)
     before, after = conditions(old), conditions(new)
     # A spelling/presentation change alone is not a new condition.

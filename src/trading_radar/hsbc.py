@@ -180,6 +180,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
     deadline = utc_date(props["validThrough"]) if props.get("validThrough") else None
     if deadline and deadline < posted:
         raise SourceUnavailable("HSBC deadline predates publication")
+    places = sorted(set(places), key=normalize_text)
     return RawJob(
         company=config.name,
         title=props["title"],
@@ -189,7 +190,7 @@ def parse_detail(text: str, row: dict, config: Company, source: str) -> RawJob:
         source_url=url,
         apply_url=url,
         description="<p>" + html.escape(clean(description[0])) + "</p>",
-        location="; ".join(dict.fromkeys(places)),
+        location="; ".join(places),
         date_posted=posted,
         application_deadline=deadline,
         expected_start_date=row["start"],

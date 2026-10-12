@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from trading_radar.config import Config
 from trading_radar.digest_state import DigestState
 from trading_radar.notifications import TelegramNotifier
+from trading_radar.runtime_status import format_daily_status, runtime_report
 from trading_radar.telegram_jobs import jobs_message
 
 logger = logging.getLogger("trading_radar.telegram")
@@ -42,10 +43,24 @@ def digest_status(state: DigestState) -> str:
 
 
 def digest_message(config: Config, now: datetime) -> str:
-    body = jobs_message(config, "new", now, max_units=4000, compact=True)
+    if now.tzinfo is None:
+        raise ValueError("Digest time must include a timezone")
+    report = runtime_report(config, now=now)
+    status = format_daily_status(report)
+    body = jobs_message(
+        config,
+        "new",
+        now,
+        max_units=4000,
+        compact=True,
+        radar_status=status,
+        health_snapshot=report["health"],
+    )
     if body.startswith("📋 Offres indisponibles"):
         return (
             "<b>🗓 Votre veille du jour</b>\n\n"
+            + status
+            + "\n\n"
             + body
             + "\n\nÉtat des sources indisponible · /status"
         )

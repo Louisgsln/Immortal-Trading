@@ -9,6 +9,7 @@ from uuid import UUID
 
 from trading_radar.experience import experience_requirement
 from trading_radar.job_conditions import authorization_evidence, deadline_label, start_label
+from trading_radar.location_updates import location_label
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job
 from trading_radar.programmes import programme
@@ -111,7 +112,7 @@ def format_alert(job: Job, event: str) -> str:
             f"<b>{clean(job.title, 180)}</b>",
             clean(job.company, 100),
             "",
-            f"📍 {clean(job.location_normalized or 'Lieu non précisé', 100)}",
+            f"📍 {clean(location_label(job), 100)}",
             f"🗓 Début : {clean(start_label(job), 120)}",
             *programme_line,
             f"🎓 Expérience : {experience}",

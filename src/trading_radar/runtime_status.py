@@ -104,8 +104,8 @@ def watcher_status(config: Config, now: datetime | None = None) -> dict:
         return {"status": "unknown", "phase": None, "at": None, "age_seconds": None}
 
 
-def runtime_report(config: Config) -> dict:
-    health = check_health(config)
+def runtime_report(config: Config, *, now: datetime | None = None) -> dict:
+    health = check_health(config, now=now) if now is not None else check_health(config)
     observed = {source["source"]: source["status"] for source in health["sources"]}
     counts = None
     try:
@@ -122,7 +122,7 @@ def runtime_report(config: Config) -> dict:
         pass
     return {
         "health": health,
-        "watcher": watcher_status(config),
+        "watcher": watcher_status(config, now=now),
         "deliveries": counts,
         "alerts_enabled": config.settings.alerts_enabled,
         "threshold": config.settings.alert_min_score,
@@ -252,6 +252,28 @@ def format_incident_notice(report: dict) -> str:
     if problems:
         lines.append("Détails · /status")
     return "\n".join(lines).rstrip()
+
+
+def format_daily_status(report: dict) -> str:
+    """A bounded daily heartbeat with coverage kept separate from worker activity."""
+    counts, watcher = report["source_counts"], report["watcher"]
+    label = WATCHER_LABELS[watcher["status"]]
+    enabled, employers, fresh = counts["enabled"], counts["employers"], counts["fresh"]
+    lines = [
+        f"<b>📡 Radar · {label}</b>",
+        f"Veille 24 h/24 · {enabled} sources · {employers} employeurs"
+        if watcher["status"] == "active"
+        else f"Couverture configurée · {enabled} sources · {employers} employeurs",
+        (
+            f"Sources à jour : {fresh}/{enabled}"
+            + (f" · {enabled - fresh} à surveiller" if fresh < enabled else "")
+            if type(fresh) is int
+            else "Fraîcheur des sources indisponible"
+        ),
+        f"Alertes {'actives' if report['alerts_enabled'] else 'désactivées'} · seuil {report['threshold']}/100",
+        "Dernier signal · " + format_paris(watcher["at"]),
+    ]
+    return "\n".join(lines)
 
 
 def format_status(report: dict) -> str:
