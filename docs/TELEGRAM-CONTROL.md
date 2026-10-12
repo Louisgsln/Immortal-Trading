@@ -153,6 +153,24 @@ aucun résumé IA ni traduction automatique n'est ajouté.
 
 ## Notifications d'incident
 
+### Points d'état supplémentaires
+
+Sur OVH, les lots 151–153 ajoutent un état du radar à **13:00 et 18:00, heure de Paris**,
+en complément du récapitulatif de **09:00**. Ils fonctionnent même sans nouvelle offre.
+Ils présentent l'activité réelle, le dernier signal, le nombre de sources et leur fraîcheur.
+Les horaires supplémentaires figurent dans `/statuts`.
+
+Chaque créneau possède une tentative persistée avant envoi, indépendante du curseur Telegram.
+Un redémarrage ou une livraison incertaine ne déclenchent pas un doublon. Le rattrapage
+est limité à une heure et au dernier créneau. L'activation commence au prochain horaire futur.
+`/digest_off` conserve ces deux points d'état et les alertes d'offres.
+
+Les horaires viennent de `telegram_heartbeat_times` et l'activation d'exploitation de
+`TELEGRAM_HEARTBEAT_ENABLED`. Le fichier `.heartbeat.json` reste dans les données persistantes ;
+aucune liaison privée ni tentative personnelle n'est publiée dans les rapports publics.
+
+### Avis sur les incidents
+
 Le service vérifie périodiquement l'état local et la santé des sources. Un
 ensemble de problèmes doit rester stable au moins deux minutes avant envoi.
 Deux avis sont espacés d'au moins 30 minutes, y compris le retour à la normale.

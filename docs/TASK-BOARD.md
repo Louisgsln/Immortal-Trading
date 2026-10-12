@@ -7,8 +7,8 @@ Les validations et mesures sont dans [VALIDATION-LOTS125-127.md](VALIDATION-LOTS
 [VALIDATION-LOT128.md](VALIDATION-LOT128.md) et
 [VALIDATION-LOTS129-131.md](VALIDATION-LOTS129-131.md) et
 [VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire actuel
-est [daté par source](RADAR-SOURCES-20261012.md) : 79 sources / 67 employeurs,
-73 à jour au relevé du 12 octobre. Les chiffres des livraisons précédentes restent historiques.
+est [daté par source](RADAR-SOURCES-LOTS151-153.md) : 85 sources / 73 employeurs,
+80 à jour au relevé de 14:16 UTC du 12 octobre. Les chiffres des livraisons précédentes restent historiques.
 Ce carnet a été réconcilié avec le VPS :
 les anciennes mentions Windows et exclusions globales des stages étaient historiques.
 
@@ -45,6 +45,10 @@ et observation. Les compteurs de premier import ne doivent pas être présentés
 comme un nombre garanti de nouvelles offres par semaine.
 
 ## Livraison du 12 octobre — lots 148–150
+
+Dernière livraison : [lots 151–153](VALIDATION-LOTS151-153.md), avec [preuves](DELIVERY-LOTS151-153.json).
+Trois points Telegram par jour à 09:00, 13:00 et 18:00 Europe/Paris ; six sources supplémentaires,
+49 fiches importées sans alerte rétroactive. Les versions HSBC restent stables ; données et curseur préservés.
 
 | Lot | État | Résultat observé |
 |---|---|---|
@@ -104,6 +108,11 @@ ont été observés sur OVH. Chaque lot présente son avant/après et ses limite
 | 148 — stabilité HSBC | Comparer les adresses multiples indépendamment de leur ordre et rendre la localisation lisible | Historique réel et permutations sans nouvelle alerte ; vraie ville modifiée détectée ; observation OVH | Installé et vérifié le 12/10 |
 | 149 — état quotidien Telegram | Afficher activité, couverture et seuil dans le récapitulatif, même sans offre ; isoler la programmation des erreurs de réception | Préférences et curseur préservés, une tentative par jour, envoi confirmé | Installé et vérifié le 12/10, 09:00 Europe/Paris |
 | 150 — santé du worker | Distinguer activité du radar et accès aux employeurs dans le contrôle Docker | Worker sain ; signal ancien/base inaccessible toujours en échec ; problèmes de sources visibles | Installé et vérifié le 12/10 ; 73/79 à jour au relevé |
+| 151 — points d'état réguliers | États à 13:00 et 18:00 en plus du digest de 09:00, avec tentatives persistantes séparées du curseur | Redémarrage, échec Telegram, DST et chevauchement du digest sans doublon ; propriétaire et réglages conservés | Installé et vérifié ; confirmation envoyée, prochain point 18:00 le 12/10 |
+| 152 — cohérence et signal | Recontrôler la première page Workday paginée sur les six ajouts, Citi campus et Morgan Stanley ; vérifier les références campus ; capturer le signal avant les contrôles lents | Changements de catalogue refusés, ordre/âge d'affichage tolérés ; aucune fermeture par absence ; signal cohérent | Installé et vérifié ; Citi campus et Morgan Stanley relus avec succès |
+| 153 — six employeurs | PIMCO, BlackRock, CIBC, TD, G-Research et TP ICAP | Deux lectures puis revalidation, simulation, import silencieux, premier succès, conservation et CI | Installé et observé ; 49 fiches, 85 sources / 73 employeurs |
+| 154 / haute — qualification des nouveaux portails | CIBC FICC 2619877 : filtre de titre et NON_TRADING malgré pricing/execution/booking clients ; autres intitulés pertinents rejetés | Responsabilités et exigences vérifiées, contre-exemples contrôle/opérations ; changements métier mesurés sur copie avant réconciliation silencieuse | À faire ; complète le lot 133 ; aucune inflation de score au lot 153 |
+| 155 / moyenne — ressources SQLite | Diagnostiquer le ResourceWarning Python 3.14 de connexion non fermée, localiser l'allocation et vérifier les fermetures lors des exceptions | Trace d'allocation puis test de non-fuite pertinent, CI complète | À diagnostiquer ; 5 347 tests passent sur les quatre versions |
 
 ### Incidents et contrôles récurrents
 

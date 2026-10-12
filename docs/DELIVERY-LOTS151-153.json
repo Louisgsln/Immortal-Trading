@@ -1,0 +1,530 @@
+{
+  "status": "ok",
+  "release": "immortal-trading:lot151-status-sources-20261012",
+  "code_commit": "09212e9482231915e189eacb6c90f6779f7e9286",
+  "simulation": {
+    "alerts_created": 0,
+    "applications_and_histories_preserved": true,
+    "configured_heartbeat_times": [
+      "13:00",
+      "18:00"
+    ],
+    "heartbeat_messages_synthetic": 1,
+    "heartbeat_packaged_schedule_verified": true,
+    "metrics": [
+      {
+        "alerts": 0,
+        "closed": 0,
+        "degraded": {},
+        "duration": 121.21,
+        "failed": {},
+        "high_priority": 362,
+        "listing_gaps": {},
+        "new": 49,
+        "received": 49,
+        "relevant": 519,
+        "requests": 161,
+        "source_results": {
+          "blackrock": {
+            "status": "successful",
+            "duration": 50.005,
+            "internship_baseline_complete": true
+          },
+          "cibc": {
+            "status": "successful",
+            "duration": 32.896,
+            "internship_baseline_complete": true
+          },
+          "g_research": {
+            "status": "successful",
+            "duration": 26.301,
+            "internship_baseline_complete": true
+          },
+          "pimco": {
+            "status": "successful",
+            "duration": 76.726,
+            "internship_baseline_complete": true
+          },
+          "td": {
+            "status": "successful",
+            "duration": 70.603,
+            "internship_baseline_complete": true
+          },
+          "tp_icap": {
+            "status": "successful",
+            "duration": 61.476,
+            "internship_baseline_complete": true
+          }
+        },
+        "sources": 6,
+        "successful": 6,
+        "updated": 0
+      },
+      {
+        "alerts": 0,
+        "closed": 0,
+        "degraded": {},
+        "duration": 116.809,
+        "failed": {},
+        "high_priority": 362,
+        "listing_gaps": {},
+        "new": 0,
+        "received": 49,
+        "relevant": 519,
+        "requests": 161,
+        "source_results": {
+          "blackrock": {
+            "status": "successful",
+            "duration": 49.193,
+            "internship_baseline_complete": true
+          },
+          "cibc": {
+            "status": "successful",
+            "duration": 32.793,
+            "internship_baseline_complete": true
+          },
+          "g_research": {
+            "status": "successful",
+            "duration": 26.701,
+            "internship_baseline_complete": true
+          },
+          "pimco": {
+            "status": "successful",
+            "duration": 75.235,
+            "internship_baseline_complete": true
+          },
+          "td": {
+            "status": "successful",
+            "duration": 70.779,
+            "internship_baseline_complete": true
+          },
+          "tp_icap": {
+            "status": "successful",
+            "duration": 60.561,
+            "internship_baseline_complete": true
+          }
+        },
+        "sources": 6,
+        "successful": 6,
+        "updated": 0
+      }
+    ],
+    "notifier_calls": 0,
+    "old_job_ids_preserved": true,
+    "source_baselines": {
+      "blackrock": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:00:16.554641+00:00",
+        "retained": 13
+      },
+      "cibc": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:00:00.155142+00:00",
+        "retained": 0
+      },
+      "g_research": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:00:26.857504+00:00",
+        "retained": 5
+      },
+      "pimco": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:00:42.583034+00:00",
+        "retained": 18
+      },
+      "td": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:00:38.142200+00:00",
+        "retained": 2
+      },
+      "tp_icap": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:01:17.117718+00:00",
+        "retained": 11
+      }
+    },
+    "status": "ok",
+    "successful_sources": 6,
+    "telegram_cursor_untouched": true,
+    "telegram_network_calls": 0
+  },
+  "new_source_validation": {
+    "status": "ok",
+    "observed_at": "2026-10-12T14:15:57.275810+00:00",
+    "sources": {
+      "pimco": {
+        "status": "fresh",
+        "listing_gaps": [],
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:09:54.619932+00:00",
+        "last_count": 18,
+        "at_threshold": 1,
+        "internship_eligible": 0,
+        "associated_alerts_including_preexisting": 0
+      },
+      "blackrock": {
+        "status": "fresh",
+        "listing_gaps": [],
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:09:55.049552+00:00",
+        "last_count": 13,
+        "at_threshold": 0,
+        "internship_eligible": 0,
+        "associated_alerts_including_preexisting": 0
+      },
+      "cibc": {
+        "status": "fresh",
+        "listing_gaps": [],
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:09:55.055730+00:00",
+        "last_count": 0,
+        "at_threshold": 0,
+        "internship_eligible": 0,
+        "associated_alerts_including_preexisting": 0
+      },
+      "td": {
+        "status": "fresh",
+        "listing_gaps": [],
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:09:55.105745+00:00",
+        "last_count": 2,
+        "at_threshold": 0,
+        "internship_eligible": 0,
+        "associated_alerts_including_preexisting": 0
+      },
+      "g_research": {
+        "status": "fresh",
+        "listing_gaps": [],
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:09:55.184640+00:00",
+        "last_count": 5,
+        "at_threshold": 0,
+        "internship_eligible": 0,
+        "associated_alerts_including_preexisting": 0
+      },
+      "tp_icap": {
+        "status": "fresh",
+        "listing_gaps": [],
+        "bootstrapped": true,
+        "last_success": "2026-10-12T14:09:55.394490+00:00",
+        "last_count": 11,
+        "at_threshold": 2,
+        "internship_eligible": 0,
+        "associated_alerts_including_preexisting": 0
+      }
+    },
+    "all_initial_imports_silent": true,
+    "score_changed": 0,
+    "enabled_sources": 85,
+    "employers": 73
+  },
+  "precollection": {
+    "added_sources": [
+      "pimco",
+      "blackrock",
+      "cibc",
+      "td",
+      "g_research",
+      "tp_icap"
+    ],
+    "alerts_created": 0,
+    "collections_sha256": "29597ced370299c2bf478bcd7affc77644b12a5d0dfef35e90ebb93c10dd66a3",
+    "database_written": false,
+    "sources": {
+      "blackrock": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 25,
+        "retained": 13,
+        "status": "ok"
+      },
+      "cibc": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 17,
+        "retained": 0,
+        "status": "ok"
+      },
+      "citi_campus": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 41,
+        "retained": 17,
+        "status": "ok"
+      },
+      "g_research": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 14,
+        "retained": 5,
+        "status": "ok"
+      },
+      "morgan_stanley": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 31,
+        "retained": 14,
+        "status": "ok"
+      },
+      "pimco": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 38,
+        "retained": 18,
+        "status": "ok"
+      },
+      "td": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 36,
+        "retained": 2,
+        "status": "ok"
+      },
+      "tp_icap": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": true,
+        "requests": 31,
+        "retained": 11,
+        "status": "ok"
+      }
+    },
+    "status": "ok",
+    "telegram_network_calls": 0
+  },
+  "live_initial_import": {
+    "status": "ok",
+    "successful": 6,
+    "new": 49,
+    "updated": 0,
+    "alerts_created": 0,
+    "requests_during_import": 0
+  },
+  "preservation": {
+    "checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "application_rows_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true
+    },
+    "counts_after": {
+      "alert_history": 98,
+      "alerts": 49,
+      "application_history": 2,
+      "applications": 1558,
+      "jobs": 1558
+    },
+    "counts_before": {
+      "alert_history": 98,
+      "alerts": 49,
+      "application_history": 2,
+      "applications": 1509,
+      "jobs": 1509
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    },
+    "stage": "verification"
+  },
+  "dashboard": {
+    "actual_image_verified": true,
+    "dashboard_contract": {
+      "asset_hashes": "verified",
+      "controls": 86,
+      "jobs": 1558,
+      "modules": 7,
+      "status": "ok"
+    },
+    "dashboard_editable": true,
+    "dashboard_radar_policy_matches": true,
+    "dashboard_without_telegram_credentials": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "https_trusted": true,
+    "same_private_link": true,
+    "page_seconds": 19.665,
+    "services_running": 5,
+    "systemd_active_enabled": 4,
+    "summary": {
+      "active": 1543,
+      "applications_due": 0,
+      "applications_in_progress": 1,
+      "enabled_sources": 85,
+      "fresh_sources": 80,
+      "high_priority": 354,
+      "relevant": 511,
+      "total": 1558
+    },
+    "incidents": [
+      {
+        "source": "hsbc_professionals",
+        "status": "recent_failure"
+      },
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "jefferies_campus",
+        "status": "recent_failure"
+      },
+      {
+        "source": "bnp_campus",
+        "status": "recent_failure"
+      }
+    ],
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_control_enabled": true,
+      "telegram_heartbeat_enabled": true,
+      "telegram_heartbeat_times": [
+        "13:00",
+        "18:00"
+      ],
+      "telegram_incident_notices_enabled": false
+    }
+  },
+  "hsbc_observation": {
+    "external_id": "1370782657",
+    "last_verified": "2026-10-12T14:20:21.621937+00:00",
+    "last_material_update": "2026-10-12T02:10:00.680399+00:00",
+    "score": 92,
+    "historical_versions": 6,
+    "location": "Beijing, BJ, CN; Shanghai, SH, CN; Shenzhen, GD, CN"
+  },
+  "services": [
+    {
+      "name": "/immortal-trading-cloud-radar-1",
+      "running": true,
+      "health": "healthy",
+      "restarts": 0,
+      "started_at": "2026-10-12T14:10:02.218340099Z"
+    },
+    {
+      "name": "/immortal-trading-cloud-telegram-1",
+      "running": true,
+      "health": null,
+      "restarts": 0,
+      "started_at": "2026-10-12T14:10:02.220252198Z"
+    },
+    {
+      "name": "/immortal-trading-cloud-backups-1",
+      "running": true,
+      "health": null,
+      "restarts": 0,
+      "started_at": "2026-10-12T14:10:02.240560323Z"
+    },
+    {
+      "name": "/immortal-trading-dashboard-dashboard-1",
+      "running": true,
+      "health": "healthy",
+      "restarts": 0,
+      "started_at": "2026-10-12T14:10:03.620402089Z"
+    },
+    {
+      "name": "/immortal-trading-dashboard-https-1",
+      "running": true,
+      "health": null,
+      "restarts": 0,
+      "started_at": "2026-10-07T06:32:17.312344045Z"
+    }
+  ],
+  "daily_digest_delivery_confirmed": "2026-10-12",
+  "daily_digest_evidence": "lot148_before_container_recreation",
+  "status_confirmation": {
+    "status_message_confirmed": true,
+    "messages_sent": 1,
+    "offer_messages_sent": 0,
+    "source_counts": {
+      "enabled": 85,
+      "employers": 73,
+      "fresh": 80
+    },
+    "watcher": "active",
+    "daily_time": "09:00",
+    "daily_enabled": true,
+    "telegram_state_rewritten": false,
+    "heartbeat_schedule": [
+      "13:00",
+      "18:00"
+    ],
+    "heartbeat_binding_verified": true,
+    "incidents": [
+      {
+        "source": "hsbc_professionals",
+        "status": "recent_failure"
+      },
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "jefferies_campus",
+        "status": "recent_failure"
+      },
+      {
+        "source": "bnp_campus",
+        "status": "recent_failure"
+      }
+    ]
+  },
+  "scheduled_status_times_paris": [
+    "09:00",
+    "13:00",
+    "18:00"
+  ],
+  "source_counts": {
+    "employers": 73,
+    "enabled": 85,
+    "fresh": 80
+  },
+  "statuts_alias_verified": true,
+  "ci": {
+    "run_id": 38258320123,
+    "url": "https://github.com/Louisgsln/Immortal-Trading/actions/runs/38258320123",
+    "all_six_jobs": "success",
+    "python_versions": [
+      "3.11",
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "python_tests_per_version": 5347,
+    "coverage_percent": 96,
+    "node_tests": 34,
+    "packaged_dashboard_contract": "ok",
+    "isolated_container_recovery": "ok",
+    "python314_warning": "ResourceWarning: unclosed SQLite connection; allocation to diagnose"
+  },
+  "protection": {
+    "rdc_sudo_block_restored": true,
+    "blocked_command_count": 33
+  }
+}

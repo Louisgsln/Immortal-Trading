@@ -14,12 +14,19 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
+Les lots **151–153**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS151-153.md),
+ajoutent **PIMCO, BlackRock, CIBC, TD, G-Research et TP ICAP** : **85 sources / 73 employeurs**,
+**80 à jour au relevé daté**. [Inventaire actuel](docs/RADAR-SOURCES-LOTS151-153.md).
+Telegram donne un état à **09:00, 13:00 et 18:00, heure de Paris**, même sans nouvelle offre.
+Les collectes Workday concernées recontrôlent la pagination ; le signal du radar est capturé
+avant les contrôles lents. **49 fiches importées sans alerte rétroactive**, données et curseur préservés.
+
 Les lots **148–150**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS148-150.md),
 corrigent les fausses mises à jour HSBC liées à l'ordre des villes et affichent
 l'état du radar dans le récapitulatif quotidien de **09:00, heure de Paris**, même sans offre.
 Le worker et le Dashboard sont sains ; **79 sources / 67 employeurs** sont surveillés,
-**73 sources à jour au dernier relevé daté**, six restent à surveiller.
-[Inventaire actuel](docs/RADAR-SOURCES-20261012.md) ; `/statuts` pour l'état courant.
+**73 sources à jour au relevé de 13:20 UTC**, six à surveiller lors de ces lots.
+[Inventaire des lots 148–150](docs/RADAR-SOURCES-20261012.md) ; `/statuts` pour l'état courant.
 Base, historique des alertes, suivi et curseur Telegram préservés.
 
 Les lots **141-A et 143-A**, [installés et vérifiés](docs/VALIDATION-INTEGRATIONS-20261011.md), ajoutent
@@ -27,7 +34,7 @@ Rothschild étudiants, Millennium professionnels, Brevan Howard et BNP stages :
 **79 sources / 67 employeurs** sur OVH, **72 à jour au relevé daté**.
 L'[inventaire complet](docs/RADAR-SOURCES-20261011.md) donne toutes les URL et les limites :
 BNP stages reste partiel ; les portails refusés ou non intégrés restent explicites.
-`/statuts` donne le même total ; `/sources`, `/sources 2`, `/sources 3` donnent la liste.
+`/statuts` donne le total courant ; `/sources`, `/sources 2`, `/sources 3` donnent la liste.
 Off-cycle et stages longs 2027 inclus, Summer hors alertes ; 70 fiches nouvelles importées
 sans alerte rétroactive, base, suivi et curseur Telegram préservés. Brevan propose un off-cycle
 3–6 mois collecté dont l'année et la qualification métier restent à confirmer.

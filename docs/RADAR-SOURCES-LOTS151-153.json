@@ -1,0 +1,797 @@
+{
+  "observed_at": "2026-10-12T14:16:32.055254+00:00",
+  "source_counts": {
+    "enabled": 85,
+    "employers": 73,
+    "fresh": 80
+  },
+  "watcher": {
+    "status": "active",
+    "phase": "scanning",
+    "at": "2026-10-12T14:16:12.424736+00:00",
+    "age_seconds": 9
+  },
+  "unique_catalogue_urls": 84,
+  "inventory": [
+    {
+      "source": "3red",
+      "company": "3Red Partners",
+      "career_url": "https://job-boards.greenhouse.io/3redpartners",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:12:37.419355+00:00",
+      "last_count": 3,
+      "listing_gaps": []
+    },
+    {
+      "source": "acadian",
+      "company": "Acadian Asset Management",
+      "career_url": "https://www.acadian-asset.com/careers/open-positions",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:14:37.429013+00:00",
+      "last_count": 0,
+      "listing_gaps": []
+    },
+    {
+      "source": "akuna_capital",
+      "company": "Akuna Capital",
+      "career_url": "https://akunacapital.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:13.511341+00:00",
+      "last_count": 10,
+      "listing_gaps": []
+    },
+    {
+      "source": "aqr",
+      "company": "AQR",
+      "career_url": "https://careers.aqr.com/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:40:45.460452+00:00",
+      "last_count": 3,
+      "listing_gaps": []
+    },
+    {
+      "source": "aquatic",
+      "company": "Aquatic Capital Management",
+      "career_url": "https://job-boards.greenhouse.io/aquaticcapitalmanagement",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:40:53.114265+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "bank_of_america",
+      "company": "Bank of America",
+      "career_url": "https://ghr.wd1.myworkdayjobs.com/lateral-us",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:03:09.343940+00:00",
+      "last_count": 11,
+      "listing_gaps": []
+    },
+    {
+      "source": "bank_of_america_campus",
+      "company": "Bank of America",
+      "career_url": "https://careers.bankofamerica.com/en-us/students/job-search",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:55:24.131124+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "barclays",
+      "company": "Barclays",
+      "career_url": "https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:02:44.849347+00:00",
+      "last_count": 22,
+      "listing_gaps": []
+    },
+    {
+      "source": "blackrock",
+      "company": "BlackRock",
+      "career_url": "https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:55.049552+00:00",
+      "last_count": 13,
+      "listing_gaps": []
+    },
+    {
+      "source": "bnp_campus",
+      "company": "BNP Paribas",
+      "career_url": "https://group.bnpparibas/en/careers/all-job-offers/trainee-internship",
+      "status": "recent_failure",
+      "last_success": "2026-10-12T11:52:06.875834+00:00",
+      "last_count": 3,
+      "listing_gaps": [
+        "https://group.bnpparibas/en/careers/job-offer/london-quant-long-term-internship-2027-cash-equity-electronic-equities",
+        "https://group.bnpparibas/en/careers/job-offer/london-long-term-internship-2027-global-markets-quantitative-research-analyst",
+        "https://group.bnpparibas/en/careers/job-offer/london-long-term-internship-2027-etrading-quantitative-research",
+        "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-global-markets-theam-fund-sales-internship-2",
+        "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-global-markets-theam-fund-sales-internship-rome-italy",
+        "https://group.bnpparibas/en/careers/job-offer/praktikum-all-genders-im-bereich-global-markets-mit-themenschwerpunkt-structured-product-sales-1",
+        "https://group.bnpparibas/en/careers/job-offer/structurer-operational-intern-h-f",
+        "https://group.bnpparibas/en/careers/job-offer/debt-markets-investment-grade-finance-intern",
+        "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-real-estate-capital-markets-internship-3",
+        "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-real-estate-capital-markets-internship-4",
+        "https://group.bnpparibas/en/careers/job-offer/capital-and-portfolio-management-internship-real-estate-capital-markets-emea",
+        "https://group.bnpparibas/en/careers/job-offer/financial-international-markets-trainee-1",
+        "https://group.bnpparibas/en/careers/job-offer/risk-quantitative-analyst-trainee"
+      ]
+    },
+    {
+      "source": "bnp_paribas",
+      "company": "BNP Paribas",
+      "career_url": "https://group.bnpparibas/emploi-carriere/toutes-offres-emploi",
+      "status": "stale",
+      "last_success": "2026-09-16T19:06:21.927986+00:00",
+      "last_count": 23,
+      "listing_gaps": []
+    },
+    {
+      "source": "brevan_howard",
+      "company": "Brevan Howard",
+      "career_url": "https://brevanhoward.wd3.myworkdayjobs.com/BH_ExternalCareers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:06:21.656312+00:00",
+      "last_count": 17,
+      "listing_gaps": []
+    },
+    {
+      "source": "capula",
+      "company": "Capula",
+      "career_url": "https://apply.workable.com/capula-investment-management-ltd/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:45:11.951033+00:00",
+      "last_count": 3,
+      "listing_gaps": []
+    },
+    {
+      "source": "chicago_trading",
+      "company": "Chicago Trading Company",
+      "career_url": "https://www.chicagotrading.com/search",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:20.462833+00:00",
+      "last_count": 3,
+      "listing_gaps": []
+    },
+    {
+      "source": "chicago_trading_campus",
+      "company": "Chicago Trading Company",
+      "career_url": "https://www.chicagotrading.com/campus",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:36.054514+00:00",
+      "last_count": 5,
+      "listing_gaps": []
+    },
+    {
+      "source": "cibc",
+      "company": "CIBC",
+      "career_url": "https://cibc.wd3.myworkdayjobs.com/search",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:55.055730+00:00",
+      "last_count": 0,
+      "listing_gaps": []
+    },
+    {
+      "source": "citi",
+      "company": "Citi",
+      "career_url": "https://citi.wd5.myworkdayjobs.com/2",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:03:01.521941+00:00",
+      "last_count": 40,
+      "listing_gaps": []
+    },
+    {
+      "source": "citi_campus",
+      "company": "Citi",
+      "career_url": "https://citi.wd5.myworkdayjobs.com/2",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:16:15.962329+00:00",
+      "last_count": 17,
+      "listing_gaps": []
+    },
+    {
+      "source": "credit_agricole_cib",
+      "company": "Crédit Agricole CIB",
+      "career_url": "https://jobs.ca-cib.com/pages/offre/listeoffre.aspx",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:07:31.047372+00:00",
+      "last_count": 27,
+      "listing_gaps": []
+    },
+    {
+      "source": "da_vinci",
+      "company": "Da Vinci",
+      "career_url": "https://davincitrading.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:41:08.646076+00:00",
+      "last_count": 10,
+      "listing_gaps": []
+    },
+    {
+      "source": "deutsche_bank",
+      "company": "Deutsche Bank",
+      "career_url": "https://db.wd3.myworkdayjobs.com/DBWebsite",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:12:55.347949+00:00",
+      "last_count": 21,
+      "listing_gaps": []
+    },
+    {
+      "source": "deutsche_bank_campus",
+      "company": "Deutsche Bank",
+      "career_url": "https://careers.db.com/students-graduates/search-programmes/index?language_id=1",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:13:33.929180+00:00",
+      "last_count": 14,
+      "listing_gaps": []
+    },
+    {
+      "source": "drw",
+      "company": "DRW",
+      "career_url": "https://www.drw.com/work-at-drw/listings",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:06:04.005121+00:00",
+      "last_count": 29,
+      "listing_gaps": []
+    },
+    {
+      "source": "dv_trading",
+      "company": "DV Trading",
+      "career_url": "https://dvtrading.co/join-dv/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:44.016044+00:00",
+      "last_count": 21,
+      "listing_gaps": []
+    },
+    {
+      "source": "engineers_gate",
+      "company": "Engineers Gate",
+      "career_url": "https://www.eglp.com/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:41:49.480830+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "five_rings",
+      "company": "Five Rings",
+      "career_url": "https://fiverings.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:51.572455+00:00",
+      "last_count": 5,
+      "listing_gaps": []
+    },
+    {
+      "source": "flow_traders",
+      "company": "Flow Traders",
+      "career_url": "https://www.flowtraders.com/careers/job-search/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:07.617012+00:00",
+      "last_count": 11,
+      "listing_gaps": []
+    },
+    {
+      "source": "g_research",
+      "company": "G-Research",
+      "career_url": "https://gresearch.wd103.myworkdayjobs.com/G-Research",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:55.184640+00:00",
+      "last_count": 5,
+      "listing_gaps": []
+    },
+    {
+      "source": "gelber",
+      "company": "Gelber Group",
+      "career_url": "https://www.gelbergroup.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:45:39.647579+00:00",
+      "last_count": 10,
+      "listing_gaps": []
+    },
+    {
+      "source": "geneva_trading",
+      "company": "Geneva Trading",
+      "career_url": "https://www.genevatrading.com/careers-open-positions/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:51:08.053718+00:00",
+      "last_count": 5,
+      "listing_gaps": []
+    },
+    {
+      "source": "goldman_campus",
+      "company": "Goldman Sachs",
+      "career_url": "https://higher.gs.com/campus",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:50.754101+00:00",
+      "last_count": 17,
+      "listing_gaps": []
+    },
+    {
+      "source": "goldman_sachs",
+      "company": "Goldman Sachs",
+      "career_url": "https://higher.gs.com/results",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:12.962542+00:00",
+      "last_count": 35,
+      "listing_gaps": []
+    },
+    {
+      "source": "graham",
+      "company": "Graham Capital Management",
+      "career_url": "https://www.grahamcapital.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:52:14.431440+00:00",
+      "last_count": 1,
+      "listing_gaps": []
+    },
+    {
+      "source": "graviton",
+      "company": "Graviton Research Capital",
+      "career_url": "https://job-boards.greenhouse.io/gravitonresearchcapital",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:52:36.883445+00:00",
+      "last_count": 7,
+      "listing_gaps": []
+    },
+    {
+      "source": "headlands",
+      "company": "Headlands Technologies",
+      "career_url": "https://www.headlandstech.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:54:06.391721+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "hsbc_graduates",
+      "company": "HSBC",
+      "career_url": "https://www.hsbc.com/careers/students-and-graduates/find-a-programme",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:07:52.312772+00:00",
+      "last_count": 8,
+      "listing_gaps": []
+    },
+    {
+      "source": "hsbc_professionals",
+      "company": "HSBC",
+      "career_url": "https://portal.careers.hsbc.com/careers",
+      "status": "recent_failure",
+      "last_success": "2026-10-12T14:01:38.356356+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "hudson_river_trading",
+      "company": "Hudson River Trading",
+      "career_url": "https://www.hudsonrivertrading.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:20.924990+00:00",
+      "last_count": 10,
+      "listing_gaps": []
+    },
+    {
+      "source": "imc",
+      "company": "IMC",
+      "career_url": "https://www.imc.com/us/search-careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:07:58.380830+00:00",
+      "last_count": 28,
+      "listing_gaps": []
+    },
+    {
+      "source": "ing",
+      "company": "ING",
+      "career_url": "https://ing.wd3.myworkdayjobs.com/ICSGBLCOR",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:49:41.617086+00:00",
+      "last_count": 6,
+      "listing_gaps": []
+    },
+    {
+      "source": "jane_street",
+      "company": "Jane Street",
+      "career_url": "https://www.janestreet.com/join-jane-street/open-roles/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:07:03.329543+00:00",
+      "last_count": 230,
+      "listing_gaps": []
+    },
+    {
+      "source": "jefferies_campus",
+      "company": "Jefferies",
+      "career_url": "https://jefferies.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/candidate/jobboard/vacancy/2/adv/",
+      "status": "recent_failure",
+      "last_success": "2026-10-11T20:22:11.058172+00:00",
+      "last_count": 3,
+      "listing_gaps": []
+    },
+    {
+      "source": "jump_trading",
+      "company": "Jump Trading",
+      "career_url": "https://www.jumptrading.com/careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:07:38.986297+00:00",
+      "last_count": 25,
+      "listing_gaps": []
+    },
+    {
+      "source": "lazard_campus",
+      "company": "Lazard",
+      "career_url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:42:29.717625+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "macquarie",
+      "company": "Macquarie",
+      "career_url": "https://recruitment.macquarie.com/en_US/careers/SearchJobs/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:14:26.257418+00:00",
+      "last_count": 12,
+      "listing_gaps": []
+    },
+    {
+      "source": "mako",
+      "company": "Mako",
+      "career_url": "https://www.mako.com/opportunities",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:56:19.168210+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "man_group",
+      "company": "Man Group",
+      "career_url": "https://www.man.com/careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:54:22.042613+00:00",
+      "last_count": 7,
+      "listing_gaps": []
+    },
+    {
+      "source": "marshall_wace_graduates",
+      "company": "Marshall Wace",
+      "career_url": "https://www.mwam.com/join-us/early-careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:54:14.024289+00:00",
+      "last_count": 1,
+      "listing_gaps": []
+    },
+    {
+      "source": "maven_securities",
+      "company": "Maven Securities",
+      "career_url": "https://www.mavensecurities.com/jobs/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:28.824504+00:00",
+      "last_count": 10,
+      "listing_gaps": []
+    },
+    {
+      "source": "millennium_campus",
+      "company": "Millennium",
+      "career_url": "https://campusjobs.mlp.com/careers?domain=mlp.com&microsite=campus-site",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:04:12.593720+00:00",
+      "last_count": 18,
+      "listing_gaps": []
+    },
+    {
+      "source": "millennium_professionals",
+      "company": "Millennium",
+      "career_url": "https://career.mlp.com/careers?domain=mlp.com",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:48:20.617014+00:00",
+      "last_count": 47,
+      "listing_gaps": []
+    },
+    {
+      "source": "morgan_stanley",
+      "company": "Morgan Stanley",
+      "career_url": "https://ms.wd5.myworkdayjobs.com/External",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:12:12.002285+00:00",
+      "last_count": 14,
+      "listing_gaps": []
+    },
+    {
+      "source": "morgan_stanley_campus",
+      "company": "Morgan Stanley",
+      "career_url": "https://morganstanley.tal.net/vx/lang-en-GB/candidate/jobboard/vacancy/1/adv",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:14:47.022212+00:00",
+      "last_count": 18,
+      "listing_gaps": []
+    },
+    {
+      "source": "nomura_campus",
+      "company": "Nomura",
+      "career_url": "https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/",
+      "status": "access_restricted",
+      "last_success": "2026-10-11T08:44:52.474328+00:00",
+      "last_count": 8,
+      "listing_gaps": []
+    },
+    {
+      "source": "nomura_professionals",
+      "company": "Nomura",
+      "career_url": "https://careers.nomura.com/Nomura?locale=en_US",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:06:33.422619+00:00",
+      "last_count": 15,
+      "listing_gaps": []
+    },
+    {
+      "source": "old_mission",
+      "company": "Old Mission",
+      "career_url": "https://www.oldmissioncapital.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:10:57.219963+00:00",
+      "last_count": 20,
+      "listing_gaps": []
+    },
+    {
+      "source": "optiver",
+      "company": "Optiver",
+      "career_url": "https://www.optiver.com/join-us/jobs",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:06:52.991064+00:00",
+      "last_count": 24,
+      "listing_gaps": []
+    },
+    {
+      "source": "pdt",
+      "company": "PDT Partners",
+      "career_url": "https://pdtpartners.com/careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:56:35.694321+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "pimco",
+      "company": "PIMCO",
+      "career_url": "https://pimco.wd1.myworkdayjobs.com/pimco-careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:54.619932+00:00",
+      "last_count": 18,
+      "listing_gaps": []
+    },
+    {
+      "source": "point72",
+      "company": "Point72",
+      "career_url": "https://careers.point72.com/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:08:28.451846+00:00",
+      "last_count": 31,
+      "listing_gaps": []
+    },
+    {
+      "source": "quantbot",
+      "company": "Quantbot Technologies",
+      "career_url": "https://www.quantbot.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:56:50.324080+00:00",
+      "last_count": 5,
+      "listing_gaps": []
+    },
+    {
+      "source": "qube_research",
+      "company": "Qube Research & Technologies",
+      "career_url": "https://job-boards.greenhouse.io/quberesearchandtechnologies",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:56:56.125610+00:00",
+      "last_count": 23,
+      "listing_gaps": []
+    },
+    {
+      "source": "radix_campus",
+      "company": "Radix Trading",
+      "career_url": "https://job-boards.greenhouse.io/radixuniversity",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:58:45.371646+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "radix_professionals",
+      "company": "Radix Trading",
+      "career_url": "https://job-boards.greenhouse.io/radixexperienced",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:00:33.788827+00:00",
+      "last_count": 1,
+      "listing_gaps": []
+    },
+    {
+      "source": "rbc",
+      "company": "RBC",
+      "career_url": "https://rbc.wd3.myworkdayjobs.com/RBCGLOBAL1",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:41:34.723908+00:00",
+      "last_count": 11,
+      "listing_gaps": []
+    },
+    {
+      "source": "rothschild_campus",
+      "company": "Rothschild & Co",
+      "career_url": "https://www.rothschildandco.com/en/careers/students-and-graduates/opportunities/",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:43:31.739190+00:00",
+      "last_count": 6,
+      "listing_gaps": []
+    },
+    {
+      "source": "santander",
+      "company": "Santander",
+      "career_url": "https://santander.wd3.myworkdayjobs.com/SantanderCareers",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:48:44.430492+00:00",
+      "last_count": 11,
+      "listing_gaps": []
+    },
+    {
+      "source": "schonfeld",
+      "company": "Schonfeld",
+      "career_url": "https://www.schonfeld.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:12:20.459678+00:00",
+      "last_count": 11,
+      "listing_gaps": []
+    },
+    {
+      "source": "societe_generale",
+      "company": "Société Générale",
+      "career_url": "https://careers.societegenerale.com/fr/Technical/toutes-les-offres",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:04:44.030447+00:00",
+      "last_count": 33,
+      "listing_gaps": []
+    },
+    {
+      "source": "squarepoint_capital",
+      "company": "Squarepoint Capital",
+      "career_url": "https://www.squarepoint-capital.com/open-opportunities",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:15:23.453432+00:00",
+      "last_count": 15,
+      "listing_gaps": []
+    },
+    {
+      "source": "sig",
+      "company": "Susquehanna",
+      "career_url": "https://careers.sig.com/jobs",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:15:14.866275+00:00",
+      "last_count": 52,
+      "listing_gaps": []
+    },
+    {
+      "source": "td",
+      "company": "TD",
+      "career_url": "https://td.wd3.myworkdayjobs.com/TD_Bank_Careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:55.105745+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "tower_research",
+      "company": "Tower Research Capital",
+      "career_url": "https://tower-research.com/roles/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:15:32.598090+00:00",
+      "last_count": 22,
+      "listing_gaps": []
+    },
+    {
+      "source": "tp_icap",
+      "company": "TP ICAP",
+      "career_url": "https://tp.wd107.myworkdayjobs.com/TP-ICAP",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:09:55.394490+00:00",
+      "last_count": 11,
+      "listing_gaps": []
+    },
+    {
+      "source": "transmarket_group",
+      "company": "TransMarket Group",
+      "career_url": "https://www.transmarketgroup.com/careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:15:41.298185+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "tudor",
+      "company": "Tudor Group",
+      "career_url": "https://job-boards.greenhouse.io/tudorgroup",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:01:54.322535+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "ubs",
+      "company": "UBS",
+      "career_url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:05:47.775624+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "ubs_professionals",
+      "company": "UBS",
+      "career_url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:05:21.866631+00:00",
+      "last_count": 29,
+      "listing_gaps": []
+    },
+    {
+      "source": "verition",
+      "company": "Verition",
+      "career_url": "https://www.verition.com/open-positions",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:11:08.317798+00:00",
+      "last_count": 4,
+      "listing_gaps": []
+    },
+    {
+      "source": "virtu_financial",
+      "company": "Virtu Financial",
+      "career_url": "https://www.virtu.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:05:30.112039+00:00",
+      "last_count": 21,
+      "listing_gaps": []
+    },
+    {
+      "source": "walleye_capital",
+      "company": "Walleye Capital",
+      "career_url": "https://walleyecapital.com/careers",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:05:55.785407+00:00",
+      "last_count": 3,
+      "listing_gaps": []
+    },
+    {
+      "source": "wells_fargo",
+      "company": "Wells Fargo",
+      "career_url": "https://wf.wd1.myworkdayjobs.com/WellsFargoJobs",
+      "status": "fresh",
+      "last_success": "2026-10-12T13:51:25.473042+00:00",
+      "last_count": 2,
+      "listing_gaps": []
+    },
+    {
+      "source": "winton",
+      "company": "Winton",
+      "career_url": "https://job-boards.eu.greenhouse.io/winton",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:11:15.770312+00:00",
+      "last_count": 1,
+      "listing_gaps": []
+    },
+    {
+      "source": "worldquant",
+      "company": "WorldQuant",
+      "career_url": "https://job-boards.greenhouse.io/worldquant",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:12:29.100870+00:00",
+      "last_count": 15,
+      "listing_gaps": []
+    },
+    {
+      "source": "xtx_markets",
+      "company": "XTX Markets",
+      "career_url": "https://www.xtxmarkets.com/careers/",
+      "status": "fresh",
+      "last_success": "2026-10-12T14:07:46.472386+00:00",
+      "last_count": 1,
+      "listing_gaps": []
+    }
+  ],
+  "profile_sha256": "e09f078072f4799a7be49aed6de378b40d89db06d82cb97ee0d963516ac8338d"
+}
