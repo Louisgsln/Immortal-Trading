@@ -60,11 +60,13 @@ Trois points Telegram par jour à 09:00, 13:00 et 18:00 Europe/Paris ; six sourc
 Base, alertes, suivi et curseur Telegram préservés ; même Dashboard HTTPS privé.
 Le digest reste activé à 09:00, heure de Paris ; `/statuts` donne le nombre et l'état courant.
 
-Le lot 147 reste ouvert : au relevé du 12/10, Goldman campus, Point72 et Morgan Stanley campus
+Le lot 147 reste ouvert : au relevé initial de 13:20 UTC le 12/10, Goldman campus, Point72 et Morgan Stanley campus
 ont retrouvé un état à jour. Morgan Stanley professionnels est partiel ; Citi campus est en échec récent.
 Diagnostiquer ces détails et collectes, suivre leur reprise, puis revalider les témoins avant clôture.
 BNP général/campus et Jefferies campus restent en difficulté ; Nomura campus attend toujours
 l'intervention humaine choisie par le propriétaire. Aucune erreur n'est assimilée à un catalogue vide.
+Citi campus et Morgan Stanley professionnels sont à jour dans le relevé des lots 151–153 à 14:16 UTC.
+Ces reprises ne clôturent pas le suivi des autres accès en difficulté.
 
 ## Livraison du 11 octobre — 141-A et 143-A
 
