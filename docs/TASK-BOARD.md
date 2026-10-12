@@ -1,4 +1,4 @@
-# Carnet des tâches — 10 octobre 2026
+# Carnet des tâches — 12 octobre 2026
 
 Ce carnet suit l’instance OVH. Un connecteur développé ou une offre visible dans
 un catalogue public ne sont pas, à eux seuls, une preuve de surveillance active.
@@ -7,7 +7,8 @@ Les validations et mesures sont dans [VALIDATION-LOTS125-127.md](VALIDATION-LOTS
 [VALIDATION-LOT128.md](VALIDATION-LOT128.md) et
 [VALIDATION-LOTS129-131.md](VALIDATION-LOTS129-131.md) et
 [VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire actuel
-est [daté par source](RADAR-SOURCES-20261010.md) : 75 sources / 65 employeurs.
+est [daté par source](RADAR-SOURCES-20261012.md) : 79 sources / 67 employeurs,
+73 à jour au relevé du 12 octobre. Les chiffres des livraisons précédentes restent historiques.
 Ce carnet a été réconcilié avec le VPS :
 les anciennes mentions Windows et exclusions globales des stages étaient historiques.
 
@@ -42,6 +43,24 @@ les anciennes mentions Windows et exclusions globales des stages étaient histor
 Chaque livraison clôture ses lignes après tests, sauvegarde vérifiée, installation
 et observation. Les compteurs de premier import ne doivent pas être présentés
 comme un nombre garanti de nouvelles offres par semaine.
+
+## Livraison du 12 octobre — lots 148–150
+
+| Lot | État | Résultat observé |
+|---|---|---|
+| 148 — HSBC, localisation | Installé et vérifié | Ordre des villes ignoré dans la comparaison ; vraie ville ajoutée/retirée toujours signalée ; six versions historiques conservées après une nouvelle collecte |
+| 149 — État Telegram quotidien | Installé et vérifié | Bloc radar même sans offre, programmation indépendante des erreurs de réception ; envoi du 12/10 confirmé, confirmation distincte envoyée une fois |
+| 150 — Contrôle du worker H24 | Installé et vérifié | Radar sain malgré les problèmes de couverture explicitement conservés ; 79 sources programmées, 73 à jour, zéro redémarrage au contrôle final |
+
+[Validation](VALIDATION-LOTS148-150.md) et [preuves](DELIVERY-LOTS148-150.json).
+Base, alertes, suivi et curseur Telegram préservés ; même Dashboard HTTPS privé.
+Le digest reste activé à 09:00, heure de Paris ; `/statuts` donne le nombre et l'état courant.
+
+Le lot 147 reste ouvert : au relevé du 12/10, Goldman campus, Point72 et Morgan Stanley campus
+ont retrouvé un état à jour. Morgan Stanley professionnels est partiel ; Citi campus est en échec récent.
+Diagnostiquer ces détails et collectes, suivre leur reprise, puis revalider les témoins avant clôture.
+BNP général/campus et Jefferies campus restent en difficulté ; Nomura campus attend toujours
+l'intervention humaine choisie par le propriétaire. Aucune erreur n'est assimilée à un catalogue vide.
 
 ## Livraison du 11 octobre — 141-A et 143-A
 
@@ -82,6 +101,9 @@ ont été observés sur OVH. Chaque lot présente son avant/après et ses limite
 | 144 / haute — témoins de stages | Ajouter Citi Markets Paris 2027, Deutsche Bank Global Markets et placements longs à la référence indépendante ; structurer durée/début/graduation/langues ; qualifier le Citi LATAM Analyst Program 2025 encore affiché à 70 | Identités et extraits employeur conservés ; Summer/mauvais millésime exclus ; conversion CDI conditionnelle distincte, année inconnue non inventée | À faire ; complète 134 et les régressions 132 |
 | 145 / moyenne — export de couverture | Comparer sources, employeurs, associations d'offres, programmes admissibles et alertes envoyées sur sept jours | Utiliser `job_sources` pour les portails communs Citi ; dédupliquer les offres ; distinguer import initial, découverte et publication | À faire ; complète 136 et l'inventaire 139 |
 | 147 / haute — reprise des sources critiques | Goldman campus : rôle incomplet/incohérent ; Point72 : timeout ; Morgan Stanley campus : échec récent | Diagnostiquer la fiche et le contrat employeur, retrouver un témoin ; aucun faux succès ni fermeture par absence | Ouvert le 11/10, [relevé](RADAR-SOURCES-20261011.md) |
+| 148 — stabilité HSBC | Comparer les adresses multiples indépendamment de leur ordre et rendre la localisation lisible | Historique réel et permutations sans nouvelle alerte ; vraie ville modifiée détectée ; observation OVH | Installé et vérifié le 12/10 |
+| 149 — état quotidien Telegram | Afficher activité, couverture et seuil dans le récapitulatif, même sans offre ; isoler la programmation des erreurs de réception | Préférences et curseur préservés, une tentative par jour, envoi confirmé | Installé et vérifié le 12/10, 09:00 Europe/Paris |
+| 150 — santé du worker | Distinguer activité du radar et accès aux employeurs dans le contrôle Docker | Worker sain ; signal ancien/base inaccessible toujours en échec ; problèmes de sources visibles | Installé et vérifié le 12/10 ; 73/79 à jour au relevé |
 
 ### Incidents et contrôles récurrents
 

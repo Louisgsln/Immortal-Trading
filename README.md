@@ -14,6 +14,14 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
+Les lots **148–150**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS148-150.md),
+corrigent les fausses mises à jour HSBC liées à l'ordre des villes et affichent
+l'état du radar dans le récapitulatif quotidien de **09:00, heure de Paris**, même sans offre.
+Le worker et le Dashboard sont sains ; **79 sources / 67 employeurs** sont surveillés,
+**73 sources à jour au dernier relevé daté**, six restent à surveiller.
+[Inventaire actuel](docs/RADAR-SOURCES-20261012.md) ; `/statuts` pour l'état courant.
+Base, historique des alertes, suivi et curseur Telegram préservés.
+
 Les lots **141-A et 143-A**, [installés et vérifiés](docs/VALIDATION-INTEGRATIONS-20261011.md), ajoutent
 Rothschild étudiants, Millennium professionnels, Brevan Howard et BNP stages :
 **79 sources / 67 employeurs** sur OVH, **72 à jour au relevé daté**.

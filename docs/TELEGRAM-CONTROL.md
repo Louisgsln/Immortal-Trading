@@ -114,14 +114,18 @@ immédiat rétroactif. Un changement d'horaire ne permet pas de renvoyer le
 récapitulatif d'une date déjà tentée.
 
 Le message reprend les découvertes des 24 heures précédant son exécution,
-avec les mêmes critères que `/new`, et le nombre de sources à jour. Un jour
-sans offre correspondante reste signalé par un message explicite. Les dates
+avec les mêmes critères que `/new`. Depuis les lots 148–150, il affiche aussi
+l'activité du radar, son dernier signal, les sources et employeurs surveillés,
+les sources à jour et le seuil des alertes. Un jour sans offre correspondante
+conserve ce bloc d'état et un message explicite. Les dates
 des fiches et l'horaire de programmation utilisent Europe/Paris.
 
-Le service vérifie l'horaire environ toutes les minutes. Il peut rattraper un
+Le service vérifie l'horaire environ toutes les minutes, indépendamment des erreurs
+de réception des commandes Telegram. Il peut rattraper un
 créneau manqué pendant les quatre heures suivantes, y compris après minuit.
-Au-delà, le créneau est ignoré ; aucun empilement des jours manqués. Une coupure
-du PC ou d'Internet empêche toujours le fonctionnement normal.
+Au-delà, le créneau est ignoré ; aucun empilement des jours manqués. Les services
+OVH continuent quand le PC de développement est fermé. Une interruption du VPS
+ou de sa connexion peut empêcher une collecte ou un envoi.
 
 Une seule tentative automatique est enregistrée par date de créneau **avant**
 l'appel Telegram. Un échec ou une livraison incertaine ne provoque pas de
