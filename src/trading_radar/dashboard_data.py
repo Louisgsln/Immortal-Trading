@@ -404,6 +404,17 @@ def build_dashboard_data(
         "fresh_sources": result["health"]["source_summary"].get("fresh", 0),
         "enabled_sources": sum(company.enabled for company in config.companies.values()),
     }
+    from trading_radar.dashboard_applications import ApplicationEditError
+    from trading_radar.wishlist import list_wishlist
+
+    try:
+        result["wishlist"] = {"status": "ok", "entries": list_wishlist(config)}
+    except ApplicationEditError:
+        result["wishlist"] = {"status": "unavailable", "entries": []}
+        result["warnings"].append(
+            "La liste de souhaits est indisponible. Les candidatures sont conservées."
+        )
+    result["telegram_all_new_jobs"] = config.settings.telegram_all_new_jobs
     result["facets"] = {
         "companies": sorted({job["company"] for job in jobs}),
         "countries": sorted({job["country"] for job in jobs if job["country"]}),

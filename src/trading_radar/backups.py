@@ -20,9 +20,12 @@ from zipfile import ZIP_STORED, ZipFile
 from filelock import FileLock
 
 from trading_radar.storage import SCHEMA, SCHEMA_VERSION
+from trading_radar.wishlist import validate as validate_wishlist
+from trading_radar.wishlist import wishlist_path
 
 DATABASE_MEMBER = "database.sqlite3"
 MANIFEST_MEMBER = "manifest.json"
+WISHLIST_MEMBER = "wishlist.sqlite3"
 SIDECARS = ("-wal", "-shm", "-journal")
 
 
@@ -90,6 +93,8 @@ def _require_new(path: Path, *, database: bool = False) -> None:
 def _protect_path(destination: Path, source: Path) -> None:
     protected = {
         source.resolve(),
+        wishlist_path(source),
+        *(Path(str(wishlist_path(source)) + suffix) for suffix in (*SIDECARS, ".lock")),
         *(Path(str(source.resolve()) + suffix) for suffix in (*SIDECARS, ".lock", ".scan.lock")),
     }
     if any(
@@ -108,6 +113,31 @@ def _publish(staged: Path, destination: Path, *, database: bool = False) -> None
     # Same-volume hard link publishes a complete file atomically and fails if another
     # process created the destination. Unlike replace(), it cannot overwrite a file.
     os.link(staged, destination)
+
+
+def _wishlist_manifest(path: Path, database: Path) -> dict[str, Any]:
+    with closing(_read_only(path)) as db, closing(_read_only(database)) as jobs:
+        validate_wishlist(db)
+        if db.execute("PRAGMA journal_mode").fetchone()[0] != "delete":
+            raise ValueError("Wishlist snapshot must be standalone")
+        known = {row[0] for row in jobs.execute("SELECT id FROM jobs")}
+        if any(
+            row[0] not in known
+            for row in db.execute(
+                "SELECT job_id FROM wishlist UNION SELECT job_id FROM wishlist_history"
+            )
+        ):
+            raise ValueError("Wishlist contains unknown jobs")
+        tables = {
+            name: db.execute(f'SELECT COUNT(*) FROM "{name}"').fetchone()[0]
+            for name in ("wishlist", "wishlist_history")
+        }
+    return {
+        "schema_version": 1,
+        "sqlite_bytes": path.stat().st_size,
+        "sha256": _digest(path),
+        "tables": tables,
+    }
 
 
 def create_backup(source: Path, destination: Path) -> dict[str, Any]:
@@ -138,9 +168,24 @@ def create_backup(source: Path, destination: Path) -> dict[str, Any]:
             "sha256": _digest(snapshot),
             **inspect_database(snapshot),
         }
+        wish_source = wishlist_path(source)
+        wish_snapshot = Path(directory) / WISHLIST_MEMBER
+        if wish_source.exists():
+            if wish_source.is_symlink():
+                raise ValueError("Wishlist must be a regular database")
+            with (
+                closing(_read_only(wish_source)) as reader,
+                closing(sqlite3.connect(wish_snapshot)) as writer,
+            ):
+                reader.backup(writer, pages=256, progress=progress, sleep=0.05)
+                writer.execute("PRAGMA journal_mode=DELETE")
+            manifest["format_version"] = 2
+            manifest["wishlist"] = _wishlist_manifest(wish_snapshot, snapshot)
         archive = Path(directory) / "backup.zip"
         with ZipFile(archive, "w", compression=ZIP_STORED) as bundle:
             bundle.write(snapshot, DATABASE_MEMBER)
+            if wish_snapshot.exists():
+                bundle.write(wish_snapshot, WISHLIST_MEMBER)
             bundle.writestr(MANIFEST_MEMBER, json.dumps(manifest, ensure_ascii=False, indent=2))
         # Verify the actual archive, not only the source snapshot, before publication.
         verify_backup(archive)
@@ -151,8 +196,12 @@ def create_backup(source: Path, destination: Path) -> dict[str, Any]:
 def _unpack_verified(archive: Path, snapshot: Path) -> dict[str, Any]:
     with ZipFile(archive) as bundle:
         entries = bundle.infolist()
-        if sorted(entry.filename for entry in entries) != [DATABASE_MEMBER, MANIFEST_MEMBER]:
-            raise ValueError("Backup must contain exactly database.sqlite3 and manifest.json.")
+        names = sorted(entry.filename for entry in entries)
+        has_wishlist = names == sorted([DATABASE_MEMBER, MANIFEST_MEMBER, WISHLIST_MEMBER])
+        if names != [DATABASE_MEMBER, MANIFEST_MEMBER] and not has_wishlist:
+            raise ValueError(
+                "Backup must contain exactly the fixed database, manifest and optional wishlist members."
+            )
         if any(entry.compress_type != ZIP_STORED for entry in entries):
             raise ValueError("Unsupported compressed backup; expected the radar archive format.")
         if any(entry.flag_bits & 1 for entry in entries):
@@ -168,9 +217,13 @@ def _unpack_verified(archive: Path, snapshot: Path) -> dict[str, Any]:
             "schema_version",
             "tables",
         }
+        if has_wishlist:
+            required.add("wishlist")
         if not isinstance(manifest, dict) or set(manifest) != required:
             raise ValueError("Invalid backup manifest.")
-        if type(manifest["format_version"]) is not int or manifest["format_version"] != 1:
+        if type(manifest["format_version"]) is not int or manifest["format_version"] != (
+            2 if has_wishlist else 1
+        ):
             raise ValueError("Unsupported backup format version.")
         try:
             created_at = datetime.fromisoformat(manifest["created_at"])
@@ -186,6 +239,20 @@ def _unpack_verified(archive: Path, snapshot: Path) -> dict[str, Any]:
         # Fixed output name, no ZipFile.extract: archive paths never choose a destination.
         with bundle.open(DATABASE_MEMBER) as reader, snapshot.open("xb") as writer:
             shutil.copyfileobj(reader, writer)
+        if has_wishlist:
+            details = manifest["wishlist"]
+            if (
+                not isinstance(details, dict)
+                or set(details) != {"schema_version", "sqlite_bytes", "sha256", "tables"}
+                or type(details["sqlite_bytes"]) is not int
+                or details["sqlite_bytes"] != bundle.getinfo(WISHLIST_MEMBER).file_size
+            ):
+                raise ValueError("Invalid wishlist manifest")
+            with (
+                bundle.open(WISHLIST_MEMBER) as reader,
+                (snapshot.parent / WISHLIST_MEMBER).open("xb") as writer,
+            ):
+                shutil.copyfileobj(reader, writer)
     if _digest(snapshot) != manifest["sha256"]:
         raise ValueError("Database SHA-256 does not match the manifest.")
     actual = inspect_database(snapshot)
@@ -193,6 +260,11 @@ def _unpack_verified(archive: Path, snapshot: Path) -> dict[str, Any]:
         raise ValueError("Database contents do not match the manifest.")
     if any(Path(str(snapshot) + suffix).exists() for suffix in SIDECARS):
         raise ValueError("Backup database is not a standalone SQLite file.")
+    if (
+        has_wishlist
+        and _wishlist_manifest(snapshot.parent / WISHLIST_MEMBER, snapshot) != manifest["wishlist"]
+    ):
+        raise ValueError("Wishlist contents do not match the manifest")
     return manifest
 
 
@@ -205,6 +277,10 @@ def verify_backup(archive: Path) -> dict[str, Any]:
 def restore_backup(archive: Path, destination: Path, *, protected: Path) -> dict[str, Any]:
     """Restore to a new file only; never select it as the active application database."""
     _protect_path(destination, protected)
+    wish_destination = wishlist_path(destination)
+    _protect_path(wish_destination, protected)
+    _protect_path(wish_destination, archive)
+    _require_new(wish_destination, database=True)
     lock_path = Path(str(destination) + ".lock")
     # FileLock can truncate an existing lock file on POSIX. Check aliases before
     # acquiring it, including an archive whose filename happens to end in .lock.
@@ -217,5 +293,18 @@ def restore_backup(archive: Path, destination: Path, *, protected: Path) -> dict
         with TemporaryDirectory(prefix=".radar-restore-", dir=destination.parent) as directory:
             snapshot = Path(directory) / DATABASE_MEMBER
             manifest = _unpack_verified(archive, snapshot)
-            _publish(snapshot, destination, database=True)
+            published_wish = None
+            if manifest["format_version"] == 2:
+                _publish(Path(directory) / WISHLIST_MEMBER, wish_destination, database=True)
+                published_wish = wish_destination.stat().st_ino
+            try:
+                _publish(snapshot, destination, database=True)
+            except Exception:
+                if (
+                    published_wish is not None
+                    and wish_destination.exists()
+                    and wish_destination.stat().st_ino == published_wish
+                ):
+                    wish_destination.unlink()
+                raise
     return manifest

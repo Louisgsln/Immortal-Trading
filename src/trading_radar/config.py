@@ -40,6 +40,7 @@ class Settings(BaseModel):
     closure_after_missing_scans: int = Field(default=2, ge=2)
     database_url: str = "sqlite:///data/jobs.db"
     alerts_enabled: bool = False
+    telegram_all_new_jobs: bool = False
     telegram_control_enabled: bool = False
     telegram_incident_notices_enabled: bool = False
     telegram_heartbeat_enabled: bool = False
@@ -85,6 +86,7 @@ def load_config(directory: Path = Path("config")) -> Config:
     for env, key in [
         ("DATABASE_URL", "database_url"),
         ("ALERTS_ENABLED", "alerts_enabled"),
+        ("TELEGRAM_ALL_NEW_JOBS", "telegram_all_new_jobs"),
         ("TELEGRAM_CONTROL_ENABLED", "telegram_control_enabled"),
         ("TELEGRAM_INCIDENT_NOTICES_ENABLED", "telegram_incident_notices_enabled"),
         ("TELEGRAM_HEARTBEAT_ENABLED", "telegram_heartbeat_enabled"),

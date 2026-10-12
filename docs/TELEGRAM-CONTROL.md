@@ -245,3 +245,13 @@ provoque un arrêt, sans effacement automatique.
 
 Références : [réception Telegram](https://core.telegram.org/bots/api#getupdates)
 et [menu des commandes](https://core.telegram.org/bots/api#setmycommands).
+
+## Tous scores et liste de souhaits (lots 156–158)
+
+`TELEGRAM_ALL_NEW_JOBS=true` envoie chaque nouvelle offre collectée et vérifiée, même à 0 ou hors critères de priorité. Le score reste affiché. L’import initial d’une source reste silencieux ; les archives ne sont pas relancées. Les offres expirées, inactives et les collectes en conflit restent protégées. Les filtres des portails définissent toujours le périmètre collecté. Les rappels et actualisations significatives conservent leurs critères de priorité.
+
+`/offres` puis `/offres 2` affiche cinq fiches par page, tous scores ; `/souhaits` affiche les favoris. Les cartes comportent « Ajouter à la liste des souhaits » et « J’ai postulé ». Les clics signés sont liés au bot et à son destinataire privé. Ajouter un favori ne change pas le statut de candidature.
+
+Dans le Dashboard, **Liste de souhaits** permet de filtrer, trier par ajout, score, entreprise ou échéance, retirer un favori et confirmer une candidature. **Modifier le suivi** conserve les notes et prochaines actions sur téléphone. Retirer un favori ne supprime ni l’offre ni la candidature. Le suivi et les favoris sont relus toutes les dix secondes dans une page ouverte.
+
+Les favoris et leur historique sont stockés dans `jobs.db.wishlist.sqlite3` ; le schéma 4 de la base principale reste inchangé. Les sauvegardes ZIP version 2 incluent les deux bases et leurs empreintes. Les archives version 1 restent vérifiables et restaurables. La restauration utilise des fichiers neufs et ne remplace jamais une base active.

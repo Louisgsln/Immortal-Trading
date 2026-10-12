@@ -129,6 +129,7 @@ def runtime_report(config: Config, *, now: datetime | None = None) -> dict:
         "deliveries": counts,
         "alerts_enabled": config.settings.alerts_enabled,
         "threshold": config.settings.alert_min_score,
+        "all_new_jobs": config.settings.telegram_all_new_jobs,
         "heartbeat_schedule": {
             "enabled": config.settings.telegram_heartbeat_enabled,
             "times": config.settings.telegram_heartbeat_times,
@@ -278,7 +279,11 @@ def format_daily_status(report: dict) -> str:
             if type(fresh) is int
             else "Fraîcheur des sources indisponible"
         ),
-        f"Alertes {'actives' if report['alerts_enabled'] else 'désactivées'} · seuil {report['threshold']}/100",
+        (
+            f"Alertes {'actives' if report['alerts_enabled'] else 'désactivées'} · nouvelles offres : tous scores, même 0"
+            if report.get("all_new_jobs")
+            else f"Alertes {'actives' if report['alerts_enabled'] else 'désactivées'} · seuil {report['threshold']}/100"
+        ),
         "Dernier signal · " + format_paris(watcher["at"]),
     ]
     return "\n".join(lines)
@@ -295,7 +300,9 @@ def format_status(report: dict) -> str:
             else []
         ),
         _summary(report),
-        f"Seuil des alertes · {report['threshold']}/100",
+        "Nouvelles offres · tous scores, même 0"
+        if report.get("all_new_jobs")
+        else f"Seuil des alertes · {report['threshold']}/100",
         *(
             [
                 "États automatiques · "

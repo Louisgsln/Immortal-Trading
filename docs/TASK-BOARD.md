@@ -131,3 +131,11 @@ pagination, identifiant employeur, offre témoin, date du dernier contrôle et p
 du premier succès OVH. Une erreur d'accès reste une tâche ouverte et ne vaut pas
 absence d'offres. Les étapes de livraison sont : développé → testé → installé →
 observé ; seule la dernière permet de marquer une source comme surveillée.
+
+## Lots 156–158 — en cours de validation
+
+- 156 : envoi automatique de chaque nouvelle offre collectée et vérifiée, tous scores, y compris 0. Premier import silencieux ; `/offres` paginé pour les archives. Les mises à jour et rappels prioritaires gardent leurs critères.
+- 157 : bouton Telegram « Ajouter à la liste des souhaits », favoris indépendants des candidatures, vue Dashboard triable, retrait, confirmation Postulé, suivi mobile synchronisé. Base principale en schéma 4 conservée ; favoris dans une base annexe sauvegardée avec elle.
+- 158 : six portails vérifiés deux fois : BP, Shell, Marex, Wellington Management, AllianceBernstein, Arrowstreet Capital. Profil préparé : 91 sources / 79 employeurs. Initialisation silencieuse et contrôle H24 requis avant clôture.
+
+Le déploiement et ses preuves restent à effectuer. Les problèmes d’accès déjà ouverts et les lots 154–155 restent suivis.

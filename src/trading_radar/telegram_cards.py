@@ -15,26 +15,38 @@ from trading_radar.models import Job
 from trading_radar.programmes import programme
 
 
-def application_callback(job_id: str, token: str, chat_id: str) -> str:
+def _callback(action: str, job_id: str, token: str, chat_id: str) -> str:
     identifier = UUID(job_id).hex
-    message = f"ap:{chat_id}:{identifier}"
+    message = f"{action}:{chat_id}:{identifier}"
     signature = hmac.new(token.encode(), message.encode(), hashlib.sha256).hexdigest()[:16]
-    return f"ap:{identifier}:{signature}"
+    return f"{action}:{identifier}:{signature}"
 
 
-def callback_job(data: object, token: str, chat_id: str) -> str | None:
-    if not isinstance(data, str) or not re.fullmatch(r"ap:[0-9a-f]{32}:[0-9a-f]{16}", data):
+def application_callback(job_id: str, token: str, chat_id: str) -> str:
+    return _callback("ap", job_id, token, chat_id)
+
+
+def wishlist_callback(job_id: str, token: str, chat_id: str) -> str:
+    return _callback("wl", job_id, token, chat_id)
+
+
+def callback_job(data: object, token: str, chat_id: str, *, action: str = "ap") -> str | None:
+    if (
+        action not in {"ap", "wl"}
+        or not isinstance(data, str)
+        or not re.fullmatch(action + r":[0-9a-f]{32}:[0-9a-f]{16}", data)
+    ):
         return None
     identifier = str(UUID(data.split(":")[1]))
     return (
         identifier
-        if hmac.compare_digest(data, application_callback(identifier, token, chat_id))
+        if hmac.compare_digest(data, _callback(action, identifier, token, chat_id))
         else None
     )
 
 
 def application_keyboard(
-    job_id: str, url: str, token: str, chat_id: str, *, applied: bool = False
+    job_id: str, url: str, token: str, chat_id: str, *, applied: bool = False, wished: bool = False
 ) -> dict:
     rows = []
     try:
@@ -65,6 +77,16 @@ def application_keyboard(
                 }
             ]
         )
+        rows.append(
+            [
+                {
+                    "text": "⭐ Dans la liste des souhaits"
+                    if wished
+                    else "⭐ Ajouter à la liste des souhaits",
+                    "callback_data": wishlist_callback(job_id, token, chat_id),
+                }
+            ]
+        )
     return {"inline_keyboard": rows}
 
 
@@ -85,6 +107,7 @@ def format_alert(job: Job, event: str) -> str:
         "updated": "OFFRE ACTUALISÉE",
         "reopened": "OFFRE ROUVERTE",
         "preview": "APERÇU DU NOUVEAU FORMAT",
+        "catalogue": "OFFRE DU RADAR",
     }.get(event, "OPPORTUNITÉ TRADING")
     if event in {"deadline_j7", "deadline_j3", "deadline_j1"}:
         heading = "ÉCHÉANCE · " + event.replace("deadline_j", "J−")
@@ -112,6 +135,8 @@ def format_alert(job: Job, event: str) -> str:
             f"<b>{clean(job.title, 180)}</b>",
             clean(job.company, 100),
             "",
+            *(["📁 Archive · offre inactive"] if not job.is_active else []),
+            *(["⚠️ Échéance dépassée"] if job.is_expired else []),
             f"📍 {clean(location_label(job), 100)}",
             f"🗓 Début : {clean(start_label(job), 120)}",
             *programme_line,
@@ -120,6 +145,11 @@ def format_alert(job: Job, event: str) -> str:
             *(["🛂 " + clean(authorization[0], 260)] if authorization else []),
             "",
             f"<b>Priorité · {score}/100</b>  {'▰' * blocks}{'▱' * (10 - blocks)}",
+            *(
+                ["⚠️ Hors critères de priorité · à examiner manuellement"]
+                if job.score_breakdown.exclusions
+                else []
+            ),
             f"Trading {job.score_breakdown.trading}/30 · Junior {job.score_breakdown.junior}/20 · Front office {job.score_breakdown.front_office}/15",
             "",
             f"<b>{excerpt_label}</b>",

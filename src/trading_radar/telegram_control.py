@@ -15,7 +15,8 @@ from pydantic import ConfigDict, Field
 
 from trading_radar.backups import database_path
 from trading_radar.config import Config
-from trading_radar.dashboard_applications import ApplicationEditError, mark_applied
+from trading_radar.dashboard_applications import ApplicationEditError, _connection, mark_applied
+from trading_radar.models import Job
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import (
     atomic_json,
@@ -26,6 +27,7 @@ from trading_radar.runtime_status import (
     runtime_report,
 )
 from trading_radar.telegram_cards import application_keyboard, callback_job
+from trading_radar.telegram_catalogue import send_catalogue
 from trading_radar.telegram_digest import (
     DigestState,
     check_digest,
@@ -35,10 +37,12 @@ from trading_radar.telegram_digest import (
 )
 from trading_radar.telegram_heartbeat import check_heartbeat
 from trading_radar.telegram_jobs import jobs_message
+from trading_radar.wishlist import read_wishlist, set_wishlist
 
 logger = logging.getLogger("trading_radar.telegram")
 HELP = "📡 Immortal Trading\n/statuts ou /status : activité du radar, nombre de sources et alertes.\n/top : jusqu’à 5 meilleures offres à examiner.\n/new : jusqu’à 5 offres découvertes depuis 24 h.\n/help : cette aide.\nListes au seuil des alertes, sources et fiches récentes. Ces commandes ne modifient pas tes candidatures."
 HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure.\n/digest_off : arrêter le récapitulatif."
+HELP += "\n/offres : toutes les offres, tous scores ; /offres 2 pour la suite.\n/souhaits : ta liste de souhaits. Ajoute avec ⭐ sous une offre ; retire ou modifie le suivi dans le Dashboard."
 HELP += "\n/sources : liste des portails surveillés ; /sources 2 pour la suite."
 HELP += "\n\nSous chaque nouvelle alerte : Voir l’offre ouvre le site employeur. J’ai postulé enregistre ta confirmation dans le dashboard, avec la date du jour."
 
@@ -88,17 +92,17 @@ def command_from(update: dict, chat_id: str, username: str, now: float) -> str |
     if type(date) is not int or not 0 <= now - date <= 300 or not isinstance(text, str):
         return None
     match = re.fullmatch(
-        r"/(status|statuts|statut|sources|start|help|top|new|digest|digest_on|digest_off)(?:@([A-Za-z0-9_]+))?(?:[ \t]+([^\r\n]{0,128}))?",
+        r"/(status|statuts|statut|sources|offres|souhaits|start|help|top|new|digest|digest_on|digest_off)(?:@([A-Za-z0-9_]+))?(?:[ \t]+([^\r\n]{0,128}))?",
         text.strip(),
     )
     if not match or (match[2] and match[2].casefold() != username.casefold()):
         return None
-    if match[1] == "sources":
+    if match[1] in {"sources", "offres", "souhaits"}:
         argument = (match[3] or "").strip()
         return (
-            "sources " + (argument or "1")
+            match[1] + " " + (argument or "1")
             if re.fullmatch(r"[1-9][0-9]{0,4}", argument or "1")
-            else "sources_usage"
+            else match[1] + "_usage"
         )
     if match[1] == "digest_on":
         argument = (match[3] or "").strip()
@@ -157,18 +161,31 @@ async def process_callback(
         or not 1 <= len(query["id"]) <= 256
     ):
         return
-    job_id = callback_job(query.get("data"), notifier.token, notifier.chat_id)
+    wish_id = callback_job(query.get("data"), notifier.token, notifier.chat_id, action="wl")
+    job_id = wish_id or callback_job(query.get("data"), notifier.token, notifier.chat_id)
     result = None
     if job_id is None:
         text = "Ce bouton n’est plus valide. Utilise le dashboard pour cette candidature."
     else:
         try:
-            result = mark_applied(config, job_id, datetime.fromtimestamp(now, UTC))
-            text = (
-                "✅ Postulé — suivi mis à jour dans le dashboard."
-                if result["application"]["status"] == "Applied"
-                else "Ton suivi est déjà à une autre étape. Il a été conservé dans le dashboard."
-            )
+            if wish_id:
+                result = set_wishlist(
+                    config, job_id, True, actor="telegram", now=datetime.fromtimestamp(now, UTC)
+                )
+                text = "⭐ Ajouté à la liste de souhaits — disponible dans le Dashboard."
+            else:
+                result = mark_applied(config, job_id, datetime.fromtimestamp(now, UTC))
+                text = (
+                    "✅ Postulé — suivi mis à jour dans le dashboard."
+                    if result["application"]["status"] == "Applied"
+                    else "Ton suivi est déjà à une autre étape. Il a été conservé dans le dashboard."
+                )
+            result["wished"] = read_wishlist(config, job_id)["saved"]
+            if "apply_url" not in result:
+                with _connection(config) as db:
+                    result["apply_url"] = Job.model_validate_json(
+                        db.execute("SELECT payload FROM jobs WHERE id=?", (job_id,)).fetchone()[0]
+                    ).apply_url
         except ApplicationEditError as error:
             text = error.message
     try:
@@ -183,7 +200,7 @@ async def process_callback(
         )
     except RuntimeError:
         logger.warning("telegram_application_ack_unconfirmed")
-    if job_id is not None and result is not None and result["application"]["status"] == "Applied":
+    if job_id is not None and result is not None:
         try:
             await api(
                 notifier,
@@ -192,7 +209,12 @@ async def process_callback(
                     "chat_id": notifier.chat_id,
                     "message_id": message["message_id"],
                     "reply_markup": application_keyboard(
-                        job_id, result["apply_url"], notifier.token, notifier.chat_id, applied=True
+                        job_id,
+                        result["apply_url"],
+                        notifier.token,
+                        notifier.chat_id,
+                        applied=result["application"]["status"] == "Applied",
+                        wished=result["wished"],
                     ),
                 },
             )
@@ -237,6 +259,20 @@ async def process_updates(
             continue
         replies += 1
         instant = datetime.fromtimestamp(now, UTC)
+        if command.startswith(("offres ", "souhaits ")):
+            try:
+                await send_catalogue(
+                    config,
+                    notifier,
+                    int(command.split()[1]),
+                    wished=command.startswith("souhaits "),
+                )
+            except Exception as error:
+                logger.warning("telegram_catalogue_unconfirmed type=%s", type(error).__name__)
+            continue
+        if command in {"offres_usage", "souhaits_usage"}:
+            await notifier.send_text("Utilise /offres, /offres 2 ou /souhaits, /souhaits 2.")
+            continue
         if command == "digest_usage":
             text = "Utilise /digest, /digest_on HH:MM ou /digest_off. Exemple : /digest_on 09:00."
         elif command.startswith("digest_on"):
@@ -344,6 +380,8 @@ async def run_control(config: Config) -> None:
                     {"command": "status", "description": "État du radar et des sources"},
                     {"command": "statuts", "description": "Nombre de sources et état du radar"},
                     {"command": "sources", "description": "Liste des portails surveillés"},
+                    {"command": "offres", "description": "Toutes les offres, même à 0 (page)"},
+                    {"command": "souhaits", "description": "Ta liste de souhaits (page)"},
                     {"command": "top", "description": "Meilleures offres à examiner"},
                     {"command": "new", "description": "Offres découvertes depuis 24 h"},
                     {"command": "digest", "description": "Aperçu et réglage du récapitulatif"},

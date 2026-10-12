@@ -18,6 +18,7 @@ services:
       ALERTS_ENABLED: "false"
       TELEGRAM_CONTROL_ENABLED: "false"
       # Read-only radar policy metadata; this service still has no notifier credentials.
+      TELEGRAM_ALL_NEW_JOBS: ${TELEGRAM_ALL_NEW_JOBS:-false}
       DASHBOARD_RADAR_ALERTS_ENABLED: ${DASHBOARD_RADAR_ALERTS_ENABLED:-false}
     volumes:
       - type: bind

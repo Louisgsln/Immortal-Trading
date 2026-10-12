@@ -1,4 +1,3 @@
-# Public VPS profile, additions verified 2026-10-12.
 companies:
   nomura_professionals:
     name: Nomura
@@ -18,10 +17,10 @@ companies:
       - structurer
       - repo
       - securities finance
-    notes: Public SuccessFactors search and complete descriptions verified 2026-09-17. Trading search,
-      pages of 100, first-page recheck, title filter including eTrading; Operations division excluded.
-      Corporate grade and explicit experience minima retained. No deadline inferred from validThrough;
-      no closure by absence.
+    notes: Public SuccessFactors search and complete descriptions verified 2026-09-17.
+      Trading search, pages of 100, first-page recheck, title filter including eTrading;
+      Operations division excluded. Corporate grade and explicit experience minima
+      retained. No deadline inferred from validThrough; no closure by absence.
   hsbc_professionals:
     name: HSBC
     enabled: true
@@ -31,18 +30,19 @@ companies:
     options:
       search_terms:
       - trading
-    notes: Public Eightfold search and JobPosting details verified 2026-09-17. Trading query, pagination
-      of 10, first-page recheck and title filter. Intl Wealth & Premier Banking excluded. Platform dates
-      without timezone are not publication/deadline instants. No closure by absence.
+    notes: Public Eightfold search and JobPosting details verified 2026-09-17. Trading
+      query, pagination of 10, first-page recheck and title filter. Intl Wealth &
+      Premier Banking excluded. Platform dates without timezone are not publication/deadline
+      instants. No closure by absence.
   ubs_professionals:
     name: UBS
     enabled: true
     ats: ubs
     career_url: https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231
     country: global
-    notes: Public professional board verified 2026-09-17; 547 listings, full pagination then Trading/Markets
-      title filter. Separate source from campus, shared employer identity. No inferred seniority or dates;
-      no closure by absence.
+    notes: Public professional board verified 2026-09-17; 547 listings, full pagination
+      then Trading/Markets title filter. Separate source from campus, shared employer
+      identity. No inferred seniority or dates; no closure by absence.
   jump_trading:
     name: Jump Trading
     enabled: true
@@ -50,8 +50,9 @@ companies:
     tenant: jumptrading
     career_url: https://www.jumptrading.com/careers
     country: global
-    notes: Public Greenhouse board linked by experienced and student career pages; verified 2026-09-17.
-      Campus contract is not an intake date. Jump Crypto, Jump Capital and talent communities excluded.
+    notes: Public Greenhouse board linked by experienced and student career pages;
+      verified 2026-09-17. Campus contract is not an intake date. Jump Crypto, Jump
+      Capital and talent communities excluded.
   xtx_markets:
     name: XTX Markets
     enabled: true
@@ -59,18 +60,19 @@ companies:
     tenant: xtxmarketstechnologies
     career_url: https://www.xtxmarkets.com/careers/
     country: global
-    notes: Public Greenhouse board linked by official careers page; ten IDs match official JSON mirror
-      on 2026-09-17. Trading technology requires department and role-section evidence; no junior or intake
-      inference.
+    notes: Public Greenhouse board linked by official careers page; ten IDs match
+      official JSON mirror on 2026-09-17. Trading technology requires department and
+      role-section evidence; no junior or intake inference.
   sig:
     name: Susquehanna
     enabled: true
     ats: sig
     career_url: https://careers.sig.com/jobs
     country: global
-    notes: Public iCIMS/Jibe catalogue and adapter verified 2026-09-16. Three pages of 100/100/65; full
-      requirements, explicit target starts and publication. Discovery, Operations and Sports Analytics
-      excluded. Graduate/INTERN contradictions retained and excluded from priority. No closure by absence.
+    notes: Public iCIMS/Jibe catalogue and adapter verified 2026-09-16. Three pages
+      of 100/100/65; full requirements, explicit target starts and publication. Discovery,
+      Operations and Sports Analytics excluded. Graduate/INTERN contradictions retained
+      and excluded from priority. No closure by absence.
   flow_traders:
     name: Flow Traders
     enabled: true
@@ -78,9 +80,10 @@ companies:
     tenant: flowtraders
     career_url: https://www.flowtraders.com/careers/job-search/
     country: global
-    notes: Public Greenhouse board and adapter verified 2026-09-16; linked by official job-search.js.
-      Events division excluded; explicit Start Date preserved, including past or missing dates without
-      inventing a current intake. Titles filtered; no closure by absence.
+    notes: Public Greenhouse board and adapter verified 2026-09-16; linked by official
+      job-search.js. Events division excluded; explicit Start Date preserved, including
+      past or missing dates without inventing a current intake. Titles filtered; no
+      closure by absence.
   imc:
     name: IMC
     enabled: true
@@ -88,10 +91,10 @@ companies:
     tenant: imc
     career_url: https://www.imc.com/us/search-careers
     country: global
-    notes: Public Greenhouse board linked from official details and verified 2026-09-16. Global board
-      via boards-api.greenhouse.io; EU hosted application URLs. Titles filtered locally; prospects and
-      hidden postings excluded. Graduate starts retained only from explicit employment wording. No closure
-      by absence.
+    notes: Public Greenhouse board linked from official details and verified 2026-09-16.
+      Global board via boards-api.greenhouse.io; EU hosted application URLs. Titles
+      filtered locally; prospects and hidden postings excluded. Graduate starts retained
+      only from explicit employment wording. No closure by absence.
   drw:
     name: DRW
     enabled: true
@@ -99,9 +102,9 @@ companies:
     tenant: drweng
     career_url: https://www.drw.com/work-at-drw/listings
     country: global
-    notes: English Greenhouse board linked from official details and verified 2026-09-16. Titles filtered
-      locally; full descriptions, explicit employment type and target start season retained. French board
-      not collected. No closure by absence.
+    notes: English Greenhouse board linked from official details and verified 2026-09-16.
+      Titles filtered locally; full descriptions, explicit employment type and target
+      start season retained. French board not collected. No closure by absence.
   optiver:
     name: Optiver
     enabled: true
@@ -123,18 +126,19 @@ companies:
       - head of
       - senior
       - the trading floor
-    notes: Public website API and 27 detailed records verified 2026-09-16. Full board pagination then
-      title filtering; no closure by absence. The Trading Floor event filtered out; Career Kickstarter
-      and Expressions of Interest retained with zero score. Experienced is not interpreted as Senior.
-      Dates without a timezone remain unknown.
+    notes: Public website API and 27 detailed records verified 2026-09-16. Full board
+      pagination then title filtering; no closure by absence. The Trading Floor event
+      filtered out; Career Kickstarter and Expressions of Interest retained with zero
+      score. Experienced is not interpreted as Senior. Dates without a timezone remain
+      unknown.
   citadel_securities:
     name: Citadel Securities
     enabled: false
     ats: citadel
     career_url: https://www.citadelsecurities.com/careers/open-opportunities/
     country: global
-    notes: HTTP 403 from this environment on 2026-09-16. Collector not implemented or enabled; public
-      browser indexing alone does not validate automated collection.
+    notes: HTTP 403 from this environment on 2026-09-16. Collector not implemented
+      or enabled; public browser indexing alone does not validate automated collection.
   macquarie:
     name: Macquarie
     enabled: true
@@ -144,18 +148,19 @@ companies:
     options:
       search_terms:
       - trading
-    notes: Public Avature search and detailed pages verified 2026-09-16. Trading query plus title filter;
-      explicit Junior/Senior employment levels inform scoring. Generic Date label not treated as original
-      publication.
+    notes: Public Avature search and detailed pages verified 2026-09-16. Trading query
+      plus title filter; explicit Junior/Senior employment levels inform scoring.
+      Generic Date label not treated as original publication.
   nomura_campus:
     name: Nomura
     enabled: true
     ats: nomura
     career_url: https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/
     country: global
-    notes: Public campus vacancies verified 2026-09-16, excluding events. Context-free detail URLs verified;
-      form tokens never stored. Current selected programmes are internships, excluded from priority. Professional
-      SuccessFactors portal is a separate source.
+    notes: Public campus vacancies verified 2026-09-16, excluding events. Context-free
+      detail URLs verified; form tokens never stored. Current selected programmes
+      are internships, excluded from priority. Professional SuccessFactors portal
+      is a separate source.
   credit_agricole_cib:
     name: Crédit Agricole CIB
     enabled: true
@@ -173,25 +178,27 @@ companies:
       - repo
       - securities finance
       - front office developer
-    notes: Public Talentsoft board verified 2026-09-16; complete pagination then local title filter. Explicit
-      minimum experience and contract preserved. Update date is not publication.
+    notes: Public Talentsoft board verified 2026-09-16; complete pagination then local
+      title filter. Explicit minimum experience and contract preserved. Update date
+      is not publication.
   hsbc_graduates:
     name: HSBC
     enabled: true
     ats: hsbc
     career_url: https://www.hsbc.com/careers/students-and-graduates/find-a-programme
     country: global
-    notes: Public programme finder and emerging-talent job pages verified 2026-09-16. Explicit start dates
-      and UTC deadlines; multi-city positions supported. Professional portal is a separate source; Hang
-      Seng programmes grouped under HSBC.
+    notes: Public programme finder and emerging-talent job pages verified 2026-09-16.
+      Explicit start dates and UTC deadlines; multi-city positions supported. Professional
+      portal is a separate source; Hang Seng programmes grouped under HSBC.
   ubs:
     name: UBS
     enabled: true
     ats: ubs
     career_url: https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232
     country: global
-    notes: Public student/graduate board linked from ubs.com. Anonymous full board pagination then Trading/Markets
-      title filter. Professional board is a separate source; session data never stored in job payloads.
+    notes: Public student/graduate board linked from ubs.com. Anonymous full board
+      pagination then Trading/Markets title filter. Professional board is a separate
+      source; session data never stored in job payloads.
   societe_generale:
     name: Société Générale
     enabled: true
@@ -210,9 +217,9 @@ companies:
       - securities finance
       - salle des marches
       - front office developer
-    notes: Public French and English directories; English preferred for shared employer references. Full
-      visible descriptions and profile requirements. validThrough not interpreted as deadline. No authenticated
-      API used.
+    notes: Public French and English directories; English preferred for shared employer
+      references. Full visible descriptions and profile requirements. validThrough
+      not interpreted as deadline. No authenticated API used.
   bnp_paribas:
     name: BNP Paribas
     enabled: true
@@ -224,9 +231,10 @@ companies:
     options:
       search_terms:
       - trading
-    notes: French public search HTTP 403; English general search also refuses page 17 on 2026-10-11. Old
-      jobs retained; no truncated import or closure by absence. Dedicated English internship catalogue
-      tracked by bnp_campus. General coverage remains blocked.
+    notes: French public search HTTP 403; English general search also refuses page
+      17 on 2026-10-11. Old jobs retained; no truncated import or closure by absence.
+      Dedicated English internship catalogue tracked by bnp_campus. General coverage
+      remains blocked.
   goldman_campus:
     name: Goldman Sachs
     enabled: true
@@ -249,8 +257,8 @@ companies:
       - repo
       - securities finance
       - ficc
-    notes: Public CAMPUS category verified 2026-09-15. Publication/scheduling startDate is not an employment
-      start date. Internships remain excluded from priority alerts.
+    notes: Public CAMPUS category verified 2026-09-15. Publication/scheduling startDate
+      is not an employment start date. Internships remain excluded from priority alerts.
   goldman_sachs:
     name: Goldman Sachs
     enabled: true
@@ -262,7 +270,8 @@ companies:
     options:
       search_terms:
       - trading
-    notes: Anonymous professional/early-career search verified 2026-09-15; campus programmes not covered.
+    notes: Anonymous professional/early-career search verified 2026-09-15; campus
+      programmes not covered.
   jpmorgan:
     name: JPMorgan
     enabled: false
@@ -274,8 +283,8 @@ companies:
     options:
       search_terms:
       - trading
-    notes: HTTP 403 from this environment on 2026-09-15. Adapter tested offline only; requires live validation
-      before enabling.
+    notes: HTTP 403 from this environment on 2026-09-15. Adapter tested offline only;
+      requires live validation before enabling.
   barclays:
     name: Barclays
     enabled: true
@@ -296,9 +305,10 @@ companies:
       max_results_per_query: 500
       max_details: 100
       max_scan_seconds: 600
-    notes: 'Public portal linked from search.jobs.barclays; verified 2026-09-15. Private/unlisted career
-      boards excluded. Student page and internship portal publicly verified 2026-10-10: same Workday board,
-      expanded six bounded searches, not a separate fictitious employer.'
+    notes: 'Public portal linked from search.jobs.barclays; verified 2026-09-15. Private/unlisted
+      career boards excluded. Student page and internship portal publicly verified
+      2026-10-10: same Workday board, expanded six bounded searches, not a separate
+      fictitious employer.'
   deutsche_bank:
     name: Deutsche Bank
     enabled: true
@@ -311,7 +321,8 @@ companies:
     options:
       search_terms:
       - trading
-    notes: Public CXS verified 2026-09-15. Trading search plus title filter; not a full company inventory.
+    notes: Public CXS verified 2026-09-15. Trading search plus title filter; not a
+      full company inventory.
   morgan_stanley:
     name: Morgan Stanley
     enabled: true
@@ -325,7 +336,8 @@ companies:
       search_terms:
       - trading
       verify_listing_snapshot: true
-    notes: Public CXS verified 2026-09-15. Early careers on other portals are not covered.
+    notes: Public CXS verified 2026-09-15. Early careers on other portals are not
+      covered.
   citi:
     name: Citi
     enabled: true
@@ -338,7 +350,8 @@ companies:
     options:
       search_terms:
       - trading
-    notes: Public CXS verified 2026-09-15. Search includes descriptions; title filter limits detail requests.
+    notes: Public CXS verified 2026-09-15. Search includes descriptions; title filter
+      limits detail requests.
   jane_street:
     name: Jane Street
     enabled: true
@@ -388,8 +401,8 @@ companies:
       - off-cycle
       - internship
       max_details: 100
-    notes: Public campus searches validated on the VPS in lot 111; initial import is silent. Summer programmes
-      remain outside the internship alert policy.
+    notes: Public campus searches validated on the VPS in lot 111; initial import
+      is silent. Summer programmes remain outside the internship alert policy.
   morgan_stanley_campus:
     name: Morgan Stanley
     enabled: true
@@ -420,8 +433,8 @@ companies:
       - head of
       - senior
       max_details: 100
-    notes: Only public Global Programs; events, login and application forms are excluded. Runtime activation
-      requires a successful live preview.
+    notes: Only public Global Programs; events, login and application forms are excluded.
+      Runtime activation requires a successful live preview.
   akuna_capital:
     name: Akuna Capital
     enabled: true
@@ -431,11 +444,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -478,11 +492,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -525,11 +540,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -572,11 +588,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -619,11 +636,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -668,11 +686,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -715,11 +734,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -763,11 +783,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -811,11 +832,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -858,11 +880,12 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official career link and complete public Greenhouse board verified 2026-09-26. Trading and
-      quantitative titles; operational support and experienced titles excluded from collection. Explicit
-      contract and junior metadata only; no date inferred from updates. Partial scope, no closure by absence;
-      initial import silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official career link and complete public Greenhouse board verified 2026-09-26.
+      Trading and quantitative titles; operational support and experienced titles
+      excluded from collection. Explicit contract and junior metadata only; no date
+      inferred from updates. Partial scope, no closure by absence; initial import
+      silent. See docs/EMPLOYER-EXPANSION.md. Catalogues publics relus deux fois sur
+      le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -905,9 +928,10 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official employer board verified 2026-09-26. Partial trading/quantitative scope, no closures
-      inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md. Catalogues publics relus
-      deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -953,9 +977,10 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official employer board verified 2026-09-26. Partial trading/quantitative scope, no closures
-      inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md. Catalogues publics relus
-      deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - junior trader
@@ -993,9 +1018,10 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official employer board verified 2026-09-26. Partial trading/quantitative scope, no closures
-      inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md. Catalogues publics relus
-      deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -1042,9 +1068,10 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official employer board verified 2026-09-26. Partial trading/quantitative scope, no closures
-      inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md. Catalogues publics relus
-      deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -1090,9 +1117,10 @@ companies:
     country: global
     scan_interval: 300
     request_interval: 2.0
-    notes: Official employer board verified 2026-09-26. Partial trading/quantitative scope, no closures
-      inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md. Catalogues publics relus
-      deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official employer board verified 2026-09-26. Partial trading/quantitative
+      scope, no closures inferred from absence. Initial import silent. See docs/VALIDATION-LOT75.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -1138,9 +1166,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
-      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues publics relus deux fois sur le VPS
-      le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
+      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
+      publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1197,9 +1225,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
-      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues publics relus deux fois sur le VPS
-      le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
+      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
+      publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1255,9 +1283,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
-      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues publics relus deux fois sur le VPS
-      le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
+      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
+      publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1313,9 +1341,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
-      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues publics relus deux fois sur le VPS
-      le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
+      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
+      publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1371,9 +1399,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
-      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues publics relus deux fois sur le VPS
-      le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
+      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
+      publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1429,9 +1457,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1492,9 +1520,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1555,9 +1583,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1618,9 +1646,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1681,9 +1709,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1744,9 +1772,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT92.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1807,9 +1835,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT92.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1870,9 +1898,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT92.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -1933,9 +1961,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -2001,9 +2029,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -2069,9 +2097,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -2137,9 +2165,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -2205,9 +2233,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -2273,9 +2301,9 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics relus deux fois sur le VPS le
-      10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT94.md. Catalogues publics
+      relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
     options:
       title_terms:
       - trading
@@ -2341,9 +2369,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading scope, silent bootstrap,
-      no absence closures. See docs/VALIDATION-LOTS95-97.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -2412,9 +2441,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading scope, silent bootstrap,
-      no absence closures. See docs/VALIDATION-LOTS95-97.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -2483,9 +2513,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading scope, silent bootstrap,
-      no absence closures. See docs/VALIDATION-LOTS95-97.md. Catalogues publics relus deux fois sur le
-      VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official public catalogue verified 2026-09-28, lot 96. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -2554,9 +2585,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official employer script links to Greenhouse engineersgate; verified 2026-09-28, lot 95. Partial
-      trading scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md. Catalogues
-      publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+    notes: Official employer script links to Greenhouse engineersgate; verified 2026-09-28,
+      lot 95. Partial trading scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+      Catalogues publics relus deux fois sur le VPS le 10 octobre 2026; premier import
+      silencieux.
     options:
       title_terms:
       - trading
@@ -2625,9 +2657,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
-      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
-      search scope, silent bootstrap; no absence closures.
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets
+      and off-cycle/internship queries; programme policy remains off-cycle/long 2027,
+      excludes Summer and Associate alone. Partial search scope, silent bootstrap;
+      no absence closures.
     options:
       title_terms:
       - trading
@@ -2692,9 +2725,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
-      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
-      search scope, silent bootstrap; no absence closures.
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets
+      and off-cycle/internship queries; programme policy remains off-cycle/long 2027,
+      excludes Summer and Associate alone. Partial search scope, silent bootstrap;
+      no absence closures.
     options:
       applied_facets:
         jobFamily:
@@ -2765,9 +2799,10 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
-      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
-      search scope, silent bootstrap; no absence closures.
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets
+      and off-cycle/internship queries; programme policy remains off-cycle/long 2027,
+      excludes Summer and Associate alone. Partial search scope, silent bootstrap;
+      no absence closures.
     options:
       title_terms:
       - trading
@@ -2853,9 +2888,10 @@ companies:
       max_details: 80
       max_results_per_query: 500
       max_scan_seconds: 600
-    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets and off-cycle/internship
-      queries; programme policy remains off-cycle/long 2027, excludes Summer and Associate alone. Partial
-      search scope, silent bootstrap; no absence closures.
+    notes: Public career search and details verified from OVH 2026-10-10. Trading/markets
+      and off-cycle/internship queries; programme policy remains off-cycle/long 2027,
+      excludes Summer and Associate alone. Partial search scope, silent bootstrap;
+      no absence closures.
   bank_of_america:
     name: Bank of America
     enabled: true
@@ -2865,8 +2901,8 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no absence closures.
-      Silent bootstrap. See docs/VALIDATION-LOTS88-90.md.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
+      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md.
     options:
       title_terms:
       - trading
@@ -2928,9 +2964,10 @@ companies:
     country: global
     scan_interval: 1800
     request_interval: 2
-    notes: Public student catalogue verified from OVH on 2026-10-10. Exclusive-end pagination, employer
-      detail identity/content/date recheck and first-page recheck. Separate from events and professional
-      Workday. Silent bootstrap; no absence closures.
+    notes: Public student catalogue verified from OVH on 2026-10-10. Exclusive-end
+      pagination, employer detail identity/content/date recheck and first-page recheck.
+      Separate from events and professional Workday. Silent bootstrap; no absence
+      closures.
     options:
       search_terms: []
       title_terms:
@@ -2968,9 +3005,10 @@ companies:
     country: global
     scan_interval: 1800
     request_interval: 2
-    notes: Official Campus Opportunities board 2 verified from OVH 2026-10-10; board 1 is Events. Context-free
-      public details and requisition/application targets verified. Paged catalogue rechecked; no absence
-      closure, silent bootstrap. Fixed Income off-cycle Dubai 2002 is the role witness.
+    notes: Official Campus Opportunities board 2 verified from OVH 2026-10-10; board
+      1 is Events. Context-free public details and requisition/application targets
+      verified. Paged catalogue rechecked; no absence closure, silent bootstrap. Fixed
+      Income off-cycle Dubai 2002 is the role witness.
     options:
       search_terms: []
       title_terms:
@@ -3015,9 +3053,10 @@ companies:
       max_details: 100
       max_scan_seconds: 600
       verify_listing_snapshot: true
-    notes: Verified public Citi student roles share the Workday board linked from jobs.citi.com. Separate
-      bounded early-career search scope; campus identity preserved, not a second employer. Paris Markets
-      2027 off-cycle witnessed. Summer and wrong-year eligibility unchanged; no absence closure.
+    notes: Verified public Citi student roles share the Workday board linked from
+      jobs.citi.com. Separate bounded early-career search scope; campus identity preserved,
+      not a second employer. Paris Markets 2027 off-cycle witnessed. Summer and wrong-year
+      eligibility unchanged; no absence closure.
   deutsche_bank_campus:
     name: Deutsche Bank
     enabled: true
@@ -3042,10 +3081,10 @@ companies:
       max_results_per_query: 500
       max_details: 100
       max_scan_seconds: 600
-    notes: Official student JavaScript links Beesite graduatesearch and jobhtml. Entire catalogue and
-      recsolu identities verified; 81 roles at audit. Complete bounded read with first-list recheck, no
-      inferred closing dates or absence closures. Off-cycle and long internships retained; Summer and
-      wrong years not alertable.
+    notes: Official student JavaScript links Beesite graduatesearch and jobhtml. Entire
+      catalogue and recsolu identities verified; 81 roles at audit. Complete bounded
+      read with first-list recheck, no inferred closing dates or absence closures.
+      Off-cycle and long internships retained; Summer and wrong years not alertable.
   lazard_campus:
     name: Lazard
     enabled: true
@@ -3075,9 +3114,10 @@ companies:
       max_results_per_query: 500
       max_details: 60
       max_scan_seconds: 600
-    notes: Official lazard.com students page links LazardStudentCareers, which publishes siteNumber CX_2.
-      Public Oracle searches and full descriptions, no absence closures. Selection remains trading/markets/quant;
-      advisory M&A roles are outside the current role scope.
+    notes: Official lazard.com students page links LazardStudentCareers, which publishes
+      siteNumber CX_2. Public Oracle searches and full descriptions, no absence closures.
+      Selection remains trading/markets/quant; advisory M&A roles are outside the
+      current role scope.
   millennium_campus:
     name: Millennium
     enabled: true
@@ -3106,10 +3146,10 @@ companies:
       max_results_per_query: 500
       max_details: 100
       max_scan_seconds: 600
-    notes: Official mlp.com students page links campusjobs.mlp.com. Anonymous Eightfold public campus
-      search, full pages, first-page rechecks, employer/title/ATS identity consistency. Actual 2026 Hong
-      Kong 3-6 month off-cycle detected but excluded from 2027 alerts; no invented year or publication/deadline
-      timezone.
+    notes: Official mlp.com students page links campusjobs.mlp.com. Anonymous Eightfold
+      public campus search, full pages, first-page rechecks, employer/title/ATS identity
+      consistency. Actual 2026 Hong Kong 3-6 month off-cycle detected but excluded
+      from 2027 alerts; no invented year or publication/deadline timezone.
   capula:
     name: Capula
     enabled: true
@@ -3150,10 +3190,11 @@ companies:
       max_results_per_query: 500
       max_details: 80
       max_scan_seconds: 600
-    notes: Official Capula careers links Workable; public llms.txt explicitly advertises complete jobs.md
-      catalogue and full per-ID Markdown details. Counts, metadata, application IDs and two catalogue
-      reads required. Explicitly speculative strategist excluded; calendar publication dates retained
-      without invented UTC instants. Future off-cycle roles will use the same internship policy.
+    notes: Official Capula careers links Workable; public llms.txt explicitly advertises
+      complete jobs.md catalogue and full per-ID Markdown details. Counts, metadata,
+      application IDs and two catalogue reads required. Explicitly speculative strategist
+      excluded; calendar publication dates retained without invented UTC instants.
+      Future off-cycle roles will use the same internship policy.
   rothschild_campus:
     name: Rothschild & Co
     enabled: true
@@ -3171,10 +3212,10 @@ companies:
       - structuring
       - execution
       - redburn
-    notes: 'Public student catalogue verified 2026-10-11: pages of 50, full catalogue and first-page recheck
-      before filtering market titles. Complete employer descriptions and Tal.net posting ID. Advisory
-      receives no trading points by title alone; Summer excluded from internship alerts. No inferred dates
-      or closure by absence.'
+    notes: 'Public student catalogue verified 2026-10-11: pages of 50, full catalogue
+      and first-page recheck before filtering market titles. Complete employer descriptions
+      and Tal.net posting ID. Advisory receives no trading points by title alone;
+      Summer excluded from internship alerts. No inferred dates or closure by absence.'
   millennium_professionals:
     name: Millennium
     enabled: true
@@ -3197,10 +3238,10 @@ companies:
       - off cycle
       - internship
       - intern
-    notes: Official campus page links this independent professional board. Anonymous Eightfold pages of
-      10 with count and first-page recheck; full JobPosting detail and ATS reference, Unicode slugs canonicalized
-      to ID. Same employer as campus, separate source. No inferred publication/deadline or closure by
-      absence.
+    notes: Official campus page links this independent professional board. Anonymous
+      Eightfold pages of 10 with count and first-page recheck; full JobPosting detail
+      and ATS reference, Unicode slugs canonicalized to ID. Same employer as campus,
+      separate source. No inferred publication/deadline or closure by absence.
   brevan_howard:
     name: Brevan Howard
     enabled: true
@@ -3224,10 +3265,11 @@ companies:
       - off cycle
       - internship
       - intern
-    notes: Official Phenom catalogue links Workday tenant brevanhoward / BH_ExternalCareers. Public CXS
-      and full details verified 2026-10-11. Off-cycle 3–6 months Geneva/London retained; intake year not
-      inferred from 2028 graduate conversion or graduation. Summer excluded from internship alerts; no
-      authenticated HR API or closure by absence.
+    notes: Official Phenom catalogue links Workday tenant brevanhoward / BH_ExternalCareers.
+      Public CXS and full details verified 2026-10-11. Off-cycle 3–6 months Geneva/London
+      retained; intake year not inferred from 2028 graduate conversion or graduation.
+      Summer excluded from internship alerts; no authenticated HR API or closure by
+      absence.
   bnp_campus:
     name: BNP Paribas
     enabled: true
@@ -3250,11 +3292,13 @@ companies:
       - securities finance
       - quantitative
       - equity electronic
-    notes: Official English Trainee / Internship catalogue audited 2026-10-11. Trading and structuring
-      queries, complete pages of 10 and first-page recheck; internship contract required on each listing
-      and detail. Refused or missing individual details reported as gaps, source partial, old jobs retained;
-      all-details failure aborts. General search and quantitative query remain access-restricted. Same
-      BNP employer and shared references. Summer excluded; no inferred intake or closure by absence.
+    notes: Official English Trainee / Internship catalogue audited 2026-10-11. Trading
+      and structuring queries, complete pages of 10 and first-page recheck; internship
+      contract required on each listing and detail. Refused or missing individual
+      details reported as gaps, source partial, old jobs retained; all-details failure
+      aborts. General search and quantitative query remain access-restricted. Same
+      BNP employer and shared references. Summer excluded; no inferred intake or closure
+      by absence.
   pimco:
     name: PIMCO
     enabled: true
@@ -3264,11 +3308,12 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT92.md. Public Workday catalogue and full target details
-      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
-      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
-      Initial import silent.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md. Public Workday
+      catalogue and full target details revalidated twice from OVH on 2026-10-12;
+      internships included by the active off-cycle/long policy, no dates or eligibility
+      inferred. First-page recheck on paginated queries. No closure by absence. Initial
+      import silent.
     options:
       title_terms:
       - trading
@@ -3336,11 +3381,12 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Public Workday catalogue and full target details
-      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
-      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
-      Initial import silent.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Public Workday
+      catalogue and full target details revalidated twice from OVH on 2026-10-12;
+      internships included by the active off-cycle/long policy, no dates or eligibility
+      inferred. First-page recheck on paginated queries. No closure by absence. Initial
+      import silent.
     options:
       title_terms:
       - trading
@@ -3408,11 +3454,12 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT92.md. Public Workday catalogue and full target details
-      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
-      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
-      Initial import silent.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md. Public Workday
+      catalogue and full target details revalidated twice from OVH on 2026-10-12;
+      internships included by the active off-cycle/long policy, no dates or eligibility
+      inferred. First-page recheck on paginated queries. No closure by absence. Initial
+      import silent.
     options:
       title_terms:
       - trading
@@ -3480,11 +3527,12 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT92.md. Public Workday catalogue and full target details
-      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
-      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
-      Initial import silent.
+    notes: Official public catalogue verified 2026-09-28. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT92.md. Public Workday
+      catalogue and full target details revalidated twice from OVH on 2026-10-12;
+      internships included by the active off-cycle/long policy, no dates or eligibility
+      inferred. First-page recheck on paginated queries. No closure by absence. Initial
+      import silent.
     options:
       title_terms:
       - trading
@@ -3552,11 +3600,12 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent bootstrap; no
-      absence closures. See docs/VALIDATION-LOT91.md. Public Workday catalogue and full target details
-      revalidated twice from OVH on 2026-10-12; internships included by the active off-cycle/long policy,
-      no dates or eligibility inferred. First-page recheck on paginated queries. No closure by absence.
-      Initial import silent.
+    notes: Official public catalogue verified 2026-09-27. Partial trading scope; silent
+      bootstrap; no absence closures. See docs/VALIDATION-LOT91.md. Public Workday
+      catalogue and full target details revalidated twice from OVH on 2026-10-12;
+      internships included by the active off-cycle/long policy, no dates or eligibility
+      inferred. First-page recheck on paginated queries. No closure by absence. Initial
+      import silent.
     options:
       title_terms:
       - trading
@@ -3622,11 +3671,13 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2
-    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative and broking
-      searches only; partial scope, no closures inferred from absence. First import silent. See docs/VALIDATION-LOT81.md.
-      Public Workday catalogue and full target details revalidated twice from OVH on 2026-10-12; internships
-      included by the active off-cycle/long policy, no dates or eligibility inferred. First-page recheck
-      on paginated queries. No closure by absence. Initial import silent.
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative
+      and broking searches only; partial scope, no closures inferred from absence.
+      First import silent. See docs/VALIDATION-LOT81.md. Public Workday catalogue
+      and full target details revalidated twice from OVH on 2026-10-12; internships
+      included by the active off-cycle/long policy, no dates or eligibility inferred.
+      First-page recheck on paginated queries. No closure by absence. Initial import
+      silent.
     options:
       search_terms:
       - trading
@@ -3668,5 +3719,356 @@ companies:
       - systems engineer
       verify_listing_snapshot: true
       max_results_per_query: 500
+      max_details: 80
+      max_scan_seconds: 600
+  bp:
+    name: BP
+    enabled: true
+    ats: workday
+    tenant: bpinternational
+    career_url: https://bpinternational.wd3.myworkdayjobs.com/bpCareers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative
+      and broking searches only; partial scope, no closures inferred from absence.
+      First import silent. See docs/VALIDATION-LOT81.md.
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - operator
+      - sanctions
+      - support
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - brokerage
+      - systems engineer
+  shell:
+    name: Shell
+    enabled: true
+    ats: workday
+    tenant: shell
+    career_url: https://shell.wd3.myworkdayjobs.com/ShellCareers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official employer-linked Workday board verified 2026-09-26. Trading, quantitative
+      and broking searches only; partial scope, no closures inferred from absence.
+      First import silent. See docs/VALIDATION-LOT81.md.
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - operator
+      - sanctions
+      - support
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - brokerage
+      - systems engineer
+  marex:
+    name: Marex
+    enabled: true
+    ats: marex
+    tenant: marex
+    career_url: https://www.marex.com/careers/career-opportunities
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: 'Official public catalogue verified 2026-09-27. Title-filtered market roles,
+      no absence closures. First import silent. Graduate programme 2027 omitted: published
+      deadline has passed and it is absent from the catalogue. See docs/VALIDATION-LOT86.md.'
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - broker
+      - fx dealer
+      - commodity sales
+      - commodities sales
+      - execution
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - implementation
+      - business manager
+      max_results_per_query: 500
+      max_details: 60
+  wellington:
+    name: Wellington Management
+    enabled: true
+    ats: workday
+    tenant: wellington
+    career_url: https://wellington.wd5.myworkdayjobs.com/External
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-28, lot 97. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  alliancebernstein:
+    name: AllianceBernstein
+    enabled: true
+    ats: workday
+    tenant: abglobal
+    career_url: https://abglobal.wd1.myworkdayjobs.com/alliancebernsteincareers
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official public catalogue verified 2026-09-28, lot 97. Partial trading
+      scope, silent bootstrap, no absence closures. See docs/VALIDATION-LOTS95-97.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      - general application
+      - expression of interest
+      - talent community
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      max_details: 80
+      max_scan_seconds: 600
+  arrowstreet:
+    name: Arrowstreet Capital
+    enabled: true
+    ats: workday
+    tenant: arrowstreetcapital
+    career_url: https://arrowstreetcapital.wd5.myworkdayjobs.com/Arrowstreet
+    country: ''
+    scan_interval: 1800
+    request_interval: 2
+    notes: Official employer link verified 2026-09-28. Bounded trading and quantitative
+      searches; silent bootstrap; no absence closures. See docs/VALIDATION-LOT94.md.
+    options:
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - market microstructure
+      - securities finance
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - risk
+      - director
+      - vice president
+      - vp
+      - svp
+      - avp
+      - head of
+      - senior
+      - support
+      - software
+      - infrastructure
+      - sr
+      - business analyst
+      - product manager
+      - manager
+      - lead
+      - principal
+      - regulatory
+      - intern
+      - internship
+      - alternant
+      - alternante
+      - alternance
+      - engineer
+      - stage
+      - surveillance
+      - developer
+      - technologist
+      - external contributors
+      - production
+      - engineering
+      - talent network
+      - marketing
+      - summer analyst
+      max_results_per_query: 500
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
       max_details: 80
       max_scan_seconds: 600

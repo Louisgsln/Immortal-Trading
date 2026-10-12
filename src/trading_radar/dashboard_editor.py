@@ -13,13 +13,16 @@ from trading_radar.dashboard import _assets, _policy, render_dashboard
 from trading_radar.dashboard_applications import (
     ApplicationEditError,
     list_applications,
+    mark_applied,
     read_application,
     update_application,
 )
 from trading_radar.dashboard_data import build_dashboard_data
 from trading_radar.dashboard_http import discard_small_body
 from trading_radar.dashboard_private import PrivateDashboardAccess, PrivateSessions
+from trading_radar.models import utcnow
 from trading_radar.monitoring import history, record_health
+from trading_radar.wishlist import list_wishlist, read_wishlist, set_wishlist
 
 MAX_BODY_BYTES = 131_072
 
@@ -153,6 +156,10 @@ def create_editable_dashboard_server(
                 return False
             return True
 
+        def wish_id(self) -> str | None:
+            match = re.fullmatch(r"/api/wishlist/([A-Za-z0-9_-]{1,128})", unquote(self.path))
+            return match[1] if match else None
+
         def job_id(self) -> str | None:
             match = re.fullmatch(r"/api/applications/([A-Za-z0-9_-]{1,128})", unquote(self.path))
             return match[1] if match else None
@@ -196,7 +203,27 @@ def create_editable_dashboard_server(
                 if not self.authorized():
                     return
                 try:
-                    self.json(200, {"status": "ok", "applications": list_applications(config)})
+                    self.json(
+                        200,
+                        {
+                            "status": "ok",
+                            "applications": list_applications(config),
+                            "wishlist": list_wishlist(config),
+                        },
+                    )
+                except ApplicationEditError as exc:
+                    self.error(exc.status, exc.code, exc.message)
+                return
+            if self.path == "/api/wishlist" or self.wish_id() is not None:
+                if not self.authorized():
+                    return
+                try:
+                    result = (
+                        {"wishlist": list_wishlist(config)}
+                        if self.path == "/api/wishlist"
+                        else read_wishlist(config, cast(str, self.wish_id()))
+                    )
+                    self.json(200, {"status": "ok", **result})
                 except ApplicationEditError as exc:
                     self.error(exc.status, exc.code, exc.message)
                 return
@@ -218,8 +245,14 @@ def create_editable_dashboard_server(
             if not self.local(write=True) or not self.authorized():
                 return
             job_id = self.job_id()
+            applied_match = re.fullmatch(
+                r"/api/applications/([A-Za-z0-9_-]{1,128})/applied", unquote(self.path)
+            )
+            if applied_match:
+                job_id = applied_match[1]
+            wish_id = self.wish_id()
             capture_health = private_access is None and self.path == "/api/health-snapshots"
-            if job_id is None and not capture_health:
+            if job_id is None and wish_id is None and not capture_health:
                 self.error(404, "not_found", "Cette ressource n’existe pas.")
                 return
             lengths = self.headers.get_all("Content-Length", [])
@@ -254,7 +287,13 @@ def create_editable_dashboard_server(
                     object_pairs_hook=_unique_object,
                     parse_constant=_reject_constant,
                 )
-                expected = set() if capture_health else {"revision", "changes"}
+                expected = (
+                    set()
+                    if capture_health or applied_match
+                    else {"revision", "saved"}
+                    if wish_id
+                    else {"revision", "changes"}
+                )
                 if not isinstance(payload, dict) or set(payload) != expected:
                     raise ValueError("Invalid envelope")
             except (ValueError, RecursionError, TimeoutError, OSError):
@@ -263,7 +302,34 @@ def create_editable_dashboard_server(
             if capture_health:
                 self.capture_health()
                 return
+            if wish_id is not None:
+                if not isinstance(payload["revision"], str) or len(payload["revision"]) != 64:
+                    self.error(400, "invalid_request", "La révision est invalide.")
+                    return
+                try:
+                    self.json(
+                        200,
+                        {
+                            "status": "ok",
+                            **set_wishlist(
+                                config,
+                                wish_id,
+                                payload["saved"],
+                                actor="dashboard",
+                                expected_revision=payload["revision"],
+                            ),
+                        },
+                    )
+                except ApplicationEditError as exc:
+                    self.error(exc.status, exc.code, exc.message)
+                return
             assert job_id is not None
+            if applied_match:
+                try:
+                    self.json(200, {"status": "ok", **mark_applied(config, job_id, utcnow())})
+                except ApplicationEditError as exc:
+                    self.error(exc.status, exc.code, exc.message)
+                return
             try:
                 result = update_application(
                     config,

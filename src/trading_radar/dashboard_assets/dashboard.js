@@ -82,7 +82,7 @@
     const stages = data.internship_summary;
     $("internship-overview").hidden = false;
     $("internship-counts").textContent = number(stages.available) + " stages disponibles · " + number(stages.formats.off_cycle) + " off-cycle · " + number(stages.formats.long) + " stages longs · " + number(stages.criteria_met) + " avec les critères d’alerte remplis.";
-    $("internship-policy").textContent = "Alertes stages " + (data.internship_scope.alerts_enabled && data.internship_scope.radar_alerts_enabled ? "activées" : "désactivées") + " · année ciblée : " + data.internship_scope.target_year + ". Les offres sans année ou format confirmé restent consultables.";
+    $("internship-policy").textContent = data.telegram_all_new_jobs ? "Chaque nouvelle offre collectée et vérifiée est envoyée, même à 0. Les critères ci-dessous servent à trier les stages prioritaires." : "Alertes stages " + (data.internship_scope.alerts_enabled && data.internship_scope.radar_alerts_enabled ? "activées" : "désactivées") + " · année ciblée : " + data.internship_scope.target_year + ". Les offres sans année ou format confirmé restent consultables.";
   }
   const internshipAlertLabels = {eligible:"Critères d’alerte remplis",blocked:"Critères d’alerte non remplis",unavailable:"Critères d’alerte à vérifier"};
   const liveEnabled = data.live === true;
@@ -93,6 +93,9 @@
     typeof data.editing.token === "string" && data.editing.token &&
     (privateEditing || (["http:", "https:"].includes(location.protocol) && ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname))));
   const applicationsAPI = privateEditing ? data.editing.api_base : "/api/applications";
+  const wishlistAPI = applicationsAPI.replace(/applications$/, "wishlist");
+  let wishlist = new Map((data.wishlist?.entries || []).map((entry) => [entry.job_id, entry]));
+  let wishlistPending = false;
   const requestCredentials = privateEditing ? "same-origin" : "omit";
   if (editingEnabled) {
     $("workspace-mode").textContent = "Suivi modifiable";
@@ -223,9 +226,61 @@
     renderJobs();
     if (state.view === "agenda") renderAgenda();
   }
+  function syncWishlist(entries) {
+    wishlist = new Map(entries.map((entry) => [entry.job_id, entry]));
+    $("nav-wishlist").textContent = number(wishlist.size);
+    renderJobs();
+    if (detailSession?.wishlistButton) detailSession.wishlistButton.textContent = wishlist.has(detailSession.job.id) ? "Retirer des souhaits" : "⭐ Ajouter à la liste des souhaits";
+  }
+  function wishlistMessage(text) {
+    $("wishlist-message").textContent = text;
+    if (detailSession?.wishlistMessage) detailSession.wishlistMessage.textContent = text;
+  }
+  async function wishlistAction(job, saved) {
+    if (!editingEnabled || wishlistPending) return;
+    wishlistPending = true; applicationEpoch += 1;
+    const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), 15000);
+    const options = {headers: {"X-Radar-Token": data.editing.token}, credentials: requestCredentials, cache: "no-store", redirect: "error", referrerPolicy: "no-referrer", signal: controller.signal};
+    wishlistMessage("Mise à jour des souhaits…");
+    try {
+      const response = await fetch(wishlistAPI + "/" + encodeURIComponent(job.id), options);
+      const current = await response.json();
+      if (!response.ok || current.status !== "ok" || typeof current.revision !== "string") throw new Error("Liste indisponible.");
+      const changed = await fetch(wishlistAPI + "/" + encodeURIComponent(job.id), {...options, method: "POST", headers: {...options.headers, "Content-Type": "application/json"}, body: JSON.stringify({revision: current.revision, saved})});
+      const result = await changed.json();
+      if (!changed.ok || result.status !== "ok" || result.job_id !== job.id || result.saved !== saved) throw new Error(result.error?.message || "Modification non confirmée.");
+      if (saved) wishlist.set(job.id, result); else wishlist.delete(job.id);
+      syncWishlist([...wishlist.values()]);
+      wishlistMessage(saved ? "⭐ Offre ajoutée à la liste de souhaits." : "Favori retiré. L’offre et le suivi de candidature sont conservés.");
+    } catch (error) {
+      wishlistMessage(error.message + " La liste sera relue automatiquement avant une nouvelle action.");
+    } finally { clearTimeout(timer); wishlistPending = false; applicationEpoch += 1; refreshApplications(); }
+  }
+  async function confirmApplied(job) {
+    if (!editingEnabled || wishlistPending) return;
+    wishlistPending = true; applicationEpoch += 1;
+    const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(applicationsAPI + "/" + encodeURIComponent(job.id) + "/applied", {method: "POST", headers: {"Content-Type": "application/json", "X-Radar-Token": data.editing.token}, body: "{}", signal: controller.signal, credentials: requestCredentials, cache: "no-store", redirect: "error", referrerPolicy: "no-referrer"});
+      const result = await response.json();
+      if (!response.ok || result.status !== "ok" || result.application?.job_id !== job.id) throw new Error(result.error?.message || "Confirmation indisponible.");
+      syncApplication(job, result.application);
+      $("wishlist-message").textContent = result.application.status === "Applied" ? "✅ Candidature marquée comme postulée. Le favori est conservé." : "Votre suivi est déjà à une autre étape et a été conservé.";
+      if (detailSession?.job === job && !detailSession.editor) renderTracking(detailSession);
+    } catch (error) { $("wishlist-message").textContent = error.message + " Relisez le suivi avant une nouvelle action."; }
+    finally { clearTimeout(timer); wishlistPending = false; applicationEpoch += 1; refreshApplications(); }
+  }
+  function wishlistButtons(job) {
+    const actions = make("div", null, "editor-actions");
+    if (!editingEnabled) return actions;
+    actions.append(actionButton(wishlist.has(job.id) ? "Retirer des souhaits" : "⭐ Ajouter aux souhaits", () => wishlistAction(job, !wishlist.has(job.id))));
+    if (state.view === "wishlist" && ["New", "Reviewing", "To Apply"].includes(job.application?.status || "New")) actions.append(actionButton("✓ J’ai postulé", () => confirmApplied(job)));
+    return actions;
+  }
+  $("nav-wishlist").textContent = number(wishlist.size);
   let refreshingApplications = false;
   async function refreshApplications() {
-    if (!editingEnabled || document.hidden || refreshingApplications || detailSession?.pending) return;
+    if (!editingEnabled || document.hidden || refreshingApplications || wishlistPending || detailSession?.pending) return;
     refreshingApplications = true;
     const epoch = applicationEpoch;
     const controller = new AbortController();
@@ -236,6 +291,7 @@
       const result = await response.json();
       if (!response.ok || result.status !== "ok" || !Array.isArray(result.applications)) throw new Error("Tracking unavailable");
       if (epoch !== applicationEpoch || detailSession?.pending) return;
+      if (Array.isArray(result.wishlist)) syncWishlist(result.wishlist);
       const byId = new Map(result.applications.map((application) => [application.job_id, application]));
       jobs.forEach((job) => {
         const application = byId.get(job.id);
@@ -371,6 +427,10 @@
     if (editingEnabled) {
       tracking.append(make("p", "Vos modifications sont conservées dans le radar et accessibles sur vos appareils. Enregistrer un statut n’envoie aucune candidature.", "editor-help"));
       session.message = make("p", message, "editor-message"); session.message.setAttribute("role", "status"); session.message.setAttribute("aria-live", "polite");
+      session.wishlistButton = actionButton(wishlist.has(session.job.id) ? "Retirer des souhaits" : "⭐ Ajouter à la liste des souhaits", () => wishlistAction(session.job, !wishlist.has(session.job.id)));
+      session.wishlistMessage = make("p", "", "editor-message"); session.wishlistMessage.setAttribute("role", "status");
+      tracking.append(session.wishlistButton, session.wishlistMessage);
+      if (["New", "Reviewing", "To Apply"].includes(application.status || "New")) tracking.append(actionButton("✓ J’ai postulé", () => confirmApplied(session.job)));
       session.editButton = actionButton("Modifier le suivi", () => requestApplication(session), true);
       tracking.append(session.editButton, session.message); renderApplicationHistory(session);
     }
@@ -452,12 +512,12 @@
     content.append(programmeSection);
     if (job.internship_alert) {
       const criteria = job.internship_alert;
-      const alertSection = detailSection("Critères d’alerte Telegram");
+      const alertSection = detailSection(data.telegram_all_new_jobs ? "Critères de priorité des stages" : "Critères d’alerte Telegram");
       alertSection.append(make("p", internshipAlertLabels[criteria.status] || internshipAlertLabels.unavailable),
         make("p", "Année ciblée : " + criteria.target_year + " · seuil de score : " + criteria.score_threshold));
       criteria.reasons.forEach((reason) => alertSection.append(make("p", reason.message, "experience-help")));
       criteria.warnings.forEach((warning) => alertSection.append(make("p", warning, "experience-help")));
-      alertSection.append(make("p", "Une alerte nécessite aussi une nouvelle détection, une réouverture ou une modification significative dans une collecte validée. Cet état ne confirme pas un envoi Telegram et ne relance pas les anciennes offres.", "experience-help"));
+      alertSection.append(make("p", data.telegram_all_new_jobs ? "Toutes les nouvelles offres collectées et vérifiées sont envoyées, même sans remplir ces critères de priorité. Les anciens imports ne sont pas renvoyés." : "Une alerte nécessite aussi une nouvelle détection, une réouverture ou une modification significative dans une collecte validée. Cet état ne confirme pas un envoi Telegram et ne relance pas les anciennes offres.", "experience-help"));
       content.append(alertSection);
     }
     const opportunitySection = detailSection("Pays, durée et début");
@@ -566,12 +626,13 @@
       (!validStart || radarOpportunity.start(job.start, startFrom, startTo)) &&
       (!education || (education === "unrecognized" ? !educationLevels(job).length : educationLevels(job).includes(education))) &&
       (!validPeriod || radarPublication.within(job.publication_day, from, to)) &&
-      (state.view !== "applications" || (job.application || {}).status !== "New")
+      (state.view !== "applications" || (job.application || {}).status !== "New") &&
+      (state.view !== "wishlist" || wishlist.has(job.id))
     );
     const sorting = $("sort").value;
     const timestamp = (value) => { const stamp = Date.parse(value); return Number.isFinite(stamp) ? stamp : 0; };
     const deadlineTime = (job) => timestamp((job.deadline || {}).instant || (job.deadline || {}).day) || Number.MAX_SAFE_INTEGER;
-    results.sort((a, b) => (sorting.startsWith("publication-") ? radarPublication.compare(a.publication_day, b.publication_day, sorting === "publication-oldest") : sorting === "company" ? collator.compare(a.company, b.company) : sorting === "recent" ? timestamp(b.first_seen) - timestamp(a.first_seen) : sorting === "deadline" ? deadlineTime(a) - deadlineTime(b) : b.score - a.score) || collator.compare(a.title, b.title) || collator.compare(a.id, b.id));
+    results.sort((a, b) => (sorting.startsWith("publication-") ? radarPublication.compare(a.publication_day, b.publication_day, sorting === "publication-oldest") : sorting === "company" ? collator.compare(a.company, b.company) : sorting === "saved" ? timestamp(wishlist.get(b.id)?.added_at) - timestamp(wishlist.get(a.id)?.added_at) : sorting === "recent" ? timestamp(b.first_seen) - timestamp(a.first_seen) : sorting === "deadline" ? deadlineTime(a) - deadlineTime(b) : b.score - a.score) || collator.compare(a.title, b.title) || collator.compare(a.id, b.id));
     const pages = Math.max(1, Math.ceil(results.length / pageSize)); state.page = Math.min(state.page, pages);
     const start = (state.page - 1) * pageSize;
     $("job-rows").replaceChildren();
@@ -592,7 +653,7 @@
       if (degrees.length) jobCell.append(make("span", "Diplômes cités · " + degrees.map((level) => educationLabels[level]).join(" · "), "experience-indicator"));
       const scoreCell = make("td"); scoreCell.append(scorePill(job.score));
       const statusCell = make("td"); statusCell.append(make("span", statusLabel((job.application || {}).status), "badge"));
-      const detailCell = make("td"); const detailButton = make("button", "↗", "arrow-button"); detailButton.type = "button"; detailButton.setAttribute("aria-label", "Détail : " + job.title + " chez " + job.company); detailButton.addEventListener("click", () => showDetail(job)); detailCell.append(detailButton);
+      const detailCell = make("td"); const detailButton = make("button", "↗", "arrow-button"); detailButton.type = "button"; detailButton.setAttribute("aria-label", "Détail : " + job.title + " chez " + job.company); detailButton.addEventListener("click", () => showDetail(job)); detailCell.append(detailButton); if (state.view === "wishlist") detailCell.append(wishlistButtons(job));
       const publicationCell = make("td", undefined, "date-cell");
       const publicationDay = radarPublication.day(job.publication_day);
       if (publicationDay) {
@@ -613,12 +674,13 @@
       if (job.application?.next_action) card.append(make("p", "Prochaine action : " + job.application.next_action + (job.application.next_action_date ? " · " + date(job.application.next_action_date) : ""), "mobile-next-action"));
       if (job.deadline?.day) card.append(make("p", "Date limite : " + date(job.deadline.day), job.is_expired ? "editor-error" : ""));
       card.append(actionButton(editingEnabled ? "Ouvrir le suivi" : "Voir la fiche", () => showDetail(job)));
+      card.append(wishlistButtons(job));
       $("mobile-jobs").append(card);
     });
     $("empty-state").hidden = results.length > 0;
     const emptyText = $("empty-state").querySelector("p");
-    emptyText.textContent = state.view === "applications" ? "Cette vue affiche les offres dont le suivi a quitté le statut « À découvrir ». Vous pouvez aussi élargir les filtres." : "Élargissez vos filtres ou recherchez un autre mot-clé.";
-    $("result-count").textContent = number(results.length) + (results.length === 1 ? " offre" : " offres") + (state.view === "applications" ? (results.length === 1 ? " suivie" : " suivies") : " dans votre sélection");
+    emptyText.textContent = state.view === "wishlist" ? "Ajoutez une offre avec ⭐ dans Telegram ou le détail d’une fiche. Réinitialisez les filtres si vos favoris sont masqués." : state.view === "applications" ? "Cette vue affiche les offres dont le suivi a quitté le statut « À découvrir ». Vous pouvez aussi élargir les filtres." : "Élargissez vos filtres ou recherchez un autre mot-clé.";
+    $("result-count").textContent = number(results.length) + (results.length === 1 ? " offre" : " offres") + (state.view === "applications" ? (results.length === 1 ? " suivie" : " suivies") : state.view === "wishlist" ? " dans vos souhaits" : " dans votre sélection");
     $("page-info").textContent = results.length ? (start + 1) + "–" + Math.min(start + pageSize, results.length) + " sur " + number(results.length) + " · Page " + state.page + " / " + pages : "0 offre";
     $("previous").disabled = state.page <= 1; $("next").disabled = state.page >= pages;
   }
@@ -863,7 +925,8 @@
   const filterStorage = () => window.localStorage;
   function restoreFilters(view) {
     HTMLFormElement.prototype.reset.call($("filters")); $("sort").value = "score";
-    if (view === "applications") $("active").value = "all";
+    if (["applications", "wishlist"].includes(view)) $("active").value = "all";
+    if (view === "wishlist") $("sort").value = "saved";
     const saved = savedFilterViews[view];
     if (saved) Object.entries(saved).forEach(([id,value]) => {if (radarPreferences.fields.includes(id)) $(id).value = value;});
   }
@@ -884,25 +947,26 @@
   function setView(view) {
     if (view !== state.view) {
       if (["jobs","applications"].includes(state.view)) savedFilterViews[state.view] = captureFilters();
-      if (["jobs","applications"].includes(view)) restoreFilters(view);
+      if (["jobs","applications","wishlist"].includes(view)) restoreFilters(view);
     }
     state.view = view; state.page = 1;
     document.querySelectorAll(".nav-item").forEach((button) => {
       const selected = button.dataset.view === view; button.classList.toggle("selected", selected);
       if (selected) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current");
     });
-    $("jobs-view").hidden = !["jobs", "applications"].includes(view); $("health-view").hidden = view !== "health"; $("trends-view").hidden = view !== "trends"; $("agenda-view").hidden = view !== "agenda";
+    $("jobs-view").hidden = !["jobs", "applications", "wishlist"].includes(view); $("health-view").hidden = view !== "health"; $("trends-view").hidden = view !== "trends"; $("agenda-view").hidden = view !== "agenda";
     $("metrics").hidden = view === "trends";
     const headings = {
       jobs: ["OFFRES", "Le marché, à votre portée.", "Repérez les offres pertinentes. Gardez le cap sur votre recherche."],
+      wishlist: ["LISTE DE SOUHAITS", "Vos offres à garder sous la main.", "Triez vos favoris, confirmez vos candidatures et préparez la prochaine action."],
       applications: ["CANDIDATURES", "Chaque candidature compte.", "Consultez votre suivi, vos contacts et vos prochaines actions."],
       agenda: ["ÉCHÉANCES", "Gardez une longueur d’avance.", "Vos prochaines actions et vos dates limites, accessibles sur téléphone."],
       health: ["SANTÉ DES SOURCES", "La santé de votre veille.", "Vérifiez la fraîcheur des collectes et les derniers rapports locaux."],
       trends: ["TENDANCES", "Le rythme de votre veille.", "Suivez les détections, les changements et la fiabilité des collectes."]
     };
     ["breadcrumb-view", "page-title", "page-subtitle"].forEach((id, index) => { $(id).textContent = headings[view][index]; });
-    $("results-heading").textContent = view === "applications" ? "Votre suivi de candidatures" : "Toutes les offres";
-    if (["jobs", "applications"].includes(view)) renderJobs();
+    $("results-heading").textContent = view === "wishlist" ? "Votre liste de souhaits" : view === "applications" ? "Votre suivi de candidatures" : "Toutes les offres";
+    if (["jobs", "applications", "wishlist"].includes(view)) renderJobs();
     if (view === "agenda") renderAgenda();
   }
   document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
@@ -913,7 +977,7 @@
   $("record-health").addEventListener("click", recordHealth);
   $("service-details").addEventListener("click", () => setView("health"));
   radarPreferences.fields.forEach((id) => $(id).addEventListener(id === "search" || id.startsWith("publication-") || id.startsWith("start-") ? "input" : "change", () => { state.page = 1; renderJobs(); persistFilters(); }));
-  $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (state.view === "applications") $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); persistFilters(); });
+  $("reset").addEventListener("click", () => { HTMLFormElement.prototype.reset.call($("filters")); if (["applications", "wishlist"].includes(state.view)) $("active").value = "all"; $("sort").value = "score"; state.page = 1; renderJobs(); persistFilters(); });
   $("remember-filters").addEventListener("change", () => {
     if ($("remember-filters").checked) persistFilters();
     else {

@@ -86,7 +86,9 @@ async def deliver(
             continue
         if only_sources is not None and job.source not in only_sources:
             continue
-        if settings is not None and not programme_alertable(job, settings):
+        event = alert["event_key"].split(":")[-2]
+        all_scores = settings is not None and settings.telegram_all_new_jobs and event == "new"
+        if settings is not None and not all_scores and not programme_alertable(job, settings):
             repo.set_alert(alert["id"], "suppressed")
             continue
         event = alert["event_key"].split(":")[-2]
@@ -104,8 +106,10 @@ async def deliver(
         if (
             not job.is_active
             or expired
-            or job.score_breakdown.exclusions
-            or job.score_breakdown.total < min_score
+            or (
+                not all_scores
+                and (job.score_breakdown.exclusions or job.score_breakdown.total < min_score)
+            )
         ):
             repo.set_alert(alert["id"], "suppressed")
             continue
@@ -286,16 +290,26 @@ async def scan(
                                 event == "updated"
                                 and meaningful_update(repo, job, config.settings.alert_min_score)
                             )
+                            all_scores = config.settings.telegram_all_new_jobs and event == "new"
                             if (
                                 not silent
                                 and not result.conflicts
                                 and alertable
                                 and not job.is_expired
                                 and not expired_deadline(job)
-                                and not job.score_breakdown.exclusions
-                                and job.score_breakdown.total >= config.settings.alert_min_score
-                                and programme_alertable(job, config.settings)
-                                and (internship_ready or programme(job)["kind"] != "internship")
+                                and (
+                                    all_scores
+                                    or (
+                                        not job.score_breakdown.exclusions
+                                        and job.score_breakdown.total
+                                        >= config.settings.alert_min_score
+                                        and programme_alertable(job, config.settings)
+                                        and (
+                                            internship_ready
+                                            or programme(job)["kind"] != "internship"
+                                        )
+                                    )
+                                )
                             ):
                                 if config.settings.alerts_enabled:
                                     repo.enqueue(job, event)
