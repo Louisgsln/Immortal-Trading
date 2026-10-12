@@ -950,6 +950,11 @@
       if (["jobs","applications","wishlist"].includes(view)) restoreFilters(view);
     }
     state.view = view; state.page = 1;
+    document.body.dataset.radarView = view;
+    document.body.dataset.wishlistFilters = "closed";
+    $("wishlist-filters").hidden = view !== "wishlist";
+    $("wishlist-filters").setAttribute("aria-expanded", "false");
+    $("wishlist-filters").textContent = "Afficher les filtres";
     document.querySelectorAll(".nav-item").forEach((button) => {
       const selected = button.dataset.view === view; button.classList.toggle("selected", selected);
       if (selected) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current");
@@ -970,6 +975,13 @@
     if (view === "agenda") renderAgenda();
   }
   document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => setView(button.dataset.view)));
+  $("wishlist-filters").addEventListener("click", () => {
+    const open = document.body.dataset.wishlistFilters !== "open";
+    document.body.dataset.wishlistFilters = open ? "open" : "closed";
+    $("wishlist-filters").setAttribute("aria-expanded", String(open));
+    $("wishlist-filters").textContent = open ? "Masquer les filtres" : "Afficher les filtres";
+    if (open) $("search").focus();
+  });
   $("filters").addEventListener("submit", (event) => event.preventDefault());
   $("trend-days").addEventListener("change", renderTrends);
   $("agenda-period").addEventListener("change", renderAgenda);

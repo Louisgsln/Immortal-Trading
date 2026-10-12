@@ -37,3 +37,7 @@
 .tracking-shortcuts p {width:100%;margin:0 0 4px;}
 .tracking-shortcuts button,.service-overview button {min-height:44px;}
 @media(max-width:700px){.service-overview{padding:16px;gap:12px}.service-overview>div{flex-basis:100%}.tracking-shortcuts{grid-column:auto}.tracking-shortcuts button{flex:1 1 180px;}}
+
+body[data-radar-view="wishlist"] #metrics,body[data-radar-view="wishlist"] #service-overview,body[data-radar-view="wishlist"] #weekly-overview,body[data-radar-view="wishlist"] #internship-overview,body[data-radar-view="wishlist"] #jobs-view>.consultation-controls{display:none!important}
+body[data-radar-view="wishlist"][data-wishlist-filters="closed"] #filters,body[data-radar-view="wishlist"][data-wishlist-filters="closed"] #jobs-view>.experience-help{display:none!important}
+#wishlist-message{padding:0 25px;color:var(--green);overflow-wrap:anywhere}#wishlist-message:empty{display:none}
