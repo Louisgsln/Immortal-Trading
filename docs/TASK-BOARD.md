@@ -7,8 +7,8 @@ Les validations et mesures sont dans [VALIDATION-LOTS125-127.md](VALIDATION-LOTS
 [VALIDATION-LOT128.md](VALIDATION-LOT128.md) et
 [VALIDATION-LOTS129-131.md](VALIDATION-LOTS129-131.md) et
 [VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire actuel
-est [daté par source](RADAR-SOURCES-LOTS151-153.md) : 85 sources / 73 employeurs,
-80 à jour au relevé de 14:16 UTC du 12 octobre. Les chiffres des livraisons précédentes restent historiques.
+est [daté par source](RADAR-SOURCES-LOTS156-158.md) : 91 sources / 79 employeurs,
+85 à jour au relevé de 16:45 UTC du 12 octobre. Les chiffres des livraisons précédentes restent historiques.
 Ce carnet a été réconcilié avec le VPS :
 les anciennes mentions Windows et exclusions globales des stages étaient historiques.
 
@@ -132,10 +132,24 @@ du premier succès OVH. Une erreur d'accès reste une tâche ouverte et ne vaut 
 absence d'offres. Les étapes de livraison sont : développé → testé → installé →
 observé ; seule la dernière permet de marquer une source comme surveillée.
 
-## Lots 156–158 — en cours de validation
+## Lots 156–158 — installés et vérifiés le 12 octobre
 
-- 156 : envoi automatique de chaque nouvelle offre collectée et vérifiée, tous scores, y compris 0. Premier import silencieux ; `/offres` paginé pour les archives. Les mises à jour et rappels prioritaires gardent leurs critères.
-- 157 : bouton Telegram « Ajouter à la liste des souhaits », favoris indépendants des candidatures, vue Dashboard triable, retrait, confirmation Postulé, suivi mobile synchronisé. Base principale en schéma 4 conservée ; favoris dans une base annexe sauvegardée avec elle.
-- 158 : six portails vérifiés deux fois : BP, Shell, Marex, Wellington Management, AllianceBernstein, Arrowstreet Capital. Profil préparé : 91 sources / 79 employeurs. Initialisation silencieuse et contrôle H24 requis avant clôture.
+| Lot | État | Résultat observé |
+|---|---|---|
+| 156 — Toutes les nouvelles offres | Installé et vérifié | Envoi automatique de chaque nouvelle offre collectée et vérifiée, tous scores, même 0 ; import initial silencieux ; `/offres` paginé pour les archives |
+| 157 — Liste de souhaits partagée | Installé et vérifié | Bouton Telegram signé, favoris indépendants des candidatures, vue mobile compacte avec filtres repliables, tri, retrait et Postulé ; notes/actions via le suivi existant ; synchronisation de la page ouverte toutes les dix secondes |
+| 158 — Six portails supplémentaires | Installé et vérifié | BP, Shell, Marex, Wellington Management, AllianceBernstein, Arrowstreet Capital ; deux lectures stables ; 21 fiches initialisées sans alerte rétroactive ; 91 sources / 79 employeurs |
+| Passerelle HTTPS des souhaits | Corrigé et vérifié | Routes wishlist et confirmation Applied autorisées uniquement sous le lien privé ; 13 tests ; certificats, session, origine et CSRF conservés |
 
-Le déploiement et ses preuves restent à effectuer. Les problèmes d’accès déjà ouverts et les lots 154–155 restent suivis.
+[Validation](VALIDATION-LOTS156-158.md), [preuves](DELIVERY-LOTS156-158.json), [inventaire](RADAR-SOURCES-LOTS156-158.md).
+Les cinq services Docker tournent, le radar et le Dashboard sont sains ; les quatre services système sont actifs et activés au démarrage.
+Une carte Telegram réelle à 0 avec bouton des souhaits a été envoyée une fois avec accusé de réception. Les horaires 09:00, 13:00 et 18:00 Paris restent configurés.
+Base principale en schéma 4, anciens identifiants, candidatures, historiques, alertes envoyées et curseur préservés. Les favoris sont sauvegardés dans la même archive version 2 que la base principale.
+
+Prochains lots :
+
+- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
+- 160 — documenter et compléter la couverture Marex, actuellement sept fiches validées sans inventaire exhaustif ; conserver l'absence de fermeture déduite.
+- 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
+
+Les lots 154 (qualification CIBC FICC) et 155 (avertissements SQLite des tests Python 3.14) restent ouverts. Le flux tous scores n'élargit pas à lui seul les filtres de collecte des portails.

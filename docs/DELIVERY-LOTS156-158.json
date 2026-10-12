@@ -1,0 +1,570 @@
+{
+  "status": "ok",
+  "release": "immortal-trading:lot156-all-offers-wishlist-20261012",
+  "application_commit": "89fd622c5c68ccc3fa4487d6a103951221c44f89",
+  "gateway_commit": "2527898ec0d038b741bb44d05214e38d15fb6189",
+  "preservation": {
+    "checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "application_rows_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true
+    },
+    "counts_after": {
+      "alert_history": 104,
+      "alerts": 52,
+      "application_history": 2,
+      "applications": 1581,
+      "jobs": 1581
+    },
+    "counts_before": {
+      "alert_history": 102,
+      "alerts": 51,
+      "application_history": 2,
+      "applications": 1559,
+      "jobs": 1559
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    },
+    "stage": "verification"
+  },
+  "simulation": {
+    "alerts_created": 0,
+    "all_scores_zero_sent_once": true,
+    "applications_and_histories_preserved": true,
+    "configured_heartbeat_times": [
+      "13:00",
+      "18:00"
+    ],
+    "heartbeat_messages_synthetic": 1,
+    "heartbeat_packaged_schedule_verified": true,
+    "metrics": [
+      {
+        "alerts": 0,
+        "closed": 0,
+        "degraded": {},
+        "duration": 50.951,
+        "failed": {},
+        "high_priority": 368,
+        "listing_gaps": {},
+        "new": 21,
+        "received": 21,
+        "relevant": 528,
+        "requests": 77,
+        "sources": 6,
+        "successful": 6,
+        "updated": 0
+      },
+      {
+        "alerts": 0,
+        "closed": 0,
+        "degraded": {},
+        "duration": 54.939,
+        "failed": {},
+        "high_priority": 368,
+        "listing_gaps": {},
+        "new": 0,
+        "received": 21,
+        "relevant": 528,
+        "requests": 77,
+        "sources": 6,
+        "successful": 6,
+        "updated": 0
+      }
+    ],
+    "notifier_calls": 0,
+    "old_job_ids_preserved": true,
+    "source_baselines": {
+      "alliancebernstein": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T15:33:32.838374+00:00",
+        "retained": 1
+      },
+      "arrowstreet": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T15:33:41.281173+00:00",
+        "retained": 1
+      },
+      "bp": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T15:33:46.944823+00:00",
+        "retained": 6
+      },
+      "marex": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T15:33:20.867108+00:00",
+        "retained": 7
+      },
+      "shell": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T15:33:30.868914+00:00",
+        "retained": 3
+      },
+      "wellington": {
+        "bootstrapped": true,
+        "last_success": "2026-10-12T15:33:35.346084+00:00",
+        "retained": 3
+      }
+    },
+    "status": "ok",
+    "successful_sources": 6,
+    "telegram_cursor_untouched": true,
+    "telegram_network_calls": 0,
+    "wishlist_backup_restore_verified": true,
+    "wishlist_removal_keeps_application": true,
+    "wishlist_telegram_dashboard_sync": true
+  },
+  "new_sources_two_reads": [
+    {
+      "source": "marex",
+      "status": "ok",
+      "reads": [
+        {
+          "retained": 7,
+          "requests": 10,
+          "scope_complete": false,
+          "listing_gaps": [],
+          "at_threshold": 0,
+          "internships": 1,
+          "internships_eligible": 0
+        },
+        {
+          "retained": 7,
+          "requests": 9,
+          "scope_complete": false,
+          "listing_gaps": [],
+          "at_threshold": 0,
+          "internships": 1,
+          "internships_eligible": 0
+        }
+      ],
+      "stable": true
+    },
+    {
+      "source": "shell",
+      "status": "ok",
+      "reads": [
+        {
+          "retained": 3,
+          "requests": 15,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 2,
+          "internships": 0,
+          "internships_eligible": 0
+        },
+        {
+          "retained": 3,
+          "requests": 14,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 2,
+          "internships": 0,
+          "internships_eligible": 0
+        }
+      ],
+      "stable": true
+    },
+    {
+      "source": "alliancebernstein",
+      "status": "ok",
+      "reads": [
+        {
+          "retained": 1,
+          "requests": 6,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 0,
+          "internships": 0,
+          "internships_eligible": 0
+        },
+        {
+          "retained": 1,
+          "requests": 5,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 0,
+          "internships": 0,
+          "internships_eligible": 0
+        }
+      ],
+      "stable": true
+    },
+    {
+      "source": "bp",
+      "status": "ok",
+      "reads": [
+        {
+          "retained": 6,
+          "requests": 23,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 2,
+          "internships": 0,
+          "internships_eligible": 0
+        },
+        {
+          "retained": 6,
+          "requests": 22,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 2,
+          "internships": 0,
+          "internships_eligible": 0
+        }
+      ],
+      "stable": true
+    },
+    {
+      "source": "arrowstreet",
+      "status": "ok",
+      "reads": [
+        {
+          "retained": 1,
+          "requests": 6,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 0,
+          "internships": 0,
+          "internships_eligible": 0
+        },
+        {
+          "retained": 1,
+          "requests": 5,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 0,
+          "internships": 0,
+          "internships_eligible": 0
+        }
+      ],
+      "stable": true
+    },
+    {
+      "source": "wellington",
+      "status": "ok",
+      "reads": [
+        {
+          "retained": 3,
+          "requests": 17,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 1,
+          "internships": 0,
+          "internships_eligible": 0
+        },
+        {
+          "retained": 3,
+          "requests": 16,
+          "scope_complete": true,
+          "listing_gaps": [],
+          "at_threshold": 1,
+          "internships": 0,
+          "internships_eligible": 0
+        }
+      ],
+      "stable": true
+    },
+    {
+      "probe_complete": true,
+      "successful": [
+        "marex",
+        "shell",
+        "alliancebernstein",
+        "bp",
+        "arrowstreet",
+        "wellington"
+      ]
+    }
+  ],
+  "precollection": {
+    "added_sources": [
+      "bp",
+      "shell",
+      "marex",
+      "wellington",
+      "alliancebernstein",
+      "arrowstreet"
+    ],
+    "alerts_created": 0,
+    "collections_sha256": "f74dbe08d26d53ae47e3e7148e023327923966de5e1d1768d45f607c8c09c5db",
+    "database_written": false,
+    "sources": {
+      "alliancebernstein": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": false,
+        "requests": 6,
+        "retained": 1,
+        "status": "ok"
+      },
+      "arrowstreet": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": false,
+        "requests": 6,
+        "retained": 1,
+        "status": "ok"
+      },
+      "bp": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": false,
+        "requests": 23,
+        "retained": 6,
+        "status": "ok"
+      },
+      "marex": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": false,
+        "requests": 10,
+        "retained": 7,
+        "status": "ok"
+      },
+      "shell": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": false,
+        "requests": 15,
+        "retained": 3,
+        "status": "ok"
+      },
+      "wellington": {
+        "listing_gaps": [],
+        "listing_recheck_enabled": false,
+        "requests": 17,
+        "retained": 3,
+        "status": "ok"
+      }
+    },
+    "status": "ok",
+    "telegram_network_calls": 0
+  },
+  "live_initial_import": {
+    "status": "ok",
+    "successful": 6,
+    "new": 21,
+    "updated": 0,
+    "alerts_created": 0,
+    "requests_during_import": 0
+  },
+  "source_counts": {
+    "enabled": 91,
+    "employers": 79,
+    "fresh": 85
+  },
+  "observed_at": "2026-10-12T16:45:33.447595+00:00",
+  "profile_sha256": "f3b301e7e37c17d9631a68c6027f7203da3fad3a6d90d148c6909accf1f8b281",
+  "dashboard": {
+    "summary": {
+      "active": 1566,
+      "applications_due": 0,
+      "applications_in_progress": 1,
+      "enabled_sources": 91,
+      "fresh_sources": 85,
+      "high_priority": 361,
+      "relevant": 521,
+      "total": 1581
+    },
+    "dashboard_contract": {
+      "asset_hashes": "verified",
+      "controls": 89,
+      "jobs": 1581,
+      "modules": 7,
+      "status": "ok"
+    },
+    "same_private_link": true,
+    "https_trusted": true,
+    "dashboard_editable": true,
+    "dashboard_without_telegram_credentials": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "incidents": [
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "bank_of_america",
+        "status": "recent_failure"
+      },
+      {
+        "source": "jefferies_campus",
+        "status": "recent_failure"
+      },
+      {
+        "source": "bnp_campus",
+        "status": "recent_failure"
+      },
+      {
+        "source": "td",
+        "status": "recent_failure"
+      }
+    ],
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_all_new_jobs": true,
+      "telegram_control_enabled": true,
+      "telegram_heartbeat_enabled": true,
+      "telegram_heartbeat_times": [
+        "13:00",
+        "18:00"
+      ],
+      "telegram_incident_notices_enabled": false
+    },
+    "wishlist_api_verified": true,
+    "all_new_scores_enabled": true
+  },
+  "gateway": {
+    "status": "ok",
+    "wishlist_and_applied_routes_enabled": true,
+    "gateway_validation": "ok",
+    "same_private_url": true,
+    "https_only_container_recreated": true,
+    "csrf_origin_session_guards_unchanged": true
+  },
+  "services": [
+    {
+      "name": "/immortal-trading-cloud-radar-1",
+      "running": true,
+      "health": "healthy",
+      "restarts": 0
+    },
+    {
+      "name": "/immortal-trading-cloud-telegram-1",
+      "running": true,
+      "health": null,
+      "restarts": 0
+    },
+    {
+      "name": "/immortal-trading-cloud-backups-1",
+      "running": true,
+      "health": null,
+      "restarts": 0
+    },
+    {
+      "name": "/immortal-trading-dashboard-dashboard-1",
+      "running": true,
+      "health": "healthy",
+      "restarts": 1
+    },
+    {
+      "name": "/immortal-trading-dashboard-https-1",
+      "running": true,
+      "health": null,
+      "restarts": 0
+    }
+  ],
+  "wishlist_backup": {
+    "format_version": 2,
+    "main_schema": 4,
+    "wishlist_schema": 1,
+    "wishlist_tables": {
+      "wishlist": 0,
+      "wishlist_history": 0
+    },
+    "verified": true,
+    "wishlist_file_mode": "0o600"
+  },
+  "telegram_preview": {
+    "status_message_confirmed": true,
+    "messages_sent": 1,
+    "offer_messages_sent": 1,
+    "preview_score": 0,
+    "wishlist_button_verified": true,
+    "all_new_scores_enabled": true,
+    "source_counts": {
+      "enabled": 91,
+      "employers": 79,
+      "fresh": 85
+    },
+    "watcher": "active",
+    "daily_time": "09:00",
+    "daily_enabled": true,
+    "telegram_state_rewritten": false,
+    "heartbeat_schedule": [
+      "13:00",
+      "18:00"
+    ],
+    "heartbeat_binding_verified": true,
+    "incidents": [
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "bank_of_america",
+        "status": "recent_failure"
+      },
+      {
+        "source": "jefferies_campus",
+        "status": "recent_failure"
+      },
+      {
+        "source": "bnp_campus",
+        "status": "recent_failure"
+      },
+      {
+        "source": "td",
+        "status": "recent_failure"
+      }
+    ]
+  },
+  "scheduled_status_times_paris": [
+    "09:00",
+    "13:00",
+    "18:00"
+  ],
+  "ci": {
+    "application_run_id": 38273180835,
+    "all_six_jobs": "success",
+    "python_versions": [
+      "3.11",
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "python_tests_per_version": 5354,
+    "node_tests": 34,
+    "gateway_focused_tests": 13,
+    "gateway_ci": "in_progress"
+  },
+  "mobile_browser": {
+    "status": "ok",
+    "viewport": "390x844",
+    "add_from_detail": true,
+    "zero_score_visible": true,
+    "telegram_change_refreshed": true,
+    "sort_by_score": true,
+    "mark_applied_keeps_wishlist": true,
+    "remove_keeps_application": true,
+    "job_view_restored": true,
+    "javascript_errors": 0
+  },
+  "gateway_ci_run_id": 38280220695
+}

@@ -14,9 +14,14 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
+Les lots **156–158**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS156-158.md),
+envoient **chaque nouvelle offre collectée et vérifiée, même à 0**, et ajoutent une **liste de souhaits partagée entre Telegram et le Dashboard** : tri, retrait, confirmation Postulé et suivi mobile. Les filtres se déplient à la demande dans cette vue.
+**BP, Shell, Marex, Wellington Management, AllianceBernstein et Arrowstreet Capital** portent le profil à **91 sources / 79 employeurs**, dont **85 à jour au relevé daté**. [Inventaire actuel](docs/RADAR-SOURCES-LOTS156-158.md).
+**21 fiches initialisées sans alerte rétroactive** ; archives via `/offres`, favoris via `/souhaits`, compteur et incidents via `/statuts`. Base, historiques et curseur préservés ; favoris inclus dans les sauvegardes vérifiées.
+
 Les lots **151–153**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS151-153.md),
 ajoutent **PIMCO, BlackRock, CIBC, TD, G-Research et TP ICAP** : **85 sources / 73 employeurs**,
-**80 à jour au relevé daté**. [Inventaire actuel](docs/RADAR-SOURCES-LOTS151-153.md).
+**80 à jour au relevé daté**. [Inventaire historique](docs/RADAR-SOURCES-LOTS151-153.md).
 Telegram donne un état à **09:00, 13:00 et 18:00, heure de Paris**, même sans nouvelle offre.
 Les collectes Workday concernées recontrôlent la pagination ; le signal du radar est capturé
 avant les contrôles lents. **49 fiches importées sans alerte rétroactive**, données et curseur préservés.
