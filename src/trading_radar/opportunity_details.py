@@ -9,7 +9,7 @@ from trading_radar.description_sections import labelled_lists, normalize_heading
 from trading_radar.experience import experience_requirement
 from trading_radar.html_page import Document, Element
 from trading_radar.job_conditions import deadline_label, start_label
-from trading_radar.location_updates import location_label
+from trading_radar.location_updates import hsbc_addresses, location_label
 from trading_radar.models import Job
 from trading_radar.opportunity_facts import country_facts, start_facts
 from trading_radar.ubs_sections import bullet_items, field_lines
@@ -169,7 +169,7 @@ def public_source_url(job: Job) -> str | None:
 def opportunity_details(job: Job) -> dict:
     location = country_facts(job)
     countries = location["countries"]
-    if len(countries) == 1:
+    if len(countries) == 1 and hsbc_addresses(job) is None:
         country = countries[0]
         place = " ".join(job.location.split()).strip()
         if job.city and (job.country or "").replace("UK", "GB") == country["code"]:
@@ -210,7 +210,8 @@ def opportunity_details(job: Job) -> dict:
             start_text = "À convenir · indiqué par l’employeur"
     if start_status == "unknown":
         start_text = "Date non indiquée par l’employeur"
-        if job.expected_start_date or start["evidence"]:
+        date_words = r"\b(?:January|February|March|April|June|July|August|September|October|November|December|janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\b|\b20\d{2}\b|\d{1,2}[/.-]\d{1,2}"
+        if job.expected_start_date or re.search(date_words, " ".join(start["evidence"]), re.I):
             start_status = "unrecognized"
             start_text = "Début annoncé à vérifier · voir l’extrait employeur"
     if start_status == "year" and re.search(

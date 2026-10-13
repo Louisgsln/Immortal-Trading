@@ -202,3 +202,15 @@ def test_cached_details_keep_real_source_verification_time(config, repo, raw, tm
     assert b["jobs"][0]["opportunity_details"]["verified_at"] == updated.last_seen.isoformat()
     assert a["jobs"][0]["id"] == b["jobs"][0]["id"]
     assert sum(b["opportunity_quality"]["fields"]["location"].values()) == 1
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Start your career with us.",
+        "Starting to develop trading strategies.",
+        "Join our team and start making an impact.",
+    ],
+)
+def test_rhetorical_start_text_does_not_claim_an_announced_date(text):
+    assert opportunity_details(observed(text))["start"]["status"] == "not_published"
