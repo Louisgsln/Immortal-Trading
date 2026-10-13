@@ -1,0 +1,342 @@
+{
+  "status": "ok",
+  "release": "immortal-trading:lot162-opportunity-fields-20261013",
+  "application_commit": "17eb80a0bcb75a0380efe2b86f36406ae2936947",
+  "verified_at": "2026-10-13T10:30:24.222373+00:00",
+  "production_quality": {
+    "active_jobs": 1575,
+    "fields": {
+      "deadline": {
+        "date": 35,
+        "instant": 16,
+        "not_published": 1470,
+        "qualitative": 20,
+        "unrecognized": 34
+      },
+      "experience": {
+        "not_published": 1009,
+        "numeric": 461,
+        "qualitative": 105
+      },
+      "location": {
+        "not_published": 1,
+        "recognized": 1502,
+        "unrecognized": 72
+      },
+      "start": {
+        "conflict": 19,
+        "day": 68,
+        "months": 81,
+        "not_published": 1299,
+        "qualitative": 28,
+        "unrecognized": 62,
+        "year": 18
+      }
+    }
+  },
+  "official_ubs": {
+    "last_seen": "2026-10-13T10:30:24.222373+00:00",
+    "opportunity_details": {
+      "deadline": {
+        "evidence": [],
+        "label": "Date non indiquée par l’employeur",
+        "status": "not_published"
+      },
+      "experience": {
+        "evidence": [
+          "as prior experience in working either for a DA native company or on an eFX Trading desk",
+          "Knowledge/experience of applications such as Python, Jupiterhub, mathlab, q, kx systems etc"
+        ],
+        "label": "Expérience préalable en actifs numériques ou desk eFX · durée non chiffrée",
+        "minimum_years": null,
+        "status": "qualitative"
+      },
+      "location": {
+        "countries": [
+          {
+            "code": "SG",
+            "label": "Singapour"
+          }
+        ],
+        "evidence": [
+          "Singapore, Singapore"
+        ],
+        "label": "Singapour (SG)",
+        "status": "recognized"
+      },
+      "source_url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=JobDetails&jobid=351976",
+      "start": {
+        "evidence": [],
+        "label": "Date non indiquée par l’employeur",
+        "status": "not_published"
+      },
+      "verified_at": "2026-10-13T10:30:24.222373+00:00"
+    },
+    "score": 77,
+    "source": "ubs_professionals",
+    "title": "eFX Crypto Trader"
+  },
+  "preservation": {
+    "checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "application_rows_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "heartbeat_binding_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true,
+      "wishlist_history_preserved": true,
+      "wishlist_inode_preserved": true,
+      "wishlist_members_preserved": true
+    },
+    "counts_after": {
+      "alert_history": 126,
+      "alerts": 63,
+      "application_history": 2,
+      "applications": 1591,
+      "jobs": 1591
+    },
+    "counts_before": {
+      "alert_history": 126,
+      "alerts": 63,
+      "application_history": 2,
+      "applications": 1591,
+      "jobs": 1591
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    },
+    "stage": "verification"
+  },
+  "simulation": {
+    "status": "ok",
+    "jobs": 1591,
+    "quality": {
+      "active_jobs": 1575,
+      "fields": {
+        "location": {
+          "recognized": 1502,
+          "unrecognized": 72,
+          "not_published": 1
+        },
+        "start": {
+          "months": 81,
+          "year": 18,
+          "day": 68,
+          "not_published": 1299,
+          "unrecognized": 62,
+          "conflict": 19,
+          "qualitative": 28
+        },
+        "experience": {
+          "not_published": 1009,
+          "qualitative": 105,
+          "numeric": 461
+        },
+        "deadline": {
+          "not_published": 1473,
+          "qualitative": 20,
+          "date": 35,
+          "unrecognized": 31,
+          "instant": 16
+        }
+      }
+    },
+    "contract": {
+      "status": "ok",
+      "jobs": 1591,
+      "controls": 89,
+      "modules": 7,
+      "asset_hashes": "verified"
+    },
+    "crypto": {
+      "title": "eFX Crypto Trader",
+      "source": "ubs_professionals",
+      "apply_url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?PageType=JobDetails&jobid=351976&partnerid=25008&siteid=5012",
+      "score": 77,
+      "last_seen": "2026-10-13T10:18:34.756675+00:00",
+      "opportunity_details": {
+        "location": {
+          "status": "recognized",
+          "label": "Singapour (SG)",
+          "evidence": [
+            "Singapore, Singapore"
+          ],
+          "countries": [
+            {
+              "code": "SG",
+              "label": "Singapour"
+            }
+          ]
+        },
+        "start": {
+          "status": "not_published",
+          "label": "Date non indiquée par l’employeur",
+          "evidence": []
+        },
+        "experience": {
+          "status": "qualitative",
+          "label": "Expérience préalable en actifs numériques ou desk eFX · durée non chiffrée",
+          "minimum_years": null,
+          "evidence": [
+            "as prior experience in working either for a DA native company or on an eFX Trading desk",
+            "Knowledge/experience of applications such as Python, Jupiterhub, mathlab, q, kx systems etc"
+          ]
+        },
+        "deadline": {
+          "status": "not_published",
+          "label": "Date non indiquée par l’employeur",
+          "evidence": []
+        },
+        "source_url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=JobDetails&jobid=351976",
+        "verified_at": "2026-10-13T10:18:34.756675+00:00"
+      }
+    },
+    "database_tables_unchanged": true,
+    "wishlist_unchanged": true,
+    "backup_restore_verified": true,
+    "schema_version": 4,
+    "network": "none",
+    "telegram_calls": 0
+  },
+  "services_running": 5,
+  "systemd_active_enabled": 4,
+  "https": {
+    "trusted": true,
+    "same_private_link": true,
+    "editable": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "seconds": 22.434
+  },
+  "dashboard_contract": {
+    "asset_hashes": "verified",
+    "controls": 89,
+    "jobs": 1591,
+    "modules": 7,
+    "status": "ok"
+  },
+  "source_counts": {
+    "employers": 79,
+    "enabled": 91,
+    "fresh": 85
+  },
+  "scope": {
+    "alerts_enabled": true,
+    "deadline_reminders_enabled": false,
+    "include_internships": true,
+    "internship_alerts_enabled": true,
+    "internship_formats": [
+      "off_cycle",
+      "long"
+    ],
+    "internship_target_year": 2027,
+    "telegram_all_new_jobs": true,
+    "telegram_control_enabled": true,
+    "telegram_heartbeat_enabled": true,
+    "telegram_heartbeat_times": [
+      "13:00",
+      "18:00"
+    ],
+    "telegram_incident_notices_enabled": false
+  },
+  "incidents": [
+    {
+      "source": "nomura_campus",
+      "status": "access_restricted"
+    },
+    {
+      "source": "bnp_paribas",
+      "status": "stale"
+    },
+    {
+      "source": "morgan_stanley_campus",
+      "status": "recent_failure"
+    },
+    {
+      "source": "jefferies_campus",
+      "status": "stale"
+    },
+    {
+      "source": "bnp_campus",
+      "status": "recent_failure"
+    },
+    {
+      "source": "wellington",
+      "status": "recent_failure"
+    }
+  ],
+  "ci": {
+    "run_id": 38383492429,
+    "url": "https://github.com/Louisgsln/Immortal-Trading/actions/runs/38383492429",
+    "python314_tests": 5400,
+    "javascript_tests": 34,
+    "jobs": [
+      {
+        "name": "dashboard",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (3.13)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "name": "checks (3.12)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "name": "checks (3.11)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "name": "checks (3.14)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "mobile": {
+    "status": "ok",
+    "viewport": "390x844",
+    "add_from_detail": true,
+    "zero_score_visible": true,
+    "telegram_change_refreshed": true,
+    "sort_by_score": true,
+    "mark_applied_keeps_wishlist": true,
+    "remove_keeps_application": true,
+    "job_view_restored": true,
+    "javascript_errors": 0,
+    "four_employer_fields": true,
+    "official_experience_excerpt_opened": true,
+    "unknown_dates_explicit": true
+  },
+  "telegram_preview": {
+    "status_message_confirmed": true,
+    "messages_sent": 1,
+    "preview_score": 77,
+    "fields": {
+      "location": "Singapour (SG)",
+      "start": "Date non indiquée par l’employeur",
+      "experience": "Expérience préalable en actifs numériques ou desk eFX · durée non chiffrée",
+      "deadline": "Date non indiquée par l’employeur"
+    },
+    "wishlist_button_verified": true,
+    "all_new_scores_enabled": true,
+    "telegram_state_rewritten": false,
+    "alert_history_rewritten": false
+  }
+}

@@ -1,4 +1,4 @@
-# Carnet des tâches — 12 octobre 2026
+# Carnet des tâches — 13 octobre 2026
 
 Ce carnet suit l’instance OVH. Un connecteur développé ou une offre visible dans
 un catalogue public ne sont pas, à eux seuls, une preuve de surveillance active.
@@ -148,13 +148,13 @@ Base principale en schéma 4, anciens identifiants, candidatures, historiques, a
 
 Prochains lots :
 
-- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
+- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
 - 160 — documenter et compléter la couverture Marex, actuellement sept fiches validées sans inventaire exhaustif ; conserver l'absence de fermeture déduite.
 - 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
 
 Les lots 154 (qualification CIBC FICC) et 155 (avertissements SQLite des tests Python 3.14) restent ouverts. Le flux tous scores n'élargit pas à lui seul les filtres de collecte des portails.
 
-## Lot 162 — informations des opportunités (en validation)
+## Lot 162 — informations des opportunités (installé et vérifié)
 
 Demande du 13 octobre : remplir localisation, début, expérience et échéance avec les informations officielles disponibles.
 
@@ -164,4 +164,6 @@ Demande du 13 octobre : remplir localisation, début, expérience et échéance 
 - Même information dans Telegram et Dashboard, extraits et date réelle de vérification ; cache ne fige pas cette dernière.
 - Audit initial : 1 573 offres actives ; 178 pays non reconnus, 1 387 débuts inconnus, 1 113 anciennetés minimales non reconnues, 1 522 échéances inconnues. Absence de publication et difficulté d'extraction sont distinguées.
 
-Tests, simulation sur copie, sauvegarde vérifiée et déploiement restent à terminer avant clôture.
+Tests ciblés, contrat des assets, contrôle mobile, simulation sur copie, sauvegarde version 2 et installation sont vérifiés. Les 1 591 fiches bénéficient du nouvel affichage ; 1 575 actives au relevé, dont 105 critères d'expérience non chiffrés. Base, candidatures, alertes, souhaits et historiques, digest, curseur et liaison Telegram préservés. Une fiche UBS corrigée envoyée une fois avec réception confirmée. [Validation](VALIDATION-LOT162.md) · [Preuves](DELIVERY-LOT162.json).
+
+Suite — lot 163 : analyser par source les valeurs encore à interpréter (62 débuts, 34 échéances et 72 localisations au relevé), chercher les champs structurés officiels manquants et conserver les ambiguïtés tant qu'aucune preuve ne les tranche. Les conflits de dates ne seront pas remplacés par l'année courante. Le lot 159 de performance du Dashboard et les reprises d'accès du lot 161 restent ouverts.

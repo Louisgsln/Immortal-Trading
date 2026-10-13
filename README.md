@@ -14,6 +14,8 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
+Le **lot 162**, [installé le 13 octobre](docs/VALIDATION-LOT162.md), améliore les quatre champs des opportunités dans Telegram et le Dashboard : localisation, début, expérience et échéance. Les critères non chiffrés, dates explicites et indications qualitatives sont conservés ; extraits employeur et vérification sont consultables dans la fiche. Une date absente n'est jamais inventée. Le témoin UBS eFX Crypto Trader affiche l'expérience en actifs numériques/desk eFX, sans ancienneté ni dates de début/clôture publiées.
+
 Les lots **156–158**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS156-158.md),
 envoient **chaque nouvelle offre collectée et vérifiée, même à 0**, et ajoutent une **liste de souhaits partagée entre Telegram et le Dashboard** : tri, retrait, confirmation Postulé et suivi mobile. Les filtres se déplient à la demande dans cette vue.
 **BP, Shell, Marex, Wellington Management, AllianceBernstein et Arrowstreet Capital** portent le profil à **91 sources / 79 employeurs**, dont **85 à jour au relevé daté**. [Inventaire actuel](docs/RADAR-SOURCES-LOTS156-158.md).
