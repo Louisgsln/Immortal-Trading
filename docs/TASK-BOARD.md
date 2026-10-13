@@ -153,3 +153,15 @@ Prochains lots :
 - 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
 
 Les lots 154 (qualification CIBC FICC) et 155 (avertissements SQLite des tests Python 3.14) restent ouverts. Le flux tous scores n'élargit pas à lui seul les filtres de collecte des portails.
+
+## Lot 162 — informations des opportunités (en validation)
+
+Demande du 13 octobre : remplir localisation, début, expérience et échéance avec les informations officielles disponibles.
+
+- Fiche UBS 351976 / référence 344425BR vérifiée sur le portail officiel : intitulé actuel eFX Crypto Trader, Singapour ; expérience préalable en entreprise d'actifs numériques ou desk eFX, sans ancienneté chiffrée ; aucune date de début ni de clôture publiée.
+- Extraction commune : critères d'expérience non chiffrés et leurs qualificatifs conservés, dates françaises, début exact quand explicitement publié, ASAP/à convenir et recrutement au fil de l'eau sans date inventée.
+- Pays/cités supplémentaires reconnus ; anciennes identités et localisations stockées conservées pour éviter les fausses actualisations.
+- Même information dans Telegram et Dashboard, extraits et date réelle de vérification ; cache ne fige pas cette dernière.
+- Audit initial : 1 573 offres actives ; 178 pays non reconnus, 1 387 débuts inconnus, 1 113 anciennetés minimales non reconnues, 1 522 échéances inconnues. Absence de publication et difficulté d'extraction sont distinguées.
+
+Tests, simulation sur copie, sauvegarde vérifiée et déploiement restent à terminer avant clôture.

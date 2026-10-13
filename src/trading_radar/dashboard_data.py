@@ -24,6 +24,7 @@ from trading_radar.job_conditions import conditions
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job, utcnow
 from trading_radar.monitoring import history
+from trading_radar.opportunity_details import opportunity_details
 from trading_radar.opportunity_facts import country_facts, duration_facts, start_facts
 from trading_radar.programmes import programme
 from trading_radar.source_history import source_history
@@ -90,6 +91,7 @@ def _employer_details(payload: str) -> dict:
     observed = conditions(job)
     deadline = resolve_deadline(job)
     return {
+        "opportunity_details": opportunity_details(job),
         "experience": observed["experience"],
         "education": observed["education"],
         "conditions": observed,
@@ -160,6 +162,7 @@ def _job(row: sqlite3.Row) -> dict:
             )
         )
     )
+    details["opportunity_details"]["verified_at"] = job.last_seen.isoformat()
     # Present normalized publication instants as Paris calendar days. Do not expose a fabricated hour
     # or substitute discovery/update dates when publication is unknown.
     publication_day = job.publication_day.isoformat() if job.publication_day else None
@@ -415,6 +418,15 @@ def build_dashboard_data(
             "La liste de souhaits est indisponible. Les candidatures sont conservées."
         )
     result["telegram_all_new_jobs"] = config.settings.telegram_all_new_jobs
+    field_names = ["location", "start", "experience", "deadline"]
+    quality_jobs = [job for job in jobs if job["is_active"]]
+    result["opportunity_quality"] = {"active_jobs": len(quality_jobs), "fields": {}}
+    for name in field_names:
+        states: dict[str, int] = {}
+        for job in quality_jobs:
+            state = job["opportunity_details"][name]["status"]
+            states[state] = states.get(state, 0) + 1
+        result["opportunity_quality"]["fields"][name] = states
     result["facets"] = {
         "companies": sorted({job["company"] for job in jobs}),
         "countries": sorted({job["country"] for job in jobs if job["country"]}),

@@ -7,11 +7,10 @@ from html import escape
 from urllib.parse import urlsplit
 from uuid import UUID
 
-from trading_radar.experience import experience_requirement
-from trading_radar.job_conditions import authorization_evidence, deadline_label, start_label
-from trading_radar.location_updates import location_label
+from trading_radar.job_conditions import authorization_evidence
 from trading_radar.missions import mission_excerpts
 from trading_radar.models import Job
+from trading_radar.opportunity_details import opportunity_details
 from trading_radar.programmes import programme
 
 
@@ -111,9 +110,9 @@ def format_alert(job: Job, event: str) -> str:
     }.get(event, "OPPORTUNITÉ TRADING")
     if event in {"deadline_j7", "deadline_j3", "deadline_j1"}:
         heading = "ÉCHÉANCE · " + event.replace("deadline_j", "J−")
-    minimum = experience_requirement(job)["minimum_years"]
-    experience = f"minimum reconnu : {minimum} an(s)" if minimum is not None else "à vérifier"
-    deadline = deadline_label(job)
+    details = opportunity_details(job)
+    experience = clean(details["experience"]["label"], 240)
+    deadline = clean(details["deadline"]["label"], 160)
     blocks = min(10, max(0, score // 10))
     missions = mission_excerpts(job)
     authorization = authorization_evidence(job)
@@ -137,8 +136,8 @@ def format_alert(job: Job, event: str) -> str:
             "",
             *(["📁 Archive · offre inactive"] if not job.is_active else []),
             *(["⚠️ Échéance dépassée"] if job.is_expired else []),
-            f"📍 {clean(location_label(job), 100)}",
-            f"🗓 Début : {clean(start_label(job), 120)}",
+            f"📍 {clean(details['location']['label'], 160)}",
+            f"🗓 Début : {clean(details['start']['label'], 160)}",
             *programme_line,
             f"🎓 Expérience : {experience}",
             f"⏳ Échéance : {deadline}",

@@ -146,3 +146,26 @@ def start_period(job: Job) -> dict:
         ),
         "evidence": list(dict.fromkeys(statement.strip() for statement in statements))[:8],
     }
+
+
+def exact_start_day(job: Job) -> tuple[date | None, bool]:
+    """Only complete calendar dates in the reviewed candidate start statements."""
+    from trading_radar.deadlines import DATE, explicit_day
+
+    observed = start_period(job)
+    if observed["precision"] == "conflict":
+        return None, True
+    days = set()
+    for statement in observed["evidence"]:
+        if re.search(r"\b(?:between|entre)\b", statement, re.I):
+            continue
+        for match in re.finditer(DATE, statement, re.I):
+            try:
+                day = explicit_day(match[0])
+            except ValueError:
+                return None, True
+            if observed["year"] == day.year and (
+                not observed["months"] or day.month in observed["months"]
+            ):
+                days.add(day)
+    return (next(iter(days)), False) if len(days) == 1 else (None, False)

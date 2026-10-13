@@ -126,6 +126,25 @@ def parse_detail(data: dict, listing: dict, config: Company, source: str) -> Raw
             sections.append(f"<h2>{html.escape(label)}</h2>" + row["AnswerValue"])
     if not sections:
         raise SourceUnavailable("UBS full description missing")
+    # Preserve only explicitly labelled public conditions. Posting/update dates
+    # are never used as a start date or an application deadline.
+    condition_labels = {
+        "start date",
+        "expected start date",
+        "date de début",
+        "date de debut",
+        "application deadline",
+        "application closing date",
+        "closing date",
+        "date limite de candidature",
+        "date limite des candidatures",
+        "minimum experience",
+        "minimum years of experience",
+    }
+    for row in info["JobDetailQuestions"]:
+        label = " ".join((row.get("QuestionName") or "").lower().split()).strip(" :")
+        if label in condition_labels and row["AnswerValue"].strip():
+            sections.append("<p>" + html.escape(label + ": " + row["AnswerValue"]) + "</p>")
     return RawJob(
         company=config.name,
         source=source,

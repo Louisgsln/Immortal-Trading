@@ -182,6 +182,7 @@
       (item.minimum_years === 1 ? " an" : " ans") + " (" + context[item.kind] + ")";
   };
   const experienceLabel = (job) => {
+    if (job.opportunity_details?.experience.status === "qualitative") return job.opportunity_details.experience.label;
     const years = experience(job).minimum_years;
     if (years === null && experienceEvidence(job).some((item) => item.kind === "industry_or_academia")) {
       return "Minimum professionnel non reconnu";
@@ -504,6 +505,25 @@
       link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer";
       link.setAttribute("aria-label", "Consulter l’offre officielle (nouvel onglet)"); content.append(link);
     } else content.append(make("p", "Lien officiel indisponible.", "detail-company"));
+    const fields = job.opportunity_details;
+    if (fields) {
+      const fieldSection = detailSection("Informations publiées par l’employeur");
+      const statusNames = {not_published: "Non indiqué", unrecognized: "À interpréter", conflict: "Contradictoire", qualitative: "Critère publié"};
+      const grid = make("dl", null, "detail-grid");
+      [["location", "Localisation"], ["start", "Début"], ["experience", "Expérience"], ["deadline", "Échéance"]].forEach(([key, label]) => {
+        const field = fields[key]; if (!field) return;
+        const cell = make("div"); cell.append(make("dt", label), make("dd", field.label));
+        if (statusNames[field.status]) cell.append(make("span", statusNames[field.status], "badge"));
+        if (field.evidence?.length) {
+          const evidence = make("details"); evidence.append(make("summary", "Voir l’extrait employeur"));
+          field.evidence.forEach((excerpt) => evidence.append(make("blockquote", excerpt, "description")));
+          cell.append(evidence);
+        }
+        grid.append(cell);
+      });
+      fieldSection.append(grid, make("p", "Fiche vérifiée : " + date(fields.verified_at, true) + ". Une information non indiquée n’est pas déduite de la publication ou du score.", "experience-help"));
+      content.append(fieldSection);
+    }
     const conditions = job.conditions || {};
     const programmeSection = detailSection("Programme");
     programmeSection.append(make("p", radarProgramme.label(job.programme)));
@@ -670,7 +690,7 @@
       if (job.internship_alert) badges.append(make("span", internshipAlertLabels[job.internship_alert.status], "badge"));
       card.append(heading, make("p", job.company + " · " + (job.location || "Lieu non précisé")), badges,
         make("p", radarProgramme.label(job.programme) + " · " + radarOpportunity.durationLabel(job.duration)),
-        make("p", "Début : " + radarOpportunity.startLabel(job.start)));
+        make("p", "Début : " + (job.opportunity_details?.start.label || radarOpportunity.startLabel(job.start))));
       if (job.application?.next_action) card.append(make("p", "Prochaine action : " + job.application.next_action + (job.application.next_action_date ? " · " + date(job.application.next_action_date) : ""), "mobile-next-action"));
       if (job.deadline?.day) card.append(make("p", "Date limite : " + date(job.deadline.day), job.is_expired ? "editor-error" : ""));
       card.append(actionButton(editingEnabled ? "Ouvrir le suivi" : "Voir la fiche", () => showDetail(job)));

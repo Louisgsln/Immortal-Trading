@@ -8,7 +8,7 @@ from trading_radar.description_sections import visible_text
 from trading_radar.html_page import Document
 from trading_radar.models import Job
 from trading_radar.normalizer import LOCATIONS, has, normalize_text
-from trading_radar.start_dates import start_period
+from trading_radar.start_dates import exact_start_day, start_period
 
 COUNTRIES = {
     "FR": ("France", ["france"]),
@@ -32,7 +32,28 @@ COUNTRIES = {
     "TR": ("Turquie", ["turkey", "turkiye", "turquie"]),
     "PL": ("Pologne", ["poland", "pologne"]),
     "SE": ("Suède", ["sweden", "suede"]),
-    "ZA": ("Afrique du Sud", ["south africa"]),
+    "ZA": ("Afrique du Sud", ["south africa", "afrique du sud"]),
+    "CN": ("Chine", ["china", "chine", "mainland china"]),
+    "BR": ("Brésil", ["brazil", "brasil", "bresil"]),
+    "DK": ("Danemark", ["denmark", "danemark"]),
+    "PT": ("Portugal", ["portugal"]),
+    "KR": (
+        "Corée du Sud",
+        ["south korea", "korea republic of", "republic of korea", "coree du sud"],
+    ),
+    "TW": ("Taïwan", ["taiwan"]),
+    "MY": ("Malaisie", ["malaysia", "malaisie"]),
+    "MX": ("Mexique", ["mexico", "mexique"]),
+    "CO": ("Colombie", ["colombia", "colombie"]),
+    "RO": ("Roumanie", ["romania", "roumanie"]),
+    "NZ": ("Nouvelle-Zélande", ["new zealand", "nouvelle zelande"]),
+    "ID": ("Indonésie", ["indonesia", "indonesie"]),
+    "TH": ("Thaïlande", ["thailand", "thailande"]),
+    "VN": ("Vietnam", ["vietnam", "viet nam"]),
+    "SA": ("Arabie saoudite", ["saudi arabia", "arabie saoudite"]),
+    "NG": ("Nigeria", ["nigeria"]),
+    "BE": ("Belgique", ["belgium", "belgique"]),
+    "AT": ("Autriche", ["austria", "autriche"]),
 }
 CITY_COUNTRIES = {
     normalize_text(city): "GB" if code == "UK" else code for city, code, _ in LOCATIONS
@@ -51,6 +72,25 @@ CITY_COUNTRIES.update(
         "bengaluru": "IN",
         "stockholm": "SE",
         "johannesburg": "ZA",
+        "beijing": "CN",
+        "shanghai": "CN",
+        "shenzhen": "CN",
+        "pudong": "CN",
+        "taipei": "TW",
+        "seoul": "KR",
+        "lisbon": "PT",
+        "lisbonne": "PT",
+        "sao paulo": "BR",
+        "kuala lumpur": "MY",
+        "bogota": "CO",
+        "aarhus": "DK",
+        "canary wharf": "GB",
+        "boadilla del monte": "ES",
+        "greenwich": "US",
+        "brussels": "BE",
+        "bruxelles": "BE",
+        "vienna": "AT",
+        "wien": "AT",
     }
 )
 NUMBERS = {
@@ -91,7 +131,7 @@ LABEL = re.compile(
 
 
 def country_facts(job: Job) -> dict:
-    codes = set()
+    codes: set[str] = set()
     for piece in re.split(r"[;|]", job.location):
         text = normalize_text(piece)
         stated = {
@@ -99,7 +139,16 @@ def country_facts(job: Job) -> dict:
             for code, (_, aliases) in COUNTRIES.items()
             if any(has(text, alias) for alias in aliases)
         }
-        codes |= stated or {code for city, code in CITY_COUNTRIES.items() if has(text, city)}
+        trusted_codes: set[str] = set()
+        if job.source == "hsbc_graduates" and job.company == "HSBC":
+            parts = [part.strip() for part in piece.split(",")]
+            if len(parts) == 3 and parts[-1] in COUNTRIES:
+                trusted_codes.add(parts[-1])
+        codes |= (
+            stated
+            or trusted_codes
+            or {code for city, code in CITY_COUNTRIES.items() if has(text, city)}
+        )
     return {
         "countries": [
             {"code": code, "label": COUNTRIES[code][0]}
@@ -166,11 +215,11 @@ def start_facts(job: Job) -> dict:
                     "to": date(year, month, calendar.monthrange(year, month)[1]).isoformat(),
                 }
             )
-        try:
-            exact = date.fromisoformat(job.expected_start_date or "")
-        except ValueError:
-            pass
-        else:
+        exact, invalid = exact_start_day(job)
+        if invalid:
+            observed["precision"] = "conflict"
+            windows = []
+        elif exact:
             observed["precision"] = "day"
             windows = [{"from": exact.isoformat(), "to": exact.isoformat()}]
     return {**observed, "windows": windows}

@@ -14,7 +14,30 @@ MONTHS = {
         1,
     )
 }
-DAY = r"\d{1,2}(?:st|nd|rd|th)?"
+MONTHS.update(
+    {
+        name: month
+        for month, names in enumerate(
+            [
+                ("janvier", "jan"),
+                ("février", "fevrier", "feb"),
+                ("mars", "mar"),
+                ("avril", "apr"),
+                ("mai",),
+                ("juin", "jun"),
+                ("juillet", "jul"),
+                ("août", "aout", "aug"),
+                ("septembre", "sep", "sept"),
+                ("octobre", "oct"),
+                ("novembre", "nov"),
+                ("décembre", "decembre", "dec"),
+            ],
+            1,
+        )
+        for name in names
+    }
+)
+DAY = r"\d{1,2}(?:st|nd|rd|th|er)?"
 MONTH = "(?:" + "|".join(MONTHS) + ")"
 WEEKDAY = r"(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+)?"
 DATE = (
@@ -22,8 +45,18 @@ DATE = (
 )
 TIME = r"\d{1,2}:\d{2}\s*(?:am|pm)?"
 ZONE = r"(?:UTC|GMT|HKT|SGT|CET|CEST|[+-]\d{2}:\d{2})(?![\w:+-])"
-LABEL = re.compile(r"\b(?:application deadline|applications? closes?|closing date)\b", re.I)
-DATE_FIRST = re.compile(rf"(?:\s*[:\-]?\s*)(?:(?:will be|is|on)\s+)?(?P<date>{DATE})(?!\w)", re.I)
+LABEL = re.compile(
+    r"\b(?:application deadline|applications? closes?|closing date|application closing date|"
+    r"deadline for applications|apply by|apply before|"
+    r"date limite(?: de (?:candidature|candidatures|dépôt|depot))?|"
+    r"clôture des candidatures|cloture des candidatures|"
+    r"fin des candidatures|candidatures? jusqu['’]au)\b",
+    re.I,
+)
+DATE_FIRST = re.compile(
+    rf"(?:\s*[:\-]?\s*)(?:(?:will be|is|on|le|au|est|est fixée au|est fixee au)\s+)?(?P<date>{DATE})(?!\w)",
+    re.I,
+)
 TIME_FIRST = re.compile(
     rf"\s*:?\s*(?:please apply before|at)\s+(?P<time>{TIME})\s*(?P<zone>{ZONE})?"
     rf"\s*,?\s*(?:on\s+)?(?P<date>{DATE})(?!\w)",
@@ -73,7 +106,7 @@ def explicit_day(text: str) -> date:
     )
     if weekday:
         text = text[weekday.end() :]
-    text = re.sub(r"(\d)(?:st|nd|rd|th)\b", r"\1", text, flags=re.I).replace(",", "")
+    text = re.sub(r"(\d)(?:st|nd|rd|th|er)\b", r"\1", text, flags=re.I).replace(",", "")
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
         result = date.fromisoformat(text)
     else:
