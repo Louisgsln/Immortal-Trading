@@ -1,4 +1,4 @@
-# Plan de développement — état au 11 octobre 2026
+# Plan de développement — état au 14 octobre 2026
 
 Le [carnet des tâches actif](TASK-BOARD.md) distingue ce qui est installé, ce qui
 est validé hors production et ce qui reste bloqué. La cible active est le VPS OVH,
@@ -8,14 +8,23 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Livraison actuelle : [141-A et 143-A](VALIDATION-INTEGRATIONS-20261011.md), quatre périmètres ajoutés,
-**79 sources / 67 employeurs**, 72 à jour au [relevé daté](RADAR-SOURCES-20261011.md).
-BNP stages reste partiel. `/statuts` et le Dashboard utilisent le même profil.
+Livraison actuelle : [lot 169](VALIDATION-LOT169.md), CFM, Xantium, BlueCrest et Dymon ajoutés,
+QRT élargi aux développeurs quantitatifs et stages 2027 auparavant filtrés ;
+**107 sources / 95 employeurs**, 97 à jour au [relevé daté de 18:42 UTC](RADAR-SOURCES-LOT169.md).
+Le flux des nouvelles offres conserve tous les scores, même zéro ; il reste distinct du classement prioritaire.
+BNP et les accès campus en incident restent explicites. `/statuts` et le Dashboard utilisent le même profil.
 Le carnet conserve 133–137 : missions quantitatives, dates des stages, architecture
 du Dashboard mobile, observation hebdomadaire et sauvegarde distante. Il développe
 140–145 : autres banques UK/FR/US, fonds supplémentaires, témoins de stages et
 export de couverture. Les [accès non intégrés](CAMPUS-FUNDS-AUDIT-20261010.md)
 gardent des tâches ouvertes et ne sont pas ajoutés au total surveillé.
+
+Prochaines livraisons : 167, banques et campus BMO/Janus Henderson/Schroders ;
+168, catalogues de fonds Aspect/Balyasny/Rokos ; 170, audit des missions et conditions des
+74 fiches des cinq périmètres quantitatifs, sans bonus au nom du fonds ; 171, portails Hibob
+publiés par Aspect et Dymon. Les durées variables 3–6/4–6 mois, fellowships et années absentes
+restent distinctes des stages off-cycle/longs confirmés. Le lot 159 de performance du Dashboard,
+les incidents de sources et la destination de sauvegarde hors VPS restent ouverts.
 
 ## Historique des décisions avant la migration VPS
 

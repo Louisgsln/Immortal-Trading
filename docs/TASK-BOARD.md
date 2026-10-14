@@ -7,8 +7,8 @@ Les validations et mesures sont dans [VALIDATION-LOTS125-127.md](VALIDATION-LOTS
 [VALIDATION-LOT128.md](VALIDATION-LOT128.md) et
 [VALIDATION-LOTS129-131.md](VALIDATION-LOTS129-131.md) et
 [VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire actuel
-est [daté par source](RADAR-SOURCES-LOTS156-158.md) : 91 sources / 79 employeurs,
-85 à jour au relevé de 16:45 UTC du 12 octobre. Les chiffres des livraisons précédentes restent historiques.
+est [daté par source](RADAR-SOURCES-LOT169.md) : **107 sources / 95 employeurs**,
+97 à jour au relevé de 18:42 UTC du 14 octobre. Les chiffres des livraisons précédentes restent historiques.
 Ce carnet a été réconcilié avec le VPS :
 les anciennes mentions Windows et exclusions globales des stages étaient historiques.
 
@@ -148,7 +148,7 @@ Base principale en schéma 4, anciens identifiants, candidatures, historiques, a
 
 Prochains lots :
 
-- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164, puis 39,64 secondes pour 1 729 fiches au lot 166 ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
+- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164, puis 39,64 secondes pour 1 729 fiches au lot 166 et 28,21 secondes pour 1 787 fiches au lot 169 ; mesures ponctuelles selon la charge, profiler les lectures/parsers avant de modifier la fraîcheur des données.
 - 160 — documenter et compléter la couverture Marex, actuellement sept fiches validées sans inventaire exhaustif ; conserver l'absence de fermeture déduite.
 - 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
 
@@ -183,12 +183,20 @@ Suite — lot 165 : qualifier les titres non retenus par les recherches, notamme
 
 Scotiabank, D. E. Shaw, T. Rowe Price, Aberdeen, Invesco et Trafigura. Deux nouveaux collecteurs officiels et quatre profils Workday. 41 fiches initiales vérifiées ; 217 tests ciblés, 34 JavaScript, Ruff/formatage et Mypy passent. État : installé et observé le 14 octobre. Trois lectures stables ; simulation et sauvegarde/restauration vérifiées ; 41 fiches, dont 7 à score ≥ 70 et 31 à zéro, importées sans alerte. Profil VPS : 103 sources / 91 employeurs, 91 à jour au relevé ; les six ajouts sont à jour. `/statuts` et Dashboard concordent. Les 15 contrôles de préservation passent, mêmes liens privés et souhaits/candidatures modifiables ; cinq conteneurs actifs, radar et Dashboard sains, quatre services système actifs/activés ; sudo à nouveau bloqué. Les 5 466 tests locaux et les 5 466 tests sur chacune des quatre versions Python 3.11–3.14 passent. [Sources et périmètre](RADAR-SOURCES-LOT166.md) · [Validation](VALIDATION-LOT166.md).
 
+## Lot 169 — CFM et fonds quantitatifs
+
+Installé et observé le 14 octobre à 18:42 UTC. CFM 9/24, Xantium 6/8, BlueCrest 1/8 et Dymon 4/12 ; QRT passe de 23 à 54 fiches du catalogue de 198 sans ajouter un employeur au compteur. Deux stages 2027 de développement quantitatif auparavant rejetés sont retenus ; les stages recherche/trading existaient déjà. Descriptions et exigences complètes, métadonnées publiées conservées ; variantes CFM de titres et rubriques vérifiées. Deux lectures stables, 77 nouveaux tests, 103 ciblés, 5 543 Python locaux et 34 JavaScript réussis. Simulation et restauration isolée vérifiées ; 51 créations, aucune actualisation, fermeture ni alerte ; second passage stable. Import réel silencieux de 51 fiches, 15 contrôles de préservation réussis, même HTTPS privé et API mobile souhaits/candidatures. Profil installé : 107 sources / 95 employeurs, 97 à jour ; cinq périmètres de ce lot à jour. Les dix incidents des autres portails restent ouverts. Liste RDC originale et blocage de sudo rétablis et vérifiés ; CI du correctif réussie : 5 543 tests sur chacune des versions Python 3.11–3.14, 34 JavaScript et récupération isolée du conteneur ; six contrôles verts.
+
+[Sources et inventaire complet](RADAR-SOURCES-LOT169.md) · [Validation](VALIDATION-LOT169.md) · [Preuves](DELIVERY-LOT169.json).
+
 ## Prochaines intégrations
 
 | Lot / priorité | Travail et preuve attendue | État |
 |---|---|---|
 | 167 / haute — banques et campus | Qualifier BMO Phenom, Janus Henderson SuccessFactors et Schroders Oracle, puis les programmes campus Scotiabank ; retrouver les fiches front office dont le titre ne contient pas trading ; inventaire, pagination, deux lectures, fiches témoins et simulation | À faire ; ne sont pas comptés comme nouveaux portails actifs |
 | 168 / haute — fonds supplémentaires | Aspect Capital : redirection officielle vers Hibob ; Balyasny : portail Salesforce publié ; Rokos : retrouver un catalogue officiel exploitable ; séparation des programmes informatifs, viviers et postes ouverts | À faire ; accès restreints et CAPTCHA laissés explicites |
+| 170 / haute — missions et stages quantitatifs | Auditer les 74 fiches QRT/CFM/Xantium/BlueCrest/Dymon : missions de recherche liées aux décisions d'investissement, développeurs front office, 3–6 et 4–6 mois, fellowship et critères publiés ; contre-exemples support/plateforme, aucune date ou séniorité inventée ; conserver les scores zéro et mesurer le rappel avant modification | À faire après le lot 169 ; le flux tous scores reste distinct des priorités |
+| 171 / haute — portails complémentaires des fonds | Collecteur public Hibob pour les portails officiellement publiés par Aspect et Dymon ; vérifier catalogue, pagination, fiches, employeur, doublons et premier import silencieux ; qualifier Lynx et Florin Court seulement si des postes publics pertinents sont accessibles | À développer ; aucun accès restreint ajouté au nombre de sources actives |
 | 165 / haute — qualification | Mesurer les faux négatifs et les intitulés de support retenus chez les nouveaux employeurs, dont Mizuho Credit Derivatives Sales et Scotiabank ; justifier toute extension par les missions, sans bonus de score au nom de la société | Ouvert ; le flux tous scores ne remplace pas la qualification des fiches |
 
 Les lots 154, 155, 159, 160, 161 et 163 restent ouverts. Nomura campus reste en attente conformément au choix du propriétaire. Chaque portail n'est déclaré surveillé qu'après installation et premier succès observé sur OVH ; `/statuts` doit concorder avec le Dashboard et l'inventaire installé.

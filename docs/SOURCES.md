@@ -1,6 +1,8 @@
 # Couverture vérifiée des sources
 
-État au 17 septembre 2026. « Activée » signifie incluse dans `scan` / `watch`, pas qu'un watcher tourne actuellement.
+Profil VPS actuel : [lot 169 et inventaire complet](RADAR-SOURCES-LOT169.md), **107 sources / 95 employeurs**, 97 à jour au relevé du 14 octobre 2026 à 18:42 UTC. CFM, Xantium, BlueCrest et Dymon ajoutés ; QRT élargi sans double comptage. Radar observé actif, même profil dans `/statuts`, `/sources` et Dashboard. Les états d'accès restent distincts du nombre de portails programmés.
+
+Les tableaux et relevés ci-dessous gardent leur contexte historique. État au 17 septembre 2026 : « Activée » signifie incluse dans `scan` / `watch`, pas qu'un watcher tourne actuellement.
 
 | Employeur | Portail public | Connecteur | Configuration |
 |---|---|---|---|

@@ -14,6 +14,8 @@ avant les nouvelles alertes de stages. Voir
 La sélection active du VPS est conservée ; les chiffres du catalogue historique
 ci-dessous ne décrivent pas les sources activées en production.
 
+Le **lot 169**, [fonds quantitatifs et inventaire complet](docs/RADAR-SOURCES-LOT169.md), ajoute CFM, Xantium, BlueCrest et Dymon, et élargit QRT de 23 à 54 fiches, dont les stages 2027 de développement quantitatif auparavant filtrés. **107 sources / 95 employeurs**, dont **97 à jour à 18:42 UTC le 14 octobre** ; cinq périmètres vérifiés. **51 fiches supplémentaires**, import silencieux puis Telegram tous scores, même zéro. Même Dashboard privé, données, souhaits, candidatures et curseur conservés. [Validation](docs/VALIDATION-LOT169.md) · [Carnet](docs/TASK-BOARD.md).
+
 Le **lot 166**, [six sources supplémentaires](docs/RADAR-SOURCES-LOT166.md), ajoute Scotiabank, D. E. Shaw, T. Rowe Price, Aberdeen, Invesco et Trafigura : **103 sources / 91 employeurs**, dont 91 à jour au relevé du 14 octobre et les six ajouts vérifiés. **41 fiches**, 7 à score ≥ 70 et 31 à zéro ; première référence silencieuse, puis Telegram tous scores. Off-cycle et stages longs conservés, aucune date inventée. Base, alertes, candidatures, souhaits et curseur préservés ; mêmes liens privés. [Validation](docs/VALIDATION-LOT166.md) · [Carnet](docs/TASK-BOARD.md).
 
 Le **lot 164**, [six sources vérifiées](docs/RADAR-SOURCES-LOT164.md), ajoute State Street, Mizuho, Northern Trust, LSEG, GSA Capital et Quadrature Capital au profil VPS : **97 sources / 85 employeurs**, installées et vérifiées le 14 octobre. 67 fiches contrôlées, dont 2 à score ≥ 70 ; les scores restent inchangés. Première référence silencieuse, puis flux de chaque nouvelle offre tous scores. Off-cycle et stages longs conservés ; événements et viviers exclus. [Validation](docs/VALIDATION-LOT164.md).
@@ -22,7 +24,7 @@ Le **lot 162**, [installé le 13 octobre](docs/VALIDATION-LOT162.md), améliore 
 
 Les lots **156–158**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS156-158.md),
 envoient **chaque nouvelle offre collectée et vérifiée, même à 0**, et ajoutent une **liste de souhaits partagée entre Telegram et le Dashboard** : tri, retrait, confirmation Postulé et suivi mobile. Les filtres se déplient à la demande dans cette vue.
-**BP, Shell, Marex, Wellington Management, AllianceBernstein et Arrowstreet Capital** portent le profil à **91 sources / 79 employeurs**, dont **85 à jour au relevé daté**. [Inventaire actuel](docs/RADAR-SOURCES-LOTS156-158.md).
+**BP, Shell, Marex, Wellington Management, AllianceBernstein et Arrowstreet Capital** portent le profil à **91 sources / 79 employeurs**, dont **85 à jour au relevé daté**. [Inventaire du 12 octobre](docs/RADAR-SOURCES-LOTS156-158.md).
 **21 fiches initialisées sans alerte rétroactive** ; archives via `/offres`, favoris via `/souhaits`, compteur et incidents via `/statuts`. Base, historiques et curseur préservés ; favoris inclus dans les sauvegardes vérifiées.
 
 Les lots **151–153**, [installés et vérifiés le 12 octobre](docs/VALIDATION-LOTS151-153.md),
