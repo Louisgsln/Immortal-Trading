@@ -19,6 +19,9 @@ from trading_radar.selection import SelectionAudit, rejection_reason
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
+    "xantium": ("Xantium", "job-boards.greenhouse.io"),
+    "bluecrestcapitalmanagement": ("BlueCrest Capital Management", "job-boards.greenhouse.io"),
+    "dymonasiacapitalsingaporepteltd": ("Dymon Asia", "job-boards.anz.greenhouse.io"),
     "gsacapital": ("GSA Capital", "www.gsacapital.com"),
     "quadraturecapital": ("Quadrature Capital", "job-boards.greenhouse.io"),
     "engineersgate": ("Engineers Gate", "job-boards.greenhouse.io"),
@@ -85,6 +88,9 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "xantium",
+    "bluecrestcapitalmanagement",
+    "dymonasiacapitalsingaporepteltd",
     "quadraturecapital",
     "engineersgate",
     "grahamcapitalmanagement",

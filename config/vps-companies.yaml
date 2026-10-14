@@ -1341,9 +1341,13 @@ companies:
     country: ''
     scan_interval: 1800
     request_interval: 2.0
-    notes: Official public catalogue verified 2026-09-27. Partial trading scope; no
-      absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
+    notes: 'Official public catalogue verified 2026-09-27. Partial trading scope;
+      no absence closures. Silent bootstrap. See docs/VALIDATION-LOTS88-90.md. Catalogues
       publics relus deux fois sur le VPS le 10 octobre 2026; premier import silencieux.
+      Lot 169: VPS scope widened to retain senior and quantitative development/trading
+      technology titles, including 2027 internships, under the all-score policy. Support/risk/control
+      and summer titles remain excluded; programme evidence and scores unchanged.
+      Default historical catalogue scope remains separate.'
     options:
       title_terms:
       - trading
@@ -1359,37 +1363,28 @@ companies:
       - product control
       - compliance
       - audit
-      - risk
-      - director
-      - vice president
-      - vp
-      - svp
-      - avp
-      - head of
-      - senior
-      - support
-      - software
-      - infrastructure
-      - sr
-      - business analyst
-      - product manager
-      - manager
-      - lead
-      - principal
-      - regulatory
-      - intern
-      - internship
-      - alternant
-      - alternante
-      - alternance
-      - engineer
-      - stage
-      - surveillance
-      - developer
-      - technologist
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - insight programme
+      - insight program
       - external contributors
       - production
-      max_results_per_query: 500
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      max_results_per_query: 1000
+      max_details: 200
+      max_scan_seconds: 600
   man_group:
     name: Man Group
     enabled: true
@@ -4801,3 +4796,232 @@ companies:
       Off-cycle/long internships admitted, summers/support roles excluded; seniority
       scored rather than discarded. No closure by absence; campus/regional completeness
       not claimed.
+  xantium:
+    name: Xantium
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: xantium
+    career_url: https://job-boards.greenhouse.io/xantium
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - academy fellow
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Public employer Greenhouse board verified 2026-10-14; provenance https://www.xantium.com/careers.
+      Complete feed, strict employer/URL/posting ID and metadata shape, full descriptions,
+      no closure by absence. Off-cycle/long internships and all score levels admitted;
+      summer titles, support and exploratory pools excluded. Regional/campus exhaustiveness
+      not claimed.
+  bluecrest:
+    name: BlueCrest Capital Management
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: bluecrestcapitalmanagement
+    career_url: https://job-boards.greenhouse.io/bluecrestcapitalmanagement
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Public employer Greenhouse board verified 2026-10-14; provenance https://job-boards.greenhouse.io/bluecrestcapitalmanagement.
+      Complete feed, strict employer/URL/posting ID and metadata shape, full descriptions,
+      no closure by absence. Off-cycle/long internships and all score levels admitted;
+      summer titles, support and exploratory pools excluded. Regional/campus exhaustiveness
+      not claimed.
+  dymon_asia:
+    name: Dymon Asia
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: dymonasiacapitalsingaporepteltd
+    career_url: https://job-boards.anz.greenhouse.io/dymonasiacapitalsingaporepteltd
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - equity long short
+      - equity long/short
+      - els fellowship
+      - equity research
+      - ai research
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Public employer Greenhouse board verified 2026-10-14; provenance https://www.dymonasia.com/join-us/.
+      Complete feed, strict employer/URL/posting ID and metadata shape, full descriptions,
+      no closure by absence. Off-cycle/long internships and all score levels admitted;
+      summer titles, support and exploratory pools excluded. Regional/campus exhaustiveness
+      not claimed.
+  cfm:
+    name: Capital Fund Management
+    enabled: true
+    ats: cfm
+    career_url: https://jobs.cfm.com/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - portfolio engineering
+      - financial engineering
+      - merger arbitrage
+      - machine learning
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Official public CFM SuccessFactors recruitment subdomain verified 2026-10-14;
+      corporate careers page remains HTTP 403. Whole unfiltered catalogue, exact counts
+      and pagination, posting IDs, canonical URLs, listing/detail titles, full descriptions
+      and final first-page recheck. Public listing locations, no invented publication/start/deadline;
+      seniority scored rather than discarded, stages admitted, no closure by absence.

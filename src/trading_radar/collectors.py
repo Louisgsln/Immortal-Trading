@@ -173,6 +173,10 @@ class VendorCollector:
 
 
 def build_collector(source: str, config: Company, http: HTTPClient) -> Collector:
+    if config.ats == "cfm":
+        from trading_radar.cfm import CFMCollector
+
+        return CFMCollector(source, config, http)
     if config.ats == "scotiabank":
         from trading_radar.scotiabank import ScotiabankCollector
 
