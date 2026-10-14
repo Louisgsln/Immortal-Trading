@@ -1,0 +1,2657 @@
+{
+  "status": "ok",
+  "release": "immortal-trading:lot164-source-expansion-20261014",
+  "application_commit": "e05b83865f8652f03f51fafa353e2a4c0fc43eff",
+  "new_source_jobs": {
+    "gsa_capital": 2,
+    "lseg": 12,
+    "mizuho": 7,
+    "northern_trust": 12,
+    "quadrature": 1,
+    "state_street": 33
+  },
+  "import": {
+    "alerts": 0,
+    "closed": 0,
+    "degraded": {},
+    "duration": 11.274,
+    "failed": {},
+    "high_priority": 379,
+    "listing_gaps": {},
+    "new": 67,
+    "received": 67,
+    "relevant": 549,
+    "requests": 0,
+    "source_results": {
+      "gsa_capital": {
+        "completed_at": "2026-10-14T11:50:26.145877+00:00",
+        "duration": 0.019,
+        "internship_baseline_complete": true,
+        "selection": {
+          "examined": 13,
+          "rejected": {
+            "excluded_title:accountant": 1,
+            "excluded_title:competition": 1,
+            "excluded_title:insight programme": 2,
+            "excluded_title:operations": 1,
+            "excluded_title:quant talk": 1,
+            "excluded_title:technology talk": 1,
+            "no_title_match": 4
+          },
+          "samples": [
+            {
+              "external_id": "7336091002",
+              "reason": "excluded_title:operations",
+              "title": "Business Operations - General Application"
+            },
+            {
+              "external_id": "8870873002",
+              "reason": "excluded_title:competition",
+              "title": "Digital Competition - SPARK 2026"
+            },
+            {
+              "external_id": "8625916002",
+              "reason": "excluded_title:accountant",
+              "title": "Finance - Assistant Accountant"
+            },
+            {
+              "external_id": "8870173002",
+              "reason": "excluded_title:insight programme",
+              "title": "General Trading & Technology Insight Programme - 2027"
+            },
+            {
+              "external_id": "4625058002",
+              "reason": "no_title_match",
+              "title": "Infrastructure Assistant"
+            },
+            {
+              "external_id": "4010431002",
+              "reason": "no_title_match",
+              "title": "IT Engineer"
+            },
+            {
+              "external_id": "8871056002",
+              "reason": "excluded_title:quant talk",
+              "title": "Quant Talk - University of Oxford (13th of November)"
+            },
+            {
+              "external_id": "7555839002",
+              "reason": "no_title_match",
+              "title": "Software Developer"
+            },
+            {
+              "external_id": "8570668002",
+              "reason": "no_title_match",
+              "title": "Software Developer - Intern"
+            },
+            {
+              "external_id": "8826886002",
+              "reason": "excluded_title:technology talk",
+              "title": "Technology Talk - University of Oxford (20th of October)"
+            },
+            {
+              "external_id": "8518528002",
+              "reason": "excluded_title:insight programme",
+              "title": "Women in Trading & Technology Insight Programme - 2027"
+            }
+          ],
+          "scope": "public_catalogue",
+          "selected": 2
+        },
+        "status": "successful"
+      },
+      "lseg": {
+        "completed_at": "2026-10-14T11:50:26.126335+00:00",
+        "duration": 0.33,
+        "internship_baseline_complete": true,
+        "selection": {
+          "examined": 141,
+          "rejected": {
+            "excluded_title:operations": 5,
+            "excluded_title:summer internship": 4,
+            "no_title_match": 120
+          },
+          "samples": [
+            {
+              "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Content-Infrastructure-Owner---Research_R0122760",
+              "reason": "no_title_match",
+              "title": "Content Infrastructure Owner - Research"
+            },
+            {
+              "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Senior-Content-Specialist_R0122762",
+              "reason": "no_title_match",
+              "title": "Senior Content Specialist"
+            },
+            {
+              "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Content-Infrastructure-Owner--Estimates_R0122761",
+              "reason": "no_title_match",
+              "title": "Content Infrastructure Owner -Estimates"
+            },
+            {
+              "external_id": "/job/THA-Bangkok-One-Bangkok/Lead-Software-Engineer--C---_R0100379",
+              "reason": "no_title_match",
+              "title": "Lead Software Engineer (C++)"
+            },
+            {
+              "external_id": "/job/IND-BLR-Divyasree-Technopolis/Sr-Technical-Specialist---Workflows-Technical-Support_R0116209-1",
+              "reason": "no_title_match",
+              "title": "Sr. Technical Specialist - Workflows Technical Support"
+            },
+            {
+              "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Technical-Specialist---AI-and-Enterprise-Applications_R0123376",
+              "reason": "no_title_match",
+              "title": "Senior Technical Specialist - AI and Enterprise Applications"
+            },
+            {
+              "external_id": "/job/IND-Mumbai-One-World-Center/Senior-Research-Analyst--Flows_R0121925",
+              "reason": "no_title_match",
+              "title": "Senior Research Analyst, Flows"
+            },
+            {
+              "external_id": "/job/Colombo-Sri-Lanka/Analyst--Market-Supervision--LSE-24_R0123339",
+              "reason": "no_title_match",
+              "title": "Analyst, Market Supervision, LSE 24"
+            },
+            {
+              "external_id": "/job/HKG-Hong-Kong-ICBC-Tower/Senior-Manager--Business-Consulting_R0124156",
+              "reason": "no_title_match",
+              "title": "Senior Manager, Business Consulting"
+            },
+            {
+              "external_id": "/job/PHL-Taguig-City-CitiPlaza/Associate--PTS-Customer-Support_R0123105",
+              "reason": "no_title_match",
+              "title": "Associate, PTS Customer Support"
+            },
+            {
+              "external_id": "/job/London-United-Kingdom/Senior-Manager--Live-Supervision--Rules---Post-Trade_R0123696",
+              "reason": "no_title_match",
+              "title": "Senior Manager, Live Supervision, Rules & Post Trade"
+            },
+            {
+              "external_id": "/job/Cluj---21-Decembrie-1989-Boulevard/Assistant-Manager--Technical-Implementation_R0122513",
+              "reason": "no_title_match",
+              "title": "Assistant Manager, Technical Implementation"
+            },
+            {
+              "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Associate--Securities-Clearing-Operations_R0123613",
+              "reason": "excluded_title:operations",
+              "title": "Senior Associate, Securities Clearing Operations"
+            },
+            {
+              "external_id": "/job/IND-Hyderabad-CapitaLand/BI-Engineering-Manager_R0123806",
+              "reason": "no_title_match",
+              "title": "BI Engineering Manager"
+            },
+            {
+              "external_id": "/job/London-United-Kingdom/Director--Brand-Strategy---Enterprise-Positioning_R0122110",
+              "reason": "no_title_match",
+              "title": "Director, Brand Strategy & Enterprise Positioning"
+            },
+            {
+              "external_id": "/job/USA-New-York-28-Liberty-Street/Senior-Valuations-Lead--CLO---CDO_R0121718-1",
+              "reason": "no_title_match",
+              "title": "Senior Valuations Lead, CLO / CDO"
+            },
+            {
+              "external_id": "/job/New-York-United-States/Senior-Sales-Specialist--Analytics_R0118851-1",
+              "reason": "no_title_match",
+              "title": "Senior Sales Specialist, Yield Book"
+            },
+            {
+              "external_id": "/job/Paris-France/Director--Collateral---Liquidity-Management_R0120818-1",
+              "reason": "no_title_match",
+              "title": "Director, Collateral & Liquidity Management"
+            },
+            {
+              "external_id": "/job/SGP-Singapore-1-Raffles-Quay/Partner-Account-Manager_R0123227",
+              "reason": "no_title_match",
+              "title": "Partner Account Manager"
+            },
+            {
+              "external_id": "/job/IND-BLR-Divyasree-Technopolis/Engineer--Site-Reliability-Engineering_R0117362-1",
+              "reason": "no_title_match",
+              "title": "Engineer, Site Reliability Engineering"
+            },
+            {
+              "external_id": "/job/London-United-Kingdom/Senior-Market-Supervision-Surveillance-Specialist_R0122459",
+              "reason": "no_title_match",
+              "title": "Senior Market Supervision Surveillance Specialist"
+            },
+            {
+              "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Technical-Specialist---AI-and-Enterprise-Applications_R0123375",
+              "reason": "no_title_match",
+              "title": "Senior Technical Specialist - AI and Enterprise Applications"
+            },
+            {
+              "external_id": "/job/London-United-Kingdom/Technical-Account-Manager--Analyst-_R0122748",
+              "reason": "no_title_match",
+              "title": "Technical Account Manager (Analyst)"
+            },
+            {
+              "external_id": "/job/New-York-City-United-States/Business-Analyst-Summer-Internship_R0123463-2",
+              "reason": "excluded_title:summer internship",
+              "title": "Business Analyst Summer Internship"
+            },
+            {
+              "external_id": "/job/New-York-City-United-States/Business-Management-and-Sales-Summer-Internship_R0123464-1",
+              "reason": "excluded_title:summer internship",
+              "title": "Business Management Summer Internship"
+            },
+            {
+              "external_id": "/job/GBR-London-5-Canada-Square/Business-Management-and-Sales-Summer-Internship_R0123386-1",
+              "reason": "excluded_title:summer internship",
+              "title": "Business Management Summer Internship"
+            },
+            {
+              "external_id": "/job/London-United-Kingdom/Business-Analyst-Summer-Internship_R0123387-1",
+              "reason": "excluded_title:summer internship",
+              "title": "Business Analyst Summer Internship"
+            },
+            {
+              "external_id": "/job/Bucharest---Iuliu-Maniu-Boulevard/Senior-Risk-Developer_R0114189-1",
+              "reason": "no_title_match",
+              "title": "Senior Risk Developer"
+            },
+            {
+              "external_id": "/job/POL-Gdynia-3T-Office-Park-Tower-C/Senior-Product-Manager---FX-Post-Trade-Workflows---Solutions_R0122604-1",
+              "reason": "no_title_match",
+              "title": "Product Manager — FX Post-Trade Workflows & Solutions"
+            },
+            {
+              "external_id": "/job/JPN-Tokyo-Akasaka-Biz-Tower-30/Sales-Manager--Data-and-Feeds--Japan_R0115149-1",
+              "reason": "no_title_match",
+              "title": "Sales Manager, Data and Feeds, Japan"
+            }
+          ],
+          "scope": "search_results",
+          "selected": 12
+        },
+        "status": "successful"
+      },
+      "mizuho": {
+        "completed_at": "2026-10-14T11:50:25.498734+00:00",
+        "duration": 0.189,
+        "internship_baseline_complete": true,
+        "selection": {
+          "examined": 113,
+          "rejected": {
+            "excluded_title:audit": 2,
+            "excluded_title:compliance": 2,
+            "excluded_title:legal": 2,
+            "excluded_title:market risk": 3,
+            "no_title_match": 97
+          },
+          "samples": [
+            {
+              "external_id": "/job/NYC-1285/Equity-Finance---Derivatives-Attorney_R7005",
+              "reason": "excluded_title:legal",
+              "title": "Legal Counsel - (Equity Derivatives, Trading Documentation)"
+            },
+            {
+              "external_id": "/job/NYC-1285/MBSCC-Specialist--AVP-VP_R7308",
+              "reason": "no_title_match",
+              "title": "MBSCC Specialist- AVP/VP"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--GTB--Global-Transaction-Banking--Advisory_R7432",
+              "reason": "no_title_match",
+              "title": "Associate, GTB (Global Transaction Banking) Advisory"
+            },
+            {
+              "external_id": "/job/NYC-1285/Director---Non-Financial-Risk--FO-Coverage-_R7427",
+              "reason": "no_title_match",
+              "title": "Director – Non-Financial Risk (FO Coverage)"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Business-Development-VP---Transaction-Banking_R7250",
+              "reason": "no_title_match",
+              "title": "Vice President, Global Subsidiary Coverage"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--Transaction-Banking-Sales-Support_R7407",
+              "reason": "no_title_match",
+              "title": "Associate, Transaction Banking Sales Support"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Fixed-Income-Swap-Desk-Technology-Support-and-Implementation_R7232-3",
+              "reason": "no_title_match",
+              "title": "Fixed Income Swap Desk Technology Support and Implementation"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Vice-President--Customer-Support-Team-Lead_R7404",
+              "reason": "no_title_match",
+              "title": "Vice President, Customer Support Team Lead"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Derivatives-Analytics---AI-Solutions-Engineer_R7131",
+              "reason": "no_title_match",
+              "title": "Derivatives Analytics & AI Solutions Engineer"
+            },
+            {
+              "external_id": "/job/NYC-1285/Data-Architecture---Engineering---Market-Risk-Technology_R7172-1",
+              "reason": "excluded_title:market risk",
+              "title": "Data Architecture & Engineering — Market Risk Technology"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Director---Market-Risk--Spread-Products_R7047-1",
+              "reason": "excluded_title:market risk",
+              "title": "Director – Market Risk, Spread Products"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Director--Payments-Product-Management_R7402",
+              "reason": "no_title_match",
+              "title": "Director, Payments Product Management"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Financial-Planning---Analysis---AVP_R7388",
+              "reason": "no_title_match",
+              "title": "Financial Planning & Analysis - AVP"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--Cash-Channel-Product-Management_R7403",
+              "reason": "no_title_match",
+              "title": "Associate, Cash Channel Product Management"
+            },
+            {
+              "external_id": "/job/NYC-1285/Internal-Audit---Credit-Rsik_R7373",
+              "reason": "excluded_title:audit",
+              "title": "Internal Audit - Credit Risk"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Vice-President---Finance-Strategy---Execution_R7113",
+              "reason": "no_title_match",
+              "title": "Vice President – Finance Strategy & Execution"
+            },
+            {
+              "external_id": "/job/NYC-1285/Director---Non-Financial-Risk--FO-Coverage-_R7425",
+              "reason": "no_title_match",
+              "title": "Director – Non-Financial Risk (FO Coverage)"
+            },
+            {
+              "external_id": "/job/NYC-1285/Legal-Counsel---Equity-Finance_R7214-2",
+              "reason": "excluded_title:legal",
+              "title": "Legal Counsel – Equity Finance"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Credit-Derivatives-Sales_R7026",
+              "reason": "no_title_match",
+              "title": "Credit Derivatives Sales"
+            },
+            {
+              "external_id": "/job/NYC-1285/Derivatives-Attorney_R7341",
+              "reason": "no_title_match",
+              "title": "Derivatives Attorney"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Equities-Strategic-Initiatives---AI-Transformation_R7176-1",
+              "reason": "no_title_match",
+              "title": "Equities Strategic Initiatives & Transformation"
+            },
+            {
+              "external_id": "/job/NYC-1285/Legal-Counsel_R6635",
+              "reason": "no_title_match",
+              "title": "Fixed Income Structured Products Attorney"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Investment---Corporate-Banking---DCM-Associate--Healthcare--Consumer---Industrials-_R71",
+              "reason": "no_title_match",
+              "title": "Investment & Corporate Banking - DCM Associate (Healthcare, Consumer & Industrials)"
+            },
+            {
+              "external_id": "/job/NYC-1285/Internal-Audit---Liquidity-Risk-Management_R7384",
+              "reason": "excluded_title:audit",
+              "title": "Internal Audit - Liquidity Risk Management"
+            },
+            {
+              "external_id": "/job/NYC-1285/Risk-Division-Control-Officer_R7423",
+              "reason": "no_title_match",
+              "title": "Risk Division Control Officer"
+            },
+            {
+              "external_id": "/job/NYC-1285/Loan-Administration-AVP---Agency-Team_R7217",
+              "reason": "no_title_match",
+              "title": "Loan Administration AVP - Agency Team"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Tax-Associate_R7408",
+              "reason": "no_title_match",
+              "title": "Tax Associate"
+            },
+            {
+              "external_id": "/job/NYC-1285/Nostro-Account-Reconciliations---AVP---VP_R6623",
+              "reason": "no_title_match",
+              "title": "Nostro Account Reconciliations - AVP / VP"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Securities-Regulatory-Reporting-Associate_R7366-1",
+              "reason": "no_title_match",
+              "title": "Securities Regulatory Reporting AVP"
+            },
+            {
+              "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Exposure-Management-VP---Director_R7367",
+              "reason": "no_title_match",
+              "title": "Exposure Management VP / Director"
+            }
+          ],
+          "scope": "search_results",
+          "selected": 7
+        },
+        "status": "successful"
+      },
+      "northern_trust": {
+        "completed_at": "2026-10-14T11:50:25.795535+00:00",
+        "duration": 0.297,
+        "internship_baseline_complete": true,
+        "selection": {
+          "examined": 215,
+          "rejected": {
+            "excluded_title:accountant": 2,
+            "excluded_title:audit": 3,
+            "excluded_title:compliance": 8,
+            "excluded_title:expression of interest": 1,
+            "excluded_title:legal": 1,
+            "excluded_title:marketing": 1,
+            "excluded_title:operations": 7,
+            "excluded_title:product control": 1,
+            "excluded_title:settlements": 1,
+            "no_title_match": 178
+          },
+          "samples": [
+            {
+              "external_id": "/job/Bangalore-India/Senior-Analyst--Trade-Settlements--Pune---Bangalore----Multiple-position_R155623",
+              "reason": "excluded_title:settlements",
+              "title": "Senior Analyst, Trade Settlements (Pune & Bangalore) - Multiple position"
+            },
+            {
+              "external_id": "/job/Chicago-IL/OTC-FX-Associate-Specialist--Integrated-Portfolio-Services_R161098",
+              "reason": "no_title_match",
+              "title": "OTC/FX Associate Specialist, Integrated Portfolio Services"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Sr-Associate--Brokerage-Ops_R158028-1",
+              "reason": "excluded_title:operations",
+              "title": "Consultant, Capital Markets Operations"
+            },
+            {
+              "external_id": "/job/London-United-Kingdom/Sr-Consultant-Securities-Lending_R160167",
+              "reason": "no_title_match",
+              "title": "Sr. Consultant-Securities Lending"
+            },
+            {
+              "external_id": "/job/Limerick-Ireland/Global-Foreign-Exchange---Business-Analyst--Business-Enablement-Team_R156790",
+              "reason": "no_title_match",
+              "title": "Global Foreign Exchange | Business Analyst, Business Enablement Team"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Sr-Analyst--Hedge-Fund-Acctng_R161083-1",
+              "reason": "no_title_match",
+              "title": "Sr Analyst, Hedge Fund Acctng"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Technical-Coordinator-Quality_R159615-2",
+              "reason": "no_title_match",
+              "title": "Technical Coordinator Quality"
+            },
+            {
+              "external_id": "/job/Tempe-AZ/Consultant--Investor-Services--Integrated-Portfolio-Services---IPS-_R157095",
+              "reason": "no_title_match",
+              "title": "Consultant, Investor Services, Integrated Portfolio Services, (IPS)"
+            },
+            {
+              "external_id": "/job/Tempe-AZ/Sr-Analyst--Investor-Services_R161104",
+              "reason": "no_title_match",
+              "title": "Sr. Analyst, Investor Services"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Sr-Analyst--Investor-Srvcs-HFS_R161756",
+              "reason": "no_title_match",
+              "title": "Sr Analyst, Investor Srvcs HFS"
+            },
+            {
+              "external_id": "/job/Tempe-AZ/Analyst--Cash-Ops_R162025",
+              "reason": "no_title_match",
+              "title": "Analyst, Cash Ops"
+            },
+            {
+              "external_id": "/job/Tempe-AZ/Rep--CS-Invest-Ops_R160469",
+              "reason": "no_title_match",
+              "title": "Rep, CS Invest Ops"
+            },
+            {
+              "external_id": "/job/Limerick-Ireland/Graduate---Client-Services-Investment-Operations-Representative_R161902",
+              "reason": "excluded_title:operations",
+              "title": "Graduate | Client Services Investment Operations Representative"
+            },
+            {
+              "external_id": "/job/Limerick-Ireland/Graduate---Custody-Client-Service-Representative_R162088",
+              "reason": "no_title_match",
+              "title": "Graduate | Custody Client Service Representative"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Senior-Analyst_R157963-2",
+              "reason": "no_title_match",
+              "title": "Senior Analyst"
+            },
+            {
+              "external_id": "/job/Sydney-Australia/Consultant--Brokerage-Ops_R160454-1",
+              "reason": "no_title_match",
+              "title": "Consultant, Brokerage Ops"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Sr-Associate--Charles-River-Support_R157578",
+              "reason": "no_title_match",
+              "title": "Sr Associate, Charles River Support"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Analyst--HFS_R155668-1",
+              "reason": "no_title_match",
+              "title": "Analyst, HFS"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Sales-Practice-Principal_R158834-1",
+              "reason": "no_title_match",
+              "title": "Manager, Registered Sales Associates"
+            },
+            {
+              "external_id": "/job/Manila-Philippines/Consultant--Global-Swap-Dealer_R162547",
+              "reason": "no_title_match",
+              "title": "Consultant, Global Swap Dealer"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Principal--SRE_R160889",
+              "reason": "no_title_match",
+              "title": "Principal, SRE"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Sr-Lead-Data-Engineer_R150309",
+              "reason": "no_title_match",
+              "title": "Technical Software Support Lead"
+            },
+            {
+              "external_id": "/job/Manila-Philippines/Sr-Analyst--Sec-Lending_R158864",
+              "reason": "no_title_match",
+              "title": "Sr Analyst, Sec Lending"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Senior-Consultant--Collateral-Management--Middle-Office--HFS_R152331",
+              "reason": "excluded_title:product control",
+              "title": "Senior Consultant, Product Control, Integrated Portfolio Services (IPS)"
+            },
+            {
+              "external_id": "/job/Miami-FL/Investment-Associate---FIA_R162469",
+              "reason": "no_title_match",
+              "title": "Investment Associate - FIA"
+            },
+            {
+              "external_id": "/job/Pune-India/Principal---Head-of-Compliance-Architecture_R162289",
+              "reason": "excluded_title:compliance",
+              "title": "Principal - Head of Compliance Architecture"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Specialist--Business-Strategy_R160891-1",
+              "reason": "no_title_match",
+              "title": "Specialist, Business Strategy"
+            },
+            {
+              "external_id": "/job/Chicago-IL/Head-of-Compliance-Architecture_R161054",
+              "reason": "excluded_title:compliance",
+              "title": "Principal - Head of Compliance Architecture"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Associate-Consultant_R158354-1",
+              "reason": "no_title_match",
+              "title": "Associate Consultant"
+            },
+            {
+              "external_id": "/job/Bangalore-India/NTAM-Invest-Ops-Blr-Sr-Analyst_R161404-2",
+              "reason": "no_title_match",
+              "title": "NTAM Invest Ops Blr Sr Analyst"
+            }
+          ],
+          "scope": "search_results",
+          "selected": 12
+        },
+        "status": "successful"
+      },
+      "quadrature": {
+        "completed_at": "2026-10-14T11:50:26.155092+00:00",
+        "duration": 0.009,
+        "internship_baseline_complete": true,
+        "selection": {
+          "examined": 3,
+          "rejected": {
+            "prospect": 2
+          },
+          "samples": [],
+          "scope": "public_catalogue",
+          "selected": 1
+        },
+        "status": "successful"
+      },
+      "state_street": {
+        "completed_at": "2026-10-14T11:50:27.034410+00:00",
+        "duration": 0.879,
+        "internship_baseline_complete": true,
+        "selection": {
+          "examined": 790,
+          "rejected": {
+            "excluded_title:accountant": 6,
+            "excluded_title:audit": 13,
+            "excluded_title:compliance": 6,
+            "excluded_title:legal": 5,
+            "excluded_title:market risk": 6,
+            "excluded_title:operations": 47,
+            "excluded_title:settlements": 10,
+            "no_title_match": 664
+          },
+          "samples": [
+            {
+              "external_id": "/job/Irvine-California/Alpha-Operations-Client-Pathways--Vice-President_R-778801",
+              "reason": "excluded_title:settlements",
+              "title": "Middle Office Trade Management & Settlements, Vice President"
+            },
+            {
+              "external_id": "/job/Burlington-Massachusetts/Consultant--Officer_R-794304",
+              "reason": "no_title_match",
+              "title": "Implementation Specialist - IBOR / Post Trade / Swift - Officer"
+            },
+            {
+              "external_id": "/job/Burlington-Massachusetts/R-781540-Front-Office---Buyside-Post-Production-Technical-Support-Specialist----API--ETL-t",
+              "reason": "no_title_match",
+              "title": "Senior Implementation Manager - Post Trade / IBOR - Charles River Development"
+            },
+            {
+              "external_id": "/job/Quincy-Massachusetts/Exchange-Traded-Funds--ETF--Technology-Delivery-Lead---Managing-Director_R-797323-1",
+              "reason": "no_title_match",
+              "title": "Exchange Traded Funds (ETF) Technology Delivery Lead – Managing Director"
+            },
+            {
+              "external_id": "/job/Chennai-India/Operations-Clearance--Settlement----Trading-Operations--Senior-Associate_R-798686-1",
+              "reason": "excluded_title:operations",
+              "title": "Operations Clearance, Settlement, & Trading Operations, Senior Associate"
+            },
+            {
+              "external_id": "/job/HINJEWADI-PUNE/Collateral-Processing---Senior-Associate_R-798548-1",
+              "reason": "no_title_match",
+              "title": "Collateral Processing - Senior Associate"
+            },
+            {
+              "external_id": "/job/Krakow-Poland/Alpha-Middle-Office-Senior-Expert--hybrid--Officer_R-788095",
+              "reason": "no_title_match",
+              "title": "Alpha Middle Office Senior Expert, hybrid, Officer"
+            },
+            {
+              "external_id": "/job/Mumbai-India/IBOR-Accounting--Associate-2_R-796422",
+              "reason": "no_title_match",
+              "title": "IBOR Accounting, Associate 2"
+            },
+            {
+              "external_id": "/job/Kansas-City-Missouri/Operation-Client-Service--Assistant-Vice-President_R-799042",
+              "reason": "no_title_match",
+              "title": "Operation Client Service, Assistant Vice President"
+            },
+            {
+              "external_id": "/job/Quincy-Massachusetts/Client-Services--Assistant-Vice-President_R-799050-1",
+              "reason": "no_title_match",
+              "title": "Client Services, Assistant Vice President"
+            },
+            {
+              "external_id": "/job/Boston-Massachusetts/Front-Office-Market-Risk-Analyst--Prime-Services-and-Broker-Dealer---Vice-President_R-793857",
+              "reason": "excluded_title:market risk",
+              "title": "Front Office Market Risk Analyst (Prime Services and Broker Dealer), Vice President"
+            },
+            {
+              "external_id": "/job/Boston-Massachusetts/Securities-Finance-Front-Office-Market-Risk-Analyst--Vice-Presidentnalyst_R-796386",
+              "reason": "excluded_title:market risk",
+              "title": "Front Office Market Risk FCM and Futures Clearing, Vice President"
+            },
+            {
+              "external_id": "/job/London-England/Front-Office-Market-Risk-Analyst--Assistant-Vice-President_R-796905-1",
+              "reason": "excluded_title:market risk",
+              "title": "Front Office Market Risk Analyst, Assistant Vice President"
+            },
+            {
+              "external_id": "/job/Boston-Massachusetts/Front-Office-Market-Risk-Analyst--Assistant-Vice-President_R-796903-2",
+              "reason": "excluded_title:market risk",
+              "title": "Front Office Market Risk Analyst, Assistant Vice President"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/FX-Collateral-Management---Assistant-Vice-President_R-793195",
+              "reason": "no_title_match",
+              "title": "FX Collateral Management, Senior Manager"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/Financing-Solutions-Prime-Services--Manager_R-796945-1",
+              "reason": "no_title_match",
+              "title": "Financing Solutions Prime Services, Manager"
+            },
+            {
+              "external_id": "/job/Mumbai-India/Global-Head-of-Financing-and-Portfolio-Solutions--FPS--Operations--Senior-Managing-Director_R-798012-1",
+              "reason": "excluded_title:operations",
+              "title": "Global Head of Financing and Portfolio Solutions (FPS) Operations, Senior Managing Director"
+            },
+            {
+              "external_id": "/job/Bangalore-India/GlobalLINK-Platform-Support-Team-Lead_R-798233-1",
+              "reason": "no_title_match",
+              "title": "GlobalLINK Platform Support-Team Lead"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/Regulatory-Reporting-Specialist--Senior-Associae_R-798406",
+              "reason": "no_title_match",
+              "title": "Regulatory Reporting Specialist, Senior Associate"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/Collateral-Management---Manager_R-798847",
+              "reason": "no_title_match",
+              "title": "Collateral Management - Manager"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/Financing-Solutions--Prime-Services---Senior-Associate_R-798945-1",
+              "reason": "no_title_match",
+              "title": "Financing Solutions, Prime Services - Senior Associate"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/Regulatory-Reporting--Senior-Associate_R-799119",
+              "reason": "no_title_match",
+              "title": "Regulatory Reporting, Senior Associate"
+            },
+            {
+              "external_id": "/job/Seoul-Korea/Global-Treasury--Officer_R-799225",
+              "reason": "no_title_match",
+              "title": "Global Treasury, Officer"
+            },
+            {
+              "external_id": "/job/Boston-Massachusetts/Portfolio-Finance---Execution-Business-Officer--Vice-President_R-798794",
+              "reason": "no_title_match",
+              "title": "Portfolio Finance - Execution Business Officer, Vice President"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/Alpha-Data-Operations---Assistant-Manager_R-799572",
+              "reason": "excluded_title:operations",
+              "title": "Alpha Data Operations - Assistant Manager"
+            },
+            {
+              "external_id": "/job/Hyderabad-India/FX-Confirmations---Settlements--Senior-Associate_R-795044",
+              "reason": "excluded_title:settlements",
+              "title": "FX Confirmations & Settlements, Team Lead"
+            },
+            {
+              "external_id": "/job/Boston-Massachusetts/Software-Engineering---Development--VP_R-796633-1",
+              "reason": "no_title_match",
+              "title": "Senior eFX Software Engineer (Java/Rust), Vice President"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Derivatives---Senior-Associate_R-798272",
+              "reason": "no_title_match",
+              "title": "Derivatives - Senior Associate"
+            },
+            {
+              "external_id": "/job/Bangalore-India/Derivatives---Senior-Associate_R-798293",
+              "reason": "no_title_match",
+              "title": "Derivatives - Senior Associate"
+            },
+            {
+              "external_id": "/job/Boston-Massachusetts/Counterparty-Credit-Risk-Manager--Prime-Brokerage---Clearing_R-793578-6",
+              "reason": "no_title_match",
+              "title": "Counterparty Credit Risk Manager, Prime Brokerage & Clearing, VP"
+            }
+          ],
+          "scope": "search_results",
+          "selected": 33
+        },
+        "status": "successful"
+      }
+    },
+    "sources": 6,
+    "successful": 6,
+    "updated": 0
+  },
+  "preservation": {
+    "checks": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "application_rows_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "heartbeat_binding_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true,
+      "wishlist_history_preserved": true,
+      "wishlist_inode_preserved": true,
+      "wishlist_members_preserved": true
+    },
+    "counts_after": {
+      "alert_history": 176,
+      "alerts": 88,
+      "application_history": 2,
+      "applications": 1683,
+      "jobs": 1683
+    },
+    "counts_before": {
+      "alert_history": 176,
+      "alerts": 88,
+      "application_history": 2,
+      "applications": 1616,
+      "jobs": 1616
+    },
+    "database": {
+      "schema_version": 4,
+      "status": "ok"
+    },
+    "stage": "verification"
+  },
+  "simulation": {
+    "status": "ok",
+    "metrics": [
+      {
+        "source_results": {
+          "mizuho": {
+            "completed_at": "2026-10-14T11:30:03.181929+00:00",
+            "status": "successful",
+            "duration": 0.22,
+            "selection": {
+              "scope": "search_results",
+              "examined": 113,
+              "selected": 7,
+              "rejected": {
+                "excluded_title:legal": 2,
+                "no_title_match": 97,
+                "excluded_title:market risk": 3,
+                "excluded_title:audit": 2,
+                "excluded_title:compliance": 2
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:legal",
+                  "title": "Legal Counsel - (Equity Derivatives, Trading Documentation)",
+                  "external_id": "/job/NYC-1285/Equity-Finance---Derivatives-Attorney_R7005"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "MBSCC Specialist- AVP/VP",
+                  "external_id": "/job/NYC-1285/MBSCC-Specialist--AVP-VP_R7308"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, GTB (Global Transaction Banking) Advisory",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--GTB--Global-Transaction-Banking--Advisory_R7432"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director – Non-Financial Risk (FO Coverage)",
+                  "external_id": "/job/NYC-1285/Director---Non-Financial-Risk--FO-Coverage-_R7427"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Vice President, Global Subsidiary Coverage",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Business-Development-VP---Transaction-Banking_R7250"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, Transaction Banking Sales Support",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--Transaction-Banking-Sales-Support_R7407"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Fixed Income Swap Desk Technology Support and Implementation",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Fixed-Income-Swap-Desk-Technology-Support-and-Implementation_R7232-3"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Vice President, Customer Support Team Lead",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Vice-President--Customer-Support-Team-Lead_R7404"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives Analytics & AI Solutions Engineer",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Derivatives-Analytics---AI-Solutions-Engineer_R7131"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Data Architecture & Engineering — Market Risk Technology",
+                  "external_id": "/job/NYC-1285/Data-Architecture---Engineering---Market-Risk-Technology_R7172-1"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Director – Market Risk, Spread Products",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Director---Market-Risk--Spread-Products_R7047-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director, Payments Product Management",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Director--Payments-Product-Management_R7402"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Financial Planning & Analysis - AVP",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Financial-Planning---Analysis---AVP_R7388"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, Cash Channel Product Management",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--Cash-Channel-Product-Management_R7403"
+                },
+                {
+                  "reason": "excluded_title:audit",
+                  "title": "Internal Audit - Credit Risk",
+                  "external_id": "/job/NYC-1285/Internal-Audit---Credit-Rsik_R7373"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Vice President – Finance Strategy & Execution",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Vice-President---Finance-Strategy---Execution_R7113"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director – Non-Financial Risk (FO Coverage)",
+                  "external_id": "/job/NYC-1285/Director---Non-Financial-Risk--FO-Coverage-_R7425"
+                },
+                {
+                  "reason": "excluded_title:legal",
+                  "title": "Legal Counsel – Equity Finance",
+                  "external_id": "/job/NYC-1285/Legal-Counsel---Equity-Finance_R7214-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Credit Derivatives Sales",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Credit-Derivatives-Sales_R7026"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives Attorney",
+                  "external_id": "/job/NYC-1285/Derivatives-Attorney_R7341"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Equities Strategic Initiatives & Transformation",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Equities-Strategic-Initiatives---AI-Transformation_R7176-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Fixed Income Structured Products Attorney",
+                  "external_id": "/job/NYC-1285/Legal-Counsel_R6635"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Investment & Corporate Banking - DCM Associate (Healthcare, Consumer & Industrials)",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Investment---Corporate-Banking---DCM-Associate--Healthcare--Consumer---Industrials-_R71"
+                },
+                {
+                  "reason": "excluded_title:audit",
+                  "title": "Internal Audit - Liquidity Risk Management",
+                  "external_id": "/job/NYC-1285/Internal-Audit---Liquidity-Risk-Management_R7384"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Risk Division Control Officer",
+                  "external_id": "/job/NYC-1285/Risk-Division-Control-Officer_R7423"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Loan Administration AVP - Agency Team",
+                  "external_id": "/job/NYC-1285/Loan-Administration-AVP---Agency-Team_R7217"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Tax Associate",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Tax-Associate_R7408"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Nostro Account Reconciliations - AVP / VP",
+                  "external_id": "/job/NYC-1285/Nostro-Account-Reconciliations---AVP---VP_R6623"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Securities Regulatory Reporting AVP",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Securities-Regulatory-Reporting-Associate_R7366-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Exposure Management VP / Director",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Exposure-Management-VP---Director_R7367"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "northern_trust": {
+            "completed_at": "2026-10-14T11:30:03.469706+00:00",
+            "status": "successful",
+            "duration": 0.288,
+            "selection": {
+              "scope": "search_results",
+              "examined": 215,
+              "selected": 12,
+              "rejected": {
+                "excluded_title:settlements": 1,
+                "no_title_match": 178,
+                "excluded_title:operations": 7,
+                "excluded_title:product control": 1,
+                "excluded_title:compliance": 8,
+                "excluded_title:accountant": 2,
+                "excluded_title:marketing": 1,
+                "excluded_title:expression of interest": 1,
+                "excluded_title:audit": 3,
+                "excluded_title:legal": 1
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:settlements",
+                  "title": "Senior Analyst, Trade Settlements (Pune & Bangalore) - Multiple position",
+                  "external_id": "/job/Bangalore-India/Senior-Analyst--Trade-Settlements--Pune---Bangalore----Multiple-position_R155623"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "OTC/FX Associate Specialist, Integrated Portfolio Services",
+                  "external_id": "/job/Chicago-IL/OTC-FX-Associate-Specialist--Integrated-Portfolio-Services_R161098"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Consultant, Capital Markets Operations",
+                  "external_id": "/job/Chicago-IL/Sr-Associate--Brokerage-Ops_R158028-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr. Consultant-Securities Lending",
+                  "external_id": "/job/London-United-Kingdom/Sr-Consultant-Securities-Lending_R160167"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Global Foreign Exchange | Business Analyst, Business Enablement Team",
+                  "external_id": "/job/Limerick-Ireland/Global-Foreign-Exchange---Business-Analyst--Business-Enablement-Team_R156790"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Analyst, Hedge Fund Acctng",
+                  "external_id": "/job/Bangalore-India/Sr-Analyst--Hedge-Fund-Acctng_R161083-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Technical Coordinator Quality",
+                  "external_id": "/job/Bangalore-India/Technical-Coordinator-Quality_R159615-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Consultant, Investor Services, Integrated Portfolio Services, (IPS)",
+                  "external_id": "/job/Tempe-AZ/Consultant--Investor-Services--Integrated-Portfolio-Services---IPS-_R157095"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr. Analyst, Investor Services",
+                  "external_id": "/job/Tempe-AZ/Sr-Analyst--Investor-Services_R161104"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Analyst, Investor Srvcs HFS",
+                  "external_id": "/job/Chicago-IL/Sr-Analyst--Investor-Srvcs-HFS_R161756"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Analyst, Cash Ops",
+                  "external_id": "/job/Tempe-AZ/Analyst--Cash-Ops_R162025"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Rep, CS Invest Ops",
+                  "external_id": "/job/Tempe-AZ/Rep--CS-Invest-Ops_R160469"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Graduate | Client Services Investment Operations Representative",
+                  "external_id": "/job/Limerick-Ireland/Graduate---Client-Services-Investment-Operations-Representative_R161902"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Graduate | Custody Client Service Representative",
+                  "external_id": "/job/Limerick-Ireland/Graduate---Custody-Client-Service-Representative_R162088"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Analyst",
+                  "external_id": "/job/Bangalore-India/Senior-Analyst_R157963-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Consultant, Brokerage Ops",
+                  "external_id": "/job/Sydney-Australia/Consultant--Brokerage-Ops_R160454-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Associate, Charles River Support",
+                  "external_id": "/job/Bangalore-India/Sr-Associate--Charles-River-Support_R157578"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Analyst, HFS",
+                  "external_id": "/job/Chicago-IL/Analyst--HFS_R155668-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Manager, Registered Sales Associates",
+                  "external_id": "/job/Chicago-IL/Sales-Practice-Principal_R158834-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Consultant, Global Swap Dealer",
+                  "external_id": "/job/Manila-Philippines/Consultant--Global-Swap-Dealer_R162547"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Principal, SRE",
+                  "external_id": "/job/Chicago-IL/Principal--SRE_R160889"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Technical Software Support Lead",
+                  "external_id": "/job/Chicago-IL/Sr-Lead-Data-Engineer_R150309"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Analyst, Sec Lending",
+                  "external_id": "/job/Manila-Philippines/Sr-Analyst--Sec-Lending_R158864"
+                },
+                {
+                  "reason": "excluded_title:product control",
+                  "title": "Senior Consultant, Product Control, Integrated Portfolio Services (IPS)",
+                  "external_id": "/job/Chicago-IL/Senior-Consultant--Collateral-Management--Middle-Office--HFS_R152331"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Investment Associate - FIA",
+                  "external_id": "/job/Miami-FL/Investment-Associate---FIA_R162469"
+                },
+                {
+                  "reason": "excluded_title:compliance",
+                  "title": "Principal - Head of Compliance Architecture",
+                  "external_id": "/job/Pune-India/Principal---Head-of-Compliance-Architecture_R162289"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Specialist, Business Strategy",
+                  "external_id": "/job/Chicago-IL/Specialist--Business-Strategy_R160891-1"
+                },
+                {
+                  "reason": "excluded_title:compliance",
+                  "title": "Principal - Head of Compliance Architecture",
+                  "external_id": "/job/Chicago-IL/Head-of-Compliance-Architecture_R161054"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate Consultant",
+                  "external_id": "/job/Bangalore-India/Associate-Consultant_R158354-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "NTAM Invest Ops Blr Sr Analyst",
+                  "external_id": "/job/Bangalore-India/NTAM-Invest-Ops-Blr-Sr-Analyst_R161404-2"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "lseg": {
+            "completed_at": "2026-10-14T11:30:04.088573+00:00",
+            "status": "successful",
+            "duration": 0.619,
+            "selection": {
+              "scope": "search_results",
+              "examined": 141,
+              "selected": 12,
+              "rejected": {
+                "no_title_match": 120,
+                "excluded_title:operations": 5,
+                "excluded_title:summer internship": 4
+              },
+              "samples": [
+                {
+                  "reason": "no_title_match",
+                  "title": "Content Infrastructure Owner - Research",
+                  "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Content-Infrastructure-Owner---Research_R0122760"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Content Specialist",
+                  "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Senior-Content-Specialist_R0122762"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Content Infrastructure Owner -Estimates",
+                  "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Content-Infrastructure-Owner--Estimates_R0122761"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Lead Software Engineer (C++)",
+                  "external_id": "/job/THA-Bangkok-One-Bangkok/Lead-Software-Engineer--C---_R0100379"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr. Technical Specialist - Workflows Technical Support",
+                  "external_id": "/job/IND-BLR-Divyasree-Technopolis/Sr-Technical-Specialist---Workflows-Technical-Support_R0116209-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Technical Specialist - AI and Enterprise Applications",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Technical-Specialist---AI-and-Enterprise-Applications_R0123376"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Research Analyst, Flows",
+                  "external_id": "/job/IND-Mumbai-One-World-Center/Senior-Research-Analyst--Flows_R0121925"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Analyst, Market Supervision, LSE 24",
+                  "external_id": "/job/Colombo-Sri-Lanka/Analyst--Market-Supervision--LSE-24_R0123339"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Manager, Business Consulting",
+                  "external_id": "/job/HKG-Hong-Kong-ICBC-Tower/Senior-Manager--Business-Consulting_R0124156"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, PTS Customer Support",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Associate--PTS-Customer-Support_R0123105"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Manager, Live Supervision, Rules & Post Trade",
+                  "external_id": "/job/London-United-Kingdom/Senior-Manager--Live-Supervision--Rules---Post-Trade_R0123696"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Assistant Manager, Technical Implementation",
+                  "external_id": "/job/Cluj---21-Decembrie-1989-Boulevard/Assistant-Manager--Technical-Implementation_R0122513"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Senior Associate, Securities Clearing Operations",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Associate--Securities-Clearing-Operations_R0123613"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "BI Engineering Manager",
+                  "external_id": "/job/IND-Hyderabad-CapitaLand/BI-Engineering-Manager_R0123806"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director, Brand Strategy & Enterprise Positioning",
+                  "external_id": "/job/London-United-Kingdom/Director--Brand-Strategy---Enterprise-Positioning_R0122110"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Valuations Lead, CLO / CDO",
+                  "external_id": "/job/USA-New-York-28-Liberty-Street/Senior-Valuations-Lead--CLO---CDO_R0121718-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Sales Specialist, Yield Book",
+                  "external_id": "/job/New-York-United-States/Senior-Sales-Specialist--Analytics_R0118851-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director, Collateral & Liquidity Management",
+                  "external_id": "/job/Paris-France/Director--Collateral---Liquidity-Management_R0120818-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Partner Account Manager",
+                  "external_id": "/job/SGP-Singapore-1-Raffles-Quay/Partner-Account-Manager_R0123227"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Engineer, Site Reliability Engineering",
+                  "external_id": "/job/IND-BLR-Divyasree-Technopolis/Engineer--Site-Reliability-Engineering_R0117362-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Market Supervision Surveillance Specialist",
+                  "external_id": "/job/London-United-Kingdom/Senior-Market-Supervision-Surveillance-Specialist_R0122459"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Technical Specialist - AI and Enterprise Applications",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Technical-Specialist---AI-and-Enterprise-Applications_R0123375"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Technical Account Manager (Analyst)",
+                  "external_id": "/job/London-United-Kingdom/Technical-Account-Manager--Analyst-_R0122748"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Analyst Summer Internship",
+                  "external_id": "/job/New-York-City-United-States/Business-Analyst-Summer-Internship_R0123463-2"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Management Summer Internship",
+                  "external_id": "/job/New-York-City-United-States/Business-Management-and-Sales-Summer-Internship_R0123464-1"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Management Summer Internship",
+                  "external_id": "/job/GBR-London-5-Canada-Square/Business-Management-and-Sales-Summer-Internship_R0123386-1"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Analyst Summer Internship",
+                  "external_id": "/job/London-United-Kingdom/Business-Analyst-Summer-Internship_R0123387-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Risk Developer",
+                  "external_id": "/job/Bucharest---Iuliu-Maniu-Boulevard/Senior-Risk-Developer_R0114189-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Product Manager — FX Post-Trade Workflows & Solutions",
+                  "external_id": "/job/POL-Gdynia-3T-Office-Park-Tower-C/Senior-Product-Manager---FX-Post-Trade-Workflows---Solutions_R0122604-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sales Manager, Data and Feeds, Japan",
+                  "external_id": "/job/JPN-Tokyo-Akasaka-Biz-Tower-30/Sales-Manager--Data-and-Feeds--Japan_R0115149-1"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "gsa_capital": {
+            "completed_at": "2026-10-14T11:30:04.104111+00:00",
+            "status": "successful",
+            "duration": 0.015,
+            "selection": {
+              "scope": "public_catalogue",
+              "examined": 13,
+              "selected": 2,
+              "rejected": {
+                "excluded_title:operations": 1,
+                "excluded_title:competition": 1,
+                "excluded_title:accountant": 1,
+                "excluded_title:insight programme": 2,
+                "no_title_match": 4,
+                "excluded_title:quant talk": 1,
+                "excluded_title:technology talk": 1
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Business Operations - General Application",
+                  "external_id": "7336091002"
+                },
+                {
+                  "reason": "excluded_title:competition",
+                  "title": "Digital Competition - SPARK 2026",
+                  "external_id": "8870873002"
+                },
+                {
+                  "reason": "excluded_title:accountant",
+                  "title": "Finance - Assistant Accountant",
+                  "external_id": "8625916002"
+                },
+                {
+                  "reason": "excluded_title:insight programme",
+                  "title": "General Trading & Technology Insight Programme - 2027",
+                  "external_id": "8870173002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Infrastructure Assistant",
+                  "external_id": "4625058002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "IT Engineer",
+                  "external_id": "4010431002"
+                },
+                {
+                  "reason": "excluded_title:quant talk",
+                  "title": "Quant Talk - University of Oxford (13th of November)",
+                  "external_id": "8871056002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Software Developer",
+                  "external_id": "7555839002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Software Developer - Intern",
+                  "external_id": "8570668002"
+                },
+                {
+                  "reason": "excluded_title:technology talk",
+                  "title": "Technology Talk - University of Oxford (20th of October)",
+                  "external_id": "8826886002"
+                },
+                {
+                  "reason": "excluded_title:insight programme",
+                  "title": "Women in Trading & Technology Insight Programme - 2027",
+                  "external_id": "8518528002"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "quadrature": {
+            "completed_at": "2026-10-14T11:30:04.114733+00:00",
+            "status": "successful",
+            "duration": 0.011,
+            "selection": {
+              "scope": "public_catalogue",
+              "examined": 3,
+              "selected": 1,
+              "rejected": {
+                "prospect": 2
+              },
+              "samples": []
+            },
+            "internship_baseline_complete": true
+          },
+          "state_street": {
+            "completed_at": "2026-10-14T11:30:05.801490+00:00",
+            "status": "successful",
+            "duration": 1.687,
+            "selection": {
+              "scope": "search_results",
+              "examined": 790,
+              "selected": 33,
+              "rejected": {
+                "excluded_title:settlements": 10,
+                "no_title_match": 664,
+                "excluded_title:operations": 47,
+                "excluded_title:market risk": 6,
+                "excluded_title:compliance": 6,
+                "excluded_title:accountant": 6,
+                "excluded_title:audit": 13,
+                "excluded_title:legal": 5
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:settlements",
+                  "title": "Middle Office Trade Management & Settlements, Vice President",
+                  "external_id": "/job/Irvine-California/Alpha-Operations-Client-Pathways--Vice-President_R-778801"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Implementation Specialist - IBOR / Post Trade / Swift - Officer",
+                  "external_id": "/job/Burlington-Massachusetts/Consultant--Officer_R-794304"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Implementation Manager - Post Trade / IBOR - Charles River Development",
+                  "external_id": "/job/Burlington-Massachusetts/R-781540-Front-Office---Buyside-Post-Production-Technical-Support-Specialist----API--ETL-t"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Exchange Traded Funds (ETF) Technology Delivery Lead – Managing Director",
+                  "external_id": "/job/Quincy-Massachusetts/Exchange-Traded-Funds--ETF--Technology-Delivery-Lead---Managing-Director_R-797323-1"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Operations Clearance, Settlement, & Trading Operations, Senior Associate",
+                  "external_id": "/job/Chennai-India/Operations-Clearance--Settlement----Trading-Operations--Senior-Associate_R-798686-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Collateral Processing - Senior Associate",
+                  "external_id": "/job/HINJEWADI-PUNE/Collateral-Processing---Senior-Associate_R-798548-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Alpha Middle Office Senior Expert, hybrid, Officer",
+                  "external_id": "/job/Krakow-Poland/Alpha-Middle-Office-Senior-Expert--hybrid--Officer_R-788095"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "IBOR Accounting, Associate 2",
+                  "external_id": "/job/Mumbai-India/IBOR-Accounting--Associate-2_R-796422"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Operation Client Service, Assistant Vice President",
+                  "external_id": "/job/Kansas-City-Missouri/Operation-Client-Service--Assistant-Vice-President_R-799042"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Client Services, Assistant Vice President",
+                  "external_id": "/job/Quincy-Massachusetts/Client-Services--Assistant-Vice-President_R-799050-1"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk Analyst (Prime Services and Broker Dealer), Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Front-Office-Market-Risk-Analyst--Prime-Services-and-Broker-Dealer---Vice-President_R-793857"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk FCM and Futures Clearing, Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Securities-Finance-Front-Office-Market-Risk-Analyst--Vice-Presidentnalyst_R-796386"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk Analyst, Assistant Vice President",
+                  "external_id": "/job/London-England/Front-Office-Market-Risk-Analyst--Assistant-Vice-President_R-796905-1"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk Analyst, Assistant Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Front-Office-Market-Risk-Analyst--Assistant-Vice-President_R-796903-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "FX Collateral Management, Senior Manager",
+                  "external_id": "/job/Hyderabad-India/FX-Collateral-Management---Assistant-Vice-President_R-793195"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Financing Solutions Prime Services, Manager",
+                  "external_id": "/job/Hyderabad-India/Financing-Solutions-Prime-Services--Manager_R-796945-1"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Global Head of Financing and Portfolio Solutions (FPS) Operations, Senior Managing Director",
+                  "external_id": "/job/Mumbai-India/Global-Head-of-Financing-and-Portfolio-Solutions--FPS--Operations--Senior-Managing-Director_R-798012-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "GlobalLINK Platform Support-Team Lead",
+                  "external_id": "/job/Bangalore-India/GlobalLINK-Platform-Support-Team-Lead_R-798233-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Regulatory Reporting Specialist, Senior Associate",
+                  "external_id": "/job/Hyderabad-India/Regulatory-Reporting-Specialist--Senior-Associae_R-798406"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Collateral Management - Manager",
+                  "external_id": "/job/Hyderabad-India/Collateral-Management---Manager_R-798847"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Financing Solutions, Prime Services - Senior Associate",
+                  "external_id": "/job/Hyderabad-India/Financing-Solutions--Prime-Services---Senior-Associate_R-798945-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Regulatory Reporting, Senior Associate",
+                  "external_id": "/job/Hyderabad-India/Regulatory-Reporting--Senior-Associate_R-799119"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Global Treasury, Officer",
+                  "external_id": "/job/Seoul-Korea/Global-Treasury--Officer_R-799225"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Portfolio Finance - Execution Business Officer, Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Portfolio-Finance---Execution-Business-Officer--Vice-President_R-798794"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Alpha Data Operations - Assistant Manager",
+                  "external_id": "/job/Hyderabad-India/Alpha-Data-Operations---Assistant-Manager_R-799572"
+                },
+                {
+                  "reason": "excluded_title:settlements",
+                  "title": "FX Confirmations & Settlements, Team Lead",
+                  "external_id": "/job/Hyderabad-India/FX-Confirmations---Settlements--Senior-Associate_R-795044"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior eFX Software Engineer (Java/Rust), Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Software-Engineering---Development--VP_R-796633-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives - Senior Associate",
+                  "external_id": "/job/Bangalore-India/Derivatives---Senior-Associate_R-798272"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives - Senior Associate",
+                  "external_id": "/job/Bangalore-India/Derivatives---Senior-Associate_R-798293"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Counterparty Credit Risk Manager, Prime Brokerage & Clearing, VP",
+                  "external_id": "/job/Boston-Massachusetts/Counterparty-Credit-Risk-Manager--Prime-Brokerage---Clearing_R-793578-6"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          }
+        },
+        "sources": 6,
+        "successful": 6,
+        "failed": {},
+        "degraded": {},
+        "listing_gaps": {},
+        "requests": 0,
+        "received": 67,
+        "new": 67,
+        "updated": 0,
+        "closed": 0,
+        "relevant": 549,
+        "high_priority": 379,
+        "alerts": 0,
+        "duration": 20.516
+      },
+      {
+        "source_results": {
+          "mizuho": {
+            "completed_at": "2026-10-14T11:30:24.896320+00:00",
+            "status": "successful",
+            "duration": 0.373,
+            "selection": {
+              "scope": "search_results",
+              "examined": 113,
+              "selected": 7,
+              "rejected": {
+                "excluded_title:legal": 2,
+                "no_title_match": 97,
+                "excluded_title:market risk": 3,
+                "excluded_title:audit": 2,
+                "excluded_title:compliance": 2
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:legal",
+                  "title": "Legal Counsel - (Equity Derivatives, Trading Documentation)",
+                  "external_id": "/job/NYC-1285/Equity-Finance---Derivatives-Attorney_R7005"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "MBSCC Specialist- AVP/VP",
+                  "external_id": "/job/NYC-1285/MBSCC-Specialist--AVP-VP_R7308"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, GTB (Global Transaction Banking) Advisory",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--GTB--Global-Transaction-Banking--Advisory_R7432"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director – Non-Financial Risk (FO Coverage)",
+                  "external_id": "/job/NYC-1285/Director---Non-Financial-Risk--FO-Coverage-_R7427"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Vice President, Global Subsidiary Coverage",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Business-Development-VP---Transaction-Banking_R7250"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, Transaction Banking Sales Support",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--Transaction-Banking-Sales-Support_R7407"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Fixed Income Swap Desk Technology Support and Implementation",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Fixed-Income-Swap-Desk-Technology-Support-and-Implementation_R7232-3"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Vice President, Customer Support Team Lead",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Vice-President--Customer-Support-Team-Lead_R7404"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives Analytics & AI Solutions Engineer",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Derivatives-Analytics---AI-Solutions-Engineer_R7131"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Data Architecture & Engineering — Market Risk Technology",
+                  "external_id": "/job/NYC-1285/Data-Architecture---Engineering---Market-Risk-Technology_R7172-1"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Director – Market Risk, Spread Products",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Director---Market-Risk--Spread-Products_R7047-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director, Payments Product Management",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Director--Payments-Product-Management_R7402"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Financial Planning & Analysis - AVP",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Financial-Planning---Analysis---AVP_R7388"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, Cash Channel Product Management",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Associate--Cash-Channel-Product-Management_R7403"
+                },
+                {
+                  "reason": "excluded_title:audit",
+                  "title": "Internal Audit - Credit Risk",
+                  "external_id": "/job/NYC-1285/Internal-Audit---Credit-Rsik_R7373"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Vice President – Finance Strategy & Execution",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Vice-President---Finance-Strategy---Execution_R7113"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director – Non-Financial Risk (FO Coverage)",
+                  "external_id": "/job/NYC-1285/Director---Non-Financial-Risk--FO-Coverage-_R7425"
+                },
+                {
+                  "reason": "excluded_title:legal",
+                  "title": "Legal Counsel – Equity Finance",
+                  "external_id": "/job/NYC-1285/Legal-Counsel---Equity-Finance_R7214-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Credit Derivatives Sales",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Credit-Derivatives-Sales_R7026"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives Attorney",
+                  "external_id": "/job/NYC-1285/Derivatives-Attorney_R7341"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Equities Strategic Initiatives & Transformation",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Equities-Strategic-Initiatives---AI-Transformation_R7176-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Fixed Income Structured Products Attorney",
+                  "external_id": "/job/NYC-1285/Legal-Counsel_R6635"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Investment & Corporate Banking - DCM Associate (Healthcare, Consumer & Industrials)",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Investment---Corporate-Banking---DCM-Associate--Healthcare--Consumer---Industrials-_R71"
+                },
+                {
+                  "reason": "excluded_title:audit",
+                  "title": "Internal Audit - Liquidity Risk Management",
+                  "external_id": "/job/NYC-1285/Internal-Audit---Liquidity-Risk-Management_R7384"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Risk Division Control Officer",
+                  "external_id": "/job/NYC-1285/Risk-Division-Control-Officer_R7423"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Loan Administration AVP - Agency Team",
+                  "external_id": "/job/NYC-1285/Loan-Administration-AVP---Agency-Team_R7217"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Tax Associate",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Tax-Associate_R7408"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Nostro Account Reconciliations - AVP / VP",
+                  "external_id": "/job/NYC-1285/Nostro-Account-Reconciliations---AVP---VP_R6623"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Securities Regulatory Reporting AVP",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Securities-Regulatory-Reporting-Associate_R7366-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Exposure Management VP / Director",
+                  "external_id": "/job/New-York-NY-1271-AOA6th-Ave/Exposure-Management-VP---Director_R7367"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "northern_trust": {
+            "completed_at": "2026-10-14T11:30:25.489518+00:00",
+            "status": "successful",
+            "duration": 0.593,
+            "selection": {
+              "scope": "search_results",
+              "examined": 215,
+              "selected": 12,
+              "rejected": {
+                "excluded_title:settlements": 1,
+                "no_title_match": 178,
+                "excluded_title:operations": 7,
+                "excluded_title:product control": 1,
+                "excluded_title:compliance": 8,
+                "excluded_title:accountant": 2,
+                "excluded_title:marketing": 1,
+                "excluded_title:expression of interest": 1,
+                "excluded_title:audit": 3,
+                "excluded_title:legal": 1
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:settlements",
+                  "title": "Senior Analyst, Trade Settlements (Pune & Bangalore) - Multiple position",
+                  "external_id": "/job/Bangalore-India/Senior-Analyst--Trade-Settlements--Pune---Bangalore----Multiple-position_R155623"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "OTC/FX Associate Specialist, Integrated Portfolio Services",
+                  "external_id": "/job/Chicago-IL/OTC-FX-Associate-Specialist--Integrated-Portfolio-Services_R161098"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Consultant, Capital Markets Operations",
+                  "external_id": "/job/Chicago-IL/Sr-Associate--Brokerage-Ops_R158028-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr. Consultant-Securities Lending",
+                  "external_id": "/job/London-United-Kingdom/Sr-Consultant-Securities-Lending_R160167"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Global Foreign Exchange | Business Analyst, Business Enablement Team",
+                  "external_id": "/job/Limerick-Ireland/Global-Foreign-Exchange---Business-Analyst--Business-Enablement-Team_R156790"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Analyst, Hedge Fund Acctng",
+                  "external_id": "/job/Bangalore-India/Sr-Analyst--Hedge-Fund-Acctng_R161083-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Technical Coordinator Quality",
+                  "external_id": "/job/Bangalore-India/Technical-Coordinator-Quality_R159615-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Consultant, Investor Services, Integrated Portfolio Services, (IPS)",
+                  "external_id": "/job/Tempe-AZ/Consultant--Investor-Services--Integrated-Portfolio-Services---IPS-_R157095"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr. Analyst, Investor Services",
+                  "external_id": "/job/Tempe-AZ/Sr-Analyst--Investor-Services_R161104"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Analyst, Investor Srvcs HFS",
+                  "external_id": "/job/Chicago-IL/Sr-Analyst--Investor-Srvcs-HFS_R161756"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Analyst, Cash Ops",
+                  "external_id": "/job/Tempe-AZ/Analyst--Cash-Ops_R162025"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Rep, CS Invest Ops",
+                  "external_id": "/job/Tempe-AZ/Rep--CS-Invest-Ops_R160469"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Graduate | Client Services Investment Operations Representative",
+                  "external_id": "/job/Limerick-Ireland/Graduate---Client-Services-Investment-Operations-Representative_R161902"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Graduate | Custody Client Service Representative",
+                  "external_id": "/job/Limerick-Ireland/Graduate---Custody-Client-Service-Representative_R162088"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Analyst",
+                  "external_id": "/job/Bangalore-India/Senior-Analyst_R157963-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Consultant, Brokerage Ops",
+                  "external_id": "/job/Sydney-Australia/Consultant--Brokerage-Ops_R160454-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Associate, Charles River Support",
+                  "external_id": "/job/Bangalore-India/Sr-Associate--Charles-River-Support_R157578"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Analyst, HFS",
+                  "external_id": "/job/Chicago-IL/Analyst--HFS_R155668-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Manager, Registered Sales Associates",
+                  "external_id": "/job/Chicago-IL/Sales-Practice-Principal_R158834-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Consultant, Global Swap Dealer",
+                  "external_id": "/job/Manila-Philippines/Consultant--Global-Swap-Dealer_R162547"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Principal, SRE",
+                  "external_id": "/job/Chicago-IL/Principal--SRE_R160889"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Technical Software Support Lead",
+                  "external_id": "/job/Chicago-IL/Sr-Lead-Data-Engineer_R150309"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr Analyst, Sec Lending",
+                  "external_id": "/job/Manila-Philippines/Sr-Analyst--Sec-Lending_R158864"
+                },
+                {
+                  "reason": "excluded_title:product control",
+                  "title": "Senior Consultant, Product Control, Integrated Portfolio Services (IPS)",
+                  "external_id": "/job/Chicago-IL/Senior-Consultant--Collateral-Management--Middle-Office--HFS_R152331"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Investment Associate - FIA",
+                  "external_id": "/job/Miami-FL/Investment-Associate---FIA_R162469"
+                },
+                {
+                  "reason": "excluded_title:compliance",
+                  "title": "Principal - Head of Compliance Architecture",
+                  "external_id": "/job/Pune-India/Principal---Head-of-Compliance-Architecture_R162289"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Specialist, Business Strategy",
+                  "external_id": "/job/Chicago-IL/Specialist--Business-Strategy_R160891-1"
+                },
+                {
+                  "reason": "excluded_title:compliance",
+                  "title": "Principal - Head of Compliance Architecture",
+                  "external_id": "/job/Chicago-IL/Head-of-Compliance-Architecture_R161054"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate Consultant",
+                  "external_id": "/job/Bangalore-India/Associate-Consultant_R158354-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "NTAM Invest Ops Blr Sr Analyst",
+                  "external_id": "/job/Bangalore-India/NTAM-Invest-Ops-Blr-Sr-Analyst_R161404-2"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "lseg": {
+            "completed_at": "2026-10-14T11:30:26.184879+00:00",
+            "status": "successful",
+            "duration": 0.695,
+            "selection": {
+              "scope": "search_results",
+              "examined": 141,
+              "selected": 12,
+              "rejected": {
+                "no_title_match": 120,
+                "excluded_title:operations": 5,
+                "excluded_title:summer internship": 4
+              },
+              "samples": [
+                {
+                  "reason": "no_title_match",
+                  "title": "Content Infrastructure Owner - Research",
+                  "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Content-Infrastructure-Owner---Research_R0122760"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Content Specialist",
+                  "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Senior-Content-Specialist_R0122762"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Content Infrastructure Owner -Estimates",
+                  "external_id": "/job/IND-Bangalore-TowerERMZ-Infin/Content-Infrastructure-Owner--Estimates_R0122761"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Lead Software Engineer (C++)",
+                  "external_id": "/job/THA-Bangkok-One-Bangkok/Lead-Software-Engineer--C---_R0100379"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sr. Technical Specialist - Workflows Technical Support",
+                  "external_id": "/job/IND-BLR-Divyasree-Technopolis/Sr-Technical-Specialist---Workflows-Technical-Support_R0116209-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Technical Specialist - AI and Enterprise Applications",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Technical-Specialist---AI-and-Enterprise-Applications_R0123376"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Research Analyst, Flows",
+                  "external_id": "/job/IND-Mumbai-One-World-Center/Senior-Research-Analyst--Flows_R0121925"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Analyst, Market Supervision, LSE 24",
+                  "external_id": "/job/Colombo-Sri-Lanka/Analyst--Market-Supervision--LSE-24_R0123339"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Manager, Business Consulting",
+                  "external_id": "/job/HKG-Hong-Kong-ICBC-Tower/Senior-Manager--Business-Consulting_R0124156"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Associate, PTS Customer Support",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Associate--PTS-Customer-Support_R0123105"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Manager, Live Supervision, Rules & Post Trade",
+                  "external_id": "/job/London-United-Kingdom/Senior-Manager--Live-Supervision--Rules---Post-Trade_R0123696"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Assistant Manager, Technical Implementation",
+                  "external_id": "/job/Cluj---21-Decembrie-1989-Boulevard/Assistant-Manager--Technical-Implementation_R0122513"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Senior Associate, Securities Clearing Operations",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Associate--Securities-Clearing-Operations_R0123613"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "BI Engineering Manager",
+                  "external_id": "/job/IND-Hyderabad-CapitaLand/BI-Engineering-Manager_R0123806"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director, Brand Strategy & Enterprise Positioning",
+                  "external_id": "/job/London-United-Kingdom/Director--Brand-Strategy---Enterprise-Positioning_R0122110"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Valuations Lead, CLO / CDO",
+                  "external_id": "/job/USA-New-York-28-Liberty-Street/Senior-Valuations-Lead--CLO---CDO_R0121718-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Sales Specialist, Yield Book",
+                  "external_id": "/job/New-York-United-States/Senior-Sales-Specialist--Analytics_R0118851-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Director, Collateral & Liquidity Management",
+                  "external_id": "/job/Paris-France/Director--Collateral---Liquidity-Management_R0120818-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Partner Account Manager",
+                  "external_id": "/job/SGP-Singapore-1-Raffles-Quay/Partner-Account-Manager_R0123227"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Engineer, Site Reliability Engineering",
+                  "external_id": "/job/IND-BLR-Divyasree-Technopolis/Engineer--Site-Reliability-Engineering_R0117362-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Market Supervision Surveillance Specialist",
+                  "external_id": "/job/London-United-Kingdom/Senior-Market-Supervision-Surveillance-Specialist_R0122459"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Technical Specialist - AI and Enterprise Applications",
+                  "external_id": "/job/PHL-Taguig-City-CitiPlaza/Senior-Technical-Specialist---AI-and-Enterprise-Applications_R0123375"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Technical Account Manager (Analyst)",
+                  "external_id": "/job/London-United-Kingdom/Technical-Account-Manager--Analyst-_R0122748"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Analyst Summer Internship",
+                  "external_id": "/job/New-York-City-United-States/Business-Analyst-Summer-Internship_R0123463-2"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Management Summer Internship",
+                  "external_id": "/job/New-York-City-United-States/Business-Management-and-Sales-Summer-Internship_R0123464-1"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Management Summer Internship",
+                  "external_id": "/job/GBR-London-5-Canada-Square/Business-Management-and-Sales-Summer-Internship_R0123386-1"
+                },
+                {
+                  "reason": "excluded_title:summer internship",
+                  "title": "Business Analyst Summer Internship",
+                  "external_id": "/job/London-United-Kingdom/Business-Analyst-Summer-Internship_R0123387-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Risk Developer",
+                  "external_id": "/job/Bucharest---Iuliu-Maniu-Boulevard/Senior-Risk-Developer_R0114189-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Product Manager — FX Post-Trade Workflows & Solutions",
+                  "external_id": "/job/POL-Gdynia-3T-Office-Park-Tower-C/Senior-Product-Manager---FX-Post-Trade-Workflows---Solutions_R0122604-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Sales Manager, Data and Feeds, Japan",
+                  "external_id": "/job/JPN-Tokyo-Akasaka-Biz-Tower-30/Sales-Manager--Data-and-Feeds--Japan_R0115149-1"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "gsa_capital": {
+            "completed_at": "2026-10-14T11:30:26.198210+00:00",
+            "status": "successful",
+            "duration": 0.013,
+            "selection": {
+              "scope": "public_catalogue",
+              "examined": 13,
+              "selected": 2,
+              "rejected": {
+                "excluded_title:operations": 1,
+                "excluded_title:competition": 1,
+                "excluded_title:accountant": 1,
+                "excluded_title:insight programme": 2,
+                "no_title_match": 4,
+                "excluded_title:quant talk": 1,
+                "excluded_title:technology talk": 1
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Business Operations - General Application",
+                  "external_id": "7336091002"
+                },
+                {
+                  "reason": "excluded_title:competition",
+                  "title": "Digital Competition - SPARK 2026",
+                  "external_id": "8870873002"
+                },
+                {
+                  "reason": "excluded_title:accountant",
+                  "title": "Finance - Assistant Accountant",
+                  "external_id": "8625916002"
+                },
+                {
+                  "reason": "excluded_title:insight programme",
+                  "title": "General Trading & Technology Insight Programme - 2027",
+                  "external_id": "8870173002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Infrastructure Assistant",
+                  "external_id": "4625058002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "IT Engineer",
+                  "external_id": "4010431002"
+                },
+                {
+                  "reason": "excluded_title:quant talk",
+                  "title": "Quant Talk - University of Oxford (13th of November)",
+                  "external_id": "8871056002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Software Developer",
+                  "external_id": "7555839002"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Software Developer - Intern",
+                  "external_id": "8570668002"
+                },
+                {
+                  "reason": "excluded_title:technology talk",
+                  "title": "Technology Talk - University of Oxford (20th of October)",
+                  "external_id": "8826886002"
+                },
+                {
+                  "reason": "excluded_title:insight programme",
+                  "title": "Women in Trading & Technology Insight Programme - 2027",
+                  "external_id": "8518528002"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          },
+          "quadrature": {
+            "completed_at": "2026-10-14T11:30:26.208141+00:00",
+            "status": "successful",
+            "duration": 0.01,
+            "selection": {
+              "scope": "public_catalogue",
+              "examined": 3,
+              "selected": 1,
+              "rejected": {
+                "prospect": 2
+              },
+              "samples": []
+            },
+            "internship_baseline_complete": true
+          },
+          "state_street": {
+            "completed_at": "2026-10-14T11:30:27.830059+00:00",
+            "status": "successful",
+            "duration": 1.622,
+            "selection": {
+              "scope": "search_results",
+              "examined": 790,
+              "selected": 33,
+              "rejected": {
+                "excluded_title:settlements": 10,
+                "no_title_match": 664,
+                "excluded_title:operations": 47,
+                "excluded_title:market risk": 6,
+                "excluded_title:compliance": 6,
+                "excluded_title:accountant": 6,
+                "excluded_title:audit": 13,
+                "excluded_title:legal": 5
+              },
+              "samples": [
+                {
+                  "reason": "excluded_title:settlements",
+                  "title": "Middle Office Trade Management & Settlements, Vice President",
+                  "external_id": "/job/Irvine-California/Alpha-Operations-Client-Pathways--Vice-President_R-778801"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Implementation Specialist - IBOR / Post Trade / Swift - Officer",
+                  "external_id": "/job/Burlington-Massachusetts/Consultant--Officer_R-794304"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior Implementation Manager - Post Trade / IBOR - Charles River Development",
+                  "external_id": "/job/Burlington-Massachusetts/R-781540-Front-Office---Buyside-Post-Production-Technical-Support-Specialist----API--ETL-t"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Exchange Traded Funds (ETF) Technology Delivery Lead – Managing Director",
+                  "external_id": "/job/Quincy-Massachusetts/Exchange-Traded-Funds--ETF--Technology-Delivery-Lead---Managing-Director_R-797323-1"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Operations Clearance, Settlement, & Trading Operations, Senior Associate",
+                  "external_id": "/job/Chennai-India/Operations-Clearance--Settlement----Trading-Operations--Senior-Associate_R-798686-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Collateral Processing - Senior Associate",
+                  "external_id": "/job/HINJEWADI-PUNE/Collateral-Processing---Senior-Associate_R-798548-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Alpha Middle Office Senior Expert, hybrid, Officer",
+                  "external_id": "/job/Krakow-Poland/Alpha-Middle-Office-Senior-Expert--hybrid--Officer_R-788095"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "IBOR Accounting, Associate 2",
+                  "external_id": "/job/Mumbai-India/IBOR-Accounting--Associate-2_R-796422"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Operation Client Service, Assistant Vice President",
+                  "external_id": "/job/Kansas-City-Missouri/Operation-Client-Service--Assistant-Vice-President_R-799042"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Client Services, Assistant Vice President",
+                  "external_id": "/job/Quincy-Massachusetts/Client-Services--Assistant-Vice-President_R-799050-1"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk Analyst (Prime Services and Broker Dealer), Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Front-Office-Market-Risk-Analyst--Prime-Services-and-Broker-Dealer---Vice-President_R-793857"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk FCM and Futures Clearing, Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Securities-Finance-Front-Office-Market-Risk-Analyst--Vice-Presidentnalyst_R-796386"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk Analyst, Assistant Vice President",
+                  "external_id": "/job/London-England/Front-Office-Market-Risk-Analyst--Assistant-Vice-President_R-796905-1"
+                },
+                {
+                  "reason": "excluded_title:market risk",
+                  "title": "Front Office Market Risk Analyst, Assistant Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Front-Office-Market-Risk-Analyst--Assistant-Vice-President_R-796903-2"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "FX Collateral Management, Senior Manager",
+                  "external_id": "/job/Hyderabad-India/FX-Collateral-Management---Assistant-Vice-President_R-793195"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Financing Solutions Prime Services, Manager",
+                  "external_id": "/job/Hyderabad-India/Financing-Solutions-Prime-Services--Manager_R-796945-1"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Global Head of Financing and Portfolio Solutions (FPS) Operations, Senior Managing Director",
+                  "external_id": "/job/Mumbai-India/Global-Head-of-Financing-and-Portfolio-Solutions--FPS--Operations--Senior-Managing-Director_R-798012-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "GlobalLINK Platform Support-Team Lead",
+                  "external_id": "/job/Bangalore-India/GlobalLINK-Platform-Support-Team-Lead_R-798233-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Regulatory Reporting Specialist, Senior Associate",
+                  "external_id": "/job/Hyderabad-India/Regulatory-Reporting-Specialist--Senior-Associae_R-798406"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Collateral Management - Manager",
+                  "external_id": "/job/Hyderabad-India/Collateral-Management---Manager_R-798847"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Financing Solutions, Prime Services - Senior Associate",
+                  "external_id": "/job/Hyderabad-India/Financing-Solutions--Prime-Services---Senior-Associate_R-798945-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Regulatory Reporting, Senior Associate",
+                  "external_id": "/job/Hyderabad-India/Regulatory-Reporting--Senior-Associate_R-799119"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Global Treasury, Officer",
+                  "external_id": "/job/Seoul-Korea/Global-Treasury--Officer_R-799225"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Portfolio Finance - Execution Business Officer, Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Portfolio-Finance---Execution-Business-Officer--Vice-President_R-798794"
+                },
+                {
+                  "reason": "excluded_title:operations",
+                  "title": "Alpha Data Operations - Assistant Manager",
+                  "external_id": "/job/Hyderabad-India/Alpha-Data-Operations---Assistant-Manager_R-799572"
+                },
+                {
+                  "reason": "excluded_title:settlements",
+                  "title": "FX Confirmations & Settlements, Team Lead",
+                  "external_id": "/job/Hyderabad-India/FX-Confirmations---Settlements--Senior-Associate_R-795044"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Senior eFX Software Engineer (Java/Rust), Vice President",
+                  "external_id": "/job/Boston-Massachusetts/Software-Engineering---Development--VP_R-796633-1"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives - Senior Associate",
+                  "external_id": "/job/Bangalore-India/Derivatives---Senior-Associate_R-798272"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Derivatives - Senior Associate",
+                  "external_id": "/job/Bangalore-India/Derivatives---Senior-Associate_R-798293"
+                },
+                {
+                  "reason": "no_title_match",
+                  "title": "Counterparty Credit Risk Manager, Prime Brokerage & Clearing, VP",
+                  "external_id": "/job/Boston-Massachusetts/Counterparty-Credit-Risk-Manager--Prime-Brokerage---Clearing_R-793578-6"
+                }
+              ]
+            },
+            "internship_baseline_complete": true
+          }
+        },
+        "sources": 6,
+        "successful": 6,
+        "failed": {},
+        "degraded": {},
+        "listing_gaps": {},
+        "requests": 0,
+        "received": 67,
+        "new": 0,
+        "updated": 0,
+        "closed": 0,
+        "relevant": 549,
+        "high_priority": 379,
+        "alerts": 0,
+        "duration": 16.769
+      }
+    ],
+    "sources": {
+      "mizuho": 7,
+      "northern_trust": 12,
+      "lseg": 12,
+      "gsa_capital": 2,
+      "quadrature": 1,
+      "state_street": 33
+    },
+    "scores": {
+      "mizuho": {
+        "jobs": 7,
+        "priority": 0,
+        "zero": 7
+      },
+      "northern_trust": {
+        "jobs": 12,
+        "priority": 0,
+        "zero": 11
+      },
+      "lseg": {
+        "jobs": 12,
+        "priority": 0,
+        "zero": 10
+      },
+      "gsa_capital": {
+        "jobs": 2,
+        "priority": 0,
+        "zero": 2
+      },
+      "quadrature": {
+        "jobs": 1,
+        "priority": 0,
+        "zero": 1
+      },
+      "state_street": {
+        "jobs": 33,
+        "priority": 2,
+        "zero": 28
+      }
+    },
+    "jobs": 1683,
+    "summary": {
+      "total": 1683,
+      "active": 1667,
+      "high_priority": 372,
+      "relevant": 542,
+      "applications_due": 0,
+      "applications_in_progress": 1,
+      "fresh_sources": 91,
+      "enabled_sources": 97
+    },
+    "contract": {
+      "status": "ok",
+      "jobs": 1683,
+      "controls": 89,
+      "modules": 7,
+      "asset_hashes": "verified"
+    },
+    "old_job_ids_preserved": true,
+    "applications_and_alert_journals_preserved": true,
+    "wishlist_unchanged": true,
+    "backup_restore_verified": true,
+    "schema_version": 4,
+    "network": "none",
+    "telegram_calls": 0
+  },
+  "fresh_validation": {
+    "status": "ok",
+    "finished_at_epoch": 1791978515.3612685,
+    "sources": {
+      "mizuho": {
+        "status": "ok",
+        "jobs": 7,
+        "requests": 28,
+        "unchanged": true
+      },
+      "northern_trust": {
+        "status": "ok",
+        "jobs": 12,
+        "requests": 34,
+        "unchanged": true
+      },
+      "lseg": {
+        "status": "ok",
+        "jobs": 12,
+        "requests": 25,
+        "unchanged": true
+      },
+      "gsa_capital": {
+        "status": "ok",
+        "jobs": 2,
+        "requests": 2,
+        "unchanged": true
+      },
+      "quadrature": {
+        "status": "ok",
+        "jobs": 1,
+        "requests": 2,
+        "unchanged": true
+      },
+      "state_street": {
+        "status": "ok",
+        "jobs": 33,
+        "requests": 114,
+        "unchanged": true
+      }
+    },
+    "collections_sha256": "430ab606258c57d5b964c077ab40bbe0c12361b0eabddca83c505dc63bf63697",
+    "third_read_unchanged": true
+  },
+  "source_counts": {
+    "employers": 85,
+    "enabled": 97,
+    "fresh": 89
+  },
+  "https": {
+    "same_private_link": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "seconds": 26.632
+  },
+  "services_running": 5,
+  "systemd_active_enabled": 4,
+  "scope": {
+    "alerts_enabled": true,
+    "deadline_reminders_enabled": false,
+    "include_internships": true,
+    "internship_alerts_enabled": true,
+    "internship_formats": [
+      "off_cycle",
+      "long"
+    ],
+    "internship_target_year": 2027,
+    "telegram_all_new_jobs": true,
+    "telegram_control_enabled": true,
+    "telegram_heartbeat_enabled": true,
+    "telegram_heartbeat_times": [
+      "13:00",
+      "18:00"
+    ],
+    "telegram_incident_notices_enabled": false
+  },
+  "incidents": [
+    {
+      "source": "hsbc_professionals",
+      "status": "recent_failure"
+    },
+    {
+      "source": "nomura_campus",
+      "status": "access_restricted"
+    },
+    {
+      "source": "bnp_paribas",
+      "status": "stale"
+    },
+    {
+      "source": "citi",
+      "status": "recent_failure"
+    },
+    {
+      "source": "morgan_stanley_campus",
+      "status": "stale"
+    },
+    {
+      "source": "rbc",
+      "status": "recent_failure"
+    },
+    {
+      "source": "jefferies_campus",
+      "status": "stale"
+    },
+    {
+      "source": "bnp_campus",
+      "status": "recent_failure"
+    }
+  ],
+  "ci": {
+    "run_id": 38556765707,
+    "python313_tests": 5424,
+    "python314_tests": 5424,
+    "javascript_tests": 34,
+    "targeted_tests": 258,
+    "jobs": [
+      {
+        "name": "dashboard",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (3.12)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "name": "checks (3.11)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "name": "checks (3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (3.14)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-# Carnet des tâches — 13 octobre 2026
+# Carnet des tâches — 14 octobre 2026
 
 Ce carnet suit l’instance OVH. Un connecteur développé ou une offre visible dans
 un catalogue public ne sont pas, à eux seuls, une preuve de surveillance active.
@@ -148,7 +148,7 @@ Base principale en schéma 4, anciens identifiants, candidatures, historiques, a
 
 Prochains lots :
 
-- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
+- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164 ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
 - 160 — documenter et compléter la couverture Marex, actuellement sept fiches validées sans inventaire exhaustif ; conserver l'absence de fermeture déduite.
 - 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
 
@@ -167,3 +167,14 @@ Demande du 13 octobre : remplir localisation, début, expérience et échéance 
 Tests ciblés, contrat des assets, contrôle mobile, simulation sur copie, sauvegarde version 2 et installation sont vérifiés. Les 1 591 fiches bénéficient du nouvel affichage ; 1 575 actives au relevé, dont 105 critères d'expérience non chiffrés. Base, candidatures, alertes, souhaits et historiques, digest, curseur et liaison Telegram préservés. Une fiche UBS corrigée envoyée une fois avec réception confirmée. [Validation](VALIDATION-LOT162.md) · [Preuves](DELIVERY-LOT162.json).
 
 Suite — lot 163 : analyser par source les valeurs encore à interpréter (62 débuts, 34 échéances et 72 localisations au relevé), chercher les champs structurés officiels manquants et conserver les ambiguïtés tant qu'aucune preuve ne les tranche. Les conflits de dates ne seront pas remplacés par l'année courante. Le lot 159 de performance du Dashboard et les reprises d'accès du lot 161 restent ouverts.
+
+
+## Lot 164 — six sources supplémentaires (installé et vérifié)
+
+State Street, Mizuho, Northern Trust, LSEG, GSA Capital et Quadrature Capital. Profil VPS installé : 97 sources / 85 employeurs, 89 à jour au relevé daté. /statuts et Dashboard concordent. [Sources et limites](RADAR-SOURCES-LOT164.md).
+
+258 tests ciblés, Ruff et Mypy réussis ; 5 424 tests Python 3.13 et 3.14 et 34 tests JavaScript réussis sur le correctif. Deux lectures stables, puis revalidation complète supplémentaire. Simulation sur copie : 67 fiches, 2 à score ≥ 70 et 59 à 0 ; seconde importation sans création ni actualisation ; zéro alerte et zéro appel Telegram. Identifiants, candidatures, journaux et souhaits conservés ; sauvegarde/restauration version 2 vérifiée.
+
+La fraîcheur insuffisante de la première référence a empêché son installation ; code et configuration rétablis, sans restauration de la base. Relance réussie sur nouvelle lecture identique et sauvegarde vérifiée ; 67 nouvelles fiches, zéro actualisation historique et zéro alerte à l’import. Les 15 contrôles de préservation passent, cinq services Docker tournent et les quatre services système sont actifs/activés. Même accès privé HTTPS et API des souhaits/candidatures vérifiées. [Validation](VALIDATION-LOT164.md) · [Preuves](DELIVERY-LOT164.json).
+
+Suite — lot 165 : qualifier les titres non retenus par les recherches, notamment Credit Derivatives Sales chez Mizuho, et compléter les portails régionaux/campus. Chaque élargissement sera basé sur les missions publiées ; aucun point attribué au nom d'une banque. BNY reste à traiter sur la pagination ; les portails 403 et les viviers restent distincts des sources actives. Les lots 159, 160, 161, 163, 154 et 155 restent ouverts.
