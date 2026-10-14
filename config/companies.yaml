@@ -4755,3 +4755,398 @@ companies:
       lot 164. Bounded trading/markets/quantitative scope including off-cycle and long internships; explicit
       summer/event/pool exclusions. Senior trading roles retained for the all-score stream. Silent initial
       reference; no closures inferred from absence.
+  t_rowe_price:
+    name: T. Rowe Price
+    enabled: true
+    ats: workday
+    tenant: troweprice
+    career_url: https://troweprice.wd5.myworkdayjobs.com/TRowePrice
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      - investment research
+      - fundamental research
+      - credit analyst
+      - investment associate
+      - investment graduate
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      - middle office
+      - investment operations
+      - portfolio operations
+      - summer
+      - aml
+      - hr business partner
+      - human resources
+      - private markets product
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - portfolio
+      - investment
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official portal https://www.troweprice.com/en/us/careers publishes this
+      public Workday board; verified 2026-10-14. Six keyword queries, complete bounded
+      pagination and full posting descriptions; first-page recheck. Off-cycle and
+      long internships admitted, summer programmes and support titles excluded; seniority
+      is scored, not discarded. No inferred employment start or deadline; no closure
+      by absence. Regional/campus completeness is not claimed.
+  aberdeen:
+    name: Aberdeen
+    enabled: true
+    ats: workday
+    tenant: abrdn
+    career_url: https://abrdn.wd3.myworkdayjobs.com/abrdn
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      - investment research
+      - fundamental research
+      - credit analyst
+      - investment associate
+      - investment graduate
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      - middle office
+      - investment operations
+      - portfolio operations
+      - summer
+      - aml
+      - hr business partner
+      - human resources
+      - private markets product
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - portfolio
+      - investment
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official portal https://www.aberdeenplc.com/en-gb/careers publishes this
+      public Workday board; verified 2026-10-14. Six keyword queries, complete bounded
+      pagination and full posting descriptions; first-page recheck. Off-cycle and
+      long internships admitted, summer programmes and support titles excluded; seniority
+      is scored, not discarded. No inferred employment start or deadline; no closure
+      by absence. Regional/campus completeness is not claimed.
+  invesco:
+    name: Invesco
+    enabled: true
+    ats: workday
+    tenant: invesco
+    career_url: https://invesco.wd1.myworkdayjobs.com/IVZ
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      - investment research
+      - fundamental research
+      - credit analyst
+      - investment associate
+      - investment graduate
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      - middle office
+      - investment operations
+      - portfolio operations
+      - summer
+      - aml
+      - hr business partner
+      - human resources
+      - private markets product
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - portfolio
+      - investment
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official portal https://careers.invesco.com/ publishes this public Workday
+      board; verified 2026-10-14. Six keyword queries, complete bounded pagination
+      and full posting descriptions; first-page recheck. Off-cycle and long internships
+      admitted, summer programmes and support titles excluded; seniority is scored,
+      not discarded. No inferred employment start or deadline; no closure by absence.
+      Regional/campus completeness is not claimed.
+  trafigura:
+    name: Trafigura
+    enabled: true
+    ats: workday
+    tenant: trafigura
+    career_url: https://trafigura.wd3.myworkdayjobs.com/TrafiguraCareerSite
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      - investment research
+      - fundamental research
+      - credit analyst
+      - investment associate
+      - investment graduate
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      - middle office
+      - investment operations
+      - portfolio operations
+      - summer
+      - aml
+      - hr business partner
+      - human resources
+      - private markets product
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - portfolio
+      - investment
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official portal https://www.trafigura.com/careers/ publishes this public
+      Workday board; verified 2026-10-14. Six keyword queries, complete bounded pagination
+      and full posting descriptions; first-page recheck. Off-cycle and long internships
+      admitted, summer programmes and support titles excluded; seniority is scored,
+      not discarded. No inferred employment start or deadline; no closure by absence.
+      Regional/campus completeness is not claimed.
+  deshaw:
+    name: D. E. Shaw
+    enabled: true
+    ats: deshaw
+    career_url: https://www.deshaw.com/careers
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - investment analyst
+      - fundamental equities
+      exclude_title_terms:
+      - operations
+      - compliance
+      - audit
+      - legal
+      - marketing
+      - summer
+      - all positions
+      - talent community
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Official public employer catalogue and complete posting pages verified
+      2026-10-14. Public regularJobs and internships only; internalJobs, hidden and
+      exploratory requisitions never imported. Listing/detail identity, full responsibilities/requirements
+      and complete catalogue recheck. Off-cycle/long internships admitted, summer
+      programmes excluded, all score levels retained. Generated detail datePosted
+      and unverified validToDate never become candidate dates; no closure by absence.
+  scotiabank:
+    name: Scotiabank
+    enabled: true
+    ats: scotiabank
+    career_url: https://jobs.scotiabank.com/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - structuring
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - structurer
+      - equity sales
+      - fixed income sales
+      - credit sales
+      - fx sales
+      - sales and trading
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      - middle office
+      - investment operations
+      - portfolio operations
+      - summer
+      - aml
+      - hr business partner
+      - human resources
+      - private markets product
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Official public SuccessFactors search and complete employer jobdescription
+      verified 2026-10-14. Trading/quantitative/structuring queries, exact 25-row
+      pagination, count/identity checks, first-page recheck, listing/detail title
+      validation. Calendar publication is separate from employment start and deadline.
+      Off-cycle/long internships admitted, summers/support roles excluded; seniority
+      scored rather than discarded. No closure by absence; campus/regional completeness
+      not claimed.
