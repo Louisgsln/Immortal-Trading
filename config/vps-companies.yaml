@@ -4072,3 +4072,337 @@ companies:
       - structuring
       max_details: 80
       max_scan_seconds: 600
+  state_street:
+    name: State Street
+    enabled: true
+    ats: workday
+    tenant: statestreet
+    career_url: https://statestreet.wd1.myworkdayjobs.com/Global
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official employer link https://careers.statestreet.com/global/en verified
+      on OVH 2026-10-14, lot 164. Bounded trading/markets/quantitative scope including
+      off-cycle and long internships; explicit summer/event/pool exclusions. Senior
+      trading roles retained for the all-score stream. Silent initial reference; no
+      closures inferred from absence.
+  mizuho:
+    name: Mizuho
+    enabled: true
+    ats: workday
+    tenant: mizuho
+    career_url: https://mizuho.wd1.myworkdayjobs.com/mizuhoamericas
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official employer link https://www.mizuhogroup.com/americas/careers verified
+      on OVH 2026-10-14, lot 164. Bounded trading/markets/quantitative scope including
+      off-cycle and long internships; explicit summer/event/pool exclusions. Senior
+      trading roles retained for the all-score stream. Silent initial reference; no
+      closures inferred from absence.
+  northern_trust:
+    name: Northern Trust
+    enabled: true
+    ats: workday
+    tenant: ntrs
+    career_url: https://ntrs.wd1.myworkdayjobs.com/northerntrust
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official employer link https://www.northerntrust.com/united-states/about-us/careers
+      verified on OVH 2026-10-14, lot 164. Bounded trading/markets/quantitative scope
+      including off-cycle and long internships; explicit summer/event/pool exclusions.
+      Senior trading roles retained for the all-score stream. Silent initial reference;
+      no closures inferred from absence.
+  lseg:
+    name: LSEG
+    enabled: true
+    ats: workday
+    tenant: lseg
+    career_url: https://lseg.wd3.myworkdayjobs.com/Careers
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Official employer link https://www.lseg.com/en/careers verified on OVH
+      2026-10-14, lot 164. Bounded trading/markets/quantitative scope including off-cycle
+      and long internships; explicit summer/event/pool exclusions. Senior trading
+      roles retained for the all-score stream. Silent initial reference; no closures
+      inferred from absence.
+  gsa_capital:
+    name: GSA Capital
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: gsacapital
+    career_url: https://www.gsacapital.com/join-us
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Official employer link https://www.gsacapital.com/join-us verified on OVH
+      2026-10-14, lot 164. Bounded trading/markets/quantitative scope including off-cycle
+      and long internships; explicit summer/event/pool exclusions. Senior trading
+      roles retained for the all-score stream. Silent initial reference; no closures
+      inferred from absence.
+  quadrature:
+    name: Quadrature Capital
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: quadraturecapital
+    career_url: https://www.quadrature.ai/careers/join-us/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      title_terms:
+      - trading
+      - trader
+      - markets
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - investment analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer internship
+      - summer intern
+      - summer analyst
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - insight programme
+      - insight program
+      - competition
+      - quant talk
+      - technology talk
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Official employer link https://www.quadrature.ai/careers/join-us/ verified
+      on OVH 2026-10-14, lot 164. Bounded trading/markets/quantitative scope including
+      off-cycle and long internships; explicit summer/event/pool exclusions. Senior
+      trading roles retained for the all-score stream. Silent initial reference; no
+      closures inferred from absence.

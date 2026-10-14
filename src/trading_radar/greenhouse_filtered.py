@@ -19,6 +19,8 @@ from trading_radar.selection import SelectionAudit, rejection_reason
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
+    "gsacapital": ("GSA Capital", "www.gsacapital.com"),
+    "quadraturecapital": ("Quadrature Capital", "job-boards.greenhouse.io"),
     "engineersgate": ("Engineers Gate", "job-boards.greenhouse.io"),
     "pdtpartners": ("PDT Partners", "job-boards.greenhouse.io"),
     "grahamcapitalmanagement": ("Graham Capital Management", "boards.greenhouse.io"),
@@ -67,6 +69,7 @@ BOARDS = {
     "worldquant": ("WorldQuant", "job-boards.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
+    "gsacapital": "GSA",
     "grahamcapitalmanagement": "Graham Capital Management, L.P.",
     "headlandstechnologiesllc": "Headlands Technologies LLC",
     "radixuniversity": "Radix Trading University Job Board",
@@ -82,6 +85,7 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "quadraturecapital",
     "engineersgate",
     "grahamcapitalmanagement",
     "quantbot-technologies",
@@ -108,6 +112,7 @@ _NULL_METADATA = {
     "davinciderivatives",
 }
 _CUSTOM_PATHS = {
+    "gsacapital": "/careers/gh/",
     "grahamcapitalmanagement": "/grahamcapitalmanagement/jobs/{id}",
     "quantbot-technologies": "/careers/{id}",
     "acadianassetmanagementllc": "/careers/open-positions",
@@ -401,6 +406,10 @@ def parse_board(
             or parts.fragment
         ):
             raise SourceUnavailable("Greenhouse posting URL identity mismatch")
+        if config.tenant == "gsacapital":
+            # The feed retains a retired employer path. The official careers page
+            # publishes this application link for the same verified posting ID.
+            url = f"https://boards.greenhouse.io/embed/job_app?for=gsacapital&token={identifier}"
         if config.tenant == "mako":
             # The feed's /job-listing/{id} path returns 404. The employer's own
             # openings page links to this query-based application page instead.
