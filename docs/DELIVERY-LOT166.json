@@ -1,0 +1,189 @@
+{
+  "release": "immortal-trading:lot166-source-expansion-20261014",
+  "core_commit": "d74e0a9cf950548346093feafff7925610625564",
+  "verified_date": "2026-10-14",
+  "source_counts": {
+    "enabled": 103,
+    "employers": 91,
+    "fresh": 91
+  },
+  "sources_added": [
+    "aberdeen",
+    "t_rowe_price",
+    "trafigura",
+    "invesco",
+    "deshaw",
+    "scotiabank"
+  ],
+  "new_source_scores": {
+    "aberdeen": {
+      "jobs": 1,
+      "priority": 0,
+      "zero": 1
+    },
+    "t_rowe_price": {
+      "jobs": 8,
+      "priority": 1,
+      "zero": 7
+    },
+    "trafigura": {
+      "jobs": 4,
+      "priority": 4,
+      "zero": 0
+    },
+    "invesco": {
+      "jobs": 10,
+      "priority": 1,
+      "zero": 8
+    },
+    "deshaw": {
+      "jobs": 6,
+      "priority": 1,
+      "zero": 5
+    },
+    "scotiabank": {
+      "jobs": 12,
+      "priority": 0,
+      "zero": 10
+    }
+  },
+  "initial_import": {
+    "new": 41,
+    "updated": 0,
+    "alerts": 0
+  },
+  "retry_import": {
+    "new": 0,
+    "updated": 0,
+    "alerts": 0
+  },
+  "preservation_checks": {
+    "alert_history_preserved": true,
+    "application_history_preserved": true,
+    "application_ids_preserved": true,
+    "application_rows_preserved": true,
+    "backup_verified": true,
+    "database_inode_preserved": true,
+    "heartbeat_binding_preserved": true,
+    "job_ids_preserved": true,
+    "sent_alerts_preserved": true,
+    "telegram_binding_preserved": true,
+    "telegram_cursor_preserved": true,
+    "telegram_digest_preferences_preserved": true,
+    "wishlist_history_preserved": true,
+    "wishlist_inode_preserved": true,
+    "wishlist_members_preserved": true
+  },
+  "main_schema": 4,
+  "wishlist_schema": 1,
+  "backup_format": 2,
+  "services_running": 5,
+  "systemd_active_enabled": 4,
+  "private_https": {
+    "same_link": true,
+    "editable": true,
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "wishlist_api": true,
+    "page_seconds": 39.64
+  },
+  "telegram": {
+    "all_new_scores": true,
+    "statuts_alias_verified": true,
+    "heartbeat_times": [
+      "13:00",
+      "18:00"
+    ],
+    "sent_test_messages": 0
+  },
+  "internships": {
+    "formats": [
+      "off_cycle",
+      "long"
+    ],
+    "target_year": 2027
+  },
+  "tests": {
+    "python_local": 5466,
+    "targeted": 217,
+    "new_tests": 42,
+    "javascript": 34,
+    "ruff": "pass",
+    "mypy_modules": 128,
+    "dashboard_controls": 89,
+    "ci_run": 38586189270,
+    "ci_status": "success",
+    "ci_checks": 6,
+    "python_versions": {
+      "3.11": 5466,
+      "3.12": 5466,
+      "3.13": 5466,
+      "3.14": 5466
+    },
+    "container_recovery": "pass"
+  },
+  "rdc_policy_restored": true,
+  "incidents": [
+    {
+      "source": "hsbc_professionals",
+      "status": "recent_failure"
+    },
+    {
+      "source": "nomura_campus",
+      "status": "access_restricted"
+    },
+    {
+      "source": "bnp_paribas",
+      "status": "stale"
+    },
+    {
+      "source": "goldman_sachs",
+      "status": "recent_failure"
+    },
+    {
+      "source": "barclays",
+      "status": "recent_failure"
+    },
+    {
+      "source": "deutsche_bank",
+      "status": "partial"
+    },
+    {
+      "source": "morgan_stanley",
+      "status": "recent_failure"
+    },
+    {
+      "source": "morgan_stanley_campus",
+      "status": "stale"
+    },
+    {
+      "source": "jefferies_campus",
+      "status": "stale"
+    },
+    {
+      "source": "bnp_campus",
+      "status": "partial"
+    },
+    {
+      "source": "td",
+      "status": "recent_failure"
+    },
+    {
+      "source": "state_street",
+      "status": "recent_failure"
+    }
+  ],
+  "first_attempt": {
+    "database_restored": false,
+    "rollback": "code_config_only",
+    "cause": "Dashboard warm-up exceeded 120 seconds"
+  },
+  "retry": {
+    "dashboard_started_before_radar": true,
+    "dashboard_wait_seconds": 300
+  }
+}

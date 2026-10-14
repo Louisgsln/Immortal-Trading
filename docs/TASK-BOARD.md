@@ -148,7 +148,7 @@ Base principale en schéma 4, anciens identifiants, candidatures, historiques, a
 
 Prochains lots :
 
-- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164 ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
+- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164, puis 39,64 secondes pour 1 729 fiches au lot 166 ; profiler les lectures/parsers avant de modifier la fraîcheur des données.
 - 160 — documenter et compléter la couverture Marex, actuellement sept fiches validées sans inventaire exhaustif ; conserver l'absence de fermeture déduite.
 - 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
 
@@ -178,3 +178,17 @@ State Street, Mizuho, Northern Trust, LSEG, GSA Capital et Quadrature Capital. P
 La fraîcheur insuffisante de la première référence a empêché son installation ; code et configuration rétablis, sans restauration de la base. Relance réussie sur nouvelle lecture identique et sauvegarde vérifiée ; 67 nouvelles fiches, zéro actualisation historique et zéro alerte à l’import. Les 15 contrôles de préservation passent, cinq services Docker tournent et les quatre services système sont actifs/activés. Même accès privé HTTPS et API des souhaits/candidatures vérifiées. [Validation](VALIDATION-LOT164.md) · [Preuves](DELIVERY-LOT164.json).
 
 Suite — lot 165 : qualifier les titres non retenus par les recherches, notamment Credit Derivatives Sales chez Mizuho, et compléter les portails régionaux/campus. Chaque élargissement sera basé sur les missions publiées ; aucun point attribué au nom d'une banque. BNY reste à traiter sur la pagination ; les portails 403 et les viviers restent distincts des sources actives. Les lots 159, 160, 161, 163, 154 et 155 restent ouverts.
+
+## Lot 166 — six employeurs supplémentaires
+
+Scotiabank, D. E. Shaw, T. Rowe Price, Aberdeen, Invesco et Trafigura. Deux nouveaux collecteurs officiels et quatre profils Workday. 41 fiches initiales vérifiées ; 217 tests ciblés, 34 JavaScript, Ruff/formatage et Mypy passent. État : installé et observé le 14 octobre. Trois lectures stables ; simulation et sauvegarde/restauration vérifiées ; 41 fiches, dont 7 à score ≥ 70 et 31 à zéro, importées sans alerte. Profil VPS : 103 sources / 91 employeurs, 91 à jour au relevé ; les six ajouts sont à jour. `/statuts` et Dashboard concordent. Les 15 contrôles de préservation passent, mêmes liens privés et souhaits/candidatures modifiables ; cinq conteneurs actifs, radar et Dashboard sains, quatre services système actifs/activés ; sudo à nouveau bloqué. Les 5 466 tests locaux et les 5 466 tests sur chacune des quatre versions Python 3.11–3.14 passent. [Sources et périmètre](RADAR-SOURCES-LOT166.md) · [Validation](VALIDATION-LOT166.md).
+
+## Prochaines intégrations
+
+| Lot / priorité | Travail et preuve attendue | État |
+|---|---|---|
+| 167 / haute — banques et campus | Qualifier BMO Phenom, Janus Henderson SuccessFactors et Schroders Oracle, puis les programmes campus Scotiabank ; retrouver les fiches front office dont le titre ne contient pas trading ; inventaire, pagination, deux lectures, fiches témoins et simulation | À faire ; ne sont pas comptés comme nouveaux portails actifs |
+| 168 / haute — fonds supplémentaires | Aspect Capital : redirection officielle vers Hibob ; Balyasny : portail Salesforce publié ; Rokos : retrouver un catalogue officiel exploitable ; séparation des programmes informatifs, viviers et postes ouverts | À faire ; accès restreints et CAPTCHA laissés explicites |
+| 165 / haute — qualification | Mesurer les faux négatifs et les intitulés de support retenus chez les nouveaux employeurs, dont Mizuho Credit Derivatives Sales et Scotiabank ; justifier toute extension par les missions, sans bonus de score au nom de la société | Ouvert ; le flux tous scores ne remplace pas la qualification des fiches |
+
+Les lots 154, 155, 159, 160, 161 et 163 restent ouverts. Nomura campus reste en attente conformément au choix du propriétaire. Chaque portail n'est déclaré surveillé qu'après installation et premier succès observé sur OVH ; `/statuts` doit concorder avec le Dashboard et l'inventaire installé.
