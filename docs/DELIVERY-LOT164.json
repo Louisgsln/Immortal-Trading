@@ -2634,13 +2634,13 @@
       },
       {
         "name": "checks (3.12)",
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
       {
         "name": "checks (3.11)",
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
       {
         "name": "checks (3.13)",
@@ -2651,7 +2651,22 @@
         "name": "checks (3.14)",
         "status": "completed",
         "conclusion": "success"
+      },
+      {
+        "name": "container",
+        "status": "completed",
+        "conclusion": "success"
       }
-    ]
-  }
+    ],
+    "python_versions": [
+      "3.11",
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "tests_per_python_version": 5424,
+    "container_recovery_verified": true
+  },
+  "rdc_original_policy_restored": true,
+  "rdc_sudo_blocked": true
 }

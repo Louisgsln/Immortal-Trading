@@ -5,7 +5,7 @@ Application : e05b83865f8652f03f51fafa353e2a4c0fc43eff. Image : immortal-trading
 Six ajouts : State Street, Mizuho, Northern Trust, LSEG, GSA Capital et Quadrature Capital. [Inventaire et limites](RADAR-SOURCES-LOT164.md).
 
 - 258 tests ciblés réussis : profils, off-cycle, API Workday, identités Greenhouse, champs des fiches, localisations HSBC et souhaits ; Ruff et Mypy (126 modules) réussis.
-- [CI du correctif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/38556765707) : 5 424 tests par version Python 3.13 et 3.14 réussis, 34 tests JavaScript réussis ; autres versions en cours au premier relevé.
+- [CI du correctif](https://github.com/Louisgsln/Immortal-Trading/actions/runs/38556765707) : six contrôles réussis ; 5 424 tests par version Python 3.11–3.14, 34 tests JavaScript et récupération isolée du conteneur réussis.
 - Image construite et contrat des assets vérifié : 89 contrôles, 7 modules, empreintes CSS/JavaScript valides.
 - Deux lectures publiques stables des six sources. Revalidation supplémentaire avant import.
 - Simulation sur copie : 67 fiches retenues, premier import puis zéro création/actualisation au second passage ; zéro alerte créée, zéro appel Telegram ; anciens identifiants, candidatures et journaux d'alertes conservés, souhaits inchangés.
