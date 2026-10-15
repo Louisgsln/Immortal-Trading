@@ -6,7 +6,7 @@ from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from trading_radar.collection_diagnostics import source_conflicts
+from trading_radar.collection_diagnostics import sources_conflicts
 from trading_radar.config import Config
 from trading_radar.models import utcnow
 
@@ -42,10 +42,9 @@ def audit_sources(config: Config, max_age_hours: float = 24, now: datetime | Non
         try:
             db.execute("BEGIN")
             states = {r["source"]: dict(r) for r in db.execute("SELECT * FROM companies")}
-            conflicts = {
-                key: source_conflicts(db, key, state.get("last_success"))
-                for key, state in states.items()
-            }
+            conflicts = sources_conflicts(
+                db, {key: state.get("last_success") for key, state in states.items()}
+            )
             for row in db.execute("SELECT source, job_id, last_seen FROM job_sources"):
                 seen = timestamp(row["last_seen"])
                 by_job = observations[row["source"]]

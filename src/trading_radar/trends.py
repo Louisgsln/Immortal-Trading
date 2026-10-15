@@ -1,11 +1,14 @@
 """Daily local activity from one bounded, read-only SQLite observation."""
 
+import hashlib
 import json
 import math
 import sqlite3
+from collections import OrderedDict
 from contextlib import closing
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from threading import Lock
 from typing import Any
 
 from trading_radar.config import Config
@@ -15,6 +18,9 @@ from trading_radar.storage import SCHEMA, SCHEMA_VERSION
 
 MAX_ROWS = 100_000
 MAX_METRICS_LENGTH = 1_000_000
+MAX_VALIDATED_METRICS = MAX_ROWS
+_validated_metrics: OrderedDict[bytes, int] = OrderedDict()
+_metrics_lock = Lock()
 COUNTERS = ("new_jobs", "updates", "rescored", "closed", "reopened", "scans", "failed_sources")
 EVENTS = {"updated": "updates", "rescored": "rescored", "closed": "closed", "reopened": "reopened"}
 MESSAGES = {
@@ -64,6 +70,14 @@ def _object(pairs: list[tuple[str, Any]]) -> dict:
 def _failed_sources(raw: str) -> int:
     if not isinstance(raw, str):
         raise TrendsError("invalid_data")
+    # Re-read the journal on every observation, but reuse validation of identical
+    # immutable JSON. Keep only digests and counts, never 150 MB of source text.
+    # Editing an old row changes its digest; malformed content is never cached.
+    digest = hashlib.sha256(raw.encode("utf-8")).digest()
+    with _metrics_lock:
+        if digest in _validated_metrics:
+            _validated_metrics.move_to_end(digest)
+            return _validated_metrics[digest]
 
     def reject_constant(value: str) -> None:
         raise TrendsError("invalid_data")
@@ -96,7 +110,13 @@ def _failed_sources(raw: str) -> int:
         or metrics["duration"] < 0
     ):
         raise TrendsError("invalid_data")
-    return len(metrics["failed"])
+    count = len(metrics["failed"])
+    with _metrics_lock:
+        _validated_metrics[digest] = count
+        _validated_metrics.move_to_end(digest)
+        while len(_validated_metrics) > MAX_VALIDATED_METRICS:
+            _validated_metrics.popitem(last=False)
+    return count
 
 
 def _read(config: Config, instant: datetime, daily: dict[str, dict]) -> None:

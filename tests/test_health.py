@@ -152,14 +152,15 @@ def test_healthy_sources_do_not_search_unbounded_error_history(
     import trading_radar.health as health_module
 
     source_state(repo, last_failure=failure)
-    original = health_module.source_observation
+    original = health_module.source_observations
     calls = []
 
-    def observed(db, source, since, field):
-        calls.append((source, since, field))
-        return original(db, source, since, field)
+    def observed(db, cutoffs, field):
+        if cutoffs:
+            calls.append((cutoffs, field))
+        return original(db, cutoffs, field)
 
-    monkeypatch.setattr(health_module, "source_observation", observed)
+    monkeypatch.setattr(health_module, "source_observations", observed)
     report = check_health(health_config, now=NOW)
     assert report["status"] == "healthy"
     assert not calls
@@ -171,18 +172,19 @@ def test_current_first_failure_still_reads_its_cause(health_config, repo, monkey
     source_state(repo, last_success=None, last_failure=NOW.isoformat(), consecutive_failures=1)
     with repo.transaction():
         repo.record_scan({"failed": {"test": "access restricted: HTTP 403"}})
-    original = health_module.source_observation
+    original = health_module.source_observations
     calls = []
 
-    def observed(db, source, since, field):
-        calls.append((source, since, field))
-        return original(db, source, since, field)
+    def observed(db, cutoffs, field):
+        if cutoffs:
+            calls.append((cutoffs, field))
+        return original(db, cutoffs, field)
 
-    monkeypatch.setattr(health_module, "source_observation", observed)
+    monkeypatch.setattr(health_module, "source_observations", observed)
     report = check_health(health_config, now=NOW)
     assert report["sources"][0]["status"] == "never_scanned"
     assert report["sources"][0]["failure"]["code"] == "access_restricted"
-    assert calls == [("test", NOW.isoformat(), "failed")]
+    assert calls == [({"test": NOW.isoformat()}, "failed")]
 
 
 def test_disabled_and_unconfigured_sources_do_not_break_health(health_config, repo):

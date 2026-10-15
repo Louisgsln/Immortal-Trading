@@ -2,7 +2,8 @@
 
 import json
 import re
-from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
+from threading import Event, Lock, Thread
 
 import httpx
 import pytest
@@ -155,3 +156,62 @@ def test_remote_application_edit_does_not_wait_for_network_collection_lease(priv
         )
     assert response.status_code == 200
     assert response.json()["application"]["status"] == "Reviewing"
+
+
+def test_simultaneous_pages_serialize_but_edits_and_health_stay_available(
+    private_editor, monkeypatch
+):
+    import trading_radar.dashboard_editor as editor
+
+    client, headers, path, _ = private_editor
+    original = editor.build_dashboard_data
+    first_started, second_requested, release_first = Event(), Event(), Event()
+    count_lock = Lock()
+    calls = 0
+    active = 0
+    peak = 0
+
+    def slow_page(*args, **kwargs):
+        nonlocal calls, active, peak
+        with count_lock:
+            calls += 1
+            active += 1
+            peak = max(peak, active)
+            first = calls == 1
+        try:
+            if first:
+                first_started.set()
+                assert release_first.wait(10)
+            return original(*args, **kwargs)
+        finally:
+            with count_lock:
+                active -= 1
+
+    def next_page():
+        second_requested.set()
+        return client.get("/index.html", headers=headers, timeout=15)
+
+    monkeypatch.setattr(editor, "build_dashboard_data", slow_page)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first = pool.submit(client.get, "/", headers=headers, timeout=15)
+        second = None
+        try:
+            assert first_started.wait(5)
+            second = pool.submit(next_page)
+            assert second_requested.wait(5)
+            assert client.get("/healthz", timeout=3).status_code == 200
+            current = client.get(path, headers=headers, timeout=3).json()
+            saved = client.post(
+                path,
+                headers=headers,
+                json={"revision": current["revision"], "changes": {"notes": "Mobile update"}},
+                timeout=3,
+            )
+            assert saved.status_code == 200
+        finally:
+            release_first.set()
+        assert first.result(timeout=15).status_code == 200
+        assert second is not None
+        response = second.result(timeout=15)
+        assert response.status_code == 200 and "Mobile update" in response.text
+    assert calls == 2 and peak == 1

@@ -10,9 +10,9 @@ from typing import Any
 
 from trading_radar.audit import timestamp
 from trading_radar.collection_diagnostics import (
-    source_conflicts,
-    source_listing_gaps,
-    source_observation,
+    source_observations,
+    sources_conflicts,
+    sources_listing_gaps,
 )
 from trading_radar.config import Config
 from trading_radar.models import utcnow
@@ -101,20 +101,18 @@ def check_health(config: Config, max_age_hours: float = 24, now: datetime | None
                     "FROM companies"
                 )
             }
-            conflicts = {
-                key: source_conflicts(connection, key, state[0]) for key, state in states.items()
-            }
-            gaps = {
-                key: source_listing_gaps(connection, key, state[0]) for key, state in states.items()
-            }
-            failure_messages = {}
+            cutoffs = {key: state[0] for key, state in states.items()}
+            conflicts = sources_conflicts(connection, cutoffs)
+            gaps = sources_listing_gaps(connection, cutoffs)
+            failure_cutoffs = {}
             for key, state in states.items():
                 failure_time, success_time = timestamp(state[1]), timestamp(state[0])
                 # A missing cutoff scans the entire journal. Historical errors
                 # are irrelevant once a newer successful observation exists.
                 if failure_time is None or (success_time and failure_time < success_time):
                     continue
-                failure_messages[key] = source_observation(connection, key, state[1], "failed")
+                failure_cutoffs[key] = state[1]
+            failure_messages = source_observations(connection, failure_cutoffs, "failed")
             latest = connection.execute(
                 "SELECT created_at FROM scan_runs ORDER BY id DESC LIMIT 1"
             ).fetchone()

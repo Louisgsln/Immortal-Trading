@@ -5,6 +5,7 @@ import re
 import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Lock
 from typing import cast
 from urllib.parse import unquote
 
@@ -52,6 +53,10 @@ def create_editable_dashboard_server(
     if initial["status"] != "ok":
         raise ValueError("Dashboard data unavailable")
     token = secrets.token_urlsafe(32)
+    # A page holds all jobs and its serialized HTML at once. Serialize these
+    # large responses so simultaneous tabs cannot multiply the worker's memory
+    # footprint. Health checks and application/wishlist actions remain independent.
+    page_lock = Lock()
     sessions = PrivateSessions(private_access) if private_access else None
     _, css, script = _assets()
     policy = _policy(css, script, editable=True) + "; frame-ancestors 'none'"
@@ -175,29 +180,8 @@ def create_editable_dashboard_server(
             if not self.local():
                 return
             if self.path in {"/", "/index.html"}:
-                data = build_dashboard_data(config, history_dir=history_dir)
-                data["editing"] = {"enabled": True, "token": token}
-                if private_access and sessions:
-                    if data["status"] != "ok":
-                        self.error(
-                            503, "unavailable", "Le Dashboard est momentanément indisponible."
-                        )
-                        return
-                    session = sessions.read(self.headers) or sessions.mint()
-                    self.session_cookie = sessions.cookie(session)
-                    data["live"] = True
-                    data["editing"] = {
-                        "enabled": True,
-                        "mode": "private",
-                        "token": sessions.csrf(session),
-                        "origin": private_access.origin,
-                        "api_base": private_access.prefix + "api/applications",
-                    }
-                self.respond(
-                    200,
-                    render_dashboard(data, editable=True).encode("utf-8"),
-                    "text/html; charset=utf-8",
-                )
+                with page_lock:
+                    self.page()
                 return
             if self.path == "/api/applications":
                 if not self.authorized():
@@ -237,6 +221,29 @@ def create_editable_dashboard_server(
                 self.json(200, {"status": "ok", **read_application(config, job_id)})
             except ApplicationEditError as exc:
                 self.error(exc.status, exc.code, exc.message)
+
+        def page(self):
+            data = build_dashboard_data(config, history_dir=history_dir)
+            data["editing"] = {"enabled": True, "token": token}
+            if private_access and sessions:
+                if data["status"] != "ok":
+                    self.error(503, "unavailable", "Le Dashboard est momentanément indisponible.")
+                    return
+                session = sessions.read(self.headers) or sessions.mint()
+                self.session_cookie = sessions.cookie(session)
+                data["live"] = True
+                data["editing"] = {
+                    "enabled": True,
+                    "mode": "private",
+                    "token": sessions.csrf(session),
+                    "origin": private_access.origin,
+                    "api_base": private_access.prefix + "api/applications",
+                }
+            self.respond(
+                200,
+                render_dashboard(data, editable=True).encode("utf-8"),
+                "text/html; charset=utf-8",
+            )
 
         def do_HEAD(self):
             self.do_GET()
