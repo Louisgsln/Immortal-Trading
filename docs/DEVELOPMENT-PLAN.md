@@ -8,7 +8,7 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Livraison actuelle : [lot 172](VALIDATION-LOT172.md), quinze sources de banques et fonds/gérants ajoutées,
+Couverture livrée au [lot 172](VALIDATION-LOT172.md) : quinze sources de banques et fonds/gérants ajoutées,
 106 fiches importées silencieusement ; CFM et QRT déjà actifs restent inclus.
 **122 sources / 110 employeurs**, 115 à jour au [relevé du 15/10/2026 à 01:38 UTC](RADAR-SOURCES-LOT172.md).
 Le flux des nouvelles offres conserve tous les scores, même zéro ; il reste distinct du classement prioritaire.
@@ -23,8 +23,7 @@ Prochaines livraisons : 167, Janus Henderson/Schroders et campus Scotiabank, BMO
 168, catalogues de fonds Aspect/Balyasny/Rokos ; 170, audit des missions et conditions des
 74 fiches des cinq périmètres quantitatifs, sans bonus au nom du fonds ; 171, portails Hibob
 publiés par Aspect et Dymon. Les durées variables 3–6/4–6 mois, fellowships et années absentes
-restent distinctes des stages off-cycle/longs confirmés. Le lot 159 de performance du Dashboard,
-les incidents de sources et la destination de sauvegarde hors VPS restent ouverts.
+restent distinctes des stages off-cycle/longs confirmés. Le [lot 175](VALIDATION-LOT175.md) livre le regroupement des lectures prévu aux tâches 135/159 : HTTPS autour de 11 secondes contre 33, sans figer les données. Le lot 176 poursuit le premier affichage, le calcul à froid et le transfert de 16,89 Mo ; objectif à mesurer avant clôture. Les incidents de sources et la destination de sauvegarde hors VPS restent ouverts.
 Lots 173 et 174 : rappel/conditions des 106 fiches ajoutées, puis références masquées MUFG et pagination BNY ; aucune source en accès incomplet ajoutée au compteur.
 
 ## Historique des décisions avant la migration VPS

@@ -1,0 +1,561 @@
+{
+  "lot": 175,
+  "observed_at": "2026-10-15, contrôle de production vers 16:55 UTC",
+  "core_commit": "dd6205c6f88681af65111803e59a76432248f859",
+  "dashboard_image": "immortal-trading:lot175-dashboard-performance-20261015",
+  "workers_image": "immortal-trading:lot172-source-expansion-20261015",
+  "runtime_profile_sha256": "247f333b97a66a9158fa05f622689d0d5190d55a0282be26192bad69f73ceb2f",
+  "tests": {
+    "new_cases": 42,
+    "targeted_groups": [
+      120,
+      301,
+      101
+    ],
+    "targeted_groups_overlap": true,
+    "javascript": 34,
+    "ruff": "passed",
+    "format": "passed",
+    "mypy_modules": 131,
+    "local_full_suite": {
+      "tests": 5647,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1223.95,
+      "python": "3.12.14"
+    },
+    "github": {
+      "run_id": 38771133577,
+      "status": "in_progress",
+      "python_3_14": 5647,
+      "jobs": [
+        {
+          "id": 116546927643,
+          "name": "dashboard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 116546928018,
+          "name": "checks (3.14)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 116546928060,
+          "name": "checks (3.11)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 116546928203,
+          "name": "checks (3.12)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 116546928271,
+          "name": "checks (3.13)",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ],
+      "checked_at": "2026-10-15T17:02:53Z",
+      "container_job_started": false
+    },
+    "asset_contract": {
+      "controls": 89,
+      "modules": 7,
+      "status": "ok"
+    },
+    "isolated_runtime_recovery": {
+      "status": "ok",
+      "mode": "container",
+      "uid": 10001,
+      "directory": "/app/data/container-smoke-6tz2xl58",
+      "synthetic_jobs": 8,
+      "preview_new_jobs": 8,
+      "table_counts": {
+        "alert_history": 2,
+        "alerts": 1,
+        "application_history": 1,
+        "applications": 8,
+        "companies": 1,
+        "job_sources": 8,
+        "job_versions": 8,
+        "jobs": 8,
+        "scan_runs": 2,
+        "schema_version": 4,
+        "score_history": 8
+      },
+      "identical_tables": 11,
+      "health_snapshots": 1,
+      "dashboard_jobs": 8,
+      "trends_scans": 2,
+      "retention_verified": 1,
+      "commands": [
+        [
+          "scan",
+          "--demo",
+          "--dry-run"
+        ],
+        [
+          "scan",
+          "--demo"
+        ],
+        [
+          "scan",
+          "--demo"
+        ],
+        [
+          "scan",
+          "--demo",
+          "--dry-run"
+        ],
+        [
+          "monitor",
+          "record"
+        ],
+        [
+          "monitor",
+          "history"
+        ],
+        [
+          "monitor",
+          "show",
+          "20261015T164717075408Z-e5067246cc534e39a1d3d230ffb0818d"
+        ],
+        [
+          "dashboard",
+          "export",
+          "dashboard.html"
+        ],
+        [
+          "trends",
+          "--days",
+          "7"
+        ],
+        [
+          "backup",
+          "create",
+          "snapshot.zip",
+          "--demo"
+        ],
+        [
+          "backup",
+          "verify",
+          "snapshot.zip"
+        ],
+        [
+          "backup",
+          "plan",
+          ".",
+          "--json"
+        ],
+        [
+          "backup",
+          "restore",
+          "snapshot.zip",
+          "data/restored.db",
+          "--demo"
+        ]
+      ]
+    }
+  },
+  "measurements": {
+    "https_before": {
+      "status": 200,
+      "seconds": 32.594,
+      "jobs": 1919,
+      "uncompressed_bytes": 16875583
+    },
+    "https_after": [
+      {
+        "encoding": "gzip",
+        "http_status": 200,
+        "iteration": 0,
+        "jobs": 1921,
+        "seconds": 11.6224,
+        "sources": 122,
+        "transferred_bytes": 2828619,
+        "uncompressed_bytes": 16888253
+      },
+      {
+        "encoding": "gzip",
+        "http_status": 200,
+        "iteration": 1,
+        "jobs": 1921,
+        "seconds": 10.964,
+        "sources": 122,
+        "transferred_bytes": 2828692,
+        "uncompressed_bytes": 16888283
+      },
+      {
+        "encoding": "gzip",
+        "http_status": 200,
+        "iteration": 2,
+        "jobs": 1921,
+        "seconds": 11.1889,
+        "sources": 122,
+        "transferred_bytes": 2828688,
+        "uncompressed_bytes": 16888284
+      }
+    ],
+    "same_database_comparison": {
+      "status": "ok",
+      "identical_data": true,
+      "results": {
+        "before": [
+          {
+            "iteration": 0,
+            "seconds": 99.9362,
+            "status": "ok",
+            "jobs": 1921,
+            "sources": 122,
+            "data_sha256": "e823fe0be2db638289fc4f23755e2fcad059449c02abd53254ec75c6954b8189",
+            "html_bytes": 16881390,
+            "details_cache": {
+              "hits": 0,
+              "misses": 1921,
+              "maxsize": 5000,
+              "currsize": 1921
+            }
+          },
+          {
+            "iteration": 1,
+            "seconds": 41.058,
+            "status": "ok",
+            "jobs": 1921,
+            "sources": 122,
+            "data_sha256": "e823fe0be2db638289fc4f23755e2fcad059449c02abd53254ec75c6954b8189",
+            "html_bytes": 16881390,
+            "details_cache": {
+              "hits": 1921,
+              "misses": 1921,
+              "maxsize": 5000,
+              "currsize": 1921
+            }
+          },
+          {
+            "iteration": 2,
+            "seconds": 44.9613,
+            "status": "ok",
+            "jobs": 1921,
+            "sources": 122,
+            "data_sha256": "e823fe0be2db638289fc4f23755e2fcad059449c02abd53254ec75c6954b8189",
+            "html_bytes": 16881390,
+            "details_cache": {
+              "hits": 3842,
+              "misses": 1921,
+              "maxsize": 5000,
+              "currsize": 1921
+            }
+          }
+        ],
+        "after": [
+          {
+            "iteration": 0,
+            "seconds": 97.9648,
+            "status": "ok",
+            "jobs": 1921,
+            "sources": 122,
+            "data_sha256": "e823fe0be2db638289fc4f23755e2fcad059449c02abd53254ec75c6954b8189",
+            "html_bytes": 16881390,
+            "details_cache": {
+              "hits": 0,
+              "misses": 1921,
+              "maxsize": 5000,
+              "currsize": 1921
+            }
+          },
+          {
+            "iteration": 1,
+            "seconds": 13.1023,
+            "status": "ok",
+            "jobs": 1921,
+            "sources": 122,
+            "data_sha256": "e823fe0be2db638289fc4f23755e2fcad059449c02abd53254ec75c6954b8189",
+            "html_bytes": 16881390,
+            "details_cache": {
+              "hits": 1921,
+              "misses": 1921,
+              "maxsize": 5000,
+              "currsize": 1921
+            }
+          },
+          {
+            "iteration": 2,
+            "seconds": 15.8905,
+            "status": "ok",
+            "jobs": 1921,
+            "sources": 122,
+            "data_sha256": "e823fe0be2db638289fc4f23755e2fcad059449c02abd53254ec75c6954b8189",
+            "html_bytes": 16881390,
+            "details_cache": {
+              "hits": 3842,
+              "misses": 1921,
+              "maxsize": 5000,
+              "currsize": 1921
+            }
+          }
+        ]
+      }
+    },
+    "health_comparison": {
+      "health_before_seconds": 23.1089,
+      "health_after_seconds": 4.4603,
+      "identical_health": true,
+      "enabled_sources": 122,
+      "source_summary": {
+        "recent_failure": 9,
+        "stale": 4,
+        "fresh": 107,
+        "access_restricted": 1,
+        "partial": 1
+      },
+      "database": {
+        "status": "ok",
+        "schema_version": 4
+      }
+    },
+    "concurrent_openings": {
+      "status": "ok",
+      "concurrent_pages": [
+        {
+          "status": 200,
+          "seconds": 23.719,
+          "bytes": 2828737
+        },
+        {
+          "status": 200,
+          "seconds": 12.153,
+          "bytes": 2828740
+        }
+      ],
+      "health_requests": 12,
+      "health_max_seconds": 0.0043,
+      "no_container_restarts": true,
+      "dashboard_memory_events": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "radar_policy": {
+        "enabled_sources": 122,
+        "alerts_enabled": true,
+        "telegram_control_enabled": true,
+        "all_new_jobs": true,
+        "heartbeat_enabled": true,
+        "heartbeat_times": [
+          "13:00",
+          "18:00"
+        ],
+        "include_internships": true,
+        "internship_formats": [
+          "off_cycle",
+          "long"
+        ],
+        "internship_target_year": 2027
+      },
+      "research_database_copies_removed": true,
+      "production_data_restored": false
+    },
+    "scope": "Relevés ponctuels depuis le VPS ; charge variable, aucun engagement de latence mobile."
+  },
+  "production": {
+    "applications_api": {
+      "applications": 1921,
+      "status": "ok",
+      "wishlist": 30
+    },
+    "containers": [
+      {
+        "health": "healthy",
+        "name": "immortal-trading-cloud-radar-1",
+        "restarts": 0,
+        "running": true
+      },
+      {
+        "health": null,
+        "name": "immortal-trading-cloud-telegram-1",
+        "restarts": 0,
+        "running": true
+      },
+      {
+        "health": null,
+        "name": "immortal-trading-cloud-backups-1",
+        "restarts": 0,
+        "running": true
+      },
+      {
+        "health": "healthy",
+        "name": "immortal-trading-dashboard-dashboard-1",
+        "restarts": 0,
+        "running": true
+      },
+      {
+        "health": null,
+        "name": "immortal-trading-dashboard-https-1",
+        "restarts": 0,
+        "running": true
+      }
+    ],
+    "core_commit": "dd6205c6f88681af65111803e59a76432248f859",
+    "dashboard_image": "immortal-trading:lot175-dashboard-performance-20261015",
+    "https": [
+      {
+        "encoding": "gzip",
+        "http_status": 200,
+        "iteration": 0,
+        "jobs": 1921,
+        "seconds": 11.6224,
+        "sources": 122,
+        "transferred_bytes": 2828619,
+        "uncompressed_bytes": 16888253
+      },
+      {
+        "encoding": "gzip",
+        "http_status": 200,
+        "iteration": 1,
+        "jobs": 1921,
+        "seconds": 10.964,
+        "sources": 122,
+        "transferred_bytes": 2828692,
+        "uncompressed_bytes": 16888283
+      },
+      {
+        "encoding": "gzip",
+        "http_status": 200,
+        "iteration": 2,
+        "jobs": 1921,
+        "seconds": 11.1889,
+        "sources": 122,
+        "transferred_bytes": 2828688,
+        "uncompressed_bytes": 16888284
+      }
+    ],
+    "preservation": {
+      "checks": {
+        "alert_history_preserved": true,
+        "application_history_preserved": true,
+        "application_ids_preserved": true,
+        "application_rows_preserved": true,
+        "backup_verified": true,
+        "database_inode_preserved": true,
+        "heartbeat_binding_preserved": true,
+        "job_ids_preserved": true,
+        "sent_alerts_preserved": true,
+        "telegram_binding_preserved": true,
+        "telegram_cursor_preserved": true,
+        "telegram_digest_preferences_preserved": true,
+        "wishlist_history_preserved": true,
+        "wishlist_inode_preserved": true,
+        "wishlist_members_preserved": true
+      },
+      "counts_after": {
+        "alert_history": 258,
+        "alerts": 129,
+        "application_history": 2,
+        "applications": 1921,
+        "jobs": 1921
+      },
+      "counts_before": {
+        "alert_history": 258,
+        "alerts": 129,
+        "application_history": 2,
+        "applications": 1921,
+        "jobs": 1921
+      },
+      "database": {
+        "schema_version": 4,
+        "status": "ok"
+      },
+      "stage": "verification"
+    },
+    "production_git_head_preserved": true,
+    "runtime_config_unchanged": true,
+    "services": [
+      {
+        "watcher": "active"
+      }
+    ],
+    "source_summary": {
+      "access_restricted": 1,
+      "fresh": 108,
+      "partial": 2,
+      "recent_failure": 7,
+      "stale": 4
+    },
+    "status": "ok",
+    "summary": {
+      "active": 1903,
+      "applications_due": 0,
+      "applications_in_progress": 1,
+      "enabled_sources": 122,
+      "fresh_sources": 108,
+      "high_priority": 389,
+      "relevant": 577,
+      "total": 1921
+    },
+    "workers_and_gateway_unchanged": true,
+    "workers_image": "immortal-trading:lot172-source-expansion-20261015",
+    "backup": "pre-lot175-dashboard-performance-20261015-01c9f8c2296d4ed18348016472f4531f.zip",
+    "source_inventory": {
+      "enabled_sources": 122,
+      "employers": 110,
+      "fresh_at_observation": 108
+    },
+    "sudo_block_restored": true,
+    "blocked_commands": 33,
+    "manual_telegram_messages": 0,
+    "profiling_incident": "Le premier profilage dans le conteneur actif a provoqué une saturation mémoire et un redémarrage automatique ; essais suivants sur copie isolée, aucun redémarrage de worker."
+  },
+  "follow_up": {
+    "lot": 176,
+    "status": "planned",
+    "goal": "Réduire encore le premier affichage et le poids des données sans figer les états métier."
+  },
+  "installed_files": {
+    "src/trading_radar/audit.py": {
+      "before": "b93108c5a96239e2d3333979932e655d9ac7a1a61bc73765dc3101db94342bfa",
+      "after": "6b7146a88d2fb6141e9ecf84ba8d72659974388095618468e659233c075b65e2"
+    },
+    "src/trading_radar/collection_diagnostics.py": {
+      "before": "8341f3f24fbc0838c9c2c4ee64a0da3b8d91f4b519877728d0433729707a395e",
+      "after": "2d3a10317d3c3279c9a406b39ed35943db71bca219cec4fb0e14abe19191f7b3"
+    },
+    "src/trading_radar/dashboard_editor.py": {
+      "before": "95ab33799328c596b91b0484c74da0352a539671a9e459ed501135fe9fafcd09",
+      "after": "df43e7baa4a94f5c87a1a60c73423808261cd6ca386fd1c30309484a9bc65767"
+    },
+    "src/trading_radar/health.py": {
+      "before": "0b994c5921e6b24be95916ef1016c50ef893af85f2ba39c38cd6f65bda554023",
+      "after": "2f6266d0d2382cac76fe6c2d77e72a6c097da9fc9375539a62931f0653e04250"
+    },
+    "src/trading_radar/trends.py": {
+      "before": "8f5653b1fcfc58f6e97fac20ecf84032102d326a916de2b5f831395493c8367f",
+      "after": "b0a2d2e20abb0d9dd0619dc872e65db507481458e6e817e69e06e5d461a538b9"
+    },
+    "tests/test_collection_diagnostics_batch.py": {
+      "before": null,
+      "after": "ebd601d248a1700fc8274424e7e28195214b065604c131a698a591ecf8284a42"
+    },
+    "tests/test_dashboard_private_editor.py": {
+      "before": "db05f8b1b60404e943d8cd7c58ab4384090ef24d801d13797d40a4fad7e0aaa5",
+      "after": "cb41df86ab608987ec0a28d83b8b2917d9556bfb8ac6d8659ef52386b2ead977"
+    },
+    "tests/test_health.py": {
+      "before": "1e4c523c038919120a7d9a442e011cfebe39d4059af7dd6ba27539ab5528eb42",
+      "after": "7351388633ad51d9ff2969acd2fa03e5f4f1f4e675544a4ae7b1b854e22169fc"
+    },
+    "tests/test_trends_validation_cache.py": {
+      "before": null,
+      "after": "49b3654ed34c87e9bee984f8de532aaad5284708d033eb1e8aebb82a40f13cca"
+    }
+  }
+}
