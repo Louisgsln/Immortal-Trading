@@ -1,0 +1,1019 @@
+{
+  "lot": 172,
+  "observed_at": "2026-10-15T01:38:58.135026+00:00",
+  "core_commit": "76c89331407a39cf79f80ce2baee7e5a9a13e042",
+  "image": "immortal-trading:lot172-source-expansion-20261015",
+  "runtime_profile_sha256": "247f333b97a66a9158fa05f622689d0d5190d55a0282be26192bad69f73ceb2f",
+  "tests": {
+    "new": 62,
+    "targeted": 76,
+    "python_local": 5605,
+    "local_seconds": 1175.009,
+    "javascript": 34,
+    "ruff": true,
+    "format": true,
+    "mypy_modules": 131,
+    "ci_run": 38663885335,
+    "ci_matrix_pending": false,
+    "python_versions": {
+      "3.11": 5605,
+      "3.12": 5605,
+      "3.13": 5605,
+      "3.14": 5605
+    },
+    "ci_conclusion": "success",
+    "container_ci": true,
+    "ci_jobs": [
+      {
+        "job_id": 116191207662,
+        "name": "dashboard",
+        "conclusion": "success"
+      },
+      {
+        "job_id": 116191207855,
+        "name": "checks (3.12)",
+        "conclusion": "success"
+      },
+      {
+        "job_id": 116191207952,
+        "name": "checks (3.11)",
+        "conclusion": "success"
+      },
+      {
+        "job_id": 116191208077,
+        "name": "checks (3.13)",
+        "conclusion": "success"
+      },
+      {
+        "job_id": 116191208269,
+        "name": "checks (3.14)",
+        "conclusion": "success"
+      },
+      {
+        "job_id": 116203895315,
+        "name": "container",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "collection_counts": {
+    "dimensional": {
+      "jobs": 2,
+      "priority": 0,
+      "zero": 2
+    },
+    "bmo": {
+      "jobs": 38,
+      "priority": 1,
+      "zero": 35
+    },
+    "us_bank": {
+      "jobs": 15,
+      "priority": 2,
+      "zero": 12
+    },
+    "sculptor": {
+      "jobs": 0,
+      "priority": 0,
+      "zero": 0
+    },
+    "bridgewater": {
+      "jobs": 5,
+      "priority": 0,
+      "zero": 5
+    },
+    "viking": {
+      "jobs": 0,
+      "priority": 0,
+      "zero": 0
+    },
+    "farallon": {
+      "jobs": 0,
+      "priority": 0,
+      "zero": 0
+    },
+    "greenland": {
+      "jobs": 2,
+      "priority": 1,
+      "zero": 0
+    },
+    "laurion": {
+      "jobs": 0,
+      "priority": 0,
+      "zero": 0
+    },
+    "gmo": {
+      "jobs": 3,
+      "priority": 0,
+      "zero": 3
+    },
+    "caxton": {
+      "jobs": 13,
+      "priority": 0,
+      "zero": 13
+    },
+    "danske": {
+      "jobs": 4,
+      "priority": 0,
+      "zero": 4
+    },
+    "smbc": {
+      "jobs": 3,
+      "priority": 0,
+      "zero": 3
+    },
+    "nordea": {
+      "jobs": 1,
+      "priority": 0,
+      "zero": 1
+    },
+    "trexquant": {
+      "jobs": 20,
+      "priority": 1,
+      "zero": 19
+    }
+  },
+  "simulation": {
+    "first_import": 106,
+    "second_import": 0,
+    "updates": 0,
+    "closures": 0,
+    "alerts": 0,
+    "telegram_calls": 0,
+    "network": "none",
+    "histories_preserved": true,
+    "wishlist_unchanged": true,
+    "backup_restore_verified": true
+  },
+  "production": {
+    "jobs": 1899,
+    "active": 1881,
+    "source_counts": {
+      "employers": 110,
+      "enabled": 122,
+      "fresh": 115
+    },
+    "import": {
+      "new": 106,
+      "updated": 0,
+      "closed": 0,
+      "alerts": 0
+    },
+    "preservation": {
+      "alert_history_preserved": true,
+      "application_history_preserved": true,
+      "application_ids_preserved": true,
+      "application_rows_preserved": true,
+      "backup_verified": true,
+      "database_inode_preserved": true,
+      "heartbeat_binding_preserved": true,
+      "job_ids_preserved": true,
+      "sent_alerts_preserved": true,
+      "telegram_binding_preserved": true,
+      "telegram_cursor_preserved": true,
+      "telegram_digest_preferences_preserved": true,
+      "wishlist_history_preserved": true,
+      "wishlist_inode_preserved": true,
+      "wishlist_members_preserved": true
+    },
+    "services_running": 5,
+    "systemd_active_enabled": 4,
+    "actual_image_verified": true,
+    "radar_healthy": true,
+    "dashboard_healthy": true,
+    "sudo_block_restored": true,
+    "original_rdc_block_list_verified": true,
+    "dashboard_contract": {
+      "asset_hashes": "verified",
+      "controls": 89,
+      "jobs": 1899,
+      "modules": 7,
+      "status": "ok"
+    },
+    "page_seconds": 32.853,
+    "same_private_link": true,
+    "wishlist_api_verified": true,
+    "dashboard_editable": true,
+    "statuts_alias_verified": true,
+    "sources_pages": 5,
+    "scope": {
+      "alerts_enabled": true,
+      "deadline_reminders_enabled": false,
+      "include_internships": true,
+      "internship_alerts_enabled": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "internship_target_year": 2027,
+      "telegram_all_new_jobs": true,
+      "telegram_control_enabled": true,
+      "telegram_heartbeat_enabled": true,
+      "telegram_heartbeat_times": [
+        "13:00",
+        "18:00"
+      ],
+      "telegram_incident_notices_enabled": false
+    },
+    "digest": {
+      "enabled": true,
+      "last_attempt_day": "2026-10-14",
+      "status": "configured",
+      "time": "09:00",
+      "time_zone": "Europe/Paris"
+    },
+    "watcher": {
+      "age_seconds": 1,
+      "at": "2026-10-15T01:37:58.504348+00:00",
+      "phase": "scanning",
+      "status": "active"
+    },
+    "guards": {
+      "api_without_csrf": 403,
+      "private_file": 404,
+      "private_page_post": 405,
+      "public_root": 404
+    },
+    "new_source_statuses": {
+      "bmo": "fresh",
+      "bridgewater": "fresh",
+      "caxton": "fresh",
+      "danske": "fresh",
+      "dimensional": "fresh",
+      "farallon": "fresh",
+      "gmo": "fresh",
+      "greenland": "fresh",
+      "laurion": "fresh",
+      "nordea": "fresh",
+      "sculptor": "fresh",
+      "smbc": "fresh",
+      "trexquant": "fresh",
+      "us_bank": "fresh",
+      "viking": "fresh"
+    },
+    "incidents": [
+      {
+        "source": "hsbc_professionals",
+        "status": "recent_failure"
+      },
+      {
+        "source": "nomura_campus",
+        "status": "access_restricted"
+      },
+      {
+        "source": "bnp_paribas",
+        "status": "stale"
+      },
+      {
+        "source": "morgan_stanley_campus",
+        "status": "stale"
+      },
+      {
+        "source": "rbc",
+        "status": "recent_failure"
+      },
+      {
+        "source": "jefferies_campus",
+        "status": "stale"
+      },
+      {
+        "source": "bnp_campus",
+        "status": "recent_failure"
+      }
+    ]
+  },
+  "source_inventory": [
+    {
+      "company": "3Red Partners",
+      "source": "3red",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/3redpartners"
+    },
+    {
+      "company": "Aberdeen",
+      "source": "aberdeen",
+      "status": "fresh",
+      "portal": "https://abrdn.wd3.myworkdayjobs.com/abrdn"
+    },
+    {
+      "company": "Acadian Asset Management",
+      "source": "acadian",
+      "status": "fresh",
+      "portal": "https://www.acadian-asset.com/careers/open-positions"
+    },
+    {
+      "company": "Akuna Capital",
+      "source": "akuna_capital",
+      "status": "fresh",
+      "portal": "https://akunacapital.com/careers/"
+    },
+    {
+      "company": "AllianceBernstein",
+      "source": "alliancebernstein",
+      "status": "fresh",
+      "portal": "https://abglobal.wd1.myworkdayjobs.com/alliancebernsteincareers"
+    },
+    {
+      "company": "AQR",
+      "source": "aqr",
+      "status": "fresh",
+      "portal": "https://careers.aqr.com/"
+    },
+    {
+      "company": "Aquatic Capital Management",
+      "source": "aquatic",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/aquaticcapitalmanagement"
+    },
+    {
+      "company": "Arrowstreet Capital",
+      "source": "arrowstreet",
+      "status": "fresh",
+      "portal": "https://arrowstreetcapital.wd5.myworkdayjobs.com/Arrowstreet"
+    },
+    {
+      "company": "Bank of America",
+      "source": "bank_of_america",
+      "status": "fresh",
+      "portal": "https://ghr.wd1.myworkdayjobs.com/lateral-us"
+    },
+    {
+      "company": "Bank of America",
+      "source": "bank_of_america_campus",
+      "status": "fresh",
+      "portal": "https://careers.bankofamerica.com/en-us/students/job-search"
+    },
+    {
+      "company": "Barclays",
+      "source": "barclays",
+      "status": "fresh",
+      "portal": "https://barclays.wd3.myworkdayjobs.com/External_Career_Site_Barclays"
+    },
+    {
+      "company": "BlackRock",
+      "source": "blackrock",
+      "status": "fresh",
+      "portal": "https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional"
+    },
+    {
+      "company": "BlueCrest Capital Management",
+      "source": "bluecrest",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/bluecrestcapitalmanagement"
+    },
+    {
+      "company": "BMO",
+      "source": "bmo",
+      "status": "fresh",
+      "portal": "https://bmo.wd3.myworkdayjobs.com/External"
+    },
+    {
+      "company": "BNP Paribas",
+      "source": "bnp_campus",
+      "status": "recent_failure",
+      "portal": "https://group.bnpparibas/en/careers/all-job-offers/trainee-internship"
+    },
+    {
+      "company": "BNP Paribas",
+      "source": "bnp_paribas",
+      "status": "stale",
+      "portal": "https://group.bnpparibas/emploi-carriere/toutes-offres-emploi"
+    },
+    {
+      "company": "BP",
+      "source": "bp",
+      "status": "fresh",
+      "portal": "https://bpinternational.wd3.myworkdayjobs.com/bpCareers"
+    },
+    {
+      "company": "Brevan Howard",
+      "source": "brevan_howard",
+      "status": "fresh",
+      "portal": "https://brevanhoward.wd3.myworkdayjobs.com/BH_ExternalCareers"
+    },
+    {
+      "company": "Bridgewater Associates",
+      "source": "bridgewater",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/bridgewater89"
+    },
+    {
+      "company": "Capula",
+      "source": "capula",
+      "status": "fresh",
+      "portal": "https://apply.workable.com/capula-investment-management-ltd/"
+    },
+    {
+      "company": "Caxton Associates",
+      "source": "caxton",
+      "status": "fresh",
+      "portal": "https://apply.workable.com/caxton/"
+    },
+    {
+      "company": "Capital Fund Management",
+      "source": "cfm",
+      "status": "fresh",
+      "portal": "https://jobs.cfm.com/"
+    },
+    {
+      "company": "Chicago Trading Company",
+      "source": "chicago_trading",
+      "status": "fresh",
+      "portal": "https://www.chicagotrading.com/search"
+    },
+    {
+      "company": "Chicago Trading Company",
+      "source": "chicago_trading_campus",
+      "status": "fresh",
+      "portal": "https://www.chicagotrading.com/campus"
+    },
+    {
+      "company": "CIBC",
+      "source": "cibc",
+      "status": "fresh",
+      "portal": "https://cibc.wd3.myworkdayjobs.com/search"
+    },
+    {
+      "company": "Citi",
+      "source": "citi",
+      "status": "fresh",
+      "portal": "https://citi.wd5.myworkdayjobs.com/2"
+    },
+    {
+      "company": "Citi",
+      "source": "citi_campus",
+      "status": "fresh",
+      "portal": "https://citi.wd5.myworkdayjobs.com/2"
+    },
+    {
+      "company": "Crédit Agricole CIB",
+      "source": "credit_agricole_cib",
+      "status": "fresh",
+      "portal": "https://jobs.ca-cib.com/pages/offre/listeoffre.aspx"
+    },
+    {
+      "company": "Da Vinci",
+      "source": "da_vinci",
+      "status": "fresh",
+      "portal": "https://davincitrading.com/careers/"
+    },
+    {
+      "company": "Danske Bank",
+      "source": "danske",
+      "status": "fresh",
+      "portal": "https://ejqi.fa.ocs.oraclecloud.eu/hcmUI/CandidateExperience/en/sites/CX_1001"
+    },
+    {
+      "company": "D. E. Shaw",
+      "source": "deshaw",
+      "status": "fresh",
+      "portal": "https://www.deshaw.com/careers"
+    },
+    {
+      "company": "Deutsche Bank",
+      "source": "deutsche_bank",
+      "status": "fresh",
+      "portal": "https://db.wd3.myworkdayjobs.com/DBWebsite"
+    },
+    {
+      "company": "Deutsche Bank",
+      "source": "deutsche_bank_campus",
+      "status": "fresh",
+      "portal": "https://careers.db.com/students-graduates/search-programmes/index?language_id=1"
+    },
+    {
+      "company": "Dimensional Fund Advisors",
+      "source": "dimensional",
+      "status": "fresh",
+      "portal": "https://dimensional.wd5.myworkdayjobs.com/DFA_Careers"
+    },
+    {
+      "company": "DRW",
+      "source": "drw",
+      "status": "fresh",
+      "portal": "https://www.drw.com/work-at-drw/listings"
+    },
+    {
+      "company": "DV Trading",
+      "source": "dv_trading",
+      "status": "fresh",
+      "portal": "https://dvtrading.co/join-dv/"
+    },
+    {
+      "company": "Dymon Asia",
+      "source": "dymon_asia",
+      "status": "fresh",
+      "portal": "https://job-boards.anz.greenhouse.io/dymonasiacapitalsingaporepteltd"
+    },
+    {
+      "company": "Engineers Gate",
+      "source": "engineers_gate",
+      "status": "fresh",
+      "portal": "https://www.eglp.com/"
+    },
+    {
+      "company": "Farallon Capital Management",
+      "source": "farallon",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/faralloncapitalmanagementllc"
+    },
+    {
+      "company": "Five Rings",
+      "source": "five_rings",
+      "status": "fresh",
+      "portal": "https://fiverings.com/careers/"
+    },
+    {
+      "company": "Flow Traders",
+      "source": "flow_traders",
+      "status": "fresh",
+      "portal": "https://www.flowtraders.com/careers/job-search/"
+    },
+    {
+      "company": "G-Research",
+      "source": "g_research",
+      "status": "fresh",
+      "portal": "https://gresearch.wd103.myworkdayjobs.com/G-Research"
+    },
+    {
+      "company": "Gelber Group",
+      "source": "gelber",
+      "status": "fresh",
+      "portal": "https://www.gelbergroup.com/careers/"
+    },
+    {
+      "company": "Geneva Trading",
+      "source": "geneva_trading",
+      "status": "fresh",
+      "portal": "https://www.genevatrading.com/careers-open-positions/"
+    },
+    {
+      "company": "GMO",
+      "source": "gmo",
+      "status": "fresh",
+      "portal": "https://jobs.lever.co/gmo"
+    },
+    {
+      "company": "Goldman Sachs",
+      "source": "goldman_campus",
+      "status": "fresh",
+      "portal": "https://higher.gs.com/campus"
+    },
+    {
+      "company": "Goldman Sachs",
+      "source": "goldman_sachs",
+      "status": "fresh",
+      "portal": "https://higher.gs.com/results"
+    },
+    {
+      "company": "Graham Capital Management",
+      "source": "graham",
+      "status": "fresh",
+      "portal": "https://www.grahamcapital.com/careers/"
+    },
+    {
+      "company": "Graviton Research Capital",
+      "source": "graviton",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/gravitonresearchcapital"
+    },
+    {
+      "company": "Greenland Investment Management",
+      "source": "greenland",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/greenlandinvestmentmanagement"
+    },
+    {
+      "company": "GSA Capital",
+      "source": "gsa_capital",
+      "status": "fresh",
+      "portal": "https://www.gsacapital.com/join-us"
+    },
+    {
+      "company": "Headlands Technologies",
+      "source": "headlands",
+      "status": "fresh",
+      "portal": "https://www.headlandstech.com/careers/"
+    },
+    {
+      "company": "HSBC",
+      "source": "hsbc_graduates",
+      "status": "fresh",
+      "portal": "https://www.hsbc.com/careers/students-and-graduates/find-a-programme"
+    },
+    {
+      "company": "HSBC",
+      "source": "hsbc_professionals",
+      "status": "recent_failure",
+      "portal": "https://portal.careers.hsbc.com/careers"
+    },
+    {
+      "company": "Hudson River Trading",
+      "source": "hudson_river_trading",
+      "status": "fresh",
+      "portal": "https://www.hudsonrivertrading.com/careers/"
+    },
+    {
+      "company": "IMC",
+      "source": "imc",
+      "status": "fresh",
+      "portal": "https://www.imc.com/us/search-careers"
+    },
+    {
+      "company": "ING",
+      "source": "ing",
+      "status": "fresh",
+      "portal": "https://ing.wd3.myworkdayjobs.com/ICSGBLCOR"
+    },
+    {
+      "company": "Invesco",
+      "source": "invesco",
+      "status": "fresh",
+      "portal": "https://invesco.wd1.myworkdayjobs.com/IVZ"
+    },
+    {
+      "company": "Jane Street",
+      "source": "jane_street",
+      "status": "fresh",
+      "portal": "https://www.janestreet.com/join-jane-street/open-roles/"
+    },
+    {
+      "company": "Jefferies",
+      "source": "jefferies_campus",
+      "status": "stale",
+      "portal": "https://jefferies.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/candidate/jobboard/vacancy/2/adv/"
+    },
+    {
+      "company": "Jump Trading",
+      "source": "jump_trading",
+      "status": "fresh",
+      "portal": "https://www.jumptrading.com/careers"
+    },
+    {
+      "company": "Laurion Capital Management",
+      "source": "laurion",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/laurioncapitalmanagement"
+    },
+    {
+      "company": "Lazard",
+      "source": "lazard_campus",
+      "status": "fresh",
+      "portal": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2"
+    },
+    {
+      "company": "LSEG",
+      "source": "lseg",
+      "status": "fresh",
+      "portal": "https://lseg.wd3.myworkdayjobs.com/Careers"
+    },
+    {
+      "company": "Macquarie",
+      "source": "macquarie",
+      "status": "fresh",
+      "portal": "https://recruitment.macquarie.com/en_US/careers/SearchJobs/"
+    },
+    {
+      "company": "Mako",
+      "source": "mako",
+      "status": "fresh",
+      "portal": "https://www.mako.com/opportunities"
+    },
+    {
+      "company": "Man Group",
+      "source": "man_group",
+      "status": "fresh",
+      "portal": "https://www.man.com/careers"
+    },
+    {
+      "company": "Marex",
+      "source": "marex",
+      "status": "fresh",
+      "portal": "https://www.marex.com/careers/career-opportunities"
+    },
+    {
+      "company": "Marshall Wace",
+      "source": "marshall_wace_graduates",
+      "status": "fresh",
+      "portal": "https://www.mwam.com/join-us/early-careers/"
+    },
+    {
+      "company": "Maven Securities",
+      "source": "maven_securities",
+      "status": "fresh",
+      "portal": "https://www.mavensecurities.com/jobs/"
+    },
+    {
+      "company": "Millennium",
+      "source": "millennium_campus",
+      "status": "fresh",
+      "portal": "https://campusjobs.mlp.com/careers?domain=mlp.com&microsite=campus-site"
+    },
+    {
+      "company": "Millennium",
+      "source": "millennium_professionals",
+      "status": "fresh",
+      "portal": "https://career.mlp.com/careers?domain=mlp.com"
+    },
+    {
+      "company": "Mizuho",
+      "source": "mizuho",
+      "status": "fresh",
+      "portal": "https://mizuho.wd1.myworkdayjobs.com/mizuhoamericas"
+    },
+    {
+      "company": "Morgan Stanley",
+      "source": "morgan_stanley",
+      "status": "fresh",
+      "portal": "https://ms.wd5.myworkdayjobs.com/External"
+    },
+    {
+      "company": "Morgan Stanley",
+      "source": "morgan_stanley_campus",
+      "status": "stale",
+      "portal": "https://morganstanley.tal.net/vx/lang-en-GB/candidate/jobboard/vacancy/1/adv"
+    },
+    {
+      "company": "Nomura",
+      "source": "nomura_campus",
+      "status": "access_restricted",
+      "portal": "https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/"
+    },
+    {
+      "company": "Nomura",
+      "source": "nomura_professionals",
+      "status": "fresh",
+      "portal": "https://careers.nomura.com/Nomura?locale=en_US"
+    },
+    {
+      "company": "Nordea",
+      "source": "nordea",
+      "status": "fresh",
+      "portal": "https://careers.nordea.com/"
+    },
+    {
+      "company": "Northern Trust",
+      "source": "northern_trust",
+      "status": "fresh",
+      "portal": "https://ntrs.wd1.myworkdayjobs.com/northerntrust"
+    },
+    {
+      "company": "Old Mission",
+      "source": "old_mission",
+      "status": "fresh",
+      "portal": "https://www.oldmissioncapital.com/careers/"
+    },
+    {
+      "company": "Optiver",
+      "source": "optiver",
+      "status": "fresh",
+      "portal": "https://www.optiver.com/join-us/jobs"
+    },
+    {
+      "company": "PDT Partners",
+      "source": "pdt",
+      "status": "fresh",
+      "portal": "https://pdtpartners.com/careers"
+    },
+    {
+      "company": "PIMCO",
+      "source": "pimco",
+      "status": "fresh",
+      "portal": "https://pimco.wd1.myworkdayjobs.com/pimco-careers"
+    },
+    {
+      "company": "Point72",
+      "source": "point72",
+      "status": "fresh",
+      "portal": "https://careers.point72.com/"
+    },
+    {
+      "company": "Quadrature Capital",
+      "source": "quadrature",
+      "status": "fresh",
+      "portal": "https://www.quadrature.ai/careers/join-us/"
+    },
+    {
+      "company": "Quantbot Technologies",
+      "source": "quantbot",
+      "status": "fresh",
+      "portal": "https://www.quantbot.com/careers/"
+    },
+    {
+      "company": "Qube Research & Technologies",
+      "source": "qube_research",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/quberesearchandtechnologies"
+    },
+    {
+      "company": "Radix Trading",
+      "source": "radix_campus",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/radixuniversity"
+    },
+    {
+      "company": "Radix Trading",
+      "source": "radix_professionals",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/radixexperienced"
+    },
+    {
+      "company": "RBC",
+      "source": "rbc",
+      "status": "recent_failure",
+      "portal": "https://rbc.wd3.myworkdayjobs.com/RBCGLOBAL1"
+    },
+    {
+      "company": "Rothschild & Co",
+      "source": "rothschild_campus",
+      "status": "fresh",
+      "portal": "https://www.rothschildandco.com/en/careers/students-and-graduates/opportunities/"
+    },
+    {
+      "company": "Santander",
+      "source": "santander",
+      "status": "fresh",
+      "portal": "https://santander.wd3.myworkdayjobs.com/SantanderCareers"
+    },
+    {
+      "company": "Schonfeld",
+      "source": "schonfeld",
+      "status": "fresh",
+      "portal": "https://www.schonfeld.com/careers/"
+    },
+    {
+      "company": "Scotiabank",
+      "source": "scotiabank",
+      "status": "fresh",
+      "portal": "https://jobs.scotiabank.com/"
+    },
+    {
+      "company": "Sculptor Capital",
+      "source": "sculptor",
+      "status": "fresh",
+      "portal": "https://sculptor.wd12.myworkdayjobs.com/Sculptor_External_Career_Site"
+    },
+    {
+      "company": "Shell",
+      "source": "shell",
+      "status": "fresh",
+      "portal": "https://shell.wd3.myworkdayjobs.com/ShellCareers"
+    },
+    {
+      "company": "Susquehanna",
+      "source": "sig",
+      "status": "fresh",
+      "portal": "https://careers.sig.com/jobs"
+    },
+    {
+      "company": "SMBC",
+      "source": "smbc",
+      "status": "fresh",
+      "portal": "https://careersemea.smbcgroup.com/"
+    },
+    {
+      "company": "Société Générale",
+      "source": "societe_generale",
+      "status": "fresh",
+      "portal": "https://careers.societegenerale.com/fr/Technical/toutes-les-offres"
+    },
+    {
+      "company": "Squarepoint Capital",
+      "source": "squarepoint_capital",
+      "status": "fresh",
+      "portal": "https://www.squarepoint-capital.com/open-opportunities"
+    },
+    {
+      "company": "State Street",
+      "source": "state_street",
+      "status": "fresh",
+      "portal": "https://statestreet.wd1.myworkdayjobs.com/Global"
+    },
+    {
+      "company": "T. Rowe Price",
+      "source": "t_rowe_price",
+      "status": "fresh",
+      "portal": "https://troweprice.wd5.myworkdayjobs.com/TRowePrice"
+    },
+    {
+      "company": "TD",
+      "source": "td",
+      "status": "fresh",
+      "portal": "https://td.wd3.myworkdayjobs.com/TD_Bank_Careers"
+    },
+    {
+      "company": "Tower Research Capital",
+      "source": "tower_research",
+      "status": "fresh",
+      "portal": "https://tower-research.com/roles/"
+    },
+    {
+      "company": "TP ICAP",
+      "source": "tp_icap",
+      "status": "fresh",
+      "portal": "https://tp.wd107.myworkdayjobs.com/TP-ICAP"
+    },
+    {
+      "company": "Trafigura",
+      "source": "trafigura",
+      "status": "fresh",
+      "portal": "https://trafigura.wd3.myworkdayjobs.com/TrafiguraCareerSite"
+    },
+    {
+      "company": "TransMarket Group",
+      "source": "transmarket_group",
+      "status": "fresh",
+      "portal": "https://www.transmarketgroup.com/careers"
+    },
+    {
+      "company": "Trexquant Investment",
+      "source": "trexquant",
+      "status": "fresh",
+      "portal": "https://apply.workable.com/trexquant/"
+    },
+    {
+      "company": "Tudor Group",
+      "source": "tudor",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/tudorgroup"
+    },
+    {
+      "company": "UBS",
+      "source": "ubs",
+      "status": "fresh",
+      "portal": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232"
+    },
+    {
+      "company": "UBS",
+      "source": "ubs_professionals",
+      "status": "fresh",
+      "portal": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231"
+    },
+    {
+      "company": "U.S. Bank",
+      "source": "us_bank",
+      "status": "fresh",
+      "portal": "https://usbank.wd1.myworkdayjobs.com/US_Bank_Careers"
+    },
+    {
+      "company": "Verition",
+      "source": "verition",
+      "status": "fresh",
+      "portal": "https://www.verition.com/open-positions"
+    },
+    {
+      "company": "Viking Global Investors",
+      "source": "viking",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/vikingglobalinvestors"
+    },
+    {
+      "company": "Virtu Financial",
+      "source": "virtu_financial",
+      "status": "fresh",
+      "portal": "https://www.virtu.com/careers/"
+    },
+    {
+      "company": "Walleye Capital",
+      "source": "walleye_capital",
+      "status": "fresh",
+      "portal": "https://walleyecapital.com/careers"
+    },
+    {
+      "company": "Wellington Management",
+      "source": "wellington",
+      "status": "fresh",
+      "portal": "https://wellington.wd5.myworkdayjobs.com/External"
+    },
+    {
+      "company": "Wells Fargo",
+      "source": "wells_fargo",
+      "status": "fresh",
+      "portal": "https://wf.wd1.myworkdayjobs.com/WellsFargoJobs"
+    },
+    {
+      "company": "Winton",
+      "source": "winton",
+      "status": "fresh",
+      "portal": "https://job-boards.eu.greenhouse.io/winton"
+    },
+    {
+      "company": "WorldQuant",
+      "source": "worldquant",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/worldquant"
+    },
+    {
+      "company": "Xantium",
+      "source": "xantium",
+      "status": "fresh",
+      "portal": "https://job-boards.greenhouse.io/xantium"
+    },
+    {
+      "company": "XTX Markets",
+      "source": "xtx_markets",
+      "status": "fresh",
+      "portal": "https://www.xtxmarkets.com/careers/"
+    }
+  ]
+}

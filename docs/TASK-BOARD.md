@@ -1,4 +1,4 @@
-# Carnet des tâches — 14 octobre 2026
+# Carnet des tâches — 15 octobre 2026
 
 Ce carnet suit l’instance OVH. Un connecteur développé ou une offre visible dans
 un catalogue public ne sont pas, à eux seuls, une preuve de surveillance active.
@@ -7,8 +7,8 @@ Les validations et mesures sont dans [VALIDATION-LOTS125-127.md](VALIDATION-LOTS
 [VALIDATION-LOT128.md](VALIDATION-LOT128.md) et
 [VALIDATION-LOTS129-131.md](VALIDATION-LOTS129-131.md) et
 [VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire actuel
-est [daté par source](RADAR-SOURCES-LOT169.md) : **107 sources / 95 employeurs**,
-97 à jour au relevé de 18:42 UTC du 14 octobre. Les chiffres des livraisons précédentes restent historiques.
+est [daté par source](RADAR-SOURCES-LOT172.md) : **122 sources / 110 employeurs**,
+115 à jour au relevé du 15/10/2026 à 01:38 UTC ; les quinze ajouts sont frais. Les chiffres des livraisons précédentes restent historiques.
 Ce carnet a été réconcilié avec le VPS :
 les anciennes mentions Windows et exclusions globales des stages étaient historiques.
 
@@ -148,7 +148,7 @@ Base principale en schéma 4, anciens identifiants, candidatures, historiques, a
 
 Prochains lots :
 
-- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164, puis 39,64 secondes pour 1 729 fiches au lot 166 et 28,21 secondes pour 1 787 fiches au lot 169 ; mesures ponctuelles selon la charge, profiler les lectures/parsers avant de modifier la fraîcheur des données.
+- 159 — réduire le délai de chargement du Dashboard : 18,6 secondes au contrôle HTTPS de 1 581 fiches, puis 22,4 secondes pour 1 591 fiches au lot 162 et 26,6 secondes pour 1 683 fiches au lot 164, puis 39,64 secondes pour 1 729 fiches au lot 166, 28,21 secondes pour 1 787 fiches au lot 169 et 32,85 secondes pour 1 899 fiches au lot 172 ; mesures ponctuelles selon la charge, profiler les lectures/parsers avant de modifier la fraîcheur des données.
 - 160 — documenter et compléter la couverture Marex, actuellement sept fiches validées sans inventaire exhaustif ; conserver l'absence de fermeture déduite.
 - 161 — suivre les échecs datés Bank of America et TD en plus des accès BNP général/campus et Jefferies campus ; Nomura campus attend toujours l'intervention humaine choisie.
 
@@ -189,14 +189,24 @@ Installé et observé le 14 octobre à 18:42 UTC. CFM 9/24, Xantium 6/8, BlueCre
 
 [Sources et inventaire complet](RADAR-SOURCES-LOT169.md) · [Validation](VALIDATION-LOT169.md) · [Preuves](DELIVERY-LOT169.json).
 
+## Livraison du 15 octobre — lot 172
+
+Installé et observé le 15/10/2026 à 01:38 UTC : 15 sources / 15 employeurs supplémentaires, cinq banques et dix fonds/gérants. BMO 38/284, U.S. Bank 15/516, Danske 4/69, SMBC 3/167, Nordea 1/91 ; Dimensional 2/54, Sculptor 0/0 ciblé, Bridgewater 5/18, Viking 0/6, Farallon 0/0, Greenland 2/7, Laurion 0/0, GMO 3/12, Caxton 13/22 et Trexquant 20/34. **106 créations, cinq scores ≥ 70 et 97 scores zéro**, premier inventaire et non flux hebdomadaire. Trois lectures concordantes, 62 nouveaux tests, 76 ciblés, 5 605 Python locaux et 34 JavaScript réussis ; CI du correctif réussie : 5 605 tests sur chacune des versions Python 3.11–3.14, 34 JavaScript, construction et récupération isolée ; six contrôles verts.
+
+Simulation, sauvegarde/restauration et import réel vérifiés ; aucune actualisation, fermeture ni alerte, second passage stable. Les quinze contrôles de conservation passent. Même HTTPS privé et API mobile, 1 899 fiches, radar/Dashboard sains, cinq conteneurs actifs et quatre services actifs/activés. `/statuts` et Dashboard : **122 sources / 110 employeurs, 115 à jour**, quinze ajouts frais ; `/sources` sur cinq pages. Summer/viviers distincts des stages off-cycle, contrats/dates/conditions absents laissés inconnus. Sept incidents antérieurs restent ouverts ; sudo à nouveau bloqué, liste de 33 commandes vérifiée.
+
+[Sources et inventaire complet](RADAR-SOURCES-LOT172.md) · [Validation](VALIDATION-LOT172.md) · [Preuves](DELIVERY-LOT172.json).
+
 ## Prochaines intégrations
 
 | Lot / priorité | Travail et preuve attendue | État |
 |---|---|---|
-| 167 / haute — banques et campus | Qualifier BMO Phenom, Janus Henderson SuccessFactors et Schroders Oracle, puis les programmes campus Scotiabank ; retrouver les fiches front office dont le titre ne contient pas trading ; inventaire, pagination, deux lectures, fiches témoins et simulation | À faire ; ne sont pas comptés comme nouveaux portails actifs |
+| 167 / haute — banques et campus | BMO Workday livré au lot 172, relié au recrutement officiel ; poursuivre Janus Henderson SuccessFactors, Schroders Oracle et les programmes campus Scotiabank ; fiches front office sans trading dans le titre, inventaire/pagination/fiches et simulation | Partiellement livré ; autres portails non activés, Phenom BMO ne constitue pas un deuxième employeur |
 | 168 / haute — fonds supplémentaires | Aspect Capital : redirection officielle vers Hibob ; Balyasny : portail Salesforce publié ; Rokos : retrouver un catalogue officiel exploitable ; séparation des programmes informatifs, viviers et postes ouverts | À faire ; accès restreints et CAPTCHA laissés explicites |
 | 170 / haute — missions et stages quantitatifs | Auditer les 74 fiches QRT/CFM/Xantium/BlueCrest/Dymon : missions de recherche liées aux décisions d'investissement, développeurs front office, 3–6 et 4–6 mois, fellowship et critères publiés ; contre-exemples support/plateforme, aucune date ou séniorité inventée ; conserver les scores zéro et mesurer le rappel avant modification | À faire après le lot 169 ; le flux tous scores reste distinct des priorités |
 | 171 / haute — portails complémentaires des fonds | Collecteur public Hibob pour les portails officiellement publiés par Aspect et Dymon ; vérifier catalogue, pagination, fiches, employeur, doublons et premier import silencieux ; qualifier Lynx et Florin Court seulement si des postes publics pertinents sont accessibles | À développer ; aucun accès restreint ajouté au nombre de sources actives |
+| 173 / haute — rappel et qualité des quinze ajouts | Auditer les 106 fiches : cinq au seuil, 97 à zéro, trading/recherche vs risque/support, pays, dates et conditions ; expliquer les stages Winter/co-op de quatre mois sans les transformer en off-cycle, contre-exemples Summer/viviers ; recouper les portails campus/EMEA et les zones non couvertes | Ouvert ; aucune augmentation artificielle des scores ou garantie de volume hebdomadaire |
+| 174 / haute — MUFG et BNY | MUFG : résoudre la référence publique masquée 10079807-WD sans omission silencieuse ; BNY : qualifier la répétition d’identifiants Oracle et le contrat de pagination publié ; catalogues complets, fiches témoins, lectures stables et simulation avant activation | Bloqués au contrôle du 15 octobre ; exclus du compteur installé |
 | 165 / haute — qualification | Mesurer les faux négatifs et les intitulés de support retenus chez les nouveaux employeurs, dont Mizuho Credit Derivatives Sales et Scotiabank ; justifier toute extension par les missions, sans bonus de score au nom de la société | Ouvert ; le flux tous scores ne remplace pas la qualification des fiches |
 
 Les lots 154, 155, 159, 160, 161 et 163 restent ouverts. Nomura campus reste en attente conformément au choix du propriétaire. Chaque portail n'est déclaré surveillé qu'après installation et premier succès observé sur OVH ; `/statuts` doit concorder avec le Dashboard et l'inventaire installé.
