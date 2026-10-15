@@ -17,6 +17,7 @@ from trading_radar.selection import SelectionAudit, rejection_reason
 
 API = "https://api.lever.co/v0/postings/"
 BOARDS = {
+    "gmo": "GMO",
     "belvederetrading": "Belvedere Trading",
     "valkyrietrading": "Valkyrie Trading",
 }
@@ -84,8 +85,9 @@ def parse_board(
             raise SourceUnavailable("Lever posting title missing")
         fields = row.get("categories")
         valkyrie = config.tenant == "valkyrietrading"
+        gmo = config.tenant == "gmo"
         required: tuple[str, ...] = ("location", "team", "commitment")
-        if not valkyrie:
+        if not valkyrie and not gmo:
             required += ("department",)
         if not isinstance(fields, dict) or any(
             not isinstance(fields.get(k), str) or not fields[k].strip() for k in required
@@ -93,11 +95,24 @@ def parse_board(
             raise SourceUnavailable("Lever job categories missing or changed")
         # Valkyrie's published board has no department and spells Full Time
         # without a hyphen. Keep Belvedere's separate contract unchanged.
-        contracts = {"Full Time", "Intern"} if valkyrie else {"Full-Time", "Intern"}
+        contracts = (
+            {"Full-time", "Intern"}
+            if gmo
+            else {"Full Time", "Intern"}
+            if valkyrie
+            else {"Full-Time", "Intern"}
+        )
         if fields["commitment"] not in contracts:
             raise SourceUnavailable("Lever employment type missing or changed")
         in_scope = (
-            fields["team"] in {"Trading", "Quants"}
+            fields["team"]
+            in {
+                "Investments",
+                "Emerging Country Debt",
+                "Software Engineering and Platform Architecture",
+            }
+            if gmo
+            else fields["team"] in {"Trading", "Quants"}
             if valkyrie
             else fields["department"] == "Trading"
         )
@@ -145,6 +160,7 @@ def parse_board(
                 employment_type=fields["commitment"],
                 seniority_hint="junior"
                 if not valkyrie
+                and not gmo
                 and fields["team"] == "Campus - Quantitative Trading"
                 and fields["commitment"] == "Full-Time"
                 else None,
@@ -204,6 +220,7 @@ class LeverFilteredCollector:
         return Collection(
             jobs=jobs,
             complete=False,
+            scope_complete=self.config.tenant == "gmo",
             requests=self.http.counts[self.source] - before,
             selection=audit.summary(),
         )

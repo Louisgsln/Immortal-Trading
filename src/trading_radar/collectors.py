@@ -173,6 +173,14 @@ class VendorCollector:
 
 
 def build_collector(source: str, config: Company, http: HTTPClient) -> Collector:
+    if config.ats == "workable_api":
+        from trading_radar.workable_api import WorkableAPICollector
+
+        return WorkableAPICollector(source, config, http)
+    if config.ats == "successfactors_public":
+        from trading_radar.successfactors_public import SuccessFactorsPublicCollector
+
+        return SuccessFactorsPublicCollector(source, config, http)
     if config.ats == "cfm":
         from trading_radar.cfm import CFMCollector
 

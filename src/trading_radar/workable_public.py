@@ -1,4 +1,4 @@
-"""Capula's explicitly published Workable Markdown catalogue and full role details."""
+"""Audited employers' public Workable Markdown catalogues and full role details."""
 
 import asyncio
 import html
@@ -15,15 +15,21 @@ from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import SelectionAudit, rejection_reason
 
 BOARD = "https://apply.workable.com/capula-investment-management-ltd/"
+BOARDS = {
+    "capula-investment-management-ltd": "Capula",
+    "caxton": "Caxton Associates",
+}
 
 
 class WorkableOptions(SearchOptions):
     search_terms: list[str] = Field(default_factory=list, max_length=0)
 
 
-def listing(text: str, total: int) -> list[dict[str, str]]:
+def listing(
+    text: str, total: int, *, board: str = BOARD, name: str = "Capula"
+) -> list[dict[str, str]]:
     if (
-        not text.startswith("# Capula — All Open Positions\n")
+        not text.startswith("# " + name + " — All Open Positions\n")
         or "| Title | Department | Location | Type | Salary | Posted | Details |" not in text
         or not 0 <= total <= 1999
     ):
@@ -37,7 +43,7 @@ def listing(text: str, total: int) -> list[dict[str, str]]:
         if len(parts) != 7 or any(not part for part in parts):
             raise SourceUnavailable("Workable catalogue row incomplete")
         link = re.fullmatch(
-            r"\[View\]\(" + re.escape(BOARD) + r"jobs/view/([A-F0-9]{10})\.md\)", parts[6]
+            r"\[View\]\(" + re.escape(board) + r"jobs/view/([A-F0-9]{10})\.md\)", parts[6]
         )
         if not link or link[1] in seen:
             raise SourceUnavailable("Workable catalogue identity mismatch or duplicate")
@@ -54,7 +60,7 @@ def listing(text: str, total: int) -> list[dict[str, str]]:
                     strict=True,
                 )
             )
-            | {"id": link[1], "detail": BOARD + "jobs/view/" + link[1] + ".md"}
+            | {"id": link[1], "detail": board + "jobs/view/" + link[1] + ".md"}
         )
     if len(rows) != total:
         raise SourceUnavailable("Workable incomplete catalogue")
@@ -80,20 +86,33 @@ def markdown_html(text: str) -> str:
 
 
 def detail(text: str, row: dict[str, str], source: str, company: Company) -> RawJob | None:
+    board = "https://apply.workable.com/" + company.tenant + "/"
+    name = company.name
     heading = "# " + row["title"] + "\n"
     banner = (
-        "> Capula · " + row["location"] + " · " + row["contract"] + " · Posted " + row["posted"]
+        "> "
+        + name
+        + " · "
+        + row["location"]
+        + " · "
+        + row["contract"]
+        + " · Posted "
+        + row["posted"]
     )
-    apply = BOARD + "j/" + row["id"] + "/apply"
+    apply = board + "j/" + row["id"] + "/apply"
+    lines = text.splitlines()
+    departments = [line for line in lines if line.startswith("**Department:**")]
+    expected_department = ["**Department:** " + row["department"]] if row["department"] else []
+    # Trexquant also publishes roles with no requirements section. Preserve the
+    # whole description (including benefits) rather than inventing requirements.
+    requirements = lines.count("## Requirements")
     if (
         not text.startswith(heading)
-        or text.splitlines().count(banner) != 1
-        or text.splitlines().count("**Department:** " + row["department"]) != 1
-        or any(
-            text.splitlines().count(section) != 1
-            for section in ("## Description", "## Requirements", "## Apply")
-        )
-        or re.findall(r"\[Apply at Capula\]\(([^)]+)\)", text) != [apply]
+        or lines.count(banner) != 1
+        or departments != expected_department
+        or requirements not in ({0, 1} if company.tenant == "trexquant" else {1})
+        or any(lines.count(section) != 1 for section in ("## Description", "## Apply"))
+        or re.findall(r"\[Apply at " + re.escape(name) + r"\]\(([^)]+)\)", text) != [apply]
     ):
         raise SourceUnavailable("Workable detail identity, requirements or apply link changed")
     description = text.split("## Description\n", 1)[1].split("## Apply\n", 1)[0].strip()
@@ -110,6 +129,9 @@ def detail(text: str, row: dict[str, str], source: str, company: Company) -> Raw
         location=row["location"],
         employment_type=None if row["contract"] == "—" else row["contract"],
         description=markdown_html(description),
+        publication_day=date.fromisoformat(row["posted"])
+        if company.tenant in {"caxton", "trexquant"}
+        else None,
         apply_url=apply,
         source_url=row["detail"],
         raw_payload={"posted_calendar_date": row["posted"], "department": row["department"]},
@@ -119,13 +141,15 @@ def detail(text: str, row: dict[str, str], source: str, company: Company) -> Raw
 class WorkablePublicCollector:
     def __init__(self, source: str, config: Company, http: HTTPClient):
         if (
-            config.name != "Capula"
-            or config.tenant != "capula-investment-management-ltd"
-            or config.career_url != BOARD
+            config.tenant not in BOARDS
+            or config.name != BOARDS[config.tenant]
+            or config.career_url != "https://apply.workable.com/" + config.tenant + "/"
         ):
-            raise ValueError("Use the verified public Capula Workable catalogue")
+            raise ValueError("Use a verified public Workable catalogue")
         self.source, self.config, self.http = source, config, http
         self.options = WorkableOptions(**config.options)
+        self.board = config.career_url
+        self.catalogue = self.board + "jobs.md"
 
     async def text(self, url: str) -> str:
         return await self.http.get_text(url, self.config.request_interval, self.source)
@@ -139,18 +163,20 @@ class WorkablePublicCollector:
 
     async def _collect(self) -> Collection:
         before = self.http.counts[self.source]
-        guide = await self.text(BOARD + "llms.txt")
+        guide = await self.text(self.board + "llms.txt")
         counts = re.findall(
-            r"All open roles \(GET `" + re.escape(BOARD) + r"jobs\.md`\): (\d+) current openings",
+            r"All open roles \(GET `"
+            + re.escape(self.board)
+            + r"jobs\.md`\): (\d+) current openings",
             guide,
         )
-        if not guide.startswith("# Capula Careers\n") or len(counts) != 1:
+        if not guide.startswith("# " + self.config.name + " Careers\n") or len(counts) != 1:
             raise SourceUnavailable("Workable public catalogue declaration missing")
         total = int(counts[0])
         if total > self.options.max_results_per_query:
             raise SourceUnavailable("Workable catalogue exceeds result limit")
-        first = await self.text(BOARD + "jobs.md")
-        rows = listing(first, total)
+        first = await self.text(self.catalogue)
+        rows = listing(first, total, board=self.board, name=self.config.name)
         audit = SelectionAudit("public_catalogue")
         selected = []
         for row in rows:
@@ -166,8 +192,8 @@ class WorkablePublicCollector:
             if job is not None:
                 jobs.append(job)
         if (
-            await self.text(BOARD + "jobs.md") != first
-            or await self.text(BOARD + "llms.txt") != guide
+            await self.text(self.catalogue) != first
+            or await self.text(self.board + "llms.txt") != guide
         ):
             raise SourceUnavailable("Workable catalogue changed during collection")
         return Collection(

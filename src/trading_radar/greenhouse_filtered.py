@@ -19,6 +19,14 @@ from trading_radar.selection import SelectionAudit, rejection_reason
 
 API = "https://boards-api.greenhouse.io/v1/boards/"
 BOARDS = {
+    "bridgewater89": ("Bridgewater Associates", "job-boards.greenhouse.io"),
+    "vikingglobalinvestors": ("Viking Global Investors", "job-boards.greenhouse.io"),
+    "faralloncapitalmanagementllc": ("Farallon Capital Management", "job-boards.greenhouse.io"),
+    "greenlandinvestmentmanagement": (
+        "Greenland Investment Management",
+        "job-boards.greenhouse.io",
+    ),
+    "laurioncapitalmanagement": ("Laurion Capital Management", "job-boards.greenhouse.io"),
     "xantium": ("Xantium", "job-boards.greenhouse.io"),
     "bluecrestcapitalmanagement": ("BlueCrest Capital Management", "job-boards.greenhouse.io"),
     "dymonasiacapitalsingaporepteltd": ("Dymon Asia", "job-boards.anz.greenhouse.io"),
@@ -72,6 +80,7 @@ BOARDS = {
     "worldquant": ("WorldQuant", "job-boards.greenhouse.io"),
 }
 _EMPLOYER_NAMES = {
+    "faralloncapitalmanagementllc": "Farallon Capital Management, L.L.C.",
     "gsacapital": "GSA",
     "grahamcapitalmanagement": "Graham Capital Management, L.P.",
     "headlandstechnologiesllc": "Headlands Technologies LLC",
@@ -88,6 +97,8 @@ _EMPLOYER_NAMES = {
     "chicagotradingcampus": "CTC Campus - Website",
 }
 _NULL_METADATA = {
+    "vikingglobalinvestors",
+    "greenlandinvestmentmanagement",
     "xantium",
     "bluecrestcapitalmanagement",
     "dymonasiacapitalsingaporepteltd",
@@ -481,8 +492,30 @@ def parse_board(
         verified_research = config.tenant == "oldmissioncapital" and research_duties(
             row["title"], row.get("content", "") if isinstance(row.get("content"), str) else ""
         )
-        reason = rejection_reason(
-            row["title"], options, verified_role=trading_technology or verified_research
+        summer_programme = (
+            config.tenant in {"bridgewater89", "vikingglobalinvestors"}
+            and any(
+                has(normalize_text(row["title"]), t)
+                for t in ("intern", "internship", "internships")
+            )
+            and isinstance(row.get("content"), str)
+            and (
+                "what can i expect in an investment associate summer internship"
+                in plain_text(row["content"]).casefold()
+                or re.search(
+                    r"\bthis is a (?:\d+|[a-z]+)-week internship taking place over the summer\b"
+                    r"|\bjoin our (?:\d+-person )?private equity investment team this summer\b",
+                    plain_text(row["content"]),
+                    re.IGNORECASE,
+                )
+            )
+        )
+        reason = (
+            "summer_programme"
+            if summer_programme
+            else rejection_reason(
+                row["title"], options, verified_role=trading_technology or verified_research
+            )
         )
         if audit is not None:
             audit.record(reason, row["title"], identifier)

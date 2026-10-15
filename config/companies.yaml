@@ -5379,3 +5379,975 @@ companies:
       and pagination, posting IDs, canonical URLs, listing/detail titles, full descriptions
       and final first-page recheck. Public listing locations, no invented publication/start/deadline;
       seniority scored rather than discarded, stages admitted, no closure by absence.
+  bmo:
+    name: BMO
+    enabled: true
+    ats: workday
+    career_url: https://bmo.wd3.myworkdayjobs.com/External
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - markets
+      - off-cycle
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - markets
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 180
+      max_scan_seconds: 900
+      verify_listing_snapshot: true
+      conditional_details: true
+    notes: Public Workday employer recruitment site verified 2026-10-15; provenance https://jobs.bmo.com/ca/en.
+      Complete bounded searches, full details and first-page rechecks; seniority scored, internships admitted,
+      summer titles and support excluded. No closures by absence, no intake/start/deadline invented; first
+      reference silent.
+  us_bank:
+    name: U.S. Bank
+    enabled: true
+    ats: workday
+    career_url: https://usbank.wd1.myworkdayjobs.com/US_Bank_Careers
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - markets
+      - off-cycle
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - markets
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 180
+      max_scan_seconds: 900
+      verify_listing_snapshot: true
+      conditional_details: true
+    notes: Public Workday employer recruitment site verified 2026-10-15; provenance https://careers.usbank.com/global/en.
+      Complete bounded searches, full details and first-page rechecks; seniority scored, internships admitted,
+      summer titles and support excluded. No closures by absence, no intake/start/deadline invented; first
+      reference silent.
+  sculptor:
+    name: Sculptor Capital
+    enabled: true
+    ats: workday
+    career_url: https://sculptor.wd12.myworkdayjobs.com/Sculptor_External_Career_Site
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - portfolio
+      - investment
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - investment associate
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 180
+      max_scan_seconds: 900
+      verify_listing_snapshot: true
+      conditional_details: true
+    notes: Public Workday employer recruitment site verified 2026-10-15; provenance https://www.sculptor.com/careers.
+      Complete bounded searches, full details and first-page rechecks; seniority scored, internships admitted,
+      summer titles and support excluded. No closures by absence, no intake/start/deadline invented; first
+      reference silent.
+  bridgewater:
+    name: Bridgewater Associates
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: bridgewater89
+    career_url: https://job-boards.greenhouse.io/bridgewater89
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - investment associate
+      - portfolio associate
+      - data science intern
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Employer public Greenhouse board verified 2026-10-15; provenance https://www.bridgewater.com/working-at-bridgewater/job-openings.
+      Strict employer, URLs, IDs, full content and whole-feed totals. Prospect pools and support excluded;
+      explicit internship Summer descriptions excluded for Bridgewater/Viking. Empty Farallon/Laurion
+      catalogues are stated as zero current vacancies, not unknown access or actual internship availability.
+      No absence closures or employer-name score bonus.
+  viking:
+    name: Viking Global Investors
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: vikingglobalinvestors
+    career_url: https://job-boards.greenhouse.io/vikingglobalinvestors
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - investment associate
+      - portfolio associate
+      - data science intern
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Employer public Greenhouse board verified 2026-10-15; provenance https://job-boards.greenhouse.io/vikingglobalinvestors.
+      Strict employer, URLs, IDs, full content and whole-feed totals. Prospect pools and support excluded;
+      explicit internship Summer descriptions excluded for Bridgewater/Viking. Empty Farallon/Laurion
+      catalogues are stated as zero current vacancies, not unknown access or actual internship availability.
+      No absence closures or employer-name score bonus.
+  farallon:
+    name: Farallon Capital Management
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: faralloncapitalmanagementllc
+    career_url: https://job-boards.greenhouse.io/faralloncapitalmanagementllc
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - investment associate
+      - portfolio associate
+      - data science intern
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Employer public Greenhouse board verified 2026-10-15; provenance https://www.faralloncapital.com/careers.
+      Strict employer, URLs, IDs, full content and whole-feed totals. Prospect pools and support excluded;
+      explicit internship Summer descriptions excluded for Bridgewater/Viking. Empty Farallon/Laurion
+      catalogues are stated as zero current vacancies, not unknown access or actual internship availability.
+      No absence closures or employer-name score bonus.
+  greenland:
+    name: Greenland Investment Management
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: greenlandinvestmentmanagement
+    career_url: https://job-boards.greenhouse.io/greenlandinvestmentmanagement
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - investment associate
+      - portfolio associate
+      - data science intern
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Employer public Greenhouse board verified 2026-10-15; provenance https://job-boards.greenhouse.io/greenlandinvestmentmanagement.
+      Strict employer, URLs, IDs, full content and whole-feed totals. Prospect pools and support excluded;
+      explicit internship Summer descriptions excluded for Bridgewater/Viking. Empty Farallon/Laurion
+      catalogues are stated as zero current vacancies, not unknown access or actual internship availability.
+      No absence closures or employer-name score bonus.
+  laurion:
+    name: Laurion Capital Management
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: laurioncapitalmanagement
+    career_url: https://job-boards.greenhouse.io/laurioncapitalmanagement
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - investment associate
+      - portfolio associate
+      - data science intern
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Employer public Greenhouse board verified 2026-10-15; provenance https://www.laurioncap.com/team-building.
+      Strict employer, URLs, IDs, full content and whole-feed totals. Prospect pools and support excluded;
+      explicit internship Summer descriptions excluded for Bridgewater/Viking. Empty Farallon/Laurion
+      catalogues are stated as zero current vacancies, not unknown access or actual internship availability.
+      No absence closures or employer-name score bonus.
+  gmo:
+    name: GMO
+    enabled: true
+    ats: lever_filtered
+    tenant: gmo
+    career_url: https://jobs.lever.co/gmo
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - corporate credit analyst
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Published by https://www.gmo.com/americas/careers/; public Lever catalogue, UUID/URLs and audited
+      Investments, Emerging Country Debt and quantitative technology teams. Full descriptions/lists, Full-time
+      spelling and missing department shape verified. No invented programme year or date; no absence closures.
+  caxton:
+    name: Caxton Associates
+    enabled: true
+    ats: workable_public
+    tenant: caxton
+    career_url: https://apply.workable.com/caxton/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - portfolio manager program
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Employer-branded public Workable Markdown catalogue/llms guide verified 2026-10-15, corporate
+      careers page remains 403. Exact total, full responsibilities and requirements, listing/detail/banner/apply
+      identity, final catalogue recheck. No absence closures or invented start/deadline.
+  trexquant:
+    name: Trexquant Investment
+    enabled: true
+    ats: workable_api
+    tenant: trexquant
+    career_url: https://apply.workable.com/trexquant/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 600
+    notes: Public Workable search API and employer Markdown detail pages verified 2026-10-15. Whole unfiltered
+      catalogue with cursor pagination, exact totals, approved/published identity and public account marker,
+      full Markdown descriptions, first-page recheck. Search Markdown snippets are incomplete and not
+      used as a complete catalogue. Summer titles excluded; no absence closures.
+  danske:
+    name: Danske Bank
+    enabled: true
+    ats: oracle
+    career_url: https://ejqi.fa.ocs.oraclecloud.eu/hcmUI/CandidateExperience/en/sites/CX_1001
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - trader
+      - quantitative
+      - structuring
+      - markets
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - markets
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 180
+      max_scan_seconds: 900
+    notes: Published by https://danskebank.com/careers/apply; public European Oracle recruitment domain.
+      Bounded paginated searches and full matching role details, support and Summer titles excluded, no
+      absence closure; no fabricated programme dates.
+  smbc:
+    name: SMBC
+    enabled: true
+    ats: successfactors_public
+    career_url: https://careersemea.smbcgroup.com/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - structuring
+      - markets
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+    notes: Employer-owned public SuccessFactors table verified 2026-10-15. Exact counts, unique IDs, stable
+      pagination and search overlaps, canonical posting ID/title and full description, first-page rechecks.
+      Talent-community registrations explicitly not vacancies; no date from page render, no absence closures.
+      Summer titles excluded, senior roles retained for all-score review.
+  nordea:
+    name: Nordea
+    enabled: true
+    ats: successfactors_public
+    career_url: https://careers.nordea.com/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - structuring
+      - markets
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+    notes: Employer-owned public SuccessFactors table verified 2026-10-15. Exact counts, unique IDs, stable
+      pagination and search overlaps, canonical posting ID/title and full description, first-page rechecks.
+      Talent-community registrations explicitly not vacancies; no date from page render, no absence closures.
+      Summer titles excluded, senior roles retained for all-score review.

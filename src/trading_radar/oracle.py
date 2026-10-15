@@ -14,7 +14,7 @@ from trading_radar.selection import SelectionAudit
 
 def oracle_base(url: str) -> tuple[str, str, str]:
     parts = urlsplit(url)
-    host = re.fullmatch(r"[a-z0-9-]+\.fa(?:\.[a-z0-9-]+)?\.oraclecloud\.com", parts.netloc)
+    host = re.fullmatch(r"[a-z0-9-]+\.fa(?:\.[a-z0-9-]+)?\.oraclecloud\.(?:com|eu)", parts.netloc)
     path = re.fullmatch(r"/hcmUI/CandidateExperience/en/sites/([A-Za-z0-9_-]+)/?", parts.path)
     if parts.scheme != "https" or not host or not path or parts.query or parts.fragment:
         raise ValueError("Use a public Oracle Candidate Experience site root")
