@@ -40,8 +40,8 @@
         {
           "id": 118281876447,
           "name": "checks (3.13)",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success"
         },
         {
           "id": 118281876523,
@@ -52,17 +52,24 @@
         {
           "id": 118281876733,
           "name": "checks (3.12)",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success"
         },
         {
           "id": 118281876793,
           "name": "checks (3.11)",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 118304809766,
+          "name": "container",
+          "status": "completed",
+          "conclusion": "success"
         }
       ],
-      "full_matrix_status": "in_progress"
+      "full_matrix_status": "completed_success",
+      "checked_at": "2026-10-19T22:33:00Z"
     }
   },
   "vps_package": {

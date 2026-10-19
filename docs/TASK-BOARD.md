@@ -1,4 +1,4 @@
-# Carnet des tâches — 19 octobre 2026
+# Carnet des tâches — 20 octobre 2026
 
 ## Lots 181–182 publiés, installation préparée
 
@@ -16,8 +16,9 @@ n'a pas encore fait l'objet d'une mesure en production.
 | 181 — activité et collectes | Développé, diagnostic partiel | État du radar relu toutes les 15 s dans le Dashboard ; SMBC concordant sur deux passages ; U.S. Bank réussit puis échoue sur pagination incohérente, aucun import incomplet. Ne pas clôturer cet incident. |
 | 182 / jalon 176 — mobile | Publié et testé, non installé | Première page légère, chargement complet authentifié, filtres repliables avec compteur. Parcours mobile et souhaits/suivi testés ; vitesse réelle sur OVH à mesurer lors de l'installation. |
 
-**5 783 tests Python 3.14 et 53 tests JavaScript passent.** Les autres versions
-de la nouvelle CI sont en cours. L'image Docker locale et le paquet installé
+**5 783 tests Python 3.14 et 53 tests JavaScript passent.** La CI complète
+réussit désormais ses six jobs : Python 3.11 à 3.14, JavaScript et Docker.
+L'image Docker locale et le paquet installé
 isolément sur OVH passent leurs contrôles. La CI complète du lot 180 est désormais
 verte, Docker compris. [Validation](VALIDATION-LOTS181-182.md) · [Preuves](DELIVERY-LOTS181-182.json).
 

@@ -32,8 +32,9 @@ HTTPS. Aucune note, clé du lien ou configuration privée n'est publiée.
 ## Vérifications réalisées
 
 La [CI de la version publiée](https://github.com/Louisgsln/Immortal-Trading/actions/runs/39317266615)
-réussit **5 783 tests Python 3.14** et le job JavaScript. Les autres versions Python
-et le job Docker hébergé restent en cours au relevé de préparation.
+réussit désormais ses **six jobs**, Python 3.11 à 3.14, JavaScript et Docker.
+Python 3.14 confirme **5 783 tests**. Ce résultat complète le relevé initial
+de préparation ; la version n'est toujours pas installée sur le VPS.
 
 En local : 319 tests Dashboard passent, puis 56 vérifications ciblées de la
 version finale et 20 contrôles de contrat. Ces groupes se recouvrent et ne se
