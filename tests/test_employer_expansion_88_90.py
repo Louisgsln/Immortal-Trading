@@ -184,7 +184,7 @@ def test_three_banks_have_bounded_queries_and_all_new_sources_are_scheduled():
         company = cfg.companies[source]
         assert company.enabled and company.scan_interval == 1800
         assert company.request_interval >= 2
-        assert company.options["max_results_per_query"] == 500
+        assert company.options["max_results_per_query"] == (1000 if source == "rbc" else 500)
         if company.ats == "workday":
             assert company.options["max_details"] == 80
             assert company.options["search_terms"][:4] == [
