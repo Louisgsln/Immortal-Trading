@@ -1,0 +1,189 @@
+{
+  "lots": [
+    181,
+    182
+  ],
+  "status": "published_not_deployed",
+  "code_commit": "dfe25f6703419ab89f5fdd305d6401f8bbda3048",
+  "observed_at": "2026-10-19T20:25:18Z",
+  "validation": {
+    "python_314_passed": 5783,
+    "new_python_cases": 31,
+    "targeted_groups": [
+      {
+        "passed": 319,
+        "note": "dashboard suite before the last service cases"
+      },
+      {
+        "passed": 56,
+        "note": "final private/progressive/services/contract selection"
+      },
+      {
+        "passed": 20,
+        "note": "final contract checks; overlaps earlier groups"
+      }
+    ],
+    "groups_are_not_additive": true,
+    "node_passed": 53,
+    "ruff": "passed",
+    "formatted_files": 363,
+    "mypy_modules": 133,
+    "ci": {
+      "run_id": 39317266615,
+      "jobs": [
+        {
+          "id": 118281876313,
+          "name": "dashboard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 118281876447,
+          "name": "checks (3.13)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 118281876523,
+          "name": "checks (3.14)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 118281876733,
+          "name": "checks (3.12)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 118281876793,
+          "name": "checks (3.11)",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ],
+      "full_matrix_status": "in_progress"
+    }
+  },
+  "vps_package": {
+    "status": "ok",
+    "commit": "dfe25f6703419ab89f5fdd305d6401f8bbda3048",
+    "wheel": "trading_job_radar-0.1.0-py3-none-any.whl",
+    "bytes": 379522,
+    "sha256": "435fb2a7d2a97e7f77c535a96abebe0a15d33c3cd5749a9d9da48e13d9da666d",
+    "installed_non_editable": true,
+    "contract": {
+      "asset_hashes": "verified",
+      "controls": 93,
+      "jobs": 0,
+      "modules": 8,
+      "progressive_shell": "verified",
+      "status": "ok"
+    },
+    "synthetic_recovery_mode": "local_workflow_only",
+    "synthetic_recovery_tables": 11,
+    "docker_validation": false,
+    "production_changed": false
+  },
+  "vps_preflight": {
+    "status": "ready_not_deployed",
+    "commit": "dfe25f6703419ab89f5fdd305d6401f8bbda3048",
+    "source_files": 8,
+    "production_file_guards_verified": true,
+    "profile_unchanged": true,
+    "installed_wheel_verified": true,
+    "dashboard_only": true,
+    "privileged_operations_performed": false,
+    "disk_free_gib": 10.49,
+    "ops_sha256": {
+      "deploy182.py": "25ae8245b6d942789863bf424d1f8c08529dc72bee04246b4982db697c8cde18",
+      "compare-copy182.py": "2af714a48dc207f2d39d778c7b1e73d2953b156f7c7ab99e311af292dcf92c4b",
+      "preserve182.py": "5b8bc70dca29854221a07e6762aa7ba3eb5e6352f0d66b99ae6a2f066b9bc3c9",
+      "install-manifest182.json": "97f4fa78a928b9780501e9d1acb23b43c4f034bafdee3d86ae7c4da0f124e4ad"
+    }
+  },
+  "source_audit": "SOURCE-AUDIT-LOT181.json",
+  "production_changes_this_release": false,
+  "installation_pending": "Remote Desktop Commander currently blocks sudo; prior maintenance window has been closed.",
+  "data_migration": false,
+  "manual_telegram_test_messages": 0,
+  "local_docker": {
+    "status": "ok",
+    "image": "immortal-trading:lots181-182-mobile-20261019",
+    "image_id": "sha256:8dba8de9d8cc5b089afd09b1131a3e740a90b9a57cfbb7b662708ed56947a6b9",
+    "contract": {
+      "asset_hashes": "verified",
+      "controls": 93,
+      "jobs": 0,
+      "modules": 8,
+      "progressive_shell": "verified",
+      "status": "ok"
+    },
+    "synthetic_recovery": {
+      "status": "ok",
+      "mode": "container",
+      "uid": 10001,
+      "identical_tables": 11
+    },
+    "constraints": {
+      "memory_mib": 512,
+      "cpus": 1,
+      "pids_limit": 64,
+      "read_only": true,
+      "network": "none",
+      "user": "10001:10001"
+    }
+  },
+  "synthetic_mobile_browser": {
+    "status": "ok",
+    "mode": "synthetic_chromium_mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "shell_domcontentloaded_seconds": 0.252,
+    "initial_jobs_hidden_until_complete": true,
+    "jobs_loaded": 3,
+    "wishlist_add_remove": true,
+    "notes_saved": true,
+    "mobile_filters_collapsed_with_selection_preserved": true,
+    "invalid_range_warning_visible_when_collapsed": true,
+    "marked_applied": true,
+    "pulse_stopped_and_recovered_without_reload": true,
+    "jobs_unchanged": true,
+    "telegram_cursor_unchanged": true,
+    "page_errors": [],
+    "request_count": 18,
+    "http_errors": []
+  },
+  "installed_version_observation": {
+    "observed_at": "2026-10-19T20:26:12.529370+00:00",
+    "installed_sources": 128,
+    "employers": 116,
+    "fresh": 125,
+    "http_status": 200,
+    "http_seconds": 15.442,
+    "watcher": {
+      "status": "active",
+      "phase": "scanning",
+      "at": "2026-10-19T20:26:01.328451+00:00",
+      "age_seconds": 4
+    },
+    "all_new_scores": true,
+    "summary": {
+      "total": 2019,
+      "active": 1991,
+      "high_priority": 404,
+      "relevant": 599,
+      "applications_due": 0,
+      "applications_in_progress": 1,
+      "fresh_sources": 125,
+      "enabled_sources": 128
+    }
+  },
+  "rdc_blocklist": {
+    "sudo_blocked": true,
+    "commands": 33,
+    "original_restored": true
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "observed_on": "2026-10-19",
+  "mode": "two_public_collection_passes_no_production_access",
+  "production_changed": false,
+  "sources": {
+    "smbc": {
+      "first": {
+        "status": "ok",
+        "jobs": 4,
+        "seconds": 50.268,
+        "requests": 26,
+        "examined": 173,
+        "selected": 4,
+        "rejected": {
+          "no_title_match": 125,
+          "excluded_title:support": 11,
+          "excluded_title:legal": 6,
+          "excluded_title:compliance": 7,
+          "excluded_title:product control": 1,
+          "excluded_title:operations": 8,
+          "excluded_title:audit": 7,
+          "excluded_title:settlements": 1,
+          "excluded_title:business analyst": 2,
+          "talent_community": 1
+        },
+        "gaps": [],
+        "conflicts": 0
+      },
+      "second": {
+        "status": "ok",
+        "jobs": 4,
+        "seconds": 50.24,
+        "requests": 26,
+        "examined": 173,
+        "selected": 4,
+        "rejected": {
+          "no_title_match": 125,
+          "excluded_title:support": 11,
+          "excluded_title:legal": 6,
+          "excluded_title:compliance": 7,
+          "excluded_title:product control": 1,
+          "excluded_title:operations": 8,
+          "excluded_title:audit": 7,
+          "excluded_title:settlements": 1,
+          "excluded_title:business analyst": 2,
+          "talent_community": 1
+        },
+        "gaps": [],
+        "conflicts": 0
+      },
+      "semantic_fields_identical": true
+    },
+    "us_bank": {
+      "first": {
+        "status": "ok",
+        "jobs": 19,
+        "seconds": 144.561,
+        "requests": 73,
+        "examined": 511,
+        "selected": 19,
+        "rejected": {
+          "excluded_title:accountant": 8,
+          "excluded_title:operations": 20,
+          "no_title_match": 434,
+          "excluded_title:audit": 3,
+          "excluded_title:market risk": 2,
+          "excluded_title:product manager": 10,
+          "excluded_title:infrastructure": 2,
+          "excluded_title:compliance": 3,
+          "excluded_title:marketing": 2,
+          "excluded_title:risk analyst": 1,
+          "excluded_title:human resources": 1,
+          "excluded_title:support": 4,
+          "excluded_title:registration": 1,
+          "excluded_title:summer": 1
+        },
+        "gaps": [],
+        "conflicts": 0
+      },
+      "second": {
+        "status": "error",
+        "seconds": 117.561,
+        "requests": 59,
+        "error": "SnapshotChanged",
+        "message": "Workday pagination repeated a posting"
+      },
+      "failed_snapshot_not_imported": true
+    }
+  },
+  "remaining_incidents": [
+    "U.S. Bank pagination remains intermittent; no complete recovery confirmed in production.",
+    "Nomura campus awaiting human intervention as requested; no CAPTCHA bypass."
+  ]
+}

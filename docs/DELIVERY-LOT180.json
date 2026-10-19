@@ -163,7 +163,7 @@
   },
   "validation": {
     "run_id": 39309313310,
-    "checked_at": "2026-10-19 19:25:52 UTC",
+    "checked_at": "2026-10-19T20:25:18Z",
     "jobs": [
       {
         "id": 118254502222,
@@ -174,24 +174,30 @@
       {
         "id": 118254502590,
         "name": "checks (3.12)",
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
       {
         "id": 118254502659,
         "name": "checks (3.11)",
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
       {
         "id": 118254503012,
         "name": "checks (3.13)",
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
       {
         "id": 118254503036,
         "name": "checks (3.14)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118277078424,
+        "name": "container",
         "status": "completed",
         "conclusion": "success"
       }
@@ -200,7 +206,7 @@
     "targeted_python_passed": 92,
     "new_cases": 9,
     "node_passed": 34,
-    "full_matrix_status": "in_progress"
+    "full_matrix_status": "completed_success"
   },
   "final_audit": {
     "status": "ok",
@@ -248,7 +254,7 @@
         "last_snapshot_jobs": 23,
         "failure": {
           "code": "access_restricted",
-          "label": "Le portail refuse temporairement l’accès."
+          "label": "Le portail refuse temporairement l\u2019acc\u00e8s."
         },
         "schedule": {
           "interval_seconds": 300,
@@ -288,7 +294,7 @@
         "last_snapshot_jobs": 4,
         "failure": {
           "code": "access_restricted",
-          "label": "Le portail refuse temporairement l’accès."
+          "label": "Le portail refuse temporairement l\u2019acc\u00e8s."
         },
         "schedule": {
           "interval_seconds": 1800,
@@ -340,7 +346,7 @@
         "last_snapshot_jobs": 19,
         "failure": {
           "code": "pagination",
-          "label": "Les pages de résultats sont incohérentes ; import interrompu."
+          "label": "Les pages de r\u00e9sultats sont incoh\u00e9rentes ; import interrompu."
         },
         "schedule": {
           "interval_seconds": 1800,
@@ -360,7 +366,7 @@
         "last_snapshot_jobs": 4,
         "failure": {
           "code": "timeout",
-          "label": "La connexion ou la collecte n’a pas abouti à temps."
+          "label": "La connexion ou la collecte n\u2019a pas abouti \u00e0 temps."
         },
         "schedule": {
           "interval_seconds": 1800,
@@ -417,8 +423,8 @@
         "image": "caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
       }
     ],
-    "statuts_text": "📡 Radar · actif\nCouverture · 128 sources · 116 employeurs\n121/128 sources à jour · alertes actives\nNouvelles offres · tous scores, même 0\nÉtats automatiques · 13:00 · 18:00 (Paris)\n\nDernier cycle · 19/10/2026 · 21:23\nDernier signal · 19/10/2026 · 21:23\n\nNomura · Campus · collecte ancienne\nReprise possible dès 19/10/2026 · 22:17\nBNP Paribas · collecte ancienne\nReprise possible dès 19/10/2026 · 22:07\nJefferies · Campus · Le site demande un CAPTCHA.\nReprise possible dès 19/10/2026 · 22:02\nBNP Paribas · Campus · Le portail refuse temporairement l’accès.\nReprise possible dès 19/10/2026 · 22:10\nState Street · fiches incomplètes\nU.S. Bank · Les pages de résultats sont incohérentes ; import interrompu.\nReprise possible dès 19/10/2026 · 21:25\nSMBC · La connexion ou la collecte n’a pas abouti à temps.\nReprise possible dès 19/10/2026 · 21:59\n\n193 alertes envoyées · 7 en attente",
-    "daily_status_text": "<b>📡 Radar · actif</b>\nVeille 24 h/24 · 128 sources · 116 employeurs\nSources à jour : 121/128 · 7 à surveiller\nAlertes actives · nouvelles offres : tous scores, même 0\nDernier signal · 19/10/2026 · 21:23",
+    "statuts_text": "\ud83d\udce1 Radar \u00b7 actif\nCouverture \u00b7 128 sources \u00b7 116 employeurs\n121/128 sources \u00e0 jour \u00b7 alertes actives\nNouvelles offres \u00b7 tous scores, m\u00eame 0\n\u00c9tats automatiques \u00b7 13:00 \u00b7 18:00 (Paris)\n\nDernier cycle \u00b7 19/10/2026 \u00b7 21:23\nDernier signal \u00b7 19/10/2026 \u00b7 21:23\n\nNomura \u00b7 Campus \u00b7 collecte ancienne\nReprise possible d\u00e8s 19/10/2026 \u00b7 22:17\nBNP Paribas \u00b7 collecte ancienne\nReprise possible d\u00e8s 19/10/2026 \u00b7 22:07\nJefferies \u00b7 Campus \u00b7 Le site demande un CAPTCHA.\nReprise possible d\u00e8s 19/10/2026 \u00b7 22:02\nBNP Paribas \u00b7 Campus \u00b7 Le portail refuse temporairement l\u2019acc\u00e8s.\nReprise possible d\u00e8s 19/10/2026 \u00b7 22:10\nState Street \u00b7 fiches incompl\u00e8tes\nU.S. Bank \u00b7 Les pages de r\u00e9sultats sont incoh\u00e9rentes ; import interrompu.\nReprise possible d\u00e8s 19/10/2026 \u00b7 21:25\nSMBC \u00b7 La connexion ou la collecte n\u2019a pas abouti \u00e0 temps.\nReprise possible d\u00e8s 19/10/2026 \u00b7 21:59\n\n193 alertes envoy\u00e9es \u00b7 7 en attente",
+    "daily_status_text": "<b>\ud83d\udce1 Radar \u00b7 actif</b>\nVeille 24 h/24 \u00b7 128 sources \u00b7 116 employeurs\nSources \u00e0 jour : 121/128 \u00b7 7 \u00e0 surveiller\nAlertes actives \u00b7 nouvelles offres : tous scores, m\u00eame 0\nDernier signal \u00b7 19/10/2026 \u00b7 21:23",
     "backup_service": {
       "status": "ok",
       "backup": "cloud-20261019T192117102979Z-0d9247c8372a4011bb27216ec41af595.zip",

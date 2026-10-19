@@ -14,6 +14,15 @@ statuts, notes, contacts, dates et prochaines actions. Une révision protège le
 modifications entre appareils ; chaque changement est historisé. Les exports
 HTML et le serveur local par défaut restent des instantanés en lecture seule.
 
+La version **lots 181–182, publiée mais pas encore installée**, ajoute une page
+de chargement légère. Le navigateur demande ensuite les données complètes à
+`api/snapshot`, avec la même session privée et son jeton ; une erreur est visible
+et ne se transforme pas en liste vide. L'état du radar est ensuite relu à
+`api/services` toutes les quinze secondes, indépendamment du calcul des offres.
+Les filtres sont repliables sur téléphone, sans perdre les sélections.
+Le transfert complet des descriptions reste à améliorer : la première réponse
+rapide n'est pas une mesure du délai avant consultation de toutes les offres.
+
 Le Dashboard s’ouvre avec un lien HTTPS privé à enregistrer en favori, sans
 saisie d’identifiant ou de mot de passe. Ce lien contient une clé aléatoire
 de 256 bits ; toute personne qui reçoit le lien peut consulter la page et modifier

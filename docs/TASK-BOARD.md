@@ -1,5 +1,26 @@
 # Carnet des tâches — 19 octobre 2026
 
+## Lots 181–182 publiés, installation préparée
+
+Le code **dfe25f6** est publié et le paquet vérifié dans un dossier isolé du VPS.
+Il n'est pas encore en service ; la fenêtre sudo des lots précédents est fermée.
+La version installée reste celle des lots 177–180 ci-dessous.
+
+Contrôle en lecture seule au **19/10/2026 à 20:26 UTC** : radar actif,
+**128 sources / 116 employeurs, 125 à jour**, 2 019 offres enregistrées.
+HTTPS répond en 15,442 secondes avec la version actuelle ; la nouvelle version
+n'a pas encore fait l'objet d'une mesure en production.
+
+| Lot | État | Résultat / prochaine vérification |
+|---|---|---|
+| 181 — activité et collectes | Développé, diagnostic partiel | État du radar relu toutes les 15 s dans le Dashboard ; SMBC concordant sur deux passages ; U.S. Bank réussit puis échoue sur pagination incohérente, aucun import incomplet. Ne pas clôturer cet incident. |
+| 182 / jalon 176 — mobile | Publié et testé, non installé | Première page légère, chargement complet authentifié, filtres repliables avec compteur. Parcours mobile et souhaits/suivi testés ; vitesse réelle sur OVH à mesurer lors de l'installation. |
+
+**5 783 tests Python 3.14 et 53 tests JavaScript passent.** Les autres versions
+de la nouvelle CI sont en cours. L'image Docker locale et le paquet installé
+isolément sur OVH passent leurs contrôles. La CI complète du lot 180 est désormais
+verte, Docker compris. [Validation](VALIDATION-LOTS181-182.md) · [Preuves](DELIVERY-LOTS181-182.json).
+
 ## Lots 177 à 180 installés et vérifiés
 
 Au **19/10/2026 à 19:23 UTC** : **128 sources / 116 employeurs**, **121 à jour et 7 à surveiller**. Radar, Dashboard, Telegram et sauvegardes actifs. Même accès privé, alertes tous scores, off-cycle/stages longs 2027, souhaits et suivi conservés. Les quinze contrôles de conservation passent ; liste originale des 33 commandes bloquées rétablie, dont sudo.
@@ -27,9 +48,9 @@ Au **19/10/2026 à 19:23 UTC** : **128 sources / 116 employeurs**, **121 à jour
 
 | Priorité / tâche | Livrable et critère de fin |
 |---|---|
-| 181 / haute — incidents de collecte | Recontrôler la pagination U.S. Bank sans publier un mélange de pages ; mesurer le timeout SMBC par étape ; chercher une preuve officielle des deux références State Street. Garder chaque lacune et les refus BNP/Jefferies explicites. Nomura campus reste en attente conformément au choix du propriétaire. Aucun CAPTCHA contourné, aucune date ou fiche inventée. |
+| 181 / haute — incidents de collecte | Deux passages SMBC concordants ; U.S. Bank intermittent, collecte invalide refusée. Confirmer les prochains succès en production et poursuivre la recherche officielle des deux références State Street. Garder chaque lacune et les refus BNP/Jefferies explicites. Nomura campus reste en attente conformément au choix du propriétaire. Aucun CAPTCHA contourné, aucune date ou fiche inventée. |
 | 170 et 173 / haute — qualité des offres | Auditer les missions, pays, conditions et durées QRT/CFM et autres ajouts ; mesurer les faux négatifs sur les bons profils, avec contre-exemples risque/support/Summer ; conserver tous les scores, sans bonus par employeur. |
-| 176 / haute — premier affichage mobile | Réduire le calcul initial et le transfert des descriptions ; cible de première vue à cinq secondes à vérifier sur le VPS. Le dernier accès complet reste à 14.012 secondes, cible non atteinte. Préserver filtres, compteurs globaux, preuves et révisions de suivi. |
+| 176 / haute — premier affichage mobile | Premier jalon développé au lot 182 : page légère et filtres repliables, à installer et mesurer sur OVH. Les descriptions restent chargées ensemble ; les charger à la demande au prochain jalon. La cible de vue complète à cinq secondes n'est pas atteinte ; préserver filtres, compteurs globaux, preuves et révisions de suivi. |
 
 Les bilans ci-dessous conservent leurs chiffres historiques.
 
