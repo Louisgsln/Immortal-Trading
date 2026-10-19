@@ -15,6 +15,7 @@ from trading_radar.linkedin_import import (
     parse_offer,
     posting_url,
 )
+from trading_radar.models import WithdrawnPosting
 from trading_radar.normalizer import normalize
 from trading_radar.runtime_status import runtime_report
 from trading_radar.scoring import score_job
@@ -146,6 +147,47 @@ def test_paste_cannot_refresh_or_reopen_matching_official_offer(local, repo):
         repo.db.execute("SELECT COUNT(*) FROM job_sources WHERE source=?", (SOURCE,)).fetchone()[0]
         == 0
     )
+
+
+def test_later_official_verification_keeps_tracking_and_can_close_despite_manual_origin(
+    local, repo
+):
+    imported, _ = import_offer(local, BODY)
+    repo.update_application(imported.id, {"status": "Applied", "notes": "Keep this"})
+    set_wishlist(local, imported.id, True, actor="telegram")
+    official = score_job(
+        normalize(
+            parse_offer(BODY).model_copy(
+                update={
+                    "source": "test",
+                    "source_type": "official",
+                    "external_id": "employer-1",
+                    "apply_url": "https://bank.example/jobs/employer-1",
+                }
+            )
+        ),
+        local.keywords,
+    )
+    with repo.transaction():
+        verified, _ = repo.upsert(official)
+    assert verified.id == imported.id and verified.source == "test"
+    assert not read_jobs(local)[0].get("manual_import")
+    with repo.transaction():
+        assert (
+            repo.withdraw(
+                "test",
+                WithdrawnPosting(
+                    external_id="employer-1",
+                    apply_url=verified.apply_url,
+                    evidence="http_410",
+                ),
+            )
+            == 1
+        )
+    assert not repo.get(imported.id).is_active
+    assert repo.application(imported.id).status == "Applied"
+    assert repo.application(imported.id).notes == "Keep this"
+    assert read_wishlist(local, imported.id)["saved"]
 
 
 def test_different_company_for_existing_linkedin_id_is_rejected(local, repo):

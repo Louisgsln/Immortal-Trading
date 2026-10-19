@@ -136,6 +136,12 @@ def import_offer(config: Config, body: str) -> tuple[Job, bool]:
             if existing:
                 return existing, False
             job, _ = repo.upsert(incoming)
+            # A manual observation can be bookmarked, but must never keep a
+            # later employer-verified offer open after its official withdrawal.
+            repo.db.execute(
+                "UPDATE job_sources SET is_active=0 WHERE source=? AND job_id=?",
+                (SOURCE, job.id),
+            )
             return job, True
     finally:
         repo.close()
