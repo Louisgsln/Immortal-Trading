@@ -323,8 +323,8 @@ class WorkdayCollector:
                 # invent a title/path or treat the reference as a closed vacancy.
                 pattern = {
                     "deutsche_bank": r"R[0-9]{7}",
-                    "citi": r"[0-9]{8}",
-                    "citi_campus": r"[0-9]{8}",
+                    "citi": r"[0-9]{8,9}",
+                    "citi_campus": r"[0-9]{8,9}",
                     "bp": r"RQ[0-9]{6}",
                     "morgan_stanley": r"JR[0-9]{6}",
                     "bank_of_america": r"[0-9]{8}",

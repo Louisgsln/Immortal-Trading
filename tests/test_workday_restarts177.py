@@ -154,6 +154,31 @@ def test_bofa_opaque_reference_preserves_position_and_visible_coverage_gap(monke
     assert gaps == {"26022615"}
 
 
+@pytest.mark.parametrize("source", ["citi", "citi_campus"])
+def test_observed_nine_digit_citi_reference_is_a_gap_without_invented_fields(monkeypatch, source):
+    rows, gaps = execute(
+        monkeypatch,
+        lambda body: httpx.Response(
+            200, json={"total": 1, "jobPostings": [{"bulletFields": ["261001222"]}]}
+        ),
+        source=source,
+    )
+    assert rows == {"unavailable:261001222": {"bulletFields": ["261001222"]}}
+    assert gaps == {"261001222"}
+
+
+@pytest.mark.parametrize("reference", ["2610012", "2610012222", "JR261001222"])
+def test_new_citi_length_does_not_accept_other_incomplete_rows(monkeypatch, reference):
+    with pytest.raises(SourceUnavailable, match="malformed"):
+        execute(
+            monkeypatch,
+            lambda body: httpx.Response(
+                200, json={"total": 1, "jobPostings": [{"bulletFields": [reference]}]}
+            ),
+            source="citi",
+        )
+
+
 @pytest.mark.parametrize(
     "placeholder",
     [
