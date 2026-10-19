@@ -325,5 +325,96 @@
         }
       ]
     }
+  },
+  "deployment_revalidation": {
+    "mode": "built_image_public_collection",
+    "results": {
+      "lloyds": {
+        "status": "ok",
+        "captured_at": "2026-10-19T19:00:31.939665+00:00",
+        "jobs": 4,
+        "withdrawn": 0,
+        "gaps": [],
+        "conflicts": 0,
+        "requests": 10,
+        "seconds": 18.571,
+        "selection": {
+          "examined": 16,
+          "selected": 4
+        }
+      },
+      "lombard_odier": {
+        "status": "ok",
+        "captured_at": "2026-10-19T19:00:35.905862+00:00",
+        "jobs": 4,
+        "withdrawn": 0,
+        "gaps": [],
+        "conflicts": 0,
+        "requests": 12,
+        "seconds": 22.477,
+        "selection": {
+          "examined": 42,
+          "selected": 4
+        }
+      },
+      "janus_henderson": {
+        "status": "ok",
+        "captured_at": "2026-10-19T19:00:47.886940+00:00",
+        "jobs": 4,
+        "withdrawn": 0,
+        "gaps": [],
+        "conflicts": 0,
+        "requests": 17,
+        "seconds": 34.411,
+        "selection": {
+          "examined": 73,
+          "selected": 4
+        }
+      },
+      "belvedere": {
+        "status": "ok",
+        "captured_at": "2026-10-19T19:00:34.948043+00:00",
+        "jobs": 7,
+        "withdrawn": 0,
+        "gaps": [],
+        "conflicts": 0,
+        "requests": 2,
+        "seconds": 2.961,
+        "selection": {
+          "examined": 19,
+          "selected": 7
+        }
+      },
+      "tibra": {
+        "status": "ok",
+        "captured_at": "2026-10-19T19:00:43.156602+00:00",
+        "jobs": 0,
+        "withdrawn": 0,
+        "gaps": [],
+        "conflicts": 0,
+        "requests": 5,
+        "seconds": 8.162,
+        "selection": {
+          "examined": 0,
+          "selected": 0
+        }
+      },
+      "eclipse": {
+        "status": "ok",
+        "captured_at": "2026-10-19T19:00:38.094583+00:00",
+        "jobs": 8,
+        "withdrawn": 0,
+        "gaps": [],
+        "conflicts": 0,
+        "requests": 2,
+        "seconds": 2.141,
+        "selection": {
+          "examined": 17,
+          "selected": 8
+        }
+      }
+    },
+    "silent_initial_import_verified": true,
+    "all_six_fresh_at": "2026-10-19T19:23:43.485938+00:00"
   }
 }

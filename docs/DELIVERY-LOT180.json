@@ -1,0 +1,496 @@
+{
+  "lot": 180,
+  "status": "deployed",
+  "code_commit": "9041be5d1c40a7ebb45ce9d6e7c5cefa3862cb20",
+  "deployed_at": "2026-10-19T19:21:42Z",
+  "runtime_build": {
+    "status": "ok",
+    "commit": "9041be5d1c40a7ebb45ce9d6e7c5cefa3862cb20",
+    "image": "immortal-trading:lot180-state-street-20261019",
+    "contract": {
+      "asset_hashes": "verified",
+      "controls": 89,
+      "jobs": 0,
+      "modules": 7,
+      "status": "ok"
+    }
+  },
+  "production_backup": {
+    "backup": "pre-lot180-state-street-20261019-b906882eb644469fa24530f57453e2ce.zip",
+    "backup_verified": true,
+    "counts": {
+      "alert_history": 386,
+      "alerts": 199,
+      "application_history": 2,
+      "applications": 2016,
+      "jobs": 2016
+    },
+    "schema_version": 4,
+    "stage": "baseline"
+  },
+  "deployment": {
+    "commit": "9041be5d1c40a7ebb45ce9d6e7c5cefa3862cb20",
+    "dashboard_and_gateway_unchanged": true,
+    "deployed_at": "2026-10-19T19:21:42Z",
+    "import": {
+      "backup_restored_and_verified": false,
+      "captured_at": "2026-10-19T19:19:47.778150+00:00",
+      "checks": {
+        "alert_history_preserved": true,
+        "alerts_preserved": true,
+        "application_history_preserved": true,
+        "applications_preserved": true,
+        "database_inode_preserved": true,
+        "job_ids_preserved": true,
+        "no_closure_from_missing_reference": true,
+        "wishlist_history_preserved": true,
+        "wishlist_preserved": true
+      },
+      "closed": 0,
+      "counts_after": {
+        "alert_history": 386,
+        "alerts": 200,
+        "application_history": 2,
+        "applications": 2017,
+        "jobs": 2017
+      },
+      "counts_before": {
+        "alert_history": 386,
+        "alerts": 199,
+        "application_history": 2,
+        "applications": 2016,
+        "jobs": 2016
+      },
+      "listing_gaps": {
+        "state_street": [
+          "R-794329",
+          "R-796523"
+        ]
+      },
+      "mode": "apply",
+      "new": 1,
+      "received": 40,
+      "status": "ok",
+      "updated": 0
+    },
+    "live": {
+      "health": "critical",
+      "watcher": "active"
+    },
+    "preservation": {
+      "checks": {
+        "alert_history_preserved": true,
+        "application_history_preserved": true,
+        "application_ids_preserved": true,
+        "application_rows_preserved": true,
+        "backup_verified": true,
+        "database_inode_preserved": true,
+        "heartbeat_binding_preserved": true,
+        "job_ids_preserved": true,
+        "sent_alerts_preserved": true,
+        "telegram_binding_preserved": true,
+        "telegram_cursor_preserved": true,
+        "telegram_digest_preferences_preserved": true,
+        "wishlist_history_preserved": true,
+        "wishlist_inode_preserved": true,
+        "wishlist_members_preserved": true
+      },
+      "counts_after": {
+        "alert_history": 386,
+        "alerts": 200,
+        "application_history": 2,
+        "applications": 2017,
+        "jobs": 2017
+      },
+      "counts_before": {
+        "alert_history": 386,
+        "alerts": 199,
+        "application_history": 2,
+        "applications": 2016,
+        "jobs": 2016
+      },
+      "database": {
+        "schema_version": 4,
+        "status": "ok"
+      },
+      "stage": "verification"
+    },
+    "profile_and_preferences_preserved": true,
+    "simulation": {
+      "backup_restored_and_verified": true,
+      "captured_at": "2026-10-19T19:19:47.778150+00:00",
+      "checks": {
+        "alert_history_preserved": true,
+        "alerts_preserved": true,
+        "application_history_preserved": true,
+        "applications_preserved": true,
+        "database_inode_preserved": true,
+        "job_ids_preserved": true,
+        "no_closure_from_missing_reference": true,
+        "wishlist_history_preserved": true,
+        "wishlist_preserved": true
+      },
+      "closed": 0,
+      "counts_after": {
+        "alert_history": 386,
+        "alerts": 200,
+        "application_history": 2,
+        "applications": 2017,
+        "jobs": 2017
+      },
+      "counts_before": {
+        "alert_history": 386,
+        "alerts": 199,
+        "application_history": 2,
+        "applications": 2016,
+        "jobs": 2016
+      },
+      "listing_gaps": {
+        "state_street": [
+          "R-794329",
+          "R-796523"
+        ]
+      },
+      "mode": "simulate",
+      "new": 1,
+      "received": 40,
+      "status": "ok",
+      "updated": 0
+    },
+    "status": "ok",
+    "workers_image": "immortal-trading:lot180-state-street-20261019",
+    "workers_image_id": "sha256:b00c7b35c217cb9c7e3e676932675d7fefdfd69c6b4a4bc5f655d2d10bb609a5"
+  },
+  "validation": {
+    "run_id": 39309313310,
+    "checked_at": "2026-10-19 19:25:52 UTC",
+    "jobs": [
+      {
+        "id": 118254502222,
+        "name": "dashboard",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 118254502590,
+        "name": "checks (3.12)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118254502659,
+        "name": "checks (3.11)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118254503012,
+        "name": "checks (3.13)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 118254503036,
+        "name": "checks (3.14)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "python_314_passed": 5752,
+    "targeted_python_passed": 92,
+    "new_cases": 9,
+    "node_passed": 34,
+    "full_matrix_status": "in_progress"
+  },
+  "final_audit": {
+    "status": "ok",
+    "pulse_advanced": true,
+    "source_counts": {
+      "enabled": 128,
+      "employers": 116,
+      "fresh": 121
+    },
+    "source_summary": {
+      "fresh": 121,
+      "stale": 2,
+      "recent_failure": 4,
+      "partial": 1
+    },
+    "incidents": [
+      {
+        "source": "nomura_campus",
+        "company": "Nomura",
+        "status": "stale",
+        "last_success": "2026-10-13T05:27:17.639496+00:00",
+        "last_failure": "2026-10-19T19:17:58.024245+00:00",
+        "age_hours": 157.941,
+        "consecutive_failures": 127,
+        "last_snapshot_jobs": 8,
+        "failure": {
+          "code": "redirect",
+          "label": "Le portail renvoie une redirection inattendue."
+        },
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-19T20:17:58.024245+00:00",
+          "eligible_now": false
+        }
+      },
+      {
+        "source": "bnp_paribas",
+        "company": "BNP Paribas",
+        "status": "stale",
+        "last_success": "2026-09-16T19:06:21.927986+00:00",
+        "last_failure": "2026-10-19T19:07:43.539536+00:00",
+        "age_hours": 792.289,
+        "consecutive_failures": 357,
+        "last_snapshot_jobs": 23,
+        "failure": {
+          "code": "access_restricted",
+          "label": "Le portail refuse temporairement l’accès."
+        },
+        "schedule": {
+          "interval_seconds": 300,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-19T20:07:43.539536+00:00",
+          "eligible_now": false
+        }
+      },
+      {
+        "source": "jefferies_campus",
+        "company": "Jefferies",
+        "status": "recent_failure",
+        "last_success": "2026-10-19T18:10:36.078980+00:00",
+        "last_failure": "2026-10-19T19:02:48.889901+00:00",
+        "age_hours": 1.219,
+        "consecutive_failures": 1,
+        "last_snapshot_jobs": 3,
+        "failure": {
+          "code": "captcha",
+          "label": "Le site demande un CAPTCHA."
+        },
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-19T20:02:48.889901+00:00",
+          "eligible_now": false
+        }
+      },
+      {
+        "source": "bnp_campus",
+        "company": "BNP Paribas",
+        "status": "recent_failure",
+        "last_success": "2026-10-19T09:52:11.932301+00:00",
+        "last_failure": "2026-10-19T19:10:22.771030+00:00",
+        "age_hours": 9.525,
+        "consecutive_failures": 7,
+        "last_snapshot_jobs": 4,
+        "failure": {
+          "code": "access_restricted",
+          "label": "Le portail refuse temporairement l’accès."
+        },
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-19T20:10:22.771030+00:00",
+          "eligible_now": false
+        },
+        "listing_gaps": [
+          "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-global-markets-theam-fund-sales-internship-2",
+          "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-global-markets-theam-fund-sales-internship-rome-italy",
+          "https://group.bnpparibas/en/careers/job-offer/london-long-term-internship-2026-global-markets-intern",
+          "https://group.bnpparibas/en/careers/job-offer/praktikum-all-genders-im-bereich-global-markets-mit-themenschwerpunkt-structured-product-sales-1",
+          "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-real-estate-capital-markets-internship-3",
+          "https://group.bnpparibas/en/careers/job-offer/bnp-paribas-corporate-institutional-banking-real-estate-capital-markets-internship-4",
+          "https://group.bnpparibas/en/careers/job-offer/capital-and-portfolio-management-internship-real-estate-capital-markets-emea",
+          "https://group.bnpparibas/en/careers/job-offer/financial-international-markets-trainee-1",
+          "https://group.bnpparibas/en/careers/job-offer/risk-quantitative-analyst-trainee"
+        ]
+      },
+      {
+        "source": "state_street",
+        "company": "State Street",
+        "status": "partial",
+        "last_success": "2026-10-19T19:20:55.342183+00:00",
+        "last_failure": "2026-10-19T18:03:26.447418+00:00",
+        "age_hours": 0.047,
+        "consecutive_failures": 0,
+        "last_snapshot_jobs": 40,
+        "failure": null,
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 1800,
+          "next_eligible_at": "2026-10-19T19:50:55.342183+00:00",
+          "eligible_now": false
+        },
+        "listing_gaps": [
+          "R-794329",
+          "R-796523"
+        ]
+      },
+      {
+        "source": "us_bank",
+        "company": "U.S. Bank",
+        "status": "recent_failure",
+        "last_success": "2026-10-19T17:29:04.574764+00:00",
+        "last_failure": "2026-10-19T18:25:36.482731+00:00",
+        "age_hours": 1.911,
+        "consecutive_failures": 1,
+        "last_snapshot_jobs": 19,
+        "failure": {
+          "code": "pagination",
+          "label": "Les pages de résultats sont incohérentes ; import interrompu."
+        },
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-19T19:25:36.482731+00:00",
+          "eligible_now": false
+        }
+      },
+      {
+        "source": "smbc",
+        "company": "SMBC",
+        "status": "recent_failure",
+        "last_success": "2026-10-19T18:06:39.944592+00:00",
+        "last_failure": "2026-10-19T18:59:23.512972+00:00",
+        "age_hours": 1.284,
+        "consecutive_failures": 1,
+        "last_snapshot_jobs": 4,
+        "failure": {
+          "code": "timeout",
+          "label": "La connexion ou la collecte n’a pas abouti à temps."
+        },
+        "schedule": {
+          "interval_seconds": 1800,
+          "cooldown_seconds": 3600,
+          "next_eligible_at": "2026-10-19T19:59:23.512972+00:00",
+          "eligible_now": false
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "immortal-trading-cloud-radar-1",
+        "running": true,
+        "health": "healthy",
+        "restarts": 0,
+        "oom": false,
+        "restart_policy": "unless-stopped",
+        "image": "immortal-trading:lot180-state-street-20261019"
+      },
+      {
+        "name": "immortal-trading-cloud-telegram-1",
+        "running": true,
+        "health": null,
+        "restarts": 0,
+        "oom": false,
+        "restart_policy": "unless-stopped",
+        "image": "immortal-trading:lot180-state-street-20261019"
+      },
+      {
+        "name": "immortal-trading-cloud-backups-1",
+        "running": true,
+        "health": null,
+        "restarts": 0,
+        "oom": false,
+        "restart_policy": "unless-stopped",
+        "image": "immortal-trading:lot180-state-street-20261019"
+      },
+      {
+        "name": "immortal-trading-dashboard-dashboard-1",
+        "running": true,
+        "health": "healthy",
+        "restarts": 0,
+        "oom": false,
+        "restart_policy": "unless-stopped",
+        "image": "immortal-trading:lots177-179-recovery-sources-linkedin-20261019"
+      },
+      {
+        "name": "immortal-trading-dashboard-https-1",
+        "running": true,
+        "health": null,
+        "restarts": 0,
+        "oom": false,
+        "restart_policy": "unless-stopped",
+        "image": "caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"
+      }
+    ],
+    "statuts_text": "📡 Radar · actif\nCouverture · 128 sources · 116 employeurs\n121/128 sources à jour · alertes actives\nNouvelles offres · tous scores, même 0\nÉtats automatiques · 13:00 · 18:00 (Paris)\n\nDernier cycle · 19/10/2026 · 21:23\nDernier signal · 19/10/2026 · 21:23\n\nNomura · Campus · collecte ancienne\nReprise possible dès 19/10/2026 · 22:17\nBNP Paribas · collecte ancienne\nReprise possible dès 19/10/2026 · 22:07\nJefferies · Campus · Le site demande un CAPTCHA.\nReprise possible dès 19/10/2026 · 22:02\nBNP Paribas · Campus · Le portail refuse temporairement l’accès.\nReprise possible dès 19/10/2026 · 22:10\nState Street · fiches incomplètes\nU.S. Bank · Les pages de résultats sont incohérentes ; import interrompu.\nReprise possible dès 19/10/2026 · 21:25\nSMBC · La connexion ou la collecte n’a pas abouti à temps.\nReprise possible dès 19/10/2026 · 21:59\n\n193 alertes envoyées · 7 en attente",
+    "daily_status_text": "<b>📡 Radar · actif</b>\nVeille 24 h/24 · 128 sources · 116 employeurs\nSources à jour : 121/128 · 7 à surveiller\nAlertes actives · nouvelles offres : tous scores, même 0\nDernier signal · 19/10/2026 · 21:23",
+    "backup_service": {
+      "status": "ok",
+      "backup": "cloud-20261019T192117102979Z-0d9247c8372a4011bb27216ec41af595.zip",
+      "created_at": "2026-10-19T19:21:18.108115+00:00",
+      "observed_at": "2026-10-19T19:21:24.635209+00:00"
+    },
+    "policy": {
+      "include_internships": true,
+      "internship_formats": [
+        "off_cycle",
+        "long"
+      ],
+      "target_year": 2027,
+      "all_new_scores": true,
+      "alerts": true,
+      "heartbeat_times": [
+        "13:00",
+        "18:00"
+      ],
+      "heartbeat_enabled": true,
+      "telegram_listener": true
+    },
+    "preservation": {
+      "checks": {
+        "alert_history_preserved": true,
+        "application_history_preserved": true,
+        "application_ids_preserved": true,
+        "application_rows_preserved": true,
+        "backup_verified": true,
+        "database_inode_preserved": true,
+        "heartbeat_binding_preserved": true,
+        "job_ids_preserved": true,
+        "sent_alerts_preserved": true,
+        "telegram_binding_preserved": true,
+        "telegram_cursor_preserved": true,
+        "telegram_digest_preferences_preserved": true,
+        "wishlist_history_preserved": true,
+        "wishlist_inode_preserved": true,
+        "wishlist_members_preserved": true
+      },
+      "counts_after": {
+        "alert_history": 386,
+        "alerts": 200,
+        "application_history": 2,
+        "applications": 2017,
+        "jobs": 2017
+      },
+      "counts_before": {
+        "alert_history": 386,
+        "alerts": 193,
+        "application_history": 2,
+        "applications": 1983,
+        "jobs": 1983
+      },
+      "database": {
+        "schema_version": 4,
+        "status": "ok"
+      },
+      "stage": "verification"
+    }
+  },
+  "authorization": {
+    "temporary_sudo_authorized_by_user": true,
+    "sudo_blocked": true,
+    "blocked_commands": 33,
+    "original_blocklist_restored": true
+  },
+  "masked_references": [
+    "R-794329",
+    "R-796523"
+  ],
+  "no_invented_job_for_masked_reference": true,
+  "source_partial_and_visible": true,
+  "manual_telegram_test_messages": 0
+}

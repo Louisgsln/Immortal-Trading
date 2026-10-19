@@ -1,24 +1,24 @@
 {
-  "observed_at": "2026-10-19T17:26:59.643360+00:00",
-  "installed_sources": 122,
-  "employers": 110,
-  "fresh": 110,
+  "observed_at": "2026-10-19T19:23:43.485938+00:00",
+  "installed_sources": 128,
+  "employers": 116,
+  "fresh": 121,
   "http_status": 200,
-  "http_seconds": 14.796,
+  "http_seconds": 14.012,
   "watcher": {
     "status": "active",
     "phase": "scanning",
-    "at": "2026-10-19T17:26:41.283309+00:00",
-    "age_seconds": 11
+    "at": "2026-10-19T19:23:53.076577+00:00",
+    "age_seconds": 2
   },
   "all_new_scores": true,
   "summary": {
-    "total": 1983,
-    "active": 1957,
-    "high_priority": 392,
-    "relevant": 586,
-    "fresh_sources": 110,
-    "enabled_sources": 122
+    "total": 2017,
+    "active": 1989,
+    "high_priority": 403,
+    "relevant": 597,
+    "fresh_sources": 121,
+    "enabled_sources": 128
   },
   "sources": [
     {
@@ -88,6 +88,12 @@
       "status": "fresh"
     },
     {
+      "source": "belvedere",
+      "employer": "Belvedere Trading",
+      "url": "https://jobs.lever.co/belvederetrading",
+      "status": "fresh"
+    },
+    {
       "source": "blackrock",
       "employer": "BlackRock",
       "url": "https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional",
@@ -106,16 +112,16 @@
       "status": "fresh"
     },
     {
-      "source": "bnp_campus",
-      "employer": "BNP Paribas",
-      "url": "https://group.bnpparibas/en/careers/all-job-offers/trainee-internship",
-      "status": "recent_failure"
-    },
-    {
       "source": "bnp_paribas",
       "employer": "BNP Paribas",
       "url": "https://group.bnpparibas/emploi-carriere/toutes-offres-emploi",
       "status": "stale"
+    },
+    {
+      "source": "bnp_campus",
+      "employer": "BNP Paribas",
+      "url": "https://group.bnpparibas/en/careers/all-job-offers/trainee-internship",
+      "status": "recent_failure"
     },
     {
       "source": "bp",
@@ -175,7 +181,7 @@
       "source": "citi",
       "employer": "Citi",
       "url": "https://citi.wd5.myworkdayjobs.com/2",
-      "status": "recent_failure"
+      "status": "fresh"
     },
     {
       "source": "citi_campus",
@@ -241,6 +247,12 @@
       "source": "dymon_asia",
       "employer": "Dymon Asia",
       "url": "https://job-boards.anz.greenhouse.io/dymonasiacapitalsingaporepteltd",
+      "status": "fresh"
+    },
+    {
+      "source": "eclipse",
+      "employer": "Eclipse Trading",
+      "url": "https://www.eclipsetrading.com/all-jobs/",
       "status": "fresh"
     },
     {
@@ -334,16 +346,16 @@
       "status": "fresh"
     },
     {
-      "source": "hsbc_graduates",
-      "employer": "HSBC",
-      "url": "https://www.hsbc.com/careers/students-and-graduates/find-a-programme",
-      "status": "stale"
-    },
-    {
       "source": "hsbc_professionals",
       "employer": "HSBC",
       "url": "https://portal.careers.hsbc.com/careers",
-      "status": "stale"
+      "status": "fresh"
+    },
+    {
+      "source": "hsbc_graduates",
+      "employer": "HSBC",
+      "url": "https://www.hsbc.com/careers/students-and-graduates/find-a-programme",
+      "status": "fresh"
     },
     {
       "source": "hudson_river_trading",
@@ -376,6 +388,12 @@
       "status": "fresh"
     },
     {
+      "source": "janus_henderson",
+      "employer": "Janus Henderson",
+      "url": "https://jobs.janushenderson.com/",
+      "status": "fresh"
+    },
+    {
       "source": "jefferies_campus",
       "employer": "Jefferies",
       "url": "https://jefferies.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/candidate/jobboard/vacancy/2/adv/",
@@ -397,6 +415,18 @@
       "source": "lazard_campus",
       "employer": "Lazard",
       "url": "https://icbpjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2",
+      "status": "fresh"
+    },
+    {
+      "source": "lloyds",
+      "employer": "Lloyds Banking Group",
+      "url": "https://lbg.wd3.myworkdayjobs.com/LBG_Careers",
+      "status": "fresh"
+    },
+    {
+      "source": "lombard_odier",
+      "employer": "Lombard Odier",
+      "url": "https://lombardodier.wd3.myworkdayjobs.com/Lombard_Odier_Careers",
       "status": "fresh"
     },
     {
@@ -472,15 +502,15 @@
       "status": "fresh"
     },
     {
-      "source": "nomura_campus",
-      "employer": "Nomura",
-      "url": "https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/",
-      "status": "stale"
-    },
-    {
       "source": "nomura_professionals",
       "employer": "Nomura",
       "url": "https://careers.nomura.com/Nomura?locale=en_US",
+      "status": "fresh"
+    },
+    {
+      "source": "nomura_campus",
+      "employer": "Nomura",
+      "url": "https://nomuracampus.tal.net/vx/lang-en-GB/mobile-0/appcentre-ext/brand-4/xf-3348347fc789/candidate/jobboard/vacancy/1/adv/",
       "status": "stale"
     },
     {
@@ -559,7 +589,7 @@
       "source": "rbc",
       "employer": "RBC",
       "url": "https://rbc.wd3.myworkdayjobs.com/RBCGLOBAL1",
-      "status": "recent_failure"
+      "status": "fresh"
     },
     {
       "source": "rothschild_campus",
@@ -583,7 +613,7 @@
       "source": "scotiabank",
       "employer": "Scotiabank",
       "url": "https://jobs.scotiabank.com/",
-      "status": "recent_failure"
+      "status": "fresh"
     },
     {
       "source": "sculptor",
@@ -601,7 +631,7 @@
       "source": "smbc",
       "employer": "SMBC",
       "url": "https://careersemea.smbcgroup.com/",
-      "status": "fresh"
+      "status": "recent_failure"
     },
     {
       "source": "societe_generale",
@@ -619,7 +649,7 @@
       "source": "state_street",
       "employer": "State Street",
       "url": "https://statestreet.wd1.myworkdayjobs.com/Global",
-      "status": "recent_failure"
+      "status": "partial"
     },
     {
       "source": "sig",
@@ -637,6 +667,12 @@
       "source": "td",
       "employer": "TD",
       "url": "https://td.wd3.myworkdayjobs.com/TD_Bank_Careers",
+      "status": "fresh"
+    },
+    {
+      "source": "tibra",
+      "employer": "Tibra Capital",
+      "url": "https://apply.workable.com/tibra-capital-1/",
       "status": "fresh"
     },
     {
@@ -682,15 +718,15 @@
       "status": "recent_failure"
     },
     {
-      "source": "ubs",
-      "employer": "UBS",
-      "url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232",
-      "status": "fresh"
-    },
-    {
       "source": "ubs_professionals",
       "employer": "UBS",
       "url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5012&PageType=searchResults&SearchType=linkquery&LinkID=15231",
+      "status": "fresh"
+    },
+    {
+      "source": "ubs",
+      "employer": "UBS",
+      "url": "https://jobs.ubs.com/TGnewUI/Search/home/HomeWithPreLoad?partnerid=25008&siteid=5131&PageType=searchResults&SearchType=linkquery&LinkID=15232",
       "status": "fresh"
     },
     {

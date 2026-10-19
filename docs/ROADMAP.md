@@ -1,5 +1,9 @@
 # Suivi de construction
 
+## État courant — 19 octobre, lots 177 à 180
+
+128 sources / 116 employeurs, 121 à jour au 19/10/2026 à 19:23 UTC. [Inventaire actuel](RADAR-SOURCES-LOT178.md) et [carnet](TASK-BOARD.md). Reprise des sources, six employeurs et import LinkedIn manuel installés ; données et curseur préservés. Suites 181 pour les incidents, 170/173 pour la qualité et 176 pour le premier affichage. Les relevés suivants sont historiques.
+
 ## Lots 141-A et 143-A — état au 11 octobre
 
 Rothschild étudiants, Millennium professionnels, Brevan Howard et BNP campus installés.

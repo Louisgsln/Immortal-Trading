@@ -8,9 +8,7 @@ sans identifiant ni mot de passe.
 
 Périmètre : graduate/junior et VIE habituels, plus off-cycle et stages longs
 2027. Summer hors alertes ; Associate seul hors cible, Analyst/Associate conservé.
-Couverture livrée au [lot 172](VALIDATION-LOT172.md) : quinze sources de banques et fonds/gérants ajoutées,
-106 fiches importées silencieusement ; CFM et QRT déjà actifs restent inclus.
-**122 sources / 110 employeurs**, 115 à jour au [relevé du 15/10/2026 à 01:38 UTC](RADAR-SOURCES-LOT172.md).
+Couverture livrée aux [lots 177–180](VALIDATION-LOTS177-179.md) : **128 sources / 116 employeurs**, 121 à jour au [relevé du 19/10/2026 à 19:23 UTC](RADAR-SOURCES-LOT178.md). Six employeurs supplémentaires et LinkedIn manuel installés ; CFM et QRT restent actifs.
 Le flux des nouvelles offres conserve tous les scores, même zéro ; il reste distinct du classement prioritaire.
 BNP et les accès campus en incident restent explicites. `/statuts` et le Dashboard utilisent le même profil.
 Le carnet conserve 133–137 : missions quantitatives, dates des stages, architecture
@@ -19,7 +17,7 @@ du Dashboard mobile, observation hebdomadaire et sauvegarde distante. Il dévelo
 export de couverture. Les [accès non intégrés](CAMPUS-FUNDS-AUDIT-20261010.md)
 gardent des tâches ouvertes et ne sont pas ajoutés au total surveillé.
 
-Prochaines livraisons : 167, Janus Henderson/Schroders et campus Scotiabank, BMO Workday livré au lot 172 ;
+Prochaines livraisons : 167, Schroders et campus Scotiabank (Janus Henderson livré au lot 178), BMO Workday livré au lot 172 ;
 168, catalogues de fonds Aspect/Balyasny/Rokos ; 170, audit des missions et conditions des
 74 fiches des cinq périmètres quantitatifs, sans bonus au nom du fonds ; 171, portails Hibob
 publiés par Aspect et Dymon. Les durées variables 3–6/4–6 mois, fellowships et années absentes

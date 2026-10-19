@@ -1,6 +1,6 @@
 # Annonces LinkedIn — lot 179
 
-Installation sur le VPS en attente d’autorisation ; voir le [bilan](VALIDATION-LOTS177-179.md).
+Installé sur le VPS le 19 octobre 2026 ; voir le [bilan](VALIDATION-LOTS177-179.md). Import manuel disponible via le bot privé ; collecte automatique indisponible.
 
 La commande privée `/linkedin` ajoute une annonce copiée dans Telegram au Dashboard.
 Elle répond avec la fiche et les boutons « Ajouter à la liste des souhaits » et

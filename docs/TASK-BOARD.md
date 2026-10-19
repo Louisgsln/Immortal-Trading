@@ -1,22 +1,37 @@
 # Carnet des tâches — 19 octobre 2026
 
-## Intervention du 19 octobre — lots 177 à 179 préparés
+## Lots 177 à 180 installés et vérifiés
 
-Production encore sur **122 sources / 110 employeurs**, radar actif au contrôle de
-17:26 UTC, 110 sources à jour et 12 incidents. Les modifications ci-dessous ne sont
-pas installées : l’accès sudo nécessaire aux données et à Docker attend une nouvelle
-autorisation explicite après refus du contrôle automatique. Préparation, recherches
-publiques et tests poursuivis sans contourner ce blocage.
+Au **19/10/2026 à 19:23 UTC** : **128 sources / 116 employeurs**, **121 à jour et 7 à surveiller**. Radar, Dashboard, Telegram et sauvegardes actifs. Même accès privé, alertes tous scores, off-cycle/stages longs 2027, souhaits et suivi conservés. Les quinze contrôles de conservation passent ; liste originale des 33 commandes bloquées rétablie, dont sudo.
 
-| Lot | État | Résultat / action restante |
+| Lot | État | Résultat |
 |---|---|---|
-| 177 — reprise des collectes | Correctifs validés, installation en attente | Nomura/HSBC : offre pourvue distincte d’erreur ; HSBC accents ; Société Générale HTTP 410 ; Workday un seul redémarrage de pagination, RBC plafond 1 000, référence opaque Bank of America conservée comme lacune, Citi références à neuf chiffres contrôlées ; sauvegarde restaurée et installation à réaliser |
-| 178 — six employeurs | Deux collectes publiques concordantes | Lloyds, Lombard Odier, Janus Henderson, Belvedere, Tibra, Eclipse : 27 fiches, 10 à score ≥ 70 et 17 à zéro ; profil préparé 128/116, exploitation inchangée 122/110 ; premier import silencieux après simulation |
-| 179 — LinkedIn | Import manuel validé, installation en attente | `/linkedin` pour copier une annonce dans Telegram, boutons des souhaits/Postulé et suivi partagé ; aucune collecte automatique LinkedIn ni lecture Gmail activées ; installation à réaliser |
+| 177 — reprise des collectes | Installé | Nomura/HSBC : fermetures explicites, accents HSBC, HTTP 410 SG ; reprise bornée Workday, plafond RBC, références opaques Citi/BofA ; 33 fiches nouvelles, deux fermetures confirmées |
+| 178 — six employeurs | Installé, premiers succès vérifiés | Lloyds, Lombard Odier, Janus Henderson, Belvedere, Tibra, Eclipse ; 27 fiches initialisées silencieusement, 10 au seuil et 17 à zéro ; 128 sources / 116 employeurs |
+| 179 — LinkedIn | Import manuel installé | /linkedin dans le bot privé, suivi partagé et boutons Souhaits/Postulé ; collecte automatique indisponible, aucun accès Gmail |
+| 180 — State Street | Installé, source partielle explicite | 40 offres récupérées ; R-794329 et R-796523 sans titre/lien restent signalées ; une fiche ajoutée, aucune fermeture |
 
-[Validation et limites](VALIDATION-LOTS177-179.md) · [Nouvelles sources](RADAR-SOURCES-LOT178.md)
-· [Mode d’emploi LinkedIn](LINKEDIN.md). Les tâches 170/173 de qualification et 176
-de premier affichage restent ouvertes. Les comptes rendus ci-dessous sont historiques.
+[Validation 177–179](VALIDATION-LOTS177-179.md) · [Validation 180](VALIDATION-LOT180.md) · [Sources complètes](RADAR-SOURCES-LOT178.md) · [LinkedIn](LINKEDIN.md).
+
+### Incidents restant ouverts
+
+- Nomura (nomura_campus) : Collecte ancienne. Le portail renvoie une redirection inattendue.
+- BNP Paribas (bnp_paribas) : Collecte ancienne. Le portail refuse temporairement l’accès.
+- Jefferies (jefferies_campus) : Échec récent. Le site demande un CAPTCHA.
+- BNP Paribas (bnp_campus) : Échec récent. Le portail refuse temporairement l’accès.
+- State Street (state_street) : Fiches incomplètes. Références opaques : R-794329, R-796523
+- U.S. Bank (us_bank) : Échec récent. Les pages de résultats sont incohérentes ; import interrompu.
+- SMBC (smbc) : Échec récent. La connexion ou la collecte n’a pas abouti à temps.
+
+### Prochains lots
+
+| Priorité / tâche | Livrable et critère de fin |
+|---|---|
+| 181 / haute — incidents de collecte | Recontrôler la pagination U.S. Bank sans publier un mélange de pages ; mesurer le timeout SMBC par étape ; chercher une preuve officielle des deux références State Street. Garder chaque lacune et les refus BNP/Jefferies explicites. Nomura campus reste en attente conformément au choix du propriétaire. Aucun CAPTCHA contourné, aucune date ou fiche inventée. |
+| 170 et 173 / haute — qualité des offres | Auditer les missions, pays, conditions et durées QRT/CFM et autres ajouts ; mesurer les faux négatifs sur les bons profils, avec contre-exemples risque/support/Summer ; conserver tous les scores, sans bonus par employeur. |
+| 176 / haute — premier affichage mobile | Réduire le calcul initial et le transfert des descriptions ; cible de première vue à cinq secondes à vérifier sur le VPS. Le dernier accès complet reste à 14.012 secondes, cible non atteinte. Préserver filtres, compteurs globaux, preuves et révisions de suivi. |
+
+Les bilans ci-dessous conservent leurs chiffres historiques.
 
 ## Livraisons antérieures
 
@@ -26,7 +41,7 @@ Les validations et mesures sont dans [VALIDATION-LOTS125-127.md](VALIDATION-LOTS
 [AUDIT-EMPLOYERS-20261010.md](AUDIT-EMPLOYERS-20261010.md),
 [VALIDATION-LOT128.md](VALIDATION-LOT128.md) et
 [VALIDATION-LOTS129-131.md](VALIDATION-LOTS129-131.md) et
-[VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire actuel
+[VALIDATION-LOTS132-138-139.md](VALIDATION-LOTS132-138-139.md). L'inventaire historique du lot 172
 est [daté par source](RADAR-SOURCES-LOT172.md) : **122 sources / 110 employeurs**,
 115 à jour au relevé du 15/10/2026 à 01:38 UTC ; les quinze ajouts sont frais. Les chiffres des livraisons précédentes restent historiques.
 Ce carnet a été réconcilié avec le VPS :
