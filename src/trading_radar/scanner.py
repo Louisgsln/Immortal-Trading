@@ -221,6 +221,7 @@ async def scan(
             source_start = time.monotonic()
             outcome = "failed"
             selection = None
+            withdrawn = []
             source_http = http
             separate_session = own_http and collectors is None and len(selected) > 1
             if separate_session:
@@ -249,6 +250,11 @@ async def scan(
                 if result.selection is not None:
                     selection = result.selection.model_dump(mode="json")
                 excluded = {conflict.external_id for conflict in result.conflicts}
+                retired_ids = {posting.external_id for posting in result.withdrawn}
+                if len(retired_ids) != len(result.withdrawn) or any(
+                    str(raw.external_id) in retired_ids for raw in result.jobs
+                ):
+                    raise ValueError("collector returned conflicting withdrawal identities")
                 if any(str(raw.external_id) in excluded for raw in result.jobs):
                     raise ValueError("collector returned a quarantined identifier")
                 # Normalize whole snapshot before writing. A malformed row cannot close other jobs.
@@ -317,10 +323,15 @@ async def scan(
                             counts["closed"] = repo.reconcile(
                                 key, seen, config.settings.closure_after_missing_scans
                             )
+                        if not result.conflicts:
+                            for posting in result.withdrawn:
+                                counts["closed"] += repo.withdraw(key, posting)
                         if result.conflicts:
                             repo.record_failure(key)
                         else:
                             repo.mark_success(key, len(normalized), time.monotonic() - source_start)
+                if not result.conflicts:
+                    withdrawn = [posting.model_dump(mode="json") for posting in result.withdrawn]
                 if result.conflicts:
                     metrics.degraded[key] = result.conflicts
                     metrics.failed[key] = (
@@ -366,6 +377,7 @@ async def scan(
                     "status": outcome,
                     "duration": round(time.monotonic() - source_start, 3),
                     "selection": selection,
+                    **({"withdrawn": withdrawn} if withdrawn else {}),
                     "internship_baseline_complete": bool(
                         config.settings.include_internships
                         and outcome == "successful"

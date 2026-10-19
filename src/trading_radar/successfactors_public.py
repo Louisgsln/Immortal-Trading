@@ -15,6 +15,7 @@ from trading_radar.selection import SelectionAudit, rejection_reason
 SITES = {
     "SMBC": ("https://careersemea.smbcgroup.com", "en_GB", "SMBC"),
     "Nordea": ("https://careers.nordea.com", "en_US", "Nordea"),
+    "Janus Henderson": ("https://jobs.janushenderson.com", "en_US", "Janus Henderson"),
 }
 PAGE_SIZE = 25
 

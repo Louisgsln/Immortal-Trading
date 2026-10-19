@@ -95,6 +95,7 @@ def format_alert(job: Job, event: str) -> str:
         return escape(text[:limit] + ("…" if len(text) > limit else ""))
 
     score = job.score_breakdown.total
+    manual = job.source == "linkedin_manual" and job.source_type == "aggregator"
     observed = programme(job)
     programme_line = []
     if observed["kind"] == "internship":
@@ -107,6 +108,7 @@ def format_alert(job: Job, event: str) -> str:
         "reopened": "OFFRE ROUVERTE",
         "preview": "APERÇU DU NOUVEAU FORMAT",
         "catalogue": "OFFRE DU RADAR",
+        "manual_import": "ANNONCE AJOUTÉE",
     }.get(event, "OPPORTUNITÉ TRADING")
     if event in {"deadline_j7", "deadline_j3", "deadline_j1"}:
         heading = "ÉCHÉANCE · " + event.replace("deadline_j", "J−")
@@ -133,6 +135,7 @@ def format_alert(job: Job, event: str) -> str:
             "",
             f"<b>{clean(job.title, 180)}</b>",
             clean(job.company, 100),
+            *(["🔗 LinkedIn · import manuel · ouverture à confirmer"] if manual else []),
             "",
             *(["📁 Archive · offre inactive"] if not job.is_active else []),
             *(["⚠️ Échéance dépassée"] if job.is_expired else []),

@@ -16,7 +16,7 @@ from trading_radar.alerts import SYSTEM_TRANSITIONS, AlertDecision, AlertStatus,
 from trading_radar.applications import Application, ApplicationStatus, calendar_date
 from trading_radar.deadlines import deadline_status, resolve_deadline
 from trading_radar.location_updates import location_change_key
-from trading_radar.models import Job, utcnow
+from trading_radar.models import Job, WithdrawnPosting, utcnow
 from trading_radar.normalizer import canonical_url, digest
 
 SOURCE_RANK = {"official": 0, "ats": 1, "board": 2, "aggregator": 3, "fixture": 4}
@@ -298,6 +298,10 @@ class Repository:
             )
         ]
 
+    def match_candidate(self, job: Job) -> Job | None:
+        """Resolve an existing record conservatively, without changing observations."""
+        return self._match(job, source_identity(job))
+
     def _match(self, job: Job, identity: str) -> Job | None:
         row = self.db.execute(
             "SELECT job_id FROM job_sources WHERE source=? AND identity=?", (job.source, identity)
@@ -480,6 +484,30 @@ class Repository:
                     (misses, int(misses < threshold), source, row["identity"]),
                 )
                 affected.add(row["job_id"])
+        return self._close_inactive_jobs(affected)
+
+    def withdraw(self, source: str, posting: WithdrawnPosting) -> int:
+        """Deactivate only an exact recorded source/reference/URL, retaining all history.
+
+        An unknown or ambiguous reference cannot close a different job. Other
+        active source aliases still keep a shared job open, as in reconciliation.
+        """
+        rows = self.db.execute(
+            "SELECT job_id,identity,apply_url FROM job_sources WHERE source=? AND external_id=?",
+            (source, posting.external_id),
+        ).fetchall()
+        if len(rows) != 1 or canonical_url(rows[0]["apply_url"]) != canonical_url(
+            posting.apply_url
+        ):
+            return 0
+        row = rows[0]
+        self.db.execute(
+            "UPDATE job_sources SET is_active=0 WHERE source=? AND identity=?",
+            (source, row["identity"]),
+        )
+        return self._close_inactive_jobs({row["job_id"]})
+
+    def _close_inactive_jobs(self, affected: set[str]) -> int:
         closed = 0
         for job_id in affected:
             active = self.db.execute(

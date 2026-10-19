@@ -162,7 +162,8 @@ def _job(row: sqlite3.Row) -> dict:
             )
         )
     )
-    details["opportunity_details"]["verified_at"] = job.last_seen.isoformat()
+    manual = job.source == "linkedin_manual" and job.source_type == "aggregator"
+    details["opportunity_details"]["verified_at"] = None if manual else job.last_seen.isoformat()
     # Present normalized publication instants as Paris calendar days. Do not expose a fabricated hour
     # or substitute discovery/update dates when publication is unknown.
     publication_day = job.publication_day.isoformat() if job.publication_day else None
@@ -184,6 +185,7 @@ def _job(row: sqlite3.Row) -> dict:
         "region": job.region,
         "source": job.source,
         "source_type": job.source_type,
+        **({"manual_import": True} if manual else {}),
         "score": job.score_breakdown.total,
         "priority": job.score_breakdown.priority,
         "score_breakdown": job.score_breakdown.model_dump(mode="json"),

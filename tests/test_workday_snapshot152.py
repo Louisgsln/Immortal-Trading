@@ -42,7 +42,7 @@ def collect(monkeypatch, alter=None, rows=23):
         offsets.append(offset)
         if offset == 0:
             payload = copy.deepcopy(first)
-            if len(offsets) > 1 and alter:
+            if len(offsets) % 3 == 0 and alter:
                 alter(payload)
         else:
             payload = {
@@ -86,7 +86,7 @@ def test_single_page_does_not_add_a_redundant_request(monkeypatch):
         lambda p: p["jobPostings"].__setitem__(0, None),
     ],
 )
-def test_changed_or_invalid_first_page_aborts_snapshot(monkeypatch, alter):
+def test_persistently_changed_or_invalid_first_page_aborts_snapshot(monkeypatch, alter):
     with pytest.raises(SourceUnavailable):
         collect(monkeypatch, alter)
 

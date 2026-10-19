@@ -1962,7 +1962,7 @@ companies:
       - technologist
       - external contributors
       - production
-      max_results_per_query: 500
+      max_results_per_query: 1000
       search_terms:
       - trading
       - trader
@@ -6351,3 +6351,441 @@ companies:
       pagination and search overlaps, canonical posting ID/title and full description, first-page rechecks.
       Talent-community registrations explicitly not vacancies; no date from page render, no absence closures.
       Summer titles excluded, senior roles retained for all-score review.
+  lloyds:
+    name: Lloyds Banking Group
+    enabled: true
+    ats: workday
+    tenant: lbg
+    career_url: https://lbg.wd3.myworkdayjobs.com/LBG_Careers
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - structuring
+      - markets
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      - front office python developer
+      - quant researcher
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Employer-linked public catalogue verified 2026-10-19; complete scoped listing, exact posting
+      identities and full descriptions. Senior roles retained for all-score review; Summer and non-vacancy
+      talent pools excluded. Off-cycle and long internships retained; no invented dates or absence-based
+      closures.
+  lombard_odier:
+    name: Lombard Odier
+    enabled: true
+    ats: workday
+    tenant: lombardodier
+    career_url: https://lombardodier.wd3.myworkdayjobs.com/Lombard_Odier_Careers
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - structuring
+      - markets
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      - front office python developer
+      - quant researcher
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+      conditional_details: true
+      verify_listing_snapshot: true
+    notes: Employer-linked public catalogue verified 2026-10-19; complete scoped listing, exact posting
+      identities and full descriptions. Senior roles retained for all-score review; Summer and non-vacancy
+      talent pools excluded. Off-cycle and long internships retained; no invented dates or absence-based
+      closures.
+  janus_henderson:
+    name: Janus Henderson
+    enabled: true
+    ats: successfactors_public
+    career_url: https://jobs.janushenderson.com/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms:
+      - trading
+      - quantitative
+      - structuring
+      - markets
+      - internship
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      - front office python developer
+      - quant researcher
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+    notes: Employer-linked public catalogue verified 2026-10-19; complete scoped listing, exact posting
+      identities and full descriptions. Senior roles retained for all-score review; Summer and non-vacancy
+      talent pools excluded. Off-cycle and long internships retained; no invented dates or absence-based
+      closures.
+  belvedere:
+    name: Belvedere Trading
+    enabled: true
+    ats: lever_filtered
+    tenant: belvederetrading
+    career_url: https://jobs.lever.co/belvederetrading
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      - front office python developer
+      - quant researcher
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+    notes: Employer-linked public catalogue verified 2026-10-19; complete scoped listing, exact posting
+      identities and full descriptions. Senior roles retained for all-score review; Summer and non-vacancy
+      talent pools excluded. Off-cycle and long internships retained; no invented dates or absence-based
+      closures.
+  tibra:
+    name: Tibra Capital
+    enabled: true
+    ats: workable_public
+    tenant: tibra-capital-1
+    career_url: https://apply.workable.com/tibra-capital-1/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      - front office python developer
+      - quant researcher
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+    notes: Employer-linked public catalogue verified 2026-10-19; complete scoped listing, exact posting
+      identities and full descriptions. Senior roles retained for all-score review; Summer and non-vacancy
+      talent pools excluded. Off-cycle and long internships retained; no invented dates or absence-based
+      closures.
+  eclipse:
+    name: Eclipse Trading
+    enabled: true
+    ats: greenhouse_filtered
+    tenant: eclipsetrading
+    career_url: https://www.eclipsetrading.com/all-jobs/
+    country: global
+    scan_interval: 1800
+    request_interval: 2
+    options:
+      search_terms: []
+      title_terms:
+      - trading
+      - trader
+      - quantitative
+      - quant
+      - structuring
+      - structurer
+      - securities finance
+      - portfolio manager
+      - equity research
+      - investment analyst
+      - front office developer
+      - investment research
+      - research associate
+      - alpha researcher
+      - systematic
+      - global markets intern
+      - global markets graduate
+      - markets
+      - front office python developer
+      - quant researcher
+      exclude_title_terms:
+      - operations
+      - product control
+      - compliance
+      - audit
+      - market risk
+      - legal
+      - accountant
+      - marketing
+      - settlements
+      - summer
+      - general application
+      - talent community
+      - talent network
+      - expression of interest
+      - exploratory
+      - opportunistic
+      - referral
+      - registration
+      - insight programme
+      - insight program
+      - external contributors
+      - production
+      - infrastructure
+      - support
+      - business analyst
+      - product manager
+      - recruiting
+      - human resources
+      - risk analyst
+      - back office
+      max_results_per_query: 1000
+      max_details: 150
+      max_scan_seconds: 900
+    notes: Employer-linked public catalogue verified 2026-10-19; complete scoped listing, exact posting
+      identities and full descriptions. Senior roles retained for all-score review; Summer and non-vacancy
+      talent pools excluded. Off-cycle and long internships retained; no invented dates or absence-based
+      closures.

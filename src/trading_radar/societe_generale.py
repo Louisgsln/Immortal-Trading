@@ -12,8 +12,8 @@ from pydantic import Field
 from trading_radar.config import Company
 from trading_radar.description_sections import labelled_lists, visible_text
 from trading_radar.html_page import Document, Element, clean
-from trading_radar.http import HTTPClient, SourceUnavailable
-from trading_radar.models import Collection, RawJob
+from trading_radar.http import HTTPClient, HTTPGone, SourceUnavailable
+from trading_radar.models import Collection, RawJob, WithdrawnPosting
 from trading_radar.normalizer import normalize_text
 from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import SelectionAudit, rejection_reason
@@ -255,14 +255,25 @@ class SocieteGeneraleCollector:
                 targets.append(row)
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("SG detail limit exceeded; narrow title scope")
-        jobs = []
+        jobs, withdrawn = [], []
         for row in targets:
-            text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
+            try:
+                text = await self.http.get_text(
+                    row["url"], self.config.request_interval, self.source
+                )
+            except HTTPGone:
+                withdrawn.append(
+                    WithdrawnPosting(
+                        external_id=row["id"], apply_url=row["url"], evidence="http_410"
+                    )
+                )
+                continue
             jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
             jobs=jobs,
             complete=False,
             scope_complete=True,
+            withdrawn=withdrawn,
             requests=self.http.counts[self.source] - before,
             selection=audit.summary(),
         )

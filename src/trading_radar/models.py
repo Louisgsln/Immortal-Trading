@@ -1,10 +1,12 @@
 from datetime import UTC, date, datetime
 from typing import Any, Literal, Self
+from urllib.parse import urlsplit
 
 from pydantic import (
     BaseModel,
     Field,
     SerializerFunctionWrapHandler,
+    field_validator,
     model_serializer,
     model_validator,
 )
@@ -140,6 +142,37 @@ class CollectionConflict(BaseModel):
     fields: list[str]
 
 
+class WithdrawnPosting(BaseModel):
+    """Explicit employer withdrawal, never absence from a partial search."""
+
+    external_id: str = Field(min_length=1, max_length=200)
+    apply_url: str
+    evidence: Literal["employer_filled_message", "http_410"]
+
+    @field_validator("external_id")
+    @classmethod
+    def exact_reference(cls, value: str) -> str:
+        if value != value.strip() or not value or any(ord(char) < 32 for char in value):
+            raise ValueError("Withdrawal requires an exact employer reference")
+        return value
+
+    @field_validator("apply_url")
+    @classmethod
+    def public_url(cls, value: str) -> str:
+        parts = urlsplit(value)
+        if (
+            parts.scheme != "https"
+            or not parts.hostname
+            or parts.username is not None
+            or parts.password is not None
+            or parts.fragment
+            or "\\" in value
+            or any(char.isspace() or ord(char) < 32 or ord(char) == 127 for char in value)
+        ):
+            raise ValueError("Withdrawal requires a public HTTPS job URL")
+        return value
+
+
 class SelectionSummary(BaseModel):
     scope: Literal["public_catalogue", "search_results"]
     examined: int = Field(ge=0)
@@ -165,6 +198,7 @@ class Collection(BaseModel):
     requests: int = 0
     conflicts: list[CollectionConflict] = Field(default_factory=list)
     listing_gaps: list[str] = Field(default_factory=list)
+    withdrawn: list[WithdrawnPosting] = Field(default_factory=list)
     selection: SelectionSummary | None = None
 
     @model_serializer(mode="wrap")
@@ -175,6 +209,8 @@ class Collection(BaseModel):
             payload.pop("selection", None)
         if not self.scope_complete:
             payload.pop("scope_complete", None)
+        if not self.withdrawn:
+            payload.pop("withdrawn", None)
         return payload
 
 

@@ -18,6 +18,7 @@ BOARD = "https://apply.workable.com/capula-investment-management-ltd/"
 BOARDS = {
     "capula-investment-management-ltd": "Capula",
     "caxton": "Caxton Associates",
+    "tibra-capital-1": "Tibra Capital",
 }
 
 

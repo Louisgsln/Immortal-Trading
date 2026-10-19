@@ -16,6 +16,8 @@ from pydantic import ConfigDict, Field
 from trading_radar.backups import database_path
 from trading_radar.config import Config
 from trading_radar.dashboard_applications import ApplicationEditError, _connection, mark_applied
+from trading_radar.linkedin_import import USAGE as LINKEDIN_USAGE
+from trading_radar.linkedin_import import ImportRejected, import_offer
 from trading_radar.models import Job
 from trading_radar.notifications import TelegramNotifier
 from trading_radar.runtime_status import (
@@ -26,7 +28,7 @@ from trading_radar.runtime_status import (
     incident_keys,
     runtime_report,
 )
-from trading_radar.telegram_cards import application_keyboard, callback_job
+from trading_radar.telegram_cards import application_keyboard, callback_job, format_alert
 from trading_radar.telegram_catalogue import send_catalogue
 from trading_radar.telegram_digest import (
     DigestState,
@@ -44,6 +46,7 @@ HELP = "📡 Immortal Trading\n/statuts ou /status : activité du radar, nombre 
 HELP += "\n/digest : aperçu et état du récapitulatif.\n/digest_on HH:MM : activer à cette heure.\n/digest_off : arrêter le récapitulatif."
 HELP += "\n/offres : toutes les offres, tous scores ; /offres 2 pour la suite.\n/souhaits : ta liste de souhaits. Ajoute avec ⭐ sous une offre ; retire ou modifie le suivi dans le Dashboard."
 HELP += "\n/sources : liste des portails surveillés ; /sources 2 pour la suite."
+HELP += "\n/linkedin : ajouter une annonce copiée, sans collecte automatique LinkedIn."
 HELP += "\n\nSous chaque nouvelle alerte : Voir l’offre ouvre le site employeur. J’ai postulé enregistre ta confirmation dans le dashboard, avec la date du jour."
 
 
@@ -91,6 +94,13 @@ def command_from(update: dict, chat_id: str, username: str, now: float) -> str |
     date, text = message.get("date"), message.get("text")
     if type(date) is not int or not 0 <= now - date <= 300 or not isinstance(text, str):
         return None
+    linkedin = re.fullmatch(
+        r"/linkedin(?:@([A-Za-z0-9_]+))?(?:[ \t]*\r?\n([\s\S]{0,12000}))?", text.strip()
+    )
+    if linkedin:
+        if linkedin[1] and linkedin[1].casefold() != username.casefold():
+            return None
+        return "linkedin " + linkedin[2] if linkedin[2] else "linkedin_usage"
     match = re.fullmatch(
         r"/(status|statuts|statut|sources|offres|souhaits|start|help|top|new|digest|digest_on|digest_off)(?:@([A-Za-z0-9_]+))?(?:[ \t]+([^\r\n]{0,128}))?",
         text.strip(),
@@ -259,6 +269,42 @@ async def process_updates(
             continue
         replies += 1
         instant = datetime.fromtimestamp(now, UTC)
+        if command.startswith("linkedin ") or command == "linkedin_usage":
+            if command == "linkedin_usage":
+                await notifier.send_text(LINKEDIN_USAGE)
+                continue
+            try:
+                job, created = import_offer(config, command.partition(" ")[2])
+                wished = read_wishlist(config, job.id)["saved"]
+                with _connection(config) as db:
+                    status = db.execute(
+                        "SELECT status FROM applications WHERE job_id=?", (job.id,)
+                    ).fetchone()[0]
+                await notifier.send_text(
+                    "✅ Annonce ajoutée au Dashboard."
+                    if created
+                    else "Cette offre est déjà dans le Dashboard. Son suivi a été conservé."
+                )
+                await notifier.send_text(
+                    format_alert(job, "manual_import" if created else "catalogue"),
+                    parse_mode="HTML",
+                    reply_markup=application_keyboard(
+                        job.id,
+                        job.apply_url,
+                        notifier.token,
+                        notifier.chat_id,
+                        applied=status == "Applied",
+                        wished=wished,
+                    ),
+                )
+            except ImportRejected as error:
+                await notifier.send_text(str(error) + "\n\n" + LINKEDIN_USAGE)
+            except Exception as error:
+                logger.warning("telegram_linkedin_unconfirmed type=%s", type(error).__name__)
+                await notifier.send_text(
+                    "Import non confirmé. Consulte /offres ou le Dashboard avant de réessayer."
+                )
+            continue
         if command.startswith(("offres ", "souhaits ")):
             try:
                 await send_catalogue(
@@ -382,6 +428,7 @@ async def run_control(config: Config) -> None:
                     {"command": "sources", "description": "Liste des portails surveillés"},
                     {"command": "offres", "description": "Toutes les offres, même à 0 (page)"},
                     {"command": "souhaits", "description": "Ta liste de souhaits (page)"},
+                    {"command": "linkedin", "description": "Ajouter une annonce LinkedIn copiée"},
                     {"command": "top", "description": "Meilleures offres à examiner"},
                     {"command": "new", "description": "Offres découvertes depuis 24 h"},
                     {"command": "digest", "description": "Aperçu et réglage du récapitulatif"},

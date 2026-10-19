@@ -1,4 +1,24 @@
-# Carnet des tâches — 15 octobre 2026
+# Carnet des tâches — 19 octobre 2026
+
+## Intervention du 19 octobre — lots 177 à 179 préparés
+
+Production encore sur **122 sources / 110 employeurs**, radar actif au contrôle de
+16:12 UTC, 105 sources à jour et 17 incidents. Les modifications ci-dessous ne sont
+pas installées : l’accès sudo nécessaire aux données et à Docker attend une nouvelle
+autorisation explicite après refus du contrôle automatique. Préparation, recherches
+publiques et tests poursuivis sans contourner ce blocage.
+
+| Lot | État | Résultat / action restante |
+|---|---|---|
+| 177 — reprise des collectes | Correctifs préparés, essais publics réussis | Nomura/HSBC : offre pourvue distincte d’erreur ; HSBC accents ; Société Générale HTTP 410 ; Workday un seul redémarrage de pagination, RBC plafond 1 000, référence opaque Bank of America conservée comme lacune ; sauvegarde restaurée et installation à réaliser |
+| 178 — six employeurs | Deuxième lecture et validation en cours | Lloyds, Lombard Odier, Janus Henderson, Belvedere, Tibra, Eclipse : 27 fiches au premier contrôle ; profil préparé 128/116, exploitation inchangée 122/110 ; premier import silencieux après simulation |
+| 179 — LinkedIn | Import manuel développé, tests ciblés réussis | `/linkedin` pour copier une annonce dans Telegram, boutons des souhaits/Postulé et suivi partagé ; aucune collecte automatique LinkedIn ni lecture Gmail activées ; installation à réaliser |
+
+[Validation et limites](VALIDATION-LOTS177-179.md) · [Nouvelles sources](RADAR-SOURCES-LOT178.md)
+· [Mode d’emploi LinkedIn](LINKEDIN.md). Les tâches 170/173 de qualification et 176
+de premier affichage restent ouvertes. Les comptes rendus ci-dessous sont historiques.
+
+## Livraisons antérieures
 
 Ce carnet suit l’instance OVH. Un connecteur développé ou une offre visible dans
 un catalogue public ne sont pas, à eux seuls, une preuve de surveillance active.

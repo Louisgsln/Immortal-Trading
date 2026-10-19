@@ -495,19 +495,20 @@
     const top = make("div", null, "detail-top");
     top.append(make("span", radarProgramme.label(job.programme), "badge"));
     const statusBadge = make("span", statusLabel((job.application || {}).status), "badge");
-    top.append(scorePill(job.score), make("span", job.is_active ? "Offre active" : "Offre inactive", "badge"), statusBadge);
+    top.append(scorePill(job.score), make("span", job.manual_import ? "Ouverture à confirmer" : job.is_active ? "Offre active" : "Offre inactive", "badge"), statusBadge);
     if (job.is_expired) top.append(make("span", "Échéance dépassée", "badge"));
     else if ((job.deadline || {}).precision === "conflict") top.append(make("span", "Échéance à vérifier", "badge"));
     content.append(title, make("p", [job.company, job.location].filter(Boolean).join(" · "), "detail-company"), top);
+    if (job.manual_import) content.append(make("p", "LinkedIn · annonce copiée manuellement. Le radar n’a pas vérifié son ouverture ni son contenu sur le site employeur.", "editor-help"));
     const url = safeURL(job.apply_url);
     if (url) {
-      const link = make("a", "Consulter l’offre officielle ↗", "official-link");
+      const link = make("a", job.manual_import ? "Consulter sur LinkedIn ↗" : "Consulter l’offre officielle ↗", "official-link");
       link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer";
-      link.setAttribute("aria-label", "Consulter l’offre officielle (nouvel onglet)"); content.append(link);
+      link.setAttribute("aria-label", (job.manual_import ? "Consulter sur LinkedIn" : "Consulter l’offre officielle") + " (nouvel onglet)"); content.append(link);
     } else content.append(make("p", "Lien officiel indisponible.", "detail-company"));
     const fields = job.opportunity_details;
     if (fields) {
-      const fieldSection = detailSection("Informations publiées par l’employeur");
+      const fieldSection = detailSection(job.manual_import ? "Informations copiées depuis LinkedIn" : "Informations publiées par l’employeur");
       const statusNames = {not_published: "Non indiqué", unrecognized: "À interpréter", conflict: "Contradictoire", qualitative: "Critère publié"};
       const grid = make("dl", null, "detail-grid");
       [["location", "Localisation"], ["start", "Début"], ["experience", "Expérience"], ["deadline", "Échéance"]].forEach(([key, label]) => {
@@ -521,7 +522,7 @@
         }
         grid.append(cell);
       });
-      fieldSection.append(grid, make("p", "Fiche vérifiée : " + date(fields.verified_at, true) + ". Une information non indiquée n’est pas déduite de la publication ou du score.", "experience-help"));
+      fieldSection.append(grid, make("p", (job.manual_import ? "Import manuel : " + date(job.last_seen, true) + ". Contenu à confirmer sur le site employeur." : "Fiche vérifiée : " + date(fields.verified_at, true) + ".") + " Une information non indiquée n’est pas déduite de la publication ou du score.", "experience-help"));
       content.append(fieldSection);
     }
     const conditions = job.conditions || {};
@@ -662,6 +663,7 @@
       const button = make("button", job.title, "job-title"); button.type = "button"; button.addEventListener("click", () => showDetail(job));
       const companyLine = make("div", null, "company-line"); const initial = make("span", job.company.slice(0, 2).toUpperCase(), "company-initial"); initial.setAttribute("aria-hidden", "true");
       companyLine.append(initial, make("span", job.company)); if (!job.is_active) companyLine.append(make("span", "Inactive", "badge"));
+      if (job.manual_import) companyLine.append(make("span", "LinkedIn · import manuel", "badge"));
       if (job.is_expired) companyLine.append(make("span", "Échéance dépassée", "badge"));
       if (job.programme?.kind && job.programme.kind !== "unspecified") companyLine.append(make("span", radarProgramme.label(job.programme), "badge"));
       if (job.internship_alert) companyLine.append(make("span", internshipAlertLabels[job.internship_alert.status], "badge"));
@@ -687,6 +689,7 @@
       open.className = "job-title"; heading.append(open);
       const badges = make("div", null, "mobile-badges");
       badges.append(scorePill(job.score), make("span", statusLabel(job.application?.status || "New"), "badge"));
+      if (job.manual_import) badges.append(make("span", "LinkedIn · import manuel", "badge"));
       if (job.internship_alert) badges.append(make("span", internshipAlertLabels[job.internship_alert.status], "badge"));
       card.append(heading, make("p", job.company + " · " + (job.location || "Lieu non précisé")), badges,
         make("p", radarProgramme.label(job.programme) + " · " + radarOpportunity.durationLabel(job.duration)),

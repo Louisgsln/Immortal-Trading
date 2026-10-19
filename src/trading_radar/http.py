@@ -20,6 +20,10 @@ class SourceUnavailable(RuntimeError):
     """Public source cannot currently be collected safely/reliably."""
 
 
+class HTTPGone(SourceUnavailable):
+    """A requested public resource explicitly returns HTTP 410."""
+
+
 class RequestPacing:
     """Host-wide spacing shared by otherwise independent anonymous sessions."""
 
@@ -261,5 +265,7 @@ class HTTPClient:
             and not (allow_not_modified and response.status_code == 304)
             and not (allow_redirect and response.status_code in {301, 302, 303, 307, 308})
         ):
+            if response.status_code == 410:
+                raise HTTPGone("HTTP 410")
             raise SourceUnavailable(f"HTTP {response.status_code}")
         return response

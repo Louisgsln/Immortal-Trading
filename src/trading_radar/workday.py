@@ -22,6 +22,7 @@ from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import parse_date
 from trading_radar.search_scope import SearchOptions
 from trading_radar.selection import SelectionAudit, rejection_reason
+from trading_radar.snapshot_retry import SnapshotChanged, stable_listing
 from trading_radar.workday_recovery import SITES, citi_operations_reference, public_reference_title
 
 
@@ -271,6 +272,17 @@ class WorkdayCollector:
             ) from None
 
     async def _search(self, term: str) -> dict[str, dict]:
+        initial_gaps = self.listing_gaps.copy()
+
+        async def attempt() -> dict[str, dict]:
+            # No rows or gaps from an inconsistent traversal may survive a
+            # retry. The collector's original deadline and host pacing apply.
+            self.listing_gaps = initial_gaps.copy()
+            return await self._search_once(term)
+
+        return await stable_listing(attempt, self.source)
+
+    async def _search_once(self, term: str) -> dict[str, dict]:
         rows: dict[str, dict] = {}
         offset, expected = 0, None
         first_page: list[str] | None = None
@@ -298,11 +310,11 @@ class WorkdayCollector:
                 raise SourceUnavailable("Workday query exceeds result limit; narrow search scope")
             # Observed CXS contract: subsequent pages report total=0 even with results.
             if expected is not None and total not in {0, expected}:
-                raise SourceUnavailable("Workday total changed during pagination; retry next scan")
+                raise SnapshotChanged("Workday total changed during pagination; retry next scan")
             if expected is None:
                 expected = total
             if len(page) != min(20, expected - offset):
-                raise SourceUnavailable("Workday returned a short or inconsistent page")
+                raise SnapshotChanged("Workday returned a short or inconsistent page")
             if offset == 0 and self.options.verify_listing_snapshot and expected > 20:
                 first_page = listing_snapshot(payload)
             for row in page:
@@ -315,6 +327,7 @@ class WorkdayCollector:
                     "citi_campus": r"[0-9]{8}",
                     "bp": r"RQ[0-9]{6}",
                     "morgan_stanley": r"JR[0-9]{6}",
+                    "bank_of_america": r"[0-9]{8}",
                 }.get(self.source)
                 if (
                     pattern
@@ -328,7 +341,7 @@ class WorkdayCollector:
                     reference = row["bulletFields"][0]
                     key = "unavailable:" + reference
                     if key in rows:
-                        raise SourceUnavailable("Workday pagination repeated a posting")
+                        raise SnapshotChanged("Workday pagination repeated a posting")
                     rows[key] = row
                     self.listing_gaps.add(reference)
                     if len(self.listing_gaps) > 10:
@@ -342,7 +355,7 @@ class WorkdayCollector:
                     raise SourceUnavailable("malformed Workday listing")
                 path = external_path(row.get("externalPath"))
                 if path in rows:
-                    raise SourceUnavailable("Workday pagination repeated a posting")
+                    raise SnapshotChanged("Workday pagination repeated a posting")
                 rows[path] = row
             offset += len(page)
         if first_page is not None:
@@ -363,9 +376,7 @@ class WorkdayCollector:
                 or check["total"] != expected
                 or listing_snapshot(check) != first_page
             ):
-                raise SourceUnavailable(
-                    "Workday listing changed during pagination; retry next scan"
-                )
+                raise SnapshotChanged("Workday listing changed during pagination; retry next scan")
         return rows
 
     def selected(self, title: str) -> bool:

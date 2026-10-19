@@ -14,6 +14,7 @@ from trading_radar.http import HTTPClient, SourceUnavailable
 from trading_radar.models import Collection, RawJob
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.withdrawals import filled_posting
 
 SEARCH = "https://www.hsbc.com/careers/students-and-graduates/find-a-programme"
 API = "https://www.hsbc.com/api/programmes/get-programmes"
@@ -267,13 +268,18 @@ class HSBCCollector:
                 selected.append(row)
         if len(selected) > self.options.max_details:
             raise SourceUnavailable("HSBC detail limit exceeded")
-        jobs = []
+        jobs, withdrawn = [], []
         for row in selected:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
-            jobs.append(parse_detail(text, row, self.config, self.source))
+            filled = filled_posting(text, row, job_url)
+            if filled is not None:
+                withdrawn.append(filled)
+            else:
+                jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
             jobs=jobs,
             complete=False,
             scope_complete=True,
+            withdrawn=withdrawn,
             requests=self.http.counts[self.source] - before,
         )

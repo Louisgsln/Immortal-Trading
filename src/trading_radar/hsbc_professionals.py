@@ -4,7 +4,7 @@ import asyncio
 import html
 import json
 import re
-from urllib.parse import parse_qs, urlencode, urlsplit
+from urllib.parse import parse_qs, unquote, urlencode, urlsplit
 
 from trading_radar.config import Company
 from trading_radar.html_page import Document
@@ -24,13 +24,14 @@ def job_url(value: object, identifier: str) -> str:
     if not isinstance(value, str):
         raise SourceUnavailable("HSBC professional job URL missing")
     parts = urlsplit(value)
+    path = unquote(parts.path)
     if (
         parts.scheme != "https"
         or parts.netloc != "portal.careers.hsbc.com"
         or parts.fragment
-        or not re.fullmatch(
-            r"/careers/job/" + re.escape(identifier) + r"(?:-[a-zA-Z0-9_-]+)?", parts.path
-        )
+        or not re.fullmatch(r"/careers/job/" + re.escape(identifier) + r"(?:-[\w-]+)?", path)
+        or "\\" in path
+        or any(ord(char) < 32 or ord(char) == 127 for char in value + path)
         or (
             parts.query
             and parse_qs(parts.query, keep_blank_values=True) != {"domain": ["hsbc.com"]}

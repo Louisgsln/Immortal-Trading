@@ -27,7 +27,7 @@
     },
     "github": {
       "run_id": 38771133577,
-      "status": "in_progress",
+      "status": "completed",
       "python_3_14": 5647,
       "jobs": [
         {
@@ -45,24 +45,31 @@
         {
           "id": 116546928060,
           "name": "checks (3.11)",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success"
         },
         {
           "id": 116546928203,
           "name": "checks (3.12)",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success"
         },
         {
           "id": 116546928271,
           "name": "checks (3.13)",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 116567964112,
+          "name": "container",
+          "status": "completed",
+          "conclusion": "success"
         }
       ],
-      "checked_at": "2026-10-15T17:02:53Z",
-      "container_job_started": false
+      "checked_at": "2026-10-19T16:52:00Z",
+      "container_job_started": true,
+      "conclusion": "success"
     },
     "asset_contract": {
       "controls": 89,

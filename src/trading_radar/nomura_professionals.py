@@ -14,6 +14,7 @@ from trading_radar.models import Collection, RawJob
 from trading_radar.nomura_experience import experience_minima, nomura_experience_evidence
 from trading_radar.normalizer import has, normalize_text
 from trading_radar.search_scope import SearchOptions
+from trading_radar.withdrawals import filled_posting
 
 ROOT = "https://careers.nomura.com"
 BOARD = ROOT + "/Nomura?locale=en_US"
@@ -263,13 +264,18 @@ class NomuraProfessionalsCollector:
                 targets.append(row)
         if len(targets) > self.options.max_details:
             raise SourceUnavailable("Nomura professional detail limit exceeded")
-        jobs = []
+        jobs, withdrawn = [], []
         for row in targets:
             text = await self.http.get_text(row["url"], self.config.request_interval, self.source)
-            jobs.append(parse_detail(text, row, self.config, self.source))
+            filled = filled_posting(text, row, job_url)
+            if filled is not None:
+                withdrawn.append(filled)
+            else:
+                jobs.append(parse_detail(text, row, self.config, self.source))
         return Collection(
             jobs=jobs,
             complete=False,
             scope_complete=True,
+            withdrawn=withdrawn,
             requests=self.http.counts[self.source] - before,
         )
