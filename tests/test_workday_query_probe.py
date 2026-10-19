@@ -352,7 +352,7 @@ def test_queries_union_only_unseen_details_and_scores(sample):
 
 
 @pytest.mark.parametrize(
-    "failure", ["robots", "403", "429", "500", "redirect", "large", "malformed"]
+    "failure", ["robots", "403", "429", "500", "redirect", "large", "malformed", "short"]
 )
 def test_failure_stops_all_subsequent_queries_and_details(sample, failure):
     config, database = sample
@@ -370,6 +370,8 @@ def test_failure_stops_all_subsequent_queries_and_details(sample, failure):
         if failure == "large":
             return httpx.Response(200, json={"total": 201, "jobPostings": []})
         if failure == "malformed":
+            return httpx.Response(200, json={"total": 2, "jobPostings": "invalid"})
+        if failure == "short":
             return httpx.Response(200, json={"total": 2, "jobPostings": []})
         return httpx.Response(
             302 if failure == "redirect" else int(failure),
@@ -378,7 +380,9 @@ def test_failure_stops_all_subsequent_queries_and_details(sample, failure):
 
     report, details = run(config, handler)
     assert report["status"] == "incomplete"
-    assert len(requests) == (1 if failure == "robots" else 2)
+    assert len(requests) == (1 if failure == "robots" else 3 if failure == "short" else 2)
+    if failure == "short":
+        assert all(json.loads(r.content)["searchText"] == "repo" for r in requests[1:])
     assert len(report["queries"]) == 1 and details == []
     assert database.read_bytes() == before
 
