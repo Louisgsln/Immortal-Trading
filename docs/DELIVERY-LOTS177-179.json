@@ -1,0 +1,232 @@
+{
+  "lots": [
+    177,
+    178,
+    179
+  ],
+  "status": "prepared_not_deployed",
+  "code_commit": "43fd126893db6df1fe6cf058aba8cc6e313d0f33",
+  "validation_commit": "38a29a55a2ac92ef5ca1183ce05a5f72d6f8629a",
+  "production_changed": false,
+  "production_initial_observation": {
+    "at": "2026-10-19T16:12:12.363486+00:00",
+    "https_status": 200,
+    "seconds": 16.558,
+    "jobs": 1983,
+    "active": 1957,
+    "sources": 122,
+    "employers": 110,
+    "fresh_sources": 105,
+    "watcher": "active"
+  },
+  "prepared_inventory": {
+    "sources": 128,
+    "employers": 116,
+    "new_sources": [
+      "lloyds",
+      "lombard_odier",
+      "janus_henderson",
+      "belvedere",
+      "tibra",
+      "eclipse"
+    ],
+    "new_jobs": 27,
+    "priority_70": 10,
+    "zero": 17,
+    "two_public_passes_identical": true
+  },
+  "linkedin": {
+    "mode": "owner_pasted_telegram_command",
+    "command": "/linkedin",
+    "automatic_collection": false,
+    "gmail_access": false,
+    "counted_as_monitored_source": false
+  },
+  "tests": {
+    "new_cases": 96,
+    "local_full_suite": {
+      "commit": "61b5ddabba0da6237851ad1d82cfcca82de6b0bf",
+      "tests": 5737,
+      "passed": 5736,
+      "failures": 1,
+      "seconds": 1363.04,
+      "remaining_failure": "Historical probe fixture classified a short page as malformed; fixture corrected and the 83-case probe/restart/snapshot group passed. Final GitHub run validates the latest commit.",
+      "corrected_probe_cases_passed": 8
+    },
+    "targeted_groups": [
+      282,
+      217,
+      108,
+      24,
+      81,
+      86,
+      83
+    ],
+    "targeted_groups_overlap": true,
+    "javascript": 34,
+    "ruff": "passed",
+    "format": "passed",
+    "mypy_modules": 133,
+    "dashboard_controls": 89,
+    "github": {
+      "run_id": 39293731137,
+      "status": "in_progress",
+      "python_3_14": 5743,
+      "javascript": 34,
+      "checked_at": "2026-10-19T17:32:39Z",
+      "container_job_started": false,
+      "jobs": [
+        {
+          "id": 118200749492,
+          "name": "dashboard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 118200749897,
+          "name": "checks (3.12)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 118200749901,
+          "name": "checks (3.14)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 118200749959,
+          "name": "checks (3.13)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 118200750115,
+          "name": "checks (3.11)",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ]
+    },
+    "synthetic_recovery": {
+      "status": "ok",
+      "mode": "local_workflow_only",
+      "synthetic_jobs": 8,
+      "identical_tables": 11
+    },
+    "unprivileged_vps_wheel": {
+      "status": "ok",
+      "sha256": "b4a95385279fbcf7019ac237b8d4e14807e0438a497675be6cb15b2487d2fb7f",
+      "bytes": 376206,
+      "installed_non_editable": true,
+      "dashboard_contract": "passed",
+      "synthetic_recovery": "passed",
+      "docker_validation": false
+    }
+  },
+  "authorization": {
+    "sudo_blocked": true,
+    "blocked_commands": 33,
+    "original_blocklist_unchanged": true,
+    "deployment": "awaiting_new_explicit_sudo_authorization",
+    "auto_review_rejection": "Previous maintenance approval was completed and restored; reopening sudo requires new explicit approval."
+  },
+  "production_backup": "not_accessible_without_sudo",
+  "production_copy_simulation": "pending_authorization",
+  "deployment": "pending_authorization",
+  "telegram_cursor": "not_changed_by_this_intervention",
+  "manual_telegram_messages": 0,
+  "remaining_incidents": [
+    "BNP public access restrictions",
+    "Nomura campus human CAPTCHA pending",
+    "Jefferies campus CAPTCHA",
+    "Bank of America opaque reference 26022615"
+  ],
+  "follow_up": [
+    170,
+    173,
+    176
+  ],
+  "predeployment_code_manifest": {
+    "status": "ok",
+    "files": 19,
+    "base_versions_match": true,
+    "target_versions_match": true,
+    "production_head_unchanged": "3afcdbf7b9e1f2ba5e951238d3317d5685fddbf3",
+    "profile_sha256_before": "247f333b97a66a9158fa05f622689d0d5190d55a0282be26192bad69f73ceb2f",
+    "profile_sha256_prepared": "3c19ae5bfd1ba354b7e0a5c599ac104bb002fc7f2495383bac8890c003588371"
+  },
+  "public_collection_checks": {
+    "nomura_professionals": {
+      "jobs": 14,
+      "withdrawn": 1
+    },
+    "hsbc_graduates": {
+      "jobs": 4,
+      "withdrawn": 1
+    },
+    "hsbc_professionals": {
+      "jobs": 8
+    },
+    "societe_generale": {
+      "jobs": 32
+    },
+    "state_street": {
+      "jobs": 39
+    },
+    "barclays": {
+      "jobs": 23
+    },
+    "morgan_stanley": {
+      "jobs": 10
+    },
+    "citi_campus": {
+      "jobs": 15
+    },
+    "citi": {
+      "jobs": 38,
+      "listing_gaps": [],
+      "seconds": 185.9,
+      "masked_nine_digit_reference": "261001222"
+    },
+    "td": {
+      "jobs": 3
+    },
+    "bmo": {
+      "jobs": 38
+    },
+    "us_bank": {
+      "jobs": 19
+    },
+    "rbc": {
+      "jobs": 9,
+      "seconds": 320.029
+    },
+    "bank_of_america": {
+      "jobs": 9,
+      "listing_gaps": [
+        "26022615"
+      ]
+    },
+    "scotiabank": {
+      "jobs": 11
+    }
+  },
+  "public_collection_checks_production_changed": false,
+  "production_latest_observation": {
+    "observed_at": "2026-10-19T17:26:59.643360+00:00",
+    "installed_sources": 122,
+    "employers": 110,
+    "fresh": 110,
+    "http_status": 200,
+    "http_seconds": 14.796,
+    "watcher": {
+      "status": "active",
+      "phase": "scanning",
+      "at": "2026-10-19T17:26:41.283309+00:00",
+      "age_seconds": 11
+    },
+    "all_new_scores": true
+  },
+  "fresh_public_validation_required_before_import": true
+}

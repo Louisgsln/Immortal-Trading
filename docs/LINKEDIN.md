@@ -1,5 +1,7 @@
 # Annonces LinkedIn — lot 179
 
+Installation sur le VPS en attente d’autorisation ; voir le [bilan](VALIDATION-LOTS177-179.md).
+
 La commande privée `/linkedin` ajoute une annonce copiée dans Telegram au Dashboard.
 Elle répond avec la fiche et les boutons « Ajouter à la liste des souhaits » et
 « J’ai postulé ». Le suivi, le tri et le retrait des souhaits utilisent les mêmes
@@ -32,7 +34,9 @@ automatique d’une commande.
 Un nouvel import de la même référence conserve la fiche et le suivi existants.
 Une correspondance unique avec une offre officielle ne remplace pas sa description,
 ne rafraîchit pas son observation et ne rouvre pas une offre fermée. Les rapprochements
-ambigus restent distincts. Le score ne reçoit aucun bonus lié à LinkedIn.
+ambigus restent distincts. Une annonce manuelle ne compte pas comme une preuve de
+source active : elle ne bloque pas une fermeture ultérieure confirmée par l’employeur.
+Le score ne reçoit aucun bonus lié à LinkedIn.
 
 Le 19 octobre 2026, les règles publiques LinkedIn chargées par le client du radar
 interdisent les routes de recherche, de fiches et de l’API anonyme jobs-guest depuis

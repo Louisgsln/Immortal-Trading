@@ -1,0 +1,329 @@
+{
+  "status": "ok",
+  "mode": "public_read_only_research",
+  "production_changed": false,
+  "sources": {
+    "lloyds": {
+      "employer": "Lloyds Banking Group",
+      "catalogue": "https://lbg.wd3.myworkdayjobs.com/LBG_Careers",
+      "jobs": 4,
+      "two_passes_identical": true,
+      "first_sha256": "5772fcb5912fcfa487ac0eb620533a918b8706692b9a88ebbcae4914f66ae6aa",
+      "second_sha256": "5772fcb5912fcfa487ac0eb620533a918b8706692b9a88ebbcae4914f66ae6aa",
+      "priority_70": 0,
+      "zero": 4,
+      "internships": 0,
+      "selected": 4,
+      "examined": 16,
+      "samples": [
+        {
+          "title": "Senior Analyst Markets Middle Office Trade Controls",
+          "reference": "81c42a9647fe103977250283fb750000",
+          "location": "London; London 33 Old Broad Street",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://lbg.wd3.myworkdayjobs.com/LBG_Careers/job/London/Senior-Analyst-Markets-Middle-Office-Trade-Controls_162932-1"
+        },
+        {
+          "title": "SME Relationship Director Trading Sector",
+          "reference": "8d28c9c6e774104393e01ab555130001",
+          "location": "Worcester; Hereford 8 High Town",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://lbg.wd3.myworkdayjobs.com/LBG_Careers/job/Worcester/SME-Relationship-Director-Trading-Sector_164080-1"
+        },
+        {
+          "title": "Senior Enterprise Architect (Markets and Investments)",
+          "reference": "78bf207fc7921014591907cc860d0001",
+          "location": "London; Edinburgh; Bristol Harbourside",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://lbg.wd3.myworkdayjobs.com/LBG_Careers/job/London/Senior-Enterprise-Architect--Markets-and-Investments-_151312-3"
+        }
+      ]
+    },
+    "lombard_odier": {
+      "employer": "Lombard Odier",
+      "catalogue": "https://lombardodier.wd3.myworkdayjobs.com/Lombard_Odier_Careers",
+      "jobs": 4,
+      "two_passes_identical": true,
+      "first_sha256": "882332f49547ff88134cbe41ff3742dba27fdd1288338249025177fa08e3ddf2",
+      "second_sha256": "882332f49547ff88134cbe41ff3742dba27fdd1288338249025177fa08e3ddf2",
+      "priority_70": 0,
+      "zero": 4,
+      "internships": 3,
+      "selected": 4,
+      "examined": 42,
+      "samples": [
+        {
+          "title": "Internship – Software Engineer – Global Markets Services AI Project",
+          "reference": "e9abe51651901001991955ddd8df0000",
+          "location": "Geneva",
+          "score": 0,
+          "programme": {
+            "kind": "internship",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [
+              "Internship – Software Engineer – Global Markets Services AI Project"
+            ],
+            "issues": []
+          },
+          "url": "https://lombardodier.wd3.myworkdayjobs.com/Lombard_Odier_Careers/job/Geneva/Internship---Software-Engineer---Global-Markets-Services-AI-Project_R0007627-1"
+        },
+        {
+          "title": "Quantitative Analyst Intern Multi-Asset",
+          "reference": "501c7bb259111000ee59e9e43f810000",
+          "location": "Geneva",
+          "score": 0,
+          "programme": {
+            "kind": "internship",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [
+              "Quantitative Analyst Intern Multi-Asset"
+            ],
+            "issues": []
+          },
+          "url": "https://lombardodier.wd3.myworkdayjobs.com/Lombard_Odier_Careers/job/Geneva/Quantitative-Analyst-Intern-Multi-Asset_R0007658"
+        },
+        {
+          "title": "Quantitative Research Intern – AI for Investment Research",
+          "reference": "501c7bb259111000ee4bff1470a70000",
+          "location": "Geneva",
+          "score": 0,
+          "programme": {
+            "kind": "internship",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [
+              "Quantitative Research Intern – AI for Investment Research"
+            ],
+            "issues": []
+          },
+          "url": "https://lombardodier.wd3.myworkdayjobs.com/Lombard_Odier_Careers/job/Geneva/Quantitative-Research-Intern---AI-for-Investment-Research_R0007657"
+        }
+      ]
+    },
+    "janus_henderson": {
+      "employer": "Janus Henderson",
+      "catalogue": "https://jobs.janushenderson.com/",
+      "jobs": 4,
+      "two_passes_identical": true,
+      "first_sha256": "a1f223c05ea353349ae2f57bcb1e0fee09c1853da3f22f9748fa706cd168186a",
+      "second_sha256": "a1f223c05ea353349ae2f57bcb1e0fee09c1853da3f22f9748fa706cd168186a",
+      "priority_70": 0,
+      "zero": 4,
+      "internships": 1,
+      "selected": 4,
+      "examined": 73,
+      "samples": [
+        {
+          "title": "Quantitative Developer",
+          "reference": "1393370800",
+          "location": "London, GB, EC2M 3AE",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://jobs.janushenderson.com/job/London-Quantitative-Developer-EC2M-3AE/1393370800"
+        },
+        {
+          "title": "Equity Research MBA Intern",
+          "reference": "1439073100",
+          "location": "Denver, CO, US, 80206",
+          "score": 0,
+          "programme": {
+            "kind": "internship",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [
+              "Equity Research MBA Intern"
+            ],
+            "issues": []
+          },
+          "url": "https://jobs.janushenderson.com/job/Denver-Equity-Research-MBA-Intern-CO-80206/1439073100"
+        },
+        {
+          "title": "Quantitative Analyst - Equities",
+          "reference": "1426640600",
+          "location": "Denver, CO, US, 80206",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://jobs.janushenderson.com/job/Denver-Quantitative-Analyst-Equities-CO-80206/1426640600"
+        }
+      ]
+    },
+    "belvedere": {
+      "employer": "Belvedere Trading",
+      "catalogue": "https://jobs.lever.co/belvederetrading",
+      "jobs": 7,
+      "two_passes_identical": true,
+      "first_sha256": "f645775c18031699855e0de83dd9ca3d7fecef15cb130c70b7d6d9a63a5ced52",
+      "second_sha256": "f645775c18031699855e0de83dd9ca3d7fecef15cb130c70b7d6d9a63a5ced52",
+      "priority_70": 6,
+      "zero": 1,
+      "internships": 1,
+      "selected": 7,
+      "examined": 19,
+      "samples": [
+        {
+          "title": "Experienced Commodities Options Trader",
+          "reference": "be7ab7fc-03c2-4192-adbe-eaf85e9588fe",
+          "location": "Chicago, Illinois",
+          "score": 72,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://jobs.lever.co/belvederetrading/be7ab7fc-03c2-4192-adbe-eaf85e9588fe/apply"
+        },
+        {
+          "title": "Experienced Equity Options Trader",
+          "reference": "9f0c0e5c-403a-4383-a25a-f5ebd191fbc4",
+          "location": "Chicago, Illinois",
+          "score": 72,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://jobs.lever.co/belvederetrading/9f0c0e5c-403a-4383-a25a-f5ebd191fbc4/apply"
+        },
+        {
+          "title": "Experienced Options Trader – Singapore Office",
+          "reference": "25963deb-5dfd-42da-88b4-3cd3b5d8d5ef",
+          "location": "Singapore",
+          "score": 75,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://jobs.lever.co/belvederetrading/25963deb-5dfd-42da-88b4-3cd3b5d8d5ef/apply"
+        }
+      ]
+    },
+    "tibra": {
+      "employer": "Tibra Capital",
+      "catalogue": "https://apply.workable.com/tibra-capital-1/",
+      "jobs": 0,
+      "two_passes_identical": true,
+      "first_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "second_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "priority_70": 0,
+      "zero": 0,
+      "internships": 0,
+      "selected": 0,
+      "examined": 0,
+      "samples": []
+    },
+    "eclipse": {
+      "employer": "Eclipse Trading",
+      "catalogue": "https://www.eclipsetrading.com/all-jobs/",
+      "jobs": 8,
+      "two_passes_identical": true,
+      "first_sha256": "5747aaf179313b846939d8b1100f1d767c68b7690cdd69c6b75a7378e57c6428",
+      "second_sha256": "5747aaf179313b846939d8b1100f1d767c68b7690cdd69c6b75a7378e57c6428",
+      "priority_70": 4,
+      "zero": 4,
+      "internships": 0,
+      "selected": 8,
+      "examined": 17,
+      "samples": [
+        {
+          "title": "Electronic Trading Systems Risk & Control Manager / Senior Manager",
+          "reference": "8785677002",
+          "location": "Hong Kong",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://job-boards.greenhouse.io/eclipsetrading/jobs/8785677002"
+        },
+        {
+          "title": "Front Office Python Developer",
+          "reference": "8473722002",
+          "location": "Hong Kong",
+          "score": 0,
+          "programme": {
+            "kind": "unspecified",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://job-boards.greenhouse.io/eclipsetrading/jobs/8473722002"
+        },
+        {
+          "title": "Graduate Trader | 2027 Intake",
+          "reference": "8703556002",
+          "location": "Hong Kong",
+          "score": 94,
+          "programme": {
+            "kind": "graduate",
+            "formats": [],
+            "year": null,
+            "year_status": "unknown",
+            "evidence": [],
+            "issues": []
+          },
+          "url": "https://job-boards.greenhouse.io/eclipsetrading/jobs/8703556002"
+        }
+      ]
+    }
+  }
+}
