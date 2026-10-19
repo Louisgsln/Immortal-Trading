@@ -328,6 +328,7 @@ class WorkdayCollector:
                     "bp": r"RQ[0-9]{6}",
                     "morgan_stanley": r"JR[0-9]{6}",
                     "bank_of_america": r"[0-9]{8}",
+                    "state_street": r"R-[0-9]{6}",
                 }.get(self.source)
                 if (
                     pattern
