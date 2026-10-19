@@ -5,6 +5,7 @@ import hashlib
 import json
 import re
 from html.parser import HTMLParser
+from urllib.parse import urlsplit
 
 
 class DashboardContractError(ValueError):
@@ -19,10 +20,13 @@ class _Document(HTMLParser):
         self.scripts: list[dict] = []
         self.styles: list[dict] = []
         self.block: dict | None = None
+        self.loading: str | None = None
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
+        if tag == "body":
+            self.loading = values.get("data-loading")
         if "id" in values:
             if values["id"] in self.ids:
                 raise DashboardContractError("duplicate_id")
@@ -48,7 +52,9 @@ class _Document(HTMLParser):
             self.block = None
 
 
-def validate_dashboard(html: str, *, response_policy: str | None = None) -> dict:
+def validate_dashboard(
+    html: str, *, response_policy: str | None = None, allow_loading: bool = False
+) -> dict:
     """Check asset hashes, literal DOM references and bounded, unique offer identifiers."""
     if not isinstance(html, str) or len(html) > 64 * 1024 * 1024:
         raise DashboardContractError("invalid_document")
@@ -99,8 +105,41 @@ def validate_dashboard(html: str, *, response_policy: str | None = None) -> dict
         if not isinstance(data, dict) or data.get("format_version") != 1:
             raise DashboardContractError("invalid_snapshot")
         jobs = data.get("jobs")
-        if data.get("status") != "ok" or not isinstance(jobs, list) or len(jobs) > 5000:
+        loading = allow_loading and data.get("status") == "loading"
+        if (
+            (data.get("status") != "ok" and not loading)
+            or not isinstance(jobs, list)
+            or len(jobs) > 5000
+        ):
             raise DashboardContractError("invalid_snapshot")
+        if loading:
+            editing = data.get("editing")
+            if (
+                document.loading != "true"
+                or jobs
+                or "summary" in data
+                or data.get("live") is not True
+                or not isinstance(editing, dict)
+                or editing.get("enabled") is not True
+                or editing.get("mode") != "private"
+                or re.fullmatch(r"[a-f0-9]{64}", editing.get("token", "")) is None
+                or re.fullmatch(
+                    r"/[A-Za-z0-9_-]{32,128}/api/applications", editing.get("api_base", "")
+                )
+                is None
+            ):
+                raise DashboardContractError("invalid_loading_snapshot")
+            origin = urlsplit(editing.get("origin", ""))
+            if (
+                origin.scheme != "https"
+                or not origin.hostname
+                or origin.username
+                or origin.password
+                or origin.path
+                or origin.query
+                or origin.fragment
+            ):
+                raise DashboardContractError("invalid_loading_snapshot")
         ids = [job["id"] for job in jobs]
         if any(
             not isinstance(value, str) or re.fullmatch(r"[A-Za-z0-9_-]{1,128}", value) is None
@@ -125,7 +164,23 @@ def main() -> None:
 
     # The release image checks its packaged assets without business data or network access.
     snapshot = {"format_version": 1, "status": "ok", "jobs": []}
-    print(json.dumps(validate_dashboard(render_dashboard(snapshot, editable=True)), sort_keys=True))
+    result = validate_dashboard(render_dashboard(snapshot, editable=True))
+    loading = {
+        "format_version": 1,
+        "status": "loading",
+        "jobs": [],
+        "live": True,
+        "editing": {
+            "enabled": True,
+            "mode": "private",
+            "token": "a" * 64,
+            "origin": "https://dashboard.example.com",
+            "api_base": "/" + "A" * 43 + "/api/applications",
+        },
+    }
+    validate_dashboard(render_dashboard(loading, editable=True), allow_loading=True)
+    result["progressive_shell"] = "verified"
+    print(json.dumps(result, sort_keys=True))
 
 
 if __name__ == "__main__":

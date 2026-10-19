@@ -57,3 +57,58 @@ def test_contract_blocks_incomplete_or_altered_release(before, after, code):
 def test_duplicate_or_invalid_offer_ids_are_rejected(jobs):
     with pytest.raises(DashboardContractError, match="invalid_"):
         validate_dashboard(render_dashboard(snapshot(jobs)))
+
+
+def loading_snapshot():
+    return {
+        "format_version": 1,
+        "status": "loading",
+        "jobs": [],
+        "live": True,
+        "editing": {
+            "enabled": True,
+            "mode": "private",
+            "token": "a" * 64,
+            "origin": "https://dashboard.example.com",
+            "api_base": "/" + "A" * 43 + "/api/applications",
+        },
+    }
+
+
+def test_loading_shell_requires_explicit_contract_mode():
+    page = render_dashboard(loading_snapshot(), editable=True)
+    with pytest.raises(DashboardContractError, match="invalid_snapshot"):
+        validate_dashboard(page)
+    assert validate_dashboard(page, allow_loading=True)["jobs"] == 0
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("jobs", [{"id": "fake-partial"}]),
+        ("summary", {"total": 0}),
+        ("live", False),
+        ("editing", {}),
+    ],
+)
+def test_loading_shell_cannot_claim_loaded_counts_or_missing_session(field, value):
+    initial = loading_snapshot()
+    initial[field] = value
+    with pytest.raises(DashboardContractError, match="invalid_loading_snapshot"):
+        validate_dashboard(render_dashboard(initial, editable=True), allow_loading=True)
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("token", "wrong"),
+        ("api_base", "https://other.example/api/applications"),
+        ("origin", "http://dashboard.example.com"),
+        ("origin", "https://user:password@dashboard.example.com"),
+    ],
+)
+def test_loading_contract_rejects_malformed_private_context(field, value):
+    initial = loading_snapshot()
+    initial["editing"][field] = value
+    with pytest.raises(DashboardContractError, match="invalid_loading_snapshot"):
+        validate_dashboard(render_dashboard(initial, editable=True), allow_loading=True)
