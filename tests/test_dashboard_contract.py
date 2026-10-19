@@ -15,7 +15,7 @@ def test_packaged_dashboard_contract_accepts_unicode_and_untrusted_offer_text():
     result = validate_dashboard(render_dashboard(data, editable=True))
     assert result["jobs"] == 1
     assert result["controls"] > 40
-    assert result["modules"] == 7
+    assert result["modules"] == 8
     assert "title" not in json.dumps(result)
 
 

@@ -78,7 +78,11 @@ def serve(
             from trading_radar.dashboard_private import PrivateDashboardAccess
 
             server = create_editable_dashboard_server(
-                config, history_dir, port, private_access=PrivateDashboardAccess.from_env()
+                config,
+                history_dir,
+                port,
+                private_access=PrivateDashboardAccess.from_env(),
+                progressive=True,
             )
         elif edit_applications:
             from trading_radar.dashboard_editor import create_editable_dashboard_server

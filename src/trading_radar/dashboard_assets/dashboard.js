@@ -1,4 +1,4 @@
-(() => {
+(async () => {
   "use strict";
   const $ = (id) => document.getElementById(id);
   const make = (tag, text, className) => {
@@ -45,6 +45,23 @@
   let data;
   try { data = JSON.parse($("radar-data").textContent); }
   catch (_) { fail("Cet instantané est illisible. Générez un nouvel export depuis Trading Job Radar."); return; }
+  if (data?.status === "loading") {
+    document.querySelectorAll(".nav-item").forEach((button) => { button.disabled = true; });
+    $("main").setAttribute("aria-busy", "true");
+    $("retry-snapshot").addEventListener("click", () => location.reload());
+    try {
+      data = await radarLoading.load(data, location);
+      document.body.dataset.loading = "false";
+      $("snapshot-loading").hidden = true;
+      document.querySelectorAll(".nav-item").forEach((button) => { button.disabled = false; });
+    } catch (_) {
+      $("snapshot-loading").classList.add("loading-failed");
+      $("snapshot-loading").querySelector("h2").textContent = "Le chargement a été interrompu";
+      $("snapshot-loading-message").textContent = "Les données n’ont pas pu être chargées. Réessayez pour retrouver les offres et votre suivi.";
+      $("retry-snapshot").hidden = false;
+      return;
+    } finally { $("main").removeAttribute("aria-busy"); }
+  }
   if (!data || data.status !== "ok" || !Array.isArray(data.jobs)) {
     fail(data && data.error && data.error.message || "Les données du radar sont indisponibles."); return;
   }
@@ -56,18 +73,20 @@
     $("weekly-counts").textContent = number(weekly.discovered) + " offres découvertes · " + number(weekly.score70) + " au score ≥ " + number(weekly.threshold) + " · " + number(weekly.ready) + " à examiner maintenant.";
     $("weekly-blocked").textContent = Object.entries(weekly.blocked || {}).map(([key,value]) => number(value) + " " + (labels[key] || key)).join(" · ");
   }
-  if (data.services) {
-    const watcher = data.services.watcher || {};
+  const renderServices = (services) => {
+    if (!services) return;
+    const watcher = services.watcher || {};
     const labels = {active:"Radar actif", stale:"Signal du radar ancien", stopped:"Radar arrêté", long_scan:"Collecte prolongée · à vérifier", unknown:"Activité du radar à vérifier"};
     $("service-overview").hidden = false;
     $("watcher-summary").textContent = (labels[watcher.status] || labels.unknown) +
       (watcher.status === "active" ? (watcher.phase === "scanning" ? " · collecte en cours" : " · en veille") : "");
-    $("watcher-observed").textContent = "État à l’ouverture : " + date(data.services.observed_at, true) +
+    $("watcher-observed").textContent = "Dernier état vérifié : " + date(services.observed_at, true) +
       (watcher.at ? " · dernier signal : " + date(watcher.at, true) : "");
-    const digest = data.services.digest || {};
+    const digest = services.digest || {};
     $("digest-summary").textContent = digest.status !== "configured" ? "Réglage indisponible" :
       digest.enabled ? "Programmé chaque jour à " + digest.time + " (Paris)" : "Récapitulatif désactivé";
-  }
+  };
+  renderServices(data.services);
   const countryOptions = new Map(jobs.flatMap((job) => (job.location_facts?.countries || []).map((item) => [item.code, item.label])));
   [...countryOptions].sort((a, b) => a[1].localeCompare(b[1], "fr")).forEach(([code, label]) => {
     const option = make("option", label); option.value = code; $("country").append(option);
@@ -97,6 +116,27 @@
   let wishlist = new Map((data.wishlist?.entries || []).map((entry) => [entry.job_id, entry]));
   let wishlistPending = false;
   const requestCredentials = privateEditing ? "same-origin" : "omit";
+  let refreshingServices = false;
+  async function refreshServices() {
+    if (!privateEditing || document.hidden || refreshingServices) return;
+    refreshingServices = true;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const response = await fetch(applicationsAPI.replace(/applications$/, "services"), {
+        headers: {"X-Radar-Token": data.editing.token}, credentials: "same-origin",
+        cache: "no-store", redirect: "error", referrerPolicy: "no-referrer", signal: controller.signal
+      });
+      if (!response.ok) throw new Error("unavailable");
+      const result = await response.json();
+      if (result?.status !== "ok" || !result.services?.watcher || !result.services.observed_at) throw new Error("unavailable");
+      data.services = result.services;
+      renderServices(data.services);
+    } catch (_) {
+      $("watcher-summary").textContent = "Activité du radar à vérifier";
+      $("watcher-observed").textContent = "État non confirmé. Nouvelle vérification automatique ; dernier état reçu : " + date(data.services?.observed_at, true) + ".";
+    } finally { clearTimeout(timer); refreshingServices = false; }
+  }
   if (editingEnabled) {
     $("workspace-mode").textContent = "Suivi modifiable";
     $("tracking-mode").textContent = "SUIVI MODIFIABLE";
@@ -616,6 +656,10 @@
     content.append(make("p", "Identifiant · " + job.id, "detail-id"));
     $("job-dialog").showModal(); $("job-dialog").scrollTop = 0; $("close-detail").focus();
   }
+  function validFilterRange(prefix) {
+    return radarPublication.validRange($(prefix + "-from").value, $(prefix + "-to").value) &&
+      !$(prefix + "-from").validity.badInput && !$(prefix + "-to").validity.badInput;
+  }
   function renderJobs() {
     const query = normalize($("search").value.trim());
     const company = $("company").value; const score = Number($("score").value);
@@ -626,12 +670,12 @@
     const programmeYear = $("programme-year").value;
     const countryFilter = $("country").value; const durationFilter = $("duration").value;
     const startFrom = $("start-from").value; const startTo = $("start-to").value;
-    const validStart = radarPublication.validRange(startFrom, startTo) && !$("start-from").validity.badInput && !$("start-to").validity.badInput;
+    const validStart = validFilterRange("start");
     $("start-error").hidden = validStart;
     $("start-error").textContent = validStart ? "" : "Vérifiez la période de début : la borne de départ doit précéder ou égaler la borne de fin. Ce filtre attend une période valide.";
     ["start-from", "start-to"].forEach((id) => $(id).setAttribute("aria-invalid", String(!validStart)));
     const from = $("publication-from").value; const to = $("publication-to").value;
-    const validPeriod = radarPublication.validRange(from, to) && !$("publication-from").validity.badInput && !$("publication-to").validity.badInput;
+    const validPeriod = validFilterRange("publication");
     $("publication-error").hidden = validPeriod;
     $("publication-error").textContent = validPeriod ? "" : "Vérifiez les dates : le début doit précéder ou égaler la fin. Le filtre de publication n’est pas appliqué tant que la période est invalide.";
     ["publication-from", "publication-to"].forEach((id) => $(id).setAttribute("aria-invalid", String(!validPeriod)));
@@ -706,6 +750,7 @@
     $("result-count").textContent = number(results.length) + (results.length === 1 ? " offre" : " offres") + (state.view === "applications" ? (results.length === 1 ? " suivie" : " suivies") : state.view === "wishlist" ? " dans vos souhaits" : " dans votre sélection");
     $("page-info").textContent = results.length ? (start + 1) + "–" + Math.min(start + pageSize, results.length) + " sur " + number(results.length) + " · Page " + state.page + " / " + pages : "0 offre";
     $("previous").disabled = state.page <= 1; $("next").disabled = state.page >= pages;
+    syncFilterToggle();
   }
   function agendaSelection(now) {
     const today = radarAgenda.parisDay(now);
@@ -944,6 +989,19 @@
   }
   const filterOptions = () => Object.fromEntries(radarPreferences.fields.filter((id) => $(id).tagName === "SELECT").map((id) => [id,[...$(id).options].map((option) => option.value)]));
   const captureFilters = () => Object.fromEntries(radarPreferences.fields.map((id) => [id,$(id).value]));
+  const defaultFilterValues = captureFilters();
+  const compactFilters = window.matchMedia("(max-width:760px)");
+  document.body.dataset.wishlistFilters = "closed";
+  function syncFilterToggle() {
+    const view = state.view;
+    $("wishlist-filters").hidden = !["jobs", "applications", "wishlist"].includes(view) || (view !== "wishlist" && !compactFilters.matches);
+    const open = document.body.dataset.wishlistFilters === "open";
+    const defaults = {...defaultFilterValues, active: view === "jobs" ? defaultFilterValues.active : "all"};
+    const selected = radarPreferences.fields.filter((id) => id !== "sort" && $(id).value !== defaults[id] &&
+      (!["start", "publication"].some((prefix) => id.startsWith(prefix + "-") && !validFilterRange(prefix)))).length;
+    $("wishlist-filters").setAttribute("aria-expanded", String(open));
+    $("wishlist-filters").textContent = (open ? "Masquer les filtres" : "Afficher les filtres") + (selected ? " · " + selected + " actif" + (selected > 1 ? "s" : "") : "");
+  }
   let savedFilterViews = {};
   const filterStorage = () => window.localStorage;
   function restoreFilters(view) {
@@ -975,9 +1033,7 @@
     state.view = view; state.page = 1;
     document.body.dataset.radarView = view;
     document.body.dataset.wishlistFilters = "closed";
-    $("wishlist-filters").hidden = view !== "wishlist";
-    $("wishlist-filters").setAttribute("aria-expanded", "false");
-    $("wishlist-filters").textContent = "Afficher les filtres";
+    syncFilterToggle();
     document.querySelectorAll(".nav-item").forEach((button) => {
       const selected = button.dataset.view === view; button.classList.toggle("selected", selected);
       if (selected) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current");
@@ -1001,10 +1057,10 @@
   $("wishlist-filters").addEventListener("click", () => {
     const open = document.body.dataset.wishlistFilters !== "open";
     document.body.dataset.wishlistFilters = open ? "open" : "closed";
-    $("wishlist-filters").setAttribute("aria-expanded", String(open));
-    $("wishlist-filters").textContent = open ? "Masquer les filtres" : "Afficher les filtres";
+    syncFilterToggle();
     if (open) $("search").focus();
   });
+  compactFilters.addEventListener("change", syncFilterToggle);
   $("filters").addEventListener("submit", (event) => event.preventDefault());
   $("trend-days").addEventListener("change", renderTrends);
   $("agenda-period").addEventListener("change", renderAgenda);
@@ -1039,5 +1095,10 @@
     setInterval(refreshApplications, 10000);
     document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshApplications(); });
     refreshApplications();
+  }
+  if (privateEditing) {
+    setInterval(refreshServices, 15000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshServices(); });
+    refreshServices();
   }
 })();

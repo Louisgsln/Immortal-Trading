@@ -8,7 +8,7 @@
   <title>Trading Job Radar — Tableau de bord</title>
   <style>__RADAR_CSS__</style>
 </head>
-<body>
+<body data-loading="__RADAR_LOADING_STATE__">
   <a class="skip-link" href="#main">Aller au contenu</a>
   <aside class="sidebar" aria-label="Navigation principale">
     <a class="brand" href="#main" aria-label="Trading Job Radar, accueil"><span class="brand-mark" aria-hidden="true">R<span>•</span></span><span>TRADING<br>JOB RADAR</span></a>
@@ -28,6 +28,12 @@
     <section class="page-heading"><div><p class="eyebrow">VOTRE PROCHAINE OPPORTUNITÉ</p><h1 id="page-title">Le marché, à votre portée.</h1><p id="page-subtitle" class="subtitle">Repérez les offres pertinentes. Gardez le cap sur votre recherche.</p></div><div class="snapshot-date"><span id="generated-caption">Instantané généré le</span><time id="generated-at">—</time><button id="refresh-dashboard" class="secondary-button" type="button" hidden>Actualiser</button></div></section>
     <div id="warnings" class="warnings" role="status" hidden></div>
     <div id="fatal-error" class="error-panel" role="alert" hidden></div>
+    <section id="snapshot-loading" class="loading-panel" role="status" aria-live="polite" __RADAR_LOADING_HIDDEN__>
+      <span class="loading-symbol" aria-hidden="true"></span>
+      <h2>Votre radar se prépare</h2>
+      <p id="snapshot-loading-message">Chargement des offres, de vos souhaits et du suivi. Les compteurs apparaîtront lorsque les données seront prêtes.</p>
+      <button id="retry-snapshot" class="secondary-button" type="button" hidden>Réessayer</button>
+    </section>
     <section id="metrics" class="metrics" aria-label="Indicateurs du radar"></section>
     <section id="service-overview" class="service-overview" aria-labelledby="service-heading" hidden><div><h2 id="service-heading">Votre radar</h2><p id="watcher-summary"></p><p id="watcher-observed" class="experience-help"></p></div><div><h3>Récapitulatif Telegram</h3><p id="digest-summary"></p><p class="experience-help">Réglage du récapitulatif automatique. Consultez /digest sur Telegram pour un aperçu.</p></div><button id="service-details" type="button" class="secondary-button">Voir les sources</button></section>
     <section id="weekly-overview" class="consultation-controls" aria-labelledby="weekly-heading" hidden><h2 id="weekly-heading">Les 7 derniers jours</h2><p id="weekly-counts"></p><p id="weekly-blocked"></p><p class="experience-help">Premières découvertes par le radar, y compris le premier import d’un employeur. Les offres à examiner sont actives, vérifiées récemment et dans le périmètre. Ces nombres ne comptent ni les publications employeur ni les alertes envoyées.</p></section>
@@ -41,6 +47,7 @@
         <p id="filter-memory-help">Les filtres des offres et des candidatures sont mémorisés séparément. Les alertes Telegram conservent leurs réglages.</p>
         <p id="filter-memory-message" role="status" aria-live="polite"></p>
       </div>
+      <button id="wishlist-filters" class="secondary-button filter-toggle" type="button" aria-controls="filters" aria-expanded="false" hidden>Afficher les filtres</button>
       <form id="filters" class="filters" role="search" aria-label="Filtrer les offres">
         <label class="search-field"><span>Rechercher</span><input id="search" type="search" placeholder="Poste, entreprise, localisation…" autocomplete="off"></label>
         <label><span>Entreprise</span><select id="company"><option value="">Toutes les entreprises</option></select></label>
@@ -67,7 +74,7 @@
       <p id="publication-error" class="experience-help publication-error" role="status" aria-live="polite" hidden></p>
       <p id="opportunity-help" class="experience-help">Durée et début : les fenêtres annoncées qui chevauchent vos critères sont incluses. Une année sans mois couvre cette année entière ; elle ne garantit pas un début à la date choisie. Les dates inconnues ou contradictoires sont exclues du filtre de début. Les extraits restent consultables dans chaque fiche.</p>
       <p id="start-error" class="experience-help publication-error" role="status" aria-live="polite" hidden></p>
-      <div class="result-toolbar"><button id="wishlist-filters" class="secondary-button" type="button" aria-controls="filters" aria-expanded="false" hidden>Afficher les filtres</button><p id="result-count" role="status" aria-live="polite">Chargement de l’instantané…</p><label class="sort-label">Trier par <select id="sort"><option value="score">Score décroissant</option><option value="publication-newest">Publication · plus récentes</option><option value="publication-oldest">Publication · plus anciennes</option><option value="saved">Ajout aux souhaits</option><option value="recent">Repérage · plus récent</option><option value="company">Entreprise A–Z</option><option value="deadline">Échéance proche</option></select></label></div>
+      <div class="result-toolbar"><p id="result-count" role="status" aria-live="polite">Chargement de l’instantané…</p><label class="sort-label">Trier par <select id="sort"><option value="score">Score décroissant</option><option value="publication-newest">Publication · plus récentes</option><option value="publication-oldest">Publication · plus anciennes</option><option value="saved">Ajout aux souhaits</option><option value="recent">Repérage · plus récent</option><option value="company">Entreprise A–Z</option><option value="deadline">Échéance proche</option></select></label></div>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Liste des offres, défilement horizontal"><table class="jobs-table"><thead><tr><th scope="col">POSTE &amp; ENTREPRISE</th><th scope="col">LOCALISATION</th><th scope="col">SCORE</th><th scope="col">SUIVI</th><th scope="col">PUBLIÉE LE</th><th scope="col">REPÉRÉ LE</th><th scope="col"><span class="sr-only">Détail</span></th></tr></thead><tbody id="job-rows"></tbody></table></div>
       <div id="mobile-jobs" class="mobile-job-list" aria-label="Offres sur téléphone"></div>
       <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">◎</span><h3>Aucune offre à afficher</h3><p>Élargissez vos filtres ou recherchez un autre mot-clé.</p></div>

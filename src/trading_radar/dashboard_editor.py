@@ -3,6 +3,7 @@
 import json
 import re
 import secrets
+import sqlite3
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Lock
@@ -21,6 +22,8 @@ from trading_radar.dashboard_applications import (
 from trading_radar.dashboard_data import build_dashboard_data
 from trading_radar.dashboard_http import discard_small_body
 from trading_radar.dashboard_private import PrivateDashboardAccess, PrivateSessions
+from trading_radar.dashboard_services import service_observation
+from trading_radar.health import check_health
 from trading_radar.models import utcnow
 from trading_radar.monitoring import history, record_health
 from trading_radar.wishlist import list_wishlist, read_wishlist, set_wishlist
@@ -47,9 +50,16 @@ def create_editable_dashboard_server(
     port: int = 8765,
     *,
     private_access: PrivateDashboardAccess | None = None,
+    progressive: bool = False,
 ) -> ThreadingHTTPServer:
     """Protect explicit local actions with a per-process token and origin checks."""
-    initial = build_dashboard_data(config, history_dir=history_dir)
+    if progressive and private_access is None:
+        raise ValueError("Progressive loading requires the private HTTPS gateway")
+    initial = (
+        check_health(config)["database"]
+        if progressive
+        else build_dashboard_data(config, history_dir=history_dir)
+    )
     if initial["status"] != "ok":
         raise ValueError("Dashboard data unavailable")
     token = secrets.token_urlsafe(32)
@@ -180,8 +190,35 @@ def create_editable_dashboard_server(
             if not self.local():
                 return
             if self.path in {"/", "/index.html"}:
+                if progressive:
+                    self.page()
+                    return
                 with page_lock:
                     self.page()
+                return
+            if self.path == "/api/snapshot" and progressive:
+                if not self.authorized():
+                    return
+                # The lightweight page and tracking actions never wait for this
+                # lock. Only large snapshots are serialized to bound memory.
+                with page_lock:
+                    try:
+                        data = build_dashboard_data(config, history_dir=history_dir)
+                        if data["status"] != "ok":
+                            raise ValueError("Unavailable snapshot")
+                        data["live"] = True
+                        self.json(200, data)
+                    except (OSError, ValueError, sqlite3.Error):
+                        self.error(
+                            503,
+                            "unavailable",
+                            "Les données sont momentanément indisponibles. Réessayez.",
+                        )
+                return
+            if self.path == "/api/services" and progressive:
+                if not self.authorized():
+                    return
+                self.json(200, {"status": "ok", "services": service_observation(config, utcnow())})
                 return
             if self.path == "/api/applications":
                 if not self.authorized():
@@ -223,10 +260,14 @@ def create_editable_dashboard_server(
                 self.error(exc.status, exc.code, exc.message)
 
         def page(self):
-            data = build_dashboard_data(config, history_dir=history_dir)
+            data = (
+                {"format_version": 1, "status": "loading", "jobs": []}
+                if progressive
+                else build_dashboard_data(config, history_dir=history_dir)
+            )
             data["editing"] = {"enabled": True, "token": token}
             if private_access and sessions:
-                if data["status"] != "ok":
+                if data["status"] not in ({"loading"} if progressive else {"ok"}):
                     self.error(503, "unavailable", "Le Dashboard est momentanément indisponible.")
                     return
                 session = sessions.read(self.headers) or sessions.mint()

@@ -39,5 +39,30 @@
 @media(max-width:700px){.service-overview{padding:16px;gap:12px}.service-overview>div{flex-basis:100%}.tracking-shortcuts{grid-column:auto}.tracking-shortcuts button{flex:1 1 180px;}}
 
 body[data-radar-view="wishlist"] #metrics,body[data-radar-view="wishlist"] #service-overview,body[data-radar-view="wishlist"] #weekly-overview,body[data-radar-view="wishlist"] #internship-overview,body[data-radar-view="wishlist"] #jobs-view>.consultation-controls{display:none!important}
-body[data-radar-view="wishlist"][data-wishlist-filters="closed"] #filters,body[data-radar-view="wishlist"][data-wishlist-filters="closed"] #jobs-view>.experience-help{display:none!important}
+body[data-radar-view="wishlist"][data-wishlist-filters="closed"] #filters,body[data-radar-view="wishlist"][data-wishlist-filters="closed"] #jobs-view>.experience-help:not(.publication-error){display:none!important}
 #wishlist-message{padding:0 25px;color:var(--green);overflow-wrap:anywhere}#wishlist-message:empty{display:none}
+
+/* Keep unknown counts and empty lists out of the progressive first screen. */
+body[data-loading="true"] #metrics,
+body[data-loading="true"] .view,
+body[data-loading="true"] .sidebar-bottom,
+body[data-loading="true"] .nav-count,
+body[data-loading="true"] .snapshot-label,
+body[data-loading="true"] .snapshot-date { visibility:hidden; }
+body[data-loading="true"] .view,
+body[data-loading="true"] #metrics { display:none; }
+.loading-panel { margin:8px 0 32px; padding:30px; background:var(--paper); border:1px solid var(--line); border-radius:10px; max-width:760px; }
+.loading-panel h2 { font-size:20px; margin:16px 0 8px; }
+.loading-panel p { color:var(--muted); max-width:560px; }
+.loading-symbol { display:block; width:28px; height:28px; border:3px solid var(--line); border-top-color:var(--green); border-radius:50%; animation:radar-loading 1s linear infinite; }
+.loading-failed .loading-symbol { display:none; }
+@keyframes radar-loading { to { transform:rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .loading-symbol { animation:none; } }
+
+.filter-toggle { margin:0 22px 16px; }
+@media(max-width:760px) {
+  body[data-wishlist-filters="closed"] #filters,
+  body[data-wishlist-filters="closed"] #jobs-view>.experience-help:not(.publication-error),
+  body[data-wishlist-filters="closed"] #internship-overview>.experience-help { display:none!important; }
+  .filter-toggle { margin:0 16px 16px; }
+}

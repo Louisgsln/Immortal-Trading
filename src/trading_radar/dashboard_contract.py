@@ -90,6 +90,7 @@ def validate_dashboard(html: str, *, response_policy: str | None = None) -> dict
         "radarTracking",
         "radarPreferences",
         "radarCalendar",
+        "radarLoading",
     )
     if any("const " + name + " =" not in script for name in modules):
         raise DashboardContractError("missing_module")

@@ -39,6 +39,8 @@ def _assets() -> tuple[str, str, str]:
         + "\n"
         + root.joinpath("calendar.js").read_text(encoding="utf-8")
         + "\n"
+        + root.joinpath("loading.js").read_text(encoding="utf-8")
+        + "\n"
         + root.joinpath("dashboard.js").read_text(encoding="utf-8"),
     )
 
@@ -72,6 +74,8 @@ def render_dashboard(data: dict, *, editable: bool = False) -> str:
         "__RADAR_JS__": script,
         "__RADAR_CSP__": html.escape(_policy(css, script, editable=editable), quote=True),
         "__RADAR_DATA__": encoded,
+        "__RADAR_LOADING_STATE__": "true" if data.get("status") == "loading" else "false",
+        "__RADAR_LOADING_HIDDEN__": "" if data.get("status") == "loading" else "hidden",
     }
     # One pass prevents a marker in a job description from being interpreted as a
     # template placeholder after insertion.
