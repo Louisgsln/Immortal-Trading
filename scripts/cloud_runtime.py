@@ -7,6 +7,7 @@ import signal
 import sys
 import threading
 from datetime import UTC, datetime
+from pathlib import Path
 from uuid import uuid4
 
 from filelock import FileLock
@@ -75,9 +76,12 @@ def main() -> int:
     parser.add_argument(
         "mode", choices=("preflight", "watch", "telegram", "backups", "backup-once", "check-live")
     )
+    parser.add_argument("--config-dir", type=Path, default=Path("config"))
     args = parser.parse_args()
     try:
-        config = load_config()
+        config = (
+            load_config() if args.config_dir == Path("config") else load_config(args.config_dir)
+        )
         if args.mode == "check-live":
             health, pulse = check_health(config), watcher_status(config)
             print(json.dumps({"health": health["status"], "watcher": pulse["status"]}))
@@ -90,7 +94,10 @@ def main() -> int:
         elif args.mode in {"watch", "telegram"}:
             if not report["cutover_confirmed"]:
                 raise ValueError("Confirm previous workers have stopped before cutover")
-            os.execv(sys.executable, [sys.executable, "-m", "trading_radar", args.mode])
+            command = [sys.executable, "-m", "trading_radar", args.mode]
+            if args.config_dir != Path("config"):
+                command += ["--config-dir", str(args.config_dir)]
+            os.execv(sys.executable, command)
         elif args.mode == "backup-once":
             print(json.dumps(backup_once(config)))
         else:

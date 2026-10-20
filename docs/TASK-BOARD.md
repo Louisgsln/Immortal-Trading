@@ -278,3 +278,17 @@ Deux ouvertures simultanées réussissent sans redémarrage ni dépassement mém
 | 165 / haute — qualification | Mesurer les faux négatifs et les intitulés de support retenus chez les nouveaux employeurs, dont Mizuho Credit Derivatives Sales et Scotiabank ; justifier toute extension par les missions, sans bonus de score au nom de la société | Ouvert ; le flux tous scores ne remplace pas la qualification des fiches |
 
 Les lots 154, 155, 160, 161 et 163 restent ouverts ; la suite de performance porte le numéro 176. Nomura campus reste en attente conformément au choix du propriétaire. Chaque portail n'est déclaré surveillé qu'après installation et premier succès observé sur OVH ; `/statuts` doit concorder avec le Dashboard et l'inventaire installé.
+
+## Lots 183–185 — hébergement géré et sortie du VPS
+
+| Lot | Résultat attendu | État |
+|---|---|---|
+| 183 — service permanent portable | Image dédiée, disque persistant, radar/Telegram/API/sauvegardes supervisés, démarrage en attente, santé distincte de la couverture des sources, arrêt propre et exclusion des doublons sur un même volume | Développé ; validation locale sur données synthétiques, aucun déploiement cible déclaré |
+| 184 — migration complète de l’état | Export/restauration vérifiés de la base et de ses historiques, souhaits et historique, curseur et préférences Telegram, heartbeat et configuration réellement active ; jamais d’écrasement ni de jeton dans les archives | Développé ; essais de récupération et de refus des archives altérées |
+| 185 — bascule et décommissionnement | Compte cible, coût validé, transfert privé final après gel des écritures, contrôle d’une seule instance, secret Sites et caches réorientés, reprise mobile et Telegram, redémarrage persistant, sauvegarde indépendante restaurée | En attente d’un compte d’hébergement connecté ; le VPS reste en service |
+
+[Architecture, commandes, contrôles et retour arrière](MANAGED-MIGRATION.md) ·
+[validation locale](VALIDATION-MANAGED-MIGRATION.md) : 158 tests Python ciblés,
+53 JavaScript, Ruff/formatage/Mypy et construction/smoke Docker hors réseau réussis.
+Les tests locaux ne valent ni déploiement Render observé ni autorisation de supprimer
+une source de données. Aucun nouveau portail n’est déclaré actif par cette livraison.

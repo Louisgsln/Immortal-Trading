@@ -88,6 +88,28 @@ def test_confirmed_cutover_replaces_wrapper_process(cloud_config, monkeypatch):
     assert calls == [(cloud.sys.executable, [cloud.sys.executable, "-m", "trading_radar", "watch"])]
 
 
+def test_restored_config_directory_is_used_for_preflight_and_worker(cloud_config, monkeypatch):
+    calls, directories = [], []
+    monkeypatch.setattr(
+        cloud, "load_config", lambda directory: directories.append(directory) or cloud_config
+    )
+    monkeypatch.setattr(
+        cloud.sys, "argv", ["cloud_runtime.py", "watch", "--config-dir", "/restored/config"]
+    )
+    monkeypatch.setenv("RADAR_CUTOVER_CONFIRMED", "true")
+    monkeypatch.setattr(cloud.os, "execv", lambda *args: calls.append(args))
+    assert cloud.main() == 0
+    assert directories == [Path("/restored/config")]
+    assert calls[0][1] == [
+        cloud.sys.executable,
+        "-m",
+        "trading_radar",
+        "watch",
+        "--config-dir",
+        "/restored/config",
+    ]
+
+
 def test_backup_keeps_tracking_and_queue_without_transport(cloud_config, repo, job, tmp_path):
     with repo.transaction():
         repo.upsert(job)

@@ -1,5 +1,12 @@
 # Suivi de construction
 
+## Préparation suivante — lots 183 à 185
+
+[Sortie du VPS vers un service géré](MANAGED-MIGRATION.md) : image et migration
+complète de l’état préparées ; destination en attente d’un compte connecté et
+d’un coût validé. Le Dashboard peut conserver son lien Sites. La bascule,
+la sauvegarde externe vérifiée et le retrait du VPS restent à réaliser.
+
 ## État courant — 19 octobre, lots 177 à 180
 
 128 sources / 116 employeurs, 121 à jour au 19/10/2026 à 19:23 UTC. [Inventaire actuel](RADAR-SOURCES-LOT178.md) et [carnet](TASK-BOARD.md). Reprise des sources, six employeurs et import LinkedIn manuel installés ; données et curseur préservés. Suites 181 pour les incidents, 170/173 pour la qualité et 176 pour le premier affichage. Les relevés suivants sont historiques.
