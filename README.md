@@ -1,5 +1,10 @@
 # Trading Job Radar
 
+Une [migration vers un hébergement géré](docs/MANAGED-MIGRATION.md) est préparée
+avec un service Docker permanent, un disque persistant et une restauration
+vérifiée incluant le curseur Telegram. Le déploiement cible démarre en attente ;
+la préparation de ces fichiers ne bascule pas la production.
+
 Le radar est déployé sur **vps-b7a073e2.vps.ovh.net**, sous Ubuntu, avec trois
 services Docker permanents : collectes, écouteur Telegram et sauvegardes. Le
 Dashboard possède son propre service et un lien HTTPS privé sans connexion,

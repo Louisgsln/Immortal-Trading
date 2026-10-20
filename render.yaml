@@ -1,0 +1,47 @@
+# Paid persistent service. Review the provider's current quote before creating it.
+# Initial deployment is inert: no scan, Telegram polling or Dashboard writes.
+services:
+  - type: web
+    name: immortal-trading-backend
+    runtime: docker
+    plan: standard
+    region: frankfurt
+    numInstances: 1
+    autoDeployTrigger: "off"
+    maxShutdownDelaySeconds: 60
+    dockerfilePath: ./Dockerfile.managed
+    dockerContext: .
+    healthCheckPath: /healthz
+    disk:
+      name: immortal-state
+      mountPath: /app/data
+      sizeGB: 10
+    envVars:
+      - key: RADAR_MODE
+        value: standby
+      - key: RADAR_CUTOVER_CONFIRMED
+        value: "false"
+      - key: RADAR_STATE_ROOT
+        value: /app/data/state
+      - key: RADAR_ACTIVATION_ID
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: DASHBOARD_PUBLIC_ORIGIN
+        sync: false
+      - key: DASHBOARD_PRIVATE_PREFIX
+        sync: false
+      - key: DASHBOARD_GATEWAY_SECRET
+        generateValue: true
+      - key: ALERTS_ENABLED
+        value: "true"
+      - key: TELEGRAM_ALL_NEW_JOBS
+        value: "true"
+      - key: TELEGRAM_CONTROL_ENABLED
+        value: "true"
+      - key: TELEGRAM_INCIDENT_NOTICES_ENABLED
+        value: "true"
+      - key: TELEGRAM_HEARTBEAT_ENABLED
+        value: "true"
